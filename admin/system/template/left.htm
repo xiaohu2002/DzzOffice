@@ -1,0 +1,13 @@
+{eval $oparr=array('updatecache','database','cron','systemupgrade','xtxx');}
+{eval $leftmenu=array();}
+{eval foreach($oparr as $key => $value){}
+{eval $leftmenu[$value]=array('title'=>lang($value),'active'=>'');}
+	{eval if($value==$op) $leftmenu[$value]['active']='class="active"';}
+{eval }}
+
+<ul class="nav-stacked">
+  <!--{loop $leftmenu $key $value}-->
+      <li $value[active]><a hidefocus="true" href="{MOD_URL}&op=$key">$value[title]</a></li>
+  <!--{/loop}-->
+	<li><a hidefocus="true" href="admin/system/adminer.php">数据库管理</a></li>
+</ul>

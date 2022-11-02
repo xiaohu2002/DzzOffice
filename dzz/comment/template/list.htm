@@ -1,0 +1,274 @@
+<!--{template common/header_simple_start}-->
+<link rel="stylesheet" href="static/css/checkbox.css">
+<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all"> 
+<link href="{MOD_PATH}/images/folder.css?{VERHASH}" rel="stylesheet" media="all">
+<link href="{MOD_PATH}/images/comment.css?Xqd" rel="stylesheet" media="all">
+<link href="static/dzzthumb/jquery.dzzthumb.css?{VERHASH}" rel="stylesheet" media="all">
+<link href="dzz/styles/icoblock/default/style.css?{VERHASH}" rel="stylesheet" media="all">
+<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
+<script type="text/javascript" src="static/dzzthumb/jquery.dzzthumb.js?{VERHASH}"></script>
+<style type="text/css">
+@media (max-width: 670px) {
+	html,body{
+	min-width: 670px;
+  overflow-x: auto;
+}
+}
+#orgid__Menu{
+	border: 1px solid #4c89fb;
+	background: #fff;
+	border-radius: 2px;
+	color: #4c89fb;
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: normal;
+}
+.module-list-view .item-block.item{
+    border-bottom:1px solid #eee; 
+}
+.module-list-view .item-block{
+    background:none;
+}
+.module-list-view .item-block .col{
+	color:#333;
+}
+#filem_search .iconFirstWord{
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	display: inline-block;
+	line-height: 16px;
+	font-size: 14px;
+	margin-left: 0;
+}
+</style>
+<!--{template common/header_simple_end}-->
+<!--{template common/commer_header}-->
+<div class="bs-container clearfix">
+	<div class="left-notice  bs-left-container affix-top clearfix">
+		<!--{template left}-->
+	</div>
+  <div class="bs-main-container">
+		<!--{if !$list}-->
+		<div node-type="module" class="module-share-empty text-center clearfix">
+				<div style="padding-top:40px;">
+					<p class="no-result-title">暂无评论</p>
+				</div>
+			</div>
+		<!--{else}-->
+		<div class="main-header" style="border-top:1px solid #FFF;">
+      <form name="search" action="{BASESCRIPT}" method="get" id="filem_search">
+        <input type="hidden" name="mod" value="comment" />
+        <ul class="nav nav-pills clearfix" style="padding: 5px 0 5px 0;">
+          <li class="pull-left btn-secetlt" style="display: none;">
+            <button  class="btn btn-danger " type="submit" value="{lang delete}" onclick="delete_file();" style="height:34px;">{lang delete}</button>
+          </li>
+        </ul>
+      </form>
+    </div>
+    <div node-type="module" class="module-list-view" style="display:block">
+      <form id="appform" name="appform" class="form-horizontal " action="{BASESCRIPT}?mod=comment" method="post" >
+        <input type="hidden" name="delsubmit" value="true" />
+        <input type="hidden" name="formhash" value="{FORMHASH}" />
+        <input type="hidden" name="refer" value="$refer" />
+        <div node-type="wrapper" class="list-view-home">
+          <div node-type="title" class="title" >
+            <div class="item clearfix">
+              <div class="col1 cid" style="width: 3%;text-indent: 0;padding-left: 5px;">
+                <div class="checkbox-custom checkbox-primary">
+                  <input type="checkbox" name="del[]" id="chkall">
+                  <label></label>
+                </div>
+              </div>
+              <!--选中后的效果-->
+              <div class="col sharepame-selected" style="display: none;width:27%"><span>已选择<span class="ex-number"></span>项</span></div>
+              <!-- 第一列 -->
+              <div class="col1 c1 show_first" style="width: 27%">
+                <div class="name"> <span>内容</span></div>
+              </div>
+              <!-- 其他列 -->
+              <div class="col1" style="width: 10%;">IP地址</div>
+              <div class="col1" style="width: 20%;border-right: none;">设备信息</div>
+              <div class="col" node-type="title-col" data-key="dateline" style="width: 20%;border-right: none;">发布时间<span class="asc $_GET[dateline]" style="visibility: <!--{if $_GET[dateline]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </div>
+              <div class="col1" style="width: 10%;border-right: none;">发布人</div>
+              <div class="col1" style="width: 60px;">操作</div>
+            </div>
+          </div>
+          <div class="list list-share">
+            <div class="list-wrapper clearfix"> 
+              <!--{loop $list $value}--> 
+              <div node-type="item" id="comment_$value[cid]" data-cid="$value[cid]" class="item shareblock clearfix"> 
+              <!-- 第一列 -->
+              <div class="col cid" style="width: 3%;text-indent: 0;padding-left: 5px;" >
+                <div class="checkbox-custom checkbox-primary">
+                  <input type="checkbox" name="del[]" value="$value[cid]" data-cid="$value[cid]">
+                  <label></label>
+                </div>
+              </div>
+              <div class="col c1 name" style="width: 27%;">
+                <div class="name"> 
+                  <span class="enabled">$value[message]</span>
+								</div>
+              </div>
+              <!-- 其他列 -->
+              <div class="col" style="width: 10%">$value[ip]</div>
+              <div class="col" style="width:20%">$value[xtllq]</div>
+              <div class="col dateline" style="width:20%" data-dateline="$value[dateline]">{eval echo dgmdate($value[dateline])}</div>
+              <div class="col" style="width:10%">$value[author]</div>
+              <div class="col" style="width:60px">
+								<a title="{lang delete}" hidefocus="true" href="javascript:void(0);" style="color:rgb(85, 85, 85);font-size:20px;" onclick="feed_delete('$value[cid]','comment_$value[cid]','$value[cid]')"><i class="dzz dzz-delete"></i></a>
+								<a title="编辑" hidefocus="true" href="javascript:void(0);" style="color:rgb(85, 85, 85);font-size:20px;" onclick="feed_edit('$value[cid]','$_GET[allowattach]','$_GET[allowat]','$_GET[allowsmiley]');"><i class="dzz dzz-create"></i></a>
+							</div>
+            </div>
+            <!--{/loop}--> 
+          </div>
+        </div>
+      </form>
+    </div>
+	<div class="clearfix" style="padding:10px;text-align:center">$multi</div>
+	<!--{/if}-->
+  </div>
+</div>
+<script type="text/javascript">
+function feed_edit(cid,allowattach,allowat,allowsmiley){
+	showWindow('publish_edit_'+cid,DZZSCRIPT+'?mod=comment&op=ajax&do=edit&cid='+cid+'&allowattach='+allowattach+'&allowat='+allowat+'&allowsmiley='+allowsmiley);
+}
+function feed_delete(cid,domid,tid){
+	var msg='';
+	if(tid){
+		msg=__lang.sure_want_delete_comment;
+	}else{
+		msg=__lang.sure_want_delete_all_comment;
+	}
+	if(confirm(msg)){
+		jQuery.getJSON(DZZSCRIPT+'?mod=comment&op=ajax&do=delete&cid='+cid,function(json){
+			jQuery('#'+domid).slideUp(500,function(){
+				jQuery(this).remove();
+				if(tid ){
+					 var replysum=parseInt(jQuery('#comment_reply_'+tid+'.item').html());
+					 if(replysum>0) jQuery('#comment_reply_'+tid+'.item').html(replysum-1);
+				}
+			});
+			try{
+				callback_by_comment(domid,'delete');
+			}catch(e){}
+		});
+	}
+}
+	var page_loading = false;
+	jQuery('.left-drager').leftDrager_layout();
+	function setLoadedNum() {
+		jQuery('.loaded-num').html(jQuery('.list-share .item').length);
+		if(!jQuery('.list-share .more').length) {
+			jQuery('.total-num').html('{lang loading_all}');
+		} else {
+			jQuery('.total-num').html('');
+		}
+	}
+var cids=[];
+var theurl='$theurl';
+	jQuery(document).ready(function(e) {
+		jQuery(document).on('mouseenter', 'div[node-type=item]', function() {
+			jQuery(this).addClass('item-hover');
+		});
+		jQuery(document).on('mouseleave', 'div[node-type=item]', function() {
+			jQuery(this).removeClass('item-hover');
+		});
+		jQuery('.title .item .col[node-type=title-col][data-key=dateline]').on('click', function() {
+			var el = jQuery(this);
+			el.find('.asc').css('visibility', 'visible').toggleClass('desc');
+			el.siblings().find('.asc').css('visibility', 'hidden');
+			
+			var param=el.data('key')+'='+ (el.find('.asc').hasClass('desc') ? 'desc' : 'asc');
+			var regx=new RegExp('&(dateline)=(asc)','i');
+			var url=theurl.replace(regx,'')+'&'+param;
+			location.href=correcturl(url);
+		});
+	});
+//复选框选中问题
+jQuery(document).off('click.shareclick').on('click.shareclick',".shareblock",function(){
+	var checkinput = jQuery(this).find("input[name='del[]']");
+	if(checkinput.prop('checked')){
+		checkinput.prop('checked',false);
+		jQuery(this).removeClass('item-active');
+		
+		var cid=jQuery(this).find('input[name="del[]"]').data('cid');
+		var index = jQuery.inArray(cid,cids);
+		if(index != -1){
+			cids.splice(index,1);
+		}
+
+	}else{
+		checkinput.prop('checked',true);
+		jQuery(this).addClass('item-active');
+		var cid=jQuery(this).data('cid');
+			if(jQuery.inArray(cid,cids) == -1){
+				cids.push(cid);
+			}
+
+	}
+	sharelength();
+});
+jQuery(document).off('click.inputclick').on('click.inputclick',".shareblock input[name='del[]']",function(){
+	if($(this).prop('checked')){
+		jQuery(this).prop('checked',false);
+		jQuery(this).removeClass('item-active');
+		
+	}else{
+		jQuery(this).prop('checked',true);
+		jQuery(this).addClass('item-active');
+	}
+});
+//复选框全选
+jQuery(document).off('click.allclick').on('click.allclick','#chkall',function(){
+	var allchecked=jQuery(this).prop('checked');
+	jQuery(this).closest('.title').next('.list-share').find('input[name="del[]"]').each(function(){
+		if(allchecked){
+			jQuery(this).prop('checked',true);
+			jQuery(this).closest('.item').addClass('item-block');
+			var cid=jQuery(this).data('cid');
+			if(jQuery.inArray(cid,cids) == -1){
+				cids.push(cid);
+			}
+		}else{
+			jQuery(this).prop('checked',false);
+			jQuery(this).closest('.item').removeClass('item-block');
+			var cid=jQuery(this).data('cid');
+			var index = jQuery.inArray(cid,cids);
+			if(index != -1){
+				cids.splice(index,1);
+			}
+
+		}
+	});
+	sharelength();
+})
+function sharelength(){
+  if(cids.length>0){
+    jQuery('.sharepame-selected').show().next('.show_first').hide();
+    jQuery('#chkall').prop('checked',true);
+    jQuery('.btn-secetlt').show();
+  }else{
+    jQuery('.sharepame-selected').hide().next('.show_first').show();
+    jQuery('#chkall').prop('checked',false);
+    jQuery('.btn-secetlt').hide();
+  }
+  jQuery('.ex-number').html(cids.length);
+}
+function delete_file(){
+	var delnums = cids.length;
+	var icoids = cids.join(',');
+	if(confirm('你确定要删除'+delnums+'条评论吗(如果有回复评论也将一同删除)？')){
+		jQuery.post('{MOD_URL}&do=delete',{'cid':icoids},function(data){
+			if(data['success']){
+				window.location.reload();
+			}else{
+
+			}
+		})
+	}
+}
+</script> 
+<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
+<!--{template common/footer_simple}-->

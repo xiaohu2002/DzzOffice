@@ -1,0 +1,39 @@
+<!--{template common/header_simple_start}-->
+<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
+<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
+<!--{template common/header_simple_end}-->
+<style>
+	table {
+    border-collapse: collapse;
+    width: 95%;
+}
+	th {
+    text-align: left;
+    color: #76a9ff;
+    line-height: 34px;
+    padding: 3px 5px;
+}
+</style>
+<!--{template common/commer_header}-->
+<div class="bs-container clearfix">
+	<div class="bs-left-container  clearfix">
+		<!--{template left}-->
+	</div>
+	<div class="left-drager">
+	</div>
+	<div class="bs-main-container  clearfix">
+		<div class="main-content" style="padding:20px 0;border-top:1px solid #FFF">
+			<div class="well well-sm">
+				<div class="container step_1">
+          <!--{eval echo shuchu();}-->
+					<li>已安装扩展:$extensions</li>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery('.left-drager').leftDrager_layout();
+</script>
+<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
+<!--{template common/footer_simple}-->

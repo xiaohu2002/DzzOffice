@@ -1,0 +1,13 @@
+<ul class="ul-notice">
+	<li <!--{if !$type}-->class="active"<!--{/if}-->>
+		<a href="{MOD_URL}">{lang all}</a>
+	</li>
+	<!--{loop $searchcats $val}-->
+	<li <!--{if $type==$val[identifier]}-->class="active"<!--{/if}-->>
+		<a href="{MOD_URL}&type=$val[identifier]">
+			<img src="$val[appico]">
+			$val[appname]
+    </a>
+	</li>
+	<!--{/loop}-->
+</ul>

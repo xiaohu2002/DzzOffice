@@ -1,0 +1,183 @@
+<!--{template common/header_simple_start}-->
+<link href="static/css/checkbox.css?{VERHASH}" rel="stylesheet" media="all">
+<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
+<link href="{MOD_PATH}/images/register.css?{VERHASH}" rel="stylesheet" media="all">
+<script src="user/scripts/register.js?{VARHASH}"></script>
+<style>
+	#popModal .modal-dialog{
+		width:410px;
+	}
+<!--{if $setting[loginset][template] == 2}-->
+.modal_in {
+    height: 100%;
+    padding: 0;
+    margin: 0!important;
+    background-color: transparent;
+    z-index: 10;
+    overflow: auto;
+}
+.modal_in .modal-dialog {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: auto;
+  min-height: 100%;
+  padding: 50px 30px 30px;
+  color: #76838f;
+  text-align: center;
+  overflow: auto;
+  min-width: 320px;
+	margin: 0;
+}
+.modal_in .modal-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: auto;
+  min-height: 100%;
+  padding: 50px 30px 30px;
+  color: #76838f;
+  background: #fff;
+  text-align: center;
+  overflow: auto;
+  min-width: 320px;
+	border-radius: 0;
+	border:none
+}
+	.modal_in .modal-body{
+    padding:0;
+  }
+<!--{else}-->
+.modal_in {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    display: inline-flex !important;
+    justify-content: center;
+    align-items: center;
+}
+.modal_in .modal-content {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+.modal_in .modal-dialog {
+    position: relative;
+    width: auto;
+	max-height: 100%;
+    margin: 10px;
+	-webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    transform: translate(0,0);
+}
+	.modal_in .modal-body{
+    padding:30px;
+  }
+<!--{/if}-->
+	
+</style>
+<!--{template common/header_simple_end}-->
+<!--{template common/beijing}-->
+<div id="popModal" class="modal_in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:1;display: block">
+  <div class="modal-dialog">
+    <div class="modal-content"> 
+      <div id="register_form">
+        <div class="modal-body"> 
+          <!--{template register_brand}-->
+          <form class="loginForm" method="post" role="form" name="registerform" id="registerform" enctype="multipart/form-data" action="user.php?mod=register"
+                          onsubmit="check_submit(this);return false">
+            <input type="hidden" name="regsubmit" value="yes"/>
+            <input type="hidden" name="formhash" value="{FORMHASH}"/>
+            <input type="hidden" name="referer" value="$referer"/>
+            <input type="hidden" name="handlekey" value="$_GET[handlekey]"/>
+            
+            <!--{if $_GET[action] != 'activation'}-->
+            <div class="form-group">
+              <input type="text" id="email" class="form-control" name="email" autocomplete="off"
+                                       placeholder="{lang register_email_tips}">
+               <span id="chk_email" class="help-msg"></span>         
+            </div>
+            <div class="form-group">
+              <input type="text" id="username" class="form-control" name="username" autocomplete="off" placeholder="{lang username}">
+              <span id="chk_username" class="help-msg"></span>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" name="password"
+                                       autocomplete="off" placeholder="{lang register_password_tips}">
+              <span id="chk_password" class="help-msg"></span> 
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password2" name="password2"
+                                       autocomplete="off" placeholder="{lang register_repassword_tips}">
+              <span id="chk_password2" class="help-msg"></span> 
+            </div>
+            <!--{/if}--> 
+           
+            <!--{if $secqaacheck || $seccodecheck}-->
+            <div class="form-group"> 
+              <!--{template common/seccheck}--> 
+            </div>
+            <!--{/if}--> 
+            <!--{if $bbrules}-->
+            <div class="form-group clearfix">
+              <div class="checkbox-custom checkbox-primary pull-left">
+                <input type="checkbox" name="agreebbrule" value="$bbrulehash" id="agreebbrule" checked="checked" />
+                <label>{lang agree}</label>
+              </div>
+              <a class="ml20 pull-left" href="javascript:;" onclick="showWindow('bbrule','user.php?mod=register&op=ajax&do=bbrule')">{lang rulemessage}</a> 
+            </div>
+            <!--{/if}-->
+            <div class="error-msg text-danger" id="returnmessage4"></div>
+            <div class="form-group last">
+              <button type="submit" class="btn btn-lg btn-primary btn-block "> 
+              <!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}--> 
+              $_G[setting][reglinkname]<!--{/if}--></button>
+              <button type="button" class="btn btn-lg btn-primary btn-block" onclick="try{_login.logging();}catch(e){location.href='user.php?mod=login'}" title="{lang back_login}">{lang back_login} </button>
+            </div>
+          </form>
+        </div>
+        <div class="copyright-container">
+          <!--{template common/copyright}-->
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	var lastusername = '', lastpassword = '', lastemail = '', lastinvitecode = '', stmp = new Array(), modifypwd = false;
+	var ignoreEmail = false;
+	var strongpw = new Array();
+	<!--{if $_G['setting']['strongpw']}-->
+		<!--{loop $_G['setting']['strongpw'] $key $val}-->
+			strongpw[$key] = $val;
+		<!--{/loop}-->
+	<!--{/if}-->
+	var pwlength = <!--{if $_G['setting']['pwlength']}-->$_G['setting']['pwlength']<!--{else}-->0<!--{/if}-->;
+	
+	jQuery(document).ready(function (e) {
+	
+		addFormEvent('registerform',1);
+		if (jQuery('.ie8,.ie9').length) { //ie8模拟placeholder;
+			jQuery(':input[placeholder]').each(function () {
+				jQuery(this).placeholder();
+			});
+		}
+	});
+</script> 
+<script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
+<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script> 
+<!--{template common/footer}--> 
