@@ -17,8 +17,10 @@
     	<ul class="nav navbar-nav navbar-nav-left">
         <li>
           <a class="site" href="{$_G[siteurl]}"><span class="site-logo">
-            <img src="static/image/common/logo.png" style="max-height:30px;">
-            </span><span class="site-name">$_G['setting']['sitename']</span></a>
+            <img src="static/image/common/logo.png">
+            </span>
+						<span class="site-name">$_G['setting']['sitename']</span>
+					</a>
         </li>
       </ul>
     </div>
@@ -98,7 +100,11 @@ $("img").one("error", function(e){
 <!--{if $param[msgtype] == 1 || $param[msgtype] == 2 && !$_G[inajax]}-->
 		<div class="f_c altw">
 			<div id="messagetext">
-				<img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}">
+				<!--{if $_G['setting']['sitelogo']}-->
+        <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}">
+        <!--{else}-->
+          <img src="static/image/common/logo.png">
+        <!--{/if}-->
 				<h4 style="font-size: large;">$show_message</h4>
 				<!--{if !$_G['setting']['bbclosed']|| !$_G['adminid'] ==0}-->
 				<!--{if $url_forward}-->
@@ -160,7 +166,7 @@ $("img").one("error", function(e){
 				<!--{/if}-->
 			
 			<!--{/if}-->
-            <button type="button"  data-dismiss="modal" class="btn btn-default"><strong>{lang close}</strong></button>
+       <button type="button"  data-dismiss="modal" class="btn btn-default"><strong>{lang close}</strong></button>
 		</div>
 <!--{else}-->$show_message<!--{/if}-->
 <!--{if !$_G['inajax']}-->
