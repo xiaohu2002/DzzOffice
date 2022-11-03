@@ -43,9 +43,6 @@
 	padding:0;
 	background: url(1.jpg);
   background-size: cover;
-	display: flex;
-  align-content: space-around;
-  flex-wrap: wrap;
 }
 .main-content{
 	padding:0;

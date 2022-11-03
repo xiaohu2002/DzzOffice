@@ -104,7 +104,7 @@ function getOpenUrl($icoarr,$share){
 			return array('type'=>'attach','url'=>$url,'canedit'=>$data['canedit']);
 		}
 		
-	}elseif ($share['xiazai']){//没有可用的打开方式，转入下载；
+	}else{//没有可用的打开方式，转入下载；
 		$sid=dzzencode($share['id'],'',0,0);
 		if($candownload){
 			return array('type'=>'download','url'=>'index.php?mod=shares&op=download&operation=download&sid='.$sid.'&filename='.$icoarr['name'].'&path='.$dpath);

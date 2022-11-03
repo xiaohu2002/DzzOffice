@@ -23,7 +23,7 @@
     </div>
 </div>
 <!--{else}-->
-<div class="weui-cell weui-cell_access weui-cell_longpress<!--{if !$share[yulan]}--> filelist<!--{/if}-->" data-type="$v[type]" data-dpath="$v[dpath]" <!--{if $share[yulan]}-->onclick="yulantishi();"<!--{/if}-->  <!--{if !$share[xiazai]}-->data-href="{DZZSCRIPT}?mod=io&op=download&path=$v[dpath]"<!--{/if}-->  data-rid="$v[rid]">
+<div class="weui-cell weui-cell_access weui-cell_longpress<!--{if !$share[yulan]}--> filelist<!--{/if}-->" data-type="$v[type]" data-dpath="$v[dpath]" <!--{if $share[yulan]}-->onclick="yulantishi();"<!--{/if}--> <!--{if !$share[xiazai]}-->data-href="{DZZSCRIPT}?mod=io&op=download&path=$v[dpath]"<!--{/if}-->  data-rid="$v[rid]">
     <div class="weui-cell__hd"><img src="$v[img]" class="weui-cell__recentimg"></div>
     <div class="weui-cell__bd">
         <h4 >$v[name]</h4>
