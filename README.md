@@ -1,5 +1,4 @@
 ### 官方网站:http://dzzoffice.com
-### 官方演示地址:http://demo.dzzoffice.com
 ### 小胡版插件获取地址：https://gitee.com/xh2002/projects
 ### dzzoffice笔记：https://www.kdocs.cn/l/ccbRyo5tZZpY
 ### DzzOffice 介绍：
