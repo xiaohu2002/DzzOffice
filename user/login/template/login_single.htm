@@ -7,17 +7,16 @@
 <![endif]-->
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{template common/header_simple_end}-->
-<!--{if !$_G['setting']['bbclosed']}-->
-<!--{else}--> 
+<!--{if $_G['setting']['bbclosed']}-->
 <nav class="navbar navbar-inverse resNav bs-top-container" >
 	<div class="resNav-item resNav-left">     
     	<ul class="nav navbar-nav navbar-nav-left">
           <li>
           <a class="site" href="{$_G[siteurl]}"><span class="site-logo">
-						<!--{if $_G['setting']['sitelogo']}-->
-              <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}">
+            <!--{if $_G['setting']['sitelogo']}-->
+              <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}" style="max-height:30px;">
 						<!--{else}-->
-              <img src="static/image/common/logo.png">
+              <img src="static/image/common/logo.png" style="max-height:30px;">
 						<!--{/if}-->
               </span><span class="site-name">$_G['setting']['sitename']<!--{if $_G['uid']}--><!--{else}-->(游客版)<!--{/if}--></span></a>
           </li>
