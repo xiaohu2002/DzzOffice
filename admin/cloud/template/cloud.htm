@@ -23,7 +23,7 @@
   </div>
   <div class="bs-main-container  clearfix" >
   	
-    <div class="main-content clearfix" style="padding:0">
+    <div class="main-content clearfix">
       <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{BASESCRIPT}?mod=cloud" method="post" >
         <input type="hidden" name="cloudsubmit" value="true" />
         <input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -67,12 +67,10 @@
               </td>
           </tr>
           <!--{/loop}-->
-          <thead>
-            <th valign="middle" colspan="7" style="border:none">
-            	<input type="submit" class="btn btn-primary" value="{lang save_set}" />
-            </th>
-          </thead>
         </table>
+			<dl>
+				<input type="submit" class="btn btn-primary" value="{lang save_set}" />
+			</dl>
         </div>
       </form>
       <div class="tip" style="margin: 20px;color: #444;text-shadow: 1px 1px 1px #FFF;line-height: 1.8;">

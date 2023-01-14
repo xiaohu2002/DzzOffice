@@ -77,7 +77,7 @@
   <div class="left-drager"> </div>
   <div class="bs-main-container  clearfix"> 
     <!--{if $operation=='censor' || $operation=='space' || $operation == 'permgroup'}-->
-    <div class="main-header clearfix" style="border:none;">
+    <div>
     <!--{else}-->
     <div class="main-header clearfix"> 
       <!--{/if}--> 
@@ -136,23 +136,34 @@
      
       <!--{elseif $operation=='loginset'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
-				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">基本设置</a></li>
+		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">基本设置</a></li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">QQ登录设置</a> </li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
-			<!--{elseif $operation=='denlu'}-->
+      <!--{elseif $operation=='denlu'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
-				<li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">基本设置</a></li>
+		<li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">基本设置</a></li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">QQ登录设置</a> </li> 
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+      </ul>
+      <!--{elseif $operation=='qqlogin'}-->
+      <ul class="nav navbar-nav nav-pills-bottomguide">
+		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">基本设置</a></li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+		<li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">QQ登录设置</a> </li> 
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='access'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
-				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">基本设置</a></li>
+		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">基本设置</a></li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">QQ登录设置</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='datetime'}-->
@@ -161,13 +172,14 @@
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=datetime">{lang time_set}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
-				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">通知设置</a> </li>
+		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">通知设置</a> </li>
       </ul>
       <!--{elseif $operation=='sec'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
-				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">基本设置</a></li>
+		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">基本设置</a></li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">QQ登录设置</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{/if}--> 
@@ -181,17 +193,16 @@
         <a href=""></a>
         <dt>{lang sitelogo}:</dt>
         <dd class="clearfix">			
-			<div class="file-hidde-content">
-				<!--{if $setting[sitelogo] > 0}-->
-				<img src="index.php?mod=io&op=thumbnail&size=small&path={eval echo dzzencode('attach::'.$setting[sitelogo]);}" class="upold-add">
-				<!--{else}-->
-				<img src="static/image/common/logo.png" class="upold-add">
-				<!--{/if}-->
-				<input type="file" name="files[]" value="" class="file-hidde" />
-				<input type="hidden" name="settingnew[sitelogo]" value="$setting[sitelogo]" class="build-images" /> 
-				<div class="progress-bar"></div>
-			</div>
-         	
+          <div class="file-hidde-content">
+            <!--{if $setting[sitelogo] > 0}-->
+            <img src="index.php?mod=io&op=thumbnail&size=small&path={eval echo dzzencode('attach::'.$setting[sitelogo]);}" class="upold-add">
+            <!--{else}-->
+            <img src="static/image/common/logo.png" class="upold-add">
+            <!--{/if}-->
+            <input type="file" name="files[]" value="" class="file-hidde" />
+            <input type="hidden" name="settingnew[sitelogo]" value="$setting[sitelogo]" class="build-images" /> 
+            <div class="progress-bar"></div>
+          </div>	
         </dd>
       </dl>
       <dl>
@@ -201,15 +212,15 @@
           <input type="text" id="sitename" name="settingnew[sitename]" class="form-control" value="$setting[sitename]">
           <span class="help-inline text-muted">{lang terrace_name_state} </span> </dd>
       </dl>
-			<dl> 
+      <dl> 
         <dt>{lang default_app}:</dt>
         <dd class="clearfix">
-					<input type="hidden" name="old_default_mod" class="form-control" value="$setting[default_mod]">
+          <input type="hidden" name="old_default_mod" class="form-control" value="$setting[default_mod]">
           <select name="settingnew[default_mod]" class="form-control">
-							<option value="index_simple">{lang please_select_default_index}</option> 
-							<!--{loop $applist $value}--> 
-									<option value="$value[identifier]" <!--{if $value[ 'identifier']==$setting[default_mod]}-->selected="selected"  <!--{/if}-->>$value[appname] </option>
-							<!--{/loop}-->
+            <option value="index_simple">{lang please_select_default_index}</option> 
+            <!--{loop $applist $value}--> 
+              <option value="$value[identifier]" <!--{if $value[ 'identifier']==$setting[default_mod]}-->selected="selected"  <!--{/if}-->>$value[appname] </option>
+            <!--{/loop}-->
           </select>
           <span class="help-inline text-muted">{lang default_app_desc} </span> </dd>
       </dl>
@@ -224,7 +235,7 @@
             </div>
           </div>
           <span class="help-inline text-muted">{lang setting_main_section}</span>
-				</dd>
+        </dd>
       </dl>
       <dl>
         <dt>{lang thumbnail_size}</dt>
@@ -296,7 +307,7 @@
           <textarea type="textarea" class="form-control" id="statcode" name="settingnew[statcode]" row="6">$setting[statcode]</textarea>
           <span class="help-block text-muted">{lang support_html_code}</span></dd>
       </dl>
-			<dl>
+      <dl>
         <dt>公告:</dt>
         <dd class="clearfix">
           <textarea type="textarea" class="form-control" id="gonggao" name="settingnew[gonggao]" row="6">$setting[gonggao]</textarea>
@@ -316,9 +327,9 @@
               <span class="help-block text-muted">{lang setting_main_board_message}</span></dd>
           </dl>
         </dd>
-        <dd>
-          <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
-        </dd>
+      </dl>
+      <dl>
+        <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
       </dl>
     </form>
     <script type="text/javascript">
@@ -354,13 +365,12 @@
         </dd>
         <!--{/loop}-->
       </dl>
+      </dl>
       <dl>
-        <dd>
           <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
-        </dd>
       </dl>
     </form>
-		<!--{elseif $operation=='notification'}-->
+    <!--{elseif $operation=='notification'}-->
     <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
       <input type="hidden" value="{FORMHASH}" name="formhash">
       <input type="hidden" value="notification" name="operation">
@@ -369,18 +379,18 @@
         <dd class="clearfix">
           <input type="text" class="form-control" name="settingnew[notification]" value="$setting[notification]">
           <span class="help-inline text-muted">秒</span>
-					<ul class="help-block">
+          <ul class="help-block">
             <li>间隔越短接收新消息越快，同时对服务器的性能要求越高，不建议配置差的服务器将间隔调太小。</li>
             <li>如：间隔时间为1，表示每一秒请求服务器查看是否有新消息，相当于每个一秒就会访问服务器。</li>
-						<li>注意是填整数</li>
+            <li>注意是填整数</li>
           </ul>
-				</dd>
+        </dd>
       </dl>
+      <dl>
         <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit"  value="{lang save_changes}" type="submit">
       </dl>
     </form>
     <!--{elseif $operation=='upload'}-->
-    
     <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
       <input type="hidden" value="{FORMHASH}" name="formhash">
       <input type="hidden" value="upload" name="operation">
@@ -421,9 +431,7 @@
         </dd>
       </dl>
       <dl>
-        <dd>
           <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
-        </dd>
       </dl>
     </form>
     <script type="text/javascript">
@@ -436,6 +444,49 @@
             }
         })
     </script>
+	<!--{elseif $operation=='qqlogin'}-->
+    <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <input type="hidden" value="{FORMHASH}" name="formhash">
+      <input type="hidden" value="qqlogin" name="operation">
+      <dl>
+        <dt>{lang open_qq_login}：</dt>
+        <dd class="clearfix">
+          <label class="radio-inline "><input type="radio" name="settingnew[qq_login]" value="0" <!--{if !$setting[qq_login]}-->checked<!--{/if}--> onclick="jQuery('#qqlogin_wrapper').addClass('hide');">{lang no_enable}</label>
+          <label class="radio-inline "><input type="radio" name="settingnew[qq_login]" value="1" <!--{if $setting[qq_login]=='1'}-->checked<!--{/if}--> onclick="jQuery('#qqlogin_wrapper').removeClass('hide');">{lang enable}</label>
+        </dd>
+      </dl>
+      <div id="qqlogin_wrapper"<!--{if !$setting[qq_login]}--> class="hide"<!--{/if}-->>
+        <dl>
+          <dt>QQ APPID：</dt>
+          <dd class="clearfix">
+            <input type="text" class="form-control" name="settingnew[qq_appid]" value="$setting[qq_appid]" />
+          </dd>
+          <dd class="clearfix"> <span class="help-inline">{lang qq_app_id}</span> </dd>
+          </dl>
+        <dl>
+          <dt>QQ APPKAY：</dt>
+          <dd class="clearfix">
+            <input type="text" class="form-control" name="settingnew[qq_appkey]" value="$setting[qq_appkey]" />
+          </dd>
+          <dd class="clearfix"> <span class="help-inline">{lang qq_app_key}</span> </dd>
+        </dl>
+        <dl>
+          <dt>{lang whether_allow_direct}：</dt>
+          <dd class="clearfix">
+            <label class="radio-inline "><input type="radio" name="settingnew[qq_bind]" value="1" <!--{if $setting[qq_bind]=='1'}-->checked<!--{/if}-->>{lang user_must_binding}</label>
+            <label class="radio-inline "><input type="radio" name="settingnew[qq_bind]" value="0" <!--{if !$setting[qq_bind]}-->checked<!--{/if}-->>{lang allow_direct_use}</label>
+          </dd>
+          <dd class="clearfix"> <span class="help-inline">{lang user_must_binding_text}</span> </dd>
+        </dl>
+        <dl>
+          <dt>{lang token_url}：</dt>
+          <dd class="clearfix"> <b class="help-inline">$_G['siteurl']user.php</b> </dd>
+        </dl>
+      </div>
+      <dl>
+          <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
+      </dl>
+    </form>
     <!--{elseif $operation=='loginset'}-->
     <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
       <input type="hidden" value="{FORMHASH}" name="formhash">
@@ -462,39 +513,37 @@
         </dd>
         <dd class="clearfix"><span class="help-inline">{lang for_color_set}设置图片和颜色会同步到首页背景设置</span></dd>
       </dl>
-			<dl>
+      <dl>
         <dt>游客登录选项：</dt>
           <dd class="clearfix">
-						<label class="radio-inline"><input type="radio"  name="settingnew[loginset][youkedenlu]" <!--{if $setting[loginset][youkedenlu]=='1'}-->checked="checked"<!--{/if}--> value="1">显示</label>
+            <label class="radio-inline"><input type="radio"  name="settingnew[loginset][youkedenlu]" <!--{if $setting[loginset][youkedenlu]=='1'}-->checked="checked"<!--{/if}--> value="1">显示</label>
             <label class="radio-inline"> <input type="radio" name="settingnew[loginset][youkedenlu]" <!--{if $setting[loginset][youkedenlu]=='0'}-->checked="checked"<!--{/if}--> value="0">不显示</label>
-				</dd>
-        <dd class="clearfix"><span class="help-inline">用户选择游客登录后会跳转至首页</span></dd>
+          </dd>
+          <dd class="clearfix"><span class="help-inline">用户选择游客登录后会跳转至首页</span></dd>
       </dl>
       <dl>
         <dt>登录模板：</dt>
         <dd class="clearfix">
-					<a class="loginset-template" href="admin/setting/images/template1.png" target="_blank">
+          <a class="loginset-template" href="admin/setting/images/template1.png" target="_blank">
             <div class="loginset-template-icon<!--{if $setting[loginset][template] ==1}--> loginset-template-icon1<!--{/if}-->" data-template="1">
               <span class="glyphicon glyphicon-ok"></span>
             </div>
             <img style="width: 100%;" src="admin/setting/images/template1.png" alt=""/>
           </a>
-					<a class="loginset-template" href="admin/setting/images/template2.jpg" target="_blank">
+          <a class="loginset-template" href="admin/setting/images/template2.jpg" target="_blank">
             <div class="loginset-template-icon<!--{if $setting[loginset][template] == 2}--> loginset-template-icon1<!--{/if}-->" data-template="2">
-							<span class="glyphicon glyphicon-ok"></span>
-						</div>
-            <img style="width: 100%;" src="admin/setting/images/template2.jpg" alt=""/>
-					</a>
+                <span class="glyphicon glyphicon-ok"></span>
+            </div>
+          <img style="width: 100%;" src="admin/setting/images/template2.jpg" alt=""/>
+        </a>
           <input type="hidden" class="form-control loginset-template-input" name="settingnew[loginset][template]" value="$setting[loginset][template]"/>
         </dd>
         <dd class="clearfix">
-					<span class="help-block">独立登录页登录模板;参数会同步到登录(含管理员登录)、注册、找回密码、首页应用。</span>
-				</dd>
+          <span class="help-block">独立登录页登录模板;参数会同步到登录(含管理员登录)、注册、找回密码、首页应用。</span>
+        </dd>
       </dl>
       <dl>
-        <dd>
           <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
-        </dd>
       </dl>
     </form>
     <script type="text/javascript">
@@ -508,7 +557,7 @@
     <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
       <input type="hidden" value="{FORMHASH}" name="formhash">
       <input type="hidden" value="mail" name="operation">
-			<input type="hidden" value="tzxxyjtz" name="operation">
+      <input type="hidden" value="tzxxyjtz" name="operation">
       <dl>
         <dt>{lang administrator_email}:</dt>
         <dd class="clearfix">
@@ -524,10 +573,7 @@
           <label class="radio radio-inline"><input type="radio" name="settingnew[mail][mailsend]" value="2" <!--{if $setting[mail][mailsend]=='2'}--> checked<!--{/if}--> onclick="document.getElementById('hidden1').style.display='table';document.getElementById('hidden2').style.display='none';">{lang mail_way_send2}</label>
         </dd>
         <dd class="clearfix">
-          <label class="radio radio-inline"><input type="radio" name="settingnew[mail][mailsend]" value="3" <!--{if $setting[mail][mailsend]=='3'}--> 
-            checked<!--{/if}--> 
-            onclick="document.getElementById('hidden2').style.display='table';document.getElementById('hidden1').style.display='none';">{lang
-            mail_way_send3}</label>
+          <label class="radio radio-inline"><input type="radio" name="settingnew[mail][mailsend]" value="3" <!--{if $setting[mail][mailsend]=='3'}-->checked<!--{/if}--> onclick="document.getElementById('hidden2').style.display='table';document.getElementById('hidden1').style.display='none';">{lang mail_way_send3}</label>
         </dd>
         <dd class="clearfix">
           <table id="hidden1" class="table text-center" style="margin-bottom:0; <!--{if $setting[mail][mailsend]!=2}-->display:none<!--{/if}-->">
@@ -537,15 +583,17 @@
             <!--{loop $smtps $id $smtp}-->
             <tr>
               <td>
-								<label>
+                <label>
                   <input type="checkbox" name="settingnew[mail][esmtp][delete][]" value="$id"/>
                 </label>
-							</td>
+              </td>
               <td><input class="form-control" style="width:120px;" type="text" name="settingnew[mail][esmtp][$id][server]" value="$smtp[server]"/></td>
               <td width="40"><input class="form-control" style="width:30px" type="text" name="settingnew[mail][esmtp][$id][port]" value="$smtp[port]"/></td>
-              <td width="40"><label>
+              <td width="40">
+                <label>
                   <input type="checkbox" name="settingnew[mail][esmtp][$id][auth]" value="1" $smtp[authcheck]/>
-                </label></td>
+                </label>
+				</td>
               <td><input class="form-control" style="width:120px;" type="text" name="settingnew[mail][esmtp][$id][from]" value="$smtp[from]"/></td>
               <td><input class="form-control" style="width:100px;" type="text" name="settingnew[mail][esmtp][$id][auth_username]" value="$smtp[auth_username]"/></td>
               <td><input class="form-control" style="width:100px;" type="text" name="settingnew[mail][esmtp][$id][auth_password]" value="$smtp[auth_password]"/></td>
@@ -556,14 +604,14 @@
             </tr>
           </table>
           <table id="hidden2" class="table" style="margin-bottom:0; <!--{if $setting[mail][mailsend]!=3}-->display:none<!--{/if}-->">
-            <thead>
-            {lang add_SMTP_server_set}
-              </thead>
+            <thead>{lang add_SMTP_server_set}</thead>
             <!--{loop $smtps $id $smtp}-->
             <tr>
-              <td><label>
+              <td>
+                <label>
                   <input type="checkbox" name="settingnew[mail][smtp][delete][]" value="$id"/>
-                </label></td>
+                </label>
+              </td>
               <td><input class="form-control" type="text" name="settingnew[mail][smtp][$id][server]" value="$smtp[server]"/></td>
               <td width="60"><input class="form-control" style="width:50px" type="text" name="settingnew[mail][smtp][$id][port]" value="$smtp[port]"/></td>
             </tr>
@@ -593,9 +641,8 @@
         <dt>{lang recipients_user}:</dt>
         <dd class="clearfix">
           <label class="radio-inline ">
-            <input type="radio" name="settingnew[mail][mailusername]" value="1" checked>
-            {lang yes}
-					</label>
+            <input type="radio" name="settingnew[mail][mailusername]" value="1" checked>{lang yes}
+          </label>
           &nbsp;&nbsp;
           <label class="radio radio-inline"><input type="radio" name="settingnew[mail][mailusername]" value="0"<!--{if !$setting[mail][mailusername]}-->  checked<!--{/if}-->>{lang no}</label>
         </dd>
@@ -605,23 +652,23 @@
         <dd class="clearfix">
           <label class="radio-inline ">
             <input type="radio" name="settingnew[mail][sendmail_silent]" value="1" checked>{lang yes}
-					</label>
+          </label>
           &nbsp;&nbsp;
           <label class="radio-inline "><input type="radio" name="settingnew[mail][sendmail_silent]" value="0"<!--{if !$setting[mail][sendmail_silent]}-->checked 
             <!--{/if}-->>{lang no}</label>
         </dd>
       </dl>
-			<dl>
+      <dl>
         <dt>通知消息是否邮件通知:</dt>
         <dd class="clearfix">
           <label class="radio-inline ">
             <input type="radio" name="settingnew[tzxxyjtz]" value="1" checked>{lang yes}
-					</label>
-          &nbsp;&nbsp;
-          <label class="radio-inline "><input type="radio" name="settingnew[tzxxyjtz]" value="0"<!--{if !$setting[tzxxyjtz]}-->checked 
-            <!--{/if}-->>{lang no}</label>
+          </label>&nbsp;&nbsp;
+          <label class="radio-inline ">
+            <input type="radio" name="settingnew[tzxxyjtz]" value="0"<!--{if !$setting[tzxxyjtz]}-->checked<!--{/if}-->>{lang no}
+          </label>
         </dd>
-				<dd class="clearfix"><span class="help-block ">如果未配置邮件服务器，请不要启用，以免造成系统卡顿</span></dd>
+        <dd class="clearfix"><span class="help-block ">如果未配置邮件服务器，请不要启用，以免造成系统卡顿</span></dd>
       </dl>
       <dl>
         <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
@@ -655,16 +702,17 @@
           <input type="text" class="form-control" name="settingnew[numberoflogins]" value="$setting[numberoflogins]">
           <span class="help-block text-muted">允许登录多少次后禁止</span></dd>
       </dl>
-			<dl>
+      <dl>
         <dt>禁止时间:</dt>
         <dd class="clearfix">
           <input type="text" class="form-control" name="settingnew[forbiddentime]" value="$setting[forbiddentime]">
-					<span class="help-inline text-muted">秒</span>
-          <span class="help-block text-muted">允许登录失败多少后才可再次登录</span>
+			<span class="help-inline text-muted">秒</span>
+            <span class="help-block text-muted">允许登录失败多少后才可再次登录</span>
         </dd>
       </dl>
+      <dl>
         <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit"  value="{lang save_changes}" type="submit">
-      </dl>
+      </dl> 
     </form>
     <!--文件夹权限设置-->
     <!--{elseif $operation=='access'}-->
@@ -675,7 +723,9 @@
       <dl>
         <dt>{lang allow_new_user_registration}:</dt>
         <dd class="clearfix">
-          <label class="checkbox-inline"> <input type="checkbox" name="settingnew[regstatus]" value="1" <!--{if $setting[regstatus]>0}-->checked="checked"<!--{/if}-->>{lang open_enrollment}</label>
+          <label class="checkbox-inline">
+            <input type="checkbox" name="settingnew[regstatus]" value="1" <!--{if $setting[regstatus]>0}-->checked="checked"<!--{/if}-->>{lang open_enrollment}
+          </label>
           <span class="help-block">{lang open_enrollment_text}</span></dd>
       </dl>
       <dl>
@@ -719,6 +769,8 @@
               <span class="help-block">{lang details_sites_terms_service}</span></dd>
           </dl>
         </dd>
+      </dl>
+      <dl>
         <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit"  value="{lang save_changes}" type="submit">
       </dl>
     </form>
@@ -752,43 +804,48 @@
         <dd class="clearfix">
           <p class="text-danger ml20" style="margin-left:0px"> {lang upload_permissions_text} </p>
         </dd>
-      <dl>
         <!--{loop $usergroups $value}-->
-        <dd class="clearfix">
-          <dl>
-          <dt>$value[grouptitle]</dt>
-					<dd class="clearfix"><span class="pull-left mr20" style="padding:6px;padding-left:0px;">{lang default_space}</span>
-				  <div class="input-group" style="width:120px;float:left">
-					<input type="text" class="form-control" style="width:100px;" name="group[{$value[groupid]}][maxspacesize]" value="$value[maxspacesize]">
-					<span class="input-group-addon">M</span></div>
-				  <span class="help-inline">{lang setting_main_default}</span></dd>
-          <dd class="clearfix mt10"><span class="pull-left mr20" style="padding:6px;padding-left:0px;">{lang file_size}</span>
-            <div class="input-group" style="width:120px;float:left">
-            <input type="text" class="form-control" style="width:100px;" name="group[{$value[groupid]}][maxattachsize]" value="$value[maxattachsize]">
-            <span class="input-group-addon">M</span></div>
-            <span class="help-inline">{lang setting_main_file_size}；</span></dd>
-          <dd class="clearfix mt10"><span class="pull-left mr20" style="padding:6px;padding-left:0px;">{lang file_type}</span>
-            <input type="text" class="form-control" style="width:250px;" name="group[{$value[groupid]}][attachextensions]" value="$value[attachextensions]">
-            <span class="help-inline">{lang setting_main_file_suffix}</span></dd>
+        <dl>
+            <dt>$value[grouptitle]</dt>
+			  <dd class="clearfix">
+                <span class="pull-left mr20" style="padding:6px;padding-left:0px;">{lang default_space}</span>
+                <div class="input-group" style="width:120px;float:left">
+                  <input type="text" class="form-control" style="width:100px;" name="group[{$value[groupid]}][maxspacesize]" value="$value[maxspacesize]">
+                  <span class="input-group-addon">M</span></div>
+                <span class="help-inline">{lang setting_main_default}</span>
+			  </dd>
+              <dd class="clearfix mt10">
+				  <span class="pull-left mr20" style="padding:6px;padding-left:0px;">{lang file_size}</span>
+                  <div class="input-group" style="width:120px;float:left">
+                  <input type="text" class="form-control" style="width:100px;" name="group[{$value[groupid]}][maxattachsize]" value="$value[maxattachsize]">
+                  <span class="input-group-addon">M</span></div>
+                  <span class="help-inline">{lang setting_main_file_size}；</span>
+			  </dd>
+              <dd class="clearfix mt10">
+				  <span class="pull-left mr20" style="padding:6px;padding-left:0px;">{lang file_type}</span>
+                  <input type="text" class="form-control" style="width:250px;" name="group[{$value[groupid]}][attachextensions]" value="$value[attachextensions]">
+                  <span class="help-inline">{lang setting_main_file_suffix}</span>
+			  </dd>
           </dl>
-        </dd>
         <!--{/loop}-->
-      </dl>
-      <dl>
-        <dt>{lang space_organization_set}:</dt>
-        <dd class="clearfix spacesetting "> 
-          <div class="input-group function-space">
-            <input type="text" class="form-control" placeholder="0" name="settingnew[orgmemorySpace]" value="$setting[orgmemorySpace]">
-            <span class="input-group-addon" id="basic-addon2">M</span></div>
-          <span class="help-inline">{lang space_organization_set_tip}</span> </dd>
-      </dl>
-      <dl>
-        <dt>{lang space_group_set}:</dt>
-        <dd class="clearfix spacesetting ">
-          <div class="input-group function-space">
-            <input type="text" class="form-control" placeholder="0" name="settingnew[groupmemorySpace]" value="$setting[groupmemorySpace]">
-            <span class="input-group-addon" id="basic-addon2">M</span></div>
-            <span class="help-inline">{lang space_group_set_tip}</span></dd>
+        <dl>
+          <dt>{lang space_organization_set}:</dt>
+          <dd class="clearfix spacesetting "> 
+            <div class="input-group function-space">
+              <input type="text" class="form-control" placeholder="0" name="settingnew[orgmemorySpace]" value="$setting[orgmemorySpace]">
+              <span class="input-group-addon" id="basic-addon2">M</span></div>
+            <span class="help-inline">{lang space_organization_set_tip}</span>
+          </dd>
+        </dl>
+        <dl>
+          <dt>{lang space_group_set}:</dt>
+          <dd class="clearfix spacesetting ">
+            <div class="input-group function-space">
+              <input type="text" class="form-control" placeholder="0" name="settingnew[groupmemorySpace]" value="$setting[groupmemorySpace]">
+              <span class="input-group-addon" id="basic-addon2">M</span></div>
+              <span class="help-inline">{lang space_group_set_tip}</span>
+            </dd>
+        </dl>
       </dl>
       <dl>
         <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
@@ -817,7 +874,9 @@
           <input type="text" class="form-control" name="settingnew[smrows]" value="$setting[smrows]">
           <span class="help-inline text-muted">{lang expression_line_state}</span></dd>
       </dl>
-      <input class="btn btn-primary" name="settingsubmit" value="{lang save_changes}" type="submit">
+      <dl>
+        <input class="btn btn-primary" name="settingsubmit" value="{lang save_changes}" type="submit">
+      </dl>
     </form>
     <!--{elseif $operation=='datetime'}-->
     <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
@@ -833,11 +892,9 @@
         <dt>{lang default_time_format}:</dt>
         <dd class="clearfix">
           <label class="radio radio-inline">
-            <input type="radio" name="settingnew[timeformat]" value="24" $checktimeformat[24]/>
-						24 {lang hourly}</label>
+            <input type="radio" name="settingnew[timeformat]" value="24" $checktimeformat[24]/>24 {lang hourly}</label>
           <label class="radio radio-inline">
-            <input type="radio" name="settingnew[timeformat]" value="12" $checktimeformat[12]/>
-						12 {lang hourly}</label>
+            <input type="radio" name="settingnew[timeformat]" value="12" $checktimeformat[12]/>12 {lang hourly}</label>
         </dd>
       </dl>
       <dl>
@@ -864,6 +921,8 @@
           <input type="text" name="settingnew[timeoffset]" class="form-control" value="$setting[timeoffset]" style="width:350px" id="settingnew[timeoffset]">
         </dd>
         <dd class="clearfix"><span class="help-block">{lang default_time_bad_state}</span></dd>
+      </dl>
+      <dl>
         <input class="btn btn-primary" name="settingsubmit" value="{lang save_changes}" type="submit">
       </dl>
     </form>
@@ -1041,7 +1100,9 @@
           <textarea class="form-control" name="badwords" rows="1" style="width:100%"/>$badwords</textarea>
           <span class="help-block">{lang need_words_to_replace_state}</span></dd>
       </dl>
-      <input class="btn btn-primary" name="settingsubmit" value="{lang save_changes}" type="submit">
+      <dl>
+        <input class="btn btn-primary" name="settingsubmit" value="{lang save_changes}" type="submit">
+      </dl> 
     </form>
     <!--{elseif $operation=='qywechat'}-->
     <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform" onsubmit="return validate(this);">
@@ -1076,12 +1137,10 @@
         </ul>
       </dl>
       <dl>
-        <dd>
-          <input type="hidden" id="fbind" name="fbind" value="bind"/>
-          <button class="btn btn-success btn-width" onclick="document.getElementById('cpform').onsubmit();">{lang bundle} </button>
-          &nbsp;&nbsp;
-          <button class="btn btn-danger btn-width" onclick="document.getElementById('fbind').value='unbind';document.getElementById('cpform').onsubmit();"> {lang unbundle} </button>
-        </dd>
+      <input type="hidden" id="fbind" name="fbind" value="bind"/>
+      <button class="btn btn-success btn-width" onclick="document.getElementById('cpform').onsubmit();">{lang bundle} </button>
+      &nbsp;&nbsp;
+      <button class="btn btn-danger btn-width" onclick="document.getElementById('fbind').value='unbind';document.getElementById('cpform').onsubmit();"> {lang unbundle} </button>
       </dl>
     </form>
     <script type="text/javascript">
@@ -1114,6 +1173,8 @@
     <!--{/if}--> 
   </div>
 </div>
+</div>
+  <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
 <script type="text/javascript">
     jQuery('.left-drager').leftDrager_layout();
@@ -1188,7 +1249,6 @@
 </script> 
 <script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script> 
 <script type="text/javascript" src="static/icheck/icheck.min.js?{VERHASH}"></script>
-
 <script type="text/javascript" src="static/jquery_file_upload/jquery.ui.widget.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/jquery_file_upload/jquery.iframe-transport.js?{VERHASH}"></script>
 <!-- The basic File Upload plugin -->

@@ -19,21 +19,22 @@
   <p class="name">
     <!--{if $appinfo['appname']}-->
     <span class="name-zh">$appinfo[appname]</span>
-    <!--{/if}-->
-	</p>
-  <div class="detail">
     <!--{if $about['version']}-->
     <p class="version">
       <span class="guide"><!--{if $about['name_zh']}-->$about[name_zh]<!--{/if}--> <!--{if $about['name_en']}-->$about[name_en]<!--{/if}--> {lang version}:</span>$about[version]
     </p>
     <!--{/if}-->
-    <p class="support">
-      <span class="guide">QQ:</span> <a href="http://wpa.qq.com/msgrd?v=3&uin=3203164629&site=qq&menu=yes" target="_blank">3203164629</a>
-    </p>
-		<p class="support">
-      <span class="guide">小胡 版本:</span> <a href="https://gitee.com/xh2002/dzzoffice" target="_blank">$about[xhversion]</a>
-    </p>
-  </div>
+    <!--{/if}-->
+  </p>
+  <p class="license">
+    <span class="guide">授权协议:</span> <a href="http://www.gnu.org/licenses/agpl-3.0.html" target="_blank">AGPL V3 开源协议</a>
+  </p>
+  <p class="support">
+    <span class="guide">服务支持:</span> <a href="http://www.dzzoffice.com" target="_blank">www.dzzoffice.com</a>
+  </p>
+  <p class="support">
+    <span class="guide">小胡 版本:</span><a href="https://gitee.com/xh2002/dzzoffice" target="_blank">$about[xhversion]</a>
+  </p>
 </div>
    <div class="about-copyright"><!--{template common/copyright}--></div>
 <!--{template common/footer_ajax}-->

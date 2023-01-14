@@ -89,8 +89,8 @@
 					</dl>
 				</div>
 				<dl>
-					<dd class="clearfix"><button type="submit" class="btn btn-primary" name="exportsubmit" value="true" >{lang blank_submit}</button>
-						&nbsp; &nbsp;<label class="checkbox inline"><input  type="checkbox" value="1" onclick="document.getElementById('advanceoption').style.display = document.getElementById('advanceoption').style.display == 'none' ? '' : 'none'; this.value = this.value == 1 ? 0 : 1; this.checked = this.value == 1 ? false : true" id="btn_more">{lang more_options}</label></dd>
+					<button type="submit" class="btn btn-primary" name="exportsubmit" value="true" >{lang blank_submit}</button>
+						&nbsp; &nbsp;<label class="checkbox inline"><input  type="checkbox" value="1" onclick="document.getElementById('advanceoption').style.display = document.getElementById('advanceoption').style.display == 'none' ? '' : 'none'; this.value = this.value == 1 ? 0 : 1; this.checked = this.value == 1 ? false : true" id="btn_more">{lang more_options}</label>
 				</dl>
 			</form>
 			<!--{else}-->
@@ -227,6 +227,7 @@
 		</div>
 		<!--{/if}-->
 	</div>
+    <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
 <script type="text/javascript">
 	jQuery('.left-drager').leftDrager_layout();

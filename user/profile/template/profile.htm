@@ -10,16 +10,9 @@
 	margin-left:120px;
 	overflow:auto;
 }
-.form-horizontal-left .form-group .controls{
-	width:70%;
-	padding:0 5px;
-}
 .form-horizontal-left .form-group .controls-container{
 	width:320px;
 	float:left;
-}
-.form-horizontal-left label{
-	padding:7px 10px 0 0;
 }
 .form-horizontal-left .help-inline{
 	padding:5px;
@@ -109,26 +102,22 @@
         
         <div class="form-group">
           <label class="control-label">{lang username}</label>
-          <div class="controls-container">
-            <p class="form-control-static">$_G[username]&nbsp; <!--{if $qqlogin[openid] && $qqlogin[unbind]<1}--><img src="user/images/qq.png" height="16" title="{lang qq_bind}" />&nbsp;&nbsp;<a  href="user.php?mod=profile&action=qq_unbind&openid=$qqlogin[openid]">{lang do_unbind}</a><!--{/if}--></p>
+          <div class="controls-container">$_G[username]&nbsp; <!--{if $qqlogin[openid] && $qqlogin[unbind]<1}--><img src="user/images/qq.png" height="16" title="{lang qq_bind}" />&nbsp;&nbsp;<a  href="user.php?mod=profile&action=qq_unbind&openid=$qqlogin[openid]">{lang do_unbind}</a><!--{/if}-->
           </div>
         </div>
        <div class="form-group">
           <label class="control-label">{lang Last_login_time}</label>
-          <div class="controls-container">
-            <p class="form-control-static">$scdlsj</p>
+          <div class="controls-container">$scdlsj
           </div>
         </div>
 				<div class="form-group">
           <label class="control-label">{lang registration_time}</label>
-          <div class="controls-container">
-            <p class="form-control-static">$zcsj</p>
+          <div class="controls-container">$zcsj
           </div>
         </div>
 				<div class="form-group">
           <label class="control-label">{lang email}</label>
-          <div class="controls-container">
-            <p class="form-control-static">$space['email']</p>
+          <div class="controls-container">$space['email']
           </div>
         </div>
         <!--{loop $settings $key $value}--> 
@@ -172,12 +161,10 @@
           </div>
           <!--{/if}-->
         <!--{if !$vid || $showbtn}-->
-        <div class="form-group">
+        <dl>
              <label class="control-label"></label>
-            <div class="controls">
-                <input type="submit" class="btn btn-primary btn-width" <!--{if $vid}-->value="{lang submit_audit}"<!--{else}-->value="{lang save}"<!--{/if}-->>
-            </div>
-        </div>
+             <input type="submit" class="btn btn-primary btn-width" <!--{if $vid}-->value="{lang submit_audit}"<!--{else}-->value="{lang save}"<!--{/if}-->>
+        </dl>
          <!--{/if}-->
       </form>
     </div>

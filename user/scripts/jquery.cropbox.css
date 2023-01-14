@@ -2,7 +2,7 @@
 	overflow : hidden;
 	position : relative;
   display: inline-block;
-	border-radius: .5rem;
+	border-radius:  var(--radius);
 }
 
 .cropImage {

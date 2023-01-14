@@ -196,16 +196,15 @@
 						<label class="radio-inline"><input type="radio" name="allowsearch" value="0" <!--{if !$field[allowsearch]}-->checked="checked"<!--{/if}-->>{lang no_allow_search}</label>
 					</div>
 				</div>
-				<div class="form-group">
+				<dl>
 					<label class="control-label "></label>
-					<div class="controls">
-						<input type="submit" class="btn btn-primary btn-width" name="editsubmit" value="{lang save_set}">
-					</div>
-				</div>
+                    <input type="submit" class="btn btn-primary btn-width" name="editsubmit" value="{lang save_set}">
+				</dl>
 
 			</form>
 		</div>
 	</div>
+    <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
 <script type="text/javascript">
 	jQuery('.left-drager').leftDrager_layout();

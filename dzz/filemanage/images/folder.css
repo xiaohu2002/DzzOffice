@@ -29,7 +29,7 @@ html, body {
 .module-list-view .title {
 	border: 1px solid #ebeef5;
 	background: #F7F7F7;
-  border-radius: .5rem;
+  border-radius:  var(--radius);
   margin-top: 5px;
 }
 .module-list-view .title .asc {

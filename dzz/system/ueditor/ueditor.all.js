@@ -11835,7 +11835,6 @@ UE.plugins['link'] = function(){
 ///import core
 ///import plugins\inserthtml.js
 ///commands 插入框架
-///commandsName  InsertFrame
 ///commandsTitle  插入Iframe
 ///commandsDialog  dialogs\insertframe
 
@@ -11851,9 +11850,6 @@ UE.plugins['insertframe'] = function() {
     });
 
 };
-
-
-
 // plugins/scrawl.js
 ///import core
 ///commands 涂鸦
@@ -13731,7 +13727,6 @@ UE.plugin.register('dzzfile',function(){
         }
     }
 });
-
 // plugins/anchor.js
 /**
  * 锚点插件，为UEditor提供插入锚点支持
@@ -17539,7 +17534,7 @@ UE.plugins['autofloat'] = function() {
             }
             if(toolbarBox.style.position != 'fixed'){
                 toolbarBox.style.position = 'fixed';
-                toolbarBox.style.top = "64px";
+                toolbarBox.style.top = "69px";
                 ((origalFloat == 'absolute' || origalFloat == 'relative') && parseFloat(origalLeft)) && (toolbarBox.style.left = toobarBoxPos.x + 'px');
             }
         }
@@ -17644,7 +17639,7 @@ UE.plugins['video'] = function (){
                     ' src="' + me.options.UEDITOR_HOME_URL+'themes/default/images/spacer.gif" style="background:url('+me.options.UEDITOR_HOME_URL+'themes/default/images/videologo.gif) no-repeat center center; border:1px solid gray;'+(align ? 'float:' + align + ';': '')+'" />'
                 break;
             case 'iframe':
-                str = '<iframe src="/dzz/bilibili/player.php?url=' +  utils.html(url) + '" width="100%" height="480px"'  + (align ? ' style="float:' + align + '"': '') +' style="border-radius: .5rem;border: none;"></iframe>';
+                str = '<iframe src="/dzz/bilibili/player.php?url=' +  utils.html(url) + '" width="100%" height="480px"'  + (align ? ' style="float:' + align + '"': '') +' style="border-radius:  var(--radius);border: none;"></iframe>';
                 break;
             case 'video':
                 var ext = url.substr(url.lastIndexOf('.') + 1);
@@ -27753,6 +27748,8 @@ UE.ui = baidu.editor.ui = {};
         'wordimage':'~/dialogs/wordimage/wordimage.html',
         'attachment':'~/dialogs/attachment/attachment.html',
         'insertframe':'~/dialogs/insertframe/insertframe.html',
+        'kityformula':'~/dialogs/kityformula/kityFormulaDialog.html',
+        'kityminder':'~/dialogs/kityminder/kityMinderDialog.html',
         'edittip':'~/dialogs/table/edittip.html',
         'edittable':'~/dialogs/table/edittable.html',
         'edittd':'~/dialogs/table/edittd.html',
@@ -27991,7 +27988,7 @@ UE.ui = baidu.editor.ui = {};
     var dialogBtns = {
         noOk:['searchreplace', 'help', 'spechars', 'webapp','preview'],
         ok:['attachment', 'anchor', 'link', 'insertimage', 'map', 'gmap', 'insertframe', 'wordimage',
-            'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'scrawl', 'template', 'music', 'background', 'charts']
+            'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'scrawl', 'template', 'music', 'background', 'charts', 'kityminder', 'kityformula']
     };
 
     for (var p in dialogBtns) {
@@ -28015,7 +28012,7 @@ UE.ui = baidu.editor.ui = {};
                                 className:'edui-for-' + cmd,
                                 title:title,
                                 holdScroll: cmd === 'insertimage',
-                                fullscreen: /charts|preview/.test(cmd),
+                                fullscreen: /charts|preview|kityminder|kityformula/.test(cmd),
                                 closeDialog:editor.getLang("closeDialog")
                             }, type == 'ok' ? {
                                 buttons:[
@@ -29525,79 +29522,6 @@ UE.ui = baidu.editor.ui = {};
     }
 
 })();
-UE.registerUI('kityformula', function(editor, uiname){
-
-    // 创建dialog
-    var kfDialog = new UE.ui.Dialog({
-
-        // 指定弹出层路径
-        iframeUrl: editor.options.UEDITOR_HOME_URL + 'third-party/kityformula-plugin/kityFormulaDialog.html',
-        // 编辑器实例
-        editor: editor,
-        // dialog 名称
-        name: uiname,
-        // dialog 标题
-        title: '插入公式',
-
-        // dialog 外围 css
-        cssRules: 'width:783px; height: 386px;',
-
-        //如果给出了buttons就代表dialog有确定和取消
-        buttons:[
-            {
-                className:'edui-okbutton',
-                label:'确定',
-                onclick:function () {
-                    kfDialog.close(true);
-                }
-            },
-            {
-                className:'edui-cancelbutton',
-                label:'取消',
-                onclick:function () {
-                    kfDialog.close(false);
-                }
-            }
-        ]});
-
-    editor.ready(function(){
-        UE.utils.cssRule('kfformula', 'img.kfformula{vertical-align: middle;}', editor.document);
-    });
-
-    var iconUrl = editor.options.UEDITOR_HOME_URL + 'third-party/kityformula-plugin/kf-icon.png';
-    var tmpLink = document.createElement('a');
-    tmpLink.href = iconUrl;
-    tmpLink.href = tmpLink.href;
-    iconUrl = tmpLink.href;
-
-    var kfBtn = new UE.ui.Button({
-        name:'插入' + uiname,
-        title:'插入公式',
-        //需要添加的额外样式，指定icon图标
-        cssRules :'background: url("' + iconUrl + '") !important',
-        onclick:function () {
-            //渲染dialog
-            kfDialog.render();
-            kfDialog.open();
-        }
-    });
-
-    //当点到编辑内容上时，按钮要做的状态反射
-    editor.addListener('selectionchange', function () {
-        var state = editor.queryCommandState(uiname);
-        if (state == -1) {
-            kfBtn.setDisabled(true);
-            kfBtn.setChecked(false);
-        } else {
-            kfBtn.setDisabled(false);
-            kfBtn.setChecked(state);
-        }
-    });
-
-    return kfBtn;
-
-
-}, 70);
 ///import core
 ///plugin 编辑器默认的过滤转换机制
 
@@ -29846,84 +29770,6 @@ UE.plugins['defaultfilter'] = function () {
 
     });
 };
-UE.registerUI('kityminder', function(editor, uiname){
-
-    // 创建dialog
-    var kfDialog = new UE.ui.Dialog({
-
-        // 指定弹出层路径
-        iframeUrl: editor.options.UEDITOR_HOME_URL + 'third-party/kityminder-plugin/kityMinderDialog.html',
-        // 编辑器实例
-        editor: editor,
-        // dialog 名称
-        name: uiname,
-        // dialog 标题
-        title: '插入思维导图',
-
-        // dialog 外围 css
-        cssRules: 'width:783px; height: 386px;',
-
-        // 全屏方便编辑
-        fullscreen: true,
-
-        //如果给出了buttons就代表dialog有确定和取消
-        buttons:[
-            {
-                className:'edui-okbutton',
-                label:'确定',
-                onclick:function () {
-                    kfDialog.close(true);
-                }
-            },
-            {
-                className:'edui-cancelbutton',
-                label:'取消',
-                onclick:function () {
-                    kfDialog.close(false);
-                }
-            }
-        ]});
-
-    editor.ready(function(){
-        //UE.utils.cssRule('kityminder', 'img.kfformula{vertical-align: middle;}', editor.document);
-    });
-
-    var iconUrl = editor.options.UEDITOR_HOME_URL + 'third-party/kityminder-plugin/km-icon.png';
-    var tmpLink = document.createElement('a');
-    tmpLink.href = iconUrl;
-    tmpLink.href = tmpLink.href;
-    iconUrl = tmpLink.href;
-
-    var kfBtn = new UE.ui.Button({
-        name:'插入',
-        title:'插入思维导图',
-        //需要添加的额外样式，指定icon图标
-        cssRules :'background: url("' + iconUrl + '") !important',
-        onclick:function () {
-            //渲染dialog
-            kfDialog.render();
-            kfDialog.open();
-        }
-    });
-
-    //当点到编辑内容上时，按钮要做的状态反射
-    editor.addListener('selectionchange', function () {
-        var state = editor.queryCommandState(uiname);
-        if (state == -1) {
-            kfBtn.setDisabled(true);
-            kfBtn.setChecked(false);
-        } else {
-            kfBtn.setDisabled(false);
-            kfBtn.setChecked(state);
-        }
-    });
-
-    return kfBtn;
-
-
-}, 70);
-
-
 
 // adapter/message.js
 UE.registerUI('message', function(editor) {
@@ -30008,7 +29854,6 @@ UE.registerUI('autosave', function(editor) {
     })
 
 });
-
 
 
 })();

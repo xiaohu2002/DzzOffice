@@ -63,7 +63,7 @@
           <!--{loop $permgroups $v}-->
           <li class="properties-list" id="perm_$v[id]">
           <div class="properties-listLeft">
-            <div class="proper-leftimg"> <img src="dzz/styles/thame/colorful/system/folder.png"> <span class="properties-admin">$v[pername]</span> </div>
+            <div class="proper-leftimg">$v[id].<img src="dzz/styles/thame/colorful/system/folder.png"> <span class="properties-admin">$v[pername]</span> </div>
             <ul class="proper-show proper-iconshow">
               <!--{loop $perms $k $val}--> 
               <li  <!--{if $val[1]&$v[perm]}-->style="display:block"<!--{else}--> style="display:none"<!--{/if}-->><span class="{$val[2]}"></span>

@@ -22,9 +22,11 @@ body:after{
 }   
 .form-group {
     margin-bottom: 20px;
+	display: block;
+	margin-bottom:0;
+	box-shadow: none;
+    border: none;
 }
-
-
 .page {
     height: 100%;
     padding: 0;
@@ -46,17 +48,12 @@ body:after{
     right: 0;
     height: auto;
     min-height: 100%;
-    padding: 50px 30px 30px;
+    padding: 15px;
     color: #76838f;
     background: #fff;
 	text-align:center;
 	overflow:auto;
 	min-width:320px;
-}
-
-
-.brand {
-   margin:15px 0;
 }
 .brand img {
 	max-width:300px;
@@ -77,7 +74,7 @@ body:after{
 
 .loginForm{
 	width: 350px;
-    margin: 80px 0;
+    margin: 15px 0;
 	
 }
 span.spacer{

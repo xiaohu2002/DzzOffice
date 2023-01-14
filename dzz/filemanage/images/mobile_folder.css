@@ -14,8 +14,8 @@ html, body {
 	margin-left:0;
 	border-top:0;
 }
-.item{
-	
+.name-text{
+	color: #4c89fb;
 }
 .list-share{
 	overflow-y:auto;
@@ -32,7 +32,7 @@ html, body {
 .module-list-view .title {
 	border: 1px solid #ebeef5;
 	background: #F7F7F7;
-  border-radius: .5rem;
+  border-radius:  var(--radius);
   margin-top: 5px;
 }
 .module-list-view .title .asc {
@@ -58,11 +58,10 @@ html, body {
 .module-list-view .item {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
   color: inherit;
-  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
   border: 1px solid #ebeef5;
-  border-radius: .5rem;
-  margin: .5rem;
-  padding: 5px;
+  border-radius:  var(--radius);
+  margin:  var(--radius);
    position: relative; 
   -webkit-box-align: center;
   -webkit-align-items: center;
@@ -333,20 +332,6 @@ html, body {
 .window .icoblank_rightbottom{
 	background-color: transparent!important;
 }
-/*.module-grid-view .item-block .backgound_radius{
-	background-color: #e3f2fd;
-	border-radius: 2px;
-	display: block;
-	opacity: 1;
-}
-.module-grid-view .item-block .sharepame-checked{
-	display: block;
-}
-.module-grid-view .item-block .icoblank_rightbottom{
-	display: block;
-	top: 3px;
-	right: 3px;
-}*/
 .sharepame-pictitle{
 	padding-top: 1.42rem;
 	border-bottom: 1px solid #DCDCDC;
@@ -394,9 +379,6 @@ html, body {
 	background: #fff;
 	border-radius: 2px;
 	color:#4c89fb;
-}
-.nav-pills li{
-	padding-right: 5px;
 }
 .main-header{
 	border: none;

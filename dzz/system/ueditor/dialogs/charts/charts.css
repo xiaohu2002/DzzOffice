@@ -61,7 +61,7 @@ html, body {
 .charts-format fieldset {
   padding-left: 20px;
   margin-bottom: 10px;
-	border-radius: .5rem
+	border-radius: var(--radius);
 }
 
 .charts-format legend {

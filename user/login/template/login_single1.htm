@@ -15,10 +15,10 @@
           <a class="site" href="{$_G[siteurl]}"><span class="site-logo">
             <!--{if $_G['setting']['sitelogo']}-->
               <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}" style="max-height:30px;">
-						<!--{else}-->
+			  <!--{else}-->
               <img src="static/image/common/logo.png" style="max-height:30px;">
-						<!--{/if}-->
-              </span><span class="site-name">$_G['setting']['sitename']<!--{if $_G['uid']}--><!--{else}-->(游客版)<!--{/if}--></span></a>
+			  <!--{/if}-->
+              </span><span class="site-name">$_G['setting']['sitename']</span></a>
           </li>
       </ul>
   </div>
@@ -28,70 +28,72 @@
 <!--{template common/beijing}-->
 
 <div class="mainContainer" id="main_message">
-  <table width="100%" height="100%">
-    <tr>
-			<td align="center" valign="middle">
-				<div class="modal-content">
-					<div class="brand">
-					<!--{if $_G['setting']['sitelogo']}-->
-              <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}">
-						<!--{else}-->
-              <img src="static/image/common/logo.png">
-						<!--{/if}-->
-					</div>
-            <!--{if !$_G['setting']['bbclosed']}-->
-            <!--{if $_G[setting][loginset][title]}-->
-            <div class="main-title">$_G[setting][loginset][title]</div>
-            <!--{/if}--> 
-            <!--{if $_G[setting][loginset][subtitle]}-->
-            <div class="sub-title">$_G[setting][loginset][subtitle]</div>
-            <!--{/if}-->
-            <form method="post"  name="login" id="loginform_$loginhash" class="loginForm" role="form" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}pwdclear = 1; loginsub('loginform_$loginhash', 'returnmessage_$loginhash');return false;"  action="user.php?mod=login&op=logging&action=login&loginsubmit=yes{if !empty($_GET['handlekey'])}&handlekey=$_GET[handlekey]{/if}{if isset($_GET['frommessage'])}&frommessage{/if}&loginhash=$loginhash">
-              <input type="hidden" name="formhash" value="{FORMHASH}" />
-              <input type="hidden" name="referer" value="{$referer}" />
-              <!--{if $auth}-->
-              <input type="hidden" name="auth" value="$auth" />
-              <!--{else}--> 
-              <div class="form-group">
-                <input type="text" class="form-control" id="email_$loginhash" placeholder="{lang email_username}" name="email"  autocomplete="off">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="password3_$loginhash" placeholder="{lang user_login_password}" name="password" onfocus="this.type='password'" autocomplete="off">
-              </div>
-              <!--{/if}-->
-              <!--{if $seccodecheck}-->
-              <div class="form-group seccode-wrapper clearfix"> 
-              <!--{template common/seccheck}--> 
-              </div>
-              <!--{/if}-->
-              <div class="form-group  clearfix">
-                <div class="checkbox-custom checkbox-primary pull-left">
-                  <input type="checkbox" name="cookietime" id="cookietime_$loginhash" value="2592000" $cookietimecheck />
-                  <label for="cookietime_$loginhash">{lang automatic_login_within_thirtydays}</label>
-                </div>
-                <a class="pull-right"  href="index.php?mod=appmanagement">管理员登录</a> <span class="spacer  pull-right">|</span>
-                <!--{if $_G['setting']['regstatus']>0}--> 
-                <a  class="pull-right"  href="user.php?mod=register&referer={eval echo urlencode($referer);}"  <!--{if !empty($_GET['inajax'])}-->onclick="_login.register($referer);return false;"<!--{/if}--> title="$_G['setting']['reglinkname']">$_G['setting']['reglinkname']</a> 
-                <span class="spacer  pull-right">|</span> 
-                <!--{/if}--> 
-                <a class="pull-right"  href="user.php?mod=login&op=logging&action=lostpasswd">{lang getpassword}</a> 
-							</div>
-              <div class="third-wrapper clearfix">
-                <!--{hook third_login}-->
-              </div>
-                <p class="error-msg text-danger" id="returnmessage_$loginhash"></p>
-                <!--{if $_G['setting'][loginset][youkedenlu]}--> 
-                <a href="$_G['siteurl']" class="btn btn-lg btn-primary btn-block">游客访问</a>
-                <!--{/if}--> 
-                <button class="btn btn-lg btn-primary btn-block" type="submit" name="loginsubmit" value="true">{lang login_empty}</button>
-            </form>
-          <div class="copyright-container">
-            <!--{template common/copyright}-->
-          </div>
+   <div class="modal-content">
+    <div class="brand">
+    <!--{if $_G['setting']['sitelogo']}-->
+    <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}">
+        <!--{else}-->
+    <img src="static/image/common/logo.png">
+        <!--{/if}-->
+    </div>
+    <!--{if !$_G['setting']['bbclosed']}-->
+    <!--{if $_G[setting][loginset][title]}-->
+    <div class="main-title">$_G[setting][loginset][title]</div>
+    <!--{/if}--> 
+    <!--{if $_G[setting][loginset][subtitle]}-->
+    <div class="sub-title">$_G[setting][loginset][subtitle]</div>
+    <!--{/if}-->
+    <form method="post"  name="login" id="loginform_$loginhash" class="loginForm" role="form" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}pwdclear = 1; loginsub('loginform_$loginhash', 'returnmessage_$loginhash');return false;"  action="user.php?mod=login&op=logging&action=login&loginsubmit=yes{if !empty($_GET['handlekey'])}&handlekey=$_GET[handlekey]{/if}{if isset($_GET['frommessage'])}&frommessage{/if}&loginhash=$loginhash">
+      <input type="hidden" name="formhash" value="{FORMHASH}" />
+      <input type="hidden" name="referer" value="{$referer}" />
+      <!--{if $auth}-->
+      <input type="hidden" name="auth" value="$auth" />
+      <!--{else}-->
+      <div class="form-group">
+        <input type="text" class="form-control" id="email_$loginhash" placeholder="{lang email_username}" name="email"  autocomplete="off">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="password3_$loginhash" placeholder="{lang user_login_password}" name="password" onfocus="this.type='password'" autocomplete="off">
+      </div>
+      <!--{/if}-->
+      <!--{if $seccodecheck}-->
+      <div class="form-group seccode-wrapper clearfix"> 
+      <!--{template common/seccheck}--> 
+      </div>
+      <!--{/if}-->
+      <div class="form-group  clearfix">
+        <div class="checkbox-custom checkbox-primary pull-left">
+          <input type="checkbox" name="cookietime" id="cookietime_$loginhash" value="2592000" $cookietimecheck />
+          <label for="cookietime_$loginhash">{lang automatic_login_within_thirtydays}</label>
         </div>
-      </td>
-    </tr>
-  </table>
+        <!--{if $_G['setting']['regstatus']>0}--> 
+        <a  class="pull-right"  href="user.php?mod=register&referer={eval echo urlencode($referer);}"  <!--{if !empty($_GET['inajax'])}-->onclick="_login.register($referer);return false;"<!--{/if}--> title="$_G['setting']['reglinkname']">$_G['setting']['reglinkname']</a> 
+        <span class="spacer  pull-right">|</span> 
+        <!--{/if}--> 
+        <a class="pull-right"  href="user.php?mod=login&op=logging&action=lostpasswd">{lang getpassword}</a> 
+      </div>
+      <div style="padding-top:15px;text-align: left;">
+          <span class="third-login-header">{lang other_login}：</span>
+          <a class="pull-right"  href="admin.php">管理员登录</a>
+          <!--{if $_G['setting']['qq_login']>0}-->
+          <a class="qqlogin" style="margin:0 5px" href="user.php?mod=login&op=qqlogin" title="{lang qq_login}">
+              <img src="user/images/qq.png" height="24" />
+          </a>
+          <!--{/if}-->
+      </div>
+      <div class="third-wrapper clearfix">
+        <!--{hook third_login}-->
+      </div>
+        <p class="error-msg text-danger" id="returnmessage_$loginhash"></p>
+        <!--{if $_G['setting'][loginset][youkedenlu]}--> 
+        <a href="$_G['siteurl']" class="btn btn-lg btn-primary btn-block">游客访问</a>
+        <!--{/if}--> 
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="loginsubmit" value="true">{lang login_empty}</button>
+    </form>
+    <div class="copyright-container">
+      <!--{template common/copyright}-->
+    </div>
+  </div>
 </div>
 <div class="nfl" id="main_succeed" style="display: none;text-align: center;">
 	<div class="modal-body">
@@ -137,7 +139,7 @@ jQuery(document).ready(function(e) {
 </script>
 <!--{else}-->
 <div class="main-title">$_G[setting][closedreason]</div>
-		<div class="sub-title"><a class="btn btn-lg btn-primary btn-block" href="admin.php?mod=setting">管理员登录</a><div class="copyright-container">
+		<div class="sub-title"><a class="btn btn-lg btn-primary btn-block" href="admin.php">管理员登录</a><div class="copyright-container">
 		<!--{template common/copyright}-->
 		</div></div>
 		

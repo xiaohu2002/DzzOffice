@@ -7,11 +7,11 @@
 	margin:0;
 }
 .dzzvote-container .tab-content{
-	
 	background:#FFF;
 	border-width:0 1px 1px 1px;
 	border-color:#DDD;
 	border-style:solid;
+	border-radius: var(--radius);
 }
 
 .dzzvote-post-item-container {

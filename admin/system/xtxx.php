@@ -11,6 +11,9 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 }
 $op = $_GET['op'];
 $navtitle = lang('xtxx') . ' - ' . lang('appname');
+$about['version']='V'.CORE_VERSION;//版本信息
+$about['xhversion']='V'.CORE_XHVERSION;//版本信息
+$about['XHFIXBUG']=CORE_XHFIXBUG;//更新日期
 function shuchu(){
   define('ROOT_PATH', dirname(__FILE__));
   $lang=array (

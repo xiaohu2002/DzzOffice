@@ -6,12 +6,15 @@
 	table {
     border-collapse: collapse;
     width: 95%;
-}
+  }
 	th {
-    text-align: left;
+    text-align:center;
     color: #76a9ff;
     line-height: 34px;
     padding: 3px 5px;
+  }
+	tr {
+    text-align:center;
 }
 </style>
 <!--{template common/commer_header}-->
@@ -25,12 +28,28 @@
 		<div class="main-content" style="padding:20px 0;border-top:1px solid #FFF">
 			<div class="well well-sm">
 				<div class="container step_1">
-          <!--{eval echo shuchu();}-->
-					<li>已安装扩展:$extensions</li>
+					<h2 class="title">版本信息</h2>
+					<table class="tb" style="margin:20px 0;">
+						<tbody>
+							<tr>
+                              <th>官方版本</th>
+                              <th class="padleft">小胡版本</th>
+                              <th class="padleft">小胡版更新日期</th>
+                            </tr>
+                            <tr>
+                              <td>$about[version]</td>
+                              <td class="padleft">$about[xhversion]</td>
+                              <td class="w pdleft1">$about[XHFIXBUG]</td>
+                            </tr>
+						</tbody>
+					</table>
+                  <!--{eval echo shuchu();}-->
+                  <li>已安装扩展:$extensions</li>
         </div>
 			</div>
 		</div>
 	</div>
+	<a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
 <script type="text/javascript">
 	jQuery('.left-drager').leftDrager_layout();

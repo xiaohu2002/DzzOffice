@@ -72,7 +72,7 @@
 				
 			}else{
 				
-				if($leftContainer.width()<10 || $leftContainer.is(':hidden')){
+				if($leftContainer.width()<5 || $leftContainer.is(':hidden')){
 					dragerClick('show');
 				}else{
 					dragerClick('hide');
@@ -116,7 +116,7 @@
 			 var isTopFixed=jQuery('.bs-top-container').hasClass('navbar-fixed-top');
 			 var clientHeight = Math.max(document.documentElement.clientHeight, document.body.clientHeight);
 			 jQuery('.bs-container').css('padding-top',isTopFixed?headerHeight:0);
-			 jQuery('.nav-stacked,.bs-main-container,.left-drager,.leftMenu').css('height',clientHeight-headerHeight-15);
+			 jQuery('.bs-left-container,.nav-stacked,.bs-main-container,.left-drager,.leftMenu').css('height',clientHeight-headerHeight-15);
 			 jQuery('.left-drager,.bs-left-container').css('top',isTopFixed?headerHeight:0);
 			 if(typeof(resizefunc)==='function'){
 				resizefunc();  

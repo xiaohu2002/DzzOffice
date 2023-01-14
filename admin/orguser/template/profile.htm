@@ -10,7 +10,7 @@
 
 	</ul>
 </div>
-<div class="main-body" style="padding:15px 15px 15px 22px;">
+<div class="main-body">
 	<div id="return_edituserprofile"></div>
 	<form id="accountform" name="accountform" class="form-horizontal form-horizontal-left" action="{BASESCRIPT}?mod=orguser&op=edituser&do=profile" method="post" onsubmit="account_submit();return false">
 		<input type="hidden" name="profilesubmit" value="true" />
@@ -21,18 +21,15 @@
 		<!--{if $value[available]}-->
 		<div class="news">
 			<label class="control-label" for="$key">$value[title]</label>
-			<div class="p_name">
+			<div class="form_name">
 				$htmls[$key]
 			</div>
 		 </div>
 		<!--{/if}-->
 		<!--{/loop}-->
-		<div class="form-group">
-			<label class="control-label"></label>
-			<div class="controls">
-				<input type="submit" class="btn btn-primary" value="{lang save_changes}">
-			</div>
-		</div>
+		<dl>
+			<input type="submit" class="btn btn-primary" value="{lang save_changes}">
+		</dl>
 	</form>
 </div>
 <script type="text/javascript" reload="1">

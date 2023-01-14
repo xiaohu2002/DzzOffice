@@ -903,22 +903,22 @@ class table_resources extends dzz_table
                 } elseif ($fileinfo['ext']) {
                     $fileinfo['fsize'] = formatsize($fileinfo['size']);
                 } else {
-									//获取文件基本信息
-									$fileinfos = DB::fetch_all("select r.*,f.perm_inherit,p.path from %t  r left join %t f on r.pfid = f.fid left join %t p  on p.fid = r.pfid $wheresql", $param);
+                  //获取文件基本信息
+                  $fileinfos = DB::fetch_all("select r.*,f.perm_inherit,p.path from %t  r left join %t f on r.pfid = f.fid left join %t p  on p.fid = r.pfid $wheresql", $param);
                   $fileinfo = array();
                   $tmpinfo = array();
                   $infos = array();
-									$fileinfo = DB::fetch_first("select r.*,f.perm_inherit,p.path from %t r left join %t f on r.pfid = f.fid left join %t p on r.pfid = p.fid $wheresql", $param);
-									if (!$fileinfo) {
+                  $fileinfo = DB::fetch_first("select r.*,f.perm_inherit,p.path from %t r left join %t f on r.pfid = f.fid left join %t p on r.pfid = p.fid $wheresql", $param);
+                  if (!$fileinfo) {
                       return array('error' => lang('no_privilege'));
                   }
                   //位置信息
                   $fileinfo['realpath'] = preg_replace('/dzz:(.+?):/', '', $fileinfo['path']);
-									//统计信息
+                  //统计信息
                   $fileinfo['opendateline'] = ($filestatis['opendateline']) ? dgmdate($filestatis['opendateline'], 'Y-m-d H:i:s') : dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
                   $fileinfo['editdateline'] = ($filestatis['editdateline']) ? dgmdate($filestatis['editdateline'], 'Y-m-d H:i:s') : dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
                   $fileinfo['fdateline'] = dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
-									//编辑权限信息
+                  //编辑权限信息
                   $fileinfo['editperm'] = 1;
                   if ($fileinfo['gid'] > 0) {
                       $powerarr = perm_binPerm::getPowerArr();
@@ -956,9 +956,9 @@ class table_resources extends dzz_table
                       }
                   }
                   $fileinfo['fsize'] = formatsize($tmpinfo['contains']['size']);
-									$fileinfo['ffsize'] = lang('property_info_size', array('fsize' => formatsize($tmpinfo['contains']['size']), 'size' => $tmpinfo['contains']['size']));
+                  $fileinfo['ffsize'] = lang('property_info_size', array('fsize' => formatsize($tmpinfo['contains']['size']), 'size' => $tmpinfo['contains']['size']));
                   $fileinfo['contain'] = lang('property_info_contain', array('filenum' => $tmpinfo['contains']['contain'][0], 'foldernum' => $tmpinfo['contains']['contain'][1]));
-									$fileinfo['img'] = self::get_icosinfo_by_rid($fileinfo['rid']);
+                  $fileinfo['img'] = self::get_icosinfo_by_rid($fileinfo['rid']);
                 }
 
             }

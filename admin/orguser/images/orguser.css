@@ -3,13 +3,9 @@
     margin-bottom: 20px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     border: 1px solid #ebeef5;
-    border-radius: .5rem;
+    border-radius: var(--radius);
     padding: 20px;
     display: flex;
-}
-.p_name {
-    width: 100%;
-    color: #999;
 }
 .form-horizontal-left .form-control{
 	width: 100%

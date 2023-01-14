@@ -8,10 +8,6 @@ ul{
 	border-bottom: 1px solid #DDDDDD;
 	position: relative;
 }
-.perm-top{
-	padding:20px 20px 10px 0px;
-
-}
 .properties-table{
 	padding-top: 10px;
 }
@@ -19,7 +15,7 @@ ul{
 	width: 100%;
 	background-color:#f2f2f2;
 	margin-bottom: 15px;
-	border-radius:.5rem;
+	border-radius:var(--radius);
 }
 .properties-baground .properties-orange{
 	color: #666;

@@ -3,7 +3,6 @@
 <link href="static/css/app_manage.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="{MOD_PATH}/images/mobile_share.css?{VERHASH}" rel="stylesheet" media="all">
 <script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
-
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <div class="bs-container clearfix">
@@ -65,7 +64,7 @@
 								<h4>
 									<!--{if $value[img]}--><img class="icon" src="$value[img]" /><!--{/if}-->
 									<!--{if $value[status]<0}--><span node-type="name-tip" style="color: red;">($value[fstatus])</span><!--{/if}-->
-									<span class="name-text-wrapper"> <span node-type="name-text"  data-href="$value[sharelink]" class="name-text enabled">$value[title]</span> </span>
+									<span node-type="name-text"  data-href="$value[sharelink]" class="name-text enabled">$value[title]</span>
 								</h4>
 								<p>
                   <span data-size="$value[dateline]" style="padding-left: 13px;">$value[fdateline]</span>
@@ -82,8 +81,10 @@
                   <!--{if $value[password]}--><span>{lang extract_password}：$value[password]</span><!--{/if}-->
                   &nbsp;<button class="btn btn-sm btn-default js_copy" data-clipboard-text="{eval echo $value[password]?(分享名称.':'.$value[title].'
 									'.分享链接.':'.$value[sharelink].'
-										'.提取码.':'.$value[password]):$value[sharelink];}" style="position:relative;padding: 10px;"><i class="glyphicon glyphicon-duplicate"></i>复制信息<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
+                  '.提取码.':'.$value[password]):$value[sharelink];}" style="position:relative;padding: 10px;"><i class="glyphicon glyphicon-duplicate"></i>复制信息<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
+									<!--{if $value[password]}-->
 									<button class="btn btn-sm btn-default js_copy" data-clipboard-text="$value[password]" style="position:relative;padding: 10px;"><i class="glyphicon glyphicon-duplicate"></i>提取码<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
+									<!--{/if}-->
                 </div>
 							</div>
 						</div>

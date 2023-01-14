@@ -11,6 +11,11 @@
     background-color: transparent;
     z-index: 10;
     overflow: auto;
+	display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 	.Mcontent{
     position: absolute;
@@ -24,6 +29,11 @@
     text-align: center;
     overflow: auto;
     min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
   }
 <!--{else}-->
 .page{
@@ -34,14 +44,24 @@
     position: relative;
     text-align: center!important;
 	overflow:auto;
+	display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 	.Mcontent{
-    padding: 30px;
+    padding: 15px;
     vertical-align: middle;
     display: inline-block;s
     font-size: 14px;
-	  border-radius: .5rem;
+	border-radius:  var(--radius);
     background-color:RGBA(255,255,255,.9);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
   }
 <!--{/if}-->
 .page:before{
@@ -58,16 +78,11 @@ p{
     color: #a3afb7;
     margin: 0 0 11px;
 }
-form{
-    width: 350px;
-    margin: 30px 0 0 0;
-}
 .form-group {
     margin-bottom: 20px;
 }
 .form-group.last{
  	margin-bottom: 0;
-	margin-top: 30px;
 }
 
 div.error-msg{
@@ -81,11 +96,17 @@ div.error-msg{
 	max-width:350px;
 	max-height:350px;
 }
+.form-group {
+display: block;
+margin-bottom:0;
+box-shadow: none;
+border: none;
+}
 </style>
 <!--{template common/header_simple_end}-->
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{template common/beijing}-->
-<div class="page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:block;" >	
+<div class="page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">	
   <div class="Mcontent" id="lostpw_container_$loginhash">
       <div class="brand"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}"></div>
       <h3 class="Mtitle" ><span >{lang getpassword}</span></h3>

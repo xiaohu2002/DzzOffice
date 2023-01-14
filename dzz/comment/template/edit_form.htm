@@ -72,7 +72,7 @@
      <!--{/if}-->
      </div>
   </form>
-  <div class="actionUploadAttachment tobody" id="upload_from_edit_{$cid}_menu" style="display:none;border-radius: 0.5rem;">
+  <div class="actionUploadAttachment tobody" id="upload_from_edit_{$cid}_menu" style="display:none;border-radius: var(--radius);">
       <!--{if $_GET[allowattach]>=2}-->
       <div class="local_auatth" style="position:relative;overflow:hidden"> <a href="javascript:void(0);" hidefocus onclick="jQuery(this).parent().parent().hide();">{lang web_upload}
         <input id="fileupload_edit_{$cid}" type="file" name="files[]" multiple >

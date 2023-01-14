@@ -47,18 +47,18 @@
         <span id="chk_newemail" class="help-inline"> <span id="suc_newemail"></span> <kbd  class="p_chk"><!--{if !$emailchange}-->*{lang bind_email_tips}<!--{else}-->*{lang change_bindemail_tips}<!--{/if}--></kbd> </span>
     </div>
     <!--{if !$emailchange}-->
-    <div class="form-group">
+    <dl>
         <label class="control-label"></label>
-        <div class="controls"><input type="button" class="btn btn-primary" value="{lang set}" onclick="bind_email()"></div>
-    </div>
+    <input type="button" class="btn btn-primary" value="{lang set}" onclick="bind_email()">
+    </dl> 
     <!--{else}-->
-        <div class="form-group">
-            <label class="control-label"></label>
-            <div class="controls"><input type="button" class="btn btn-primary" value="{lang change}" onclick="bind_email()"></div>
-        </div>
-        <script>
-            {if $verifyresult} safeverifystep(1); {/if}
-        </script>
+    <dl>
+      <label class="control-label"></label>
+      <input type="button" class="btn btn-primary" value="{lang change}" onclick="bind_email()">
+    </dl>
+    <script>
+        {if $verifyresult} safeverifystep(1); {/if}
+    </script>
     <!--{/if}-->
     </div>
 </form>

@@ -11,7 +11,7 @@
 	</ul>
 </div>
 
-<div class="main-body" style="padding:15px 15px 15px 22px;">
+<div class="main-body">
 	<div id="return_edituser" style="display:none"></div>
 	<form id="accountform" name="accountform" class="form-horizontal form-horizontal-left" action="{BASESCRIPT}?mod=orguser&op=edituser" method="post" onsubmit="account_submit();return false">
 		<input type="hidden" name="accountedit" value="true" />
@@ -211,11 +211,9 @@
 				</ul>
 			</div>
 		</div>
-		<div class="form-group">
-			<div class="controls ml20">
-				<input type="button" class="btn btn-primary" value="{lang save_changes}" onclick="account_submit()">
-			</div>
-		</div>
+        <dl>
+            <input type="button" class="btn btn-primary" value="{lang save_changes}" onclick="account_submit()">
+        </dl>
 	</form>
 </div>
 

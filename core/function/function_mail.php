@@ -32,7 +32,7 @@ $message = <<<EOT
     <title>$subject</title>
   </head>
   <body>
-    <div style="box-sizing:border-box;text-align:center;min-width:320px;border:1px solid #ebeef5; background-color:#f2f6fc; border-radius: .5rem;margin:auto; padding:20px 0 30px; font-family:'helvetica neue',PingFangSC-Light,arial,'hiragino sans gb','microsoft yahei ui','microsoft yahei',simsun,sans-serif">
+    <div style="box-sizing:border-box;text-align:center;min-width:320px;border:1px solid #ebeef5; background-color:#f2f6fc; border-radius:.5rem;margin:auto; padding:20px 0 30px; font-family:'helvetica neue',PingFangSC-Light,arial,'hiragino sans gb','microsoft yahei ui','microsoft yahei',simsun,sans-serif">
         <table style="width:100%;font-weight:300;margin-bottom:10px;border-collapse:collapse">
           <tbody>
             <tr style="font-weight:300">

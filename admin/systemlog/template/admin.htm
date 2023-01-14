@@ -80,7 +80,7 @@ html,  body {
 			<dt>{lang logtype}:</dt>
 			<dd class="clearfix">
 				 
-				<table id="systemlogtable" class="table text-center" style="width: auto;margin-bottom:0; <!--{if $_G[setting][systemlog_open]==0}-->display:none<!--{/if}-->">
+				<table id="systemlogtable" class="table text-center" style="margin-bottom:0; <!--{if $_G[setting][systemlog_open]==0}-->display:none<!--{/if}-->">
 				  <thead>
 					<tr>
 						<th>{lang logtypename}</th>
@@ -94,7 +94,7 @@ html,  body {
 				  <tr> 
 					<td>
 						<input type="hidden" name="settingnew[issystem][$i]" value="$info[issystem]" />
-						<input class="form-control" style="width:120px;" <!--{if $info[issystem]==1}-->readonly="readonly"<!--{/if}--> type="text" name="settingnew[title][$i]" value="$info[title]" />
+						<input class="form-control"<!--{if $info[issystem]==1}-->readonly="readonly"<!--{/if}--> type="text" name="settingnew[title][$i]" value="$info[title]" />
 					</td>
 					<td><input class="form-control" style="width:100px;" <!--{if $info[issystem]==1}-->readonly="readonly"<!--{/if}--> type="text" name="settingnew[mark][$i]" value="$mark" /></td>
 					<td><input type="checkbox" name="settingnew[is_open][$i]" value="1" <!--{if $info[is_open]==1}-->checked<!--{/if}-->  /></td>
@@ -113,15 +113,13 @@ html,  body {
 			</dd>
 		</dl>
 		<dl>
-		   
-		  <dd>
-			  <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
-		  </dd>
+            <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
 		</dl>
 		
-    </form> 
+      </form> 
+    </div>
   </div>
-</div>
+  <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
 <script type="text/javascript">
 	jQuery('.left-drager').leftDrager_layout();
@@ -140,7 +138,7 @@ html,  body {
 	});
 	function addsystemtype( obj ){
 		var num=jQuery("#systemlogtable").find("tr").length-1; 
-		var html='<tr><td><input  type="hidden" name="settingnew[issystem]['+num+']" value="0" /><input class="form-control" style="width:120px;" type="text" name="settingnew[title]['+num+']" value="" /></td><td><input class="form-control" style="width:100px;" type="text" name="settingnew[mark]['+num+']" value="" /></td><td><input type="checkbox" name="settingnew[is_open]['+num+']" value="1" checked /></td><td><a class="col-xs-2 img_delete" onclick="deletesystem(this);"  href="javascript:;"><span class="dzz dzz-delete" style="font-size:22px;"></span></a></td></tr>';
+		var html='<tr><td><input  type="hidden" name="settingnew[issystem]['+num+']" value="0" /><input class="form-control" type="text" name="settingnew[title]['+num+']" value="" /></td><td><input class="form-control" style="width:100px;" type="text" name="settingnew[mark]['+num+']" value="" /></td><td><input type="checkbox" name="settingnew[is_open]['+num+']" value="1" checked /></td><td><a class="col-xs-2 img_delete" onclick="deletesystem(this);"  href="javascript:;"><span class="dzz dzz-delete" style="font-size:22px;"></span></a></td></tr>';
 		jQuery(obj).parents("tr").before(html);
 		
 		jQuery("#systemlogtable").iCheck({

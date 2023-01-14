@@ -23,7 +23,7 @@ if($_G['uid']) {
 	}
 	showmessage('login_succeed', $url_forward ? $url_forward : './', array('username' => $_G['member']['username'], 'usergroup' => $_G['group']['grouptitle'], 'uid' => $_G['uid']), array());
 } elseif($setting['bbclosed']) {
-	showmessage(lang('site_closed_please_admin'));
+	dheader("Location: user.php?mod=login");
 } elseif(!$setting['regclosed']) {	
 	if($_GET['action'] == 'activation' || $_GET['activationauth']) {
 		if(!$setting['ucactivation'] && !$setting['closedallowactivation']) {

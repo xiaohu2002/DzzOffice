@@ -12,9 +12,8 @@ ul,li,ul li{
 	display: none;
 }
 .weui-search-bar {
-    background-color: #F2F2F2;
     padding: 0.5rem 0.5rem 0rem 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--radius);
     position: fixed;
     width: 100%;
     top: 64px;
@@ -26,6 +25,7 @@ ul,li,ul li{
 }
 .weui-search-return__cancel-btn {
     margin-left: 0.5rem;
+	margin-right: .5rem;
     line-height: 1.4rem;
     color: #3779ff;
     white-space: nowrap;
@@ -34,7 +34,6 @@ ul,li,ul li{
     padding-left: 0.5rem;
 }
 .weui-search-bar__box .weui-search-bar__input {
-    padding: 0;
     line-height: 1.5rem;
     height: auto;
 }
@@ -58,7 +57,7 @@ ul,li,ul li{
     float: right;
     clear: both;
     line-height: 1.5rem;
-    margin-right: 0.5rem;
+    margin-right: var(--radius);
 }
 .weui-search-bar:after {
     border: none;
@@ -76,7 +75,7 @@ ul,li,ul li{
     height: 2rem;
     line-height: 2rem;
     border-radius: 50%;
-    margin-right: 0.5rem;
+    margin-right: var(--radius);
 }
 .weui-cell__bd {
     overflow: hidden;
@@ -85,7 +84,7 @@ ul,li,ul li{
     word-break: break-all;
 }
 .weui-cells_margin_top{
-	margin-top: 60px;
+	margin-top: 40px;
 }
 .weui-cell-member{
 	background-color: #FFFFFF;
@@ -99,7 +98,7 @@ ul,li,ul li{
     line-height: 2rem;
     text-align: center;
     border-radius: 50%;
-    margin-right: 0.5rem;
+    margin-right: var(--radius);
     font-weight: bold;
 }
 .weui-cell__bd h4{
@@ -122,7 +121,7 @@ ul,li,ul li{
 	z-index: 3;
 	right: 0;
 	left: 0;
-	margin: .5rem;
+	margin:  var(--radius);
 	border-radius: .5rem
 }
 .weui-member-success{
@@ -132,9 +131,9 @@ ul,li,ul li{
 	width: 5rem;
 	line-height: 2.5rem;
 	text-align: center;
-	border-radius: .5rem;
+	border-radius:  var(--radius);
 	box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
-	margin: .5rem
+	margin: .5rem;
 }
 .weui-member-select-scroller .special_avatar_class{
 	width: 1.5rem;
@@ -142,7 +141,7 @@ ul,li,ul li{
     line-height: 1.5rem;
    	text-align: center;
     border-radius: 50%;
-    margin-right: 0.5rem;
+    margin-right: var(--radius);
 }
 .weui-member-success .weui-member-success-word{
 	line-height: 1.5rem;
@@ -152,7 +151,7 @@ ul,li,ul li{
 	background-color: #fff;
     outline: 0;
     border: none;
-	border-radius: .5rem;
+	border-radius:  var(--radius);
 }
 .weui-member-select-user{
 	margin-right: 5rem;
@@ -191,7 +190,7 @@ ul,li,ul li{
 }
 .weui-cell__img {
     font-size: 24px;
-    margin-right: 0.5rem;
+    margin-right: var(--radius);
     display: block;
     color: #FFFFFF;
     padding: 0.4rem;
@@ -284,7 +283,7 @@ ul,li,ul li{
 .weui-cell__hd .weui-cell__recentimg {
     width: 2rem;
     height: 2rem;
-    margin-right: 0.5rem;
+    margin-right: var(--radius);
     border-radius: 2px;
 }
 .weui-cell__bd p {
@@ -337,7 +336,7 @@ ul,li,ul li{
 .weui-dropup{
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    border-radius: .5rem;
+    border-radius:  var(--radius);
     position: absolute;
     bottom: 100%;
     left: 10%;
@@ -357,7 +356,7 @@ ul,li,ul li{
 	position: fixed;
 	max-height: 450px;
   overflow: auto;
-	border-radius: .5rem;
+	border-radius:  var(--radius);
 }
 .weui-dropup-type .weui-type-word{
 	text-align: left;

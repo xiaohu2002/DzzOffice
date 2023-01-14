@@ -87,7 +87,7 @@
 }
 
 .resNav .resNav-left{
-	padding-right: 49px;
+  padding-right: 10px;
   -webkit-box-sizing: border-box;
   -webkit-flex: 1 0 auto;
   flex: 1 0 auto;
@@ -131,20 +131,23 @@
 	margin-bottom: 0;
 }
 .navbar-inverse{
-	background: #3779ff;
-	border-color:#3779ff;
-	margin: 5px 5px 0 5px;
-  border-radius: .5rem;
+  background: #3779ff;
+  border-color:#3779ff;
+  margin: 5px 5px 0 5px;
+  border-radius:  var(--radius);
 }
 @media (min-width: 0px){
 	.navbar-nav>li {
 	    float: left;
 	}	
 }
+.navbar-nav{
+	display: flex;
+	align-items: center;
+}
 .navbar-inverse .navbar-nav>li>a{
 	color: #FFFFFF;
-	font-size: 18px;
-	line-height: 34px;
+	font-size: 22px;
 	max-width: 240px;
 	white-space: nowrap;
   overflow: hidden;
@@ -189,7 +192,7 @@
 }
 .app_popup-parent .basil{
 	font-size: 24px;
-	vertical-align: text-top;
+	vertical-align: middle;
 }
 .navbar-inverse  .imgHeight{
 	padding: 13px 10px;
@@ -212,7 +215,7 @@
   max-height: 536px;
   background: #FFF;
   z-index: 5;
-	border-radius: .5rem;
+	border-radius:  var(--radius);
 }
 .hide{
     display: none;
@@ -243,8 +246,8 @@
   display: block;
   font-size:larger;
   text-align: center;
-	padding: 4px;
-	border-radius:.5rem
+  padding: 4px;
+  border-radius:var(--radius);
 }
 .app_popup>li .app-popup-li:hover{
 	text-decoration:none;
@@ -279,7 +282,7 @@
 	text-align: center;
 	width: 336px;
 	background-color: #F4F7FA;
-	border-radius: .5rem;
+	border-radius:  var(--radius);
   color: #737373;
   text-decoration: none;
 }
@@ -514,7 +517,7 @@ button.input-search-drop {
   padding: 10px 0 10px 38px;
   position: relative;
 	box-shadow: 1px 1px 10px #d8e5f9;
-  border-radius: .5rem;
+  border-radius:  var(--radius);
 	margin: 10px
 }
 .notification-list-item:last-child{
@@ -732,11 +735,9 @@ button.input-search-drop {
 }
 .modal .modal-body.about-body{
 	text-align: center;
-	padding:20px;
 }
 .about-body .logo{
-	padding:10px;
-	margin-bottom:0;
+	margin:0;
 }
 
 .about-body .logo>img{
@@ -744,7 +745,7 @@ button.input-search-drop {
 }
 .about-copyright{
 	color: 000;
-	font-size:larger;
+	font-size:15px;
 	text-align: center;
 	padding:10px;
 }

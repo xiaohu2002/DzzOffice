@@ -194,7 +194,7 @@ html, body {
 	cursor: pointer;
 	position: relative;
 	z-index: 100;
-	border-radius: .5rem;
+	border-radius:  var(--radius);
 }
 .module-grid-view .item .backgound_radius {
 	display:none;
@@ -208,7 +208,7 @@ html, body {
 	opacity: 1;
 	filter: Alpha(opacity=100);
 	transition: all 0.2s ease-in 0s;
-	border-radius: .5rem;
+	border-radius:  var(--radius);
 }
 .module-grid-view .item .sharepame-checked{
 	display: none;
@@ -415,7 +415,7 @@ html, body {
 .select-option{
 	border: 1px solid #4c89fb;
 	background: #fff;
-	border-radius: .5rem;
+	border-radius:  var(--radius);
 	color:#4c89fb;
 }
 .nav-pills li{

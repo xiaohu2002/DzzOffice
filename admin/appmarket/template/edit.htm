@@ -66,8 +66,9 @@
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 				<div class="form-group">
 					<label class="control-label " for="appname">{lang application_name}</label>
-
-					<input type="text" class="form-control input-sm" id="appname" name="appname" autocomplete="off" value="$app[appname]">
+					<div class="form_name">
+                      <input type="text" class="form-control input-sm" id="appname" name="appname" autocomplete="off" value="$app[appname]">
+					</div>
 					<span class="help-inline"></span> 
 				</div>
 				<div class="form-group">
@@ -112,24 +113,20 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label">{lang application_ico}</label>
-					<div class="controls">
 						<!--{if $appid>0}-->
-						<p><input id="fileiz_0" class="form-control input-sm" name="TMPiconnew" value="" style="display: none;" type="file">
-							<input id="fileiz_1" class="form-control input-sm" style="" name="iconnew" value="$app[appico]" type="text"></p>
-						<p>
+							<input id="fileiz_0" class="form-control input-sm" name="TMPiconnew" value="" style="display: none;" type="file">
+							<input id="fileiz_1" class="form-control input-sm" style="" name="iconnew" value="$app[appico]" type="text">
 							<a id="fileiz_0a" style="" href="javascript:;" onclick="document.getElementById('fileiz_1a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_1').name = 'TMPiconnew';document.getElementById('fileiz_0').name = 'iconnew';document.getElementById('fileiz_0').style.display = '';document.getElementById('fileiz_1').style.display = 'none'">{lang uploading}</a>&nbsp;
 							<a id="fileiz_1a" style="font-weight: bold;" href="javascript:;" onclick="document.getElementById('fileiz_0a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_0').name = 'TMPiconnew';document.getElementById('fileiz_1').name = 'iconnew';document.getElementById('fileiz_1').style.display = '';document.getElementById('fileiz_0').style.display = 'none'">{lang type_link}</a>
-						</p>
 						<!--{else}-->
-						<p><input id="fileiz_0" class="form-control input-sm" name="iconnew" value="" type="file">
-							<input id="fileiz_1" class="form-control input-sm" style="display: none;" name="TMPiconnew" value="$app[appico]" type="text"></p>
+							<input id="fileiz_0" class="form-control input-sm" name="iconnew" value="" type="file">
+							<input id="fileiz_1" class="form-control input-sm" style="display: none;" name="TMPiconnew" value="$app[appico]" type="text">
 						<p>
 							<a id="fileiz_0a" style="font-weight: bold;" href="javascript:;" onclick="document.getElementById('fileiz_1a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_1').name = 'TMPiconnew';document.getElementById('fileiz_0').name = 'iconnew';document.getElementById('fileiz_0').style.display = '';document.getElementById('fileiz_1').style.display = 'none'">{lang uploading}</a>&nbsp;
 							<a id="fileiz_1a" style="" href="javascript:;" onclick="document.getElementById('fileiz_0a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_0').name = 'TMPiconnew';document.getElementById('fileiz_1').name = 'iconnew';document.getElementById('fileiz_1').style.display = '';document.getElementById('fileiz_0').style.display = 'none'">{lang type_link}</a>
 						</p>
 						<!--{/if}-->
-						<p class="text-muted">{lang suggest_image_size}128X128 px</p>
-					</div>
+						<span class="help-inline">{lang suggest_image_size}128X128 px</span>
 					<span class="help-inline">
                 <!--{if $appid}--><img class="img_128_128" src="$app[appico]?t=$_G[timestamp]" >
                 <!--{else}--> <img class="img_128_128" src="dzz/images/default/icodefault.png" >
@@ -273,10 +270,10 @@
 						<iframe id="uploadframe" name="uploadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
 					</div>
 				</div>
-				<div class="form-group">
+				<dl>
 					<label></label>
 					<input class="btn btn-primary" id="submit_editsubmit" name="appsubmit" value="{lang submit}" type="button" onclick="document.getElementById('editbutton').click();">
-				</div>
+				</dl>
 			</div>
 		</div>
 	</div>

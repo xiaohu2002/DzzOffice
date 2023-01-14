@@ -10,7 +10,6 @@
   <div class="left-drager">
   </div>
   <div class="bs-main-container  clearfix">
-    
     <div class="main-content" style="padding:15px;border-top:1px solid #FFF">
       <form id="cpform" action="{BASESCRIPT}?mod=cloud&op=add"  class="form-horizontal form-horizontal-left"   method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
@@ -31,54 +30,50 @@
           </dd>
         </dl>
         <dl>
-					<dt>{lang type}:</dt>
-          <dd class="clearfix">
+			<dt>{lang type}:</dt>
+            <dd class="clearfix">
             <label class="radio radio-inline">
               <input type="radio"  name="type"  value="storage" checked="checked" onclick="document.getElementById('area_pan').style.display='none'">
               {lang typename_storage}</label>
-						<label class="radio radio-inline"><input type="radio"  name="type"  value="pan" onclick="document.getElementById('area_pan').style.display=''" />{lang typename_pan}</label>
-						<label class="radio radio-inline"><input type="radio"  name="type"  value="ftp" onclick="document.getElementById('area_pan').style.display='none'">FTP</label>
+				<label class="radio radio-inline"><input type="radio"  name="type"  value="pan" onclick="document.getElementById('area_pan').style.display=''" />{lang typename_pan}</label>
+				<label class="radio radio-inline"><input type="radio"  name="type"  value="ftp" onclick="document.getElementById('area_pan').style.display='none'">FTP</label>
           </dd>
         </dl>
         <div id="area_pan" style="display:none">
           <dl>
-						<dt>{lang root_directory}:</dt>
+			  <dt>{lang root_directory}:</dt>
             <dd class="clearfix">
               <input type="text" class="form-control"  name="root" value="" >
-              <ul class="help-block ">
-								{lang cloud_add_root_directory_text}
-              </ul>
+              <ul class="help-block ">{lang cloud_add_root_directory_text}</ul>
             </dd>
           </dl>
           <dl>
             <dt>API Key:</dt>
             <dd class="clearfix">
               <input type="text" class="form-control"  name="key" value="" >
-              <ul class="help-block ">
-								{lang cloud_add_API_KEY_text}
-              </ul>
+              <ul class="help-block ">{lang cloud_add_API_KEY_text}</ul>
             </dd>
           </dl>
           <dl>
             <dt>Secret Key</dt>
             <dd class="clearfix">
               <input type="text" class="form-control" name="secret" value="" class="span4">
-              <ul class="help-block ">
-								{lang cloud_add_Secret_KEY_text}
-              </ul>
+              <ul class="help-block ">{lang cloud_add_Secret_KEY_text}</ul>
             </dd>
           </dl>
           <dl>
-						<dt>{lang cloud_add_data_table_name}</dt>
+			  <dt>{lang cloud_add_data_table_name}</dt>
             <dd class="clearfix">
               <input type="text" class="form-control" name="dname" value="" class="span4">
               <ul class="help-block ">
-								{lang cloud_add_data_table_name_text}
+				  {lang cloud_add_data_table_name_text}
               </ul>
             </dd>
           </dl>
         </div>
-				<input class="btn btn-primary" name="addcloudsubmit" value="{lang add}" type="submit">
+		  <dl>
+			  <input class="btn btn-primary" name="addcloudsubmit" value="{lang add}" type="submit">
+		  </dl>
       </form>
     </div>
   </div>

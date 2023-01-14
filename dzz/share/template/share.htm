@@ -115,7 +115,9 @@
 								&nbsp;<button class="btn btn-sm btn-default js_copy" data-clipboard-text="{eval echo $value[password]?(分享名称.':'.$value[title].'
 									'.分享链接.':'.$value[sharelink].'
 									'.提取码.':'.$value[password]):$value[sharelink];}" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>复制<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
+								<!--{if $value[password]}-->
 								<button class="btn btn-sm btn-default js_copy" data-clipboard-text="$value[password]" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>提取码<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
+								<!--{/if}-->
 								<!--{if $value[endtime]}-->&nbsp;{lang expiration_time}：$value[fendtime]<!--{/if}-->
 								<!--{if $value[times]}-->&nbsp;{lang limited_number}：$value[count] / $value[times]<!--{/if}-->
 							</div>

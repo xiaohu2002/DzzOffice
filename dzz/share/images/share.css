@@ -16,6 +16,7 @@
 	z-index: 90;
 	display: none;
 	font-size:13px;
+  margin-bottom: 40px;
 }
 .module-list-toolbar .bar {
 	position: absolute;
@@ -27,6 +28,7 @@
 	line-height: 41px;
 	background: #F2F6FF;
 	width: 100%;
+	border-radius:  var(--radius);
 }
 .module-list-toolbar .chk-box {
 	width: 30px;
@@ -56,7 +58,7 @@
 .module-list-view .title {
 	border: 1px solid #ebeef5;
 	background: #F7F7F7;
-  border-radius: .5rem;
+  border-radius:  var(--radius);
   margin-top: 5px;
 }
 .module-list-view .title .asc {

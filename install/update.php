@@ -276,36 +276,11 @@ if($_GET['step'] == 'start') {
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','notification'))){
 		 C::t('setting')->update('notification', '60');
 		}
-		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=appmanagement'))){
-			C::t('app_market')->insert(array('appname'=>'管理',
-		 								  'appico'=>'appico/201712/21/184312rthhhg9oujti9tuu.png',
-		 								  'appurl'=>'{dzzscript}?mod=appmanagement',
-										  'appdesc'=>'管理员应用集合，方便管理员管理各个管理应用',
-										  'dateline'=>TIMESTAMP,
-										  'disp'=>1,
-											'mid'=>1,
-										  'vendor'=>'乐云网络',
-										  'group'=>3,
-											'haveflash'=>0,
-											'isshow'=>1,
-											'havetask'=>0,
-											'hideInMarket'=>0,
-										  'system'=>2,
-										  'notdelete'=>1,
-										  'position'=>1,
-											'open'=>1,
-										  'app_path'=>'admin',
-										  'identifier'=>'appmanagement',
-										  'version'=>'2.0',
-											'check_upgrade_time'=>'20171115',
-										  'available'=>1),0,1);
-		}
 		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=appmanagement'))){
-		}else{
-			DB::delete('app_market', array('appurl' => '{adminscript}?mod=appmanagement'));
+			DB::delete('app_market', array('appurl' => '{dzzscript}?mod=appmanagement'));
 			C::t('app_market')->insert(array('appname'=>'管理',
 		 								  'appico'=>'appico/201712/21/184312rthhhg9oujti9tuu.png',
-		 								  'appurl'=>'{dzzscript}?mod=appmanagement',
+		 								  'appurl'=>'{adminscript}?mod=appmanagement',
 										  'appdesc'=>'管理员应用集合，方便管理员管理各个管理应用',
 										  'dateline'=>TIMESTAMP,
 										  'disp'=>1,

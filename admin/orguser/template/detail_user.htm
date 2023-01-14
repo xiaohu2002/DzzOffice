@@ -10,7 +10,7 @@
 
 	</ul>
 </div>
-<div class="main-body" style="padding:15px 15px 15px 22px;">
+<div class="main-body">
 	<form id="accountform" name="accountform" class="form-horizontal form-horizontal-left" action="{BASESCRIPT}?mod=member&op=edituser&do=edit" method="post" onsubmit="account_submit();return false">
 		<input type="hidden" name="accountedit" value="true" />
 		<input type="hidden" name="uid" value="$uid" />
@@ -131,14 +131,9 @@
 			</div>
 			<span class="help-block">{lang adduser_exceptional_space_text}</span>
 		</div>
-		<div class="form-group">
-
-			<div class="controls ml20">
-				<input type="button" class="btn btn-primary" value="{lang save_changes}" onclick="account_submit()">
-
-			</div>
-		</div>
-
+		<dl>
+			<input type="button" class="btn btn-primary" value="{lang save_changes}" onclick="account_submit()">
+		</dl>
 	</form>
 
 </div>

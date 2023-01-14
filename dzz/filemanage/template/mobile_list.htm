@@ -76,10 +76,10 @@
 	    <!--{/if}--> 
       </ol>
     </div>
-    <div class="main-header" style="border-top:1px solid #FFF;padding:0 10px 20px 5px;">
+    <div class="main-header">
       <form name="search" action="{BASESCRIPT}" method="get" id="filem_search">
         <input type="hidden" name="mod" value="filemanage" />
-        <ul class="nav nav-pills clearfix" style="padding: 5px 0 5px 0;">
+        <ul class="nav nav-pills clearfix">
           <li>
             <select class="form-control select-option" name="pfid">
               <option value="" selected="selected">{lang file_position}</option>
@@ -130,7 +130,7 @@
 								<!--{/if}-->/>
 								<!--{/if}--> 
 									<!--{if $value[status]<0}--><span node-type="name-tip" style="color: red;">($value[fstatus])</span><!--{/if}-->
-									<span class="name-text-wrapper"> <span node-type="name-text"  data-href="$value[sharelink]" class="name-text enabled">$value[name]</span> </span>
+									<span node-type="name-text"  data-href="$value[sharelink]" class="name-text enabled">$value[name]</span>
 								</h4>
 								<p>
                   <span data-size="$value[dateline]">$value[fsize]   $value[ftype]</span>

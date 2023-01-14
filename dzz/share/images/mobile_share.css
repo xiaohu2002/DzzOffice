@@ -7,9 +7,6 @@
 .btn{
 	padding: 0px;
 }
-.bs-main-container{
-  padding: 0px 10px;
-}
 .copy-success {
 	position: absolute;
 	left: 0;
@@ -33,7 +30,7 @@
 	line-height: 50px;
 	background: #F2F6FF;
 	width: 100%;
-	border-radius: .5rem;
+	border-radius:  var(--radius);
   margin: 5px 0;
 }
 .module-list-toolbar .chk-box {
@@ -41,7 +38,7 @@
 	height: 30px;
 	position: absolute;
 	left: 5px;
-	top: 10px;
+	top: 8px;
 }
 .name1 p{
 	color: #999999;
@@ -68,7 +65,7 @@
 .module-list-view .title {
 	border: 1px solid #ebeef5;
 	background: #F7F7F7;
-  border-radius: .5rem;
+  border-radius:  var(--radius);
   margin-top: 5px;
 }
 .module-list-view .title .asc {
@@ -89,11 +86,10 @@
 .module-list-view .item {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
   color: inherit;
-  box-shadow: 0 1px 12px 0 rgb(0 0 0 / 10%);
+  box-shadow: 0 1px 5px 0 rgb(0 0 0 / 10%);
   border: 1px solid #ebeef5;
-  border-radius: .5rem;
-  margin: .5rem;
-  padding: 5px;
+  border-radius:  var(--radius);
+  margin:5px 0;
    position: relative; 
    display: -webkit-box; 
    display: -webkit-flex; 
@@ -126,7 +122,7 @@
 	max-width:24px;
 	max-height:24px;
 	margin-top:-3px;
-	margin-right: 0.5rem;
+	margin-right: var(--radius);
 }
 
 .module-list-view .title .c1 {
@@ -141,7 +137,7 @@
 	width: 16px;
 	height: 16px;
 	position: absolute;
-	top: 12px;
+	top: 14px;
 	left: 12px;
 }
 .module-list-view .item .chked .chk-ico {
@@ -252,7 +248,7 @@
 .btn-sm.btn-default{
 	position: relative;
   color: #3779ff;
-  margin: .5rem;
+  margin:  var(--radius);
   display: block;
   width: 95%;
   border-width: 0;

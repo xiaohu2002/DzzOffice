@@ -14,7 +14,7 @@
 		
 		<div class="main-header">
 			<div class="clearfix" style="line-height:40px;padding:0 10px">
-<!--				<strong style="font-size:14px;">{lang updatecache}</strong>-->
+<!--<strong style="font-size:14px;">{lang updatecache}</strong>-->
 				<span class="text-muted" id="step1" <!--{if $step==1}-->style="color:green"<!--{/if}-->>1.{lang nav_updatecache_confirm}</span>
 				<span class="text-muted" id="step2" <!--{if $step==2}-->style="color:green"<!--{/if}-->>2.{lang nav_updatecache_verify}</span>
 				<span class="text-muted" id="step3" <!--{if $step==3}-->style="color:green"<!--{/if}-->>3.{lang nav_updatecache_completed}</span>
@@ -60,6 +60,7 @@
 			</ul>
 		</div>
 	</div>
+    <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
 <script type="text/javascript">
 	jQuery('.left-drager').leftDrager_layout();
