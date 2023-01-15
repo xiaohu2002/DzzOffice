@@ -23,7 +23,11 @@
   color: #76838f;
   text-align: center;
   overflow: auto;
-  min-width: 320px;
+	<!--{if $ismobile}-->
+	width: 100%;
+	<!--{else}-->
+  width: 350px;
+	<!--{/if}-->
   margin: 0;
 }
 .modal_in .modal-content {
@@ -36,7 +40,6 @@
   background: #fff;
   text-align: center;
   overflow: auto;
-  min-width: 320px;
   border-radius: 0;
   border:none;
 	margin: 0

@@ -10,7 +10,7 @@
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{template common/beijing}-->
 <div class="page animsition" id="main_message">
-  <div class="page-login-main">
+  <div class="page-login-main"<!--{if $ismobile}--> style="width: 100%;"<!--{/if}-->>
     <div class="brand">
       <!--{if $_G['setting']['sitelogo']}-->
       <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}">

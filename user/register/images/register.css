@@ -27,12 +27,11 @@ body{
 	position: relative;
 }
 .form-group .help-msg {
-    margin-bottom: 0;
-    position: absolute;
-    bottom: -20px;
-    left: 10px;
-    margin: 0;
-	font-size:12px;
+  margin-bottom: 0;
+  position: absolute;
+  left: 10px;
+  margin: 0;
+  font-size:12px;
 	width:100%;
 }
 
@@ -41,9 +40,8 @@ body{
 }
 
 .brand {
-	display: block;
-     margin:15px 0;
-	 text-align: center;
+  display: block;
+  text-align: center;
 }
 .brand img {
 	max-width:300px;
@@ -65,20 +63,17 @@ p.error-msg{
 	text-align:left;
 	margin:20px 0;
 }
-.btn-lg{
-	margin-top:20px;
-}
 
 @media (max-width: 420px){
-    .mainContainer:before{
+  .mainContainer:before{
 		display:none;
     }
 	.modal-content{
 		margin:15px;
 	}
-   .loginForm {
-        width: auto;
-    }
+ .loginForm {
+    width: auto;
+  }
 }
 
 .checkbox-custom {
