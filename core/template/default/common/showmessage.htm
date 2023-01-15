@@ -98,7 +98,6 @@
 <!--{/if}-->
 <!--{if $param[msgtype] == 1 || $param[msgtype] == 2 && !$_G[inajax]}-->
   <div id="ct" class="container" style="position: absolute;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;min-height: -webkit-fill-available;margin: 0;text-align: center;">
-		<div class="f_c altw">
 			<div id="messagetext">
 				<!--{if $_G['setting']['sitelogo']}-->
         <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}">
@@ -110,16 +109,16 @@
 				<!--{if $url_forward}-->
         <!--{if !$param[redirectmsg]}-->
           <button class="btn-jump btn btn-primary" onclick="location.href='$url_forward';return false;" >立即跳转（<span class="num">3</span>s）</button>
-          <button class="btn-jump btn btn-primary" onclick="location.href='$_G['siteurl']';return false;" >{lang goback} $_G[setting][sitename]</button>
+          <button class="btn-jump btn btn-primary" onclick="location.href='$_G['siteurl']';return false;" >首页 $_G[setting][sitename]</button>
           <!--{else}-->
           <button class="btn-jump btn btn-primary" onclick="location.href='$url_forward';return false;">{lang return_to_the_naxt_level}（<span class="num">3</span>s）</button>
         <!--{/if}-->
 				<!--{elseif $allowreturn}-->
 				<script type="text/javascript">
 					if(history.length > (BROWSER.ie ? 0 : 1)) {
-						document.write('<p class="alert_btnleft"><a href="javascript:history.back()">{lang message_go_back}</a></p>');
+						document.write('<a class="btn-jump btn btn-primary" href="javascript:history.back()">{lang message_go_back}</a>');
 					} else {
-						document.write('<p class="alert_btnleft"><a href="$_G['siteurl']">[ $_G['setting']['bbname'] {lang homepage} ]</a></p>');
+						document.write('<a class="btn-jump btn btn-primary" href="$_G['siteurl']">[ $_G['setting']['bbname'] {lang homepage} ]</a>');
 					}
 					
 				</script>
@@ -129,7 +128,6 @@
 			<!--{if $param[login]}-->
 				
 			<!--{/if}-->
-		</div>
 		<script type="text/javascript">
       jQuery(document).ready(function(){
 					function jump(cont){						
