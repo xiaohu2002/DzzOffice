@@ -555,8 +555,7 @@ button.input-search-drop {
 }
 
 .note.u-bottom,.dateline.u-bottom {
-  margin-bottom: 0;
-  padding-bottom: 0;
+  margin:0;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: normal;
