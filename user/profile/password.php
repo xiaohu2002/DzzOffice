@@ -140,7 +140,7 @@ elseif ($do == 'bindqq'){//绑定qq
         showTips(array('lang'=>lang('qq_login_closed'),'referer'=>$_G['siteurl']),'html');
     }
 
-    require_once DZZ_ROOT."./user/login/api_qqlogin/qqConnectAPI.php";
+    require_once DZZ_ROOT."./user/api_qqlogin/qqConnectAPI.php";
 
     $inurl = $_SERVER["HTTP_REFERER"]; //来路
 

@@ -3,7 +3,7 @@ if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 define('NOROBOT', TRUE);
-require_once DZZ_ROOT . "./user/login/api_qqlogin/qqConnectAPI.php";
+require_once DZZ_ROOT . "./user/api_qqlogin/qqConnectAPI.php";
 if (!in_array($_GET['type'], array('login', 'callback', 'newuser', 'olduser'))) {
 	$_GET['type'] = 'login';
 }

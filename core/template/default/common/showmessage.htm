@@ -109,16 +109,16 @@
 				<!--{if $url_forward}-->
         <!--{if !$param[redirectmsg]}-->
           <button class="btn-jump btn btn-primary" onclick="location.href='$url_forward';return false;" >立即跳转（<span class="num">3</span>s）</button>
-          <button class="btn-jump btn btn-primary" onclick="location.href='$_G['siteurl']';return false;" >首页 $_G[setting][sitename]</button>
+          <button class="btn-jump btn btn-primary" onclick="location.href='$_G['siteurl']';return false;" >首页</button>
           <!--{else}-->
           <button class="btn-jump btn btn-primary" onclick="location.href='$url_forward';return false;">{lang return_to_the_naxt_level}（<span class="num">3</span>s）</button>
         <!--{/if}-->
 				<!--{elseif $allowreturn}-->
 				<script type="text/javascript">
 					if(history.length > (BROWSER.ie ? 0 : 1)) {
-						document.write('<a class="btn-jump btn btn-primary" href="javascript:history.back()">{lang message_go_back}</a>');
+						document.write('<a class="btn-jump btn btn-primary" href="javascript:history.back()">返回</a>');
 					} else {
-						document.write('<a class="btn-jump btn btn-primary" href="$_G['siteurl']">[ $_G['setting']['bbname'] {lang homepage} ]</a>');
+						document.write('<a class="btn-jump btn btn-primary" href="$_G['siteurl']">首页</a>');
 					}
 					
 				</script>
