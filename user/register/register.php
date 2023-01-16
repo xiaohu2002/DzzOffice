@@ -39,8 +39,8 @@ $seccodecheck = $setting['seccodestatus'] & 1;
 //判断是否提交
 if(!submitcheck('regsubmit', 0, $seccodecheck)) {
 
-        //应用注册页挂载点
-        Hook::listen('appregister');
+    //应用注册页挂载点
+    Hook::listen('appregister');
 		$bbrules = $setting['bbrules'];
 		
 		$regname =$setting['regname'];
@@ -57,6 +57,11 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
 		$dreferer = dreferer();
 		include template('register');
 		exit();
+    //QQ登陆相关
+    @session_start();
+    $qqopenid = $_SESSION['openid'] ? $_SESSION['openid'] :'';
+    $qquinfo = $_SESSION['uinfo'] ? $_SESSION['uinfo'] :'';
+    include template($this->template);
 }else{
 	
     Hook::listen('check_val',$_GET);//用户数据验证钩子,用户注册资料信息提交验证

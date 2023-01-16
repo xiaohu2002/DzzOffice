@@ -49,10 +49,14 @@ if ($_GET['type'] == "login") {
 		$openid = $_SESSION['openid'];
 		$uinfo = $_SESSION['uinfo'];
 	}
-	if (!DB::result_first("select COUNT(*) from %t where openid=%d", array('user_qqconnect', $openid))) {
-		include  template('qqcallback');
-		exit();
-	}
+		if (!DB::result_first("select COUNT(*) from %t where openid=%d", array('user_qqconnect', $openid))) {
+			if ($_G['setting']['qq_bind']==1){
+        include  template('qqcallback');
+        exit();
+				}else {
+				dheader("Location: user.php?mod=qqlogin&type=newuser");
+			}
+    }
 	session_unset();
 	$user = C::t('user_qqconnect') -> fetch_by_openid($openid);
 	if ($user['status'] == -2) {
