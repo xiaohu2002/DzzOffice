@@ -61,7 +61,7 @@ if ($_GET['type'] == "login") {
 	$user = C::t('user_qqconnect') -> fetch_by_openid($openid);
 	if ($user['status'] == -2) {
 		showmessage('user_stopped_please_admin');
-	} elseif ($_G['setting']['bbclosed'] > 0 && $user['adminid'] != 1) {
+	} elseif ($_G['setting']['bbclosed'] && $user['adminid'] != 1) {
 		showmessage('site_closed_please_admin');
 	}
 	setloginstatus($user, $_GET['cookietime'] ? 2592000 : 0);
@@ -147,7 +147,7 @@ if ($_GET['type'] == "login") {
 	if (isemail($userinfo['email'])) {
 		$user = C::t('user') -> fetch_by_email($userinfo['email']);
 	} else {
-		$user = C::t('user') -> fetch_by_nickname($userinfo['email']);
+		$user = C::t('user') -> fetch_by_username($userinfo['username']);
 	};
 	if (!$user) {
 		showmessage('username_or_password_error', $_G['siteurl'] . 'user.php?mod=qqlogin&type=callback');

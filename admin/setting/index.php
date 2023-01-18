@@ -175,7 +175,6 @@ if (!submitcheck('settingsubmit')) {
 		$setting['mail'] = dunserialize($setting['mail']);
 		$oldsmtp = $settingnew['mail']['mailsend'] == 3 ? $settingnew['mail']['smtp'] : $settingnew['mail']['esmtp'];
 		$deletesmtp = $settingnew['mail']['mailsend'] != 1 ? ($settingnew['mail']['mailsend'] == 3 ? $settingnew['mail']['smtp']['delete'] : $settingnew['mail']['esmtp']['delete']) : array();
-    $setting['tzxxyjtz'] = intval($settingnew['tzxxyjtz']);
 		$settingnew['mail']['smtp'] = array();
 		foreach ($oldsmtp as $id => $value) {
 			if ((empty($deletesmtp) || !in_array($id, $deletesmtp)) && !empty($value['server']) && !empty($value['port'])) {

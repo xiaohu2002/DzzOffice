@@ -557,7 +557,6 @@
     <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
       <input type="hidden" value="{FORMHASH}" name="formhash">
       <input type="hidden" value="mail" name="operation">
-      <input type="hidden" value="tzxxyjtz" name="operation">
       <dl>
         <dt>{lang administrator_email}:</dt>
         <dd class="clearfix">
@@ -662,10 +661,10 @@
         <dt>通知消息是否邮件通知:</dt>
         <dd class="clearfix">
           <label class="radio-inline ">
-            <input type="radio" name="settingnew[tzxxyjtz]" value="1" checked>{lang yes}
+            <input type="radio" name="settingnew[mail][tzxxyjtz]" value="1" checked>{lang yes}
           </label>&nbsp;&nbsp;
           <label class="radio-inline ">
-            <input type="radio" name="settingnew[tzxxyjtz]" value="0"<!--{if !$setting[tzxxyjtz]}-->checked<!--{/if}-->>{lang no}
+            <input type="radio" name="settingnew[mail][tzxxyjtz]" value="0"<!--{if !$setting[mail][tzxxyjtz]}-->checked<!--{/if}-->>{lang no}
           </label>
         </dd>
         <dd class="clearfix"><span class="help-block ">如果未配置邮件服务器，请不要启用，以免造成系统卡顿</span></dd>

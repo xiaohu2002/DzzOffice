@@ -13,7 +13,7 @@
 	   <!--{/if}-->
 	   <!--{/loop}-->
      <!--{else}-->
-     <script type="text/javascript">showDialog('<!--{if $verify[verify1]==-1}-->您提交的实名认证审核失败，请重新提交认证<!--{elseif $verify[uid]}-->您的实名认证信息已提交，请耐心等待核核<!--{else}-->请先完成实名认证<!--{/if}-->',"right",'系统提示')</script>
+     <script type="text/javascript">showDialog('<!--{if $verify[verify1]==-1}-->您提交的实名认证审核失败，请重新提交认证<!--{elseif $verify[uid]}-->您的实名认证信息已提交，请耐心等待审核<!--{else}-->请先完成实名认证<!--{/if}-->',"right",'系统提示')</script>
      <li class="active">
 	       <a href="user.php?mod=profile&vid=1">实名认证</a>
      </li>
