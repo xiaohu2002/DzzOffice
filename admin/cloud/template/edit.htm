@@ -22,7 +22,7 @@
     <div class="main-header clearfix"> 
       <!--{template right_header}--> 
     </div>
-    <div class="main-content" style="padding:20px;border-top:1px solid #FFF;">
+    <div class="main-content">
       <form id="cpform" action="{BASESCRIPT}?mod=cloud&op=edit&bz=$bz" class="form-horizontal form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="editsubmit" name="true">
@@ -59,9 +59,9 @@
         <!--{/if}-->
       </ul>
     </div>
-    <div class="main-content clearfix" style="padding:15px;border-top:1px solid #FFF;"> 
+    <div class="main-content clearfix"> 
       <!--{if $_GET[do]=='usercloud'}-->
-      <form id="appform" name="appform" class="form-horizontal form-horizontal-left" style="margin:-15px -15px 0;" action="{BASESCRIPT}?mod=cloud&op=edit&do=usercloud" method="post" >
+      <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{BASESCRIPT}?mod=cloud&op=edit&do=usercloud" method="post" >
         <input type="hidden" name="cloudsubmit" value="true" />
         <input type="hidden" name="bz" value="$bz" />
         <input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -180,9 +180,9 @@
         <!--{/if}-->
       </ul>
     </div>
-    <div class="main-content" style="padding:15px;border-top:1px solid #FFF;"> 
+    <div class="main-content"> 
       <!--{if $_GET[do]=='usercloud'}-->
-      <form id="appform" name="appform" class="form-horizontal form-horizontal-left" style="margin:-15px -15px 0;" action="{BASESCRIPT}?mod=cloud&op=edit&do=usercloud" method="post" >
+      <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{BASESCRIPT}?mod=cloud&op=edit&do=usercloud" method="post" >
         <input type="hidden" name="cloudsubmit" value="true" />
         <input type="hidden" name="bz" value="$bz" />
         <input type="hidden" name="formhash" value="{FORMHASH}" />

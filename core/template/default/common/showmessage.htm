@@ -112,11 +112,12 @@
           <button class="btn-jump btn btn-primary" onclick="location.href='$_G['siteurl']';return false;" >首页</button>
           <!--{else}-->
           <button class="btn-jump btn btn-primary" onclick="location.href='$url_forward';return false;">{lang return_to_the_naxt_level}（<span class="num">3</span>s）</button>
+          <button class="btn-jump btn btn-primary" onclick="location.href='$_G['siteurl']';return false;" >首页</button>
         <!--{/if}-->
 				<!--{elseif $allowreturn}-->
 				<script type="text/javascript">
 					if(history.length > (BROWSER.ie ? 0 : 1)) {
-						document.write('<a class="btn-jump btn btn-primary" href="javascript:history.back()">返回</a>');
+						document.write('<a class="btn-jump btn btn-primary" href="javascript:history.back()">返回</a> <a class="btn-jump btn btn-primary" href="$_G['siteurl']">首页</a>');
 					} else {
 						document.write('<a class="btn-jump btn btn-primary" href="$_G['siteurl']">首页</a>');
 					}

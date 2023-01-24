@@ -69,7 +69,7 @@ if ($_GET['type'] == "login") {
 		dsetcookie('lip', $_G['member']['lastip'] . ',' . $_G['member']['lastvisit']);
 	}
 	C::t('user_status') -> update($_G['uid'], array('lastip' => $_G['clientip'], 'lastvisit' => TIMESTAMP, 'lastactivity' => TIMESTAMP));
-
+  C::t('user_login')->insert(array('uid'=>$_G['uid'],'username' => $result['ucresult']['username'], 'usergroup' => $_G['group']['grouptitle'], 'dlsb' =>$_SERVER['HTTP_USER_AGENT'], 'ip' => $_G['clientip'], 'dateline' => TIMESTAMP, 'type' => '1'));
 	$param = array(
 		'username' => $result['username'],
 		'usergroup' => $_G['group']['grouptitle'],

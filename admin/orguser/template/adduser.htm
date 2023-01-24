@@ -54,13 +54,13 @@
   
   <div class="form-group">
     <label class="control-label" for="">{lang disable_user}</label>
-    <div class="controls ml20" style="width:160px;">
+    <div class="controls ml20 clearfix" style="width:160px;">
       <label class="checkbox-inline"><input type="checkbox" name="status" <!--{if $_G['adminid']!=1}-->disabled="disabled"<!--{/if}--> value="1" <!--{if $user[status]}-->checked<!--{/if}-->>{lang block_up}</label>
     </div>
     <span class="help-inline">{lang adduser_disable_user_text}</span> </div>
   <div class="form-group">
     <label class="control-label" for="">{lang usergroup}</label>
-    <div class="controls ml20"> 
+    <div class="controls ml20 clearfix"> 
       <!-- <label class="checkbox-inline" ><input type="checkbox" name="adminid" <!--{if $_G['adminid']!=1}-->disabled="disabled"<!--{/if}-->value="1"<!--{if $user[adminid]==1}-->checked<!--{/if}-->>{lang set_system_administrator}
       </label>
       --> <select name="groupid" class="form-control" <!--{if $_G[ 'adminid']!=1}-->disabled="disabled"<!--{/if}-->> 
@@ -94,7 +94,7 @@
             <!--{/loop}-->
           </ul>
         </li>
-        <li> <a style="margin:0 10px 10px 0;" href="javascript:;" onclick="delDepart(this)" ttitle="{lang delete}"><i class="glyphicon glyphicon-remove"></i></a> </li>
+        <li> <a href="javascript:;" onclick="delDepart(this)" ttitle="{lang delete}"><i class="glyphicon glyphicon-remove"></i></a> </li>
       </ul>
       <!--{/if}-->
       <ul id="nav" class="nav nav-pills">

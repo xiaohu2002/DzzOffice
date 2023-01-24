@@ -33,7 +33,7 @@
 				<!--{/if}-->
 			</ul>
 		</div>
-		<div class="main-content" style="padding:15px;border-top:1px solid #FFF">
+		<div class="main-content">
 			<!--{if $msg}-->
 			<div class="well">
 				<p class="$msg_type">$msg</p>
@@ -111,7 +111,7 @@
 			<ul class="help-block">
 				<h5>{lang board_message}</h5> {lang misc_cron_tips}
 			</ul>
-			<form id="cpform" action="{BASESCRIPT}?mod=system&op=cron" class="form-horizontal form-horizontal-left" style="margin:-15px -15px 0" method="post" name="cpform">
+			<form id="cpform" action="{BASESCRIPT}?mod=system&op=cron" class="form-horizontal form-horizontal-left" method="post" name="cpform">
 				<input type="hidden" value="{FORMHASH}" name="formhash">
 				<input type="hidden" value="true" name="cronssubmit">
 				<table class="table">

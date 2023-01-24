@@ -10,7 +10,7 @@ if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 } 
 Hook::listen('email_chk',$_GET);
-
+$navtitle=lang('Safety management').' - '.lang('myCountCenter');
 Hook::listen('check_login');
 $verify = C::t('user_verify')->fetch($_G['uid']);//验证信息
 $do=trim($_GET['do']) ? trim($_GET['do']):'editpass';
@@ -90,6 +90,24 @@ if($do == 'editpass'){
         }
     }
 
+}
+elseif($do == 'login'){
+$asc = isset($_GET['asc']) ? intval($_GET['asc']) : 1;
+$uid =$_G['uid'];
+$order = in_array($_GET['order'], array('dateline', 'count')) ? trim($_GET['order']) : 'dateline';
+$page = empty($_GET['page']) ? 1 : intval($_GET['page']);
+$perpage = 20;
+$start = ($page - 1) * $perpage;
+$sql = "1";
+$gets = array('op' => 'password', 'do' => 'login', 'order' => $order, 'asc' => $asc);
+$theurl = MOD_URL."&" . url_implode($gets);
+$orderby = " order by $order " . ($asc ? 'DESC' : '');
+$param = array('user_login');
+$list = array();
+	if ($count = DB::result_first("SELECT COUNT(*) FROM %t WHERE uid =$uid", $param)) {
+		$list = DB::fetch_all("SELECT * FROM %t WHERE uid =$uid and $sql $orderby limit $start,$perpage", $param);
+	}
+$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
 }
 elseif($do == 'changeemail'){
 

@@ -100,7 +100,7 @@ if(!isset($_GET['loginsubmit'])) {//是否提交
 
         //记录登录
         C::t('user_status')->update($_G['uid'], array('lastip' => $_G['clientip'], 'lastvisit' =>TIMESTAMP, 'lastactivity' => TIMESTAMP));
-
+        C::t('user_login')->insert(array('uid'=>$_G['uid'],'username' => $result['ucresult']['username'], 'usergroup' => $_G['group']['grouptitle'], 'dlsb' =>$_SERVER['HTTP_USER_AGENT'], 'ip' => $_G['clientip'], 'dateline' => TIMESTAMP, 'type' => '0'));
         //邀请登录
         //Hook::listen('inviate');
 

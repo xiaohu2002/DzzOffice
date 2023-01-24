@@ -1,6 +1,7 @@
 <?php
 $lang = array (
 	'More applications'=>'More applications',
+	'Home page'=>'Home page',
 	'parameters_error'=>'parameters error',
 	'Select_the_language'=>'Select the language',
 	'weak'=>'weak',
@@ -11,6 +12,7 @@ $lang = array (
 	'intension'=>'intension',
 	'save_file_to'=>'Save file',
 	'Real-name authentication'=>'Real-name authentication',
+	'You can also click Submit again to alert the administrator'=>'You can also click Submit again to alert the administrator',
 	'select_position'=>'Select location',
 	'save_success'=>'Saved successfully',
 	'all_save'=>'save all',

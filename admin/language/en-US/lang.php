@@ -1157,7 +1157,7 @@ $lang = array
   'setting_mail_check_test_from' => 'test sender ',
   'setting_mail_check_test_to' => 'test recipient ',
   'setting_mail_check_test_to_comment' => 'if you want to test a mail address that contains a username, the format is "username <user@domain.com & gt;" . Separate multiple email addresses with commas',
-  'setting_MAIL_CHECK_submit' => 'check email sending Settings ',
+  'setting_mail_check_submit' => 'check email sending Settings ',
 	// admin/system
 	'upgrade_latest_version' => 'You are using the latest version and do not need to upgrade ',
   'nav_founder_upgrade' => 'Upgrade online ',

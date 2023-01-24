@@ -88,6 +88,7 @@ class table_user extends dzz_table
 			C::t('user_status')->delete($uid);
 			C::t('user_setting')->delete_by_uid($uid);
 			C::t('organization_user')->delete_by_uid($uid,0);
+			DB::delete('user_qqconnect',"uid='{$uid}'"); //删除QQ登陆
 			
 			//删除用户文件
 			if($homefid=DB::result_first("select fid from %t where uid=%d and flag='home' ",array('folder',$uid))){

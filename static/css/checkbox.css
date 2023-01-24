@@ -1,12 +1,10 @@
 
 .checkbox-custom, .radio-custom {
 	font-size: 16px;
-    position: relative;
-    display: block;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding-left: 1em;
-	line-height:1em;
+  position: relative;
+  display: block;
+	margin:var(--radius);
+	padding: var(--radius);
 }
 
 .checkbox-custom input[type=radio], .checkbox-custom input[type=checkbox], .radio-custom input[type=radio]{
@@ -28,7 +26,7 @@
 .checkbox-custom label, .radio-custom label{
     position: relative;
     display: inline-block;
-    padding-left: 1em;
+    padding-left: var(--radius);
     /*vertical-align: middle;*/
 }
 .checkbox-custom label, .radio-custom label {

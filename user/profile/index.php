@@ -11,7 +11,7 @@ if (!defined('IN_DZZ')) {
 }
 
 Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
-
+$navtitle=lang('basic_information').' - '.lang('myCountCenter');
 $uid = intval($_G['uid']);
 
 $verify = C::t('user_verify')->fetch($_G['uid']);//验证信息

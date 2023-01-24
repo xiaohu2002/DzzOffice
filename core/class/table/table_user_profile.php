@@ -31,7 +31,7 @@ class table_user_profile extends dzz_table
 				if(!empty($_G[$var]['department'])){
 					$_G[$var]['department_tree']=C::t('organization')->getPathByOrgid(intval($_G[$var]['department']));
 				}else{
-					$_G[$var]['department_tree']='请选择机构或部门';
+					$_G[$var]['department_tree']=lang('please_select_a_organization_or_department');
 				}
 			}else{
 				$_G[$var] = array();
@@ -52,7 +52,7 @@ class table_user_profile extends dzz_table
         if(!empty($_G[$var]['department'])){
             $info['department_tree'] = $_G[$var]['department_tree']=C::t('organization')->getPathByOrgid(intval($_G[$var]['department']));
         }else{
-            $info['department_tree'] = $_G[$var]['department_tree']='请选择机构或部门';
+            $info['department_tree'] = $_G[$var]['department_tree']=lang('please_select_a_organization_or_department');
         }
         if($user = C::t('user')->get_user_by_uid($uid)){
             $info = array_merge($user,$info);

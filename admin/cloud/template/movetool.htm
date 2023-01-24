@@ -21,7 +21,7 @@
     <div class="main-header clearfix"> 
       <!--{template right_header}--> 
     </div>
-    <div class="main-content clearfix" style="padding:15px;border-top:1px solid #FFF" >
+    <div class="main-content clearfix">
       <form id="cpform" action="{BASESCRIPT}?mod=cloud&op=movetool" class="form-horizontal form-horizontal-left"  method="post" name="cpform" onsubmit="return validate(this);">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="movesubmit" name="true">
@@ -66,7 +66,7 @@
             	<a href="javascript:;" onclick="setExts('jpg,jpeg,png,gif')">{lang photograph_class}</a>
                 &nbsp;&nbsp; <a href="javascript:;" onclick="setExts('doc,docx,rtf,odt,htm,html,txt')">word{lang type_attach}</a>
                 &nbsp;&nbsp; <a href="javascript:;" onclick="setExts('xls,xlsx,ods,sxc,csv,tsv')">excel{lang type_attach}</a>
-                &nbsp;&nbsp;<a href="javascript:;" onclick="setExts('ppt,pptx,pps,ppsx,odp,sxi')">ppt{lang type_attach}</a>
+                &nbsp;&nbsp; <a href="javascript:;" onclick="setExts('ppt,pptx,pps,ppsx,odp,sxi')">ppt{lang type_attach}</a>
                 &nbsp;&nbsp; <a href="javascript:;" onclick="setExts('mp4,avi,wmv,mkv,rmvb,rm,asf,mpg,mpeg,mov')">{lang video_typename_attach}</a> 
                 &nbsp;&nbsp; <a href="javascript:;" onclick="setExts('txt,ini,conf,log,bat,sql,js,css,htm,html,xml,asp,aspx,php,jsp,json,py,h,c')">text_class</a>
             </dd>
@@ -99,7 +99,7 @@
         </dl> 
       </form>
     </div>
-    <div class="tip" style="margin: 20px;color: #444;text-shadow: 1px 1px 1px #FFF;line-height: 1.8;">
+    <div class="tip">
       <div class="alert alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <h5>{lang board_message}</h5>

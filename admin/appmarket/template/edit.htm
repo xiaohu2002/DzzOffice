@@ -45,9 +45,9 @@
 	<div class="bs-main-container">	
 		<div class="main-header clearfix">
 			<!--{if !$appid}-->
-				<h4 class="main-header-title navbar-left"><a href="{MOD_URL}">{lang goback}</a>&nbsp;&nbsp;&nbsp;/&nbsp;{lang add_app}</h4>			
+				<h4 class="main-header-title navbar-left">{lang add_app}</h4>			
 			<!--{else}-->
-				<h4 class="main-header-title navbar-left"><a href="{MOD_URL}">{lang goback}</a>&nbsp;&nbsp;/&nbsp;&nbsp;{lang edit_app}</h4>
+				<h4 class="main-header-title navbar-left">{lang edit_app}</h4>
 			<!--{/if}-->
 			
 			<!--{if !$appid && $op=='edit'}-->
@@ -276,6 +276,7 @@
 				</dl>
 			</div>
 		</div>
+    <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 	</div>
 </div>
 

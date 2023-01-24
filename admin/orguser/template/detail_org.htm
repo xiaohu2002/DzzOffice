@@ -69,12 +69,12 @@
 		<dt>{lang shared_directory_set}</dt>
 		<dd class="clearfix">
 			<div class="radio-custom radio-primary pull-left"><input type="radio" id="folder_available_1" name="fid" value="1" <!--{if $org[diron]>0}-->checked="checked"<!--{/if}--> onclick="folder_available(1,'$orgid');"  /><label>{lang enable}</label>
-            </div>
-            <div class="radio-custom radio-primary ml20 pull-left">
-			<input type="radio" id="folder_available_0" name="fid"  value="0" <!--{if $org[diron]<1}-->checked="checked"<!--{/if}--> onclick="folder_available(0,'$orgid');" /><label>{lang no_enable}</label>
-            </div>
-        </dd>
-        <dd class="clearfix">
+      </div>
+      <div class="radio-custom radio-primary ml20 pull-left">
+        <input type="radio" id="folder_available_0" name="fid"  value="0" <!--{if $org[diron]<1}-->checked="checked"<!--{/if}--> onclick="folder_available(0,'$orgid');" /><label>{lang no_enable}</label>
+      </div>
+    </dd>
+      <dd class="clearfix">
 			<!--{if $org['forgid']<1}-->
 			<span class="help-inline ml20">{lang detail_org_explorerapp_enable}</span>
 			<!--{else}-->

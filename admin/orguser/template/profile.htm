@@ -19,11 +19,9 @@
 		<input type="hidden" name="formhash" value="{FORMHASH}" />
 		<!--{loop $settings $key $value}-->
 		<!--{if $value[available]}-->
-		<div class="news">
+		<div class="form-group">
 			<label class="control-label" for="$key">$value[title]</label>
-			<div class="form_name">
 				$htmls[$key]
-			</div>
 		 </div>
 		<!--{/if}-->
 		<!--{/loop}-->

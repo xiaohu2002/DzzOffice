@@ -1,6 +1,7 @@
 <?php
 $lang = array (
 	'More applications'=>'更多应用',
+	'Home page'=>'首页',
 	'parameters_error'=>'参数错误',
 	'Personal data display'=>'个人资料展示',
 	'Select_the_language'=>'选择语言',
@@ -10,6 +11,7 @@ $lang = array (
 	'strong'=>'强',
 	'back_homepage'=>'返回首页',
 	'Real-name authentication'=>'实名认证',
+	'You can also click Submit again to alert the administrator'=>'您也可以再次点击提交审核，以提醒管理员。',
 	'intension'=>'强度',
 	'save_file_to'=>'保存文件',
 	'select_position'=>'选择位置',

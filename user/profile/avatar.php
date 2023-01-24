@@ -11,7 +11,7 @@ if(!defined('IN_DZZ')) {
 }
 $verify = C::t('user_verify')->fetch($_G['uid']);//验证信息
 Hook::listen('check_login');
-
+$navtitle=lang('Modify_the_picture').' - '.lang('myCountCenter');
 if(submitcheck('avatarsubmit')) {
 
 	if($_GET['imagedata'])	$success=upbase64($_GET['imagedata'],$_G['uid']);

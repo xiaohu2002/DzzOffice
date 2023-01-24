@@ -16,7 +16,7 @@ $lang=array (
   'login_guest' => '没有帐号？<a href="user.php?mod={$_G[setting][regname]}">{$_G[setting][reglinkname]}</a>',
   'faq' => '帮助',
   'Modify_the_picture' => '修改头像',
-  'password_and_security' => '密码与安全',
+  'Safety management' => '安全管理',
   'password_edit' => '修改密码',
   'current_my_space' => '当前我的头像',
   'setting_avatar_message' => '如果您还没有设置自己的头像，系统会显示为默认头像，您需要自己上传一张新照片来作为自己的个人头像 ',

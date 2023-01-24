@@ -8,7 +8,6 @@
 	overflow:auto;
 }
 .form-horizontal-left .form-group .controls-container{
-	width:320px;
 	float:left;
 }
 .form-horizontal-left .help-inline{
@@ -68,21 +67,21 @@
   <div class="left-drager">
   </div>
   <div class="bs-main-container  clearfix" >
-    <div class="main-content" style="padding:15px;">
+    <div class="main-content">
       <!--{if $vid}-->
-          <div class="alert <!--{if $showbtn}-->alert-warning<!--{else}-->alert-success<!--{/if}-->" style="margin-bottom:20px;line-height:1.8">
-              <!--{if $showbtn}-->
-                <p><i class="glyphicon glyphicon-question-sign" ></i> {lang profile_message1}。您也可以再次点击提交审核，以提醒管理员</p> 
-                <!--{if $_G['setting']['verify'][$vid]['desc']}-->
-                {eval $desc=dzzcode($_G['setting']['verify'][$vid]['desc']);}
-                <p class="ml20">$desc</p>
-                <!--{/if}-->
-              <!--{else}-->
-               <p><i class="glyphicon glyphicon-ok" ></i> {lang profile_message2}</p>
-              <!--{/if}-->
-          </div>
+      <div class="alert <!--{if $showbtn}-->alert-warning<!--{else}-->alert-success<!--{/if}-->" style="margin-bottom:20px;line-height:1.8">
+          <!--{if $showbtn}-->
+            <p><i class="glyphicon glyphicon-question-sign" ></i> {lang profile_message1}。{lang You can also click Submit again to alert the administrator}</p> 
+            <!--{if $_G['setting']['verify'][$vid]['desc']}-->
+            {eval $desc=dzzcode($_G['setting']['verify'][$vid]['desc']);}
+            <p class="ml20">$desc</p>
+            <!--{/if}-->
+          <!--{else}-->
+           <p><i class="glyphicon glyphicon-ok" ></i> {lang profile_message2}</p>
+          <!--{/if}-->
+      </div>
       <!--{else}-->
-      <div class="" style="padding:0 20px 20px 20px;max-width:450px;line-height:1.8">
+      <div class="" style="padding:20px 0;line-height:1.8">
       	<div class="progress progress-relative" style="margin:0">
           <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="$userstatus[profileprogress]" aria-valuemin="0" aria-valuemax="100" style="width: {$userstatus[profileprogress]}%">
             <span class="sr-only">{lang Information_complete} $userstatus[profileprogress]% </span>
@@ -126,15 +125,15 @@
             $htmls[$key]
           </div>
           <div class="pull-left">
-                <!--{if $vid || $key=='department'}-->
-                <input type="hidden" name="privacy[$key]" value="$privacy[$key]" />
-                <!--{else}-->
-                <select name="privacy[$key]" class="form-control input-sm ml10 privacy" style="width:80px;">
-                    <!--{loop $_config['profile']['privacy'] $k $v}-->
-                    <option value="$k" {if $privacy[$key] == $k} selected="selected"{/if}>$v</option>
-                    <!--{/loop}-->
-                </select>
-                <!--{/if}-->
+            <!--{if $vid || $key=='department'}-->
+            <input type="hidden" name="privacy[$key]" value="$privacy[$key]" />
+            <!--{else}-->
+            <select name="privacy[$key]" class="form-control input-sm ml10 privacy" style="width:80px;">
+                <!--{loop $_config['profile']['privacy'] $k $v}-->
+                <option value="$k" {if $privacy[$key] == $k} selected="selected"{/if}>$v</option>
+                <!--{/loop}-->
+            </select>
+            <!--{/if}-->
           </div>
          </div>
         </div>

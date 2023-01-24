@@ -57,34 +57,34 @@
    <div class=" userspace">
           <div class="avatar">{eval echo avatar_block($uid);}</div>
           <div class="userinfo clearfix">
-              <a  href="javascript:" class="username "><strong>$space['username']</strong></a>
-             <!--{if $uid==$_G['uid']}--> <a  href="user.php?mod=profile">{lang edit_data}</a><!--{/if}-->
+              <a  href="javascript:" class="username"><strong>$space['username']</strong></a>
+              <!--{if $uid==$_G['uid']}--><a href="user.php?mod=profile">{lang edit_data}</a><!--{/if}--><!--{if $_G['adminid']}--><a href="admin.php?mod=orguser#user_$uid">编辑用户</a><!--{/if}-->
           </div> 
     </div>
-   <div class="main-content clearfix" style="padding:20px;border-top:1px solid #FFF">
-            <!--{if $uid==$_G['uid'] || $_G['adminid']}-->
-            <div class="news">
-                <div class="p_name">
-                    {lang Last_login_time}
-                    <span class="p_x">$scdlsj</span>
-                </div>
-             </div>
-            <div class="news">
-                <div class="p_name">
-                    {lang email}
-                    <span class="p_x">$space['email']</span>
-                </div>
-             </div>
-            <!--{/if}-->
-        <!--{loop $profiles $key $value}-->
-        <div class="news">
-                <div class="p_name">
-                    $value[title]
-                    <span class="p_x">$value[value]</span>
-                </div>
-             </div>
-        <!--{/loop}-->
+   <div class="main-content clearfix">
+      <!--{if $uid==$_G['uid'] || $_G['adminid']}-->
+      <div class="news">
+          <div class="p_name">
+              {lang Last_login_time}
+              <span class="p_x">$scdlsj</span>
+          </div>
+       </div>
+      <div class="news">
+          <div class="p_name">
+              {lang email}
+              <span class="p_x">$space['email']</span>
+          </div>
+       </div>
+      <!--{/if}-->
+      <!--{loop $profiles $key $value}-->
+      <div class="news">
+        <div class="p_name">
+            $value[title]
+            <span class="p_x">$value[value]</span>
+        </div>
       </div>
+      <!--{/loop}-->
+    </div>
  </div>
 </div>
 <script type="text/javascript">

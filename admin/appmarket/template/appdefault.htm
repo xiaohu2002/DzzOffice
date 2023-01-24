@@ -58,8 +58,6 @@
 				</li>
 			</ul>
 		</div> 
-		
-
 		<div class="main-content clearfix" style="border-top:1px solid #FFF;">
 			<form id="appform" name="appform" class="form-horizontal" action="{BASESCRIPT}?mod={MOD_NAME}&op=default" method="post">
 				<input type="hidden" name="appsubmit" value="true" />
@@ -100,7 +98,8 @@
 						<td>
 							<input type="checkbox" class="js-switch" name="notdelete[{$value[appid]}]" value="1" <!--{if $value[notdelete]>0}-->checked<!--{/if}--> />
 				         </td>
-					    <td><button id="clear_{$value['appid']}" style="width:100px;" class="btn btn-default" data-loading-text="{lang in_clear}" type="button" title="{lang clear_application_install}" onclick="clearAppFromUser('$value[appid]');return false">{lang clear}</button>
+					    <td>
+              <button id="clear_{$value['appid']}" style="width:100px;" class="btn btn-default" data-loading-text="{lang in_clear}" type="button" title="{lang clear_application_install}" onclick="clearAppFromUser('$value[appid]');return false">{lang clear}</button>
 						</td>
 					</tr>
 					<!--{/loop}-->
@@ -110,7 +109,7 @@
 					</tr>
 				</table>
 			</form>
-			<div class="tip" style="margin:10px;color:#333;line-height:1.8">
+			<div class="tip">
 				<div class="alert alert-warning">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 					<h5>{lang board_message}</h5>
@@ -120,7 +119,7 @@
 				</div>
 			</div>
 		</div>
-
+    <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 	</div>
 </div>
 

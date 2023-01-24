@@ -3,9 +3,6 @@
 <link href="{MOD_PATH}/css/passsafe.css?{VERHASH}" rel="stylesheet" media="all">
 <script src="user/scripts/register.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
-<style>
-    .main-content{padding-top:30px;}
-</style>
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <div class="bs-container clearfix">
@@ -19,8 +16,9 @@
         <div class="main-header">
             <ul class="nav nav-pills nav-pills-bottomguide">
                 <li {if $do == 'editpass'}class="active"{/if}><a href="user.php?mod=profile&op=password">{lang password_edit}</a></li>
+                <li {if $do == 'login'}class="active"{/if}><a href="user.php?mod=profile&op=password&do=login">登录记录</a></li>
                 <li {if $do == 'changeemail'}class="active"{/if}><a href="user.php?mod=profile&op=password&do=changeemail">{lang bindemail_subject}</a></li>
-                <!--<li {if $do == 'bindphone'}class="active"{/if}><a href="">绑定手机</a></li>-->    
+                <!--{if $qqlogin[openid] && $qqlogin[unbind]<1}--><li {if $do == 'bindqq'}class="active"{/if}><a href="user.php?mod=profile&op=password&do=bindqq">绑定QQ</a></li><!--{/if}--> 
             </ul>
         </div>
         <div class="main-content">
@@ -28,7 +26,8 @@
                 <!--{template editpass}-->
             <!--{elseif $do == 'changeemail'}-->
                 <!--{template changeemail}-->
-
+            <!--{elseif $do == 'login'}-->
+                <!--{template login}-->
            <!--{/if}-->
         </div>
 <script type="text/javascript"  reload="1">

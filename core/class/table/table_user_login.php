@@ -6,15 +6,20 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
+
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 
-if(!defined('CORE_VERSION')) {
-	define('CORE_VERSION', '2.02');
-	define('CORE_RELEASE', '20180909');
-	define('CORE_FIXBUG' , '20000000');
-	define('CORE_XHVERSION', '1.71');
-	define('CORE_XHRELEASE', '20230124');
-	define('CORE_XHFIXBUG' , '20230124');
+class table_user_login extends dzz_table
+{
+	public function __construct() {
+
+		$this->_table = 'user_login';
+		$this->_pk    = 'id';
+
+		parent::__construct();
+	}
 }
+
+?>

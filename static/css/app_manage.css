@@ -18,9 +18,9 @@
 }
 /*添加按钮*/
 .button_add_content{
-    bottom: 24px;
-    position: fixed;
-    right: 24px;
+  bottom: 85px;
+  position: fixed;
+  right: 24px;
 	height: 56px;
 	width: 56px;
 	z-index: 10;
