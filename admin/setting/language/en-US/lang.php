@@ -30,6 +30,7 @@ $lang = array
 	'Forbidden time'=>'Forbidden time',
 	'How many login failures are allowed before you can log in again'=>'How many login failures are allowed before you can log in again',
 	'sec'=>'sec',
+	'Visitor login display'=>'Visitor login display',
 	'If the mail server is not configured, do not enable it. Otherwise, the system stalls'=>'If the mail server is not configured, do not enable it. Otherwise, the system stalls',
 	'Notification Whether to notify by email'=>'Notification Whether to notify by email',
 	'Independent login page login template; Parameters will be synchronized to login (including administrator login), registration, password retrieval, and home application.'=>'Independent login page login template; Parameters will be synchronized to login (including administrator login), registration, password retrieval, and home application.',

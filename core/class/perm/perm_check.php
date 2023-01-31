@@ -20,7 +20,6 @@ class perm_check{
         }
         return $perm;
     }
-	
     function getPerm($fid, $bz='',$i=0){
         global $_G;
 		if(isset($_G['gperm'])) return intval($_G['gperm']);//可以通过这个参数直接使用此权限值不去查询权限

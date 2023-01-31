@@ -30,6 +30,7 @@ $lang = array
 	'Forbidden time'=>'禁止时间',
 	'How many login failures are allowed before you can log in again'=>'允许登录失败多少后才可再次登录',
 	'sec'=>'秒',
+	'Visitor login display'=>'游客登录',
 	'If the mail server is not configured, do not enable it. Otherwise, the system stalls'=>'sec',
 	'Notification Whether to notify by email'=>'如果未配置邮件服务器，请不要启用，以免造成系统卡顿。',
 	'Independent login page login template; Parameters will be synchronized to login (including administrator login), registration, password retrieval, and home application.'=>'独立登录页登录模板;参数会同步到登录(含管理员登录)、注册、找回密码、首页应用。',

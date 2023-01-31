@@ -519,6 +519,7 @@ class table_folder extends dzz_table
             $where1 = array();
             if (!$this->noperm && $folder['gid'] > 0) {
                 $folder['perm'] = perm_check::getPerm($folder['fid']);
+
                 if ($folder['perm'] > 0) {
                     if (perm_binPerm::havePower('read2', $folder['perm'])) {
                         $where1[] = "1";

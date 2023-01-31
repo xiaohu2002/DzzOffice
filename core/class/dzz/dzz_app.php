@@ -588,22 +588,22 @@ class dzz_app extends dzz_base{
           }
         }
         if($appidxu=C::t('app_market')->fetch_by_identifier(CURMODULE)){
-					if(!$this->var['member']['adminid']){
-						if($appidxu['available']==0){
+					if($this->var['member']['adminid']){
+					}elseif($appidxu['available']==0){
               showmessage(lang('您无权使用该应用，请联系管理员。'));
-            }elseif($this->var['member']['uid']){
-							$appuid= C::t('user_field')->fetch($this->var['member']['uid']);
+            }elseif ($appidxu['group']==0){
+            }elseif ($appidxu['group']==-1){
+              if ($this->var['member']['uid']){
+                showmessage(lang('您无权使用该应用，请联系管理员。'));
+              }
+            }else{
+              $appuid= C::t('user_field')->fetch($this->var['member']['uid']);
               $appuidz=explode(',',$appuid['applist']);
               if (in_array($appidxu['appid'],$appuidz)){
               }else{
                 showmessage(lang('您无权使用该应用，请联系管理员。'));
               }
-              }elseif ($appidxu['group']==-1){
-                if ($this->var['member']['uid']){
-									showmessage(lang('您无权使用该应用，请联系管理员。'));
-                }
-              }
-          }
+            }
 				}
         if(isset($this->var['setting']['nocacheheaders']) && $this->var['setting']['nocacheheaders']) {
             @header("Expires: -1");
