@@ -1,7 +1,6 @@
 <div class="leconMenu">
 	<h3 class="bs-left-title">{lang myCountCenter}</h3>
 	<ul class="nav-stacked">
-		<!--{if $verify[verify1]==1 || $_G['adminid']}-->
 	    <li <!--{if OP_NAME=='index' && !$vid}-->class="active"<!--{/if}-->><a href="user.php?mod=profile">{lang basic_information}</a></li>
 	    <li <!--{if OP_NAME=='avatar'}-->class="active"<!--{/if}-->><a href="user.php?mod=profile&op=avatar">{lang Modify_the_picture}</a></li>
 	    <li <!--{if OP_NAME=='password'}-->class="active"<!--{/if}-->><a href="user.php?mod=profile&op=password">{lang Safety management}</a></li>
@@ -12,12 +11,10 @@
      </li>
 	   <!--{/if}-->
 	   <!--{/loop}-->
-     <!--{else}-->
+     <!--{if $kai && $verify[verify1]==1 || $_G['adminid'] || $kai==0}--><!--{else}-->
      <script type="text/javascript">showDialog('<!--{if $verify[verify1]==-1}-->您提交的实名认证审核失败，请重新提交认证<!--{elseif $verify[uid]}-->您的实名认证信息已提交，请耐心等待审核<!--{else}-->请先完成实名认证<!--{/if}-->',"right",'系统提示')</script>
-     <li class="active">
-	       <a href="user.php?mod=profile&vid=1">{lang Real-name authentication}</a>
-     </li>
-      <!--{/if}-->
+     <!--{/if}-->
+      
       <li><a href="user.php">{lang Personal data display}</a></li>
 	</ul>
 </div>

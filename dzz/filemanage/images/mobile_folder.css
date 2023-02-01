@@ -130,7 +130,6 @@ html, body {
 .module-list-view .col {
 	float: left;
 	height: 51px;
-	line-height: 51px;
 	text-indent: 10px;
 	white-space: nowrap;
 	text-overflow: ellipsis;

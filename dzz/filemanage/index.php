@@ -16,6 +16,7 @@ $typearr = array('image' => lang('photo'),
     'document' => lang('type_attach'),
     'link' => lang('type_link'),
     'video' => lang('video'),
+		'folder' => lang('folder'),
     'dzzdoc' => 'DZZ' . lang('type_attach'),
     'attach' => lang('rest_attachment')
 );
@@ -61,6 +62,7 @@ if ($_GET['do'] == 'delete') {
         'mod' => 'filemanage',
         'keyword' => $keyword,
         'type' => $_GET['type'],
+        'ftype' => $_GET['ftype'],
         'size' => $_GET['size'],
         'dateline' => $_GET['dateline'],
         'orgid' => $orgid,
@@ -72,11 +74,15 @@ if ($_GET['do'] == 'delete') {
         $order = 'ORDER BY size DESC';
     } elseif ($_GET['size'] == 'asc') {
         $order = 'ORDER BY size ASC';
-    } elseif ($_GET['dateline'] == 'asc') {
+    } elseif ($_GET['ftype'] == 'desc') {
+        $order = 'ORDER BY ext DESC';
+    } elseif ($_GET['ftype'] == 'asc') {
+        $order = 'ORDER BY ext ASC';
+    }elseif ($_GET['dateline'] == 'asc') {
         $order = 'ORDER BY dateline ASC';
-    } else {
+    }else {
         $_GET['dateline'] = 'desc';
-        $order = 'ORDER BY size DESC';
+        $order = 'ORDER BY dateline DESC';
     }
     $sql = "type!='app' and type!='shortcut'";
     $foldername = array();

@@ -1,6 +1,7 @@
 <?php
 $lang = array (
-	'appname' => 'file management', 
+	'appname' => 'file management',
+	'folder' => 'folder', 
 	'rotation'=>'rotate',
   'checkednum'=>'<span><span class="ex-number"></span> items selected',
   'file_position'=>'file location',

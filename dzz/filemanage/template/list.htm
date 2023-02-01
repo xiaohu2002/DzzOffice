@@ -123,18 +123,21 @@
                 </div>
               </div>
               <!--选中后的效果-->
-              <div class="col sharepame-selected" style="display: none;width:27%">{lang checkednum}</span> </div>
+              <div class="col sharepame-selected" style="display: none;width:25%">{lang checkednum}</span> </div>
               <!-- 第一列 -->
               <div node-type="title-col" data-key="name" class="col1 c1 show_first" style="width: 25%">
                 <div class="name"> <span>{lang filename}</span> <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span> </div>
               </div>
               <!-- 其他列 -->
-              <div node-type="title-col" data-key="size" class="col" style="width: 10%;"> {lang file_size} <span node-type="order-status" class="asc $_GET[size]" style="visibility:<!--{if $_GET[size]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </div>
-              <div node-type="title-col" data-key="type" class="col1" style="width: 10%;border-right: none;"> {lang file_type} <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span> </div>
+              <div node-type="title-col" data-key="size" class="col" style="width: 10%;">{lang file_size}
+								<span node-type="order-status" class="asc $_GET[size]" style="visibility:<!--{if $_GET[size]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
+              </div>
+              <div node-type="title-col" data-key="ftype" class="col" style="width: 10%;border-right: none;">{lang file_type}
+								<span node-type="order-status" class="asc $_GET[ftype]" style="visibility: <!--{if $_GET[ftype]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
+              </div>
               <div node-type="title-col" data-key="type" class="col1" style="width: 18%;border-right: none;"> {lang file_location} <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span> </div>
               <!--{if $_G[adminid]}-->
               <div node-type="title-col" data-key="type" class="col1" style="width: 10%;border-right: none;"> {lang possessor}<span node-type="order-status" class="asc desc" style="visibility: hidden;"></span> </div>
-              <div node-type="title-col" data-key="type" class="col1" style="width: 7%;border-right: none;"> 引用</div>
               <!--{/if}-->
               <div node-type="title-col" data-key="dateline" class="col" style="width: 15%;"> {lang add_time} <span node-type="order-status" class="asc $_GET[dateline]" style="visibility: <!--{if $_GET[dateline]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </div>
               <div node-type="title-col" data-key="dateline" class="col1" style="width: 5%;"> {lang delete} </div>
@@ -142,8 +145,9 @@
           </div>
           <div node-type="list" class="list list-share">
             <div class="list-wrapper clearfix"> 
-              <!--{loop $list $value}--> 
-              <div node-type="item" data-dpath="$value[dpath]" data-rid="$value[rid]" <!--{if $value[type] == 'folder' && $value[oid]}--> data-containpath="$value[oid]"<!--{/if}--> data-type="$value[type]" class="item shareblock clearfix"> 
+              <!--{loop $list $value}-->
+              <div node-type="item" data-dpath="$value[dpath]" data-rid="$value[rid]" <!--{if $value[type] == 'folder' && $value[oid]}--> data-containpath="$value[oid]"<!--{/if}--> data-type="$value[type]" class="item shareblock clearfix">
+							<div class="di">
               <!-- 第一列 -->
               <div class="col size" style="width: 3%;text-indent: 0;padding-left: 10px;" >
                 <div class="checkbox-custom checkbox-primary">
@@ -156,23 +160,39 @@
                   <!--{if $value[img]}--><img class="icon" title="$value[name]" src="$value[img]" <!--{if $value[type]=='image' }--> data-original="$value[url]" data-dpath="$value[dpath]" 
                   <!--{/if}-->/> 
                   <!--{/if}--> 
-                  <span class="name-text-wrapper"> <span node-type="name-text"  data-href="$value[shareurl]" class="name-text enabled">$value[name]</span> </span> </div>
-                
-                	<div class="btns">
-										<a node-type="btn-item" data-key="download" class="glyphicon glyphicon-download-alt" href="javascript:void(0);"></a>
-									</div>
-                
+                  <span class="name-text-wrapper"> <span node-type="name-text"  data-href="$value[shareurl]" class="name-text enabled">$value[name]</span> </span>
+								</div>
+                <div class="btns">
+                  <a node-type="btn-item" data-key="download" class="glyphicon glyphicon-download-alt" href="javascript:void(0);"></a>
+                </div> 
               </div>
               <!-- 其他列 -->
-              <div class="col size" style="width: 10%" data-size="$value[size]">$value[fsize]</div>
+              <div class="col size" style="width:10%" data-size="$value[size]">$value[fsize]</div>
               <div class="col type" style="width:10%" data-type="$value[ftype]">$value[ftype]</div>
               <div class="col type" style="width:18%" data-type="$value[relpath]">$value[relpath]</div>
 							<!--{if $_G[adminid]}-->
               <div class="col type" style="width:10%" data-type="$value[username]">$value[username]</div>
-							<div class="col type" style="width:7%" data-type="$value[copys]">$value[copys]</div>
 							<!--{/if}-->
               <div class="col dateline" style="width: 15%" data-dateline="$value[dateline]">$value[fdateline]</div>
-              <div class="col delete" style="width: 5%" > <a class="" href="{BASESCRIPT}?mod=filemanage&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" title="{lang delete}" style="color:rgb(85, 85, 85);font-size:20px;" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="dzz dzz-delete"></i></a> </div>
+              <div class="col delete" style="width: 5%" >
+								<a class="" href="{BASESCRIPT}?mod=filemanage&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" title="{lang delete}" style="color:rgb(85, 85, 85);font-size:20px;" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="dzz dzz-delete"></i></a>
+							</div>
+							</div>
+							<!--{if $_G[adminid]}-->
+							<!--{if $value[type]=='folder'}--><!--{else}-->
+							<div class="copy">
+								<div>
+                  文件位置：<!--{eval echo IO::getStream($value[path])}-->
+                </div>
+								<div>
+                  直链地址：<!--{eval echo IO::getFileUri($value[path])}-->
+                </div>
+                <div>
+                  引用：$value[copys]
+                </div>
+							</div>
+							<!--{/if}-->
+							<!--{/if}-->
             </div>
             <!--{/loop}--> 
             <!--{if $nextpage}-->
@@ -218,6 +238,7 @@ var theurl='$theurl';
 			jQuery(this).removeClass('item-hover');
 		});
 		
+		
 		jQuery(document).on('click', 'span[node-type=name-text],.module-grid-view .item', function() {
 			var item = jQuery(this).closest('.item');
 			var type = item.data('type');
@@ -242,13 +263,13 @@ var theurl='$theurl';
 			}
 			return false;
 		});
-		jQuery('.title .item .col[node-type=title-col][data-key=dateline],.title .item .col[node-type=title-col][data-key=size]').on('click', function() {
+		jQuery('.title .item .col[node-type=title-col][data-key=dateline],.title .item .col[node-type=title-col][data-key=size],.title .item .col[node-type=title-col][data-key=ftype]').on('click', function() {
 			var el = jQuery(this);
 			el.find('.asc').css('visibility', 'visible').toggleClass('desc');
 			el.siblings().find('.asc').css('visibility', 'hidden');
 			
 			var param=el.data('key')+'='+ (el.find('.asc').hasClass('desc') ? 'desc' : 'asc');
-			var regx=new RegExp('&(dateline|size)=(asc|desc)','i');
+			var regx=new RegExp('&(dateline|size|ftype)=(asc|desc)','i');
 			var url=theurl.replace(regx,'')+'&'+param;
 			location.href=correcturl(url);
 		});
@@ -276,7 +297,6 @@ jQuery(document).off('click.shareclick').on('click.shareclick',".shareblock",fun
 	if(checkinput.prop('checked')){
 		checkinput.prop('checked',false);
 		jQuery(this).removeClass('item-active');
-		
 		var rid=jQuery(this).find('input[name="del[]"]').data('rid');
 		var index = jQuery.inArray(rid,rids);
 		if(index != -1){

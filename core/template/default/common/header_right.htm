@@ -1,8 +1,18 @@
 <ul class="nav navbar-nav">
 	<!--{if $_G['uid']}-->
 	<!--{if !$_G['setting']['bbclosed'] || !$_G['adminid'] ==0}-->
-	{eval $verify = C::t('user_verify')->fetch($_G['uid']);}	
-	<!--{if $verify[verify1]==1 || !$_G['adminid'] ==0}-->
+	{eval} 
+	foreach($_G['setting']['verify'] as $key=>$value){
+  $verify = C::t('user_verify')->fetch($_G['uid']);
+  if($value['available'] && $key==1){
+  if($verify['verify1']==1){
+  }else {
+    $kai=1;
+  }
+  }
+}
+	{/eval}
+	<!--{if $kai && $verify[verify1]==1 || $_G['adminid'] || $kai==0}-->
 	<li class="app_popup-parent">
 		<a href="javascript:;" id="desktop_app" data-href="index.php?mod=system&op=app_ajax&operation=app" class="app_popup_icon js-popbox" data-placement="bottom" data-trigger="focus" data-auto-adapt="true" data-toggle="popover"><span class="dzz dzz-apps basil"></span></a>
 	</li>

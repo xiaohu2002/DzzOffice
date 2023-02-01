@@ -572,14 +572,15 @@ class dzz_app extends dzz_base{
 
             }
         }
-        if ($this->var['member']['adminid']==1){
+        if ($this->var['member']['adminid']){
            }elseif(in_array(CURSCRIPT, array('admin', 'user', 'api')) || defined('ALLOWGUEST') && ALLOWGUEST) {
-          }else{
+          }elseif($_GET['mod']=='system') {
+				}else{
           if ($this->var['member']['uid']){
             foreach($this->var['setting']['verify'] as $key=>$value){
               $verify = C::t('user_verify')->fetch($this->var['member']['uid']);
               if($value['available'] && $key==1){
-              if($verify['verify1']){
+              if($verify['verify1']==1){
 							}else {
 								dheader("Location: user.php?mod=profile&vid=1");
 							}
@@ -596,14 +597,16 @@ class dzz_app extends dzz_base{
               if ($this->var['member']['uid']){
                 showmessage(lang('您无权使用该应用，请联系管理员。'));
               }
-            }else{
+            }elseif ($this->var['member']['uid']){
               $appuid= C::t('user_field')->fetch($this->var['member']['uid']);
               $appuidz=explode(',',$appuid['applist']);
               if (in_array($appidxu['appid'],$appuidz)){
               }else{
                 showmessage(lang('您无权使用该应用，请联系管理员。'));
               }
-            }
+            }else{
+                Hook::listen('check_login');
+              }
 				}
         if(isset($this->var['setting']['nocacheheaders']) && $this->var['setting']['nocacheheaders']) {
             @header("Expires: -1");

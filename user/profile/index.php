@@ -13,7 +13,15 @@ if (!defined('IN_DZZ')) {
 Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 $navtitle=lang('basic_information').' - '.lang('myCountCenter');
 $uid = intval($_G['uid']);
-
+foreach($_G['setting']['verify'] as $key=>$value){
+  $verify = C::t('user_verify')->fetch($_G['uid']);
+  if($value['available'] && $key==1){
+  if($verify['verify1']==1){
+  }else {
+    $kai=1;
+  }
+  }
+}
 $verify = C::t('user_verify')->fetch($_G['uid']);//验证信息
 
 $space = C::t('user_profile')->get_userprofile_by_uid($uid);//用户资料信息
