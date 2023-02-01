@@ -596,14 +596,16 @@ class dzz_app extends dzz_base{
               if ($this->var['member']['uid']){
                 showmessage(lang('您无权使用该应用，请联系管理员。'));
               }
-            }else{
+            }elseif ($this->var['member']['uid']){
               $appuid= C::t('user_field')->fetch($this->var['member']['uid']);
               $appuidz=explode(',',$appuid['applist']);
               if (in_array($appidxu['appid'],$appuidz)){
               }else{
                 showmessage(lang('您无权使用该应用，请联系管理员。'));
               }
-            }
+            }else{
+                Hook::listen('check_login');
+              }
 				}
         if(isset($this->var['setting']['nocacheheaders']) && $this->var['setting']['nocacheheaders']) {
             @header("Expires: -1");
