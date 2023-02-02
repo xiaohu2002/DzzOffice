@@ -582,7 +582,6 @@ dd,dt{line-height:1.42857143}dt{font-weight:700}dd{margin-left:0}@media (min-wid
 .breadcrumb > li + li:before{
 	padding: 0;
     vertical-align: top;
-    margin-right: -5px;
 }
 .breadcrumb > li {
     display: inline-block;
