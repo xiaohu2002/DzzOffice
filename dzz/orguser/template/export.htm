@@ -18,12 +18,12 @@
 	<div class="bs-main-container">
     <div class="main-header">
       <ul class="nav nav-pills nav-pills-bottomguide"> 
-        <li class="active"><a href="{ADMINSCRIPT}?mod=orguser&op=export&orgid=$orgid">{lang export_change}</a></li>
+        <li class="active"><a href="{MOD_URL}&op=export&orgid=$orgid">{lang export_change}</a></li>
 
       </ul>
     </div>
     <div class="main-content">
-      <form id="cpform" action="{BASESCRIPT}?mod=orguser&op=export" class="form-horizontal form-horizontal-left"  method="post" name="cpform" onsubmit="return validate(this)">
+      <form id="cpform" action="{MOD_URL}&op=export" class="form-horizontal form-horizontal-left"  method="post" name="cpform" onsubmit="return validate(this)">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="true" name="exportsubmit">
         <div class="form-group">

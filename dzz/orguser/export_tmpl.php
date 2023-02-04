@@ -6,7 +6,7 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-if(!defined('IN_DZZ') || !defined('IN_ADMIN')) {
+if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 	$h0=array('username'=>lang('compellation'),'email'=>lang('email'),'password'=>lang('user_login_password'),'birth'=>lang('date_birth'),'gender'=>lang('gender'),'mobile'=>lang('cellphone'),'weixinid'=>lang('weixin'),'orgname'=>lang('category_department'),'job'=>lang('department_position'));

@@ -8,8 +8,7 @@
 <header class="weui-search-bar">
     <div class="weui-search-bar__form" action="" onsubmit="return ">
         <div class="weui-search-bar__box">
-            <input type="search" class="weui-search-bar__input" id="user_select_search_input" placeholder="全部或部分文件名"
-                   required="">
+            <input type="search" class="weui-search-bar__input" id="user_select_search_input" placeholder="全部或部分文件名" required="">
             <a href="javascript:" class="weui-search-bar__cancel-btn"><i class="weui-icon-clear"></i></a>
         </div>
         <label class="weui-search-bar__label">
@@ -25,12 +24,8 @@
 <input type="hidden" name="formhash" value="{FORMHASH}">
 <input type="hidden" name="selectsubmit" value="true">
 <section class="weui-cells_margin_top" style="padding-bottom:50px">
-    <iframe name="seluser_iframe" class="org-sel-box-iframe"
-            src="$theurl"
-            width="100%" height="100%"
-            allowtransparency="true"></iframe>
-    <input id="sel_seluser" type="hidden" name="uids"
-           value="{eval echo implode(',',array_keys($selects));}"/>
+    <iframe name="seluser_iframe" class="org-sel-box-iframe" src="$theurl" width="100%" height="100%" allowtransparency="true"></iframe>
+    <input id="sel_seluser" type="hidden" name="uids" value="{eval echo implode(',',array_keys($selects));}"/>
 </section>
 <!--列表结束-->
 <footer class="weui-member-select">

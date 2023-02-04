@@ -386,6 +386,17 @@
           </ul>
         </dd>
       </dl>
+			<dl>
+        <dt>通知重复</dt>
+        <dd class="clearfix">
+          <label class="radio-inline"><input type="radio" name="settingnew[Duplicatenotification]" value="1" <!--{if $setting[Duplicatenotification]}--> checked="checked" <!--{/if}-->/>{lang enable}</label>
+          <label class="radio-inline"> <input type="radio" name="settingnew[Duplicatenotification]" value="0" <!--{if !$setting[Duplicatenotification]}-->checked="checked"<!--{/if}-->/>{lang close}</label>
+          <ul class="help-block">
+            <li>关闭之后同一应用同一用户时覆盖原上条消息后接收</li>
+            <li>开启之后任何消息不覆盖上条消息进行接收</li>
+          </ul>
+        </dd>
+      </dl>
       <dl>
         <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit"  value="{lang save_changes}" type="submit">
       </dl>
@@ -755,6 +766,25 @@
         </dd>
         <dd class="clearfix"><span class="help-block">{lang mandatory_password_complexity_state}</span></dd>
       </dl>
+			<dl>
+        <dt>欢迎信息标题</dt>
+        <dd class="clearfix">
+          <input type="text" class="form-control" name="settingnew[welcomemsgtitle]" value="$setting[welcomemsgtitle]">
+          <span class="help-block text-muted">系统发送的欢迎信息的标题，不支持 HTML，不超过 75 字节。</span></dd>
+      </dl>
+			<dl>
+          <dt>欢迎信息内容</dt>
+          <dd class="clearfix">
+            <textarea class="form-control" type="texterea" name="settingnew[welcomemsgtxt]" rows="5">$setting[welcomemsgtxt]</textarea> 
+            <span class="help-block">系统发送的欢迎信息的内容。标题内容均支持变量替换，可以使用如下变量:
+              <li>{username} : 用户名</li>
+              <li>{time} : 发送时间</li>
+              <li>{sitename} : 网站名称（显示在页面底部的联系方式处的名称）</li>
+              <li>{bbname} : 站点名称（显示在浏览器窗口标题等位置的名称）</li>
+              <li>{adminemail} : 管理员 Email</li>
+              </span>
+          </dd>
+        </dl>
       <dl>
         <dt>{lang according_site_terms_service}</dt>
         <dd>

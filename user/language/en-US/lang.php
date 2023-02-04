@@ -88,7 +88,6 @@ $lang=array (
   'user_password_not_correct' => 'User password is incorrect, please try again ',
   'space_usage' => 'space usage',
   'category_department' => 'department under which you belong ',
-  'registration_time' => 'registration time',
   'usergroup' => 'usergroup',
   'not_join_agency_department' => 'not joined organization or department',
   'unallocated_space' => 'unallocated space',
@@ -187,6 +186,8 @@ $lang=array (
   <p>The mail may enter the promotion mail or spam. Please check it</p>',
   'sending_ Wait '=>' is being sent, please wait',
 	'myCountCenter'=>' Personal Center',
-  'register_welcome_tip'=>' Welcome to register '
+  'register_welcome_tip'=>' Welcome to register ',
+	'register'=>'{title}',
+	'register_title'=>$_G['setting']['welcomemsgtitle'],
 
 );

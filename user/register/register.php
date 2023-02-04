@@ -10,9 +10,18 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 $setting = $_G['setting'];
+$htmls = $settings = array();
+foreach($_G['cache']['fields_register'] as $field) {
+    $fieldid = $field['fieldid'];
+    $field_val = $_GET[''.$field_key];
+    $html = profile_setting($fieldid, array(), false, false, true);
+    if($html) {
+        $settings[$fieldid] = $_G['cache']['profilesetting'][$fieldid];
+        $htmls[$fieldid] = $html;
+    }
+}
 $ismobile=helper_browser::ismobile();
 $showregisterform = 1;
-
 Hook::listen('register_before');//注册预处理钩子
 
 if($_G['uid']) {
@@ -65,7 +74,7 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
 }else{
 	
     Hook::listen('check_val',$_GET);//用户数据验证钩子,用户注册资料信息提交验证
-	$result=$_GET;
+    $result=$_GET;
     Hook::listen('register_common',$result);//用户注册钩子
     $type = isset($_GET['returnType']) ? $_GET['returnType']:'';
    
@@ -90,7 +99,23 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
         'password' => $result['password'],
         'groupid' => $result['groupid'],
     ), 0);
+	if ($_G['uid']) {
+    //发送通知
+        $notevars=array(
+                'from_id' => '0',
+                'from_idtype' => 'app',
+                'url' => '',
+                'author' => getglobal('username'),
+                'authorid' => getglobal('uid'),
+                'dataline' => dgmdate(TIMESTAMP),
+                'title'=> replacesitevar($_G['setting']['welcomemsgtxt'])
+                );
 
+          $action = 'register';
+          $type = 'register_'.$_G['uid'];
+
+        dzz_notification::notification_add($_G['uid'], $type, $action, $notevars);
+    }
     //设置显示提示文字
     $param = daddslashes(array('sitename' => $setting['sitename'], 'username' => $result['username'], 'usergroup' => $_G['cache']['usergroups'][$result['groupid']]['grouptitle'], 'uid' => $result['uid']));
 

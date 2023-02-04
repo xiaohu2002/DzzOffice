@@ -6,15 +6,14 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
+if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
-
 include_once  libfile('function/organization');
 $type = trim($_GET['idtype']);
 if ($type == 'user') {
 	$_GET['uid'] = intval($_GET['id']);
-	include DZZ_ROOT . './admin/orguser/edituser.php';
+	include DZZ_ROOT . MOD_PATH.'/edituser.php';
 	exit();
 } else {
 	$orgid = intval($_GET['id']);

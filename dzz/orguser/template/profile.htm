@@ -2,17 +2,17 @@
 	<ul class="nav nav-pills nav-pills-bottomguide">
 		<strong class="pull-left">$space[username]</strong>
 		<li>
-			<a href="{BASESCRIPT}?mod=orguser&op=edituser&uid=$uid#user_{$user[uid]}_" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang basic_message}</a>
+			<a href="{MOD_URL}&op=edituser&uid=$uid#user_{$user[uid]}_" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang basic_message}</a>
 		</li>
 		<li class="active">
-			<a href="{BASESCRIPT}?mod=orguser&op=edituser&do=profile&uid=$uid" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang details_information}</a>
+			<a href="{MOD_URL}&op=edituser&do=profile&uid=$uid" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang details_information}</a>
 		</li>
 
 	</ul>
 </div>
 <div class="main-body">
 	<div id="return_edituserprofile"></div>
-	<form id="accountform" name="accountform" class="form-horizontal form-horizontal-left" action="{BASESCRIPT}?mod=orguser&op=edituser&do=profile" method="post" onsubmit="account_submit();return false">
+	<form id="accountform" name="accountform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=edituser&do=profile" method="post" onsubmit="account_submit();return false">
 		<input type="hidden" name="profilesubmit" value="true" />
 		<input type="hidden" name="uid" value="$uid" />
 		<input type="hidden" name="handlekey" value="edituserprofile" />

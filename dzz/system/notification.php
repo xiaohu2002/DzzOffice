@@ -64,9 +64,10 @@ if($filter=='new'){//列出所有新通知
       $appid = $fromid -1;
       $searchsql .= " and n.from_id = {$appid}";
       $navtitle=$searchcats[$fromid]['appname'].' - '.lang('panel_notice_title');
+			$img=$searchcats[$fromid]['appico'];
 			$tongzhileixing=$searchcats[$fromid]['appname'];
     }else{
-			$tongzhileixing='全部通知';
+      $tongzhileixing='全部通知';
       $navtitle='全部通知'.' - '.lang('panel_notice_title');
     }
     $params = array('notification','user','app_market',$_G['uid']);

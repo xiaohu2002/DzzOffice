@@ -132,7 +132,20 @@ border: none;
             <div class="form-group"> 
               <!--{template common/seccheck}--> 
             </div>
-            <!--{/if}--> 
+            <!--{/if}-->
+						<!--{loop $_G['cache']['fields_register'] $field}-->
+							<!--{if $htmls[$field['fieldid']]}-->
+							<div class="rfm">
+								<table>
+									<tr>
+										<th><!--{if $field['required']}--><span class="rq">*</span><!--{/if}--><label for="$field['fieldid']">$field[title]:</label></th>
+										<td>$htmls[$field['fieldid']]</td>
+										<td class="tipcol"><i id="tip_$field['fieldid']" class="p_tip"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></i><kbd id="chk_$field['fieldid']" class="p_chk"></kbd></td>
+									</tr>
+								</table>
+							</div>
+							<!--{/if}-->
+						<!--{/loop}-->
             <!--{if $bbrules}-->
             <div class="form-group clearfix">
               <div class="checkbox-custom checkbox-primary pull-left">

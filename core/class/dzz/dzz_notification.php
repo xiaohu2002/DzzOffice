@@ -28,9 +28,10 @@ class dzz_notification {
 
 		$title=lang($note.'_title',$notevars,'',$langfolder);
 		$oldnote = array();
-		//if($notevars['from_id'] && $notevars['from_idtype']) {
+		
+		if(!$_G['setting']['Duplicatenotification']) {
 			$oldnote = C::t('notification')->fetch_by_fromid_uid_type($notevars['from_id'], $notevars['from_idtype'], $touid,$type);
-		//}
+		}
 
 		if(empty($oldnote['from_num'])) $oldnote['from_num'] = 0;
 		$notevars['from_num'] = (isset($notevars['from_num'])&& $notevars['from_num']) ? $notevars['from_num'] : 1;

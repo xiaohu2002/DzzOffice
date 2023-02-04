@@ -1267,7 +1267,15 @@ $_G[siteurl]',
 	'public_license'=>'开源协议',
 	'community_edition'=>'社区版',
 	'title_admincp'=>'管理员登录入口',
-	'forbid_folder_to_sub_folder'=>'目标文件夹是源文件夹的子文件夹'
+	'forbid_folder_to_sub_folder'=>'目标文件夹是源文件夹的子文件夹',
+	
+	'no_institution_users'=>'无机构用户',
+	'compellation'=>'用户名',
+	'usergroup' => '用户组',
+	'organization'=>'机构',
+	'department'=>'部门',
+	'save_changes'=>'保存更改',
+	'registration_time'=>'注册时间',
 );
 
 ?>

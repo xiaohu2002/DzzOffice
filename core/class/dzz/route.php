@@ -72,6 +72,7 @@ class Route{
             define('MOD_DIR',dirname($modfile));
             define('MOD_URL',BASESCRIPT.'?mod='.$mod);
             define('OP_NAME',$op);
+            define('MOD_URLOP',MOD_URL.'&op='.$op);
            // $break = true;
 			Hook::listen('mod_run');
             return DZZ_ROOT.$modfile;

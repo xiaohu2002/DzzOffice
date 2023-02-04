@@ -1241,8 +1241,15 @@ Important!
   'public_license'=>' Open source protocol ',
   'community_edition'=>' Community Edition ',
   'title_admincp'=>' Administrator Login entry ',
-  'forbid_folder_TO_sub_folder '=>' The destination folder is a subfolder of the source folder'
+  'forbid_folder_TO_sub_folder '=>' The destination folder is a subfolder of the source folder',
 	
+	'no_institution_users'=>' No institutional user',
+	'compellation'=>' Username',
+	'usergroup' => 'usergroup',
+	'organization' => 'institutions',
+	'department' => 'department',
+	'save_changes'=>' save changes',
+	'registration_time'=>' registration time',
 );
 
 ?>

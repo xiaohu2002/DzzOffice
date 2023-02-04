@@ -80,6 +80,7 @@ if (!submitcheck('settingsubmit')) {
 	} elseif ($operation == 'access') {
 		$navtitle = lang('loginSet').' - '.lang('appname');
 		$setting['strongpw'] = dunserialize($setting['strongpw']);
+		$setting['welcomemsgtitle'] = cutstr(trim(dhtmlspecialchars($setting['welcomemsgtitle'])), 75);
 	}elseif($operation == 'space'){//获取空间设置结果
 		$navtitle=lang('spaceSet').' - '.lang('appname');
 		$openarr=json_encode(array('orgids'=>$open));

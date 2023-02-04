@@ -2,10 +2,10 @@
 	<ul class="nav nav-pills nav-pills-bottomguide">
 		<strong class="pull-left">$user[username]</strong>
 		<li class="active">
-			<a href="{BASESCRIPT}?mod=orguser&op=edituser&uid=$user[uid]#user_{$user[uid]}_" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang basic_message}</a>
+			<a href="{MOD_URL}&op=edituser&uid=$user[uid]#user_{$user[uid]}_" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang basic_message}</a>
 		</li>
 		<li>
-			<a href="{BASESCRIPT}?mod=orguser&op=edituser&do=profile&uid=$user[uid]#user_{$user[uid]}_profile" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang details_information}</a>
+			<a href="{MOD_URL}&op=edituser&do=profile&uid=$user[uid]#user_{$user[uid]}_profile" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang details_information}</a>
 		</li>
 
 	</ul>
@@ -13,7 +13,7 @@
 
 <div class="main-body">
 	<div id="return_edituser" style="display:none"></div>
-	<form id="accountform" name="accountform" class="form-horizontal form-horizontal-left" action="{BASESCRIPT}?mod=orguser&op=edituser" method="post" onsubmit="account_submit();return false">
+	<form id="accountform" name="accountform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=edituser" method="post" onsubmit="account_submit();return false">
 		<input type="hidden" name="accountedit" value="true" />
 		<input type="hidden" name="uid" value="$uid" />
 		<input type="hidden" name="handlekey" value="edituser" />
@@ -37,7 +37,27 @@
                 <span id="suc_username"></span><kbd class="p_chk"></kbd> {lang login_username_tips}
 			</span>
 		</div>
-		
+		<!--{if $user[regip]}-->
+		<div class="form-group">
+      <label class="control-label" for="regdate">{lang registration_time}</label>
+      <div class="controls">
+				<!--{eval echo dgmdate($user[regdate])}-->
+      </div>
+    </div>
+		<div class="form-group">
+      <label class="control-label" for="regdate">{lang register}IP</label>
+      <div class="controls">
+				$user[regip]
+      </div>
+    </div>
+		<!--{else}-->
+		<div class="form-group">
+      <label class="control-label" for="regdate">{lang add_time}</label>
+      <div class="controls">
+				<!--{eval echo dgmdate($user[regdate])}-->
+      </div>
+    </div>
+		<!--{/if}-->
 		<div class="form-group">
 			<label class="control-label" for="username">{lang phone_number}</label>
 			<div class="controls">

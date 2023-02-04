@@ -105,9 +105,7 @@ class Checkvalue{
             if($field['formtype'] == 'file' && !empty($_FILES[$field_key]) && $_FILES[$field_key]['error'] == 0) {
                 $field_val = true;
             }
-
             if(!profile_check($field_key, $field_val)) {
-
                 showTips(array('error'=>$field['title'].lang('profile_illegal')),$type);
             }
         }

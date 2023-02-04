@@ -6,7 +6,7 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-if(!defined('IN_DZZ') || !defined('IN_ADMIN')) {
+if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 require_once libfile('function/mail');
@@ -302,7 +302,7 @@ EOT;
 	require_once DZZ_ROOT.'./core/class/class_PHPExcel.php';
 	$inputFileName = $_G['setting']['attachdir'].$_GET['file'];
 	if(!is_file($inputFileName)){
-		showmessage('orguser_import_user_table',ADMINSCRIPT.'?mod=orguser&op=import');
+		showmessage('orguser_import_user_table',MOD_URL.'&op=import');
 	}
 	$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
 	$objReader = PHPExcel_IOFactory::createReader($inputFileType);
@@ -391,7 +391,7 @@ EOT;
 				$url=outputurl($_G['siteurl'].MOD_URL.'&op=import&do=list&file='.urlencode($file));
 				@header("Location: $url");
 				exit();
-				showmessage('orguser_import_user_message',outputurl($_G['siteurl'].MOD_URL.'?mod=orguser&op=import&do=list&file='.urlencode($file)));
+				showmessage('orguser_import_user_message',outputurl($_G['siteurl'].MOD_URL.'&op=import&do=list&file='.urlencode($file)));
 			}else{
 				showmessage('orguser_import_tautology',dreferer());
 			}

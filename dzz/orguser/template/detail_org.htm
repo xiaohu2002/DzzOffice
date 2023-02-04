@@ -21,7 +21,7 @@
 <div class="main-header" style="line-height:34px;padding:3px 15px;">
 	<b id="title_orgname">$org['orgname'] </b>
 	<!--{if $_G['adminid']==1}-->
-	<a href="{ADMINSCRIPT}?mod=orguser&op=export&orgid=$orgid" class="btn btn-link pull-right" title="{lang export_excl}" target="_blank">{lang export_user}</a>
+	<a href="{MOD_URL}&op=export&orgid=$orgid" class="btn btn-link pull-right" title="{lang export_excl}" target="_blank">{lang export_user}</a>
 	<!--{/if}-->
 </div>
 <div class="main-body">
@@ -224,7 +224,7 @@
 		jQuery('textarea').TextAreaExpander(33);
 	});
     function set_submit(form) {
-        jQuery.post('$_G[siteurl]'+'admin.php?mod=orguser&op=ajax&do=orginfo',jQuery(form).serialize(), function (data) {
+        jQuery.post('$_G[siteurl]'+'{MOD_URL}&op=ajax&do=orginfo',jQuery(form).serialize(), function (data) {
             if (data['success']) {
 				showmessage('{lang org_update_success}','success',3000,1);
 				setTimeout(location.reload(),30000);
@@ -255,7 +255,7 @@
 	function upload_bgphoto(obj,fact) {
         'use strict';
         jQuery(obj).fileupload({
-            url: 'admin.php?mod=orguser&op=ajax&do=upload',
+            url: '{MOD_URL}&op=ajax&do=upload',
             dataType: 'json',
             autoUpload: true,
             maxFileSize: 2000000,// 2 MB

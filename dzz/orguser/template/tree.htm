@@ -3,7 +3,7 @@
 	<a class="newdir_1" href="javascript:;" onclick="jstree_create_dir();return false;" title="{lang creation_bottom_section}"></a>
 	<a class="newdoc" href="javascript:;" onclick="jstree_create_user();return false;" title="{lang add_user}"></a>
 	<!--{if $_G['adminid']==1}-->
-	<a class="import " href="{ADMINSCRIPT}?mod=orguser&op=import" title="{lang import_user}"></a>
+	<a class="import " href="{MOD_URL}&op=import" title="{lang import_user}"></a>
 	<!--{/if}-->
 	
 	<a class="guide" href="javascript:;" onclick="show_guide();return false;" title="{lang moderate_explain}"></a>
@@ -17,8 +17,8 @@
 
 <script type="text/javascript">
 	var orgtree = $orgtree;
-	var ajaxurl = '{ADMINSCRIPT}?mod=orguser&op=ajax&';
-	var baseurl = '{ADMINSCRIPT}?mod=orguser&';
+	var ajaxurl = '{MOD_URL}&op=ajax&';
+	var baseurl = '{MOD_URL}&';
 	jQuery(document).ready(function(e) {
 		jQuery("#classtree").jstree({
 			"core": {
@@ -33,7 +33,7 @@
 				"themes": { "responsive": false, "variant": 'large' },
 				"data": {
 					dataType: 'json',
-					url: '{ADMINSCRIPT}?mod=orguser&op=ajax&do=getchildren&t=' + new Date().getTime(),
+					url: '{MOD_URL}&op=ajax&do=getchildren&t=' + new Date().getTime(),
 					data: function(node) {
 						return { 'id': node.id };
 					}
@@ -105,7 +105,7 @@
 								obj1 = inst.get_node(obj.parent);
 
 							var position = jQuery.inArray(obj.id, obj1.children) + 1;
-							jQuery.post('{ADMINSCRIPT}?mod=orguser&op=ajax&do=create', { 'forgid': obj.parent, 'orgid': obj.id, 't': new Date().getTime() }, function(json) {
+							jQuery.post('{MOD_URL}&op=ajax&do=create', { 'forgid': obj.parent, 'orgid': obj.id, 't': new Date().getTime() }, function(json) {
 
 								if(!json || json.error) {
 									showmessage(json.error, 'danger', 3000, 1);
@@ -140,7 +140,7 @@
 							var inst = jQuery.jstree.reference(data.reference),
 								obj = inst.get_node(data.reference);
 							inst.open_node(obj,function(){
-								jQuery.post('{ADMINSCRIPT}?mod=orguser&op=ajax&do=create', { 'forgid': obj.id, 't': new Date().getTime() }, function(json) {
+								jQuery.post('{MOD_URL}&op=ajax&do=create', { 'forgid': obj.id, 't': new Date().getTime() }, function(json) {
 									if(!json || json.error) {
 										showmessage(json.error, 'danger', 3000, 1);
 									} else if(json.orgid > 0) {
@@ -263,7 +263,7 @@
 								}
 							}
 							Confirm(msg,function(){
-								jQuery.post('{ADMINSCRIPT}?mod=orguser&op=ajax&do=delete&t=' + new Date().getTime(), data, function(json) {
+								jQuery.post('{MOD_URL}&op=ajax&do=delete&t=' + new Date().getTime(), data, function(json) {
 									if(json.error) {
 										showmessage(json.error, 'danger', 3000, 1);
 									} else {
@@ -288,7 +288,7 @@
 			"search": {
 				"show_only_matches": true,
 				"fuzzy": false,
-				"ajax": { 'url': '{ADMINSCRIPT}?mod=orguser&op=ajax&do=search', 'dataType': 'json' }
+				"ajax": { 'url': '{MOD_URL}&op=ajax&do=search', 'dataType': 'json' }
 			},
 			"plugins": ["unique", "contextmenu", "dnd", "types", "search",'wholerow']
 			// List of active plugins
@@ -359,7 +359,7 @@
 				needsave = 1;
 			}
 			if(needsave) {
-				jQuery.post('{ADMINSCRIPT}?mod=orguser&op=ajax&do=move&t=' + new Date().getTime(), post, function(json) {
+				jQuery.post('{MOD_URL}&op=ajax&do=move&t=' + new Date().getTime(), post, function(json) {
 					if(json.error) {
 						showmessage(json.error, 'danger', 3000, 1, null, function() {
 							window.location.reload();
@@ -386,7 +386,7 @@
 				return;
 			}
 			if(needsave) {
-				jQuery.post('{ADMINSCRIPT}?mod=orguser&op=ajax&do=move&t=' + new Date().getTime(), post, function(json) {
+				jQuery.post('{MOD_URL}&op=ajax&do=move&t=' + new Date().getTime(), post, function(json) {
 
 				}, 'json');
 			}
@@ -402,7 +402,7 @@
 				inst.set_text(obj, data.old);
 				return;
 			}
-			jQuery.post('{ADMINSCRIPT}?mod=orguser&op=ajax&do=rename&t=' + new Date().getTime(), { 'orgid': data.node.id, text: data.text }, function(json) {
+			jQuery.post('{MOD_URL}&op=ajax&do=rename&t=' + new Date().getTime(), { 'orgid': data.node.id, text: data.text }, function(json) {
 				if(!json || json.error) {
 					obj.text = data.old;
 					inst.set_text(obj, data.old);

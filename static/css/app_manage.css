@@ -465,6 +465,9 @@ button.input-search-drop {
 	margin-left: 22px;
 	margin-right: 17px;
 }
+.main-allnotice .panel-heading img{
+    max-width: 30px;
+}
 .main-allnotice .panel-heading h3{
 	margin-top: 0.71rem;
 	font-size: 18px;
@@ -481,8 +484,8 @@ button.input-search-drop {
 	font-size: 16px;
 	
 }
-.main-allnotice .panel-body{
-	padding: 0px 17px 15px 22px;
+.panel-body .details{
+	padding-left: 10px;
 }
 .main-allnotice .panel-body .note{
 	padding-right:40px;
@@ -560,8 +563,13 @@ button.input-search-drop {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: normal;
-  width: calc(100% - 10px);
-  float: left;
+}
+.note.u-title,.dateline.u-title {
+  margin:0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: normal;
+	font-weight:bold;
 }
 .u-bottom b{
 	border-bottom: 2px solid #d8e5f9;

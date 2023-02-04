@@ -88,7 +88,6 @@ $lang=array (
   'user_password_not_correct' => '用户密码不正确，请重试',
   'space_usage' => '空间使用',
   'category_department' => '所属部门',
-  'registration_time' => '注册时间',
   'usergroup' => '用户组',
   'not_join_agency_department' => '未加入机构或部门',
   'unallocated_space' => '未分配空间',
@@ -187,6 +186,8 @@ $lang=array (
         <p>邮件可能会进入推广邮件或垃圾邮件中，请注意查收。</p>',
    'sending_wait'=>'发送中，请稍后...',
 	'myCountCenter'=>'个人中心',
-	'register_welcome_tip'=>'欢迎注册'
+	'register_welcome_tip'=>'欢迎注册',
+	'register'=>'{title}',
+	'register_title'=>$_G['setting']['welcomemsgtitle'],
 
 );

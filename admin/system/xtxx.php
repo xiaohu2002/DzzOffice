@@ -155,5 +155,8 @@ $extensions = '';
 foreach ($loaded_extensions as $key => $value) {
     $extensions .= $value . ', ';
 }
+$zaixianrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('session') . " WHERE uid");
+$yonghurenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE uid");
+$tingyongrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE status");
 include template('xtxx');
 ?>

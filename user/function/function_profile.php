@@ -364,7 +364,6 @@ function showdistrict($values, $elems=array(), $container='districtbox', $showle
 	}
 	return $html;
 }
-
 function countprofileprogress($uid = 0) {
 	global $_G;
 

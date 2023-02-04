@@ -6,7 +6,7 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
+if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 require_once libfile('function/user', '', 'user');
@@ -160,7 +160,7 @@ EOT;
 			}
 		}
 
-		showmessage('add_user_success', ADMINSCRIPT . '?mod=orguser#user_' . $uid, array('uid' => $uid, 'orgids' => $orgids));
+		showmessage('add_user_success', MOD_URL.'#user_' . $uid, array('uid' => $uid, 'orgids' => $orgids));
 
 	} else {
 		$orgid = intval($_GET['orgid']);
@@ -210,7 +210,7 @@ EOT;
 			//处理上司职位;
 			C::t('organization_upjob') -> insert_by_uid($uid, intval($_GET['upjobid']));
 
-			showmessage('edit_user_success', ADMINSCRIPT . '?mod=orguser#user_' . $uid, array());
+			showmessage('edit_user_success', MOD_URL.'#user_' . $uid, array());
 		}
 	
 
@@ -312,7 +312,7 @@ EOT;
 
 		C::t('organization_upjob') -> insert_by_uid($uid, intval($_GET['upjobid']));
 		Hook::listen('syntoline_user',$uid);//注册绑定到钉钉部门表
-		showmessage('edit_user_success', ADMINSCRIPT . '?mod=orguser#user_' . $uid, array());
+		showmessage('edit_user_success', MOD_URL.'#user_' . $uid, array());
 	} else {
 		require_once  libfile('function/organization');
 
@@ -413,7 +413,7 @@ EOT;
 			$setarr['uid'] = $uid;
 			C::t('user_profile') -> insert($setarr);
 		}
-		showmessage('subscriber_data_alter_success', ADMINSCRIPT . '?mod=orguser#user_' . $uid . '_profile', array());
+		showmessage('subscriber_data_alter_success', MOD_URL.'#user_' . $uid . '_profile', array());
 	} else {
 		$allowitems = array();
 		foreach ($_G['cache']['profilesetting'] as $key => $value) {
