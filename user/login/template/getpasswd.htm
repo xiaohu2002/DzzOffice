@@ -1,12 +1,24 @@
 <!--{template common/header_simple_start}-->
-
+<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
+<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
+<style type="text/css">
+	.bs-main-container{
+		border: none;
+    background: none;
+		box-shadow: none;
+	}
+</style>
 <!--{template common/header_simple_end}-->
 <!--{template common/beijing}-->
-<div id="modal_login" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:block">
+<!--{template common/commer_header}-->
+<div class="bs-container clearfix">
+  <div class="bs-main-container clearfix">
+    <div class="main-content container">
+<div id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:block">
 	<div class="modal-dialog">
 		<div class="modal-content">
 
-			<form class="form-horizontal" role="form" method="post" action="user.php?mod=login&op=logging&action=getpasswd&uid=$uid&id=$hashid" onsubmit="return validate(this);">
+			<form role="form" method="post" action="user.php?mod=login&op=logging&action=getpasswd&uid=$uid&id=$hashid" onsubmit="return validate(this);">
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 
 				<div class="modal-header">
@@ -52,8 +64,13 @@
 		</div>
 	</div>
 </div>
+			</div>
+  </div>
+</div>
 <script type="text/javascript" src="user/scripts/register.js?{VERHASH}"></script>
+<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <script type="text/javascript">
+	jQuery('.left-drager').leftDrager_layout();
 	function validate(form) {
 		if(document.getElementById('newpasswd1').value == '') {
 			document.getElementById('newpasswd1').focus();

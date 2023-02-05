@@ -12,7 +12,7 @@ if(!defined('IN_DZZ')) {
 }
 
 define('NOROBOT', TRUE);
-
+$navtitle=lang('getpassword');
 if($_GET['uid'] && $_GET['id']) {
 
     $dzz_action = 141;
@@ -27,7 +27,11 @@ if($_GET['uid'] && $_GET['id']) {
     if(!submitcheck('getpwsubmit') || $_GET['newpasswd1'] != $_GET['newpasswd2']) {
         $hashid = $_GET['id'];
         $uid = $_GET['uid'];
-        include template('getpasswd');
+			if ($_G['setting'][loginset][template] == 2){
+			include template('getpasswd2');
+		}else{
+      include template('getpasswd');
+		}
     } else {
         if($_GET['newpasswd1'] != addslashes($_GET['newpasswd1'])) {
             showmessage(lang('profile_passwd_illegal'));

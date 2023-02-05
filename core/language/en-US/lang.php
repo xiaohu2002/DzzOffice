@@ -1092,9 +1092,6 @@ Important!
 
 	'search' => 'search',
 	'page' => 'The first page {page}',
-
-	'login_title' => 'Log in to Admin  - '.$_G['setting']['sitename'].'',
-	'dibucopyright'=> $_G['setting']['sitename'],
   'login_password' => 'password',
   'script_name'=>'DzzOffice ',
   'Script_name_tips '=>' is a Web-based cloud desktop system developed by Shanghai Leyun Network Technology. It can operate and manage numerous network applications through this platform. ',

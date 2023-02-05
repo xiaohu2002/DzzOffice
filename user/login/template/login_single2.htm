@@ -1,86 +1,110 @@
-<!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-<link href="static/css/checkbox.css?{VERHASH}" rel="stylesheet">
-<link href="{MOD_PATH}/images/login_single2.css?{VERHASH}" rel="stylesheet" />
+<!--{template common/header_simple}-->
+<link href="static/css/dlzc.css?{VERHASH}" rel="stylesheet" />
 <!--[if lt IE 9]>
   <script src="static/js/jquery.placeholder.js" type="text/javascript"></script>
 <![endif]-->
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
-<!--{template common/header_simple_end}-->
 <!--{eval $loginhash = 'L'.random(4);}-->
-<!--{template common/beijing}-->
-<div class="page animsition" id="main_message">
-  <div class="page-login-main"<!--{if $ismobile}--> style="width: 100%;"<!--{/if}-->>
-    <div class="brand">
-      <!--{if $_G['setting']['sitelogo']}-->
-      <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}">
-    <!--{else}-->
-      <img src="static/image/common/logo.png">
-    <!--{/if}-->
-		</div>
-    <!--{if $_G[setting][loginset][title]}-->
-    <div class="main-title">$_G[setting][loginset][title]</div>
-    <!--{/if}--> 
-    <!--{if $_G[setting][loginset][subtitle]}-->
-    <div class="sub-title">$_G[setting][loginset][subtitle]</div>
-    <!--{/if}-->
-    <!--{if $_G[setting][bbclosed]}-->
-    <div class="text-danger">{lang site_closed_please_admin}</div>
-    <!--{/if}-->
-    <form method="post"  name="login" id="loginform_$loginhash" class="loginForm" role="form" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}pwdclear = 1; loginsub('loginform_$loginhash', 'returnmessage_$loginhash');return false;"  action="user.php?mod=login&op=logging&action=login&loginsubmit=yes{if !empty($_GET['handlekey'])}&handlekey=$_GET[handlekey]{/if}{if isset($_GET['frommessage'])}&frommessage{/if}&loginhash=$loginhash">
-      <input type="hidden" name="formhash" value="{FORMHASH}" />
-      <input type="hidden" name="referer" value="{$referer}" />
-      <!--{if $auth}-->
-      <input type="hidden" name="auth" value="$auth" />
-      <!--{else}-->
-      <div class="form-group">
-        <input type="text" class="form-control" id="email_$loginhash" placeholder="{lang email_username}" name="email" autocomplete="off">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" id="password3_$loginhash" placeholder="{lang user_login_password}" name="password" onfocus="this.type='password'" autocomplete="off">
-      </div>
-      <!--{/if}--> 
-      <!--{if $seccodecheck}-->
-      <div class="form-group seccode-wrapper clearfix"> 
-        <!--{template common/seccheck}--> 
-      </div>
-      <!--{/if}-->
-      <div class="form-group  clearfix">
-        <div class="checkbox-custom checkbox-primary pull-left">
-          <input type="checkbox" name="cookietime" id="cookietime_$loginhash" value="2592000" $cookietimecheck />
-          <label for="cookietime_$loginhash">{lang automatic_login_within_thirtydays}</label>
-        </div>
-        <!--{if !$_G['setting']['bbclosed']}-->
-        <!--{if $_G['setting']['regstatus']>0}--> 
-        <a class="pull-right" href="user.php?mod=register&referer={eval echo urlencode($referer);}" <!--{if !empty($_GET['inajax'])}-->onclick="_login.register($referer);return false;"<!--{/if}--> title="$_G['setting']['reglinkname']">$_G['setting']['reglinkname']</a>
-		<span class="spacer  pull-right">|</span> 
-        <!--{/if}--> 
-        <a class="pull-right"  href="user.php?mod=login&op=logging&action=lostpasswd">{lang getpassword}</a>
-		<!--{/if}-->
-      </div>
-	  <div style="padding-top:15px;text-align: left;">
-          <span class="third-login-header">{lang other_login}：</span>
-          <a class="pull-right"  href="admin.php">管理员登录</a>
-          <!--{if $_G['setting']['qq_login']>0}-->
-          <a class="qqlogin" style="margin:0 5px" href="user.php?mod=qqlogin" title="{lang qq_login}">
-              <img src="user/images/qq.png" height="24" />
-          </a>
+<div class="relative min-h-screen flex">
+  <div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
+      <div class="sm:w-1/2 xl:w-3/5 h-full hidden md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative"<!--{if $_G['setting']['loginset']['img']}--> style="background-image: url($_G['setting']['loginset']['img'])"<!--{/if}-->>
+          <div class="absolute bg-gradient-to-b opacity-75 inset-0 z-0" style="<!--{if !$_G['setting']['loginset']['img']}-->--tw-gradient-from: #4f46e5;--tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to, rgba(79, 70, 229, 0));<!--{/if}-->--tw-gradient-to:<!--{if $_G['setting']['loginset']['bcolor']}-->$_G['setting']['loginset']['bcolor']<!--{else}-->#3b82f6<!--{/if}-->"></div>
+          <div class="w-full max-w-md z-10">
+              <!--{if $_G[setting][loginset][subtitle]}--><div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">$_G[setting][loginset][subtitle]</div><!--{/if}-->
+              <!--{if $_G[setting][metadescription]}--><div class="sm:text-sm xl:text-md text-gray-200 font-normal">$_G[setting][metadescription]</div><!--{/if}-->
+          </div>
+          <!--{if !$_G['setting']['loginset']['img']}-->
+          <ul class="circles">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+          </ul>
           <!--{/if}-->
       </div>
-      <div cla ss="third-wrapper clearfix">
-          <!--{hook third_login}--> 
+      <div class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full w-2/5 xl:w-2/5 p-8 md:p-10 lg:p-14 sm:rounded-lg md:rounded-none  bg-white">
+          <div class="max-w-md w-full mx-auto space-y-8">
+            <div class="flex flex-row justify-center items-center space-x-3">
+              <!--{if $_G['setting']['sitelogo']}-->
+              <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}">
+              <!--{else}-->
+              <img src="static/image/common/logo.png">
+              <!--{/if}-->
+              </div>
+						<div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6 text-center">
+                <!--{if $_G[setting][loginset][title]}-->$_G[setting][loginset][title]<!--{/if}-->
+            </div>
+            <div class="flex items-center justify-center space-x-2">
+                <span class="h-px w-16 bg-gray-200"></span>
+                <span class="text-gray-300 font-normal">使用其他登录</span>
+                <span class="h-px w-16 bg-gray-200"></span>
+            </div>
+              <div class="flex flex-row justify-center items-center space-x-3">
+              <!--{if $_G['setting']['qq_login']>0}-->
+                <a href="user.php?mod=qqlogin" title="{lang qq_login}" class="w-11 h-11 items-center justify-center inline-flex rounded-2xl font-bold text-lg text-white hover:shadow-lg cursor-pointer transition ease-in duration-300">
+                  <svg t="1675572695474" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1662"><path d="M931.396342 597.895516c-18.412522-49.611518-90.528235-161.621029-91.551153-217.881514h-0.511459c0-3.068754 0.511459-6.137507 0.511459-9.206261 0-204.583581-146.78872-370.807741-327.845189-370.807741-181.056469 0.511459-327.845189 166.22416-327.845189 371.3192 0 3.068754 0.511459 6.137507 0.511459 9.206261h-0.511459c-1.022918 56.260485-72.627171 168.269996-91.551153 217.881514-18.923981 49.611518-23.527112 99.223037-14.832309 139.116835 8.694802 39.382339 15.855228 63.932369 24.038571 71.604254s15.855228 16.366687 40.405257-1.534377c19.946899-16.366687 41.428175-49.611518 41.428175-49.611518s17.901063 51.657354 57.794862 91.551152c-31.198996 14.83231-76.718843 47.565683-79.787597 69.558418-3.068754 21.481276 47.565683 102.80325 166.735619 104.849085 119.169936 1.534377 158.552275-49.611518 162.643947-53.70319 11.252097-11.763556 20.458358-18.923981 20.458358-18.923981s9.71772 7.160425 20.458358 18.923981c4.091672 4.091672 43.474011 55.749026 162.643947 53.70319 119.169936-2.045836 169.804372-83.367809 166.735619-104.849085-3.068754-21.481276-48.588601-54.726108-79.787597-69.558418 39.893798-39.382339 57.794862-91.551153 57.794862-91.551152s21.481276 33.244832 41.428175 49.611518c24.55003 17.389604 32.221914 9.206261 40.405258 1.534377 8.183343-7.671884 15.343769-32.221914 24.03857-71.604254 9.71772-39.893798 4.603131-90.016776-13.809391-139.628294z" fill="#369BCE" p-id="1663"></path></svg>
+                </a>
+                <!--{/if}-->
+                <a href="admin.php" class="w-11 h-11 items-center justify-center inline-flex rounded-2xl font-bold text-lg text-white hover:shadow-lg cursor-pointer transition ease-in duration-300">
+                  <svg t="1675573086091" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4356"><path d="M513.183454 532.442588c-62.243623 0-120.763434-24.225751-164.778904-68.215638-44.020586-43.992957-68.26271-102.486162-68.26271-164.703179 0-62.215994 24.242124-120.708176 68.26271-164.702156 44.01547-43.989887 102.535281-68.216661 164.778904-68.216661 62.243623 0 120.764458 24.226774 164.778904 68.216661 44.018539 43.992957 68.260663 102.485139 68.260663 164.702156 0 62.217017-24.242124 120.710222-68.260663 164.703179C633.947911 508.215814 575.4281 532.442588 513.183454 532.442588zM513.183454 117.828592c-100.254332 0-181.817975 81.507362-181.817975 181.694155 0 100.186793 81.563644 181.695179 181.817975 181.695179 100.254332 0 181.816952-81.508385 181.816952-181.695179C695.000406 199.336978 613.437785 117.828592 513.183454 117.828592z" p-id="4357"></path><path d="M879.044072 956.940698 146.070308 956.940698l-1.243317-24.303522c-0.317225-6.202259-0.477884-12.514012-0.477884-18.762319 0-49.262984 9.751085-97.06264 28.983101-142.071739 18.562774-43.444465 45.127803-82.45085 78.95626-115.937522 33.81106-33.468253 73.183789-59.745732 117.02632-78.100776 45.3867-19.002796 93.581352-28.637224 143.245472-28.637224 49.665143 0 97.861842 9.634428 143.247518 28.637224 43.842531 18.356067 83.21526 44.632523 117.02632 78.100776 33.828456 33.486672 60.393485 72.493058 78.955236 115.937522 19.230993 45.0091 28.982078 92.808756 28.982078 142.071739 0 6.246261-0.161682 12.56006-0.480954 18.768459L879.044072 956.940698zM195.678146 905.71706l633.765251 0c-4.380774-169.130002-144.846946-305.366849-316.883137-305.366849C340.525092 600.350211 200.05892 736.587058 195.678146 905.71706z" p-id="4358"></path></svg>
+                </a>
+              </div>
+              <form class="mt-8 space-y-6" action="user.php?mod=login&op=logging&action=login&loginsubmit=yes{if !empty($_GET['handlekey'])}&handlekey=$_GET[handlekey]{/if}{if isset($_GET['frommessage'])}&frommessage{/if}&loginhash=$loginhash" method="POST" name="login" id="loginform_$loginhash" role="form" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}pwdclear = 1; loginsub('loginform_$loginhash', 'returnmessage_$loginhash');return false;">
+                <input type="hidden" name="formhash" value="{FORMHASH}" />
+                <input type="hidden" name="referer" value="{$referer}" />
+                <!--{if $auth}-->
+                <div class="relative">
+                    <input class="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500" type="hidden" name="auth" value="$auth"/>
+                </div>
+                <!--{else}-->
+                <div class="relative">
+                  <input class="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500" type="text" id="email_$loginhash" name="email" autocomplete="off" placeholder="{lang email_username}"/>
+                </div>
+                <div class="mt-8 content-center">
+                  <input class=" w-full content-center text-base px-4 py-2 border-b rounded-2xl border-gray-300 focus:outline-none focus:border-indigo-500" type="text" id="password3_$loginhash" name="password" onfocus="this.type='password'" autocomplete="off" placeholder="{lang user_login_password}"/>
+                </div>
+                <!--{/if}-->
+                <!--{if $seccodecheck}-->
+                <div class="form-group seccode-wrapper clearfix"> 
+                  <!--{template common/seccheck}--> 
+                </div>
+                <!--{/if}-->
+                <div class="flex items-center justify-between">
+                      <div class="flex items-center">
+                          <input id="cookietime_$loginhash" name="cookietime" type="checkbox" value="2592000" $cookietimecheck class="h-4 w-4 bg-blue-500 focus:ring-blue-400 border-gray-300 rounded"/>
+                          <label for="cookietime_$loginhash" class="ml-2 block text-sm text-gray-900">记住我</label>
+                      </div>
+                      <div class="text-sm">
+                          <a href="user.php?mod=login&op=logging&action=lostpasswd" class="text-indigo-400 hover:text-blue-500">忘记密码？</a>
+                      </div>
+                  </div>
+                <div>
+                  <button type="submit" class="w-full flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600 hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500" name="loginsubmit" value="true">登 录</button>
+                </div>
+								<div class="third-wrapper clearfix">
+                    <!--{hook third_login}--> 
+                </div>
+                <p class="error-msg text-center" id="returnmessage_$loginhash"><!--{if $_G[setting][bbclosed]}-->{lang site_closed_please_admin}<!--{/if}--></p>
+                <!--{if !$_G['setting']['bbclosed']}-->
+                <!--{if $_G['setting']['regstatus']>0}--> 
+                <p class="items-center justify-center mt-10 text-center text-md text-gray-500">
+                      <span>还没有账号？</span>
+                      <a href="user.php?mod=register&referer={eval echo urlencode($referer);}" class="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300" <!--{if !empty($_GET['inajax'])}-->onclick="_login.register($referer);return false;"<!--{/if}--> title="$_G['setting']['reglinkname']">$_G['setting']['reglinkname']</a>
+                  </p>
+                <!--{/if}--> 
+                <!--{/if}-->
+              </form>
+              <div class="w-full max-w-md z-10">
+                <div class="sm:text-sm xl:text-md text-gray-200 font-normal text-center"><!--{template common/copyright}--></div>
+              </div>
+          </div>
       </div>
-      <p class="error-msg text-danger" id="returnmessage_$loginhash"></p>
-	  <!--{if !$_G['setting']['bbclosed']}-->
-      <!--{if $_G['setting'][loginset][youkedenlu]}--> 
-      <a href="$_G['siteurl']" class="btn btn-lg btn-primary btn-block">游客访问</a>
-	  <!--{/if}-->
-      <!--{/if}--> 
-      <button class="btn btn-lg btn-primary btn-block" type="submit" name="loginsubmit" value="true">{lang login_empty}</button>
-    </form>
-    <div class="copyright-container">
-      <!--{template common/copyright}-->
-    </div>
   </div>
 </div>
 <div class="nfl" id="main_succeed" style="display: none;text-align: center;">
@@ -125,5 +149,4 @@ jQuery(document).ready(function(e) {
 
 </script> 
 <script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script> 
 <!--{template common/footer}-->

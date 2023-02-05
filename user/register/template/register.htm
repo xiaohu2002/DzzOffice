@@ -4,50 +4,6 @@
 <link href="{MOD_PATH}/images/register.css?{VERHASH}" rel="stylesheet" media="all">
 <script src="user/scripts/register.js?{VARHASH}"></script>
 <style>
-<!--{if $setting[loginset][template] == 2}-->
-.modal_in {
-    height: 100%;
-    padding: 0;
-    margin: 0!important;
-    background-color: transparent;
-    z-index: 10;
-    overflow: auto;
-}
-.modal_in .modal-dialog {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: auto;
-  min-height: 100%;
-  padding: 20px;
-  color: #76838f;
-  text-align: center;
-  overflow: auto;
-	<!--{if $ismobile}-->
-	width: 100%;
-	<!--{else}-->
-  width: 350px;
-	<!--{/if}-->
-  margin: 0;
-}
-.modal_in .modal-content {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height:100%;
-  padding: 20px;
-  color: #76838f;
-  background: #fff;
-  text-align: center;
-  overflow: auto;
-  border-radius: 0;
-  border:none;
-	margin: 0
-}
-  .modal_in .modal-body{
-    padding:0;
-  }
-<!--{else}-->
 .modal_in {
     position: fixed;
     top: 0;
@@ -83,7 +39,6 @@
     -o-transform: translate(0,0);
     transform: translate(0,0);
 }
-<!--{/if}-->
 .form-group {
 display: block;
 margin-bottom:0;

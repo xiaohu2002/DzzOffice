@@ -64,7 +64,11 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
 		$navtitle = $setting['reglinkname'];
 
 		$dreferer = dreferer();
-		include template('register');
+    if ($setting[loginset][template] == 2){
+			include template('register2');
+		}else{
+      include template('register');
+		}
 		exit();
     //QQ登陆相关
     @session_start();
