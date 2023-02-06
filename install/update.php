@@ -329,8 +329,8 @@ if($_GET['step'] == 'start') {
 			DB::delete('app_market', array('appurl' => '{adminscript}?mod=filemanage'));
 		}
 		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=orguser'))){
-		C::t('app_market')->insert(array('appname'=>'文件管理',
-		 								  'appico'=>'appico/201712/21/175535t47bad99b7sssdwq.png',
+		C::t('app_market')->insert(array('appname'=>'机构用户',
+		 								  'appico'=>'appico/201712/21/131016is1wjww2uwvljllw.png',
 		 								  'appurl'=>'{dzzscript}?mod=orguser',
 										  'appdesc'=>'',
 										  'dateline'=>TIMESTAMP,
@@ -353,7 +353,7 @@ if($_GET['step'] == 'start') {
 										  'version'=>'2.0',
 											'check_upgrade_time'=>'20220204'),0,1);
 		}else{
-			DB::delete('app_market', array('appurl' => '{adminscript}?mod=filemanage'));
+			DB::delete('app_market', array('appurl' => '{adminscript}?mod=orguser'));
 		}
 		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=share'))){
 		C::t('app_market')->insert(array('appname'=>'分享管理',
