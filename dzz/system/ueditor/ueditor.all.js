@@ -46,12 +46,71 @@ var browser = UE.browser = function(){
     var agent = navigator.userAgent.toLowerCase(),
         opera = window.opera,
         browser = {
+        /**
+         * @property {boolean} ie 检测当前浏览器是否为IE
+         * @example
+         * ```javascript
+         * if ( UE.browser.ie ) {
+         *     console.log( '当前浏览器是IE' );
+         * }
+         * ```
+         */
         ie		:  /(msie\s|trident.*rv:)([\w.]+)/.test(agent),
+
+        /**
+         * @property {boolean} opera 检测当前浏览器是否为Opera
+         * @example
+         * ```javascript
+         * if ( UE.browser.opera ) {
+         *     console.log( '当前浏览器是Opera' );
+         * }
+         * ```
+         */
         opera	: ( !!opera && opera.version ),
+
+        /**
+         * @property {boolean} webkit 检测当前浏览器是否是webkit内核的浏览器
+         * @example
+         * ```javascript
+         * if ( UE.browser.webkit ) {
+         *     console.log( '当前浏览器是webkit内核浏览器' );
+         * }
+         * ```
+         */
         webkit	: ( agent.indexOf( ' applewebkit/' ) > -1 ),
+
+        /**
+         * @property {boolean} mac 检测当前浏览器是否是运行在mac平台下
+         * @example
+         * ```javascript
+         * if ( UE.browser.mac ) {
+         *     console.log( '当前浏览器运行在mac平台下' );
+         * }
+         * ```
+         */
         mac	: ( agent.indexOf( 'macintosh' ) > -1 ),
+
+        /**
+         * @property {boolean} quirks 检测当前浏览器是否处于“怪异模式”下
+         * @example
+         * ```javascript
+         * if ( UE.browser.quirks ) {
+         *     console.log( '当前浏览器运行处于“怪异模式”' );
+         * }
+         * ```
+         */
         quirks : ( document.compatMode == 'BackCompat' )
     };
+
+    /**
+    * @property {boolean} gecko 检测当前浏览器内核是否是gecko内核
+    * @example
+    * ```javascript
+    * if ( UE.browser.gecko ) {
+    *     console.log( '当前浏览器内核是gecko内核' );
+    * }
+    * ```
+    */
     browser.gecko =( navigator.product == 'Gecko' && !browser.webkit && !browser.opera && !browser.ie);
 
     var version = 0;
@@ -72,11 +131,65 @@ var browser = UE.browser = function(){
         }
 
         browser.ie11Compat = document.documentMode == 11;
+        /**
+         * @property { boolean } ie9Compat 检测浏览器模式是否为 IE9 兼容模式
+         * @warning 如果浏览器不是IE， 则该值为undefined
+         * @example
+         * ```javascript
+         * if ( UE.browser.ie9Compat ) {
+         *     console.log( '当前浏览器运行在IE9兼容模式下' );
+         * }
+         * ```
+         */
         browser.ie9Compat = document.documentMode == 9;
+
+        /**
+         * @property { boolean } ie8 检测浏览器是否是IE8浏览器
+         * @warning 如果浏览器不是IE， 则该值为undefined
+         * @example
+         * ```javascript
+         * if ( UE.browser.ie8 ) {
+         *     console.log( '当前浏览器是IE8浏览器' );
+         * }
+         * ```
+         */
         browser.ie8 = !!document.documentMode;
+
+        /**
+         * @property { boolean } ie8Compat 检测浏览器模式是否为 IE8 兼容模式
+         * @warning 如果浏览器不是IE， 则该值为undefined
+         * @example
+         * ```javascript
+         * if ( UE.browser.ie8Compat ) {
+         *     console.log( '当前浏览器运行在IE8兼容模式下' );
+         * }
+         * ```
+         */
         browser.ie8Compat = document.documentMode == 8;
+
+        /**
+         * @property { boolean } ie7Compat 检测浏览器模式是否为 IE7 兼容模式
+         * @warning 如果浏览器不是IE， 则该值为undefined
+         * @example
+         * ```javascript
+         * if ( UE.browser.ie7Compat ) {
+         *     console.log( '当前浏览器运行在IE7兼容模式下' );
+         * }
+         * ```
+         */
         browser.ie7Compat = ( ( version == 7 && !document.documentMode )
                 || document.documentMode == 7 );
+
+        /**
+         * @property { boolean } ie6Compat 检测浏览器模式是否为 IE6 模式 或者怪异模式
+         * @warning 如果浏览器不是IE， 则该值为undefined
+         * @example
+         * ```javascript
+         * if ( UE.browser.ie6Compat ) {
+         *     console.log( '当前浏览器运行在IE6模式或者怪异模式下' );
+         * }
+         * ```
+         */
         browser.ie6Compat = ( version < 7 || browser.quirks );
 
         browser.ie9above = version > 8;
@@ -98,9 +211,31 @@ var browser = UE.browser = function(){
             version = geckoRelease[0] * 10000 + ( geckoRelease[1] || 0 ) * 100 + ( geckoRelease[2] || 0 ) * 1;
         }
     }
+
+    /**
+     * @property { Number } chrome 检测当前浏览器是否为Chrome, 如果是，则返回Chrome的大版本号
+     * @warning 如果浏览器不是chrome， 则该值为undefined
+     * @example
+     * ```javascript
+     * if ( UE.browser.chrome ) {
+     *     console.log( '当前浏览器是Chrome' );
+     * }
+     * ```
+     */
     if (/chrome\/(\d+\.\d)/i.test(agent)) {
         browser.chrome = + RegExp['\x241'];
     }
+
+    /**
+     * @property { Number } safari 检测当前浏览器是否为Safari, 如果是，则返回Safari的大版本号
+     * @warning 如果浏览器不是safari， 则该值为undefined
+     * @example
+     * ```javascript
+     * if ( UE.browser.safari ) {
+     *     console.log( '当前浏览器是Safari' );
+     * }
+     * ```
+     */
     if(/(\d+\.\d)?(?:\.\d)?\s+safari\/?(\d+\.\d+)?/i.test(agent) && !/chrome/i.test(agent)){
     	browser.safari = + (RegExp['\x241'] || RegExp['\x242']);
     }
@@ -113,7 +248,31 @@ var browser = UE.browser = function(){
     // WebKit 522+ (Safari 3+)
     if ( browser.webkit )
         version = parseFloat( agent.match( / applewebkit\/(\d+)/ )[1] );
+
+    /**
+     * @property { Number } version 检测当前浏览器版本号
+     * @remind
+     * <ul>
+     *     <li>IE系列返回值为5,6,7,8,9,10等</li>
+     *     <li>gecko系列会返回10900，158900等</li>
+     *     <li>webkit系列会返回其build号 (如 522等)</li>
+     * </ul>
+     * @example
+     * ```javascript
+     * console.log( '当前浏览器版本号是： ' + UE.browser.version );
+     * ```
+     */
     browser.version = version;
+
+    /**
+     * @property { boolean } isCompatible 检测当前浏览器是否能够与UEditor良好兼容
+     * @example
+     * ```javascript
+     * if ( UE.browser.isCompatible ) {
+     *     console.log( '浏览器与UEditor能够良好兼容' );
+     * }
+     * ```
+     */
     browser.isCompatible =
         !browser.mobile && (
         ( browser.ie && version >= 6 ) ||
@@ -11835,6 +11994,7 @@ UE.plugins['link'] = function(){
 ///import core
 ///import plugins\inserthtml.js
 ///commands 插入框架
+///commandsName  InsertFrame
 ///commandsTitle  插入Iframe
 ///commandsDialog  dialogs\insertframe
 
@@ -11850,6 +12010,9 @@ UE.plugins['insertframe'] = function() {
     });
 
 };
+
+
+
 // plugins/scrawl.js
 ///import core
 ///commands 涂鸦
@@ -12981,7 +13144,7 @@ UE.plugins['lineheight'] = function(){
 UE.plugins['insertcode'] = function() {
     var me = this;
     me.ready(function(){
-        utils.cssRule('pre','pre{margin:.5em 0;padding:.4em .6em;overflow: auto;border-radius:8px;background:#f8f8f8;}',
+        utils.cssRule('pre','pre{margin:.5em 0;padding:.4em .6em;border-radius:8px;background:#f8f8f8;}',
             me.document)
     });
     me.setOpt('insertcode',{
@@ -13727,6 +13890,7 @@ UE.plugin.register('dzzfile',function(){
         }
     }
 });
+
 // plugins/anchor.js
 /**
  * 锚点插件，为UEditor提供插入锚点支持
@@ -17534,7 +17698,7 @@ UE.plugins['autofloat'] = function() {
             }
             if(toolbarBox.style.position != 'fixed'){
                 toolbarBox.style.position = 'fixed';
-                toolbarBox.style.top = "69px";
+                toolbarBox.style.top = topOffset +"px";
                 ((origalFloat == 'absolute' || origalFloat == 'relative') && parseFloat(origalLeft)) && (toolbarBox.style.left = toobarBoxPos.x + 'px');
             }
         }
@@ -17638,14 +17802,16 @@ UE.plugins['video'] = function (){
                 str = '<img ' + (id ? 'id="' + id+'"' : '') + ' width="'+ width +'" height="' + height + '" _url="'+url+'" class="' + classname.replace(/\bvideo-js\b/, '') + '"'  +
                     ' src="' + me.options.UEDITOR_HOME_URL+'themes/default/images/spacer.gif" style="background:url('+me.options.UEDITOR_HOME_URL+'themes/default/images/videologo.gif) no-repeat center center; border:1px solid gray;'+(align ? 'float:' + align + ';': '')+'" />'
                 break;
-            case 'iframe':
-                str = '<iframe src="/dzz/bilibili/player.php?url=' +  utils.html(url) + '" width="100%" height="480px"'  + (align ? ' style="float:' + align + '"': '') +' style="border-radius:  var(--radius);border: none;"></iframe>';
+            case 'embed':
+                str = '<embed type="application/x-shockwave-flash" class="' + classname + '" pluginspage="http://www.macromedia.com/go/getflashplayer"' +
+                    ' src="' +  utils.html(url) + '" width="' + width  + '" height="' + height  + '"'  + (align ? ' style="float:' + align + '"': '') +
+                    ' wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" >';
                 break;
             case 'video':
                 var ext = url.substr(url.lastIndexOf('.') + 1);
                 if(ext == 'ogv') ext = 'ogg';
                 str = '<video' + (id ? ' id="' + id + '"' : '') + ' class="' + classname + ' video-js" ' + (align ? ' style="float:' + align + '"': '') +
-                    ' controls preload="none"  preload="meta" width="' + width + '" height="' + height + '" src="' + url + '" data-setup="{}">' +
+                    ' controls preload="none" width="' + width + '" height="' + height + '" src="' + url + '" data-setup="{}">' +
                     '<source src="' + url + '" type="video/' + ext + '" /></video>';
                 break;
         }
@@ -17653,13 +17819,13 @@ UE.plugins['video'] = function (){
     }
 
     function switchImgAndVideo(root,img2video){
-        utils.each(root.getNodesByTagName(img2video ? 'img' : 'video'),function(node){
+        utils.each(root.getNodesByTagName(img2video ? 'img' : 'embed video'),function(node){
             var className = node.getAttr('class');
-            if(className && className.indexOf('edui-faked') != -1){
-                var html = creatInsertStr( img2video ? node.getAttr('_url') : node.getAttr('src'),node.getAttr('width'),node.getAttr('height'),null,node.getStyle('float') || '',className,img2video ? 'iframe':'image');
+            if(className && className.indexOf('edui-faked-video') != -1){
+                var html = creatInsertStr( img2video ? node.getAttr('_url') : node.getAttr('src'),node.getAttr('width'),node.getAttr('height'),null,node.getStyle('float') || '',className,img2video ? 'embed':'image');
                 node.parentNode.replaceChild(UE.uNode.createElement(html),node);
             }
-            if(className && className.indexOf('edui-upload') != -1){
+            if(className && className.indexOf('edui-upload-video') != -1){
                 var html = creatInsertStr( img2video ? node.getAttr('_url') : node.getAttr('src'),node.getAttr('width'),node.getAttr('height'),null,node.getStyle('float') || '',className,img2video ? 'video':'image');
                 node.parentNode.replaceChild(UE.uNode.createElement(html),node);
             }
@@ -17745,17 +17911,17 @@ UE.plugins['video'] = function (){
             var html = [],id = 'tmpVedio', cl;
             for(var i=0,vi,len = videoObjs.length;i<len;i++){
                 vi = videoObjs[i];
-                cl = (type == 'upload' ? 'edui-upload-video video-js vjs-default-skin':'edui-faked');
-                html.push(creatInsertStr( vi.url, vi.width || 420,  vi.height || 280, id + i, null, cl, 'iframe'));
+                cl = (type == 'upload' ? 'edui-upload-video video-js vjs-default-skin':'edui-faked-video');
+                html.push(creatInsertStr( vi.url, vi.width || 420,  vi.height || 280, id + i, null, cl, 'image'));
             }
             me.execCommand("inserthtml",html.join(""),true);
             var rng = this.selection.getRange();
-            //for(var i= 0,len=videoObjs.length;i<len;i++){
-//                var img = this.document.getElementById('tmpVedio'+i);
-//                domUtils.removeAttributes(img,'id');
-//                rng.selectNode(img).select();
-//                me.execCommand('imagefloat',videoObjs[i].align)
-//            }
+            for(var i= 0,len=videoObjs.length;i<len;i++){
+                var img = this.document.getElementById('tmpVedio'+i);
+                domUtils.removeAttributes(img,'id');
+                rng.selectNode(img).select();
+                me.execCommand('imagefloat',videoObjs[i].align)
+            }
         },
         queryCommandState : function(){
             var img = me.selection.getRange().getClosedNode(),
@@ -25903,7 +26069,7 @@ UE.ui = baidu.editor.ui = {};
                 popup.getDom('body').appendChild(
                     uiUtils.createElementByHtml('<div id="' +
                         this.popup.id + '_bordereraser" class="edui-bordereraser edui-background" style="width:' +
-                        (uiUtils.getClientRect(this.getDom()).width) + 'px"></div>')
+                        (uiUtils.getClientRect(this.getDom()).width + 20) + 'px"></div>')
                     );
                 popup.getDom().className += ' ' + this.className;
             }, this));
@@ -27748,8 +27914,6 @@ UE.ui = baidu.editor.ui = {};
         'wordimage':'~/dialogs/wordimage/wordimage.html',
         'attachment':'~/dialogs/attachment/attachment.html',
         'insertframe':'~/dialogs/insertframe/insertframe.html',
-        'kityformula':'~/dialogs/kityformula/kityFormulaDialog.html',
-        'kityminder':'~/dialogs/kityminder/kityMinderDialog.html',
         'edittip':'~/dialogs/table/edittip.html',
         'edittable':'~/dialogs/table/edittable.html',
         'edittd':'~/dialogs/table/edittd.html',
@@ -27988,7 +28152,7 @@ UE.ui = baidu.editor.ui = {};
     var dialogBtns = {
         noOk:['searchreplace', 'help', 'spechars', 'webapp','preview'],
         ok:['attachment', 'anchor', 'link', 'insertimage', 'map', 'gmap', 'insertframe', 'wordimage',
-            'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'scrawl', 'template', 'music', 'background', 'charts', 'kityminder', 'kityformula']
+            'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'scrawl', 'template', 'music', 'background', 'charts']
     };
 
     for (var p in dialogBtns) {
@@ -28012,7 +28176,7 @@ UE.ui = baidu.editor.ui = {};
                                 className:'edui-for-' + cmd,
                                 title:title,
                                 holdScroll: cmd === 'insertimage',
-                                fullscreen: /charts|preview|kityminder|kityformula/.test(cmd),
+                                fullscreen: /charts|preview/.test(cmd),
                                 closeDialog:editor.getLang("closeDialog")
                             }, type == 'ok' ? {
                                 buttons:[
@@ -29522,254 +29686,6 @@ UE.ui = baidu.editor.ui = {};
     }
 
 })();
-///import core
-///plugin 编辑器默认的过滤转换机制
-
-UE.plugins['defaultfilter'] = function () {
-    var me = this;
-    me.setOpt({
-        'allowDivTransToP':true,
-        'disabledTableInTable':true,
-        'rgb2Hex':true
-    });
-    //默认的过滤处理
-    //进入编辑器的内容处理
-    me.addInputRule(function (root) {
-        var allowDivTransToP = this.options.allowDivTransToP;
-        var val;
-        function tdParent(node){
-            while(node && node.type == 'element'){
-                if(node.tagName == 'td'){
-                    return true;
-                }
-                node = node.parentNode;
-            }
-            return false;
-        }
-        //进行默认的处理
-        root.traversal(function (node) {
-            if (node.type == 'element') {
-                if (!UE.dom.dtd.$cdata[node.tagName] && me.options.autoClearEmptyNode && UE.dom.dtd.$inline[node.tagName] && !UE.dom.dtd.$empty[node.tagName] && (!node.attrs || UE.utils.isEmptyObject(node.attrs))) {
-                    if (!node.firstChild()) node.parentNode.removeChild(node);
-                    else if (node.tagName == 'span' && (!node.attrs || UE.utils.isEmptyObject(node.attrs))) {
-                        node.parentNode.removeChild(node, true)
-                    }
-                    return;
-                }
-                switch (node.tagName) {
-                    case 'style':
-                    case 'script':
-                        node.setAttr({
-                            cdata_tag: node.tagName,
-                            cdata_data: (node.innerHTML() || ''),
-                            '_ue_custom_node_':'true'
-                        });
-                        node.tagName = 'div';
-                        node.innerHTML('');
-                        break;
-                    case 'a':
-                        if (val = node.getAttr('href')) {
-                            node.setAttr('_href', val)
-                        }
-                        break;
-                    case 'img':
-                        //todo base64暂时去掉，后边做远程图片上传后，干掉这个
-//                        if (val = node.getAttr('src')) {
-//                            if (/^data:/.test(val)) {
-//                                node.parentNode.removeChild(node);
-//                                break;
-//                            }
-//                        }
-                        node.setAttr('_src', node.getAttr('src'));
-                        break;
-                    case 'span':
-                        if (UE.browser.webkit && (val = node.getStyle('white-space'))) {
-                            if (/nowrap|normal/.test(val)) {
-                                node.setStyle('white-space', '');
-                                if (me.options.autoClearEmptyNode && UE.utils.isEmptyObject(node.attrs)) {
-                                    node.parentNode.removeChild(node, true)
-                                }
-                            }
-                        }
-                        val = node.getAttr('id');
-                        if(val && /^_baidu_bookmark_/i.test(val)){
-                            node.parentNode.removeChild(node)
-                        }
-                        break;
-                    case 'p':
-                        if (val = node.getAttr('align')) {
-                            node.setAttr('align');
-                            node.setStyle('text-align', val)
-                        }
-                        //trace:3431
-//                        var cssStyle = node.getAttr('style');
-//                        if (cssStyle) {
-//                            cssStyle = cssStyle.replace(/(margin|padding)[^;]+/g, '');
-//                            node.setAttr('style', cssStyle)
-//
-//                        }
-                        //p标签不允许嵌套
-                        UE.utils.each(node.children,function(n){
-                            if(n.type == 'element' && n.tagName == 'p'){
-                                var next = n.nextSibling();
-                                node.parentNode.insertAfter(n,node);
-                                var last = n;
-                                while(next){
-                                    var tmp = next.nextSibling();
-                                    node.parentNode.insertAfter(next,last);
-                                    last = next;
-                                    next = tmp;
-                                }
-                                return false;
-                            }
-                        });
-                        if (!node.firstChild()) {
-                            node.innerHTML(UE.browser.ie ? '&nbsp;' : '<br/>')
-                        }
-                        break;
-                    case 'div':
-                        if(node.getAttr('cdata_tag')){
-                            break;
-                        }
-                        //针对代码这里不处理插入代码的div
-                        val = node.getAttr('class');
-                        if(val && /^line number\d+/.test(val)){
-                            break;
-                        }
-                        if(!allowDivTransToP){
-                            break;
-                        }
-                        var tmpNode, p = UE.uNode.createElement('p');
-                        while (tmpNode = node.firstChild()) {
-                            //if (tmpNode.type == 'text' || !UE.dom.UE.dom.dtd.$block[tmpNode.tagName]) {
-                            if (tmpNode.type == 'text' || !UE.dom.dtd.$block[tmpNode.tagName]) {
-                                p.appendChild(tmpNode);
-                            } else {
-                                if (p.firstChild()) {
-                                    node.parentNode.insertBefore(p, node);
-                                    p = UE.uNode.createElement('p');
-                                } else {
-                                    node.parentNode.insertBefore(tmpNode, node);
-                                }
-                            }
-                        }
-                        if (p.firstChild()) {
-                            node.parentNode.insertBefore(p, node);
-                        }
-                        node.parentNode.removeChild(node);
-                        break;
-                    case 'dl':
-                        node.tagName = 'ul';
-                        break;
-                    case 'dt':
-                    case 'dd':
-                        node.tagName = 'li';
-                        break;
-                    case 'li':
-                        var className = node.getAttr('class');
-                        if (!className || !/list\-/.test(className)) {
-                            node.setAttr()
-                        }
-                        var tmpNodes = node.getNodesByTagName('ol ul');
-                        UE.utils.each(tmpNodes, function (n) {
-                            node.parentNode.insertAfter(n, node);
-                        });
-                        break;
-                    case 'td':
-                    case 'th':
-                    case 'caption':
-                        if(!node.children || !node.children.length){
-                            node.appendChild(UE.browser.ie11below ? UE.uNode.createText(' ') : UE.uNode.createElement('br'))
-                        }
-                        break;
-                    case 'table':
-                        if(me.options.disabledTableInTable && tdParent(node)){
-                            node.parentNode.insertBefore(UE.uNode.createText(node.innerText()),node);
-                            node.parentNode.removeChild(node)
-                        }
-                }
-
-            }
-//            if(node.type == 'comment'){
-//                node.parentNode.removeChild(node);
-//            }
-        })
-
-    });
-
-    //从编辑器出去的内容处理
-    me.addOutputRule(function (root) {
-
-        var val;
-        root.traversal(function (node) {
-            if (node.type == 'element') {
-
-                if (me.options.autoClearEmptyNode && UE.dom.dtd.$inline[node.tagName] && !UE.dom.dtd.$empty[node.tagName] && (!node.attrs || UE.utils.isEmptyObject(node.attrs))) {
-
-                    if (!node.firstChild()) node.parentNode.removeChild(node);
-                    else if (node.tagName == 'span' && (!node.attrs || UE.utils.isEmptyObject(node.attrs))) {
-                        node.parentNode.removeChild(node, true)
-                    }
-                    return;
-                }
-                switch (node.tagName) {
-                    case 'div':
-                        if (val = node.getAttr('cdata_tag')) {
-                            node.tagName = val;
-                            node.appendChild(UE.uNode.createText(node.getAttr('cdata_data')));
-                            node.setAttr({cdata_tag: '', cdata_data: '','_ue_custom_node_':''});
-                        }
-                        break;
-                    case 'a':
-                        if (val = node.getAttr('_href')) {
-                            node.setAttr({
-                                'href': UE.utils.html(val),
-                                '_href': ''
-                            })
-                        }
-                        break;
-                        break;
-                    case 'span':
-                        val = node.getAttr('id');
-                        if(val && /^_baidu_bookmark_/i.test(val)){
-                            node.parentNode.removeChild(node)
-                        }
-                        //将color的rgb格式转换为#16进制格式
-                        if(me.getOpt('rgb2Hex')){
-                            var cssStyle = node.getAttr('style');
-                            if(cssStyle){
-                                node.setAttr('style',cssStyle.replace(/rgba?\(([\d,\s]+)\)/g,function(a,value){
-                                    var array = value.split(",");
-                                    if (array.length > 3)
-                                        return "";
-                                    value = "#";
-                                    for (var i = 0, color; color = array[i++];) {
-                                        color = parseInt(color.replace(/[^\d]/gi, ''), 10).toString(16);
-                                        value += color.length == 1 ? "0" + color : color;
-                                    }
-                                    return value.toUpperCase();
-
-                                }))
-                            }
-                        }
-                        break;
-                    case 'img':
-                        if (val = node.getAttr('_src')) {
-                            node.setAttr({
-                                'src': node.getAttr('_src'),
-                                '_src': ''
-                            })
-                        }
-
-
-                }
-            }
-
-        })
-
-
-    });
-};
 
 // adapter/message.js
 UE.registerUI('message', function(editor) {
@@ -29854,6 +29770,7 @@ UE.registerUI('autosave', function(editor) {
     })
 
 });
+
 
 
 })();

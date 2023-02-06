@@ -59,9 +59,8 @@ html, body {
 }
 
 .charts-format fieldset {
-  padding-left: 20px;
-  margin-bottom: 10px;
-	border-radius: var(--radius);
+    padding-left: 20px;
+    margin-bottom: 50px;
 }
 
 .charts-format legend {
@@ -70,7 +69,7 @@ html, body {
 }
 
 .format-item-container {
-    padding: 2px;
+    padding: 20px;
 }
 
 .format-item-container label {

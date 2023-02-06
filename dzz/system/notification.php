@@ -9,8 +9,8 @@
 if(!defined('IN_DZZ')) {
     exit('Access Denied');
 }
-require libfile('function/code');
 Hook::listen('check_login');
+require libfile('function/code');
 $filter=trim($_GET['filter']);
 if($filter=='new'){//列出所有新通知
     $list=array();
@@ -26,7 +26,7 @@ if($filter=='new'){//列出所有新通知
     }
 }elseif($filter=='checknew'){//检查有没有新通知
     $num=DB::result_first("select COUNT(*) from %t where new>0 and uid=%d",array('notification',$_G['uid']));
-    exit(json_encode(array('sum'=>$num,'timeout'=>$_G['setting']['notification']*1000)));
+    exit(json_encode(array('sum'=>$num,'timeout'=>60*1000)));
 }else{
     $list=array();
     $page = empty($_GET['page'])?1:intval($_GET['page']);
@@ -45,12 +45,11 @@ if($filter=='new'){//列出所有新通知
     foreach(DB::fetch_all("select distinct(from_id) from %t where uid = %d",array('notification',$_G['uid'])) as $v){
         $searchappid[] = $v['from_id'];
     }
-    $sitelogo=IO::getFileUri('attach::'.$_G['setting']['sitelogo']);
     $searchcats = array();
     if(in_array(0,$searchappid)){
         $systemindex = array_search(0,$searchappid);
         unset($searchappid[$systemindex]);
-        $searchcats[1] = array('appid'=>1,'appname'=>'系统','appico'=>$sitelogo);
+        $searchcats[1] = array('appid'=>1,'appname'=>'系统','appico'=>'dzz/images/default/notice_system.png');
     }
     if(count($searchappid) > 0){
         foreach(DB::fetch_all("select appname,appid,appico from %t where appid in(%n)",array('app_market',$searchappid)) as $v){
@@ -60,15 +59,12 @@ if($filter=='new'){//列出所有新通知
     //如果接收到搜索条件按条件搜索
     //通知类型
     if(!is_string($fromid)){
-      $gets['appid'] = $fromid;
-      $appid = $fromid -1;
-      $searchsql .= " and n.from_id = {$appid}";
-      $navtitle=$searchcats[$fromid]['appname'].' - '.lang('panel_notice_title');
-			$img=$searchcats[$fromid]['appico'];
-			$tongzhileixing=$searchcats[$fromid]['appname'];
+        $gets['appid'] = $fromid;
+        $appid = $fromid -1;
+        $searchsql .= " and n.from_id = {$appid}";
+        $navtitle=$searchcats[$fromid]['appname'];
     }else{
-      $tongzhileixing='全部通知';
-      $navtitle='全部通知'.' - '.lang('panel_notice_title');
+        $navtitle='全部通知';
     }
     $params = array('notification','user','app_market',$_G['uid']);
     $countparam = array('notification',$_G['uid']);
@@ -88,7 +84,7 @@ if($filter=='new'){//列出所有新通知
             $value['dateline']=dgmdate($value['dateline'],'u');
 			$value['note']=dzzcode($value['note'],1,1,1,1,1);
 			if(!$value['appico']){
-			    $value['appico'] =$sitelogo;
+			    $value['appico'] = 'dzz/images/default/notice_system.png';
             }else{
                 $value['appico'] = $_G['setting']['attachurl']. $value['appico'];
             }
@@ -99,7 +95,11 @@ if($filter=='new'){//列出所有新通知
     if($count && $count>$start+count($list)) $next=true;
     $theurl = DZZSCRIPT . "?" . url_implode ($gets);//分页链接
     $multi = multi($count , $perpage ,$page, $theurl  );
+  /* if($_GET['do']=='list'){
+        include template('notification_list_item');
+    }else{*/
         include template('notification_list');
+  //  }
     dexit();
 }
 

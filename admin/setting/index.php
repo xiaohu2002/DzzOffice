@@ -91,9 +91,7 @@ if (!submitcheck('settingsubmit')) {
 		$perms = get_permsarray();//获取所有权限;
 		$permgroups = C::t('resources_permgroup')->fetch_all();
     $navtitle=lang('permGroupSet').' - '.lang('appname');
-	}elseif ($operation == 'qqlogin') {
-		$navtitle = lang('register_visit').' - '.lang('appname');
-	} elseif ($operation == 'datetime') {
+	}elseif ($operation == 'datetime') {
 		$navtitle = lang('time_or_date').' - '.lang('appname');
 		$checktimeformat = array($setting['timeformat'] == 'H:i' ? 24 : 12 => 'checked');
 		$setting['userdateformat'] = dateformat($setting['userdateformat']);
@@ -270,7 +268,7 @@ if (!submitcheck('settingsubmit')) {
 	} elseif ($operation == 'sec') {
 		$settingnew['seccodestatus'] = bindec(intval($settingnew['seccodestatus'][3]) . intval($settingnew['seccodestatus'][2]) . intval($settingnew['seccodestatus'][1]));
 
-	} elseif ($operation == 'qqlogin') {
+	} elseif ($op == 'qqlogin') {
 		if (empty($settingnew['qq_appid']) || empty($settingnew['qq_appkey'])) {
 			$settingnew['qq_login'] = 0;
 		}

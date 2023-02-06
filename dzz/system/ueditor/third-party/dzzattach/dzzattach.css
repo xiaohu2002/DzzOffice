@@ -391,6 +391,7 @@ html:root .preview-panel { filter:none;overflow:hidden }
 }
 .previewer-photo img {
 	position:absolute;
+	border:3px solid #FFF;
 	box-shadow:0 0 20px rgba(0, 0, 0, 0.8);
 	-webkit-transition:-webkit-transform 0.3s ease-in-out;
 	-moz-transition:-moz-transform 0.3s ease-in-out;

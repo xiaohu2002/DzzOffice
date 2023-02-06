@@ -10,11 +10,12 @@
 				<!--{/if}-->
 				<span class="name-text-wrapper"> <span node-type="name-text"  data-href="$value[shareurl]" class="enabled">$value[name]</span> </span>
 			</div>
-			<!--{if $share[xiazai]==0}-->
+
 			<div class="btns">
-				<a node-type="btn-item" data-key="download" class="dzz dzz-download" href="javascript:void(0);"></a>
+				<a node-type="btn-item" data-key="download" class="dzz dzz-download
+" href="javascript:void(0);"></a>
 			</div>
-			<!--{/if}-->
+
 		</div>
 		<!-- 其他列 -->
 		<div class="col size" style="width: 12%" data-size="$value[size]">$value[fsize]</div>
@@ -58,6 +59,17 @@
 				</tr>
 			</tbody>
 		</table>
+		<!--{if in_array($value[type],array('attach','document','image'))}-->
+		<!--<div class="icoblank_tip icoblank_rightbottom">
+			<a node-type="btn-item" data-key="download" class="pull-right ibtn glyphicon glyphicon-download-alt" href="javascript:void(0);"></a>
+		</div>-->
+		<!--{/if}-->
+		<!--<div class="sharepame-checked">
+			<div class="checkbox-custom checkbox-primary">
+		      <input type="checkbox" name="inputCheckboxesCall" data-dpath="$value[dpath]">
+		      <label></label>
+		    </div>
+		</div>-->
 		<div class="backgound_radius" style="position: absolute; left: 0px; top: 0px; z-index: -5;"></div>
 	</div>
 	<!--{/loop}-->

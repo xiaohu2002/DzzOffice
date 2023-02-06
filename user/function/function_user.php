@@ -189,21 +189,6 @@ function getinvite()
     return $result;
 }
 
-function replacesitevar($string, $replaces = array())
-{
-    global $_G;
-    $sitevars = array(
-        '{sitename}' => $_G['setting']['sitename'],
-
-        '{time}' => dgmdate(TIMESTAMP, 'Y-n-j H:i'),
-        '{adminemail}' => $_G['setting']['adminemail'],
-        '{username}' => $_G['member']['username'],
-        '{myname}' => $_G['member']['username']
-    );
-    $replaces = array_merge($sitevars, $replaces);
-    return str_replace(array_keys($replaces), array_values($replaces), $string);
-}
-
 function clearcookies()
 {
     global $_G;

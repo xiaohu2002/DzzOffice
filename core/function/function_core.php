@@ -24,6 +24,23 @@ if (!function_exists('sys_get_temp_dir')) {
     }
 }
 
+function replacesitevar($string, $replaces = array())
+{
+    global $_G;
+    $sitevars = array(
+        '{sitename}' => $_G['setting']['sitename'],
+        '{xhversion}' => CORE_XHVERSION,
+        '{xversion}' => CORE_VERSION,
+        '{years}' =>  date("Y"),
+        '{time}' => dgmdate(TIMESTAMP, 'Y-n-j H:i'),
+        '{adminemail}' => $_G['setting']['adminemail'],
+        '{username}' => $_G['member']['username'],
+        '{myname}' => $_G['member']['username']
+    );
+    $replaces = array_merge($sitevars, $replaces);
+    return str_replace(array_keys($replaces), array_values($replaces), $string);
+}
+
 function getfileinfo($icoid)
 {
     if (preg_match('/^dzz:[gu]id_\d+:.+?/i', $icoid)) {

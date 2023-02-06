@@ -272,5 +272,104 @@ function checkemail(el) {
 			errormessage(el, json.error||'');	
 	});
 }
+function addMailEvent(mailObj) {
 
+	mailObj.onclick = function (event) {
+		emailMenu(event, mailObj.id);
+	};
+	mailObj.onkeyup = function (event) {
+		emailMenu(event, mailObj.id);
+	};
+	mailObj.onkeydown = function (event) {
+		emailMenuOp(4, event, mailObj.id);
+	};
+	mailObj.onblur = function () {
+		if(mailObj.value == '') {
+			errormessage(mailObj.id, __lang.register_email_tips1);
+		}
+		emailMenuOp(3, null, mailObj.id);
+	};
+	stmp['email'] = mailObj.id;
+}
+var emailMenuST = null, emailMenui = 0, emaildomains = ['qq.com', '163.com', '126.com', 'sina.com', 'sohu.com', 'yahoo.com', 'gmail.com', 'hotmail.com'];
+function emailMenuOp(op, e, id) {
+	if(op == 3 && BROWSER.ie && BROWSER.ie < 7) {
+		checkemail(id);
+	}
+	if(!$('emailmore_menu')) {
+		return;
+	}
+	if(op == 1) {
+		$('emailmore_menu').style.display = 'none';
+	} else if(op == 2) {
+		showMenu({'ctrlid':'emailmore','pos': '13!'});
+	} else if(op == 3) {
+		emailMenuST = setTimeout(function () {
+			emailMenuOp(1, id);
+			checkemail(id);
+		}, 500);
+	} else if(op == 4) {
+	       	e = e ? e : window.event;
+                var obj = $(id);
+        	if(e.keyCode == 13) {
+                        var v = obj.value.indexOf('@') != -1 ? obj.value.substring(0, obj.value.indexOf('@')) : obj.value;
+                        obj.value = v + '@' + emaildomains[emailMenui];
+                        doane(e);
+        	}
+	} else if(op == 5) {
+                var as = $('emailmore_menu').getElementsByTagName('a');
+                for(i = 0;i < as.length;i++){
+                        as[i].className = '';
+                }
+	}
+}
+
+function emailMenu(e, id) {
+	if(BROWSER.ie && BROWSER.ie < 7) {
+		return;
+	}
+	e = e ? e : window.event;
+        var obj = $(id);
+	if(obj.value.indexOf('@') != -1) {
+		if($('emailmore_menu')) $('emailmore_menu').style.display = 'none';
+		return;
+	}
+	var value = e.keyCode;
+	var v = obj.value;
+	if(!obj.value.length) {
+		emailMenuOp(1);
+		return;
+	}
+
+        if(value == 40) {
+		emailMenui++;
+		if(emailMenui >= emaildomains.length) {
+			emailMenui = 0;
+		}
+	} else if(value == 38) {
+		emailMenui--;
+		if(emailMenui < 0) {
+			emailMenui = emaildomains.length - 1;
+		}
+	} else if(value == 13) {
+  		$('emailmore_menu').style.display = 'none';
+  		return;
+ 	}
+        if(!$('emailmore_menu')) {
+		menu = document.createElement('div');
+		menu.id = 'emailmore_menu';
+		menu.style.display = 'none';
+		menu.className = 'p_pop';
+		menu.setAttribute('disautofocus', true);
+		$('append_parent').appendChild(menu);
+	}
+	var s = '<ul class="dropdown-menu" style="display:block">';
+	for(var i = 0; i < emaildomains.length; i++) {
+		s += '<li><a href="javascript:;" onmouseover="emailMenuOp(5)" ' + (emailMenui == i ? 'class="a" ' : '') + 'onclick="$(stmp[\'email\']).value=this.innerHTML;display(\'emailmore_menu\');checkemail(stmp[\'email\']);">' + v + '@' + emaildomains[i] + '</a></li>';
+	}
+	s += '</ul>';
+	$('emailmore_menu').innerHTML = s;
+	
+	emailMenuOp(2);
+}
 

@@ -139,7 +139,6 @@
 		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
-        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='denlu'}-->
@@ -147,15 +146,6 @@
 		<li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
-		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li> 
-        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
-      </ul>
-      <!--{elseif $operation=='qqlogin'}-->
-      <ul class="nav navbar-nav nav-pills-bottomguide">
-		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
-        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
-        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
-		<li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li> 
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='access'}-->
@@ -163,7 +153,6 @@
 		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
-        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='datetime'}-->
@@ -179,7 +168,6 @@
 		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
-        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{/if}--> 
@@ -283,6 +271,22 @@
           <label class="radio-inline"> <input type="radio" name="settingnew[allowshare]"  value="1"<!--{if $setting[allowshare]}-->checked <!--{/if}--> >{lang forbidden}</label>
           <span class="help-block"> {lang setting_main_file_sharing}</span> </dd>
       </dl>
+			<dl>
+          <dt>{lang platform_copyright}:</dt>
+          <dd class="clearfix">
+            <textarea type="textarea" class="form-control" id="sitecopyright" name="settingnew[sitecopyright]" row="6">$setting[sitecopyright]</textarea>
+            <span class="help-inline text-muted">支持html代码和变量替换，可以使用如下变量:
+							<li>{xhversion} : 小胡版版本</li>
+							<li>{xversion} : 官方版本</li>
+							<li>{years} : 官方版本</li>
+              <li>{username} : 用户名</li>
+              <li>{time} : 发送时间</li>
+              <li>{sitename} : 网站名称（显示在页面底部的联系方式处的名称）</li>
+              <li>{bbname} : 站点名称（显示在浏览器窗口标题等位置的名称）</li>
+              <li>{adminemail} : 管理员 Email</li>
+            </span>
+          </dd>
+        </dl>
       <dl>
         <dt>{lang platform_beian}</dt>
         <dd class="clearfix">
@@ -455,49 +459,6 @@
             }
         })
     </script>
-	<!--{elseif $operation=='qqlogin'}-->
-    <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
-      <input type="hidden" value="{FORMHASH}" name="formhash">
-      <input type="hidden" value="qqlogin" name="operation">
-      <dl>
-        <dt>{lang open_qq_login}</dt>
-        <dd class="clearfix">
-          <label class="radio-inline "><input type="radio" name="settingnew[qq_login]" value="0" <!--{if !$setting[qq_login]}-->checked<!--{/if}--> onclick="jQuery('#qqlogin_wrapper').addClass('hide');">{lang no_enable}</label>
-          <label class="radio-inline "><input type="radio" name="settingnew[qq_login]" value="1" <!--{if $setting[qq_login]=='1'}-->checked<!--{/if}--> onclick="jQuery('#qqlogin_wrapper').removeClass('hide');">{lang enable}</label>
-        </dd>
-      </dl>
-      <div id="qqlogin_wrapper"<!--{if !$setting[qq_login]}--> class="hide"<!--{/if}-->>
-        <dl>
-          <dt>QQ APPID</dt>
-          <dd class="clearfix">
-            <input type="text" class="form-control" name="settingnew[qq_appid]" value="$setting[qq_appid]" />
-          </dd>
-          <dd class="clearfix"> <span class="help-inline">{lang qq_app_id}</span> </dd>
-          </dl>
-        <dl>
-          <dt>QQ APPKAY</dt>
-          <dd class="clearfix">
-            <input type="text" class="form-control" name="settingnew[qq_appkey]" value="$setting[qq_appkey]" />
-          </dd>
-          <dd class="clearfix"> <span class="help-inline">{lang qq_app_key}</span> </dd>
-        </dl>
-        <dl>
-          <dt>{lang whether_allow_direct}</dt>
-          <dd class="clearfix">
-            <label class="radio-inline "><input type="radio" name="settingnew[qq_bind]" value="1" <!--{if $setting[qq_bind]=='1'}-->checked<!--{/if}-->>{lang user_must_binding}</label>
-            <label class="radio-inline "><input type="radio" name="settingnew[qq_bind]" value="0" <!--{if !$setting[qq_bind]}-->checked<!--{/if}-->>{lang allow_direct_use}</label>
-          </dd>
-          <dd class="clearfix"> <span class="help-inline">{lang user_must_binding_text}</span> </dd>
-        </dl>
-        <dl>
-          <dt>{lang token_url}</dt>
-          <dd class="clearfix"> <b class="help-inline">$_G['siteurl']user.php</b> </dd>
-        </dl>
-      </div>
-      <dl>
-          <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
-      </dl>
-    </form>
     <!--{elseif $operation=='loginset'}-->
     <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
       <input type="hidden" value="{FORMHASH}" name="formhash">

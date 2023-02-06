@@ -1,4 +1,21 @@
 <div class="pull-right">
+    <!--<div class="button-share-group pull-left">
+        <a type="button" class="btn" data-allrids="$allrids" onclick="allsave();" id="allsave">
+            <span class="dzz dzz-save" data-toggle="tooltip" data-placement="bottom"
+                  title="{lang all_save}"></span>
+        </a>
+        <a type="button" class="btn" data-allrids="$allrids" onclick="downAll(this);">
+            <span class="dzz dzz-download dzz-textdecoration" data-toggle="tooltip" data-placement="bottom"
+                  title="{lang all_download}"></span>
+        </a>
+        <div class="btn-group" role="group">
+            <a type="button" class="btn btn-group-list" onclick="viewSwitch(this,'.module-list-view')"><i
+                    class="dzz dzz-view-list" data-toggle="tooltip" data-placement="bottom" 
+                    title="{lang change_list}"></i></a>
+            <a type="button" class="btn btn-group-thumbnail" onclick="viewSwitch(this,'.module-grid-view')"><i
+                    class="dzz dzz-view-module" data-toggle="tooltip" data-placement="bottom" title="{lang change_thumbnail}"></i></a>
+        </div>
+    </div>-->
     <!--{if $_G['uid']}-->
     <ul class="nav navbar-nav">
         <li>
@@ -30,14 +47,12 @@
                 <span class="navbar-borderleft"></span>
             </a>
         </li>
-        <li class="app_popup-parent">
+        <!--<li class="app_popup-parent">
 
             <a href="javascript:;" id="desktop_app" data-href="index.php?mod=system&op=app_ajax&operation=app" class="app_popup_icon js-popbox" data-placement="bottom" data-trigger="focus" data-auto-adapt="true" data-toggle="popover"><span class="dzz dzz-apps basil"></span></a>
-        </li>
+        </li>-->
         <li>
-          <a href="javascript:;" onclick="showWindow('about','user.php?mod=space&op=about&modname=$_GET[modname]');">{lang about}</a>
-        </li>
-        <li>
+
             <a href="javascript:;" onclick="location.href='$_G[siteurl]user.php?mod=login';return false;"><span>{lang login}</span></a>
         </li>
         <!--{if $_G['setting']['regstatus']}-->

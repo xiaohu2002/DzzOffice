@@ -4,7 +4,7 @@ return array(
     'allow_view'=>1,
     'allow_robot'=>false,//是否允许机器人爬取
     /*此三项配置如果未配置，将读取系统默认配置访问*/
-    'default_mod'=>'index_simple',//默认应用CONFIG DEFAULT_MOD
+    'default_mod'=>'index',//默认应用CONFIG DEFAULT_MOD
     'default_op' => 'index',//CONFIG DEFAULT_OP
     'dafault_action' => 'index',//CONFIG DAFAULT_ACTION
     /*加载函数文件，有两种格式：

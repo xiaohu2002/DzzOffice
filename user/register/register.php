@@ -10,16 +10,6 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 $setting = $_G['setting'];
-$htmls = $settings = array();
-foreach($_G['cache']['fields_register'] as $field) {
-    $fieldid = $field['fieldid'];
-    $field_val = $_GET[''.$field_key];
-    $html = profile_setting($fieldid, array(), false, false, true);
-    if($html) {
-        $settings[$fieldid] = $_G['cache']['profilesetting'][$fieldid];
-        $htmls[$fieldid] = $html;
-    }
-}
 $ismobile=helper_browser::ismobile();
 $showregisterform = 1;
 Hook::listen('register_before');//注册预处理钩子
@@ -94,7 +84,7 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
         'lastsendmail' => 0
     );
     //插入用户状态表
-    \DB::insert('user_status',$status,1); 
+    DB::insert('user_status',$status,1); 
 
     //新用户登录
     setloginstatus(array(

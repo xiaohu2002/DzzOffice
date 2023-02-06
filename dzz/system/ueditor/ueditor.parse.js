@@ -942,7 +942,7 @@ UE.parse.register('list',function(utils){
                     var index = 1;
                     utils.each(list.childNodes,function(li){
                         if(li.tagName == 'LI'){
-                            utils.pushItem(customCss,selector + ' li.list-' + customStyle[listStyle] + index + 'background-position:0 3px;background-repeat:no-repeat');
+                            utils.pushItem(customCss,selector + ' li.list-' + customStyle[listStyle] + index + '{background-image:url(' + T.liiconpath  + 'list-'+customStyle[listStyle] +index + '.gif)}');
                             index++;
                         }
                     });

@@ -108,6 +108,17 @@ class table_user_profile extends dzz_table
     public function fetch_weixinid($weixinid){
         return DB::fetch_first("select * from %t where `fieldid` = %s and `value` = %s",array($this->_table,'weixinid',$weixinid));
     }
+	public function zupdate($uid,$fieldarr){//插入用户资料
+		foreach($fieldarr as $key=>$value){
+			$setarr=array('uid'=>$uid,
+						  'fieldid'=>$key,
+						  'value'=>$value,
+              'privacy'=>$value
+						  );
+			DB::insert($this->_table,$setarr,0,1);
+		}
+		return true;
+	}
     public function insert($fieldarr){//插入用户资料
         $uid=$fieldarr['uid'];
         unset($fieldarr['uid']);

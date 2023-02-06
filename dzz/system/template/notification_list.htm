@@ -3,6 +3,7 @@
 <!--{template common/commer_header}--> 
 <link rel="stylesheet" href="static/css/common.css">
 <div class="bs-container">
+<div class="all-notice bs-container">
 <div class="left-notice  bs-left-container affix-top clearfix">
 	<ul class="ul-notice">
 		<li <!--{if !isset($fromid) || $fromid == ''}-->class="active"<!--{/if}-->>
@@ -21,62 +22,43 @@
 		<!--{/loop}-->
 	</ul>
 </div>
-<div class=" main-allnotice bs-main-container clearfix">
+ <div class=" main-allnotice bs-main-container clearfix">
 
-<div class="panel-container main-allcontent clearfix">
-	<!--{if $list}-->
-  <div class="panel-heading">
-		<!--{if $img}-->
-		<img src="$img">
-		<!--{else}-->
-    <span class="dzz dzz-notifications dzz-allnotice"></span>
-		<!--{/if}-->
-    <h3>{$tongzhileixing}($count)</h3>
-  </div>
-	<!--{/if}-->
-  <div class="panel-body">
-      <ul id="notification-list" class="notification-list list-unstyled u-gutter clearfix"> 
-             <!--{if $list}-->
-             <!--{loop $list $value}-->
-                <li class="notification-list-item clearfix">
-
-                    <div class="member member-no-menu">
-											<a href="user.php?uid=$value[authorid]">
-                         {eval echo avatar_block($value[authorid]);}
-                      </a>
-                    </div>
-
-                    <div class="details">
-											<!--{if $value[title]}-->
-											<p class="note u-title" >$value[title]</p>
-											<!--{/if}-->
-											<!--{if $value[note]}-->
-											<p class="note u-bottom" >$value[note]</p>
-											<!--{else}-->
-                      <p class="note u-bottom" >无内容</p>
-											<!--{/if}-->
-                      {if !isset($fromid) || is_string($fromid)}
-											<div class="note-iconimg">
-                        <img src="$value[appico]">
-											</div>
-											{/if}
-                      <p class="dateline u-bottom">$value[dateline]</p>
-                    </div>
-                </li>
-                <!--{/loop}-->
-             <!--{else}-->
-              <p class="text-warning" style="line-height:35px;">{lang noappall_notice}…</p>
-            <!--{/if}-->
-            </ul>
-
-   </div>
-
-</div>
-	<div class="all-notice">
-  <nav aria-label="Page navigation" class="notice-navigation">
-    {$multi}
-  </nav>
+	<div class="panel-container main-allcontent clearfix">
+		<div class="panel-heading">
+			<span class="dzz dzz-notifications dzz-allnotice"></span>
+		    <h3>{$navtitle}($count)</h3>
+		</div>
+		<div class="panel-body">
+		    <ul id="notification-list" class="notification-list list-unstyled u-gutter clearfix"> 
+	             <!--{if $list}-->
+	             <!--{loop $list $value}-->
+	                <li class="notification-list-item clearfix">
+	                
+	                    <div class="member member-no-menu">
+	                         {eval echo avatar_block($value[authorid]);}
+	                    </div>
+	                   
+	                    <div class="details">
+	                      <p class="note u-bottom" >$value[note]</p>
+	                      {if !isset($fromid) || is_string($fromid)}<div class="note-iconimg"><img src="$value[appico]"></div>{/if}
+	                      <p class="dateline u-bottom">$value[dateline]</p>
+	                    </div>
+	                </li>
+	                <!--{/loop}-->
+	             <!--{else}-->
+	           		<p class="text-warning" style="line-height:35px;">{lang noappall_notice}…</p>
+	            <!--{/if}-->
+	            </ul>
+	           
+		 </div>
+		 
 	</div>
+		<nav aria-label="Page navigation" class="notice-navigation">
+			{$multi}
+		</nav>
+ </div>
+
 </div>
 <script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <script type="text/javascript">
@@ -139,6 +121,17 @@ if(!_notice) _notice={};
 _notice.setIsread=function(){
 	return false;
 }
+/*jQuery(document).off('click.noticefilter').on('click.noticefilter','.ul-notice li',function(){
+    var obj=jQuery(this);
+    var fromid = obj.data('appid');
+    if(typeof fromid == 'undefined'){
+        fromid = '';
+	}
+    jQuery.post(MOD_URL+'&op=notification&do=list',{"fromid":fromid},function(html){
+        jQuery('#notification-list').replaceWith(html);
+    });
+    return false;
+})*/
 
 
 </script>

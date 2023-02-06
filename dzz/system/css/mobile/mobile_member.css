@@ -12,11 +12,12 @@ ul,li,ul li{
 	display: none;
 }
 .weui-search-bar {
+    background-color: #F2F2F2;
     padding: 0.5rem 0.5rem 0rem 0.5rem;
-    margin-bottom: var(--radius);
+    margin-bottom: 0.5rem;
     position: fixed;
     width: 100%;
-    top: 64px;
+    top: 0;
     z-index: 3;
 }
 .weui-search-bar__form {
@@ -25,7 +26,6 @@ ul,li,ul li{
 }
 .weui-search-return__cancel-btn {
     margin-left: 0.5rem;
-	margin-right: .5rem;
     line-height: 1.4rem;
     color: #3779ff;
     white-space: nowrap;
@@ -34,6 +34,7 @@ ul,li,ul li{
     padding-left: 0.5rem;
 }
 .weui-search-bar__box .weui-search-bar__input {
+    padding: 0;
     line-height: 1.5rem;
     height: auto;
 }
@@ -57,7 +58,7 @@ ul,li,ul li{
     float: right;
     clear: both;
     line-height: 1.5rem;
-    margin-right: var(--radius);
+    margin-right: 0.5rem;
 }
 .weui-search-bar:after {
     border: none;
@@ -75,7 +76,7 @@ ul,li,ul li{
     height: 2rem;
     line-height: 2rem;
     border-radius: 50%;
-    margin-right: var(--radius);
+    margin-right: 0.5rem;
 }
 .weui-cell__bd {
     overflow: hidden;
@@ -84,7 +85,7 @@ ul,li,ul li{
     word-break: break-all;
 }
 .weui-cells_margin_top{
-	margin-top: 40px;
+	margin-top: 60px;
 }
 .weui-cell-member{
 	background-color: #FFFFFF;
@@ -98,7 +99,7 @@ ul,li,ul li{
     line-height: 2rem;
     text-align: center;
     border-radius: 50%;
-    margin-right: var(--radius);
+    margin-right: 0.5rem;
     font-weight: bold;
 }
 .weui-cell__bd h4{
@@ -116,13 +117,10 @@ ul,li,ul li{
 	position: fixed;
 	bottom: 0;
 	background-color: #FFFFFF;
+	width: 100%;
 	height: 2.5rem;
 	box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
 	z-index: 3;
-	right: 0;
-	left: 0;
-	margin:  var(--radius);
-	border-radius: .5rem
 }
 .weui-member-success{
 	position: absolute;
@@ -131,9 +129,8 @@ ul,li,ul li{
 	width: 5rem;
 	line-height: 2.5rem;
 	text-align: center;
-	border-radius:  var(--radius);
+	height: 100%;
 	box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
-	margin: .5rem;
 }
 .weui-member-select-scroller .special_avatar_class{
 	width: 1.5rem;
@@ -141,17 +138,16 @@ ul,li,ul li{
     line-height: 1.5rem;
    	text-align: center;
     border-radius: 50%;
-    margin-right: var(--radius);
+    margin-right: 0.5rem;
 }
 .weui-member-success .weui-member-success-word{
-	line-height: 1.5rem;
+	line-height: 2.5rem;
 	width: 100%;
 	color:#3779ff;
 	display: block;
 	background-color: #fff;
     outline: 0;
     border: none;
-	border-radius:  var(--radius);
 }
 .weui-member-select-user{
 	margin-right: 5rem;
@@ -180,7 +176,7 @@ ul,li,ul li{
 }
 /*文件另存为*/
 .weui_cells-margin-top{
-	margin-top: 6.3rem;
+	margin-top: 2.8rem;
 }
 .weui-cell__explorer {
     background-color: #ff9800;
@@ -190,7 +186,7 @@ ul,li,ul li{
 }
 .weui-cell__img {
     font-size: 24px;
-    margin-right: var(--radius);
+    margin-right: 0.5rem;
     display: block;
     color: #FFFFFF;
     padding: 0.4rem;
@@ -200,17 +196,14 @@ ul,li,ul li{
 	margin-bottom:0.5rem;
 }
 .weui-file-keep{
-  background-color: #FFFFFF;
-  line-height: 2.75rem;
-  text-align: center;
-  font-size: 0.8rem;
-  position: fixed;
-  left: .5rem;
-  right: .5rem;
-  top: 64px;
-	margin: .5rem 0;
-  z-index: 3;
-	border-radius: 0.5rem;
+    background-color: #FFFFFF;
+    line-height: 2.75rem;
+    text-align: center;
+    font-size: 0.8rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 3;
 }
 .weui-file-keep .weui-file-keep-cancel {
     padding-left: 1rem;
@@ -283,7 +276,7 @@ ul,li,ul li{
 .weui-cell__hd .weui-cell__recentimg {
     width: 2rem;
     height: 2rem;
-    margin-right: var(--radius);
+    margin-right: 0.5rem;
     border-radius: 2px;
 }
 .weui-cell__bd p {
@@ -336,7 +329,7 @@ ul,li,ul li{
 .weui-dropup{
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    border-radius:  var(--radius);
+    border-radius: 2px;
     position: absolute;
     bottom: 100%;
     left: 10%;
@@ -352,11 +345,10 @@ ul,li,ul li{
 .weui-dropup-type{
 	left: 0.5rem;
 	right: 0.5rem;
-	bottom:3rem;
+	bottom:2.5rem;
 	position: fixed;
 	max-height: 450px;
-  overflow: auto;
-	border-radius:  var(--radius);
+    overflow: auto;
 }
 .weui-dropup-type .weui-type-word{
 	text-align: left;
@@ -403,7 +395,7 @@ ul,li,ul li{
 	color: #999999;
 	font-size: 0.7rem;
 	padding: 0.5rem;
-	margin-top: 4.8rem;
+	margin-top: 1.8rem;
 }
 .weui-cell__search {
     background-color: #ffc107;

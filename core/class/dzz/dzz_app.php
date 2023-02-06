@@ -661,5 +661,4 @@ class dzz_app extends dzz_base{
             @date_default_timezone_set('Etc/GMT'.($timeoffset > 0 ? '-' : '+').(abs($timeoffset)));
         }
     }
-
 }

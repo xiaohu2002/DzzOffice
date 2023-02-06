@@ -10,12 +10,6 @@
 if ( !defined( 'IN_DZZ' ) ) { //所有的php文件必须加上此句，防止被外部调用
 	exit( 'Access Denied' );
 }
-$osid = $_GET['sid'];
-$sid = dzzdecode($osid);
-$share = C::t('shares')->fetch($sid);
-if($share['login']){
-	Hook::listen('check_login');
-}
 function checkShare($share){
 	if (!$share) {
 		exit(json_encode(array('msg'=>lang('share_file_iscancled'))));

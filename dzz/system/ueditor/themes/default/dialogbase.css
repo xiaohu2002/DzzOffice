@@ -46,6 +46,7 @@ table {
 /*module
 */
 body {
+    background-color: #fff;
     font: 12px/1.5 sans-serif, "宋体", "Arial Narrow", HELVETICA;
     color: #646464;
 }

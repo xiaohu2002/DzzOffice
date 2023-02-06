@@ -11,15 +11,13 @@ body{
 .jstree-default .jstree-icon:empty{
 	font-size: 20px;
 }
-	em{
-		font-style: normal
-	}
 .orgtree-search{
 	position:fixed;
 	width:100%;
 	left:0;
 	top:0;
 	background-color:#FFF;
+	
 }
 .orgtree-search .form-control{
 	padding:5px 35px 5px 25px;
@@ -116,7 +114,7 @@ body{
 var ctrlid='$_GET[ctrlid]';
 var multiple=parseInt('$_GET[multiple]')>0?true:false;
 var nouser=parseInt('$_GET[nouser]')>0?1:0;
-var showjob=parseInt('$_GET[showjob]')>0?1:1;
+var showjob=parseInt('$_GET[showjob]')>0?1:0;
 var stype='$_GET[stype]'?parseInt('$_GET[stype]'):0;//0:可以选择机构和用户；1：仅选择机构和部门：2：仅选择用户
 var range='$_GET[range]'?parseInt('$_GET[range]'):0;//0:机构和用户；1：仅机构和部门：2：仅群组
 var moderator=parseInt('$_GET[moderator]')>0?1:0;
