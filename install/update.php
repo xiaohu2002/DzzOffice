@@ -51,10 +51,10 @@ if($_GET['from']) {
 
 $lockfile = DZZ_ROOT.'./data/update.lock';
 if(file_exists($lockfile) && !$_GET['from']) {
-	show_msg('请您先登录服务器ftp，手工删除 ./data/update.lock 文件，再次运行本文件进行升级。');
+	show_msg('请您先手工删除 ./data/update.lock 文件，再次运行本文件进行升级。');
 }
 
-$sqlfile = DZZ_ROOT.'./install/data/install.sql';
+$sqlfile = 'data/install.sql';
 
 if(!file_exists($sqlfile)) {
 	show_msg('SQL文件 '.$sqlfile.' 不存在');
@@ -102,7 +102,7 @@ if($_GET['step'] == 'start') {
 		show_msg('您的站点未关闭，正在关闭，请稍后...', $theurl.'?step=start', 5000);
 	}
 		show_msg('说明：<br>本升级程序会参照最新的SQL文件，对数据库进行同步升级。<br>
-			请确保当前目录下 ./data/install.sql 文件为最新版本。<br><br>
+			请确保您已将最新版文件覆盖至本地文件。<br>升级会还原部分默认设置。<br><br>
 			<a href="'.$theurl.'?step=prepare'.($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '').'">准备完毕，升级开始</a>');
 	
 } elseif ($_GET['step'] == 'waitingdb') {
@@ -258,51 +258,158 @@ if($_GET['step'] == 'start') {
 
 } elseif ($_GET['step'] == 'data') {
 	if(!$_GET['dp']){
-		
-		
-		//新增两个配置项
+		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','fileVersion'))){
 		 C::t('setting')->update('fileVersion', '1');
+		}
+		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','fileVersionNumber'))){
 		 C::t('setting')->update('fileVersionNumber', '50');
-		
-		//添加云设置和管理应用
-		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=cloud'))){
-			
-		 C::t('app_market')->insert(array('appname'=>'云设置和管理',
-		 								  'appico'=>'appico/201712/21/171106u1dk40digrrr79ed.png',
-		 								  'appurl'=>'{adminscript}?mod=cloud',
-										  'appdesc'=>'设置和管理第三方云盘、云存储等',
+		}
+		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','default_mod'))){
+     C::t('setting')->update('default_mod', 'index_simple');
+		}
+		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','forbiddentime'))){
+		 C::t('setting')->update('forbiddentime', '900');
+		}
+		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','numberoflogins'))){
+     C::t('setting')->update('numberoflogins', '5');
+		}
+		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','notification'))){
+		 C::t('setting')->update('notification', '60');
+		}
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=appmanagement'))){
+			DB::delete('app_market', array('appurl' => '{dzzscript}?mod=appmanagement'));
+			C::t('app_market')->insert(array('appname'=>'管理',
+		 								  'appico'=>'appico/201712/21/184312rthhhg9oujti9tuu.png',
+		 								  'appurl'=>'{adminscript}?mod=appmanagement',
+										  'appdesc'=>'管理员应用集合，方便管理员管理各个管理应用',
 										  'dateline'=>TIMESTAMP,
-										  'disp'=>5,
+										  'disp'=>1,
+											'mid'=>1,
 										  'vendor'=>'乐云网络',
 										  'group'=>3,
+											'haveflash'=>0,
+											'isshow'=>1,
+											'havetask'=>0,
+											'hideInMarket'=>0,
 										  'system'=>2,
 										  'notdelete'=>1,
-										  'position'=>0,
+										  'position'=>1,
+											'open'=>1,
 										  'app_path'=>'admin',
-										  'identifier'=>'cloud',
+										  'identifier'=>'appmanagement',
 										  'version'=>'2.0',
+											'check_upgrade_time'=>'20171115',
 										  'available'=>1),0,1);
 		}
-		//添加用户资料管理应用
-		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=member'))){
-			
-		 C::t('app_market')->insert(array('appname'=>'用户资料管理',
-		 								  'appico'=>'appico/201712/21/103805dczcm89b0gi8i9gc.png',
-		 								  'appurl'=>'{adminscript}?mod=member',
-										  'appdesc'=>'用户资料项配置，资料审核，认证等',
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=filemanage'))){
+		C::t('app_market')->insert(array('appname'=>'文件管理',
+		 								  'appico'=>'appico/201712/21/175535t47bad99b7sssdwq.png',
+		 								  'appurl'=>'{dzzscript}?mod=filemanage',
+										  'appdesc'=>'管理和查看系统所有文件',
 										  'dateline'=>TIMESTAMP,
-										  'disp'=>10,
+										  'disp'=>6,
+											'mid'=>6,
 										  'vendor'=>'乐云网络',
-										  'group'=>3,
+											'haveflash'=>0,
+											'isshow'=>1,
+											'havetask'=>1,
+											'hideInMarket'=>0,
+										  'group'=>1,
+											'position'=>1,
 										  'system'=>2,
 										  'notdelete'=>1,
-										  'position'=>0,
-										  'app_path'=>'admin',
-										  'identifier'=>'member',
+											'open'=>1,
+											'nodup'=>0,
+											'identifier'=>'filemanage',
+										  'app_path'=>'dzz',
+											'available'=>1,
 										  'version'=>'2.0',
-										  'available'=>1),0,1);
+											'check_upgrade_time'=>'20180206'),0,1);
 		}
-		
+		if(DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=filemanage'))){
+			DB::delete('app_market', array('appurl' => '{adminscript}?mod=filemanage'));
+		}
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=orguser'))){
+		C::t('app_market')->insert(array('appname'=>'机构用户',
+		 								  'appico'=>'appico/201712/21/131016is1wjww2uwvljllw.png',
+		 								  'appurl'=>'{dzzscript}?mod=orguser',
+										  'appdesc'=>'',
+										  'dateline'=>TIMESTAMP,
+										  'disp'=>2,
+											'mid'=>2,
+										  'vendor'=>'乐云网络',
+											'haveflash'=>0,
+											'isshow'=>1,
+											'havetask'=>1,
+											'hideInMarket'=>0,
+										  'group'=>1,
+											'position'=>1,
+										  'system'=>2,
+										  'notdelete'=>1,
+											'open'=>1,
+											'nodup'=>0,
+											'identifier'=>'orguser',
+										  'app_path'=>'dzz',
+											'available'=>1,
+										  'version'=>'2.0',
+											'check_upgrade_time'=>'20220204'),0,1);
+		}
+		if(DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=orguser'))){
+			DB::delete('app_market', array('appurl' => '{adminscript}?mod=orguser'));
+		}
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=share'))){
+		C::t('app_market')->insert(array('appname'=>'分享管理',
+		 								  'appico'=>'appico/201712/21/165535t47bad99b7qqqdwq.png',
+		 								  'appurl'=>'{dzzscript}?mod=share',
+										  'appdesc'=>'管理和查阅所有分享',
+										  'dateline'=>TIMESTAMP,
+										  'disp'=>7,
+											'mid'=>7,
+										  'vendor'=>'乐云网络',
+											'haveflash'=>0,
+											'isshow'=>1,
+											'havetask'=>1,
+											'hideInMarket'=>0,
+										  'group'=>1,
+											'position'=>1,
+										  'system'=>2,
+										  'notdelete'=>1,
+											'open'=>1,
+											'nodup'=>0,
+											'identifier'=>'share',
+										  'app_path'=>'dzz',
+											'available'=>1,
+										  'version'=>'2.0',
+											'check_upgrade_time'=>'20180206'),0,1);
+		}
+		if(DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=share'))){
+			DB::delete('app_market', array('appurl' => '{adminscript}?mod=share'));
+		}
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=comment'))){
+		C::t('app_market')->insert(array('appname'=>'评论',
+		 								  'appico'=>'appico/201712/21/128754pb0s666i6sjws1jc.png',
+		 								  'appurl'=>'{dzzscript}?mod=comment',
+										  'appdesc'=>'Dzz 系统评论组件，结合在其他应用使用，如新闻。其他开发者也可以为自己的应用调用这个通用评论插件',
+										  'dateline'=>TIMESTAMP,
+										  'disp'=>12,
+											'mid'=>12,
+										  'vendor'=>'乐云网络',
+											'haveflash'=>0,
+											'isshow'=>1,
+											'havetask'=>1,
+											'hideInMarket'=>0,
+										  'group'=>1,
+											'position'=>1,
+										  'system'=>2,
+										  'notdelete'=>1,
+											'open'=>1,
+											'nodup'=>0,
+											'identifier'=>'comment',
+										  'app_path'=>'dzz',
+											'available'=>1,
+										  'version'=>'2.0',
+											'check_upgrade_time'=>'20171115'),0,1);
+		}
 		//处理更新之后群组开关问题
 		DB::update('organization',array('manageon'=>1,'available'=>1,'syatemon'=>1),"1");
 		show_msg("基本设置修改完成", "$theurl?step=data&dp=1");
@@ -345,6 +452,7 @@ if($_GET['step'] == 'start') {
 		
 		$count_i = DB::result_first("select COUNT(*) from %t",array('folder'));
 		if($i>=$count_i) {
+
 			show_msg('开始修复回收站...', $theurl.'?step=data&dp=4');
 		}
 		$arr=DB::fetch_first("select fid from %t order by fid limit $i,1",array('folder'));
@@ -614,7 +722,7 @@ function show_header() {
 	</head>
 	<body>
 	<div class="bodydiv">
-	<h1>DzzOffice 数据库升级工具</h1>
+	<h1>DzzOffice 小胡版 数据库升级工具</h1>
 	<div style="width:90%;margin:0 auto;">
 	<table id="menu">
 	<tr>

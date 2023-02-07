@@ -461,9 +461,6 @@ button.input-search-drop {
 }
 .main-allnotice .panel-heading{
 	background-color: #FFFFFF;
-	padding: 20px 0px 10px;
-	margin-left: 22px;
-	margin-right: 17px;
 }
 .main-allnotice .panel-heading img{
     max-width: 30px;
@@ -486,6 +483,9 @@ button.input-search-drop {
 }
 .panel-body .details{
 	padding-left: 10px;
+}
+.details{
+	margin: var(--radius);
 }
 .main-allnotice .panel-body .note{
 	padding-right:40px;

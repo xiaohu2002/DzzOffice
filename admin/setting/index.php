@@ -280,20 +280,26 @@ if (!submitcheck('settingsubmit')) {
 	}elseif ($operation == 'loginset') {
 		if ($back = trim($settingnew['loginset']['background'])) {
 			if (strpos($back, '#') === 0) {
-				$settingnew['loginset']['bcolor'] = $back;
+				$settingnew['loginset']['url'] = '';
+				$settingnew['loginset']['img'] = '';
 			} else {
 				$arr = explode('.', $back);
 				$ext = array_pop($arr);
 				if ($ext && in_array(strtolower($ext), array('jpg', 'jpeg', 'gif', 'png'))) {
 					$settingnew['loginset']['img'] = $back;
-					$settingnew['loginset']['bcolor'] = '';
+					$settingnew['loginset']['url'] = '';
 				} else {
 					$settingnew['loginset']['url'] = $back;
-					$settingnew['loginset']['bcolor'] = '';
+					$settingnew['loginset']['img'] = '';
 				}
 			}
-		} else {
-			$settingnew['loginset']['bcolor'] = '';
+		}
+    if ($back = trim($settingnew['loginset']['bcolor'])) {
+      if (strpos($back, '#') === 0) {
+        $settingnew['loginset']['bcolor'] = $back;
+			}else {
+        $settingnew['loginset']['bcolor'] ='';
+      }
 		}
 	} elseif ($operation == 'qywechat') {
 		switch($_GET['fbind']) {

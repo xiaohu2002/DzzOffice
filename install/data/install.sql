@@ -10,6 +10,35 @@ CREATE TABLE dzz_admincp_session (
   PRIMARY KEY (uid,panel)
 ) ENGINE=MyISAM;
 
+CREATE TABLE IF NOT EXISTS dzz_user_wechat (
+  uid int(10) unsigned NOT NULL DEFAULT '0',
+  openid char(28) NOT NULL DEFAULT '',
+  appid char(18) NOT NULL DEFAULT '',
+  unionid char(29) NOT NULL DEFAULT '',
+  dateline int(10) unsigned NOT NULL DEFAULT '0',
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY openid (openid,appid)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS dzz_test;
+CREATE TABLE IF NOT EXISTS `dzz_test` (
+  `testid` int(10) NOT NULL AUTO_INCREMENT,
+  `name` char(30) NOT NULL DEFAULT '',
+  `dateline` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`testid`),
+  KEY `dateline` (`dateline`)
+) ENGINE=MyISAM;
+
+CREATE TABLE IF NOT EXISTS dzz_user_wechat (
+  uid int(10) unsigned NOT NULL DEFAULT '0',
+  openid char(28) NOT NULL DEFAULT '',
+  appid char(18) NOT NULL DEFAULT '',
+  unionid char(29) NOT NULL DEFAULT '',
+  dateline int(10) unsigned NOT NULL DEFAULT '0',
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY openid (openid,appid)
+) ENGINE=MyISAM;
+
 DROP TABLE IF EXISTS dzz_app_market;
 CREATE TABLE dzz_app_market (
   `appid` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -200,6 +229,7 @@ CREATE TABLE dzz_comment (
   authorid int(10) unsigned NOT NULL DEFAULT '0',
   author varchar(15) NOT NULL DEFAULT '',
   ip varchar(20) NOT NULL DEFAULT '',
+  `xtllq` tinytext,
   `port` smallint(6) unsigned NOT NULL DEFAULT '0',
   dateline int(10) unsigned NOT NULL DEFAULT '0',
   message text NOT NULL,
@@ -795,7 +825,7 @@ CREATE TABLE dzz_resources_cat (
   `default` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '1,系統默認；0，非系统默认',
   iconview tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (id)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS dzz_resources_clipboard;
 CREATE TABLE dzz_resources_clipboard (
@@ -970,6 +1000,9 @@ CREATE TABLE dzz_shares (
   gid int(11) unsigned NOT NULL DEFAULT '0' COMMENT '群组id',
   pfid int(11) NOT NULL DEFAULT '0',
   `password` varchar(256) NOT NULL DEFAULT '' COMMENT '分享密码，留空为公开分享',
+  `yulan` tinyint(1) NOT NULL DEFAULT '0',
+  `login` tinyint(1) NOT NULL DEFAULT '0',
+  `xiazai` tinyint(1) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-4：文件不存在；-3：次数到；-1：已过期；0：正常',
   private tinyint(1) unsigned NOT NULL DEFAULT '1',
   count smallint(6) unsigned NOT NULL DEFAULT '0' COMMENT '分享使用次数',
@@ -1159,7 +1192,6 @@ CREATE TABLE dzz_user_profile (
   PRIMARY KEY (uid,fieldid)
 ) ENGINE=MyISAM;
 
-
 DROP TABLE IF EXISTS dzz_user_profile_setting;
 CREATE TABLE dzz_user_profile_setting (
   fieldid varchar(255) NOT NULL DEFAULT '',
@@ -1182,6 +1214,19 @@ CREATE TABLE dzz_user_profile_setting (
   validate text NOT NULL,
   customable tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (fieldid)
+) ENGINE=MyISAM;
+
+DROP TABLE IF EXISTS dzz_user_login;
+CREATE TABLE dzz_user_login (
+  Id int(11) NOT NULL AUTO_INCREMENT,
+  uid int(10) unsigned NOT NULL DEFAULT '0',
+  username text NOT NULL,
+  usergroup text NOT NULL,
+  dlsb text NOT NULL,
+  ip varchar(20) NOT NULL DEFAULT '',
+  dateline int(10) unsigned NOT NULL DEFAULT '0',
+  type text NOT NULL,
+  PRIMARY KEY (Id)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS dzz_user_status;

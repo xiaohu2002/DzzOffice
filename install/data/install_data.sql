@@ -2,19 +2,18 @@
 -- 转存表中的数据 `dzz_app_market`
 -- 
 INSERT INTO `dzz_app_market` (`appid`,`mid`, `appname`, `appico`, `appdesc`, `appurl`,`appadminurl`, `noticeurl`, `dateline`, `disp`, `vendor`, `haveflash`, `isshow`, `havetask`, `hideInMarket`, `feature`, `fileext`, `group`, `orgid`, `position`, `system`, `notdelete`, `open`, `nodup`, `identifier`, `app_path`, `available`, `version`, `upgrade_version`, `check_upgrade_time`, `extra`) VALUES
-(1, 1, '管理', 'appico/201712/21/184312rthhhg9oujti9tuu.png', '管理员应用集合，方便管理员管理各个管理应用', '{dzzscript}?mod=appmanagement', '', '', 0, 1, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 1, 2, 1, 0, 0, 'appmanagement', 'dzz', 1, '2.0', '', 20171115, ''),
-(2, 2, '机构用户', 'appico/201712/21/131016is1wjww2uwvljllw.png', 'Dzz机构用户管理', '{adminscript}?mod=orguser', '', '', 1377753015, 2, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'orguser', 'admin', 1, '2.0', '', 20171211, ''),
+(1, 1, '管理', 'appico/201712/21/184312rthhhg9oujti9tuu.png', '管理员应用集合，方便管理员管理各个管理应用', '{adminscript}?mod=appmanagement', '', '', 0, 1, '乐云网络', 0, 1, 0, 0, '', '', 3, 0, 1, 2, 1, 1, 0, 'appmanagement', 'admin', 1, '2.0', '', 20171115, ''),
+(2, 2, '机构用户', 'appico/201712/21/131016is1wjww2uwvljllw.png', 'Dzz机构用户管理', '{dzzscript}?mod=orguser', '', '', 1377753015, 2, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'orguser', 'dzz', 1, '2.0', '', 20171211, ''),
 (3, 3, '系统设置', 'appico/201712/21/160754fwfmziiiift3gwsw.png', '系统基础设置', '{adminscript}?mod=setting', '', '', 1377677273, 3, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'setting', 'admin', 1, '2.0', '', 20171115, ''),
 (4, 4, '应用市场', 'appico/201712/21/152718k9g2pc6wouwkklwl.png', '应用管理，应用市场，支持应用在线安装，在线升级等', '{adminscript}?mod=appmarket', '', '', 1377674837, 4, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'appmarket', 'admin', 1, '2.0', '', 20171115, ''),
 (5, 5, '云设置和管理', 'appico/201712/21/171106u1dk40digrrr79ed.png', '设置和管理第三方云盘、云存储等', '{adminscript}?mod=cloud', '', '', 0, 5, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'cloud', 'admin', 1, '2.0', '', 20171115, ''),
-(6, 6, '文件管理', 'appico/201712/21/175535t47bad99b7sssdwq.png', '管理和查看系统所有文件', '{adminscript}?mod=filemanage', '', '', 0, 6, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'filemanage', 'admin', 1, '2.0', '', 20180206, ''),
-(7, 7, '分享管理', 'appico/201712/21/165535t47bad99b7qqqdwq.png', '管理和查阅所有分享', '{adminscript}?mod=share', '', '', 0, 7, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'share', 'admin', 1, '2.0', '', 20180206, ''),
+(6, 6, '文件管理', 'appico/201712/21/175535t47bad99b7sssdwq.png', '管理和查看系统所有文件', '{dzzscript}?mod=filemanage', '', '', 0, 6, '乐云网络', 0, 1, 1, 0, '', '', 1, 0, 1, 2, 1, 1, 0, 'filemanage', 'dzz', 1, '2.0', '', 20180206, ''),
+(7, 7, '分享管理', 'appico/201712/21/165535t47bad99b7qqqdwq.png', '管理和查阅所有分享', '{dzzscript}?mod=share', '', '', 0, 7, '乐云网络', 0, 1, 1, 0, '', '', 1, 0, 1, 2, 1, 1, 0, 'share', 'dzz', 1, '2.0', '', 20180206, ''),
 (8, 8, '系统日志', 'appico/201712/21/113527zz2665xg7d3h2777.png', 'Dzz 日志记录', '{adminscript}?mod=systemlog', '{adminscript}?mod=systemlog&op=admin', '', 0, 8, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'systemlog', 'admin', 1, '2.0', '', 20171115, 'a:2:{s:11:\"installfile\";s:11:\"install.php\";s:13:\"uninstallfile\";s:13:\"uninstall.php\";}'),
 (9, 9, '系统工具', 'appico/201712/21/160537cikgw2v6s6z4scuv.png', '系统维护相关工具集合，如：更新缓存、数据库备份，计划任务，在线升级等', '{adminscript}?mod=system', '', '', 1377677136, 9, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'system', 'admin', 1, '2.0', '', 20171115, ''),
-(10, 10, '应用库', 'appico/201712/21/123754pb0s666i6sjws1jc.png', '通过应用库用户选择安装自己需要的应用', '{dzzscript}?mod=market', '', '{dzzscript}?mod=market&op=notice', 1378615073, 10, '乐云网络', 0, 1, 1, 0, '', '', 1, 0, 1, 0, 1, 0, 0, 'market', 'dzz', 0, '2.0', '', 20171115, ''),
-(11, 11, '投票', 'appico/201712/21/150002d834yjjqnq82qj8z.png', 'Dzz 内置投票组件，结合其他应用使用，如新闻中用到投票插件，其他开发者也可以为自己的应用调用这个通用评论插件', '{dzzscript}?mod=dzzvote', '', '', 1378615073, 11, '乐云网络', 0, 0, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'dzzvote', 'dzz', 1, '2.0', '', 20171115, ''), 
-(12, 12, '评论', 'appico/201712/21/128754pb0s666i6sjws1jc.png', 'Dzz 系统评论组件，结合在其他应用使用，如新闻。其他开发者也可以为自己的应用调用这个通用评论插件', '{dzzscript}?mod=comment', '', '', 1378615073, 12, '乐云网络', 0, 0, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'comment', 'dzz', 1, '2.0', '', 20171115, ''),
-(13, 37, '用户资料管理', 'appico/201712/21/103805dczcm89b0gi8i9gc.png', '管理用户资料、资料审核、认证等', '{adminscript}?mod=member', '', '', 1378615073, 13, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'member', 'admin', 1, '2.0', '', 20171115, '');
+(10, 10, '投票', 'appico/201712/21/150002d834yjjqnq82qj8z.png', 'Dzz 内置投票组件，结合其他应用使用，如新闻中用到投票插件，其他开发者也可以为自己的应用调用这个通用评论插件', '{dzzscript}?mod=dzzvote', '', '', 1378615073, 11, '乐云网络', 0, 0, 1, 0, '', '', 1, 0, 0, 2, 1, 1, 0, 'dzzvote', 'dzz', 1, '2.0', '', 20171115, ''), 
+(11, 11, '评论', 'appico/201712/21/128754pb0s666i6sjws1jc.png', 'Dzz 系统评论组件，结合在其他应用使用，如新闻。其他开发者也可以为自己的应用调用这个通用评论插件', '{dzzscript}?mod=comment', '', '', 1378615073, 12, '乐云网络', 0, 1, 0, 0, '', '', 1, 0, 1, 2, 1, 1, 0, 'comment', 'dzz', 1, '2.0', '', 20171115, ''),
+(12, 37, '用户资料管理', 'appico/201712/21/103805dczcm89b0gi8i9gc.png', '管理用户资料、资料审核、认证等', '{adminscript}?mod=member', '', '', 1378615073, 13, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'member', 'admin', 1, '2.0', '', 20171115, '');
 --
 -- 转存表中的数据 `dzz_app_tag`
 --
@@ -44,7 +43,6 @@ INSERT INTO `dzz_connect` VALUES('FTP', '', '', 'ftp', 'ftp', '', 2, 'connect_ft
 INSERT INTO `dzz_connect` VALUES('七牛云存储', '', '', 'storage', 'qiniu', '', 2, 'connect_storage', '', 0);
 INSERT INTO `dzz_connect` VALUES('OneDrive', '', '', 'pan', 'OneDrive', '', 0, 'connect_onedrive', '', 0);
 INSERT INTO `dzz_connect` VALUES('本地磁盘', '', '', 'disk', 'disk', '', 1, 'connect_disk', '', -1);
-INSERT INTO `dzz_connect` VALUES('Minio', '', '', 'storage', 'Minio', '', 2, 'connect_storage', '', 0);
 INSERT INTO `dzz_connect` VALUES('Qcos', '', '', 'storage', 'QCOS', '', 2, 'connect_storage', '', 0);
 
 --
@@ -145,8 +143,8 @@ INSERT INTO `dzz_usergroup_field` VALUES(5, -1, '', 0, 1);
 INSERT INTO `dzz_usergroup_field` VALUES(6, -1, '', 0, 1);
 INSERT INTO `dzz_usergroup_field` VALUES(7, -1, 'gif, jpg, jpeg, png', 0, 7);
 INSERT INTO `dzz_usergroup_field` VALUES(8, -1, '', 0, 7);
-INSERT INTO `dzz_usergroup_field` VALUES(9, 10240, '', 0, 524287);
-INSERT INTO `dzz_usergroup_field` VALUES(10, 10240, '', 0, 229039);
+INSERT INTO `dzz_usergroup_field` VALUES(9, 0, '', 0, 524287);
+INSERT INTO `dzz_usergroup_field` VALUES(10, 0, '', 0, 229039);
 
 
 --
@@ -178,6 +176,10 @@ INSERT INTO `dzz_setting` VALUES('timeoffset', '8');
 INSERT INTO `dzz_setting` VALUES('reginput', 'a:4:{s:8:"username";s:8:"username";s:8:"password";s:8:"password";s:9:"password2";s:9:"password2";s:5:"email";s:5:"email";}');
 INSERT INTO `dzz_setting` VALUES('newusergroupid', '9');
 INSERT INTO `dzz_setting` VALUES('dateformat', 'Y-n-j');
+INSERT INTO `dzz_setting` VALUES('default_mod', 'index_simple');
+INSERT INTO `dzz_setting` VALUES('forbiddentime', '900');
+INSERT INTO `dzz_setting` VALUES('numberoflogins', '5');
+INSERT INTO `dzz_setting` VALUES('notification', '60');
 INSERT INTO `dzz_setting` VALUES('timeformat', 'H:i');
 INSERT INTO `dzz_setting` VALUES('userdateformat', '');
 INSERT INTO `dzz_setting` VALUES('metakeywords', '');
@@ -201,7 +203,7 @@ INSERT INTO `dzz_setting` VALUES('feed_at_user_title', '同事');
 INSERT INTO `dzz_setting` VALUES('feed_at_range', 'a:3:{i:9;s:1:"1";i:2;s:1:"2";i:1;s:1:"3";}');
 INSERT INTO `dzz_setting` VALUES('at_range', 'a:3:{i:9;s:1:"1";i:2;s:1:"2";i:1;s:1:"3";}');
 --INSERT INTO `dzz_setting` VALUES('sitecopyright', '<img alt="dzzoffice" src="dzz/images/logo.png" width="263" height="82"><div style="font-size: 16px;font-weight:bold;text-align:center;padding: 20px 0 10px 0;text-shadow: 1px 1px 1px #FFF;">dzzoffice</div><div style="font-size: 16px;font-weight:bold;text-align:center;padding: 0 0 25px 0;text-shadow:1px 1px 1px #fff">协同办公平台</div><div style="font-size: 12px;text-align:center;padding: 0 0 10px 0;text-shadow:1px 1px 1px #fff">©2012-2017 DzzOffice</div><div style="font-size: 12px;text-align:center;text-shadow:1px 1px 1px #fff">备案信息</div>');
-INSERT INTO `dzz_setting` VALUES('loginset', 'a:5:{s:5:"title";s:9:"DzzOffice";s:8:"subtitle";s:18:"协同办公平台";s:10:"background";s:0:"";s:8:"template";s:1:"1";s:6:"bcolor";s:17:"rgb(58, 110, 165)";}');
+INSERT INTO `dzz_setting` VALUES('loginset', 'a:5:{s:5:"title";s:9:"DzzOffice";s:8:"subtitle";s:18:"协同办公平台";s:10:"background";s:0:"";s:8:"template";s:1:"1";s:6:"bcolor";s:0:"";}');
 INSERT INTO `dzz_setting` VALUES('privacy', 'a:1:{s:7:"profile";a:17:{s:9:"education";i:1;s:8:"realname";i:-1;s:7:"address";i:0;s:9:"telephone";i:0;s:15:"affectivestatus";i:0;s:10:"department";i:0;s:8:"birthday";i:0;s:13:"constellation";i:0;s:9:"bloodtype";i:0;s:6:"gender";i:0;s:6:"mobile";i:0;s:2:"qq";i:0;s:7:"zipcode";i:0;s:11:"nationality";i:0;s:14:"graduateschool";i:0;s:8:"interest";i:0;s:3:"bio";i:0;}}');
 INSERT INTO `dzz_setting` VALUES('thumbsize', 'a:3:{s:5:"small";a:2:{s:5:"width";i:256;s:6:"height";i:256;}s:6:"middle";a:2:{s:5:"width";i:800;s:6:"height";i:600;}s:5:"large";a:2:{s:5:"width";i:1440;s:6:"height";i:900;}}');
 INSERT INTO `dzz_setting` VALUES('verify', 'a:8:{i:1;a:9:{s:4:"desc";s:0:"";s:9:"available";s:1:"1";s:8:"showicon";s:1:"0";s:5:"field";a:1:{s:8:"realname";s:8:"realname";}s:8:"readonly";i:1;s:5:"title";s:12:"实名认证";s:4:"icon";s:31:"common/verify/1/verify_icon.jpg";s:12:"unverifyicon";s:0:"";s:7:"groupid";a:0:{}}i:2;a:8:{s:5:"title";s:0:"";s:4:"desc";s:0:"";s:9:"available";s:1:"0";s:8:"showicon";s:1:"0";s:8:"readonly";N;s:4:"icon";s:0:"";s:12:"unverifyicon";s:0:"";s:7:"groupid";a:0:{}}i:3;a:8:{s:5:"title";s:0:"";s:4:"desc";s:0:"";s:9:"available";s:1:"0";s:8:"showicon";s:1:"0";s:8:"readonly";N;s:4:"icon";s:0:"";s:12:"unverifyicon";s:0:"";s:7:"groupid";a:0:{}}i:4;a:4:{s:4:"icon";s:0:"";s:12:"unverifyicon";s:0:"";s:9:"available";i:0;s:5:"title";s:0:"";}i:5;a:4:{s:4:"icon";s:0:"";s:12:"unverifyicon";s:0:"";s:9:"available";i:0;s:5:"title";s:0:"";}i:6;a:4:{s:4:"icon";s:0:"";s:12:"unverifyicon";s:0:"";s:9:"available";i:0;s:5:"title";s:0:"";}i:7;a:4:{s:4:"icon";s:0:"";s:12:"unverifyicon";s:0:"";s:9:"available";i:0;s:5:"title";s:0:"";}s:7:"enabled";b:1;}');

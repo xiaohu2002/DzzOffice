@@ -7,7 +7,7 @@
 <!--{eval $loginhash = 'L'.random(4);}-->
 <div class="relative min-h-screen flex">
   <div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
-      <div class="sm:w-1/2 xl:w-3/5 h-full hidden md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative"<!--{if $_G['setting']['loginset']['img']}--> style="background-image: url($_G['setting']['loginset']['img'])"<!--{/if}-->>
+      <div class="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative"<!--{if $_G['setting']['loginset']['img']}--> style="background-image: url($_G['setting']['loginset']['img'])"<!--{/if}-->>
           <div class="absolute bg-gradient-to-b opacity-75 inset-0 z-0" style="<!--{if !$_G['setting']['loginset']['img']}-->--tw-gradient-from: #4f46e5;--tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to, rgba(79, 70, 229, 0));<!--{/if}-->--tw-gradient-to:<!--{if $_G['setting']['loginset']['bcolor']}-->$_G['setting']['loginset']['bcolor']<!--{else}-->#3b82f6<!--{/if}-->"></div>
           <div class="w-full max-w-md z-10">
 						<!--{if $_G[setting][sitename]}--><div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">$_G[setting][sitename]</div><!--{/if}-->
@@ -125,4 +125,5 @@
 	});
 </script> 
 <script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
+<script src="static/bootstrap/js/bootstrap.min.js?vGS" ></script> 
 <!--{template common/footer}-->

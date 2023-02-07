@@ -483,15 +483,14 @@
         <dd class="clearfix">
           <input type="text" class="form-control" name="settingnew[loginset][background]" value="$setting[loginset][background]"/>
         </dd>
-        <dd class="clearfix"><span class="help-inline">{lang for_color_set}设置图片和颜色会同步到首页背景设置。</span></dd>
+        <dd class="clearfix"><span class="help-inline">可以输入以('jpg', 'jpeg', 'gif', 'png')为后缀名的图片或输入网址,设置的图片或网站会同步到首页背景设置。</span></dd>
       </dl>
-      <dl>
-        <dt>{lang Visitor login display}</dt>
-          <dd class="clearfix">
-            <label class="radio-inline"><input type="radio"  name="settingnew[loginset][youkedenlu]" <!--{if $setting[loginset][youkedenlu]=='1'}-->checked="checked"<!--{/if}--> value="1">{lang show}</label>
-            <label class="radio-inline"> <input type="radio" name="settingnew[loginset][youkedenlu]" <!--{if $setting[loginset][youkedenlu]=='0'}-->checked="checked"<!--{/if}--> value="0">{lang no_show}</label>
-          </dd>
-          <dd class="clearfix"><span class="help-inline">{lang After the user selects tourist login, it will jump to the home page}</span></dd>
+			<dl>
+        <dt>登录背景颜色</dt>
+        <dd class="clearfix">
+          <input type="text" class="form-control" name="settingnew[loginset][bcolor]" value="$setting[loginset][bcolor]"/>
+        </dd>
+        <dd class="clearfix"><span class="help-inline">只能输入颜色(如:#FFF),设置的颜色会同步到首页背景设置。</span></dd>
       </dl>
       <dl>
         <dt>{lang Login template}</dt>
@@ -630,7 +629,7 @@
         </dd>
       </dl>
       <dl>
-        <dt>{lang Notification Whether to notify by email}</dt>
+        <dt>{lang 通知是否邮件通知}</dt>
         <dd class="clearfix">
           <label class="radio-inline ">
             <input type="radio" name="settingnew[mail][tzxxyjtz]" value="1" checked>{lang yes}

@@ -35,12 +35,12 @@
               				{lang tools_updatecache_tpl}
 						</label>	
 					</p>
-					<p class="clearfix ml20">
+					<dl>
 						<input class="btn btn-primary" name="confirmed" value="{lang confirms}" type="submit"> &nbsp;
 						<script type="text/javascript">
 							if(history.length > (BROWSER.ie ? 0 : 1)) document.write('<input type="button" class="btn btn-default" value="{lang cancel}" onClick="history.go(-1);">');
 						</script>
-					</p>
+					</dl>
 				</form>
 				<!--{elseif $step==2}-->
 				<p class="ml20">{lang tools_updatecache_waiting}</p>
