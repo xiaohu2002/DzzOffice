@@ -421,7 +421,7 @@ if($method == 'show_license') {
 	echo '<h3>'.lang('install_successfully').'</h3>';
 	echo '<blockquote>
 <p class="text-muted">感谢您选用<a><strong>DzzOffice 小胡版</strong></a></p>
-<p class="text-danger">这个页面是初始安装后临时指导页，系统设置完默认首页后就不会再进入这个页面。</p>
+<p class="text-danger">这个页面是初始安装后临时指导页，并且此页面只会出现一次。</p>
 <p><b>请使用管理员账号登录、并且按照下面的步骤依次配置系统！</b></p>
 <ol>
 <li>进入<a href="admin.php?mod=appmarket&amp;op=cloudappmarket">应用市场</a>选择需要的应用，点击一键安装。安装完成后到“已安装”标签， 启用此应用；
