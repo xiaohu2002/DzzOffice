@@ -440,3 +440,15 @@ hr{border-top-width:1px}img{border-style:solid}textarea{resize:vertical}input::p
     box-shadow: none;
     border-radius: .5rem;
 }
+.modal-open{
+    overflow: hidden;
+}
+.panel-warning{border-color:#faebcc}.panel-warning>.panel-heading{color:#8a6d3b;background-color:#fcf8e3;border-color:#faebcc}
+.panel-warning>.panel-heading+.panel-collapse>.panel-body{border-top-color:#faebcc}
+.panel-warning>.panel-heading .badge{color:#fcf8e3;background-color:#8a6d3b}
+.panel-warning>.panel-footer+.panel-collapse>.panel-body{border-bottom-color:#faebcc}
+.panel-danger{border-color:#ebccd1}.panel-danger>.panel-heading{color:#a94442;background-color:#f2dede;border-color:#ebccd1}
+.panel-danger>.panel-heading+.panel-collapse>.panel-body{border-top-color:#ebccd1}
+.panel-danger>.panel-heading .badge{color:#f2dede;background-color:#a94442}
+.panel-heading{padding:10px 15px;border-bottom:1px solid transparent;border-top-left-radius:3px;border-top-right-radius:3px}
+.panel-heading>.dropdown .dropdown-toggle{color:inherit}.panel-title{margin-top:0;margin-bottom:0;font-size:16px;color:inherit}
