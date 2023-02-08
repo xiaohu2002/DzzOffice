@@ -419,6 +419,17 @@ if($method == 'show_license') {
 	show_header();
 	echo '<iframe src="../misc.php?mod=syscache" style="display:none;"></iframe>';
 	echo '<h3>'.lang('install_successfully').'</h3>';
+	echo '<blockquote>
+<p class="text-muted">感谢您选用<a><strong>DzzOffice 小胡版</strong></a></p>
+<p class="text-danger">这个页面是初始安装后临时指导页，系统设置完默认首页后就不会再进入这个页面。</p>
+<p><b>请使用管理员账号登录、并且按照下面的步骤依次配置系统！</b></p>
+<ol>
+<li>进入<a href="admin.php?mod=appmarket&amp;op=cloudappmarket">应用市场</a>选择需要的应用，点击一键安装。安装完成后到“已安装”标签， 启用此应用；
+<p class="help-block">系统默认仅预装了少量的管理应用，更多应用需要到应用市场内选择安装</p>
+</li>
+<li>进入<a href="admin.php?mod=setting">系统设置</a>设置平台名称、logo、平台版权等系统基本设置；</li>
+</ol>
+   </blockquote>';
 	echo '<h4 class="red">'.lang('handwork_del').'"./install/index.php"</h4>';
 	echo '<div style="text-align:right;width:80%;padding-top:50px;"><a href="'.$bbserver.'" class="button" ><input type="button" value="'.lang('enter_desktop').'"></a></div>';
 	show_footer();

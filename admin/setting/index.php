@@ -81,6 +81,12 @@ if (!submitcheck('settingsubmit')) {
 		$navtitle = lang('loginSet').' - '.lang('appname');
 		$setting['strongpw'] = dunserialize($setting['strongpw']);
 		$setting['welcomemsgtitle'] = cutstr(trim(dhtmlspecialchars($setting['welcomemsgtitle'])), 75);
+	} elseif ($operation == 'notification') {
+		$navtitle = lang('Notification Settings').' - '.lang('appname');
+	} elseif ($operation == 'qywechat') {
+		$navtitle = lang('weinxin_company').' - '.lang('appname');
+	} elseif ($operation == 'denlu') {
+		$navtitle = lang('loginSet').' - '.lang('appname');
 	}elseif($operation == 'space'){//获取空间设置结果
 		$navtitle=lang('spaceSet').' - '.lang('appname');
 		$openarr=json_encode(array('orgids'=>$open));
@@ -91,6 +97,8 @@ if (!submitcheck('settingsubmit')) {
 		$perms = get_permsarray();//获取所有权限;
 		$permgroups = C::t('resources_permgroup')->fetch_all();
     $navtitle=lang('permGroupSet').' - '.lang('appname');
+	}elseif ($operation == 'qqlogin') {
+		$navtitle = lang('qq_longin_set').' - '.lang('appname');
 	}elseif ($operation == 'datetime') {
 		$navtitle = lang('time_or_date').' - '.lang('appname');
 		$checktimeformat = array($setting['timeformat'] == 'H:i' ? 24 : 12 => 'checked');

@@ -5,8 +5,8 @@ body {height:100%;margin:0;padding:0;overflow:auto;}
 body{background:#2d2f3a; text-align:left; color:#FFF;text-shadow: 1px 1px 1px RGBA(0,0,0,.3)}
 body, td, button{ color:#FFF; font-size:15px;line-height:1.5 ;font-family:Tahoma,'Microsoft Yahei','Simsun'; }
 
-a{ color:#FFF; text-decoration:none; }
-	a:hover { text-decoration:none;background:RGBA(255,255,255,0.1); }
+a{ color:#3792ef; text-decoration:none; }
+	a:hover { text-decoration:none;background:RGBA(255,255,255,0.1);border-radius：.5rem }
 	a img{ border:none; }
 .red{ color:yellow}
 .container{
@@ -16,6 +16,27 @@ a{ color:#FFF; text-decoration:none; }
 .step_0{
 	padding:0;
 	height:100%;
+}
+p{
+  margin-bottom: 20px;
+}
+blockquote{
+	padding: 0 20px;
+	margin: 0 0 20px;
+  font-size: 17.5px;
+  border-left: 5px solid #eee;
+}
+.text-muted{
+	color: #777;
+}
+.text-danger{
+  color: #ff0000;
+}
+ol{
+	padding-left: 20px;
+}
+b, strong{
+	font-weight: 700;
 }
 h3,h2{
 	

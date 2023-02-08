@@ -136,23 +136,34 @@
      
       <!--{elseif $operation=='loginset'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
-		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='denlu'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
-		<li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
+        <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+      </ul>
+			<!--{elseif $operation=='qqlogin'}-->
+      <ul class="nav navbar-nav nav-pills-bottomguide">
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+        <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li> 
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='access'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
-		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='datetime'}-->
@@ -161,13 +172,14 @@
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=datetime">{lang time_set}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
-		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
       </ul>
       <!--{elseif $operation=='sec'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
-		<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{/if}--> 
@@ -459,6 +471,49 @@
             }
         })
     </script>
+    <!--{elseif $operation=='qqlogin'}-->
+    <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <input type="hidden" value="{FORMHASH}" name="formhash">
+      <input type="hidden" value="qqlogin" name="operation">
+      <dl>
+        <dt>{lang open_qq_login}</dt>
+        <dd class="clearfix">
+          <label class="radio-inline "><input type="radio" name="settingnew[qq_login]" value="0" <!--{if !$setting[qq_login]}-->checked<!--{/if}--> onclick="jQuery('#qqlogin_wrapper').addClass('hide');">{lang no_enable}</label>
+          <label class="radio-inline "><input type="radio" name="settingnew[qq_login]" value="1" <!--{if $setting[qq_login]=='1'}-->checked<!--{/if}--> onclick="jQuery('#qqlogin_wrapper').removeClass('hide');">{lang enable}</label>
+        </dd>
+      </dl>
+      <div id="qqlogin_wrapper"<!--{if !$setting[qq_login]}--> class="hide"<!--{/if}-->>
+        <dl>
+          <dt>QQ APPID</dt>
+          <dd class="clearfix">
+            <input type="text" class="form-control" name="settingnew[qq_appid]" value="$setting[qq_appid]" />
+          </dd>
+          <dd class="clearfix"> <span class="help-inline">{lang qq_app_id}</span> </dd>
+          </dl>
+        <dl>
+          <dt>QQ APPKAY</dt>
+          <dd class="clearfix">
+            <input type="text" class="form-control" name="settingnew[qq_appkey]" value="$setting[qq_appkey]" />
+          </dd>
+          <dd class="clearfix"> <span class="help-inline">{lang qq_app_key}</span> </dd>
+        </dl>
+        <dl>
+          <dt>{lang whether_allow_direct}</dt>
+          <dd class="clearfix">
+            <label class="radio-inline "><input type="radio" name="settingnew[qq_bind]" value="1" <!--{if $setting[qq_bind]=='1'}-->checked<!--{/if}-->>{lang user_must_binding}</label>
+            <label class="radio-inline "><input type="radio" name="settingnew[qq_bind]" value="0" <!--{if !$setting[qq_bind]}-->checked<!--{/if}-->>{lang allow_direct_use}</label>
+          </dd>
+          <dd class="clearfix"> <span class="help-inline">{lang user_must_binding_text}</span> </dd>
+        </dl>
+        <dl>
+          <dt>{lang token_url}</dt>
+          <dd class="clearfix"> <b class="help-inline">$_G['siteurl']user.php</b> </dd>
+        </dl>
+      </div>
+      <dl>
+          <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
+      </dl>
+    </form>
     <!--{elseif $operation=='loginset'}-->
     <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
       <input type="hidden" value="{FORMHASH}" name="formhash">

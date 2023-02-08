@@ -396,9 +396,9 @@ function show_license() {
 				<h4>$version</h4>
 				<h4>$xhversion</h4>
 				<div class="spacer"></div>
-			<div ><a href="?step=1" class="button_start"><span>$title</span></a></div>
+			<div ><a href="?step=1" class="button_start" style="color: #fff;"><span>$title</span></a></div>
 			<div class="spacer"></div>
-			<div style="font-size: large;line-height: 30px;">小胡二次开发  <a href="https://gitee.com/xh2002">https://gitee.com/xh2002</a><br>在使用过程中如有问题请及时反馈至dzzoffice官方或我的主页</div>
+			<div style="font-size: large;line-height: 30px;">小胡二次开发  <a href="https://gitee.com/xh2002">https://gitee.com/xh2002</a><br>在使用过程中如有问题请及时反馈到gitee上,我也在官方2群中，可以@我</div>
 		</td></tr>
 		</table>
 	
