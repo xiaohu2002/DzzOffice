@@ -7,7 +7,7 @@ var html=''
   	html+='	<div class="right_ifed">';
     html+=' 	<div class="main_fed">';
     html+='  		 <div class="source_fed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" class="appuser_sfed skip_mmfed">'+arr['author']+'</a><span class="cont_sfed">'+__lang.talk+'：</span> </div>';
-    html+='  		<div class="master_mfed"> <span class="lquote_mmfed"></span><span class="content_mmfed">'+arr['message']+'</span><span class="rquote_mmfed"></span> </div>';
+    html+='  		<div class="master_mfed"><span class="content_mmfed">'+arr['message']+'</span></div>';
 	html+='	   <div class="attachment_fed">';
 for(var i in arr['attachs']){
 	var attach=arr['attachs'][i];
@@ -71,7 +71,6 @@ for(var i in arr['attachs']){
    html+='   		<div class="action_mfed clearfix">';
    html+='     			<div class="btn_amfed">';
    html+='      	 		<ul>';
-   //html+='             			<li class="more_bacfed"><a hidefocus="true" href="javascript:void(0);" onclick="feed_edit(\''+arr['cid']+'\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\')">'+__lang.edit+'</a></li>';
    html+='        	 			<li class="more_bamfed"><a hidefocus="true" href="javascript:void(0);" onclick="feed_delete(\''+arr['cid']+'\',\'comment_'+arr['cid']+'\')">'+__lang.delete+'</a></li>';
    html+='         				<li class="reply_bamfed"><a hidefocus="true" href="javascript:void(0);" onclick="getReplyForm(\''+arr['cid']+'\',\'0\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\');">'+__lang.reply+'</a></li>';
    html+='      	 		</ul>';
@@ -114,11 +113,11 @@ function feed_reply(arr){
      html+='   <div class="item_cfed">';
      html+='     <div class="left_icfed"> <a href="user.php?uid='+arr['authorid']+'" title="" hidefocus="true"> '+arr['avatar']+' </a> </div>';
      html+='     <div class="right_icfed">';
-     html+='       <div class="master_cfed"> <a href="user.php?uid='+arr['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true">'+arr['author']+'</a> ';
+     html+='     <a href="user.php?uid='+arr['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true">'+arr['author']+'</a><span class="source_fed">说：</span><div class="master_cfed">';
 	 if(arr['rpost']){
-		html+='<span class="amal_fed">'+__lang.reply+'</span>  <a href="user.php?uid='+arr['rpost']['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true" target="_blank">'+arr['rpost']['author']+'</a>'; 
+		html+='<span class="amal_fed">对</span>  <a href="user.php?uid='+arr['rpost']['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true" target="_blank">'+arr['rpost']['author']+'</a>'; 
 	 }
-	 html+='          <span>：'+arr['message']+'</span> ';
+	 html+='          <span>'+arr['message']+'</span> ';
 	 html+='		</div>';
 	html+='	   <div class="attachment_fed">';
 	for(var i in arr['attachs']){

@@ -13,7 +13,7 @@ if(!defined('IN_DZZ')) {
 include_once libfile('function/organization');
 $ismobile=helper_browser::ismobile();
 $ids =isset($_GET['ids'])?rawurldecode($_GET['ids']):'';
-
+$navtitle='人员管理';
 $zero=$_GET['zero']?urldecode($_GET['zero']):lang('no_institution_users');//无机构用户名称
 $nouser=intval($_GET['nouser']);//不显示用户
 $stype=intval($_GET['stype']); //0:可以选择机构和用户；1：仅选择机构和部门：2：仅选择用户

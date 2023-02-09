@@ -134,6 +134,7 @@ html, body {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	text-indent:0;
 }
 .module-list-view .c1 {
 	position: relative;

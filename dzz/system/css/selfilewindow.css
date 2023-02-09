@@ -1,5 +1,6 @@
 .modal-content-inner{
 	background-color: #FFFFFF;
+	border-radius:  var(--radius);
 }
 .modal-title{
 	text-align: center;
@@ -57,9 +58,11 @@
 }
 .jstree-default .jstree-wholerow-hovered{
 	background: #e6e8eb;
+	border-radius:  var(--radius);
 }
 .jstree-default .jstree-wholerow-clicked{
 	background:#3779ff;
+	border-radius:  var(--radius);
 }
 .jstree-default .jstree-wholerow-clicked + .jstree-ocl {
     color: #FFFFFF;

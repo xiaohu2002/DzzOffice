@@ -182,10 +182,10 @@ if ($do == 'adddowns') {
     }
     //echo $nextpage;die;
     if ($ismobile) {
+			$navtitle='分享文件';
         include template('mobile/list');
     } else {
         include template('list');
     }
-
 }
 ?>

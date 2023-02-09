@@ -1,5 +1,6 @@
 <?php
 $lang = array (
+	'appname' => '分享',
 	'edit_time'=>'修改时间',
 	'loading_all'=>'已全部加载',	
 	'has_blocked'=>'已屏蔽',

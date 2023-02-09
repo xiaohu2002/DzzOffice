@@ -39,7 +39,6 @@
     padding: 5px 10px;
     border-bottom: 1px solid #DDD;
     cursor: pointer;
-    /* border-top: 1px solid #C8C8C8; */
 }
 .atwho-view ul li img{
 	max-height: 24px;
@@ -184,9 +183,6 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	margin: 0 20px;
 	border-top:1px solid #DDD;
 }
-.comment-reply-form .itemfeed{
-	border:none;
-}
 .comment-page .pagination{
 	margin:10px 0;
 }
@@ -237,6 +233,7 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	border-style:solid;
 	border-color:#e1e1e1;
 	border-width:0px 1px 1px 1px;
+	border-radius:0 0 .5rem .5rem;
 }
 .list_acpsw {
 	float: left;
@@ -281,6 +278,7 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	border: 1px solid #e1e1e1;
 	padding: 3px;
 	background: #fff;
+	border-radius:.5rem .5rem 0 0;
 }
 .wrap_tcpsw {
 	background: #fff;
@@ -432,9 +430,11 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	line-height: 14px;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	padding: 5px 0 5px;
-	
-	border-top: 1px solid #e7e7e7;
-	*zoom:1
+	box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
+  border: 1px solid #ebeef5;
+  border-radius: var(--radius);
+  padding: 10px;
+  margin: 10px 0;
 }
 .comment_ifed .itemfeed{
 	border-top: none;
@@ -442,6 +442,7 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 .left_ifed img{
 	width:35px;
 	height:35px;
+	border-radius: 50%
 }
 .right_ifed {
 	padding-left: 45px
@@ -504,43 +505,23 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	vertical-align: middle
 }
 .master_mfed {
-	font-size: 14px;
-	padding: 5px;
-	color: #000;
-	line-height: 22px;
-	word-break: break-all;
-	word-wrap: break-word
+	background: #f2f6fc;
+  padding: 15px;
+  border-radius: var(--radius);
 }
 .item_afed{
 	padding-bottom:10px;
 }
 .item_afed:hover {
-    background-color: #FBFBFB;
-}
-.lquote_mmfed {
-	width: 16px;
-	height: 11px;
-	margin-right: 5px;
-	line-height: 999px;
-	background: url(ico_feed.png) no-repeat -25px 0;
-	display: inline-block;
-	vertical-align: middle;
-	overflow: hidden
-}
-.rquote_mmfed {
-	width: 16px;
-	height: 11px;
-	margin-left: 5px;
-	line-height: 999px;
-	background: url(ico_feed.png) no-repeat -50px 0;
-	display: inline-block;
-	vertical-align: middle;
-	overflow: hidden
+  background-color: #FBFBFB;
+	border-radius: var(--radius)
 }
 .itemfeed .comment_ifed {
 	padding:5px 0 
 }
-
+.content_mmfed{
+	font-size: larger;
+}
 .main_fed{
 	min-height:60px;	
 }
@@ -570,6 +551,9 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	color: #aaa;
 	font-size: 12px
 }
+.btn_amfed a:hover{
+	color: #409eff;
+}
 .btn_amfed i {
 	font-style: normal
 }
@@ -578,7 +562,7 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 *height:auto
 }
 .reply_bamfed a i {
-	line-height: 12px\0;
+	line-height: 12px;
 	cursor: pointer
 }
 .from_fed {
@@ -675,12 +659,10 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	overflow: hidden
 }
 .master_cfed {
-	color: #666;
-	font-size: 12px;
-	line-height: 20px;
-	margin-top: -4px;
-	word-break: break-all;
-	word-wrap: break-word
+	background: #f2f6fc;
+  padding: 10px;
+  border-radius: var(--radius);
+  font-size: larger;
 }
 
 .dehua_mcfed {
@@ -709,9 +691,6 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	line-height: 18px;
 	margin-left: 10px
 }
-.hover_cmt_fed {
-	background: #fbfbfb
-}
 .hover_cmt_fed .btn_acfed {
 	display: inline
 }
@@ -734,12 +713,7 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	color: #2d83cf
 }
 .who_cpsw {
-	display: none;
-	background-color:#F7F7F7;
 	padding: 3px 10px;
-	border-color:#e1e1e1;
-	border-width:1px 1px 0 1px;
-	border-style:solid;
 }
 .who_cpsw span {
 	vertical-align: middle;
@@ -857,6 +831,7 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	border-color: #DDD;
 	background: #FEFEFE;
 	box-shadow: 1px 2px 2px rgba(0,0,0,0.3);
+	border-radius: var(--radius);
 }
 .sllt { padding: 5px !important; }
 .sllt .sllt-wrap{

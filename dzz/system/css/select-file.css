@@ -167,7 +167,7 @@ li{
 }
 .user-select-content-right .sele-right-classa li:hover {
     background-color: #f2f2f2;
-    border-radius: 3px;
+    border-radius:  var(--radius);
 }
 .user-select-content-right .sele-right-classa li:hover .ti-close {
     display: block;
@@ -331,9 +331,9 @@ li{
 }
 /*新建上传按钮开始*/
 .dropdown-menu {
-    border-radius: 2px;
     box-shadow: 0px 4px 13px 0px rgba(62, 62, 62, 0.28);
     border: 1px solid #d8d8d8;
+    border-radius:  var(--radius);
 }
 .dropdown-menu>li>a {
     padding: 8px 8px 8px 35px;
@@ -419,9 +419,6 @@ li{
 /*内容中间部分开始*/
 .select-filecenter{
 	position: relative;
-	border-top: 1px solid #e5e5e5;
-	margin-top: 10px;
-	border-bottom: 1px solid #E5E5E5;
 }
 .bs-left-container{
 	background: #FFFFFF;
@@ -540,13 +537,16 @@ li{
 }
 .Icoblock.middleicon .select-tdtop{
 	border: 1px solid #EEEEEE;
+	border-radius: var(--radius);
 }
 .hover.Icoblock.middleicon .select-tdtop{
 	background-color:#F2F2F2;
+	border-radius: var(--radius);
 }
 .Icoselected.Icoblock.middleicon .select-tdtop{
 	border: 1px solid #3779ff;
-    outline: 1px solid #3779ff;
+  outline: 1px solid #3779ff;
+	border-radius: var(--radius);
 }
 .Icoblock.middleicon .td_ico_item_name {
     overflow: hidden;

@@ -10,7 +10,7 @@ UE.I18N['en'] = {
         'anchor':'Anchor', 'undo':'Undo', 'redo':'Redo', 'bold':'Bold', 'indent':'Indent', 'snapscreen':'SnapScreen',
         'italic':'Italic', 'underline':'Underline', 'strikethrough':'Strikethrough', 'subscript':'SubScript','fontborder':'text border',
         'superscript':'SuperScript', 'formatmatch':'Format Match', 'source':'Source', 'blockquote':'BlockQuote',
-        'pasteplain':'PastePlain', 'selectall':'SelectAll', 'print':'Print', 'preview':'Preview',
+        'pasteplain':'PastePlain', 'selectall':'SelectAll', 'print':'Print', 'preview':'Preview','kityformula':'kityformula','kityminder':'kityminder',
         'horizontal':'Horizontal', 'removeformat':'RemoveFormat', 'time':'Time', 'date':'Date',
         'unlink':'Unlink', 'insertrow':'InsertRow', 'insertcol':'InsertCol', 'mergeright':'MergeRight', 'mergedown':'MergeDown',
         'deleterow':'DeleteRow', 'deletecol':'DeleteCol', 'splittorows':'SplitToRows','insertcode':'insert code',

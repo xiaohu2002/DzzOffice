@@ -13,7 +13,7 @@ if(!defined('IN_DZZ')) {
 if(empty($_G['uid'])){
 	include template('common/header_reload');
 	echo "<script type=\"text/javascript\">";
-	echo "try{top._login.logging();win.Close();}catch(e){location.href='user.php?mod=logging'}";
+	echo "try{top._login.login();win.Close();}catch(e){location.href='user.php?mod=login'}";
 	echo "</script>";	
 	include template('common/footer_reload');
 	exit();

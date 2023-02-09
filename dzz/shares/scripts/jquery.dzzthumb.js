@@ -68,7 +68,7 @@
 			html += '			<b data_title="'+__lang.keyboard+'“→”'+__lang.key_under+'" btn="next" class="pr-btn-next" style="z-index: 116;">'+__lang.under_a+'</b>';
 			html += '		</div>';
 			html += '		<div id="pre_loading" style="display: none;" class="previewer-loading">'+__lang.loading_in+'</div>';
-			html += '		<div id="previewer-photo" class="previewer-photo" style="overflow: visible; z-index: 114; display: none; left: 0px; top: 40px;"></div>';
+			html += '		<div id="previewer-photo" class="previewer-photo" style="overflow: visible; z-index: 114; display: none; left: 0px; top: 40px;background-color: rgba(0,0,0,.5);"></div>';
 			html += '	</div>';
 			html += '</div>';
 			html += '<div id="prev-tips" class="prev-tips" >'+__lang.keyboard+'“←”'+__lang.key_on+'</div>';

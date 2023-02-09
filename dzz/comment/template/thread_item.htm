@@ -7,7 +7,7 @@
 		<div class="main_fed">
 			<div class="source_fed">
 				<a href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true" class="appuser_sfed skip_mmfed">$value[author]</a><span class="cont_sfed">{lang talk}：</span> </div>
-			<div class="master_mfed"> <span class="lquote_mmfed"></span><span class="content_mmfed">$value[message]</span><span class="rquote_mmfed"></span> </div>
+			<div class="master_mfed"><span class="content_mmfed">$value[message]</span></div>
 			<div class="attachment_fed">
 				<!--{loop $value[attachs] $attach}-->
 
@@ -74,23 +74,24 @@
 			<div class="action_mfed clearfix">
 				<div class="btn_amfed">
 					<ul>
-						<!--{if $_G['uid']==$value[authorid] || $_G[adminid]==1}-->
-						<!--<li class="more_bamfed">
+						<!--{if $_G[adminid]==1}-->
+						<li class="more_bacfed">
 							<a hidefocus="true" href="javascript:void(0);" onclick="feed_edit('$value[cid]','$_GET[allowattach]','$_GET[allowat]','$_GET[allowsmiley]')">{lang edit}</a>
-						</li>-->
+						</li>
+						<!--{/if}-->
+						<!--{if $_G['uid']==$value[authorid] || $_G[adminid]==1}-->
+						<!--{if $_G['uid']>0}-->
 						<li class="more_bamfed">
 							<a hidefocus="true" href="javascript:void(0);" onclick="feed_delete('$value[cid]','comment_$value[cid]')">{lang delete}</a>
 						</li>
-
 						<!--{/if}-->
-						<!--{if $_G['uid']>0}-->
+						<!--{/if}-->
 						<li class="reply_bamfed">
-							<a hidefocus="true" href="javascript:void(0);" onclick="getReplyForm('$value[cid]','0','$_GET[allowattach]','$_GET[allowat]','$_GET[allowsmiley]');">{lang reply}</a>
+							<a hidefocus="true" href="javascript:void(0);" onclick="getReplyForm('$value[cid]','0','$_GET[allowattach]','$_GET[allowat]','$_GET[allowsmiley]');">评论</a>
 						</li>
-						<!--{/if}-->
 					</ul>
 				</div>
-				$value[dateline]</div>
+				$value[dateline] $value[xtllq] <!--{if $_G[adminid]==1}-->$value[ip]<!--{/if}--></div>
 		</div>
 		<div id="comment_reply_{$value[cid]}" class="comment_ifed">
 			<!--{if $value[replies]>0}-->

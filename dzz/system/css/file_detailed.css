@@ -545,9 +545,9 @@
 }
 .right-numerbottom .right-numer-carousel{
 	float: left;
-	margin-right: 0.5rem;
+	margin-right: var(--radius);
 	border-radius: 50%;
-	margin-bottom: 0.5rem;
+	margin-bottom: var(--radius);
 	text-align: center;
 	cursor: pointer;
 	position: relative;

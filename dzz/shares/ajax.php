@@ -125,5 +125,4 @@ if($ismobile){
 }else{
     include template('list_item');
 }
-dexit();
 ?>

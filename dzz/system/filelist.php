@@ -3,7 +3,7 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 global $_G;
-Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
+Hook::listen('check_login');
 $uid = $_G['uid'];
 if(!C::t('folder')->check_home_by_uid($uid)){
     C::t('folder')->fetch_home_by_uid($uid);

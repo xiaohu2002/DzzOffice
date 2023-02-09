@@ -4,7 +4,7 @@
 <link href="static/dzzthumb/jquery.dzzthumb.css?{VERHASH}" rel="stylesheet" media="all">
 <script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/dzzthumb/jquery.dzzthumb.js?{VERHASH}"></script>
-<script type="text/javascript" src="dzz/vapp/js/_hotkey.js?{VERHASH}"></script>
+<script type="text/javascript" src="{MOD_PATH}/scripts/_hotkey.js?"></script>
 <!--{template common/header_simple_end}-->
 
 <!--头部信息框-->
@@ -16,30 +16,21 @@
                 <!--选中后的效果-->
                 <div class="col sharepame-selected">
                     <span>{lang user_select_selected}<span class="ex-number"></span>{lang nape}</span>
-                    <!--<button type="button" class="btn btn-primary" style="padding:4px 20px ;" onclick="downmorefile();return false;">下载</button>-->
                 </div>
             </div>
+					<!--{if $share[xiazai]==0}-->
             <div class="select-toperate select-toperate-center  toolButtons">
                 <div class="btns">
-                   <!-- <a node-type="btn-item" href="javascript:void(0);" class="shares-topbtns share_save">
-                        <span class="dzz dzz-save" data-key="save" data-toggle="tooltip" data-placement="bottom"
-                              data-original-title="{lang save}"></span>
-                    </a>-->
-                    <a node-type="btn-item" href="javascript:void(0);" onclick="downfileselect();return false;"
-                       class="shares-topbtns">
-                        <span class="dzz dzz-download" data-key="download" data-toggle="tooltip" data-placement="bottom"
-                              data-original-title="{lang download}"></span>
+                    <a node-type="btn-item" href="javascript:void(0);" onclick="downfileselect();return false;" class="shares-topbtns">
+                        <span class="dzz dzz-download" data-key="download" data-toggle="tooltip" data-placement="bottom" data-original-title="{lang download}"></span>
                     </a>
                 </div>
             </div>
+					 <!--{/if}-->
             <div class="select-toperate select-toperate-right">
                 <div class="btn-group pull-right" role="group">
-                    <a type="button" class="btn btn-group-list" onclick="viewSwitch(this,'.module-list-view')"><i
-                            class="dzz dzz-view-list" data-toggle="tooltip" data-placement="bottom"
-                            data-original-title="{lang change_list}"></i></a>
-                    <a type="button" class="btn btn-group-thumbnail" onclick="viewSwitch(this,'.module-grid-view')"
-                       data-toggle="tooltip" data-placement="bottom" data-original-title="{lang change_thumbnail}"><i
-                            class="dzz dzz-view-module"></i></a>
+                    <a type="button" class="btn btn-group-list" onclick="viewSwitch(this,'.module-list-view')"><i class="dzz dzz-view-list" data-toggle="tooltip" data-placement="bottom" data-original-title="{lang change_list}"></i></a>
+                    <a type="button" class="btn btn-group-thumbnail" onclick="viewSwitch(this,'.module-grid-view')" data-toggle="tooltip" data-placement="bottom" data-original-title="{lang change_thumbnail}"><i class="dzz dzz-view-module"></i></a>
                 </div>
             </div>
         </div>
@@ -48,8 +39,8 @@
 <div id="contains_content">
     <!--固定的头部-->
     <!--{template common/commer_header}-->
-    <div class="bs-container1 clearfix">
-        <div class="bs-main-container" style="padding: 0px;">
+    <div class="bs-container clearfix">
+        <div class="bs-main-container" style="padding: 0 0 20px 0;">
             <div class="container">
                 <div class="sharepame-pictitle clearfix">
                     <img src="$share[img]" class="sharepame-images">
@@ -67,8 +58,6 @@
                         <li class="home" data-href="{DZZSCRIPT}?mod=shares&sid=$osid">
                             <a href="javascript:;">{lang all_typename_attach}<span>></span></a>
                         </li>
-                        <!--<li><a href="javascript:;">分享<span>></span></a></li>
-              <li class="active">文件</li>-->
                     </ol>
 
                 </div>
@@ -80,9 +69,7 @@
                             <!--选中后的效果-->
                             <div class="list-wrapper clearfix">
                                 <!--{loop $list $value}-->
-                                <div node-type="item" data-dpath="$value[dpath]"
-                                <!--{if $value[type]=='folder' && $value[dhpath]}--> data-containpath="$value[dhpath]"
-                                <!--{/if}--> data-type="$value[type]" class="item data-list-col file-icoitem bigicon
+                                <div node-type="item" data-dpath="$value[dpath]" <!--{if $value[type]=='folder' && $value[dhpath]}--> data-containpath="$value[dhpath]" <!--{/if}--> data-type="$value[type]" class="item data-list-col file-icoitem bigicon
                                 Icoblock ">
                                 <table width="180" height="180" style="table-layout:fixed;">
                                     <tbody>
@@ -109,27 +96,22 @@
                                     </tr>
                                     <tr class="IcoFont_text">
                                         <td align="center" valign="middle">
-                                            <div class="IcoText_div" style="width:135px;max-height:40px;"
-                                                 title="$value[name]">
-                                                <a class="ico_item ico_item_name IcoText_folder"
-                                                   style="width:135px;height:40px;overflow:hidden" title="$value[name]">$value[name]</a>
+                                            <div class="IcoText_div" style="width:135px;max-height:40px;" title="$value[name]">
+                                                <a class="ico_item ico_item_name IcoText_folder" style="width:135px;height:40px;overflow:hidden" title="$value[name]">$value[name]</a>
                                             </div>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div class="backgound_radius"
-                                     style="position: absolute; left: 0px; top: 0px; z-index: -5;"></div>
+                                <div class="backgound_radius" style="position: absolute; left: 0px; top: 0px; z-index: -5;"></div>
                             </div>
                             <!--{/loop}-->
                             <!--{if $nextpage}-->
-                            <div class="more text-center pull-left"
-                                 onclick="getMore(this,'{DZZSCRIPT}?mod=shares&op=ajax&morepath=$morepath&page=$nextpage&rander=grid&marker=$marker')">
+                            <div class="more text-center pull-left" onclick="getMore(this,'{DZZSCRIPT}?mod=shares&op=ajax&morepath=$morepath&page=$nextpage&rander=grid&marker=$marker')">
                                 <table width="150" height="120" style="table-layout:fixed;">
                                     <tbody>
                                     <tr>
-                                        <td align="center" valign="middle" style=""><span
-                                                style="">{lang upload_more}</span></td>
+                                        <td align="center" valign="middle" style=""><span style="">{lang upload_more}</span></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -145,23 +127,15 @@
                                 <!--选框-->
                                 <!-- 第一列 -->
                                 <div node-type="title-col" data-key="name" class="col c1" style="width: 50%">
-                                    <div class="name"><span>{lang filename}</span> <span node-type="order-status"
-                                                                                         class="asc desc"
-                                                                                         style="visibility: hidden;"></span>
+                                    <div class="name"><span>{lang filename}</span> <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span>
                                     </div>
                                 </div>
                                 <!-- 其他列 -->
 
-                                <div node-type="title-col" data-key="size" class="col" style="width: 12%;"> {lang
-                                    file_size} <span node-type="order-status" class="asc desc"
-                                                     style="visibility: hidden;"></span></div>
-                                <div node-type="title-col" data-key="type" class="col"
-                                     style="width: 15%;border-right: none;"> {lang file_type} <span
-                                        node-type="order-status" class="asc desc" style="visibility: hidden;"></span>
+                                <div node-type="title-col" data-key="size" class="col" style="width: 12%;"> {lang file_size} <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span></div>
+                                <div node-type="title-col" data-key="type" class="col" style="width: 15%;border-right: none;"> {lang file_type} <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span>
                                 </div>
-                                <div node-type="title-col" data-key="dateline" class="col" style="width: 20%;"> {lang
-                                    edit_time} <span node-type="order-status" class="asc desc"
-                                                     style="visibility: visible;"></span></div>
+                                <div node-type="title-col" data-key="dateline" class="col" style="width: 20%;"> {lang edit_time} <span node-type="order-status" class="asc desc" style="visibility: visible;"></span></div>
                             </div>
                         </div>
                         <div node-type="list" class="list list-share">
@@ -179,14 +153,13 @@
                                         data-dpath="$value[dpath]"
                                         <!--{/if}-->/>
                                         <!--{/if}-->
-                                        <span class="name-text-wrapper"> <span node-type="name-text"
-                                                                               data-href="$value[shareurl]"
-                                                                               class="enabled">$value[name]</span> </span>
+                                        <span class="name-text-wrapper"> <span node-type="name-text" data-href="$value[shareurl]" class="enabled">$value[name]</span> </span>
                                     </div>
+                                    <!--{if $share[xiazai]==0}-->
                                     <div class="btns">
-                                        <a node-type="btn-item" data-key="download" class="dzz dzz-download"
-                                           href="javascript:void(0);"></a>
+                                        <a node-type="btn-item" data-key="download" class="dzz dzz-download" href="javascript:void(0);"></a>
                                     </div>
+                                    <!--{/if}-->
                                 </div>
                                 <!-- 其他列 -->
                                 <div class="col size" style="width: 12%" data-size="$value[size]">$value[fsize]</div>
@@ -197,9 +170,7 @@
                             </div>
                             <!--{/loop}-->
                             <!--{if $nextpage}-->
-                            <div class="more text-center clearfix"
-                                 onclick="getMore(this,'{DZZSCRIPT}?mod=shares&op=ajax&morepath=$morepath&page=$nextpage&rander=list&marker=$marker')"
-                                 style="padding-top: 10px;padding-bottom: 10px;">{lang upload_more}
+                            <div class="more text-center clearfix" onclick="getMore(this,'{DZZSCRIPT}?mod=shares&op=ajax&morepath=$morepath&page=$nextpage&rander=list&marker=$marker')" style="padding-top: 10px;padding-bottom: 10px;">{lang upload_more}
                             </div>
                             <!--{/if}-->
                         </div>
@@ -210,10 +181,7 @@
     </div>
 </div>
 </div>
-
-
-<iframe id="hideframe" name="hideframe" src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" width="0"
-        height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>
+<iframe id="hideframe" name="hideframe" src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" width="0" height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>
 <div id="dataContainer" class="hide"></div>
 </div>
 <script type="text/javascript">
@@ -233,11 +201,6 @@
     //页面高度js
     var page_loading = false;
     jQuery('.left-drager').leftDrager_layout();
-  /*  jQuery('.module-list-view:visible .list-share').scroll(function (e) {
-        var clientHeight = jQuery('.list-share').height();
-        var scrollHeight = jQuery('.list-share .list-wrapper').height();
-        if (jQuery('.list-share').scrollTop() + clientHeight >= (scrollHeight - 5) && !page_loading) jQuery('.list-share .more').trigger('click');
-    });*/
     jQuery('.bs-main-container').scroll(function (e) {
         var clientHeight = jQuery('.bs-main-container').height();
         var scrollHeight = jQuery('.bs-main-container > .container').height();
@@ -345,9 +308,10 @@
                 });
                 return false;
             } else {
-                if (type == 'image' && item.find('img[data-original]').trigger('click.dzzthumb')) {
+							<!--{if $share[yulan]==0}-->
+							if (type == 'image' && item.find('img[data-original]').trigger('click.dzzthumb')) {
                 } else {
-                    var preurl = 'share.php?a=view&s=' + item.data('dpath');
+                    var preurl = 'share.php?a=<!--{if $share[xiazai]==0}-->view<!--{else}-->noview<!--{/if}-->&s=' + item.data('dpath');
                     if (top._config) {
                         top.OpenWindow('url', preurl, item.find('img').attr('title'), null, {
                             img: item.find('img').attr('src'),
@@ -357,8 +321,13 @@
                         window.open(preurl, jQuery(this).html());
                     }
                 }
+							<!--{else}-->
+							var msg ='禁止预览';
+							var mode = 'confirm';
+							var title = '系统提示';
+              showDialog(msg,mode,title);
+							<!--{/if}-->
             }
-
             return false;
         });
         //点击列表的操作
@@ -368,11 +337,14 @@
             el.siblings().find('.asc').css('visibility', 'hidden');
             item_sort(el.data('key'), el.find('.asc').hasClass('desc') ? 'desc' : 'asc');
         });
+			<!--{if $share[xiazai]==0}-->
         jQuery(document).on('click', 'a[data-key=download]', function () {
             share_download(this);
             return false;
         });
+			<!--{/if}-->
         jQuery('img[data-original]').dzzthumb();
+			
     });
 
     function item_sort(key, order) {
@@ -405,7 +377,7 @@
         jQuery(frage).appendTo(jQuery('.list .list-wrapper').empty());
         page.appendTo('.list .list-wrapper');
     }
-
+			<!--{if $share[xiazai]==0}-->
     function share_download(obj) {
         var li = jQuery(obj).closest('.item');
         jQuery.post('{MOD_URL}&do=adddowns', {'sid':'$_GET[sid]'},function (data) {
@@ -420,7 +392,6 @@
         }, 'json');
         return false;
     }
-
     function downmorefile() {
         var dpath = share.join(',');
         jQuery.post('{MOD_URL}&do=adddowns',{'sid':'$_GET[sid]'}, function (data) {
@@ -435,7 +406,7 @@
         }, 'json');
         return false;
     }
-
+			<!--{/if}-->
     //列表和缩略图的切换
     function viewSwitch(obj, tclass) {
         if (share.length > 0) {
@@ -482,7 +453,7 @@
         jQuery(tclass).show();
 
     }
-
+<!--{if $share[xiazai]==0}-->
     //下载选中项
     function downfileselect() {
         var sharids = share;
@@ -498,6 +469,7 @@
         }, 'json');
         return false;
     }
+<!--{/if}-->
     //缩略图好列表选中操作
     jQuery(document).off('click.sharesclick').on('click.sharesclick', '.Icoblock', function (e) {
         if (_hotkey.ctrl > 0) {
@@ -546,6 +518,7 @@
         }
         jQuery('.ex-number').html(share.length);
     }
+	<!--{if $share[xiazai]==0}-->
     function downAll(obj) {
         //var rids = $(obj).data('allrids');
         //var ridarr = rids.split(',');
@@ -565,7 +538,7 @@
         }, 'json');
         return false;
     }
-
+<!--{/if}-->
     /* function savefile(){
      if(uid == 0){
      location.href='$_G[siteurl]user.php?mod=login';
