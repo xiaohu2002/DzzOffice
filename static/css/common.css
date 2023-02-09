@@ -40,10 +40,9 @@ html,body{
 }
 .form-group{
 	width: 100%;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
-  border: 1px solid #ebeef5;
+  border-bottom: 1px dotted #DEEFFB;
   border-radius:  var(--radius);
-  padding: 10px;
+  padding: var(--radius);
   display: flex;
 	justify-content:flex-start;
 	flex-direction:row;
