@@ -1,6 +1,5 @@
 ### 官方网站:http://dzzoffice.com
 ### 小胡版插件获取地址：https://gitee.com/xh2002/projects
-### 【金山文档】 Dzzoffice笔记 https://kdocs.cn/l/ccbRyo5tZZpY
 ### dzzoffice 笔记_w3cschool https://www.w3cschool.cn/dzzxh/
 ### DzzOffice 介绍：
 
