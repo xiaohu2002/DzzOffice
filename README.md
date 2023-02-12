@@ -1,7 +1,6 @@
 ### 官方网站:http://dzzoffice.com
 ### 小胡版插件获取地址：https://gitee.com/xh2002/projects
-### 旧版dzzoffice笔记：https://www.kdocs.cn/l/ccbRyo5tZZpY
-### 新版dzzoffice笔记：https://www.w3cschool.cn/xhdzz
+### 【金山文档】 Dzzoffice笔记 https://kdocs.cn/l/ccpEhPqsY3na
 ### DzzOffice 介绍：
 
 Dzzoffice是一套开源办公套件，适用于企业、团队搭建自己的 类似“Google企业应用套件”、“微软Office365”的企业协同办公平台。套件由多个工具组成，包含但不限于如：
