@@ -24,8 +24,9 @@ function sendmail($toemail, $subject, $message, $from = '') {
 	}
 	$message = preg_replace("/href\=\"(?!(http|https)\:\/\/)(.+?)\"/i", 'href="'.$_G['siteurl'].'\\1"', $message);
   $sitename=$_G['setting']['sitename'];
+	$sitecopyright=replacesitevar($_G['setting']['sitecopyright']);
   $sitelogo=IO::getFileUri('attach::'.$_G['setting']['sitelogo']);
-$message = <<<EOT
+  $message = <<<EOT
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=$_G[charset]">
@@ -77,8 +78,7 @@ $message = <<<EOT
 																	<p style="margin:auto;font-size:12px;color:#999;text-align:center;line-height:22px;">
                                   $sitename <a href="$_G[siteurl]" target="_blank">$_G[siteurl]</a>
                                   </p>
-                                  <p style="margin:auto;font-size:12px;color:#999;text-align:center;line-height:22px;">
-                                  Copyright &copy;2012-2022 <a href="http://www.dzzoffice.com/" target="_blank">DzzOffice</a>  All Rights Reserved
+                                  <p style="margin:auto;font-size:12px;color:#999;text-align:center;line-height:22px;">$sitecopyright
                                     <br>
                                   </p>
                             </td>

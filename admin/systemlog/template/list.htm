@@ -39,6 +39,7 @@
 			<form id="cpform" action="{BASESCRIPT}?mod=systemlog&type=list&operation=$operation" class="form-horizontal form-horizontal-left" method="post" name="cpform">
 				<input type="hidden" value="{FORMHASH}" name="formhash">
 				<input type="hidden" name="lpp" value="20">
+				<input type="hidden" name="keyword" value="$keyword">
 				<table class="table">
 					<thead>
 						<th width="100">{lang operator}</th>
@@ -76,10 +77,6 @@
 										<option value="40" $checklpp[40]> 40 </option>
 										<option value="80" $checklpp[80]> 80 </option>
 									</select>
-								</div>
-								<div class="pull-left input-group" style="width:128px;">
-									<input type="text" class="input-sm form-control" style="width:90px;border-left:0" name="keyword" value="$_GET[keyword]">
-									<a href="javascript:;" class="input-group-addon" onclick="document.getElementById('cpform').submit();return false"><i class="glyphicon glyphicon-search"></i></a>
 								</div>
 								$multipage
 							</td>

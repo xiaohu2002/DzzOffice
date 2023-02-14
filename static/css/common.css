@@ -40,15 +40,23 @@ html,body{
 }
 .form-group{
 	width: 100%;
-  border-bottom: 1px dotted #DEEFFB;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
+  border: 1px solid #ebeef5;
   border-radius:  var(--radius);
-  padding: var(--radius);
+  padding: 10px;
   display: flex;
-	justify-content:flex-start;
-	flex-direction:row;
-	align-items:center;
-	align-content:flex-start;
-	flex-wrap:wrap
+  justify-content:flex-start;
+  flex-direction:row;
+  align-items:center;
+  align-content:flex-start;
+  flex-wrap:wrap
+}
+.form-group:nth-child(odd){
+	background: #fafafa;
+}
+.form-group:hover{
+	background: #e5f3ff;
+	border-color: transparent;
 }
 .no-result-title{
 	font-size: large;
@@ -391,6 +399,9 @@ table {
 	vertical-align:middle !important;
 	border-bottom:1px solid #F2F2F2;
 	border-top:1px solid transparent;
+}
+.table tbody:hover{
+	background: #fafafa;
 }
 /*表格样式 end*/
 .un_selector{

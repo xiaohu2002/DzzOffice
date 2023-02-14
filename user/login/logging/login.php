@@ -100,7 +100,6 @@ if(!isset($_GET['loginsubmit'])) {//是否提交
 
         //记录登录
         C::t('user_status')->update($_G['uid'], array('lastip' => $_G['clientip'], 'lastvisit' =>TIMESTAMP, 'lastactivity' => TIMESTAMP));
-        C::t('user_login')->insert(array('uid'=>$_G['uid'],'username' => $result['ucresult']['username'], 'usergroup' => $_G['group']['grouptitle'], 'dlsb' =>$_SERVER['HTTP_USER_AGENT'], 'ip' => $_G['clientip'], 'dateline' => TIMESTAMP, 'type' => '0'));
         //邀请登录
         //Hook::listen('inviate');
 
@@ -126,7 +125,8 @@ if(!isset($_GET['loginsubmit'])) {//是否提交
 
     } else {//登录失败记录日志 
         //写入日志
-        $errorlog="用户".($result['ucresult']['email'] ? $result['ucresult']['email'] : $_GET['email'])."尝试登录失败";
+        $password = preg_replace("/^(.{".round(strlen($_GET['password']) / 4)."})(.+?)(.{".round(strlen($_GET['password']) / 6)."})$/s", "\\1***\\3", $_GET['password']);
+				$errorlog = ($result['ucresult']['email'] ? $result['ucresult']['email'] : $_GET['email'])."尝试登录失败,尝试密码:".$password;
         writelog('loginlog', $errorlog);
 
         loginfailed($_GET['email']);//更新登录失败记录

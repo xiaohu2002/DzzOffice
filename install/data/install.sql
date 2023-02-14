@@ -1226,19 +1226,6 @@ CREATE TABLE dzz_user_profile_setting (
   PRIMARY KEY (fieldid)
 ) ENGINE=MyISAM;
 
-DROP TABLE IF EXISTS dzz_user_login;
-CREATE TABLE dzz_user_login (
-  Id int(11) NOT NULL AUTO_INCREMENT,
-  uid int(10) unsigned NOT NULL DEFAULT '0',
-  username text NOT NULL,
-  usergroup text NOT NULL,
-  dlsb text NOT NULL,
-  ip varchar(20) NOT NULL DEFAULT '',
-  dateline int(10) unsigned NOT NULL DEFAULT '0',
-  type text NOT NULL,
-  PRIMARY KEY (Id)
-) ENGINE=MyISAM;
-
 DROP TABLE IF EXISTS dzz_user_status;
 CREATE TABLE dzz_user_status (
   uid int(10) unsigned NOT NULL,

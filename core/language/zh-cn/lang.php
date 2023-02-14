@@ -1274,6 +1274,14 @@ $_G[siteurl]',
 	'department'=>'部门',
 	'save_changes'=>'保存更改',
 	'registration_time'=>'注册时间',
+	
+	'operator' => '操作者',
+	'info'=>'信息',
+	'loginfo'=>'日志信息',
+	'visit'=>'访问页面',
+	'from'=>'来源页面',
+	'Equipment information'=>'设备信息',
+	'ip' => 'IP 地址',
 );
 
 ?>

@@ -1247,6 +1247,14 @@ Important!
 	'department' => 'department',
 	'save_changes'=>' save changes',
 	'registration_time'=>' registration time',
+	
+	'operator'=> 'operator',
+	'info'=>'information',
+	'loginfo'=>'log information',
+	'visit'=>'Access page',
+	'from'=>'Source page',
+	'Equipment information'=>'Equipment information',
+	'ip' => 'IP',
 );
 
 ?>

@@ -1,45 +1,46 @@
-<link href="{MOD_PATH}/images/login.css?{VERHASH}" rel="stylesheet" media="all">
-<div class="module-list-view">
-    <div class="title">
-      <div class="item clearfix">
-        <div node-type="title-col" data-key="dateline" class="col" style="width: 15%;">登录时间
-          <span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='dateline'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
-        </div>
-        <div class="col" style="width: 65%;">客户端</div>
-        <div class="col" style="width: 20%;">登录IP</div>
-      </div>
-
-    </div>
-    <div class="list list-share">
-      <!--{loop $list $value}-->
-      <div node-type="item" class="item clearfix">
-        <div class="col dateline" style="width: 15%" data-dateline="$value[dateline]">{eval echo dgmdate($value[dateline])}</div>
-        <div class="col count" style="width: 65%"><!--{if $value[type=='1']}--><img src="user/images/qq.png" height="16"><!--{elseif $value[type=='2']}--><img src="user/images/qq.png" height="16"><!--{/if}-->$value[dlsb]</div>
-        <div class="col type" style="width: 20%">$value[ip]</div>
-      </div>
-      <!--{/loop}-->
-      <div class="page clearfix" style="padding: 20px 0">$multi</div>
-    </div>
-</div>
+<!--{if $list}-->
+<table class="table">
+  <thead>
+    <th width="100">{lang operator}</th>
+    <th width="100">{lang usergroup}</th>
+    <th width="125">{lang ip}</th>
+    <th width="135">{lang time}</th>
+    <th>{lang info}</th>
+  </thead>
+    <!--{loop $list $key $log}-->
+    <tr>
+      <td>$log[2]</td>
+      <td>$log[3]</td>
+      <td>$log[4]</td>
+      <td>$log[1]</td>
+      <td>
+        <a href="javascript:;" onclick="togglecplog('{$key}')">{eval echo cutstr($log[5], 200)}</a>
+      </td>
+    </tr>
+    <thead id="cplog_{$key}" style="display:none">
+      <td colspan="10">
+        {lang loginfo}: $log[5]
+        <br/>{lang visit}: $log[6]
+        <br/>{lang from}: $log[7]
+        <br/>{lang Equipment information}: $log[8]</td>
+    </thead>
+    <!--{/loop}-->
+    <tr>
+      <td colspan="15" style="border-bottom: none;">
+        $multi
+      </td>
+    </tr>
+</table>
+<!--{else}-->
+暂无记录
+<!--{/if}--> 
 <script type="text/javascript">
-	jQuery(document).ready(function(e) {
-
-		jQuery(document).on('mouseenter', 'div[node-type=item]', function() {
-			jQuery(this).addClass('item-hover');
-		});
-		jQuery(document).on('mouseleave', 'div[node-type=item]', function() {
-			jQuery(this).removeClass('item-hover');
-		});
-		jQuery('.title .item .col[node-type=title-col]').on('click', function() {
-			var el = jQuery(this);
-			el.find('.asc').css('visibility', 'visible').toggleClass('desc');
-			el.siblings().find('.asc').css('visibility', 'hidden');
-			item_sort(el.data('key'), el.find('.asc').hasClass('desc') ? 'desc' : 'asc');
-		});
-	});
-
-	function item_sort(key, order) {
-		location.href = '$theurl&order=' + key + '&asc=' + (order == 'desc' ? 1 : 0);
-		return; 
-	}
-</script>
+  function togglecplog(k) {
+    var cplogobj = document.getElementById('cplog_' + k);
+    if(cplogobj.style.display == 'none') {
+      cplogobj.style.display = '';
+    } else {
+      cplogobj.style.display = 'none';
+    }
+  }
+</script> 

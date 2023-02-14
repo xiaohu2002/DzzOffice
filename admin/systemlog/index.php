@@ -19,8 +19,8 @@ if(file_exists (DZZ_ROOT.'./admin/language/'.$checkLanguage.'/'.'lang.php')){
 if($type=="list"){
 	//Hook::listen('adminlogin'); 
 	!isset($_GET['page']) && $_GET['page']=1;
-	$page=max(1,intval($_GET['page']));
 	$lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
+	$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
 	$checklpp = array();
 	$checklpp[$lpp] = 'selected="selected"';
 	$extrainput = '';
@@ -28,7 +28,18 @@ if($type=="list"){
 	$operationarr = array_keys($systemlog_setting);  
 	$operation = in_array($_GET['operation'], $operationarr) ? $_GET['operation'] : "cplog"; 
 	$navtitle=$systemlog_setting[$operation]["title"].' - '.lang('appname');//lang('nav_logs_'.$operation).' - '.lang('admin_navtitle');
-	
+  $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
+	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
+  $start = ($page - 1) * $lpp;
+  $gets = array(
+    'mod' => 'systemlog',
+		'type' => $type,
+    'operation' => $operation,
+    'lpp' => $lpp,
+		'keyword' => $keyword,
+  );
+  $theurl = BASESCRIPT . "?" . url_implode($gets);
+  $refer = $theurl . '&page=' . $page;
 	$logdir = DZZ_ROOT.'./data/log/';
 	$logfiles = get_log_files($logdir, $operation);
 	 
@@ -37,8 +48,6 @@ if($type=="list"){
 	$firstlogs = file( $logdir.$logfiles[0] ) ; 
 	$firstlogsnum = count($firstlogs);
 	$countlogfile=count($logfiles);
-	$count = ($countlogfile-1)*4000+$firstlogsnum;
-	$multipage = multi($count, $lpp, $page, MOD_URL."&type=list&operation=$operation&lpp=$lpp",'pull-right' ); 
 	 
 	$logs = array();
 	$jishu=4000;//每个日志文件最多行数
@@ -78,6 +87,14 @@ if($type=="list"){
 	//获取数据开始
 	$logs = file( $logdir.$lastlog["file"] );
 	$logs = array_reverse($logs);
+	if($keyword){
+    foreach($logs as $key => $value) {
+      if(!empty($_GET['keyword']) && strpos($value, $_GET['keyword']) === FALSE) {
+        unset($logs[$key]);
+      }
+    }
+  }
+	$count = count($logs);
 	if( $lastlog["file"]!=$logfiles[0] ){
 		$j++;
 	}
@@ -100,9 +117,7 @@ if($type=="list"){
 		$end=$lpp-count($logs); 
 		$logs2 = array_slice( $logs2, 0, $jj);
 		$logs=array_merge($logs,$logs2);
-	} 
-	//获取数据结束
-	
+	}
 	$usergroup = array(); 
 	foreach(C::t('usergroup')->range() as $group) {
 		$usergroup[$group['groupid']] = $group['grouptitle'];
@@ -113,7 +128,6 @@ if($type=="list"){
 		if(empty($log[1])) {
 			continue;
 		}
-		 
 		$log[1] = dgmdate($log[1], 'y-n-j H:i:s');
 		$log[2] = $log[2];
 		$log[2] = ($log[2] != $_G['member']['username'] ? "<b>$log[2]</b>" : $log[2]);
@@ -121,7 +135,7 @@ if($type=="list"){
 		
 		$list[$k]=$log;
 	}
-	
+	$multipage = multi($count, $lpp, $page, $theurl,'pull-right'); 
 	include template('list');
 }
 
