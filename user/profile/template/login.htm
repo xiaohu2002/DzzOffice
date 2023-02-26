@@ -1,4 +1,9 @@
 <!--{if $list}-->
+<style>
+	.table tbody:hover{
+    background: #fafafa;
+  }
+</style>
 <table class="table">
   <thead>
     <th width="100">{lang operator}</th>
@@ -31,9 +36,6 @@
       </td>
     </tr>
 </table>
-<!--{else}-->
-暂无记录
-<!--{/if}--> 
 <script type="text/javascript">
   function togglecplog(k) {
     var cplogobj = document.getElementById('cplog_' + k);
@@ -44,3 +46,6 @@
     }
   }
 </script> 
+<!--{else}-->
+暂无记录
+<!--{/if}--> 

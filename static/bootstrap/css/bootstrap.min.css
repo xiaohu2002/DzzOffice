@@ -33,14 +33,13 @@ dl{
 	margin-top:0;
 	width: 100%;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
-  border: 1px solid #ebeef5;
   border-radius:  var(--radius);
   padding: 10px;
   display: flex;
 	flex-direction:column;
 	
 }
-dl:nth-child(odd){
+dl:nth-child(even){
 	background: #fafafa;
 }
 dl:hover{

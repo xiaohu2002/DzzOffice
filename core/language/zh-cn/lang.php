@@ -1282,6 +1282,11 @@ $_G[siteurl]',
 	'from'=>'来源页面',
 	'Equipment information'=>'设备信息',
 	'ip' => 'IP 地址',
+	
+	'Error'=>'{errormsg}，详情请前往系统日志中查看。',
+	'Error_wx'=>'你收到了{title}',
+	'Error_redirecturl'=>'{url}',
+	'Error_title'=>'{title}',
 );
 
 ?>

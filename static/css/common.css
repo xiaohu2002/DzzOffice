@@ -8,6 +8,7 @@ html,body{
   word-break:break-all;
   overflow: hidden;
   --radius: 5px;
+	background:#fafafa;
 }
 .add-menu{
   font-size: 26px;
@@ -41,7 +42,6 @@ html,body{
 .form-group{
 	width: 100%;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
-  border: 1px solid #ebeef5;
   border-radius:  var(--radius);
   padding: 10px;
   display: flex;
@@ -51,7 +51,7 @@ html,body{
   align-content:flex-start;
   flex-wrap:wrap
 }
-.form-group:nth-child(odd){
+.form-group:nth-child(even){
 	background: #fafafa;
 }
 .form-group:hover{
@@ -353,7 +353,6 @@ dl dd{
 }
 .main-header {
   position:relative;
-  border: 1px solid #ebeef5;
   width:100%;
   background: #F7F7F7;
   border-radius:  var(--radius);
@@ -399,9 +398,6 @@ table {
 	vertical-align:middle !important;
 	border-bottom:1px solid #F2F2F2;
 	border-top:1px solid transparent;
-}
-.table tbody:hover{
-	background: #fafafa;
 }
 /*表格样式 end*/
 .un_selector{
@@ -570,11 +566,10 @@ select {
 	position:absolute;
 	top: 0;
 	left:0;
+	z-index: 5;
 	-webkit-overflow-scrolling: touch;
-	z-index:5;
 	box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   border-radius:  var(--radius);
-  border: 1px solid #ebeef5;
 	background: #fbfbfb;
 }
 .bs-left-container .bs-left-title{
@@ -790,7 +785,6 @@ select {
   overflow-y: auto;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   border-radius:  var(--radius);
-  border: 1px solid #ebeef5;
   background: #fff;
 }
 /*start 定义圆形按钮*/

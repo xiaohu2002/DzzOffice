@@ -46,8 +46,8 @@ function shuchu(){
 		'网站根目录' => array('r' => '', 'b' => ''),
 		'执行时间限制' => array('r' => '不限制', 'b' => '不限制'),
   );
-  if(function_exists('mysqli_connect')) $func_items = array('mysqli_connect',  'file_get_contents', 'xml_parser_create','filesize', 'curl_init','zip_open');
-  else $func_items = array('mysql_connect',  'file_get_contents', 'xml_parser_create','filesize', 'curl_init','zip_open');
+  if(function_exists('mysqli_connect')) $func_items = array('mysqli_connect',  'file_get_contents', 'xml_parser_create','filesize', 'curl_init','zip_open','ffmpeg','imagick','imagemagick');
+  else $func_items = array('mysql_connect',  'file_get_contents', 'xml_parser_create','filesize', 'curl_init','zip_open','ffmpeg','imagick','imagemagick');
   foreach($env_items as $key => $item) {
     if($key == 'PHP 版本') {
       $env_items[$key]['current'] = PHP_VERSION;
@@ -137,7 +137,7 @@ function shuchu(){
     }
   }
   if($func_str || $func_strextra){
-    echo "<h2 class=\"title\">函数依赖性检查</h2>\n";
+    echo "<h2 class=\"title\">PHP扩展依赖性检查</h2>\n";
     echo "<table class=\"tb\" style=\"margin:20px 0;width:95%;\">\n";
     echo "<tr>\n";
     echo "\t<th>函数名称</th>\n";

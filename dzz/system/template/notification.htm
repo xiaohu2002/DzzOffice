@@ -14,7 +14,14 @@
                   <a class="member-avatar" style="position: absolute;left: 1px;" href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value[authorid]);}</a>
                 <!--{/if}-->
                 <div class="details">
+									<!--{if $value[title]}-->
+                  <p class="note u-title" >$value[title]</p>
+                  <!--{/if}-->
+                  <!--{if $value[note]}-->
                   <p class="note u-bottom" >$value[note]</p>
+                  <!--{else}-->
+                  <p class="note u-bottom" >无内容</p>
+                  <!--{/if}-->
                   <p class="dateline u-bottom">$value[dateline]</p>
                 </div>
             </div>

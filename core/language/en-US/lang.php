@@ -1255,6 +1255,11 @@ Important!
 	'from'=>'Source page',
 	'Equipment information'=>'Equipment information',
 	'ip' => 'IP',
+	
+	'Error'=>'{errormsg}，Go to the system log for details.',
+	'Error_wx'=>'You have received {title}',
+	'Error_redirecturl'=>'{url}',
+	'Error_title'=>'{title}',
 );
 
 ?>
