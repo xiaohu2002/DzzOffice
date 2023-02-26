@@ -273,27 +273,27 @@ EOT;
 </body>
 </html>
 EOT;
-		//发送通知
-		$cur_url = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-    foreach (C::t('user')->fetch_all_by_adminid(1) as $value) {
-      if ($value['uid'] != $_G['uid']) {
-          //发送通知
-          $notevars = array(
-              'from_id' => '0',
-              'from_idtype' => 'app',
-              'url' => $cur_url,
-              'author' => getglobal('username'),
-              'authorid' => getglobal('uid'),
-              'dataline' => dgmdate(TIMESTAMP),
-              'title' => '系统错误提醒',
-              'errormsg'=> $errormsg
-          );
-          $action = 'Error';
-          $type = 'Error_' . $vid;
+  //发送通知
+  $cur_url = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+  foreach (C::t('user')->fetch_all_by_adminid(1) as $value) {
+    if ($value['uid'] != $_G['uid']) {
+        //发送通知
+        $notevars = array(
+            'from_id' => '0',
+            'from_idtype' => 'app',
+            'url' => $cur_url,
+            'author' => getglobal('username'),
+            'authorid' => getglobal('uid'),
+            'dataline' => dgmdate(TIMESTAMP),
+            'title' => '系统错误提醒',
+            'errormsg'=> '考虑到系统的稳定性'
+        );
+        $action = 'Error';
+        $type = 'Error_' . $vid;
 
-          dzz_notification::notification_add($value['uid'], $type, $action, $notevars);
-      }
+        dzz_notification::notification_add($value['uid'], $type, $action, $notevars);
     }
+  }
 		$exit && exit();
 
 	}
