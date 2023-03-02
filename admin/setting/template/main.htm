@@ -217,7 +217,7 @@
         <dd class="clearfix">
           <input type="hidden" name="old_default_mod" class="form-control" value="$setting[default_mod]">
           <select name="settingnew[default_mod]" class="form-control">
-            <option value="index_simple">{lang please_select_default_index}</option> 
+            <option value="index">{lang please_select_default_index}</option> 
             <!--{loop $applist $value}--> 
               <option value="$value[identifier]" <!--{if $value[ 'identifier']==$setting[default_mod]}-->selected="selected"  <!--{/if}-->>$value[appname] </option>
             <!--{/loop}-->
