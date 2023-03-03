@@ -39,7 +39,7 @@ class MimeTypes {
 			'mscml' => 'application/mediaservercontrol+xml',
 			'mp4s' => 'application/mp4',
 			'dot' => 'application/msword',
-			'doc' => 'application/msword',
+      'doc' => 'application/msword',
 			'mxf' => 'application/mxf',
 			'oda' => 'application/oda',
 			'opf' => 'application/oebps-package+xml',
