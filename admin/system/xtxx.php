@@ -10,11 +10,17 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 	exit('Access Denied');
 }
 $op = $_GET['op'];
-$navtitle = lang('xtxx') . ' - ' . lang('appname');
-$about['version']='V'.CORE_VERSION;//版本信息
-$about['xhversion']='V'.CORE_XHVERSION;//版本信息
-$about['XHFIXBUG']=CORE_XHFIXBUG;//更新日期
-function shuchu(){
+$do=$_GET['do'];
+if($do == 'phpinfo'){
+	echo phpinfo();
+}else{
+  require_once './core/function/function_misc.php';
+  require_once './user/function/function_user.php';
+  $navtitle = lang('xtxx') . ' - ' . lang('appname');
+  $about['version']='V'.CORE_VERSION;//版本信息
+  $about['xhversion']='V'.CORE_XHVERSION;//版本信息
+  $about['XHFIXBUG']=CORE_XHFIXBUG;//更新日期
+  function shuchu(){
   define('ROOT_PATH', dirname(__FILE__));
   $lang=array (
     'php_version_too_low' => 'php版本太低啦，请先升级php到5.3以上，建议使用php5.4及以上',
@@ -46,8 +52,6 @@ function shuchu(){
 		'网站根目录' => array('r' => '', 'b' => ''),
 		'执行时间限制' => array('r' => '不限制', 'b' => '不限制'),
   );
-  if(function_exists('mysqli_connect')) $func_items = array('mysqli_connect',  'file_get_contents', 'xml_parser_create','filesize', 'curl_init','zip_open','ffmpeg','imagick','imagemagick');
-  else $func_items = array('mysql_connect',  'file_get_contents', 'xml_parser_create','filesize', 'curl_init','zip_open','ffmpeg','imagick','imagemagick');
   foreach($env_items as $key => $item) {
     if($key == 'PHP 版本') {
       $env_items[$key]['current'] = PHP_VERSION;
@@ -108,55 +112,187 @@ function shuchu(){
       echo $env_str;
       echo "</table>\n";
     }
+}
+function kuozhan(){
+  if(function_exists('mysqli_connect')) $func_items = array('mysqli_connect',  'file_get_contents', 'xml_parser_create','filesize', 'curl_init','zip_open','ffmpeg','imagick','imagemagick','cURL','date','Exif','Fileinfo','Ftp','GD','gettext','intl','Iconv','json','ldap','Mbstring','Mcrypt','Memcached','MySQLi','SQLite3','OpenSSL','PDO','pdo_mysql','pdo_sqlite','Redis','session','Sockets','Swoole','dom','xml','SimpleXML','libxml','bz2','zip','zlib');
+  else $func_items = array('mysql_connect',  'file_get_contents', 'xml_parser_create','filesize', 'curl_init','zip_open','ffmpeg','imagick','imagemagick','cURL','date','Exif','Fileinfo','Ftp','GD','gettext','intl','Iconv','json','ldap','Mbstring','Mcrypt','Memcached','MySQLi','SQLite3','OpenSSL','PDO','pdo_mysql','pdo_sqlite','Redis','session','Sockets','Swoole','dom','xml','SimpleXML','libxml','bz2','zip','zlib');
   foreach($func_items as $item) {
     $status = function_exists($item);
-    $func_str .= "<tr>\n";
-    $func_str .= "<td>$item()</td>\n";
+    $func_str .= "<div class=\"ext col-sm-6 col-lg-3\">\n";
+    $func_str .= "<span>$item</span>\n";
     if($status) {
-      $func_str .= "<td class=\"w pdleft1\">支持</td>\n";
-      $func_str .= "<td class=\"padleft\">无</td>\n";
+      $func_str .= "<span class=\"bei dzz dzz-done\"></span>\n";
+      $func_str .= "</div>\n";
     } else {
-      $func_str .= "<td class=\"nw pdleft1\">不支持</td>\n";
-      $func_str .= "<td><font color=\"red\">$item</font></td>\n";
+      $func_str .= "<span class=\"beii dzz dzz-close\"></span>\n";
+      $func_str .= "</div>\n";
     }
   }
-  $func_strextra = '';
-  $filesock_disabled = 0;
-  foreach($filesock_items as $item) {
-    $status = function_exists($item);
-    $func_strextra .= "<tr>\n";
-    $func_strextra .= "<td>$item()</td>\n";
-    if($status) {
-      $func_strextra .= "<td class=\"w pdleft1\">支持</td>\n";
-      $func_strextra .= "<td class=\"padleft\">无</td>\n";
-      break;
-    } else {
-      $filesock_disabled++;
-      $func_strextra .= "<td class=\"nw pdleft1\">不支持</td>\n";
-      $func_strextra .= "<td><font color=\"red\">".lang('advice_'.$item)."</font></td>\n";
-    }
-  }
-  if($func_str || $func_strextra){
-    echo "<h2 class=\"title\">PHP扩展依赖性检查</h2>\n";
-    echo "<table class=\"tb\" style=\"margin:20px 0;width:95%;\">\n";
-    echo "<tr>\n";
-    echo "\t<th>函数名称</th>\n";
-    echo "\t<th class=\"padleft\">检查结果</th>\n";
-    echo "\t<th class=\"padleft\">提示</th>\n";
-
-    echo "</tr>\n";
-    echo $func_str.$func_strextra;
-    echo "</table>\n";
-  }
+  echo $func_str;
 }
 // 已经安装模块
 $loaded_extensions = get_loaded_extensions();
 $extensions = '';
 foreach ($loaded_extensions as $key => $value) {
-    $extensions .= $value . ', ';
+    $extensions .= '<div class="extt"><span class="beijing">'.$value . '</span></div>';
 }
 $zaixianrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('session') . " WHERE uid");
 $yonghurenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE uid");
 $tingyongrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE status");
-include template('xtxx');
+$wenjiangeshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('attachment') . " WHERE aid");
+$kongjianshiyong=formatsize(DB::result_first("SELECT SUM(filesize) FROM ".DB::table('attachment')));
+$type=empty($_GET['type'])?'user':trim($_GET['type']);
+$starttime=trim($_GET['starttime']);
+$endtime=trim($_GET['endtime']);
+$time=trim($_GET['time']);
+if(empty($time)) $time='day';
+$operation=trim($_GET['operation']);
+
+	switch($time){
+		case 'month':
+			if(!$starttime){
+				$start=strtotime("-6 month",TIMESTAMP);
+				$starttime=dgmdate($start,'Y-m');
+			}
+			if(!$endtime){
+				$endtime=dgmdate(TIMESTAMP,'Y-m');
+			}
+			break;
+		case 'week':
+			if(!$starttime){
+				$start=strtotime("-12 week",TIMESTAMP);
+			}else{
+				$start=strtotime($starttime);
+			}
+			
+			//$darr=getdate($stamp);
+			$stamp_l=strtotime("this Monday",$start);
+			//$stamp_u=strtotime("+6 day",$stamp_l);
+			$starttime=dgmdate($stamp_l,'Y-m-d');
+			
+			if(!$endtime){
+				$end=TIMESTAMP;
+			}else{
+				$end=strtotime($endtime);
+			}
+			
+			/*$darr=getdate($end);
+			$stamp_l=strtotime("this Monday",$end);
+			$stamp_u=strtotime("+6 day",$stamp_l);*/
+			$endtime=dgmdate($end,'Y-m-d');
+			break;
+		case 'day':
+			if(!$starttime){
+				$start=strtotime("-12 day",TIMESTAMP);
+				$starttime=dgmdate($start,'Y-m-d');
+			}
+			if(!$endtime){
+				$endtime=dgmdate(TIMESTAMP,'Y-m-d');
+			}
+			break;
+		
+	}
+	function getData($time,$starttime,$endtime,$type){
+	
+	$endtime=strtotime($endtime);
+	$data=array('total'=>array(),
+				'add'=>array(),
+        'login'=>array(),
+				'total_d'=>array(),
+				'add_d'=>array(),
+        'login_d'=>array(),
+				);
+	switch($time){
+			case 'month':
+				$stamp=strtotime($starttime);
+				$arr=getdate($stamp);
+				$key=$arr['year'].'-'.$arr['mon'];
+				$low=strtotime($key);
+				$up=strtotime('+1 month',$low);
+					$ltotal=$data['total'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d",array('user',$up));
+					$data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+					$ltotal+=$data['add'][$key];
+				while($up<=$endtime){
+					
+					$key=dgmdate($up,'Y-m');
+					$low=strtotime($key);
+					$up=strtotime('+1 month',$low);
+						$data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+						$ltotal+=$data['add'][$key];
+						$data['total'][$key]=$ltotal;
+				}
+				
+				
+				break;
+			case 'week':
+				$stamp=strtotime($starttime);
+				$arr=getdate($stamp);
+				$low=strtotime('+'.(1-$arr['wday']).' day',$stamp);
+				$up=strtotime('+1 week',$low);
+				$key=dgmdate($low,'m-d').'~'.dgmdate($up-60*60*24,'m-d');
+					$ltotal=$data['total'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d",array('user',$up));
+					$data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+					$ltotal+=$data['add'][$key];
+				
+				while($up<$endtime){
+					$low=$up;
+					$up=strtotime('+1 week',$low);
+					$key=dgmdate($low,'m-d').'~'.dgmdate($up-60*60*24,'m-d');
+						$data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+						$ltotal+=$data['add'][$key];
+						$data['total'][$key]=$ltotal;
+				}
+				
+				break;
+			case 'day':
+				
+				$low=strtotime($starttime);//strtotime('+'.(1-$arr['hours']).' day',$stamp);
+				$up=$low+24*60*60;
+				$key=dgmdate($low,'Y-m-d');
+        $ltotal=$data['total'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d",array('user',$up));
+        $data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+        $ltotal+=$data['add'][$key];
+				while($up<=$endtime){
+					$low=$up;
+					$up=strtotime('+1 day',$low);
+					$key=dgmdate($low,'Y-m-d');
+          $data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+          $ltotal+=$data['add'][$key];
+          $data['total'][$key]=$ltotal;
+				}
+				break;
+			case 'all':
+				$min=DB::result_first("select min(regdate) from %t where regdate>0",array('user'));
+				$min-=60;
+				$max=TIMESTAMP+60*60*8;
+				
+				$days=($max-$min)/(60*60*24);
+				if($days<20){
+					$time='day';
+					$starttime=gmdate('Y-m-d',$min);
+					$endtime=gmdate('Y-m-d',$max);
+				}elseif($days<70){
+					$time='week';
+					$starttime=gmdate('Y-m-d',$min);
+					$endtime=gmdate('Y-m-d',$max);
+				}else{
+					$time='month';
+					$starttime=gmdate('Y-m',$min);
+					$endtime=gmdate('Y-m',$max);
+				}
+				$data=getData($time,$starttime,$endtime,$type);
+				break;
+		}
+		
+	return $data;
+}
+	if($operation=='getdata'){
+		 $data=getData($time,$starttime,$endtime,$type);
+		 include template('xtxx_ajax');
+	}else{
+		$data=getData($time,$starttime,$endtime,$type);
+	}
+
+  include template('xtxx');
+}
 ?>

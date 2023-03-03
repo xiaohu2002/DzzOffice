@@ -1,0 +1,88 @@
+<!--{template common/header_ajax}-->
+<div id="charts_todo" style="height:450px;padding-top:20px;"> <p class="text-center" style="height:100%;background:#F7F7F7">{lang there_is_no_statistical_data}</p></div>
+<script type="text/javascript" reload="1">
+
+	try{
+		myChart.dispose();myChart_document.dispose();
+	}catch(e){}
+	var myChart = echarts.init(document.getElementById('charts_todo'));
+	// 图表使用-------------------
+	var option = {
+		title : {
+			padding: [10,0,0,70], 
+			text: __lang.user_growth_statistics,
+			x:'left',
+			y:'top'
+		},
+		legend: {                                   // 图例配置
+			padding: [10,70,0,10], 
+			x:'right',
+			y:'top',					// 图例内边距，单位px，默认上下左右内边距为5
+			itemGap: 10,                            // Legend各个item之间的间隔，横向布局时为水平间隔，纵向布局时为纵向间隔
+			data: [__lang.user_total,__lang.add_users]
+		},
+		tooltip: {                                  // 气泡提示配置
+			trigger: 'item',                        // 触发类型，默认数据触发，可选为：'axis'
+		},
+		 toolbox: {
+			show : true,
+			
+			orient:'vertical',
+			padding:[70,20,0,0],   
+			feature : {
+				magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+				restore : {show: true},
+				saveAsImage : {show: true}
+			}
+		},
+		grid:{
+			 y2:80
+		},
+		xAxis: [                                    // 直角坐标系中横轴数组
+			{
+				/*boundaryGap:false,*/
+				type: 'category',
+				axisLabel:{show:true,interval:0,rotate:{eval echo count(array_keys($data['total']))>10?(count(array_keys($data['total']))>20?90:45):0;}},              // 坐标轴类型，横轴默认为类目轴，数值轴则参考yAxis说明
+				data: {eval echo json_encode(array_keys($data['total']));} 
+			}
+		],
+		yAxis: [                                    // 直角坐标系中纵轴数组
+			{
+				type: 'value',                      // 坐标轴类型，纵轴默认为数值轴，类目轴则参考xAxis说明
+				boundaryGap: [0.1, 0.1],            // 坐标轴两端空白策略，数组内数值代表百分比
+				splitNumber: 4                      // 数值轴用，分割段数，默认为5
+			}
+		],
+		series: [
+			{
+				name: __lang.user_total,                        // 系列名称
+				type: 'line', 
+				itemStyle:{
+					normal:{
+						color:'#089c08'
+					}
+				},
+				stack:'ios',                     // 图表类型，折线图line、散点图scatter、柱状图bar、饼图pie、雷达图radar
+				data: [{eval echo implode(',',$data['total']);}]
+			},
+			{
+				name: __lang.add_users,                    // 系列名称
+				type: 'line',
+				stack:'ios',                       // 图表类型，折线图line、散点图scatter、柱状图bar、饼图pie、雷达图radar
+				data: [{eval echo implode(',',$data['add']);}],
+				itemStyle:{
+					normal:{
+						color:'#fa8734'
+					}
+				}
+			}
+		
+		
+			
+		]
+	};
+	myChart.setOption(option);
+	
+</script>
+
+<!--{template common/footer_ajax}--> 
