@@ -18,7 +18,7 @@
                     <span>{lang user_select_selected}<span class="ex-number"></span>{lang nape}</span>
                 </div>
             </div>
-					<!--{if $share[xiazai]==0}-->
+					<!--{if !$share[xiazai]}-->
             <div class="select-toperate select-toperate-center  toolButtons">
                 <div class="btns">
                     <a node-type="btn-item" href="javascript:void(0);" onclick="downfileselect();return false;" class="shares-topbtns">
@@ -155,7 +155,7 @@
                                         <!--{/if}-->
                                         <span class="name-text-wrapper"> <span node-type="name-text" data-href="$value[shareurl]" class="enabled">$value[name]</span> </span>
                                     </div>
-                                    <!--{if $share[xiazai]==0}-->
+                                    <!--{if !$share[xiazai]}-->
                                     <div class="btns">
                                         <a node-type="btn-item" data-key="download" class="dzz dzz-download" href="javascript:void(0);"></a>
                                     </div>
@@ -308,10 +308,10 @@
                 });
                 return false;
             } else {
-							<!--{if $share[yulan]==0}-->
+							<!--{if !$share[yulan]}-->
 							if (type == 'image' && item.find('img[data-original]').trigger('click.dzzthumb')) {
                 } else {
-                    var preurl = 'share.php?a=<!--{if $share[xiazai]==0}-->view<!--{else}-->noview<!--{/if}-->&s=' + item.data('dpath');
+                    var preurl = 'share.php?a=<!--{if !$share[xiazai]}-->view<!--{else}-->noview<!--{/if}-->&s=' + item.data('dpath');
                     if (top._config) {
                         top.OpenWindow('url', preurl, item.find('img').attr('title'), null, {
                             img: item.find('img').attr('src'),
@@ -337,7 +337,7 @@
             el.siblings().find('.asc').css('visibility', 'hidden');
             item_sort(el.data('key'), el.find('.asc').hasClass('desc') ? 'desc' : 'asc');
         });
-			<!--{if $share[xiazai]==0}-->
+			<!--{if !$share[xiazai]}-->
         jQuery(document).on('click', 'a[data-key=download]', function () {
             share_download(this);
             return false;
@@ -377,7 +377,7 @@
         jQuery(frage).appendTo(jQuery('.list .list-wrapper').empty());
         page.appendTo('.list .list-wrapper');
     }
-			<!--{if $share[xiazai]==0}-->
+			<!--{if !$share[xiazai]}-->
     function share_download(obj) {
         var li = jQuery(obj).closest('.item');
         jQuery.post('{MOD_URL}&do=adddowns', {'sid':'$_GET[sid]'},function (data) {
@@ -453,7 +453,7 @@
         jQuery(tclass).show();
 
     }
-<!--{if $share[xiazai]==0}-->
+<!--{if !$share[xiazai]}-->
     //下载选中项
     function downfileselect() {
         var sharids = share;
@@ -518,7 +518,7 @@
         }
         jQuery('.ex-number').html(share.length);
     }
-	<!--{if $share[xiazai]==0}-->
+	<!--{if !$share[xiazai]}-->
     function downAll(obj) {
         //var rids = $(obj).data('allrids');
         //var ridarr = rids.split(',');

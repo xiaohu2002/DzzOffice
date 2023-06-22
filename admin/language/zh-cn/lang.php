@@ -38,7 +38,6 @@ $lang = array
 	'data_set'=>'资料设置',
 	'user_name'=>'用户用户名',
 	'user_name_email'=>'用户名或邮箱',
-	'user_name_sensitive'=>'用户名含有敏感字符',
 	'avatar'=>'头像',
 	'space_usage'=>'空间使用',
 	'data_item_list'=>'资料项列表',

@@ -1,8 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
 html, body {
-	overflow: auto;
-	background: #fff;
 	min-width:768px;
 	moz-user-select: -moz-none; 
 	-moz-user-select: none; 
@@ -11,6 +9,7 @@ html, body {
 	-webkit-user-select:none;/* and add the CSS class here instead */ 
 	-ms-user-select:none; 
 	user-select:none;/**禁止选中文字*/ 
+	overflow-x: auto;
 }
 .tooltip fade bottom in{
 	position: fixed
@@ -171,8 +170,9 @@ html, body {
 	color: #666666;
 	opacity: 1;
 }
-.breadcrumb > li{
-	padding-left: 10px;
+.breadcrumb > li:hover{
+	background-color: #26D8FD;
+	color: #fff;
 }
 .module-list-view .item-hover .btns{
 	display:inline-block;
@@ -337,10 +337,6 @@ html, body {
 .breadcrumb>li+li:before{
 	content: "";
 }
-.breadcrumb li a span{
-	padding-left: 10px;
-	padding-right: 5px;
-}
 .sharepame-bread .btn-group{
 	padding-top:1.21rem;
 }
@@ -438,7 +434,7 @@ html, body {
 .navtoperate{
 	background-color:#FFFFFF;
 	box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15);
-	border-radius: .4rem;
+	border-radius: .3rem;
 }
 .select-toperate{
 	display: -webkit-flex;

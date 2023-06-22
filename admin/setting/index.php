@@ -83,6 +83,8 @@ if (!submitcheck('settingsubmit')) {
 		$setting['welcomemsgtitle'] = cutstr(trim(dhtmlspecialchars($setting['welcomemsgtitle'])), 75);
 	} elseif ($operation == 'notification') {
 		$navtitle = lang('Notification Settings').' - '.lang('appname');
+	} elseif ($operation == 'watermark') {
+		$navtitle = '水印设置 - '.lang('appname');
 	} elseif ($operation == 'qywechat') {
 		$navtitle = lang('weinxin_company').' - '.lang('appname');
 	} elseif ($operation == 'denlu') {
@@ -201,6 +203,8 @@ if (!submitcheck('settingsubmit')) {
 		}
 	} elseif ($operation == 'notification') {
 		$settingnew['notification'] = intval($settingnew['notification']);
+	}elseif ($operation == 'watermark') {
+		$settingnew['watermark'] = intval($settingnew['watermark']);
 	}
 	elseif ($operation == 'denlu') {
 		$settingnew['numberoflogins'] = intval($settingnew['numberoflogins']);
@@ -276,12 +280,17 @@ if (!submitcheck('settingsubmit')) {
 	} elseif ($operation == 'sec') {
 		$settingnew['seccodestatus'] = bindec(intval($settingnew['seccodestatus'][3]) . intval($settingnew['seccodestatus'][2]) . intval($settingnew['seccodestatus'][1]));
 
-	} elseif ($op == 'qqlogin') {
+	} elseif ($operation == 'qqlogin') {
 		if (empty($settingnew['qq_appid']) || empty($settingnew['qq_appkey'])) {
 			$settingnew['qq_login'] = 0;
 		}
 
-	} elseif ($operation == 'censor') {
+	} elseif ($operation == 'quicklogin') {
+		if (empty($settingnew['quick_password']) || empty($settingnew['quick_key'])) {
+			$settingnew['quick_login'] = 0;
+		}
+
+	}elseif ($operation == 'censor') {
 		$data = array('replace' => trim($_GET['replace']), 'words' => $_GET['badwords']);
 		savecache('censor', $data);
 		showmessage('do_success', dreferer());

@@ -108,6 +108,7 @@
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
 				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
       </ul>
       <!--{elseif $operation=='at'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
@@ -116,6 +117,7 @@
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
 				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
       </ul>
 			<!--{elseif $operation=='notification'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
@@ -124,6 +126,7 @@
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
 				<li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
       </ul>
       <!--{elseif $operation=='upload'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
@@ -132,6 +135,7 @@
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
 				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
       </ul>
      
       <!--{elseif $operation=='loginset'}-->
@@ -141,6 +145,16 @@
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
 				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=quicklogin">{lang quicklogin}</a> </li>
+      </ul>
+			<!--{elseif $operation=='quicklogin'}-->
+      <ul class="nav navbar-nav nav-pills-bottomguide">
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+				<li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=quicklogin">{lang quicklogin}</a> </li>
       </ul>
       <!--{elseif $operation=='denlu'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
@@ -149,6 +163,7 @@
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
 				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=quicklogin">{lang quicklogin}</a> </li>
       </ul>
 			<!--{elseif $operation=='qqlogin'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
@@ -157,6 +172,7 @@
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li> 
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=quicklogin">{lang quicklogin}</a> </li>
       </ul>
       <!--{elseif $operation=='access'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
@@ -165,6 +181,7 @@
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
 				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=quicklogin">{lang quicklogin}</a> </li>
       </ul>
       <!--{elseif $operation=='datetime'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
@@ -173,6 +190,16 @@
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
+      </ul>
+			<!--{elseif $operation=='watermark'}-->
+      <ul class="nav navbar-nav nav-pills-bottomguide">
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=basic">{lang members_verify_base}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=datetime">{lang time_set}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
+        <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
       </ul>
       <!--{elseif $operation=='sec'}-->
       <ul class="nav navbar-nav nav-pills-bottomguide">
@@ -181,6 +208,7 @@
         <li class="active"> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
 				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+				<li> <a href="{BASESCRIPT}?mod={MOD_NAME}&operation=quicklogin">{lang quicklogin}</a> </li>
       </ul>
       <!--{/if}--> 
     </div>
@@ -417,6 +445,22 @@
         <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit"  value="{lang save_changes}" type="submit">
       </dl>
     </form>
+    <!--{elseif $operation=='watermark'}-->
+    <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <input type="hidden" value="{FORMHASH}" name="formhash">
+      <input type="hidden" value="watermark" name="operation">
+			<dl>
+        <dt>全局页面水印</dt>
+        <dd class="clearfix">
+          <label class="radio-inline"><input type="radio" name="settingnew[Duplicatewatermark]" value="1" <!--{if $setting[Duplicatewatermark]}--> checked="checked" <!--{/if}-->/>{lang enable}</label>
+          <label class="radio-inline"><input type="radio" name="settingnew[Duplicatewatermark]" value="0" <!--{if !$setting[Duplicatewatermark]}-->checked="checked"<!--{/if}-->/>{lang close}</label>
+        </dd>
+				<dd class="clearfix"><span class="help-block">文件：core\template\default\common\footer_simple.htm中处有注释，自己调整</span></dd>
+      </dl>
+      <dl>
+        <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit"  value="{lang save_changes}" type="submit">
+      </dl>
+    </form>
     <!--{elseif $operation=='upload'}-->
     <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
       <input type="hidden" value="{FORMHASH}" name="formhash">
@@ -508,6 +552,38 @@
         <dl>
           <dt>{lang token_url}</dt>
           <dd class="clearfix"> <b class="help-inline">$_G['siteurl']user.php</b> </dd>
+        </dl>
+      </div>
+      <dl>
+          <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
+      </dl>
+    </form>
+    <!--{elseif $operation=='quicklogin'}-->
+    <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <input type="hidden" value="{FORMHASH}" name="formhash">
+      <input type="hidden" value="quicklogin" name="operation">
+      <dl>
+        <dt>{lang quicklogin}</dt>
+        <dd class="clearfix">
+          <label class="radio-inline "><input type="radio" name="settingnew[quick_login]" value="0" <!--{if !$setting[quick_login]}-->checked<!--{/if}--> onclick="jQuery('#quicklogin_wrapper').addClass('hide');">{lang no_enable}</label>
+          <label class="radio-inline "><input type="radio" name="settingnew[quick_login]" value="1" <!--{if $setting[quick_login]=='1'}-->checked<!--{/if}--> onclick="jQuery('#quicklogin_wrapper').removeClass('hide');">{lang enable}</label>
+					<dd class="clearfix"> <span class="help-inline">XH通用登录提供的是一种自动登录本系统的能力，需要自己根据dzzoffice笔记开发集成。已有账号可通过用户名或邮箱登录，新用户登录时会自动创建账号。</span> </dd>
+        </dd>
+      </dl>
+      <div id="quicklogin_wrapper"<!--{if !$setting[quick_login]}--> class="hide"<!--{/if}-->>
+        <dl>
+          <dt>XH通用登录KAY</dt>
+          <dd class="clearfix">
+            <input type="text" class="form-control" name="settingnew[quick_key]" value="$setting[quick_key]" />
+          </dd>
+          <dd class="clearfix"> <span class="help-inline">XH通用登录密钥，自定义密钥，只能包含数字、字母。</span> </dd>
+        </dl>
+        <dl>
+          <dt>新用户默认密码</dt>
+          <dd class="clearfix">
+            <input type="text" class="form-control" name="settingnew[quick_password]" value="$setting[quick_password]" />
+          </dd>
+          <dd class="clearfix"> <span class="help-inline">为新用户设置默认密码，下次可在本系统登录界面输入密码登录</span> </dd>
         </dl>
       </div>
       <dl>

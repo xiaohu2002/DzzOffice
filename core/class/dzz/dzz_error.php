@@ -191,7 +191,7 @@ class dzz_error
 	<style type="text/css">
 	<!--
 	body { background-color: white; color: black; font: 9pt/11pt verdana, arial, sans-serif;}
-	#container { width: 1024px; }
+	#container {max-width: 1024px;margin: auto;}
 	#message   { width: 1024px; color: black; }
 
 	.red  {color: red;}
@@ -274,7 +274,7 @@ EOT;
 </html>
 EOT;
   //发送通知
-  $cur_url = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+  $cur_url = $_SERVER['REQUEST_URI'];
   foreach (C::t('user')->fetch_all_by_adminid(1) as $value) {
     if ($value['uid'] != $_G['uid']) {
         //发送通知

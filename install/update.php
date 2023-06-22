@@ -276,6 +276,12 @@ if($_GET['step'] == 'start') {
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','notification'))){
 		 C::t('setting')->update('notification', '60');
 		}
+		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','quick_login'))){
+		 C::t('setting')->update('notification', '0');
+		}
+		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','Duplicatewatermark'))){
+		 C::t('setting')->update('notification', '0');
+		}
 		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=appmanagement'))){
 			DB::delete('app_market', array('appurl' => '{dzzscript}?mod=appmanagement'));
 			C::t('app_market')->insert(array('appname'=>'管理',

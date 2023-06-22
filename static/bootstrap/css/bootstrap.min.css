@@ -37,6 +37,7 @@ dl{
   padding: 10px;
   display: flex;
 	flex-direction:column;
+	border: 1px solid #ebeef5;
 	
 }
 dl:nth-child(even){

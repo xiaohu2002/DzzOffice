@@ -1260,6 +1260,9 @@ Important!
 	'Error_wx'=>'You have received {title}',
 	'Error_redirecturl'=>'{url}',
 	'Error_title'=>'{title}',
+	'user_name_sensitive'=>' User name contains sensitive characters ',
+	'Login_success'=>'Login success, you will be redirected to the home page',
+	'quicklogin'=>'XH Quick login',
 );
 
 ?>

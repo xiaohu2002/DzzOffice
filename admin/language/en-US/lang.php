@@ -38,7 +38,6 @@ $lang = array
   'data_set'=>' Data Settings ',
   'user_name'=>' user user name',
   'user_name_email'=>' Username or email',
-  'user_name_sensitive'=>' User name contains sensitive characters ',
   'avatar' => 'avatar',
   'space_usage'=>' space usage',
   'data_item_list'=>' item list',

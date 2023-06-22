@@ -9,7 +9,7 @@
 if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
-$uid1=$_G['uid'];
+$uid=$_G['uid'];
 $navtitle='评论管理';
 //获取通知包含类型
 $searchappid = array();
@@ -71,8 +71,8 @@ if ($_GET['do'] == 'delete') {
       $data = DB::fetch_all("SELECT * FROM " . DB::table('comment') . " WHERE $sql $order $limitsql", $param);
     }
   }else{
-    if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('comment') . " WHERE authorid =$uid1 and $sql", $param)) {
-      $data = DB::fetch_all("SELECT * FROM " . DB::table('comment') . " WHERE authorid =$uid1 and $sql $order $limitsql", $param);
+    if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('comment') . " WHERE authorid =$uid and $sql", $param)) {
+      $data = DB::fetch_all("SELECT * FROM " . DB::table('comment') . " WHERE authorid =$uid and $sql $order $limitsql", $param);
     }
   }
   $multi = multi($count, $perpage, $page, $theurl);
