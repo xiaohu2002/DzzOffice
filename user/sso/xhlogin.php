@@ -21,22 +21,28 @@ if($_G['setting']['quick_login']){
       return;
     }
     if(($user=C::t('user')->fetch_by_username($username)) || ($user=C::t('user')->fetch_by_email($email))){//用户已经存在时
+			if ($user['adminid']) {
+        //写入日志
+        writelog('loginlog', '管理员尝试XH通用登录失败');
+        showmessage('为了安全，禁止管理员通过这种方式登录');
+        return;
+      }
 			$result = getuserbyuid($user['uid'], 1);
 			if($result['status']>0){
 				//写入日志
 				writelog('loginlog', '尝试XH通用登录失败,此用户已停用');
         showmessage('此用户已停用，请联系管理员');
       }
-      if ($user['adminid']) {
-        //写入日志
-        writelog('loginlog', '管理员尝试XH通用登录失败');
-        showmessage('为了安全，禁止管理员通过这种方式登录');
-        return;
+      //设置登录
+      setloginstatus($result, $_GET['cookietime'] ? 2592000 : 0);
+
+      if($_G['member']['lastip'] && $_G['member']['lastvisit']) {
+
+          dsetcookie('lip', $_G['member']['lastip'].','.$_G['member']['lastvisit']);
       }
-      $idstring = explode('_', $user['emailsenddate']);
-      if ($idstring[0] == (time() - $idstring[1]) < 86400) {
-          dsetcookie('auth', authcode("{$user['password']}\t{$user['uid']}", 'ENCODE'), 0, 1, true);
-      }
+
+      //记录登录
+      C::t('user_status')->update($_G['uid'], array('lastip' => $_G['clientip'], 'lastvisit' =>TIMESTAMP, 'lastactivity' => TIMESTAMP));
       writelog('loginlog', 'XH通用登录成功');
       showmessage('Login_success',$_G['siteurl']);
     }else{
@@ -70,13 +76,17 @@ if($_G['setting']['quick_login']){
         $sitename=$_G['setting']['sitename'];
         C::t('user')->update($uid,$base);
 
-        $idstring = explode('_', $user['emailsenddate']);
+      //设置登录
+			$result = getuserbyuid($user['uid'], 1);
+      setloginstatus($result, $_GET['cookietime'] ? 2592000 : 0);
 
-        if ($idstring[0] == (time() - $idstring[1]) < 86400) {
+      if($_G['member']['lastip'] && $_G['member']['lastvisit']) {
 
-          dsetcookie('auth', authcode("{$user['password']}\t{$user['uid']}", 'ENCODE'), 0, 1, true);
+          dsetcookie('lip', $_G['member']['lastip'].','.$_G['member']['lastvisit']);
+      }
 
-        }
+      //记录登录
+      C::t('user_status')->update($_G['uid'], array('lastip' => $_G['clientip'], 'lastvisit' =>TIMESTAMP, 'lastactivity' => TIMESTAMP));
         writelog('loginlog', 'XH通用登录成功');
         showmessage('Login_success',$_G['siteurl']);
       }
