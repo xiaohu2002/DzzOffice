@@ -1,6 +1,6 @@
 ### 官方网站:http://dzzoffice.com
 ### 小胡版插件获取地址：https://gitee.com/xh2002/projects
-### Dzzoffice笔记：https://thoughts.teambition.com/sharespace/64546633db084500410d69c7
+### 【金山文档】 Dzzoffice笔记：https://www.kdocs.cn/l/ccpEhPqsY3na
 ### DzzOffice 介绍：
 
 DzzOffice是一款云存储与应用管理工具,可用于个人、团队网盘和企业OA等。它部署简单,支持多种云存储的接入,并具有强大的文件共享功能以及丰富的成员权限管理。通过将存储文件与云端各类应用的交互,来实现在线协同办公,提高工作效率。
