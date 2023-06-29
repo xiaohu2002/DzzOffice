@@ -17,7 +17,7 @@
 			<!--{/if}-->
 		</div>
 		<!-- 其他列 -->
-		<div class="col size" style="width: 12%" data-size="$value[size]">$value[fsize]</div>
+		<div class="col size" style="width: 12%" data-size="$value[size]"><!--{if $value[type]=='folder' }--><!--{else}-->$value[fsize]<!--{/if}--></div>
 		<div class="col type" style="width:15%" data-type="$value[ftype]">$value[ftype]</div>
 		<div class="col dateline" style="width: 20%" data-dateline="$value[dateline]">$value[fdateline]</div>
 	</div>
