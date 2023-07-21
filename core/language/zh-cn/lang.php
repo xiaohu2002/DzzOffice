@@ -1290,6 +1290,8 @@ $_G[siteurl]',
 	'user_name_sensitive'=>'用户名含有敏感字符',
 	'Login_success'=>'登录成功，即将为您跳转至首页',
 	'quicklogin'=>'XH通用登录',
+	'congratulations' => '恭喜您',
+  'login_success' => '登录成功！',
 );
 
 ?>

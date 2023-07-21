@@ -75,7 +75,7 @@ border: none;
 <!--{template common/beijing}-->
 <div class="page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">	
   <div class="Mcontent" id="lostpw_container_$loginhash">
-      <div class="brand"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}"></div>
+      <div class="brand"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}"></div>
       <h3 class="Mtitle"><span>{lang getpassword}</span></h3>
       <p>{lang lostpassword_tip}</p>
       <!--{if !empty($_GET['inajax'])}--><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><!--{/if}-->

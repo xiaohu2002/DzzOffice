@@ -69,7 +69,7 @@ function html_login_form() {
 	$lang1 = lang();
 	$maintitle=lang('title_admincp');
 	$loginuser = $isguest ? '<input class="form-control" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}"   onblur="if(this.value==\'\'){this.value=\'' . lang('login_email_username') . '\'}"  autocomplete="off" />' : '<div class="username">' . $_G['member']['username'] . '</div><div class="email">' . $_G['member']['email'] . '</div>';
-	$loginuser2 = $isguest ? '<div class="relative"><input class="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}" placeholder='. lang('login_email_username') . ' autocomplete="off" /></div>' : '<div class="relative text-center"><div class="username">' . $_G['member']['username'] . '</div><div class="email">' . $_G['member']['email'] . '</div></div>';
+	$loginuser2 = $isguest ? '<div class="relative"><input autofocus class="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}" placeholder='. lang('login_email_username') . ' autocomplete="off" /></div>' : '<div class="relative text-center"><div class="username">' . $_G['member']['username'] . '</div><div class="email">' . $_G['member']['email'] . '</div></div>';
 	$sid = getglobal('sid');
   $avatarstatus=getglobal('avatarstatus','member');
    if(!$uid ){

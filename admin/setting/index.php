@@ -285,12 +285,7 @@ if (!submitcheck('settingsubmit')) {
 			$settingnew['qq_login'] = 0;
 		}
 
-	} elseif ($operation == 'quicklogin') {
-		if (empty($settingnew['quick_password']) || empty($settingnew['quick_key'])) {
-			$settingnew['quick_login'] = 0;
-		}
-
-	}elseif ($operation == 'censor') {
+	} elseif ($operation == 'censor') {
 		$data = array('replace' => trim($_GET['replace']), 'words' => $_GET['badwords']);
 		savecache('censor', $data);
 		showmessage('do_success', dreferer());

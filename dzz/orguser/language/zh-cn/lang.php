@@ -161,5 +161,10 @@ $lang = array (
 	'lack_required_fields_name_email'=>'缺少必填字段”用户名“或”邮箱“',
 	'bulking'=>'增量',
 	'coverage'=>'覆盖',
+	'user_phone_illegal'=>'用户手机号码不合法',
+	'user_phone_exist'=>'手机号码已经存在',
+	'user_phone_registered'=>'用户手机号码已经被注册',
+	'weixin_registered'=>'该微信号已经被注册',
+	'user_registered_retry'=>'该用户名已经被注册，请更换用户名再试',
 );
 ?>

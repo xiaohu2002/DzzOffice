@@ -16,7 +16,8 @@
       <input type="text" class="form-control input-sm" id="email" name="email" autocomplete="off" value="$user[email]" onblur="checkemail(this.id);">
       <p id="emailmore" style="height:1px;margin:0;">&nbsp;</p>
     </div>
-    <span id="chk_email" class="help-inline"> <span id="suc_email"></span><kbd class="p_chk"></kbd>{lang adduser_login_email_text}</span> </div>
+    <span id="chk_email" class="help-inline"> <span id="suc_email"></span><kbd class="p_chk"></kbd>{lang adduser_login_email_text}</span>
+	</div>
   <div class="form-group">
     <label class="control-label" for="username">{lang username}</label>
     <div class="controls">
@@ -165,11 +166,6 @@
 	function account_submit() {
 
 		//判断用户名
-		if(jQuery('#email').val() == '') {
-			jQuery('#email').focus();
-			showmessage('{lang login_email_required}', 'danger', 1000, 1);
-			return false;
-		}
 		if(jQuery('#username').val() == '') {
 			jQuery('#username').focus();
 			showmessage('{lang name_will}', 'danger', 1000, 1);

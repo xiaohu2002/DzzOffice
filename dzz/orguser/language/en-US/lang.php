@@ -160,5 +160,11 @@ $lang = array (
   'lack_required_fields_name_email'=>'The required field user name or mailbox is missing',
 	'bulking' => 'delta',
   'coverage' => 'cover',
+	'user_phone_illegal'=>' User’s phone number is illegal',
+  'user_phone_exist'=>' The phone number already exists ',
+  'user_phone_registered'=>' User phone number has been registered',
+  'weixin_registered'=>' the wechat signal has been registered',
+  'user_registered_retry'=>' The user name has been registered, please change the user name and try again ',
+  'email_registered_retry'=>' The mailbox has been registered, please change the mailbox and try again ',
 );
 ?>

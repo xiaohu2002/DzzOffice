@@ -1263,6 +1263,8 @@ Important!
 	'user_name_sensitive'=>' User name contains sensitive characters ',
 	'Login_success'=>'Login success, you will be redirected to the home page',
 	'quicklogin'=>'XH Quick login',
+	'Congratulations' =>' Congratulations ',
+  'login_success' => 'Login successful! ',
 );
 
 ?>

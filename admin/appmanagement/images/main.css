@@ -13,9 +13,6 @@ a{
 	margin-left:0;
 	padding:0;
 }
-.main-content{
-	padding:90px 30px;
-}
 .main-content-ul{
 	overflow: hidden;
 	display: flex;

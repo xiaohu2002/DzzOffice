@@ -207,6 +207,7 @@
 .dropdown-menu>li>a{
 	padding: 8px 30px;
 	position: relative;
+	margin: var(--radius);
 }
 #app_context{
   white-space: normal;

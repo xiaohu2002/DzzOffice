@@ -1,7 +1,7 @@
 <!--{template common/header_simple_start}-->
 <link rel="stylesheet" type="text/css" href="static/tagsinput/jquery.tagsinput.css" />
 <link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-
+<link href="static/icheck/skins/minimal/blue.css?{VERHASH}" rel="stylesheet" media="all">
 <link rel="stylesheet" href="static/css/checkbox.css">
 <script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <script type="text/javascript" src="dzz/system/scripts/selorg.js?{VERHASH}"></script>
@@ -21,7 +21,10 @@
     min-width: 1120px;
     overflow-y: hidden;
     overflow-x: auto;
-}
+  }
+	.control-label{
+		padding-top: 7px;
+	}
 	.btn-sorg {
 		margin: 5px;
 	}
@@ -65,35 +68,35 @@
 				<input type="hidden" name="refer" value="$refer" />
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 				<div class="form-group">
-					<label class="control-label " for="appname">{lang application_name}</label>
+					<label for="appname">{lang application_name}</label>
 					<div class="form_name">
                       <input type="text" class="form-control input-sm" id="appname" name="appname" autocomplete="off" value="$app[appname]">
 					</div>
 					<span class="help-inline"></span> 
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="identifier">{lang application_identifier}</label>
+					<label for="identifier">{lang application_identifier}</label>
 					<input type="text" class="form-control input-sm" id="identifier" name="identifier" autocomplete="off" value="$app[identifier]">
 					<ul class="help-block">
 						{lang app_application_identifier_text}
 					</ul>
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="app_path">{lang application_app_path}</label>
+					<label for="app_path">{lang application_app_path}</label>
 					<input type="text" class="form-control input-sm" id="app_path" name="app_path" autocomplete="off" value="$app[app_path]">
 					<ul class="help-block">
 						{lang app_application_app_path_text}
 					</ul>
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="appurl">{lang application_site}</label>
+					<label for="appurl">{lang application_site}</label>
 					<input type="text" class="form-control input-sm" id="appurl" name="appurl" autocomplete="off" value="$app[appurl]">
 					<ul class="help-block">
 						{lang app_application_site_text}
 					</ul>
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="appadminurl">{lang application_appadminurl}</label>
+					<label for="appadminurl">{lang application_appadminurl}</label>
 					<input type="text" class="form-control input-sm" id="appadminurl" name="appadminurl" autocomplete="off" value="$app[appadminurl]">
 					<ul class="help-block">
 						{lang app_application_appadminurl_text}
@@ -107,12 +110,12 @@
 					</ul>
 				</div>-->
 				<div class="form-group">
-					<label class="control-label" for="vendor">{lang supplier}</label>
+					<label for="vendor">{lang supplier}</label>
 					<input type="text" class="form-control input-sm" id="vendor" name="vendor" autocomplete="off" value="$app[vendor]">
 					<span class="help-inline">{lang application_provider_name}</span>
 				</div>
 				<div class="form-group">
-					<label class="control-label">{lang application_ico}</label>
+					<label>{lang application_ico}</label>
 						<!--{if $appid>0}-->
 							<input id="fileiz_0" class="form-control input-sm" name="TMPiconnew" value="" style="display: none;" type="file">
 							<input id="fileiz_1" class="form-control input-sm" style="" name="iconnew" value="$app[appico]" type="text">
@@ -317,7 +320,13 @@
 		}
 	});
 	jQuery(document).ready(function(e) {
-
+    jQuery('label.radio-inline input,label.radio input,label.checkbox-inline input,label.checkbox input').iCheck({
+        checkboxClass: 'icheckbox_minimal-blue',
+        radioClass: 'iradio_minimal-blue'
+    });
+    jQuery('label.radio-inline input,label.radio input,label.checkbox-inline input,label.checkbox input').on('ifChecked', function (e) {
+        jQuery(this).trigger('click');
+    });
 		jQuery('#fileext').tagsInput({
 			'height': '0px',
 			'width': '300px',
@@ -400,6 +409,7 @@
 		return true;
 	}
 </script>
+<script type="text/javascript" src="static/icheck/icheck.min.js?{VERHASH}"></script>
 <script src="static/bootstrap/js/bootstrap.min.js"></script>
 <script src="static/tagsinput/jquery.tagsinput.js"></script>
 <script src="static/bootstrap/js/bootstrap-typeahead.js"></script>

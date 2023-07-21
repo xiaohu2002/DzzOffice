@@ -20,10 +20,6 @@
 		min-width: 250px;
 	}
 	
-	.form-horizontal-left .form-group .controls-adapt {
-		padding-left: 130px;
-	}
-	
 	.form-horizontal-left .form-group label {
 		min-width: 125px;
 	}
@@ -72,19 +68,19 @@
 				<input type="hidden" value="$field[displayorder]" name="displayorder">
 
 				<div class="form-group">
-					<label class="control-label ">{lang name}：</label>
+					<label>{lang name}：</label>
 					<input type="text" class="form-control" value="$field[title]" name="title" required="required" <!--{if $field[isfixed2]}-->disabled="disabled"
 					<!--{/if}-->/>
 				</div>
 				<div class="form-group">
-					<label class="control-label ">{lang introduce}：</label>
+					<label>{lang introduce}：</label>
 					<input type="text" class="form-control" value="$field[description]" name="description" <!--{if $field[isfixed2]}-->disabled="disabled"
 					<!--{/if}-->/>
 				</div>
 
 				<!--{if !$field[isfixed2]}-->
 				<div class="form-group">
-					<label class="control-label ">{lang form_type}：</label>
+					<label>{lang form_type}：</label>
 					<div class="controls-adapt">
 						<label class="radio-inline"><input type="radio" name="formtype" value="text" onclick="document.getElementById('valuenumber').style.display = '';document.getElementById('fieldchoices').style.display = 'none';document.getElementById('fieldvalidate').style.display = '';" <!--{if $field[formtype]=='text'}-->checked="checked"<!--{/if}-->>{lang HtmlInputText}</label>
 						<!--{if $fieldid!='realname'}-->
@@ -98,17 +94,17 @@
 					</div>
 				</div>
 				<div class="form-group" id="valuenumber" <!--{if $field[formtype]=='select' || $field[formtype]=='radio' }-->style="display:none"<!--{/if}-->>
-					<label class="control-label ">{lang hawkeye_shellinit}：</label>
+					<label>{lang hawkeye_shellinit}：</label>
 					<input name="size" value="$field[size]" type="text" class="form-control">
 					<span class="help-inline">{lang profileset_edit_delete}</span>
 				</div>
 				<div class="form-group" id="fieldchoices" <!--{if $field[formtype]=='text' || $field[formtype]=='textarea' || $field[formtype]=='file' }-->style="display:none"<!--{/if}-->>
-					<label class="control-label ">{lang option_values}：</label>
+					<label>{lang option_values}：</label>
 					<textarea rows="6" name="choices" id="choices" class="form-control">$field[choices]</textarea>
 					<span class="help-inline">{lang profileset_edit_value}:<br>{lang beijing}<br>{lang shanghai}<br></span>
 				</div>
 				<div class="form-group" id="fieldvalidate" <!--{if $field[formtype]=='radio' || $field[formtype]=='select' || $field[formtype]=='list' || $field[formtype]=='checkbox' || $field[formtype]=='file' }-->style="display:none"<!--{/if}-->>
-					<label class="control-label ">{lang regular_verification}：</label>
+					<label>{lang regular_verification}：</label>
 					<input name="validate" value="$field[validate]" type="text" class="form-control">
 					<span class="help-inline">{lang profileset_edit_edit}</span>
 				</div>

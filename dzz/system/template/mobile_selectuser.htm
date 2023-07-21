@@ -1,14 +1,29 @@
-<!--{template common/mobile_simple_start}-->
-<link href="{MOD_PATH}/css/mobile/mobile_member.css" rel="stylesheet">
-<!--{template common/header_simple_end}-->
-<!--{template common/mobile_commer_header}-->
+<!--{template common/header_ajax}--><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <base href="{$_G['siteurl']}"/>
+    <title>成员</title>
+    <link href="static/jquery_weui/css/weui.min.css" rel="stylesheet">
+    <link href="static/jquery_weui/css/jquery-weui.min.css" rel="stylesheet">
+    <link href="static/dzzicon/icon.css" rel="stylesheet">
+    <link href="{MOD_PATH}/css/mobile/mobile_member.css" rel="stylesheet">
+    <script type="text/javascript">var DZZSCRIPT = '{DZZSCRIPT}', LANG = '{$_G[language]}', STATICURL = 'static/', IMGDIR = '{$_G[setting][imgdir]}', VERHASH = '{VERHASH}', charset = '{CHARSET}', dzz_uid = '$_G[uid]', cookiepre = '{$_G[config][cookie][cookiepre]}', cookiedomain = '{$_G[config][cookie][cookiedomain]}', cookiepath = '{$_G[config][cookie][cookiepath]}', attackevasive = '{$_G[config][security][attackevasive]}', disallowfloat = '{$_G[setting][disallowfloat]}', REPORTURL = '$_G[currenturl_encode]', SITEURL = '$_G[siteurl]', JSPATH = '$_G[setting][jspath]', MOD_PATH = '{MOD_PATH}', APP_URL = '{MOD_URL}', MOD_URL = '{MOD_URL}';</script>
+    <script type="text/javascript" reload="1">
+
+    </script>
+
+</head>
 <body>
 <!--搜索开始-->
 
 <header class="weui-search-bar">
     <div class="weui-search-bar__form" action="" onsubmit="return ">
         <div class="weui-search-bar__box">
-            <input type="search" class="weui-search-bar__input" id="user_select_search_input" placeholder="全部或部分文件名" required="">
+            <input type="search" class="weui-search-bar__input" id="user_select_search_input" placeholder="全部或部分文件名"
+                   required="">
             <a href="javascript:" class="weui-search-bar__cancel-btn"><i class="weui-icon-clear"></i></a>
         </div>
         <label class="weui-search-bar__label">
@@ -23,9 +38,13 @@
 
 <input type="hidden" name="formhash" value="{FORMHASH}">
 <input type="hidden" name="selectsubmit" value="true">
-<section class="weui-cells_margin_top" style="padding-bottom:50px">
-    <iframe name="seluser_iframe" class="org-sel-box-iframe" src="$theurl" width="100%" height="100%" allowtransparency="true"></iframe>
-    <input id="sel_seluser" type="hidden" name="uids" value="{eval echo implode(',',array_keys($selects));}"/>
+<section class="weui-cells_margin_top">
+    <iframe name="seluser_iframe" class="org-sel-box-iframe"
+            src="$theurl"
+            width="100%" height="100%"
+            allowtransparency="true"></iframe>
+    <input id="sel_seluser" type="hidden" name="uids"
+           value="{eval echo implode(',',array_keys($selects));}"/>
 </section>
 <!--列表结束-->
 <footer class="weui-member-select">
@@ -47,6 +66,8 @@
 </footer>
 
 </body>
+<script type="text/javascript" src="static/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="static/jquery_weui/js/jquery-weui.min.js"></script>
 <script type="text/javascript" src="static/jquery_weui/js/iscroll.js"></script>
 <script type="text/javascript" src="static/jquery_weui/js/navbarscroll.js"></script>
 <!--<script type="text/javascript" src="{MOD_PATH}/scripts/selorguser.js"></script>-->
@@ -223,4 +244,4 @@
 
     })
 </script>
-</html>
+</html><!--{template common/footer_ajax}-->

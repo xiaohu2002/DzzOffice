@@ -25,7 +25,7 @@ class Client {
 	//const API_URL_OneDrive   = 'https://apis.live.net/v5.0/';
 	
 	
-	const API_URL   = 'https://api.onedrive.com/v1.0';
+	const API_URL   = 'https://api.onedrive.com/';
 
 	// The base URL for authorization requests.
 	const AUTH_URL  = 'https://login.live.com/oauth20_authorize.srf';
