@@ -504,7 +504,6 @@ select {
 }
  .form-horizontal-left .control-label {
 	 float:left;
-	 padding-top: 7px;
   }
 
 .form-horizontal-left .help-inline{
