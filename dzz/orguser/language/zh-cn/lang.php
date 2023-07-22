@@ -166,5 +166,6 @@ $lang = array (
 	'user_phone_registered'=>'用户手机号码已经被注册',
 	'weixin_registered'=>'该微信号已经被注册',
 	'user_registered_retry'=>'该用户名已经被注册，请更换用户名再试',
+	'import_user'=>'导入用户',
 );
 ?>

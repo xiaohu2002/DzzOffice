@@ -166,5 +166,6 @@ $lang = array (
   'weixin_registered'=>' the wechat signal has been registered',
   'user_registered_retry'=>' The user name has been registered, please change the user name and try again ',
   'email_registered_retry'=>' The mailbox has been registered, please change the mailbox and try again ',
+	'import_user'=>' import user',
 );
 ?>

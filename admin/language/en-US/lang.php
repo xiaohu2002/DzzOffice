@@ -179,7 +179,6 @@ $lang = array
   'right_click_menu_style'=>' right click menu style ',
   'only_upload_img_file'=>' only image files can be uploaded ',
   'must_fill_address_wallpaper'=>' you must fill in the wallpaper address',
-  'import_user'=>' import user ',
   'add_new_type'=>' add new category ',
   'data_import_error'=>' data import error ',
   'network' => 'network',

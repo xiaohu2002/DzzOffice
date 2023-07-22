@@ -179,7 +179,6 @@ $lang = array
 	'right_click_menu_style'=>'右键菜单样式',
 	'only_upload_img_file'=>'只能上传图片文件',
 	'must_fill_address_wallpaper'=>'必须填写壁纸地址',
-	'import_user'=>'导入用户',
 	'add_new_type'=>'添加新分类',
 	'data_import_error'=>'数据导入错误',
 	'network'=>'网络',
