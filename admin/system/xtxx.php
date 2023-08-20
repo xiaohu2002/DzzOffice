@@ -50,6 +50,7 @@ if($do == 'phpinfo'){
 		'服务器端口' => array('r' => '不限制', 'b' => '不限制'),
 		'运行环境' => array('r' => '不限制', 'b' => '不限制'),
 		'网站根目录' => array('r' => '', 'b' => ''),
+		'PHP 平台版本' => array('r' => '32位', 'b' => '64位'),
 		'执行时间限制' => array('r' => '不限制', 'b' => '不限制'),
   );
   foreach($env_items as $key => $item) {
@@ -69,7 +70,15 @@ if($do == 'phpinfo'){
       } else {
         $env_items[$key]['current'] = 'unknow';
       }
-    } elseif($key == 'MySQL数据库持续连接') {
+    } elseif($key == 'PHP 平台版本') {
+			if (PHP_INT_SIZE === 4) {
+			$env_items[$key]['current'] ='32位';
+			} else if (PHP_INT_SIZE === 8) {
+			$env_items[$key]['current'] ='64位';
+			} else {
+			$env_items[$key]['current'] ='无法确定架构类型';
+			}
+    }elseif($key == 'MySQL数据库持续连接') {
         $env_items[$key]['current'] = @get_cfg_var("mysql.allow_persistent")?"是 ":"否";
     } elseif($key == '域名') {
         $env_items[$key]['current'] = GetHostByName($_SERVER['SERVER_NAME']);
@@ -134,7 +143,7 @@ function kuozhan(){
 $loaded_extensions = get_loaded_extensions();
 $extensions = '';
 foreach ($loaded_extensions as $key => $value) {
-    $extensions .= '<div class="extt"><span class="beijing">'.$value . '</span></div>';
+    $extensions .= '<div class="extt"><span class="card beijing">'.$value . '</span></div>';
 }
 $zaixianrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('session') . " WHERE uid");
 $yonghurenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE uid");

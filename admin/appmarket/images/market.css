@@ -1,16 +1,4 @@
 @charset "utf-8";
-/* CSS Document */
-.navbar-brand{
-	padding-left:50px;
-	position:relative;
-}
-.navbar-brand .logo{
-	position:absolute;
-	left:0;top:0;
-	padding:5px;
-	width:50px;
-	height:50px;
-}
 .img_236{
 	max-width: 236px;
 }
@@ -226,23 +214,6 @@ span.attach-item img{
 .carousel-inner>.item>img, .carousel-inner>.item>a>img{
 	margin:0 auto;
 }
-.bs-navbar-default .navbar-nav li{
-	overflow:hidden;
-}
-.bs-navbar-default .navbar-nav>li>a{
-	padding:15px;
-	
-}
-.bs-navbar-default .navbar-toggle{
-	margin-top:8px
-}
-.bs-navbar-default .navbar-form{
-	margin-top:8px
-}
-.bs-navbar-default .container-fluid>.navbar-header{
-	margin-right:0;
-	margin-left:0;
-}
 
 
 
@@ -282,7 +253,6 @@ span.attach-item img{
 }
 .app-info>a{
 	color:#999;
-	line-height: 34px;
 }
 .app-info .select-info{
 	position:absolute;
@@ -304,19 +274,12 @@ span.num {
 	line-height:34px;
 	/*margin:0 5px;*/
 }
-.checkbox-custom{
-	margin-bottom:0;
-}
-
-
-
 .appname{
 	margin:0;
 	line-height:25px;
 	
 }
 .appname a{
-	color:#333;
 	font-weight:600;
 	font-size:14px;
 }
@@ -324,7 +287,6 @@ span.num {
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-	color:#999;
 	font-size:13px;
 	cursor:default;
 	line-height: 25px;

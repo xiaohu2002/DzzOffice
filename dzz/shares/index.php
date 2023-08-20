@@ -10,10 +10,14 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 global $_G;
+if(!$_G['setting']['ballowshare']){
+	showmessage('no_privilege');
+}
 $osid = $_GET['sid'];
 $morepath = $osid;
 $sid = dzzdecode($osid);
 $ismobile = helper_browser::ismobile();
+$navtitle='分享文件';
 $do = isset($_GET['do']) ? trim($_GET['do']) : '';
 if ($do == 'adddowns') {
     C::t('shares')->add_downs_by_id($sid);
@@ -182,7 +186,6 @@ if ($do == 'adddowns') {
     }
     //echo $nextpage;die;
     if ($ismobile) {
-			$navtitle='分享文件';
         include template('mobile/list');
     } else {
         include template('list');

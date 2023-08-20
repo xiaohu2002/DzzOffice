@@ -3,32 +3,24 @@
 <!--{if !isset($arr['error'])}-->
 <!--新建文件夹-->
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    	<span class="dzz dzz-close"></span>
-    </button>
-    <h4 class="modal-title">{lang newfolder}</h4>
+  <h4 class="modal-title">{lang newfolder}</h4>
+	<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <form onsubmit=" return chk_create(this);">
     <div class="modal-body group-top">
-        	<div class="input-black input-float col-md-12 col-sm-12 clearfix"> 
-				<label class="control-label input-label">{lang default_folder_name}</label>
-			    <div class="input-animate">
+        	<div class="mb-3 clearfix"> 
+				<label class="col-sm-2">{lang default_folder_name}</label>
+			    <div class="col-sm-10">
 			    	<input type="text" class="form-control" name="foldername">
 			    </div>		     
 			</div>
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary">{lang create}</button>
-        <button type="button" class="btn btn-default-outline" data-dismiss="modal">{lang cancel}</button>
+        <button type="button" class="btn btn-outline-info-outline" data-bs-dismiss="modal">{lang cancel}</button>
     </div>
 </form>
 <script type="text/javascript" reload="1">
-    //名称初始化
-    jQuery(document).ready(function (e) {
-        $('.input-black').each(function() {			
-			InputAnimate.init($(this));			
-		});
-    });
     function chk_create(form) {
         $.post('{MOD_URL}&op=fileselection&do=ajax&operation=newFolder&createfolder=true&fid=' + '{$fid}', $(form).serialize(), function (data) {
             if (data.msg == 'success') {
@@ -62,16 +54,15 @@
 <!--{if !$error}-->
 <form onsubmit="return editsvae(this);">
     <div class="modal-header email-title">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="dzz dzz-close"></span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         <h4 class="modal-title"><!--{if $propertys[name]}-->$propertys[name]<!--{/if}-->{lang property}</h4>
     </div>
-    <div class="modal-body nature-body">
+    <div class="modal-body">
         <!--{if $propertys[name]}-->
         <div class="nature-from clearfix">
-        	<div class="input-black input-float col-md-12 col-sm-12"> 
-				<label class="control-label input-label">{lang name}</label>
-			    <div class="input-animate">
+        	<div class="mb-3"> 
+				<label class="col-sm-2">{lang name}</label>
+			    <div class="col-sm-10">
 			    	<input type="hidden" name="path" value="$propertys[rid]"/>
 			    	<input type="text" class="form-control"  <!--{if !$propertys[editperm]}-->readonly="readonly"<!--{/if}-->name="text"
                 value="$propertys[name]">
@@ -129,16 +120,11 @@
         <!--{if $propertys[editperm] && $propertys[name]}-->
         <button type="submit" class="btn btn-primary">{lang submit}</button>
         <!--{/if}-->
-        <button type="button" class="btn btn-default-outline" data-dismiss="modal">{lang close}</button>
+        <button type="button" class="btn btn-outline-info-outline" data-bs-dismiss="modal">{lang close}</button>
     </div>
 
 </form>
 <script type="text/javascript" reload="1">
-    jQuery(document).ready(function (e) {
-        $('.input-black').each(function() {			
-			InputAnimate.init($(this));			
-		});
-    });
     function editsvae(form) {
         var text = $(form).find('input[name="text"]').val();
         var path = $(form).find('input[name="path"]').val();
@@ -177,16 +163,15 @@
 <!--{if !isset($arr[error])}-->
 <form onsubmit="return false;">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">{lang add_url}</h4>
+      <h4 class="modal-title">{lang add_url}</h4>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
         <input type="text" class="form-control focus" value="http://" name="link">
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="chk_link(this.form)">{lang submit}</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">{lang close}</button>
+        <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">{lang close}</button>
     </div>
 </form>
 <script type="text/javascript" reload="1">

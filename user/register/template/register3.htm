@@ -1,0 +1,164 @@
+<!--{template common/header_simple}-->
+<link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/style.min.css">
+<!--{template common/beijing}-->
+<style>
+	body{
+		overflow:auto;
+	}
+	.signin-form .has-feedback {
+    position: relative;
+}
+	.signin-form .has-feedback .form-control {
+			padding-left: 36px;
+	}
+	.signin-form .has-feedback .mdi {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: auto;
+			width: 36px;
+			height: 36px;
+			line-height: 36px;
+			z-index: 4;
+			color: #dcdcdc;
+			display: block;
+			text-align: center;
+			pointer-events: none;
+	}
+	.signin-form .has-feedback.row .mdi {
+			left: 15px;
+	}
+	.signin-form .form-group:last-child,
+	.login-right p:last-child {
+			margin-bottom: 0px;
+	}
+	.login-box {
+			max-width: 700px;
+	}
+	.login-right {
+			max-width: 50%;
+	}
+	<!--{if $_G[setting][loginset][transparency]}-->
+	.card{
+		background-color:$_G[setting][loginset][transparency];
+	}
+	.card:hover{
+		background-color:$_G[setting][loginset][transparency];
+	}
+	<!--{/if}-->
+</style>
+<!--[if lt IE 9]>
+  <script src="static/js/jquery.placeholder.js" type="text/javascript"></script>
+<![endif]-->
+<script src="user/scripts/register.js?{VARHASH}"></script>
+<!--{eval $loginhash = 'L'.random(4);}-->
+<body class="center-vh">
+	<div class="card">
+    <div class="flex-box login-box">
+        <div class="login-left p-5">
+          <div class="text-center mb-3 d-sm-none">
+            <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" alt="logo" />
+          </div>
+          <h2 class="text-center">{lang register_welcome_tip}</h2>
+          <form class="signin-form needs-validation"  action="user.php?mod=register" method="POST" name="registerform" id="registerform" role="form" enctype="multipart/form-data" onsubmit="check_submit(this);return false">
+            <input type="hidden" name="regsubmit" value="yes"/>
+            <input type="hidden" name="formhash" value="{FORMHASH}"/>
+            <input type="hidden" name="referer" value="$referer"/>
+            <input type="hidden" name="handlekey" value="$_GET[handlekey]"/>
+            <!--{if $_GET[action] != 'activation'}-->
+            <div class="mb-3 has-feedback">
+              <span class="mdi mdi-email" aria-hidden="true"></span>
+              <input type="text" class="form-control" id="email" name="email" autocomplete="off" placeholder="{lang register_email_tips}">
+              <span id="chk_email" class="help-msg"></span>  
+            </div>
+            <div class="mb-3 has-feedback">
+              <span class="mdi mdi-account" aria-hidden="true"></span>
+              <input type="text" class="form-control" id="username" name="username" autocomplete="off" placeholder="{lang username}">
+              <span id="chk_username" class="help-msg"></span>
+            </div>
+            <div class="mb-3 has-feedback">
+              <span class="mdi mdi-lock" aria-hidden="true"></span>
+              <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="{lang register_password_tips}">
+              <span id="chk_password" class="help-msg"></span> 
+            </div>
+            <div class="mb-3 has-feedback">
+              <span class="mdi mdi-lock" aria-hidden="true"></span>
+              <input type="password" class="form-control" id="password2" name="password2" autocomplete="off" placeholder="{lang register_repassword_tips}">
+              <span id="chk_password2" class="help-msg"></span> 
+            </div>
+            <!--{/if}-->
+            <!--{if $seccodecheck}-->
+            <!--{template common/seccheck}--> 
+            <!--{/if}-->
+            <!--<!--{loop $_G['cache']['fields_register'] $field}-->
+            <!--{if $htmls[$field['fieldid']]}-->
+            <div class="mb-3">
+                  <!--{if $field['required']}--><span class="rq">*</span><!--{/if}--><label for="$field['fieldid']">$field[title]:</label>
+                  $htmls[$field['fieldid']]
+                  <i id="tip_$field['fieldid']" class="p_tip"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></i><kbd id="chk_$field['fieldid']" class="p_chk"></kbd>
+            </div>
+            <!--{/if}-->
+            <!--{/loop}-->-->
+            <!--{if $bbrules}-->
+            <div class="mb-3">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="agreebbrule" value="$bbrulehash" id="agreebbrule" checked="checked" />
+                <label for="agreebbrule">{lang agree}<a class="ml20 pull-left" href="javascript:;" onclick="showWindow('bbrule','user.php?mod=register&op=ajax&do=bbrule')">{lang rulemessage}</a></label>
+              </div>
+            </div>
+            <!--{/if}-->
+            <div class="mb-3 d-grid">
+              <button class="btn btn-round btn-primary" name="loginsubmit" value="true"><!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}-->$_G[setting][reglinkname]<!--{/if}--></button>
+            </div>
+            <p class="error-msg text-center" id="returnmessage4"></p>
+          </form>
+          <div class="mb-3 text-center">
+              <p class="text-center">
+                <span>已有账号？</span>
+                <a href="user.php?mod=login">{lang back_login}</a>
+              </p>
+            </div>
+          <p class="text-center text-muted mt-3"><!--{template common/copyright}--></p>
+        </div>
+        <div class="login-right p-5 d-none d-sm-block">
+          <p class="mb-3"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" alt="logo" /></p>
+          <!--{if $_G[setting][loginset][subtitle]}--><p class="text-white">$_G[setting][loginset][subtitle]</p><!--{/if}-->
+          <!--{if $_G[setting][metadescription]}--><p class="text-white align-self-end">$_G[setting][metadescription]</p><!--{/if}-->
+        </div>
+      </div>
+  </div>
+<script type="text/javascript">
+	var lastusername = '', lastpassword = '', lastemail = '', lastinvitecode = '', stmp = new Array(), modifypwd = false;
+	var ignoreEmail = false;
+	var strongpw = new Array();
+	<!--{if $_G['setting']['strongpw']}-->
+		<!--{loop $_G['setting']['strongpw'] $key $val}-->
+			strongpw[$key] = $val;
+		<!--{/loop}-->
+	<!--{/if}-->
+	var pwlength = <!--{if $_G['setting']['pwlength']}-->$_G['setting']['pwlength']<!--{else}-->0<!--{/if}-->;
+	
+	jQuery(document).ready(function (e) {
+	
+		addFormEvent('registerform',1);
+		if (jQuery('.ie8,.ie9').length) { //ie8模拟placeholder;
+			jQuery(':input[placeholder]').each(function () {
+				jQuery(this).placeholder();
+			});
+		}
+	});
+	var loader;
+  $(document).ajaxStart(function(){
+      $("button:submit").html('加载中...').attr("disabled", true);
+      loader = $('button:submit').lyearloading({
+          opacity: 0.2,
+          spinnerSize: 'nm'
+      });
+  }).ajaxStop(function(){
+      loader.destroy();
+      $("button:submit").html('<!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}-->$_G[setting][reglinkname]<!--{/if}-->').attr("disabled", false);
+  });
+</script> 
+<script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
+<!--{template common/footer}-->

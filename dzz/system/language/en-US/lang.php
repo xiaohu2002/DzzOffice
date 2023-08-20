@@ -10,7 +10,7 @@
 
 $lang = array
 (
-  'app_name'=>' Notification Center ',
+  'appname'=>' Notification Center ',
   'app_notice' => 'notice',
   'noapp_notice'=>' No notice yet ',
   'lookallapp_notice'=>' View all notifications ',

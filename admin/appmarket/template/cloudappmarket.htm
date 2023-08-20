@@ -1,7 +1,5 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="{MOD_PATH}/images/market.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <style>
 .app_upgradelist {
 	margin: auto;
@@ -11,20 +9,12 @@
 	display: flex;
   align-items: center;
 }
-.app_upgradelist .progess {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 30px;
-	width: 0%;
-	height: 100%;
-	width: 100%;
-}
-.app_upgradelist .progess .upgrade_progess {
+.app_upgradelist .upgrade_progess {
 	background-color: #dff0d8;
 	position: absolute;
 	width: 0%;
 	height: 100%;
+	top:0;
 }
 .app-name-wrapper {
 	padding-left: 55px;
@@ -55,7 +45,6 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	color: #999;
 	font-size: 13px;
 	cursor: default;
 }
@@ -117,10 +106,10 @@
        <div class="pull-right" style="color:#999;line-height: 34px;">{lang manual_install_tip}</div>
     </div>
     <div class="main-content clearfix" >
-      <div class="market-container" id="loopcontent" style="min-width:510px;"> 
+      <div class="market-container" id="loopcontent"> 
         <!--{loop $list $value}-->
         <div id="app_div_{$value[mid]}" class="row app_upgradelist" >
-          <div id="progess_{$value[mid]}" class="progess"> <span id="upgrade_progess_{$value[mid]}" class="upgrade_progess"></span> </div>
+          <div id="progess_{$value[mid]}"> <span id="upgrade_progess_{$value[mid]}" class="upgrade_progess"></span> </div>
           <div class="col-md-5  col-sm-5 col-xs-5" style="padding-left: 4px;">
             <div class="app-name-wrapper" > <a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer"  class="appicon view-detail" title="$value[name]"><img src="$value[coverimg]" style="margin:0" /></a>
               <p class="appname"> <a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer" target="_blank" class="view-detail" title="$value[name]">$value[name]</a> <small class="text-muted" title="{lang version}">$value[version]</small></p>
@@ -131,27 +120,26 @@
             <div class="group-td-wrapper">{$value['classid_name']}</div>
           </div>
           <div class="col-md-2 col-sm-2 col-xs-2"> {eval echo formatsize($value[packagesize]);} </div>
-          <div class="col-md-3  col-sm-3 col-xs-3"> 
+          <div class="col-md-3  col-sm-3 col-xs-3" style="z-index: 1;"> 
             <!--{if $value[price]>0}-->
-            <button class="btn btn-danger"  onclick="showBuyInfo(this,'$value[mid]')" data-href="$cloudurl?mod=dzzmarket&op=ajax&do=getBuyInfo&mid=$value[mid]" title="{lang buy_contract}">{lang buy}</button>
+            <button class="btn btn-outline-secondary"  onclick="showBuyInfo(this,'$value[mid]')" data-href="$cloudurl?mod=dzzmarket&op=ajax&do=getBuyInfo&mid=$value[mid]" title="{lang buy_contract}">{lang buy}</button>
             <!--{else}--> 
 				<!--{if $value[package]}--> 
 					<!--{if $value["local_appinfo"]}-->
-					<btn  class="btn btn-default" disabled style="color: #333;" data-mid="$value['mid']" title="{lang installed}">
+					<button  class="btn btn-w-md btn-round btn-secondary" disabled data-mid="$value['mid']" title="{lang installed}">
 					{lang installed}
 					</button>
 					<!--{else}-->
-					<button class="btn btn-success-outline" style="white-space: inherit;" onclick="start_check_install('{MOD_URL}&op=install_app_ajax&operation=check_install&appid=$value[identifier]','{$value[mid]}','{$value[baseinfo]}');" id="upgrade_info_{$value[mid]}">{lang install_onekey}</button>
+					<button class="btn btn-w-md btn-round btn-primary" style="white-space: inherit;" onclick="start_check_install('{MOD_URL}&op=install_app_ajax&operation=check_install&appid=$value[identifier]','{$value[mid]}','{$value[baseinfo]}');" id="upgrade_info_{$value[mid]}">{lang install_onekey}</button>
 					<!--{/if}--> 
 				<!--{else}--> 
-				<a class="btn btn-success-outline view-detail" title="$value[name]" href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]" >{lang view_detail}</a> 
+				<a class="btn btn-w-md btn-round btn-primary view-detail" title="$value[name]" href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]" >{lang view_detail}</a> 
 				<!--{/if}--> 
             <!--{/if}--> 
           </div>
         </div>
         <!--{/loop}--> 
       </div>
-			<a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
     </div>
     <div id="pageinfo" style="text-align:center;padding:10px;">$multi</div>
   </div>
@@ -162,7 +150,7 @@
     
       <div class="modal-body"> </div>
       <div class="modal-footer" style="text-align: center">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">{lang close}</button>
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal" aria-label="Close">{lang close}</button>
       </div>
     </div>
     <!-- /.modal-content --> 
@@ -171,7 +159,6 @@
 </div>
 <!-- /.modal --> 
 <script type="text/javascript">
-	jQuery('.left-drager').leftDrager_layout();
 	jQuery('.view-detail').on('click',function(){
 		showBuyInfo(this,'modal-lg');
 		return false;
@@ -407,5 +394,4 @@
 	} 
 		
 </script> 
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script> 
 <!--{template common/footer_simple}-->

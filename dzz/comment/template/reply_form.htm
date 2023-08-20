@@ -12,18 +12,12 @@
     <input type="hidden" name="allowattach" value="$_GET['allowattach']" />  
       <input type="hidden" name="allowat" value="$_GET['allowat']" />  
       <input type="hidden" name="allowsmiley" value="$_GET['allowat']" /> 
-    <div class="container_psw">
       <div class="notice_cpsw clearfix">
         <div id="reply_who_{$cid}" class="who_cpsw"> <span>{lang reply}</span> <span class="toname_wcpsw"></span> <span>：</span> <a class="closed_wcpsw" title="" hidefocus="true" href="javascript:void(0);" onclick="jQuery(this).parent().hide();jQuery('#reply_pid_$cid').val('0')">{lang close}</a> </div>
       </div>
-      <div class="textarea_cpsw">
-        <div class="wrap_tcpsw">
-          <textarea rows="" id="message_{$cid}" name="message" cols="" onkeyup="check_publish_enable('$cid')"   class="write_wtcpsw _bb_write_wtcpsw " style="overflow: hidden; word-wrap: break-word; resize: vertical;border:none;box-shadow:none;height:25px"></textarea>
-        </div>
-        <div id="publish_count_{$cid}" class="count_cpsw"> <span id="num_input_{$cid}" class="num_ccpsw">0</span>/<span class="leng_ccpsw">1000</span> </div>
-      </div>
-    </div>
-    <div id="publish_action_{$cid}" class="action_cpsw">
+      <textarea rows="" id="message_{$cid}" name="message" cols="" onkeyup="check_publish_enable('$cid')"   class="form-control"></textarea>
+      <div id="publish_count_{$cid}" class="count_cpsw"> <span id="num_input_{$cid}" class="num_ccpsw">0</span>/<span class="leng_ccpsw">1000</span> </div>
+    <div id="publish_action_{$cid}" class="modal-footer">
       <ul class="list_acpsw">
       	<!--{if $_GET[allowattach]>0}-->
       	 <li class="ament_lacpsw" style="position: relative; cursor: pointer;">
@@ -46,12 +40,12 @@
         </script>
         <!--{/if}-->
       </ul>
-      <a hidefocus="true" class="cancel_cpsw" href="javascript:;" onclick="jQuery('#publish_{$cid}').slideUp(500);"> <b><i>{lang cancel}</i></b></a>
-      <button id="publish_submit_{$cid}" class="btn btn-sm btn-primary" type="button"  disabled="disabled" title="{lang reply}(Ctrl+Enter)" href="javascript:void(0);"><b>{lang reply}</b></button>
+      <a hidefocus="true" class="btn btn-outline-secondary" href="javascript:;" onclick="jQuery('#publish_{$cid}').slideUp(500);">{lang cancel}</a>
+      <button id="publish_submit_{$cid}" class="btn btn-primary" type="button"  disabled="disabled" title="{lang reply}(Ctrl+Enter)" href="javascript:void(0);">{lang reply}</button>
     </div>
      <div id="attachmentViewBox_{$cid}" class="attachmentContainer clearfix"> </div>
   </form>
-  <div class="actionUploadAttachment tobody" id="upload_from_{$cid}_menu" style="display:none;border-radius: var(--radius);">
+  <div class="da actionUploadAttachment tobody" id="upload_from_{$cid}_menu" style="display:none;border-radius: var(--radius);">
       <!--{if $_GET[allowattach]>=2 }--><div class="local_auatth" style="position:relative;overflow:hidden"> <a href="javascript:void(0);" hidefocus onclick="jQuery(this).parent().parent().hide();">{lang web_upload} <input id="fileupload_{$cid}" type="file" name="files[]" multiple ></a> </div><!--{/if}-->
         <!--{if $_GET[allowattach]==1 || $_GET[allowattach]>2}-->
       <div class="own_auatth" style=""><a href="javascript:void(0);" hidefocus onclick="uploadfrom_desktop('{$cid}');jQuery(this).parent().parent().hide();">{lang choose_from_my_file}</a></div> 

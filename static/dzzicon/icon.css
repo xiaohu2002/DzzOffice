@@ -23,7 +23,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 .dzz-account-box:before {
   content: "\e900";
 }

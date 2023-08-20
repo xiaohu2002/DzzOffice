@@ -1,7 +1,4 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-<link href="static/icheck/skins/minimal/blue.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <style>
 	html,
 	body {
@@ -31,10 +28,10 @@
 	</div>
 
 	<div class="bs-main-container  clearfix">
-		<div class="main-header">
-			<ul class="nav nav-pills nav-pills-bottomguide">
-				<li class="active">
-					<a href="{MOD_URL}&op=verifyset">{lang members_verify}</a>
+		<div class="main-header clearfix">
+			<ul class="nav nav-pills">
+				<li class="nav-item">
+					<a class="nav-link active" href="{MOD_URL}&op=verifyset">{lang members_verify}</a>
 				</li>
 			</ul>
 		</div>
@@ -47,7 +44,7 @@
 			<form id="cpform" action="{MOD_URL}&op=verifyset" class="form-horizontal" method="post" name="cpform">
 				<input type="hidden" value="{FORMHASH}" name="formhash">
 				<input type="hidden" value="true" name="verifysubmit">
-				<table class="table table-hover" style="font-size:12px;">
+				<table class="table table-striped table-hover">
 					<thead>
 						<th width="60">{lang enable}</th>
 						<th width="120">{lang authentication_code}</th>
@@ -57,14 +54,14 @@
 					<!--{eval for($i=1;$i<8;$i++){}-->
 					{eval $value=$_G['setting']['verify'][$i]}
 					<tr>
-						<td width="60"><input type="checkbox" name="settingnew[verify][$i][available]" <!--{if $value[available]}-->checked="checked"<!--{/if}-->value="1" /></td>
+						<td width="60"><input type="checkbox" class="form-check-input" name="settingnew[verify][$i][available]" <!--{if $value[available]}-->checked="checked"<!--{/if}-->value="1" /></td>
 						<td width="120">verify{$i}</td>
 						<td>
 							<!--{if $value[readonly]}-->
 							$value[title]<input type="hidden" name="settingnew[verify][$i][title]" value="$value[title]" />
 							<!--{else}-->
-							<input type="text" class="form-control input-sm" name="settingnew[verify][$i][title]" value="$value[title]">
-							<!--{/if}-->&nbsp;
+							<input type="text" class="form-control" name="settingnew[verify][$i][title]" value="$value[title]">
+							<!--{/if}-->
 							<!--{if $value['icon']}-->
 							<img src="$value[icon]" />
 							<!--{/if}-->
@@ -76,28 +73,13 @@
 					<!--{eval }}-->
 				</table>
 				<dl>
-					<input class="btn btn-primary btn-width" type="submit" value="{lang save_set}" />
+					<input class="btn btn-primary" type="submit" value="{lang save_set}" />
 				</dl>
 			</form>
 		</div>
 	</div>
-	<a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
 <script type="text/javascript">
-	jQuery('.left-drager').leftDrager_layout();
 	var url = '{MOD_URL}';
-
-	jQuery(document).ready(function(e) {
-		jQuery('input').iCheck({
-			checkboxClass: 'icheckbox_minimal-blue',
-			radioClass: 'iradio_minimal-blue',
-		});
-		jQuery('input').on('ifChecked', function(e) {
-			jQuery(this).trigger('click');
-		});
-
-	});
 </script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/icheck/icheck.min.js?{VERHASH}"></script>
 <!--{template common/footer_simple}-->

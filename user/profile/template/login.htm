@@ -1,10 +1,5 @@
 <!--{if $list}-->
-<style>
-	.table tbody:hover{
-    background: #fafafa;
-  }
-</style>
-<table class="table">
+<table class="table table-hover">
   <thead>
     <th width="100">{lang operator}</th>
     <th width="100">{lang usergroup}</th>
@@ -24,10 +19,10 @@
     </tr>
     <thead id="cplog_{$key}" style="display:none">
       <td colspan="10">
-        {lang loginfo}: $log[5]
-        <br/>{lang visit}: $log[6]
-        <br/>{lang from}: $log[7]
-        <br/>{lang Equipment information}: $log[8]</td>
+      {lang loginfo}：<strong><code>$log[5]</code></strong>
+      <br/>{lang visit}：<strong><code>$log[6]</code></strong>
+      <br/>{lang from}：<strong><code>$log[7]</code></strong>
+      <br/>{lang Equipment information}：<strong><code>$log[8]</code></strong></td>
     </thead>
     <!--{/loop}-->
     <tr>

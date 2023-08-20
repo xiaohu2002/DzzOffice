@@ -1,8 +1,6 @@
 <!--{template common/header_simple_start}-->
 <link href="static/bootstrap/css/bootstrapSwitch.css?{VERHASH}" rel="stylesheet" media="all">
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
 <script src="admin/scripts/admin.js?{VERHASH}" type="text/javascript"></script>
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <style>
 	p {
 		min-height: 25px;
@@ -24,52 +22,50 @@
 <!--{template commer_header}-->
 <div class="bs-container clearfix">
 	<div class="bs-main-container  clearfix">
-      <div class="main-header">
-          <ul class="nav nav-pills nav-pills-bottomguide">
-              <li class="active">
-                  <a href="{MOD_URL}&op=import">{lang user_import}</a>
-              </li>
+      <div class="main-header clearfix">
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="{MOD_URL}&op=import">{lang user_import}</a>
+            </li>
           </ul>
       </div>
-	<div class="main-content">
-		<div style="padding:25px;line-height:2">
-			<p style="line-height:3"><strong>{lang step}</strong><strong>1</strong><strong>：<a class="btn btn-simple" href="{MOD_URL}&op=export_tmpl" target="_blank">{lang inport_guide_download}</a></strong>
-				<span class="help-inline ml10">{lang inport_guide_template}</span>
-			</p>
-			<p style="line-height:4"><strong>{lang step}</strong><strong>2</strong>：{lang inport_guide_user.}</p>
-			<div>
-				<form name="importfile" class="form-horizontal form-horizontal-left" method="post" action="{MOD_URL}&op=import" id="importfile" enctype="multipart/form-data">
-					<input type="hidden" name="formhash" value="{FORMHASH}">
-					<input type="hidden" name="importfilesubmit" value="true">
-					<div class="form-group">
-						<label class="control-label " style="width:140px;text-align:left;padding-left:0">{lang inport_guide_step}</label>
-						<div class="controls">
-							<input type="file" name="importfile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="form-control" style="padding:6px 12px;" />
-						</div>
-						<span class="help-inline">{lang inport_guide_layout}</span>
-					</div>
-					<dl>
-						<input type="submit" name="" class="btn  btn-simple" style="padding:6px 25px" value="{lang next_step}" />
-					</dl>
-				</form>
-			</div>
-			<div class="alert alert-warning " style="color:#333;text-shadow:1px 1px 1px #FFF">
-				<p><strong>{lang inport_guide_notice}</strong></p>
-				<ul class="list-unstyled" style="padding-left:25px;">
-					{lang <li>1. Edit the personnel information to be imported according to the template fields. If there is already a file information table, you only need to change the name of the relevant field in the existing file information table to be consistent with the name provided in the template. As long as the name corresponds, the position of the field does not affect the result</ li>
-<li>2. The "user name" field in the template is required, and other fields can be filled in as required</ li>
-<li>3. The information in the mailbox and user name fields in the table must be unique and cannot be duplicate. If the mailbox is empty, the system will randomly generate the mailbox address when importing</ li>
-< Li class = "danger" > 4. Multi level department creation: Method 1: add multiple columns of "subordinate departments" to the table. From left to right, they are level-1 departments, level-2 departments and level-3 departments. The system will create departments, subordinate departments and lower subordinate departments according to the principle from left to right. Method 2: use a single column in the table, and the superior and subordinate departments use "/" to divide (for example, primary school / grade 1 / class 1)</ li>
-<li>5. Importing users can only import by organization. Multiple organizations need to be imported in batches</ li>
-<li>6. The "login password" field in the table can be blank, and administrators can set unified passwords for users in batches when importing. The user can modify the unified password after logging in</ li>
-<li>7. There are two import methods in the import interface: incremental and overwrite. Incremental method: when encountering the same user, only the missing field information of the user will be added, and the original information will not change. (for example, there is a user a in the system with a password of 123. In the batch import table, there is also a user a, whose unified password is set to ABC when importing. After importing, the passwords of other users are all ABC, and the original user a still keeps his original password, 123.) Overwrite import: completely replace the original user information in the system with the information in the table</ li>
-<li>8. If there are many people to import, it is recommended to make a test table for a small number of people first, and then import all users in an incremental way after the test is correct</ li>}
-				</ul>
-			</div>
-		</div>
+      <div class="main-content">
+          <div class="col-md-12">
+      <div class="row mb-3">
+        <label class="col-sm-2">{lang step}1</label>
+        <div class="col-sm-10">
+          <a class="btn btn-outline-secondary" href="{MOD_URL}&op=export_tmpl" target="_blank">{lang inport_guide_download}</a>
+          <span class="help-block">{lang inport_guide_template}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2">{lang step}2</label>
+        <div class="col-sm-10">
+          {lang inport_guide_user.}
+        </div>
+      </div>
+      <form name="importfile" class="form-horizontal form-horizontal-left" method="post" action="{MOD_URL}&op=import" id="importfile" enctype="multipart/form-data">
+        <input type="hidden" name="formhash" value="{FORMHASH}">
+        <input type="hidden" name="importfilesubmit" value="true">
+        <div class="row mb-3">
+          <label class="col-sm-2">{lang inport_guide_step}</label>
+          <div class="col-sm-10">
+            <input type="file" name="importfile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="form-control"/>
+            <span class="help-block">{lang inport_guide_layout}</span>
+          </div>
+        </div>
+        <dl>
+          <input type="submit" name="" class="btn btn-primary" style="padding:6px 25px" value="{lang next_step}" />
+        </dl>
+      </form>
+      <div class="alert alert-warning ">
+        <p><strong>{lang inport_guide_notice}</strong></p>
+        <ul class="list-unstyled" style="padding-left:25px;">
+          {lang inport_guide_notice_text}
+        </ul>
+      </div>
+          </div>
+      </div>
+    </div>
 	</div>
-<script type="text/javascript">
-	jQuery('.left-drager').leftDrager_layout();
-</script> 
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}" type="text/javascript"></script>
 <!--{template common/footer_simple}-->

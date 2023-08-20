@@ -19,7 +19,7 @@ if (empty($_G['uid']) && !in_array($do, $guests)) {
 	include  template('common/header_ajax');
     echo '&nbsp;&nbsp;&nbsp;<a href="user.php?mod=login" class="btn btn-primary">'.lang('login').'</a>';
 	if( $_G['setting']['regstatus']>0){
-		echo '&nbsp;&nbsp;&nbsp;<a href="user.php?mod=register" class="btn btn-success">'.lang('register').'</a>';
+		echo '&nbsp;&nbsp;&nbsp;<a href="user.php?mod=register" class="btn btn-outline-primary">'.lang('register').'</a>';
 	}
 	include  template('common/footer_ajax');
 	exit();

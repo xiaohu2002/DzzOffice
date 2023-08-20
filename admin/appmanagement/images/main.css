@@ -1,6 +1,3 @@
-body{
-	background: #FFF;
-}
 ul,ul li,li{
 	list-style: none;
 	padding: 0;
@@ -8,10 +5,6 @@ ul,ul li,li{
 }
 a{
 	text-decoration: none;
-}
-.bs-main-container{
-	margin-left:0;
-	padding:0;
 }
 .main-content-ul{
 	overflow: hidden;
@@ -25,11 +18,9 @@ a{
 .main-content-ul .main-content-li{
 	float: left;
 	width: 175px;
-	height: 175px;
 	overflow: hidden;
 	border-radius: 8px;
-	margin:20px;
-	padding: 15px;
+	margin:10px;
 	background: rgba(196,196,196,0.75);
 }
 .main-content-ul .main-content-li:hover{
@@ -38,7 +29,6 @@ a{
 	box-shadow : 0px 0px 10px rgba(0, 0, 0, 0.05);
 }
 .main-content-li a{
-
 	height: 100%;
 }
 .main-content-li img{

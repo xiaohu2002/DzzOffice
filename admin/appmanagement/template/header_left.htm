@@ -1,11 +1,4 @@
-<ul class="nav navbar-nav navbar-nav-left">
-    <li>
-        <a class="site" href="{$_G[siteurl]}"><span class="site-logo">
-        <!--{if $_G['setting']['sitelogo']}-->
-        <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}"  style="max-height:30px;">
-      <!--{else}-->
-        <img src="static/image/common/logo.png" style="max-height:30px;">
-      <!--{/if}-->
-        </span><span class="site-name">{lang appname}</span></a>
-    </li>
-</ul>
+<a class="leftTopmenu navbar-brand" href="{$_G[siteurl]}">
+  <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" class="d-inline-block align-middle">
+  {lang appname}
+</a>

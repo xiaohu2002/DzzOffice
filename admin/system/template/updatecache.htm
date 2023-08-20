@@ -1,6 +1,4 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <div class="bs-container clearfix">
@@ -9,37 +7,27 @@
 	</div>
 	<div class="left-drager">
 	</div>
-
 	<div class="bs-main-container  clearfix">
-		
-		<div class="main-header">
-			<div class="clearfix" style="line-height:40px;padding:0 10px">
-<!--<strong style="font-size:14px;">{lang updatecache}</strong>-->
-				<span class="text-muted" id="step1" <!--{if $step==1}-->style="color:green"<!--{/if}-->>1.{lang nav_updatecache_confirm}</span>
-				<span class="text-muted" id="step2" <!--{if $step==2}-->style="color:green"<!--{/if}-->>2.{lang nav_updatecache_verify}</span>
-				<span class="text-muted" id="step3" <!--{if $step==3}-->style="color:green"<!--{/if}-->>3.{lang nav_updatecache_completed}</span>
-			</div>
+		<div class="main-header clearfix">
+      <span id="step1" <!--{if $step==1}-->style="color:green"<!--{/if}-->>1.{lang nav_updatecache_confirm}</span>
+      <span id="step2" <!--{if $step==2}-->style="color:green"<!--{/if}-->>2.{lang nav_updatecache_verify}</span>
+      <span id="step3" <!--{if $step==3}-->style="color:green"<!--{/if}-->>3.{lang nav_updatecache_completed}</span>
 		</div>
 		<div class="main-content">
 			<div class="well well-sm">
 				<!--{if $step==1}-->
 				<form method="post" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=updatecache&step=2">
 					<input name="formhash" value="{VERHASH}" type="hidden">
-					<p class="clearfix ml20">
-						<label class="checkbox-inline">
-			              	<input name="type[]" value="data"   checked="" type="checkbox">
-			              	{lang tools_updatecache_data}
-						</label>
-						<label class="checkbox-inline">
-							<input name="type[]" value="tpl" id="tplcache"  checked="" type="checkbox">
-              				{lang tools_updatecache_tpl}
-						</label>	
-					</p>
+					<div class="form-check form-check-inline">
+            <input name="type[]" value="data" checked class="form-check-input" type="checkbox">
+            <label class="form-check-label" for="inlineRadio3">{lang tools_updatecache_data}</label>
+          </div>
+					<div class="form-check form-check-inline">
+            <input name="type[]" value="tpl" id="tplcache" checked class="form-check-input" type="checkbox">
+            <label class="form-check-label" for="inlineRadio3">{lang tools_updatecache_tpl}</label>
+          </div>
 					<dl>
-						<input class="btn btn-primary" name="confirmed" value="{lang confirms}" type="submit"> &nbsp;
-						<script type="text/javascript">
-							if(history.length > (BROWSER.ie ? 0 : 1)) document.write('<input type="button" class="btn btn-default" value="{lang cancel}" onClick="history.go(-1);">');
-						</script>
+						<input class="btn btn-primary" name="confirmed" value="{lang confirms}" type="submit">
 					</dl>
 				</form>
 				<!--{elseif $step==2}-->
@@ -60,10 +48,5 @@
 			</ul>
 		</div>
 	</div>
-    <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
-<script type="text/javascript">
-	jQuery('.left-drager').leftDrager_layout();
-</script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <!--{template common/footer_simple}-->

@@ -22,7 +22,6 @@ function sendmail($toemail, $subject, $message, $from = '') {
 			$_G['setting']['mail']['auth_password'] = $smtp['auth_password'];
 		}
 	}
-	$message = preg_replace("/href\=\"(?!(http|https)\:\/\/)(.+?)\"/i", 'href="'.$_G['siteurl'].'\\1"', $message);
   $sitename=$_G['setting']['sitename'];
 	$sitecopyright=replacesitevar($_G['setting']['sitecopyright']);
   $sitelogo=IO::getFileUri('attach::'.$_G['setting']['sitelogo']);

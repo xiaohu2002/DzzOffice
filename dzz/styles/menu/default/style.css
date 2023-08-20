@@ -50,15 +50,6 @@
 ie6 .menu-icon{
 	background-image:url('images/icons.gif');
 }
-
-.menu-rightarrow{
-	position: absolute;
-	width:4px;
-	height:7px;
-	top:7px;
-	right:5px;
-	background:url('images/menu_rightarrow.png') no-repeat;
-}
 .menu-sep{
 	position:relative;
 	display:block;

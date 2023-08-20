@@ -168,11 +168,6 @@ function check_submit(form){
 		if(json.success){
 			location.href=json['success']['url_forward'];
 			
-			/*jQuery('#succeedmessage_href').href = json['success']['url_forward'];
-			jQuery('#register_form').hide();
-			jQuery('#main_succeed').show();
-			jQuery('#succeedlocation').html(json['success']['message']);
-			setTimeout("window.location.href ='"+json['success']['url_forward']+"';", 3000);*/
 
 		}else{
 			jQuery('#returnmessage4').html(json['error']);

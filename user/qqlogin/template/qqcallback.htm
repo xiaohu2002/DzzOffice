@@ -1,5 +1,4 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
 <script src="user/scripts/register.js?{VERHASH}"></script>
 <style>
 	body {
@@ -21,16 +20,11 @@
 		border-radius: 5px;
 	}
 	
-	.middle-box h3 {
-		text-shadow: 1px 1px 1px #FFF;
-	}
-	
 	.bindContainer {
 		margin: 20px auto 0 auto;
 	}
 	
 	.bindContainer .tip {
-		text-shadow: 1px 1px 1px #FFF;
 		padding: 10px;
 	}
 	.mainContainer{
@@ -68,7 +62,7 @@
 				<input type="password" name="userinfo[pw]" id="password" class="form-control" placeholder="{lang login_password}" required="required" />
 			</div>
 			<div class="form-group  form-group-lg">
-				<input type="submit" value="{lang login_bound}" class="btn btn-success btn-block" style="line-height:30px;">
+				<input type="submit" value="{lang login_bound}" class="btn btn-outline-primary btn-block" style="line-height:30px;">
 			</div>
 			<div class="form-group form-group-lg clearfix" style="margin-top:10px;margin-bottom:0">
 				<!--{if $_G['setting']['qq_bind']}-->
@@ -80,7 +74,7 @@
 					<a href="user.php?mod=register&agree=1" class="btn btn-info btn-block">{lang register_binding}</a>
 				</div>
 				<div class="col-xs-6">
-					<a href="user.php?mod=qqlogin&type=newuser" class="btn btn-default btn-block">{lang landing_directly}</a>
+					<a href="user.php?mod=qqlogin&type=newuser" class="btn btn-outline-info btn-block">{lang landing_directly}</a>
 				</div>
 				<!--{/if}-->
 			</div>
@@ -88,6 +82,4 @@
 	</div>
 </div>
 </div>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
-
 <!--{template common/footer}-->

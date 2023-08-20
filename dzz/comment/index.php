@@ -45,10 +45,14 @@ if ($_GET['do'] == 'delete') {
   $refer = $theurl . '&page=' . $page;
 	if ($_GET['dateline'] == 'desc') {
     $order = 'ORDER BY dateline DESC';
-	}else {
-        $_GET['dateline'] = 'asc';
-        $order = 'ORDER BY dateline ASC';
-    }
+	}elseif ($_GET['author'] == 'asc') {
+    $order = 'ORDER BY author ASC';
+  } elseif ($_GET['author'] == 'desc') {
+    $order = 'ORDER BY author DESC';
+  }else {
+    $_GET['dateline'] = 'asc';
+    $order = 'ORDER BY dateline ASC';
+  }
   $sql = "cid!='app'";
   $foldername = array();
   $param = array();

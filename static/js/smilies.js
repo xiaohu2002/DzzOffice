@@ -4,7 +4,7 @@ function smilies_show(id, smcols, seditorkey) {
 		var div = document.createElement("div");
 		div.id = seditorkey + 'sml_menu';
 		div.style.display = 'none';
-		div.className = 'sllt';
+		div.className = 'da sllt';
 		document.getElementById('append_parent').appendChild(div);
 		var div = document.createElement("div");
 		div.id = id;
@@ -44,12 +44,12 @@ function smilies_onload(id, smcols, seditorkey) {
 			}
 		}
 		var k=0;
-		smiliestype = '<div id="'+id+'_tb" class="tb tb_s cl"><ul class="nav nav-pills nav-pills-bottomguide" style="margin:0;border-bottom:1px solid #DDD;">';
+		smiliestype = '<div id="'+id+'_tb" class="tb tb_s cl"><ul class="nav nav-pills">';
 		for(i in smilies_type) {
 			key = i.substring(1);
 			if(smilies_type[i][0]) {
 				k++;
-				smiliestype += '<li ' + (CURRENTSTYPE == key ? 'class="active"' : '') + ' id="'+seditorkey+'stype_'+key+'" onclick="smilies_switch(\'' + id + '\', \'' + smcols + '\', '+key+', 1, \'' + seditorkey + '\');if(CURRENTSTYPE) {document.getElementById(\''+seditorkey+'stype_\'+CURRENTSTYPE).className=\'\';}this.className=\'active\';CURRENTSTYPE='+key+';doane(event);" ><a href="javascript:;" hidefocus="true">'+smilies_type[i][0]+'</a></li>';
+				smiliestype += '<li class="nav-item" id="'+seditorkey+'stype_'+key+'" onclick="smilies_switch(\'' + id + '\', \'' + smcols + '\', '+key+', 1, \'' + seditorkey + '\');if(CURRENTSTYPE) {document.getElementById(\''+seditorkey+'stype_\'+CURRENTSTYPE).className=\'\';}this.className=\'active\';CURRENTSTYPE='+key+';doane(event);" ><a class="nav-link ' + (CURRENTSTYPE == key ? 'active"' : '') + ' href="javascript:;" hidefocus="true">'+smilies_type[i][0]+'</a></>';
 			}
 		}
 		smiliestype += '</ul></div>';

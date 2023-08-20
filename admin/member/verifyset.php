@@ -27,14 +27,14 @@ if ($do == 'edit') {
 			$icon_url = parse_url($verifyarr['icon']);
 			$prefix = !$icon_url['host'] && strpos($verifyarr['icon'], $_G['setting']['attachurl']) === false ? $_G['setting']['attachurl'] : '';
 
-			$verificonhtml = '<label class="radio-inline"><input type="checkbox" class="checkbox" name="deleteicon[' . $vid . ']" value="yes" />'.lang('del1').'</label>&nbsp;<img src="' . $prefix . $verifyarr['icon'] . '?t=' . TIMESTAMP . '"  />';
+			$verificonhtml = '<label class="radio-inline"><input type="checkbox" class="form-check-input" name="deleteicon[' . $vid . ']" value="yes" />'.lang('del1').'</label>&nbsp;<img src="' . $prefix . $verifyarr['icon'] . '?t=' . TIMESTAMP . '"  />';
 		}
 		$unverifyiconhtml = '';
 		if ($verifyarr['unverifyicon']) {
 			$unverifyiconurl = parse_url($verifyarr['unverifyicon']);
 
 			$prefix = !$unverifyiconurl['host'] && strpos($verifyarr['unverifyicon'], $_G['setting']['attachurl']) === false ? $_G['setting']['attachurl'] : '';
-			$unverifyiconhtml = '<label class="radio-inline"><input type="checkbox" class="checkbox" name="delunverifyicon[' . $vid . ']" value="yes" />'.lang('del1').'</label>&nbsp;<img src="' . $prefix . $verifyarr['unverifyicon'] . '?t=' . TIMESTAMP . '" />';
+			$unverifyiconhtml = '<label class="radio-inline"><input type="checkbox" class="form-check-input" name="delunverifyicon[' . $vid . ']" value="yes" />'.lang('del1').'</label>&nbsp;<img src="' . $prefix . $verifyarr['unverifyicon'] . '?t=' . TIMESTAMP . '" />';
 		}
 
 		$fieldarr = C::t('user_profile_setting') -> fetch_all_by_available(1);

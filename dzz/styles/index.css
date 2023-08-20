@@ -633,30 +633,6 @@ transform: perspective(120px)
 	cursor: pointer;
 	background: url(./images/b.gif);
 }
-.picop_next {
-	z-index: 101;
-	width: 48px;
-	height: 48px;
-	overflow: hidden;
-	cursor: pointer;
-	display: none;
- _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='dzz/styles/images/picwin/next.png', sizingMethod='scale');
-	background-image: url(./images/picwin/next.png) !important;
-	background-image: none;
-	background-repeat: no-repeat;
-}
-.picop_pre {
-	z-index: 101;
-	width: 48px;
-	height: 48px;
-	overflow: hidden;
-	cursor: pointer;
-	display: none;
- _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='dzz/styles/images/picwin/prev.png', sizingMethod='scale');
-	background-image: url(./images/picwin/prev.png) !important;
-	background-image: none;
-	background-repeat: no-repeat;
-}
 /*图片浏览器结束*/
 
 
@@ -744,7 +720,6 @@ transform: perspective(120px)
 	background: none;
 	padding: 0 10px;
 	width: 360px;
-	text-shadow: 1px 1px 1px #FFF;
 	float: right;
 }
 .bottom #messageBox {

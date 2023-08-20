@@ -1,4 +1,4 @@
-<div class="itemfeed " id="comment_$value[cid]">
+<div class="card itemfeed " id="comment_$value[cid]">
 	<a name="comment_$value[cid]"></a>
 	<div class="left_ifed">
 		<a href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value[authorid]);}</a>
@@ -7,7 +7,7 @@
 		<div class="main_fed">
 			<div class="source_fed">
 				<a href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true" class="appuser_sfed skip_mmfed">$value[author]</a><span class="cont_sfed">{lang talk}：</span> </div>
-			<div class="master_mfed"><span class="content_mmfed">$value[message]</span></div>
+			<div class="card master_mfed"><span class="content_mmfed">$value[message]</span></div>
 			<div class="attachment_fed">
 				<!--{loop $value[attachs] $attach}-->
 

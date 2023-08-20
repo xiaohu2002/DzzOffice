@@ -394,13 +394,13 @@ function job_add(orgid){
 function appendjob(json){
 	var html='';
 	html+='<div id="job_'+json.jobid+'" orgid="'+json.orgid+'" class="job-item-edit pull-left">';
-    html+='    <button onclick="job_show_editor(\''+json.jobid+'\',\''+json.orgid+'\', this)" class="btn btn-simple job-name mr20">'+json.name+'</button>';
+    html+='    <button onclick="job_show_editor(\''+json.jobid+'\',\''+json.orgid+'\', this)" class="btn btn-outline-secondary job-name mr20">'+json.name+'</button>';
     html+='    <div class="edit hide" style="min-width:250px">';
     html+='        <div class="job-edit-control pull-left" >';
     html+='            <input type="text" class="form-control" style="width:100px" value="'+json.name+'" onkeyup="if(event.keyCode==13){job_save(\''+json.name+'\',\''+json.orgid+'\')}">';
     html+='        </div>';
-    html+='        <button onclick="job_save(\''+json.name+'\',\''+json.orgid+'\')" data-loading-text="'+__lang.save+'" class="btn btn-success job-save">'+__lang.save+'</button>';
-    html+='        <button class="btn btn-link todo-del" onclick="job_del(\''+json.name+'\',\''+json.orgid+'\')">'+__lang.delete+'</button>';
+    html+='        <button onclick="job_save(\''+json.name+'\',\''+json.orgid+'\')" data-loading-text="'+__lang.save+'" class="btn btn-outline-primary job-save">'+__lang.save+'</button>';
+    html+='        <button class="btn btn-outline-primary todo-del" onclick="job_del(\''+json.name+'\',\''+json.orgid+'\')">'+__lang.delete+'</button>';
     html+='    </div> ';
     html+='</div>';
 	jQuery('.jobs .new-job').before(html);

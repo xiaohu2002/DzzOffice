@@ -184,7 +184,7 @@ function getuserIcon($uids,$datas,&$data){
 		}elseif($avatars[$uid]['headerColor']){
 			$headercolor = $avatars[$uid]['headerColor'];
 			$v['icon'] = false;
-			$v['text']= '<span class="Topcarousel" style="background:'.$headercolor.';" title="'.preg_replace("/<em.+?\/em>/i",'',$v['text']).'">'.strtoupper(new_strsubstr($v['text'],1,'')).'</span>'.$v['text'];
+			$v['text']= '<span class="img-avatar" style="background:'.$headercolor.';" title="'.preg_replace("/<em.+?\/em>/i",'',$v['text']).'">'.strtoupper(new_strsubstr($v['text'],1,'')).'</span>'.$v['text'];
 	
 		}else{
 			$v['icon'] = false;

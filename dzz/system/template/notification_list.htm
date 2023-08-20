@@ -1,19 +1,18 @@
 <!--{template common/header_simple_start}-->
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}--> 
-<link rel="stylesheet" href="static/css/common.css">
 <div class="bs-container">
-<div class="left-notice  bs-left-container affix-top clearfix">
-	<ul class="ul-notice">
-		<li <!--{if !isset($fromid) || $fromid == ''}-->class="active"<!--{/if}-->>
-			<a href="{MOD_URL}&op=notification">
+<div class="bs-left-container affix-top clearfix">
+	<ul class="nav-stacked nav-pills">
+		<li class="nav-item">
+			<a <!--{if !isset($fromid) || $fromid == ''}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=notification">
 				<span class="dzz dzz-notifications dzz-noticeicon"></span>
 				<span class="notice-text">{lang all_app}</span>
 			</a>
 		</li>
 		<!--{loop $searchcats $val}-->
-		<li <!--{if $fromid == $val['appid']}-->class="active"<!--{/if}-->  data-appid="$val[appid]">
-			<a href="{MOD_URL}&op=notification&appid=$val[appid]">
+		<li class="nav-item" data-appid="$val[appid]">
+			<a <!--{if $fromid == $val['appid']}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=notification&appid=$val[appid]">
 				<img src="$val[appico]">
 				<span class="notice-text">$val[appname]</span>
 			</a>
@@ -38,7 +37,7 @@
       <ul id="notification-list" class="notification-list list-unstyled u-gutter clearfix"> 
              <!--{if $list}-->
              <!--{loop $list $value}-->
-                <li class="notification-list-item clearfix">
+                <li class="card notification-list-item clearfix">
 
                     <div class="member member-no-menu">
 											<a href="user.php?uid=$value[authorid]">
@@ -68,7 +67,7 @@
                 </li>
                 <!--{/loop}-->
              <!--{else}-->
-              <p class="text-warning" style="line-height:35px;font-size: larger;">{lang noappall_notice}…</p>
+              <p class="text-warning text-center" style="font-size: larger;">{lang noappall_notice}…</p>
             <!--{/if}-->
             </ul>
 
@@ -81,30 +80,12 @@
   </nav>
 	</div>
 </div>
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <script type="text/javascript">
-//获取左侧高度
-jQuery('.left-drager').leftDrager_layout(function(){
-	
-});
 jQuery(window).scroll(function(e) {
 	var clientHeight = document.documentElement.clientHeight;
 	var scrollHeight =document.documentElement.scrollHeight;
     if(jQuery(window).scrollTop()+clientHeight>scrollHeight-20) jQuery('.js-loadmore').trigger('click');
 });
-/*jQuery(document).on('click','.js-loadmore',function(){
-		var el=jQuery(this);
-		jQuery.get(el.data('href'),function(html){
-			el.parent().replaceWith(html);
-		});
-		return false;
-});*/
-/*jQuery(document).ready(function(e) {
-    jQuery('.js-popbox').each(function(){
-		jQuery(this).popbox();
-	});
-	
-});*/
 var search_timer=null;
 jQuery('.js-search-input').on('keyup',function(e){
 	if(search_timer) window.clearTimeout(search_timer);
@@ -145,6 +126,5 @@ _notice.setIsread=function(){
 
 
 </script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <!--codestrings-->
 <!--{template common/footer_simple}--> 

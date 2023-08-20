@@ -1,13 +1,15 @@
-{eval $oparr=array('updatecache','database','cron','systemupgrade','xtxx');}
-{eval $leftmenu=array();}
-{eval foreach($oparr as $key => $value){}
-{eval $leftmenu[$value]=array('title'=>lang($value),'active'=>'');}
-	{eval if($value==$op) $leftmenu[$value]['active']='class="active"';}
+{eval
+$oparr=array('updatecache','database','cron','systemupgrade','xtxx');
+$leftmenu=array();
+foreach($oparr as $key => $value){
+$leftmenu[$value]=array('title'=>lang($value),'active'=>'');
+if($value==$op) $leftmenu[$value]['active']='class="nav-link active"';
+}
 {eval }}
 
-<ul class="nav-stacked">
+<ul class="nav-stacked nav-pills">
   <!--{loop $leftmenu $key $value}-->
-      <li $value[active]><a hidefocus="true" href="{MOD_URL}&op=$key">$value[title]</a></li>
+  <li class="nav-item"><a hidefocus="true" $value[active] href="{MOD_URL}&op=$key">$value[title]</a></li>
   <!--{/loop}-->
-	<li><a hidefocus="true" href="admin/system/adminer.php">{lang Database management}</a></li>
+	<li class="nav-item"><a hidefocus="true" href="admin/system/adminer.php">{lang Database management}</a></li>
 </ul>

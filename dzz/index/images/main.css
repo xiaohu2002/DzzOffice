@@ -1,16 +1,5 @@
 @charset "utf-8";
 /* CSS Document */
-.navbar-inverse{
-  background: transparent;
-  border-bottom: 1px solid #e8e8e8;
-	background-color: #fff;
-}
-.navbar-inverse .navbar-nav>li>a{
-	color:inherit;
-}
-.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover{
-	color:inherit;
-}
 .site-logo>img{
 	max-height:30px;
 }
@@ -23,41 +12,29 @@
 	display: none
 }
 }
-.navbar-notice span{
-	background:#e5e5e5;
-	color:#4e5563;
-}
-.navbar-notice span.badge{
-	background-color: #db4437;
-	color:#FFF;
-}
-.bs-left-container{
-	width:0;
-	min-height:100%;
-}
 .bs-main-container{
-  margin-left:0;
-  padding:0;
-  background: url(1.jpg);
+  background: none;
   background-size: cover;
+	box-shadow:none;
 }
 .main-content{
 	padding:0;
-	min-height:90%;
+	height:100%;
+	width: 100%;
 	display:table;
 }
 .popup-index {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 	display:table-cell;
 	vertical-align: middle;
 	text-align: center;
 }
 .popup-index>li{
-	margin:15px;
+	margin:5px;
 }
 .popup-index>li .app-popup-li{
-	padding: 15px;
+	padding: 10px;
 	background-color: rgba(196,196,196,0.55);
 }
 
@@ -99,6 +76,3 @@
     font-size: 18px;
     color: #333333;
 }
-.container {
-		width: 100%;
-	}

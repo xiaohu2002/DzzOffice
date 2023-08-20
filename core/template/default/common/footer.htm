@@ -11,19 +11,11 @@ try{
 <!--{if !$_G['setting']['bbclosed']}-->
 <!--{if $_G['setting']['gonggao']}-->
 <!--{if !isset($_G['cookie']['gongguo'])}-->
-<div id="gongguo1" style="border-radius: var(--radius);position: fixed;right:10px;bottom:10px;max-width:50%;box-shadow:0px 5px 10px RGBA(0,0,0,0.3);z-index:999999">
-  <div class="panel panel-warning" style="margin:0;">
-    <div class="panel-heading" style="border-radius:var(--radius)">
-      系统提示
-      <button class="close" id="gongguo" onclick="jQuery('#gongguo1').hide();setcookie('gongguo',1,3600);">×</button>
-    </div>
-    <div style="padding:0;max-height:500px;overflow-y:auto;border-radius: var(--radius);">
-      <div style="margin: 10px;">
-        $_G['setting']['gonggao']
-      </div>
-    </div>
-  </div>
-</div>
+<script type="text/javascript">
+ $(function(){ 
+    showmessage($_G[setting][gonggao], 'success', 0, 1, 'right-bottom');
+  });
+</script>
 <!--{/if}-->
 <!--{/if}-->
 <!--{if !isset($_G['cookie']['sendmail'])}-->
@@ -39,11 +31,6 @@ try{
 <script type="text/javascript">jQuery.getScript('misc.php?mod=upgrade&action=checkappupgrade&rand=$_G[timestamp]');</script>
 <!--{/if}-->
 <!--{if !isset($_G['cookie']['upgradenotice'] )}-->
-<script type="text/javascript">
-  jQuery(document).ready(function(){
-    try{jQuery('#systemNotice').load('misc.php?mod=upgrade&action=upgradenotice');}catch(e){};	
-  });
-</script>
 <div id="systemNotice" class="systemNotice" style="border-radius: var(--radius);position: fixed;right:10px;bottom:10px;max-width:50%;box-shadow:0px 5px 10px RGBA(0,0,0,0.3);z-index:999999"></div>
 <!--{/if}-->
 <!--{/if}-->
@@ -145,5 +132,9 @@ $_G['setting']['statcode']
 }
 </script>
 <!--{/if}-->
+<script type="text/javascript" src="static/js/popper.min.js"></script>
+<script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/main.min.js"></script>
+<script type="text/javascript" src="static/js/lyear-loading.js"></script>
 </body>
 </html>

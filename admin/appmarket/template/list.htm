@@ -1,10 +1,4 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
-<style>
-
-</style>
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <div class="bs-container clearfix">
@@ -18,12 +12,12 @@
 	</div>	
 	<div class="bs-main-container">
 		<div class="main-header clearfix">
-			<ul class="nav navbar-nav nav-pills-bottomguide">
-				<li <!--{if $op=='cloudappmarket'}-->class="active"<!--{/if}-->>
-					<a href="{BASESCRIPT}?mod={MOD_NAME}&op=cloudappmarket">{lang appmarket}</a>
+			<ul class="nav nav-pills">
+				<li class="nav-item">
+					<a  class="nav-link <!--{if $op=='cloudappmarket'}-->active<!--{/if}-->" href="{BASESCRIPT}?mod={MOD_NAME}&op=cloudappmarket">{lang appmarket}</a>
 				</li>
-                <li <!--{if $op=='list'}-->class="active"<!--{/if}-->>
-					<a href="{BASESCRIPT}?mod={MOD_NAME}&op=list&do=notinstall">{lang appInLocal}</a>
+                <li class="nav-item">
+					<a  class="nav-link <!--{if $op=='list'}-->active<!--{/if}-->" href="{BASESCRIPT}?mod={MOD_NAME}&op=list&do=notinstall">{lang appInLocal}</a>
 				</li>
 			</ul>
 			<div  class="button_add_content">
@@ -32,7 +26,7 @@
 				<a href="javascript:;" id="button_add" style="z-index: 10;">+</a>				
 			</div>					
 		</div>		
-		<div class="main-content clearfix" style="border-top:1px solid #FFF">
+		<div class="main-content clearfix">
 			<!--{if $do=='notinstall'}-->
 
 			<!--{template list_list_notinstall}-->
@@ -50,7 +44,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	jQuery('.left-drager').leftDrager_layout();
 	jQuery('#button_add').click(function(){
 		if(jQuery("#button_add1").hasClass('hide')){
 			jQuery("#button_add").html("×");
@@ -71,5 +64,4 @@
 	});
 
 </script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <!--{template common/footer_simple}-->

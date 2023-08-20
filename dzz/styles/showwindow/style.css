@@ -21,27 +21,16 @@
 	margin:0;
 	padding:5px 0 0;
 }
-.fwinmask .altw { width: 350px; }
-	.fwinmask .altw .fltc { margin-bottom: 0; padding: 8px; }
-		.fwinmask .alert_right, .fwinmask .alert_error, .fwinmask .alert_info { padding: 6px 0 6px 58px; min-height: 45px; height: auto !important; height: 40px; line-height: 160%; background:url(images/right.png) no-repeat 8px 8px; font-size: 14px; }
-		.fwinmask .alert_error { background-image: url(images/error.png); }
-			.fwinmask .alert_error a { font-weight: 700;  }
-		.fwinmask .alert_info { background-image: url(images/info.png); }
-		.fwinmask .alert_btnleft { margin-top: 8px; }
-		.fwinmask .alert_btn { margin-top: 20px; text-align: center; }
-		.fwinmask .alert_act { margin-top: 20px; padding-left: 58px; }
+.fwinmask .alert_right, .fwinmask .alert_error, .fwinmask .alert_info { padding: 6px 0 6px 58px; min-height: 45px; height: auto !important; height: 40px; line-height: 160%; background:url(images/right.png) no-repeat 8px 8px; font-size: 14px; }
+.fwinmask .alert_error { background-image: url(images/error.png); }
+.fwinmask .alert_error a { font-weight: 700;  }
+.fwinmask .alert_info { background-image: url(images/info.png); }
+.fwinmask .alert_btnleft { margin-top: 8px; }
+.fwinmask .alert_btn { margin-top: 20px; text-align: center; }
+.fwinmask .alert_act { margin-top: 20px; padding-left: 58px; }
 	
 
 /*去除原来透明边框*/
-.fwinmask .t_l, .fwinmask .t_r, .fwinmask .b_l, .fwinmask .b_r {
-    height: 0px;
-    width: 0px;
-}
-.fwinmask .t_c, .fwinmask .m_l, .fwinmask .m_r,  .fwinmask .b_c {
-    width:0px;
-	height:0px;
-}
-
 .fwinmask  .nfl .f_c {
     background: none;
     border:none;

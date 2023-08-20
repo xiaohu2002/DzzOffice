@@ -56,18 +56,6 @@
 .ul_hide{
     display: block;
 }
-  .form-group .input-black .input-animate {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#4c89fb), to(#4c89fb)), -webkit-gradient(linear, left top, left bottom, from(#e6e8eb), to(#e6e8eb));
-    background-image: -webkit-linear-gradient(#4c89fb, #4c89fb), -webkit-linear-gradient(#e6e8eb, #e6e8eb);
-    background-image: -o-linear-gradient(#4c89fb, #4c89fb), -o-linear-gradient(#e6e8eb, #e6e8eb);
-    background-image: linear-gradient(#4c89fb, #4c89fb), linear-gradient(#e6e8eb, #e6e8eb);
-  }
-  .form-group .input-black .input-animate.animate {
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#4c89fb), to(#4c89fb)), -webkit-gradient(linear, left top, left bottom, from(#e6e8eb), to(#e6e8eb));
-    background-image: -webkit-linear-gradient(#4c89fb, #4c89fb), -webkit-linear-gradient(#e6e8eb, #e6e8eb);
-    background-image: -o-linear-gradient(#4c89fb, #4c89fb), -o-linear-gradient(#e6e8eb, #e6e8eb);
-    background-image: linear-gradient(#4c89fb, #4c89fb), linear-gradient(#e6e8eb, #e6e8eb);
-  }
 </style>
 <div class="main-header clearfix">
 	
@@ -93,32 +81,32 @@
           <input type="hidden" name="settingsubmit" value="true" />
           <input type="hidden" name="formhash" value="{FORMHASH}" />
           <div class="form-group">
-            <div class="input-black input-static input-form">
-              <label class="control-label wxlabel">AgendID：</label><br>
-              <div class="input-animate" style="width: 200px;display: inline-block;margin-top: 15px;">
+            <div class="input-static input-form">
+              <label class="wxlabel">AgendID：</label><br>
+              <div style="width: 200px;display: inline-block;margin-top: 15px;">
                 <input type="text" id="agentid" class="form-control" name="agentid" value="$wxapp[agentid]" placeholder="AgendID">
               </div>
               <span class="help-inline help-info">{lang access_method_login_application}</span>
             </div>
-            <!--<label class="control-label" for="agentid">AgendID：</label>-->
+            <!--<label for="agentid">AgendID：</label>-->
             <!--<input id="agentid" type="text" class="form-control" style="width:80px;" name="agentid" value="$wxapp[agentid]" />-->
-            <!--<span class="help-inline">{lang access_method_login_application}</span>-->
+            <!--<span class="help-block">{lang access_method_login_application}</span>-->
           </div>
 		  <div class="form-group">
-            <div class="input-black input-static input-form">
-              <label class="control-label wxlabel">Secret：</label><br>
-              <div class="input-animate" style="width: 200px;display: inline-block;margin-top: 15px;">
+            <div class="input-static input-form">
+              <label class="wxlabel">Secret：</label><br>
+              <div style="width: 200px;display: inline-block;margin-top: 15px;">
                 <input type="text" id="agentid" class="form-control" name="secret" value="$wxapp[secret]" placeholder="Secret">
               </div>
               <span class="help-inline help-info">{lang access_method_login_application_secret}</span>
             </div>
-            <!--<label class="control-label" for="agentid">Secret：</label> -->
+            <!--<label for="agentid">Secret：</label> -->
             <!--<input id="agentid" type="text" class="form-control" style="width:80px;" name="secret" value="$wxapp[secret]" />-->
-            <!--<span class="help-inline">{lang access_method_login_application_secret}</span>-->
+            <!--<span class="help-block">{lang access_method_login_application_secret}</span>-->
           </div>
           <div class="form-group">
-            <div class="input-black input-static input-form">
-              <label class="control-label wxlabel">{lang application_state}：</label><br>
+            <div class="input-static input-form">
+              <label class="wxlabel">{lang application_state}：</label><br>
 
               <!--<label class="radio-inline"><input type="radio" name="appstatus" value="0" &lt;!&ndash;{if !$wxapp[status]}&ndash;&gt;checked="checked"&lt;!&ndash;{/if}&ndash;&gt; >{lang open_start}</label>-->
               <!--<label class="radio-inline"><input type="radio" name="appstatus" value="1" &lt;!&ndash;{if $wxapp[status]>0}&ndash;&gt;checked="checked"&lt;!&ndash;{/if}&ndash;&gt; >{lang close}</label>-->
@@ -136,14 +124,14 @@
             </div>
             </div>
           <div class="form-group" >
-            <button type="submit" id="ueditorform_btn" class="btn btn-primary" style="padding:6px 25px;" data-loading-text="{lang In_the_save}" >{lang save}</button>
+            <button type="submit" id="ueditorform_btn" class="btn btn-primary" data-loading-text="{lang In_the_save}" >{lang save}</button>
           </div>
         </form>
     </div>
     <div class="line line-dashed line-lg pull-in"></div>
     <div class="form-group clearfix padding-left">
       <div class="col-sm-12" style="padding: 0">
-        <p class="form-control-static danger relative"><strong style="font-size: 1em;color: rgba(51, 51, 51, 1);">*{lang need_weixin_enterprises_set}</strong> <a href="http://qy.weixin.qq.com/" target="_blank" class="pull-right btn btn-primary-outline">{lang weixin_enterprises_edit}</a> </p>
+        <p class="form-control-static danger relative"><strong style="font-size: 1em;color: rgba(51, 51, 51, 1);">*{lang need_weixin_enterprises_set}</strong> <a href="http://qy.weixin.qq.com/" target="_blank" class="pull-right btn btn-outline-secondary">{lang weixin_enterprises_edit}</a> </p>
       </div>
     </div>
     <!--<div class="line line-dashed line-lg pull-in"></div>-->
@@ -210,9 +198,6 @@
 <script type="text/javascript">  
 
 jQuery(document).ready(function(e) {
-    jQuery('.input-black').each(function() {
-        InputAnimate.init(jQuery(this));
-    })
     var client = new ZeroClipboard(jQuery('.js_copy'));
 	client.on( "load", function( client ) {
 	  // alert( "ZeroClipboard SWF is ready!" );

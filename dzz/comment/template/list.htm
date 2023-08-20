@@ -1,131 +1,90 @@
 <!--{template common/header_simple_start}-->
-<link rel="stylesheet" href="static/css/checkbox.css">
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all"> 
 <link href="{MOD_PATH}/images/folder.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="{MOD_PATH}/images/comment.css?Xqd" rel="stylesheet" media="all">
 <link href="static/dzzthumb/jquery.dzzthumb.css?{VERHASH}" rel="stylesheet" media="all">
-<link href="dzz/styles/icoblock/default/style.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/dzzthumb/jquery.dzzthumb.js?{VERHASH}"></script>
 <style type="text/css">
-@media (max-width: 670px) {
-	html,body{
-	min-width: 670px;
-  overflow-x: auto;
-}
-}
-#orgid__Menu{
-	border: 1px solid #4c89fb;
-	background: #fff;
-	border-radius: 2px;
-	color: #4c89fb;
-	height: 34px;
-	padding: 6px 12px;
-	font-size: 14px;
-	font-weight: normal;
-}
-.module-list-view .item-block.item{
-    border-bottom:1px solid #eee; 
-}
-.module-list-view .item-block{
-    background:none;
-}
-.module-list-view .item-block .col{
-	color:#333;
-}
-#filem_search .iconFirstWord{
-	width: 18px;
-	height: 18px;
-	border-radius: 50%;
-	display: inline-block;
-	line-height: 16px;
-	font-size: 14px;
-	margin-left: 0;
-}
+	.overflow-auto{
+		max-height: 60px;
+	}
+	.lie{
+		min-width: 120px
+	}
 </style>
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <div class="bs-container clearfix">
-	<div class="left-notice  bs-left-container affix-top clearfix">
+	<div class="bs-left-container clearfix">
 		<!--{template left}-->
 	</div>
+	<div class="left-drager">
+    <div class="left-drager-op">
+      <div class="left-drager-sub"></div>
+    </div>
+  </div>
   <div class="bs-main-container">
 		<!--{if !$list}-->
-		<div node-type="module" class="module-share-empty text-center clearfix">
-				<div style="padding-top:40px;">
-					<p class="no-result-title">暂无评论</p>
-				</div>
-			</div>
+		<p class="no-result-title text-center">暂无文件</p>
 		<!--{else}-->
-		<div class="main-header" style="border-top:1px solid #FFF;">
-      <form name="search" action="{BASESCRIPT}" method="get" id="filem_search">
+		<div class="main-header clearfix">
+			<form name="search" class="form-horizontal" action="{BASESCRIPT}" method="get">
         <input type="hidden" name="mod" value="comment" />
-        <ul class="nav nav-pills clearfix" style="padding: 5px 0 5px 0;">
+        <ul class="nav nav-pills">
           <li class="pull-left btn-secetlt" style="display: none;">
-            <button  class="btn btn-danger " type="submit" value="{lang delete}" onclick="delete_file();" style="height:34px;">{lang delete}</button>
+            <button  class="btn btn-danger " type="submit" value="{lang delete}" onclick="delete_file();">{lang delete}</button>
           </li>
         </ul>
       </form>
     </div>
-    <div node-type="module" class="module-list-view" style="display:block">
       <form id="appform" name="appform" class="form-horizontal " action="{BASESCRIPT}?mod=comment" method="post" >
         <input type="hidden" name="delsubmit" value="true" />
         <input type="hidden" name="formhash" value="{FORMHASH}" />
         <input type="hidden" name="refer" value="$refer" />
-        <div node-type="wrapper" class="list-view-home">
-          <div node-type="title" class="title" >
-            <div class="item clearfix">
-              <div class="col1 cid" style="width: 3%;text-indent: 0;padding-left: 5px;">
-                <div class="checkbox-custom checkbox-primary">
-                  <input type="checkbox" name="del[]" id="chkall">
-                  <label></label>
+				<table class="table table-hover">
+          <thead node-type="title" class="title">
+            <tr class="item clearfix">
+              <th node-type="title-col"  class="col">
+								<div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" name="del[]" type="checkbox" id="chkall"><label></label>
+                  </div>
                 </div>
-              </div>
-              <!--选中后的效果-->
-              <div class="col sharepame-selected" style="display: none;width:27%"><span>已选择<span class="ex-number"></span>项</span></div>
-              <!-- 第一列 -->
-              <div class="col1 c1 show_first" style="width: 27%">
-                <div class="name"> <span>内容</span></div>
-              </div>
-              <!-- 其他列 -->
-              <div class="col1" style="width: 10%;">IP地址</div>
-              <div class="col1" style="width: 20%;border-right: none;">设备信息</div>
-              <div class="col" node-type="title-col" data-key="dateline" style="width: 20%;border-right: none;">发布时间<span class="asc $_GET[dateline]" style="visibility: <!--{if $_GET[dateline]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </div>
-              <div class="col1" style="width: 10%;border-right: none;">发布人</div>
-              <div class="col1" style="width: 60px;">操作</div>
-            </div>
-          </div>
-          <div class="list list-share">
-            <div class="list-wrapper clearfix"> 
-              <!--{loop $list $value}--> 
-              <div node-type="item" id="comment_$value[cid]" data-cid="$value[cid]" class="item shareblock clearfix"> 
-              <!-- 第一列 -->
-              <div class="col cid" style="width: 3%;text-indent: 0;padding-left: 5px;" >
-                <div class="checkbox-custom checkbox-primary">
-                  <input type="checkbox" name="del[]" value="$value[cid]" data-cid="$value[cid]">
-                  <label></label>
+              </th>
+              <th class="lie">内容</th>
+              <th class="lie">IP地址</th>
+              <th class="lie">设备信息</th>
+              <th node-type="title-col" data-key="dateline" class="lie col">发布时间<span class="asc $_GET[dateline]" style="visibility: <!--{if $_GET[dateline]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </th>
+              <th node-type="title-col" data-key="author" class="lie col">发布人<span class="asc $_GET[author]" style="visibility: <!--{if $_GET[author]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
+							<th class="lie">操作</th>
+            </tr>
+          </thead>
+          <tbody node-type="list" class="list list-share">
+						<!--{loop $list $value}-->
+            <tr node-type="item" id="comment_$value[cid]" data-cid="$value[cid]" class="item shareblock clearfix">
+              <td data-name="$value[name]" class="col">
+								<div class="col-sm-10">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input"  name="del[]" value="$value[cid]" data-cid="$value[cid]">
+                    <label></label>
+                  </div>
                 </div>
-              </div>
-              <div class="col c1 name" style="width: 27%;">
-                <div class="name"> 
-                  <span class="enabled">$value[message]</span>
-								</div>
-              </div>
-              <!-- 其他列 -->
-              <div class="col" style="width: 10%">$value[ip]</div>
-              <div class="col" style="width:20%">$value[xtllq]</div>
-              <div class="col dateline" style="width:20%" data-dateline="$value[dateline]">{eval echo dgmdate($value[dateline])}</div>
-              <div class="col" style="width:10%">$value[author]</div>
-              <div class="col" style="width:60px">
-								<a title="{lang delete}" hidefocus="true" href="javascript:void(0);" style="color:rgb(85, 85, 85);font-size:20px;" onclick="feed_delete('$value[cid]','comment_$value[cid]','$value[cid]')"><i class="dzz dzz-delete"></i></a>
-								<a title="编辑" hidefocus="true" href="javascript:void(0);" style="color:rgb(85, 85, 85);font-size:20px;" onclick="feed_edit('$value[cid]','$_GET[allowattach]','$_GET[allowat]','$_GET[allowsmiley]');"><i class="dzz dzz-create"></i></a>
-							</div>
-            </div>
+              </td>
+              <td node-type="name" class="name" title="$value[name]" data-size="$value[name]"><div class="overflow-auto">$value[message]</div></td>
+              <td><div class="overflow-auto">$value[ip]</div></td>
+              <td><div class="overflow-auto">$value[xtllq]</div></td>
+              <td><div class="overflow-auto">{eval echo dgmdate($value[dateline])}</div></td>
+              <td><div class="overflow-auto">$value[author]</div></td>
+              <td>
+                <div>
+                  <a class="btn btn-outline-info" href="javascript:void(0);" title="{lang delete}" onclick="feed_delete('$value[cid]','comment_$value[cid]','$value[cid]')"><i class="dzz dzz-delete"></i></a>
+									<a class="btn btn-outline-info" title="编辑" hidefocus="true" href="javascript:void(0);" onclick="feed_edit('$value[cid]','$_GET[allowattach]','$_GET[allowat]','$_GET[allowsmiley]');"><i class="dzz dzz-create"></i></a>
+                </div>
+              </td>
+            </tr>
             <!--{/loop}--> 
-          </div>
-        </div>
+          </tbody>
+        </table>
       </form>
-    </div>
 	<div class="clearfix" style="padding:10px;text-align:center">$multi</div>
 	<!--{/if}-->
   </div>
@@ -156,16 +115,6 @@ function feed_delete(cid,domid,tid){
 		});
 	}
 }
-	var page_loading = false;
-	jQuery('.left-drager').leftDrager_layout();
-	function setLoadedNum() {
-		jQuery('.loaded-num').html(jQuery('.list-share .item').length);
-		if(!jQuery('.list-share .more').length) {
-			jQuery('.total-num').html('{lang loading_all}');
-		} else {
-			jQuery('.total-num').html('');
-		}
-	}
 var cids=[];
 var theurl='$theurl';
 	jQuery(document).ready(function(e) {
@@ -175,13 +124,13 @@ var theurl='$theurl';
 		jQuery(document).on('mouseleave', 'div[node-type=item]', function() {
 			jQuery(this).removeClass('item-hover');
 		});
-		jQuery('.title .item .col[node-type=title-col][data-key=dateline]').on('click', function() {
+		jQuery('.title .item .col[node-type=title-col][data-key=dateline],.title .item .col[node-type=title-col][data-key=author]').on('click', function() {
 			var el = jQuery(this);
 			el.find('.asc').css('visibility', 'visible').toggleClass('desc');
 			el.siblings().find('.asc').css('visibility', 'hidden');
 			
 			var param=el.data('key')+'='+ (el.find('.asc').hasClass('desc') ? 'desc' : 'asc');
-			var regx=new RegExp('&(dateline)=(asc)','i');
+			var regx=new RegExp('&(dateline|author)=(asc|desc)','i');
 			var url=theurl.replace(regx,'')+'&'+param;
 			location.href=correcturl(url);
 		});
@@ -191,7 +140,7 @@ jQuery(document).off('click.shareclick').on('click.shareclick',".shareblock",fun
 	var checkinput = jQuery(this).find("input[name='del[]']");
 	if(checkinput.prop('checked')){
 		checkinput.prop('checked',false);
-		jQuery(this).removeClass('item-active');
+		jQuery(this).removeClass('item-block');
 		
 		var cid=jQuery(this).find('input[name="del[]"]').data('cid');
 		var index = jQuery.inArray(cid,cids);
@@ -201,7 +150,7 @@ jQuery(document).off('click.shareclick').on('click.shareclick',".shareblock",fun
 
 	}else{
 		checkinput.prop('checked',true);
-		jQuery(this).addClass('item-active');
+		jQuery(this).addClass('item-block');
 		var cid=jQuery(this).data('cid');
 			if(jQuery.inArray(cid,cids) == -1){
 				cids.push(cid);
@@ -213,11 +162,11 @@ jQuery(document).off('click.shareclick').on('click.shareclick',".shareblock",fun
 jQuery(document).off('click.inputclick').on('click.inputclick',".shareblock input[name='del[]']",function(){
 	if($(this).prop('checked')){
 		jQuery(this).prop('checked',false);
-		jQuery(this).removeClass('item-active');
+		jQuery(this).removeClass('item-block');
 		
 	}else{
 		jQuery(this).prop('checked',true);
-		jQuery(this).addClass('item-active');
+		jQuery(this).addClass('item-block');
 	}
 });
 //复选框全选
@@ -269,6 +218,5 @@ function delete_file(){
 		})
 	}
 }
-</script> 
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
+</script>
 <!--{template common/footer_simple}-->

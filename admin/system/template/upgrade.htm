@@ -1,7 +1,4 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <script src="admin/scripts/admin.js?{VERHASH}"></script>
 <style>
 	.progress.active .progress-bar {
@@ -23,17 +20,14 @@
 	</div>
 
 	<div class="bs-main-container  clearfix">
-		
 		<!--{if $operation == 'patch' || $operation == 'cross'}-->		
-		<div class="main-header">
-			<div class="clearfix" style="line-height:40px;padding:0 10px;font-size:12px;">
+		<div class="main-header clearfix">
 				<strong style="font-size:14px;">{lang upgrade}</strong>
 				<!--{loop $steplang $key $value}-->
 				<!--{if $key>0 && $key<=5}-->
 				<span class="text-muted" <!--{if $key==$step}-->style="color:green"<!--{/if}-->>{$key}.{$value}</span>
 				<!--{/if}-->
-				<!--{/loop}-->				
-			</div>
+				<!--{/loop}-->
 		</div>
 		<!--{/if}-->
 		<!--{if $operation=='check'}-->
@@ -71,7 +65,7 @@
 				</div>
 			</div>
 			<!--{else}-->
-			<table class="table table-hover">
+			<table class="table table-striped table-hover">
 				<thead>
 					<th colspan="5">{lang founder_upgrade_select_version}</th>
 				</thead>
@@ -98,7 +92,7 @@
 				</div>
 			</div>
 			<!--{elseif $step==1}-->
-			<table class="table table-hover">
+			<table class="table table-striped table-hover">
 				<thead>
 					<th colspan="5">{lang founder_upgrade_preupdatelist}</th>
 				</thead>
@@ -127,7 +121,7 @@
 				</div>
 			</div>
 			<!--{else}-->
-			<table class="table table-hover">
+			<table class="table table-striped table-hover">
 				<thead>
 					<th colspan="5">{lang founder_upgrade_diff_show}</th>
 				</thead>
@@ -172,53 +166,53 @@
 				<input type="hidden" name="formhash" value="{FORMHASH}">
 				<p style="padding-left:20px;font-weight:bold;font-size:16px;padding-bottom:20px;">{lang upgrade_website_FTP_set}</p>
 				<div class="form-group">
-					<label class="control-label">FTP {lang server_address}</label>
+					<label>FTP {lang server_address}</label>
 					<input type="text" class="form-control required" name="siteftp[host]" value="" placeholder="{lang host_IP_address}">
-					<span class="help-inline">{lang FTP_server_IP_site_domain}</span>
+					<span class="help-block">{lang FTP_server_IP_site_domain}</span>
 				</div>
 				<div class="form-group">
-					<label class="control-label">FTP {lang server_port}</label>
+					<label>FTP {lang server_port}</label>
 					<input type="text" class="form-control required" name="siteftp[port]" value="21" placeholder="{lang port}">
-					<span class="help-inline">{lang default_for_the_21st}</span>
+					<span class="help-block">{lang default_for_the_21st}</span>
 				</div>
 				<div class="form-group">
-					<label class="control-label">FTP {lang account}</label>
+					<label>FTP {lang account}</label>
 					<input type="text" class="form-control required" name="siteftp[username]" value="" placeholder="{lang FTP_account_user_name}">
-					<span class="help-inline">{lang accounts_supreme_authority}</span>
+					<span class="help-block">{lang accounts_supreme_authority}</span>
 				</div>
 				<div class="form-group">
-					<label class="control-label">FTP {lang password}</label>
+					<label>FTP {lang password}</label>
 					<input type="password" class="form-control required" name="siteftp[password]" value="" placeholder="{lang FTP_account_user_password}">
 
 				</div>
 				<!--<div class="form-group">
-                    <label class="control-label">编码</label>
+                    <label>编码</label>
                       <select class="form-control" name="siteftp[charset]">
                       <option value="GBK" selected="selected">GBK</option>
                       <option value="UTF-8">UTF-8</option>
                       <option value="BIG5">BIG5</option>
                       </select>
-                    <span class="help-inline">根据FTP服务器的编码设置，不一致会导致乱码</span>
+                    <span class="help-block">根据FTP服务器的编码设置，不一致会导致乱码</span>
                     
                   </div>-->
 
 				<div class="form-group">
-					<label class="control-label">{lang sitepath}</label>
+					<label>{lang sitepath}</label>
 					<input type="text" class="form-control required" name="siteftp[attachdir]" value="">
-					<span class="help-inline">{lang site_absolute_path_root_directory}</span>
+					<span class="help-block">{lang site_absolute_path_root_directory}</span>
 				</div>
 				<div class="form-group">
-					<label class="control-label"></label>
-					<label class="checkbox-inline" style="width:180px;"><input type="checkbox" name="siteftp[pasv]" value="1">{lang use_Passive_Mode}</label>
-					<span class="help-inline">{lang general_condition_passive_mode}</span>
+					<label></label>
+					<label class="checkbox-inline" style="width:180px;"><input type="checkbox"  class="form-check-input" name="siteftp[pasv]" value="1">{lang use_Passive_Mode}</label>
+					<span class="help-block">{lang general_condition_passive_mode}</span>
 				</div>
 				<div class="form-group">
-					<label class="control-label"></label>
-					<label class="checkbox-inline" style="width:180px;"><input type="checkbox" name="siteftp[ssl]" value="1">{lang enable_secure_link}</label>
-					<span class="help-inline">{lang notice_FTP_open_SSL}</span>
+					<label></label>
+					<label class="checkbox-inline" style="width:180px;"><input type="checkbox"  class="form-check-input" name="siteftp[ssl]" value="1">{lang enable_secure_link}</label>
+					<span class="help-block">{lang notice_FTP_open_SSL}</span>
 				</div>
 				<div class="form-group">
-					<label class="control-label"></label>
+					<label></label>
 					<input type="submit" class="btn btn-primary" style="padding:6px 25px" value="{lang confirms}">
 				</div>
 			</form>
@@ -235,14 +229,10 @@
 		<!--{/if}-->
 
 	</div>
-    <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
 <script type="text/javascript">
-	jQuery('.left-drager').leftDrager_layout();
-
 	function createIframe(src) {
 		document.getElementById('step4').innerHTML = '<iframe  marginheight="0" marginwidth="0" allowtransparency="true" frameborder="0"  src="' + src + '" style="width:100%;height:100%;"></iframe>';
 	}
 </script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <!--{template common/footer_simple}-->

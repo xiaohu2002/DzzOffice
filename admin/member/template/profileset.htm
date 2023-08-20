@@ -1,7 +1,4 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-<link href="static/icheck/skins/minimal/blue.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <style>
 	html,
 	body {
@@ -35,48 +32,44 @@
 	</div>
 
 	<div class="bs-main-container  clearfix" >
-		<div class="main-header">
-			<ul class="nav nav-pills nav-pills-bottomguide">
-				<li <!--{if !$fieldid}-->class="active"<!--{/if}-->>
-					<a href="{MOD_URL}&op=profileset">{lang data_item_list}</a>
+		<div class="main-header clearfix">
+			<ul class="nav nav-pills">
+				<li class="nav-item">
+					<a class="nav-link <!--{if !$fieldid}-->active<!--{/if}-->" href="{MOD_URL}&op=profileset">{lang data_item_list}</a>
 				</li>
 				<!--{if $fieldid}-->
-				<li class="active">
-					<a href="{MOD_URL}&op=profileset&fieldid=$fieldid">{lang data_edit}</a>
+				<li class="nav-item">
+					<a class="nav-link active" href="{MOD_URL}&op=profileset&fieldid=$fieldid">{lang data_edit}</a>
 				</li>
 				<!--{/if}-->
 			</ul>
 		</div>
-		<table id="table-header" class="table" style="margin:0;font-size:12px;padding: 0 5px;">
-
-			<thead>
-				<th width="60">{lang sort}</th>
-				<th width="120">{lang identifier}</th>
-				<th>{lang name}</th>
-				<th width="60" style="text-align: center;">{lang enable}</th>
-				<th width="80">{lang data_show}</th>
-				<th width="60">{lang business_card_show}</th>
-				<th width="60">{lang registration_page_display}</th>
-				<th width="120">{lang operation}</th>
-			</thead>
-
-		</table>
 		<div class="itemContainer">
 			<div class="main-content">
 				<form id="cpform" action="{MOD_URL}&op=profileset" method="post" name="cpform">
 					<input type="hidden" value="{FORMHASH}" name="formhash">
 					<input type="hidden" value="true" name="ordersubmit">
-					<table class="table table-hover">
+					<table id="table-header" class="table table-striped table-hover">
+						<thead>
+              <th width="60">{lang sort}</th>
+              <th width="120">{lang identifier}</th>
+              <th>{lang name}</th>
+              <th width="60">{lang enable}</th>
+              <th width="100">{lang data_show}</th>
+              <th width="60">{lang business_card_show}</th>
+              <th width="60">{lang registration_page_display}</th>
+              <th width="120">{lang operation}</th>
+            </thead>
 						<!--{loop $list $fieldid $value}-->
 						<tr>
 
 							<td width="60"><input type="text" class="form-control input-sm" name="displayorder[$fieldid]" value="$value[displayorder]"></td>
 							<td class="fieldid <!--{if !$value[customable]}-->gray<!--{/if}-->" width="120">$fieldid</td>
 							<td>$value[title] </td>
-							<td width="60"><input type="checkbox" class="checkbox" name="available[$fieldid]" <!--{if $value[available]}-->checked="checked"<!--{/if}-->value="1"></td>
-							<td width="60"><input type="checkbox" class="checkbox" name="invisible[$fieldid]" <!--{if !$value[invisible]}-->checked="checked"<!--{/if}-->value="1"></td>
-							<td width="60"><input type="checkbox" class="checkbox" name="showincard[$fieldid]" <!--{if $value[showincard]}-->checked="checked"<!--{/if}-->value="1"></td>
-							<td width="60"><input type="checkbox" class="checkbox" name="showinregister[$fieldid]" <!--{if $value[showinregister]}-->checked="checked"<!--{/if}-->value="1"></td>
+							<td width="60"><input type="checkbox" class="form-check-input" name="available[$fieldid]" <!--{if $value[available]}-->checked="checked"<!--{/if}-->value="1"></td>
+							<td width="100"><input type="checkbox" class="form-check-input" name="invisible[$fieldid]" <!--{if !$value[invisible]}-->checked="checked"<!--{/if}-->value="1"></td>
+							<td width="60"><input type="checkbox" class="form-check-input" name="showincard[$fieldid]" <!--{if $value[showincard]}-->checked="checked"<!--{/if}-->value="1"></td>
+							<td width="60"><input type="checkbox" class="form-check-input" name="showinregister[$fieldid]" <!--{if $value[showinregister]}-->checked="checked"<!--{/if}-->value="1"></td>
 							<td width="100">
 								<a href="{MOD_URL}&op=profileset&fieldid=$fieldid" class="ibtn glyphicon glyphicon-edit " title="{lang edit}"></a>
 								<!--{if $value['customable']}-->&nbsp;&nbsp;&nbsp;&nbsp;
@@ -86,27 +79,21 @@
 						</tr>
 						<!--{/loop}-->
 						<tr>
-							<td colspan="20"><button type="button" class="btn btn-default btn-width" onclick="addRow(this)"><i class="glyphicon glyphicon-plus"></i>{lang add_data}</button></td>
+							<td colspan="20"><button type="button" class="btn btn-outline-info" onclick="addRow(this)"><i class="glyphicon glyphicon-plus"></i>{lang add_data}</button></td>
 						</tr>
 					</table>
 					<dl>
-						<input class="btn btn-primary btn-width" type="submit" value="{lang save_set}" />
+						<input class="btn btn-primary" type="submit" value="{lang save_set}" />
 					</dl>
 				</form>
 			</div>
 		</div>
 	</div>
-    <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
 <script type="text/javascript">
-	jQuery('.left-drager').leftDrager_layout(initHeight);
 	var url = '{MOD_URL}';
 
 	jQuery(document).ready(function(e) {
-		jQuery('input').iCheck({
-			checkboxClass: 'icheckbox_minimal-blue',
-			radioClass: 'iradio_minimal-blue',
-		});
 		jQuery('input').on('ifChecked', function(e) {
 			jQuery(this).trigger('click');
 		});
@@ -146,19 +133,13 @@
 			'<td  width="60"><input type="text" class="form-control input-sm" name="add[displayorder][]" value="0" ></td>' +
 			'<td  width="120"><input type="text" class="form-control input-sm fieldid" name="add[fieldid][]" value="" placeholder="{lang can_not_repeat}" required="true"></td>' +
 			'<td ><input type="text" class="form-control input-sm" name="add[title][]" value="" style="max-width:150px;" placeholder="{lang data_name}"></td>' +
-			'<td width="60"><input type="checkbox" class="checkbox" name="add[available][]" value="1"></td>' +
-			'<td width="60"><input type="checkbox" class="checkbox" name="add[invisible][]" value="1"></td>' +
-			'<td width="60"><input type="checkbox" class="checkbox" name="add[showincard][]" value="1"></td>' +
-			'<td width="60"><input type="checkbox" class="checkbox" name="add[showinregister][]" value="1"></td>' +
+			'<td width="60"><input type="checkbox" class="form-check-input" name="add[available][]" value="1"></td>' +
+			'<td width="60"><input type="checkbox" class="form-check-input" name="add[invisible][]" value="1"></td>' +
+			'<td width="60"><input type="checkbox" class="form-check-input" name="add[showincard][]" value="1"></td>' +
+			'<td width="60"><input type="checkbox" class="form-check-input" name="add[showinregister][]" value="1"></td>' +
 			'<td width="120"><a href="javascript:;" onclick="jQuery(this).parent().parent().remove()"><i class="ibtn glyphicon glyphicon-trash"></i></a></td>';
 		jQuery(html).insertBefore(jQuery(obj).parent().parent());
-		jQuery('.add input').iCheck({
-			checkboxClass: 'icheckbox_minimal-blue',
-			radioClass: 'iradio_minimal-blue',
-		});
 
 	}
 </script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/icheck/icheck.min.js?{VERHASH}"></script>
 <!--{template common/footer_simple}-->

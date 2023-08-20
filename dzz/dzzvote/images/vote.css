@@ -1,7 +1,11 @@
 @charset "utf-8";
-
-.dzzvote-container{
-	
+.dzzvote{
+	padding:20px;
+	background-color: #f7f7f7;
+	border:1px solid #e7e7e7;
+	border-radius:5px;
+	box-shadow:inset 0 1px 1px #ffffff;
+	word-break:break-all
 }
 .dzzvote-container .nav-tabs li a{
 	margin:0;
@@ -40,26 +44,6 @@
 .dzzvote-post-image-item .thumbnail .caption {
 	max-width:200px;
 	padding:9px 9px 0 9px;
-}
-.dzzvote-post-image-item .thumbnail .caption .input-image-title{
-	border:1px solid transparent;
-	box-shadow:none;
-	/*width:auto;*/
-	width: 100%;
-	text-align: center;
-}
-.dzzvote-post-image-item .thumbnail .caption .input-image-title:focus{
-	border:1px solid #66afe9;
-}
-
-/*start 前台显示部分*/
-.dzzvote{
-	padding:20px;
-	background-color: #f7f7f7;
-	border:1px solid #e7e7e7;
-	border-radius:5px;
-	box-shadow:inset 0 1px 1px #ffffff;
-	word-break:break-all
 }
 .dzzvote .dzzvote-header{
 	padding:5px 0 15px 0;
@@ -111,7 +95,6 @@
 }
 .dzzvote .dzzvote-body{
 	padding:20px 0;
-	border-top:1px solid #FFF;
 	word-break:break-all
 }
 .dzzvote .dzzvote-body .radio,.dzzvote .dzzvote-body .checkbox{

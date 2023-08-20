@@ -1,0 +1,82 @@
+<!--{template common/header_simple_start}-->
+<link rel='stylesheet' type="text/css" href="static/css/ddxsy.css"/>
+<!--{template common/header_simple_end}-->
+<!--{template common/commer_header}-->
+<style>
+	.dplayer{
+		height: 100%;
+		width: 100%;
+	}
+</style>
+<div class="quanping">
+	<!--{if $_GET['path']}-->
+	<div class="zuobu">
+    <div id="dplayer"></div>
+	</div>
+	<div class="information-box">
+        <div class="title">$meta['name']</div>
+        <div class="information">
+          <div class="tip">基本信息</div>
+          <div class="field el-row el-row--flex">
+            <div class="el">
+              <div class="name">类型</div>
+            </div>
+            <div class="el">
+              <div class="record">$meta['ext']</div>
+            </div>
+          </div>
+					<div class="field el-row el-row--flex">
+            <div class="el">
+              <div class="name">文件大小</div>
+            </div>
+            <div class="el">
+              <div class="record">{eval echo formatsize($meta['size'])}</div>
+            </div>
+          </div>
+					<div class="field el-row el-row--flex">
+            <div class="el">
+              <div class="name">创建时间</div>
+            </div>
+            <div class="el">
+              <div class="record">$meta['fdateline']</div>
+            </div>
+          </div>
+					<div class="field el-row el-row--flex">
+            <div class="el">
+              <div class="name">修改时间</div>
+            </div>
+            <div class="el">
+              <div class="record">{eval echo dgmdate( $meta['dateline'])}</div>
+            </div>
+          </div>
+					
+        </div>
+      </div>
+	<!--{else}-->
+<div id="dplayer"></div>
+<!--{/if}-->
+</div>
+<script src="{MOD_PATH}/js/flv.min.js"></script>
+<script src="{MOD_PATH}/js/dash.all.min.js"></script>
+<script src="{MOD_PATH}/js/DPlayer.min.js"></script>
+<script src="{MOD_PATH}/js/hls.min.js"></script>
+<script src="{MOD_PATH}/js/dash.all.min.js"></script>
+<script src="{MOD_PATH}/js/webtorrent.min.js"></script>
+<script>
+const dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    screenshot: true,
+    video: {
+        url: '$src',
+        type: '',
+        customType: {
+            shakaDash: function (video, player) {
+                var src = video.src;
+                var playerShaka = new shaka.Player(video); // 将会修改 video.src
+                playerShaka.load(src);
+            },
+        },
+    },
+});
+</script>
+<!--{template common/footer_simple}-->

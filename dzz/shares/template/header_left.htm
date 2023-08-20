@@ -1,17 +1,3 @@
-<!--{if $share['password'] && (dzzdecode($share['password']) != authcode($_G['cookie']['pass_' . $sid]))}-->
-<ul class="nav navbar-nav navbar-nav-left">  
-	<li>
-		<a class="site" href="{$_G[siteurl]}"><span class="site-logo">
-		<img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}" style="max-height:30px;">
-		</span><span class="site-name">$_G['setting']['sitename']{lang $navtitle}</span><!--{if $_G['uid']}--><!--{else}-->(游客版)<!--{/if}--></a>
-	</li>
-</ul>
-<!--{else}-->
-<ul class="nav navbar-nav navbar-nav-left">  
-	<li>
-		<a class="site" href="{$_G[siteurl]}"><span class="site-logo">
-		<img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}" style="max-height:30px;">
-		</span><span class="site-name">{$share[username]}{lang de}{lang file_share}</a>
-	</li>
-</ul>
-<!--{/if}-->
+<a class="navbar-brand" href="{$_G[siteurl]}">
+<img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" style="max-height:30px;">
+{$share[username]}{lang de}{lang file_share}</a>

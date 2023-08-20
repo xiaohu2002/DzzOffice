@@ -1,8 +1,5 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-<link href="static/css/app_manage.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="{MOD_PATH}/images/mobile_share.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <div class="bs-container clearfix">
@@ -33,7 +30,7 @@
 						<input type="hidden" name="mod" value="share" />
 						<input type="hidden" name="type" value="$type" />
 						<input name="username" type="text" value="$username" class="form-control input-sm" style="width:90px ;display:inline-block" placeholder="{lang username}" />&nbsp;<input name="keyword" type="text" class="form-control input-sm" value="$keyword" style="width:90px ;display:inline-block" placeholder="{lang share_title}">
-						<button class="btn btn-default" onclick="this.parentNode.submit()"><i class="glyphicon glyphicon-search"></i></button>
+						<button class="btn btn-outline-info" onclick="this.parentNode.submit()"><i class="glyphicon glyphicon-search"></i></button>
 					</form>
 				</li>
 			</ul>
@@ -42,12 +39,7 @@
 		<!--{/if}-->
 		<div class="main-content clearfix">
 			<!--{if !$list}-->
-			<div node-type="module" class="module-share-empty text-center clearfix">
-				<div class="no-result-div" style="padding-top:40px;">
-					<p class="no-result-pic"><em class="shr"></em></p>
-					<p class="no-result-title">{lang share_file_content}</p>
-				</div>
-			</div>
+			<p class="no-result-title text-center">{lang share_file_content}</p>
 			<!--{else}-->
 			<div node-type="module" class="module-list-view">
 				<div node-type="wrapper" class="list-view-home">
@@ -57,16 +49,15 @@
 							<!-- 第一列 -->
 							<div node-type="name" class="name1" title="$value[title]">
 								<div class="c1 name" data-name="$value[title]">
-								<span node-type="chk" class="chk"> <span class="chk-ico"></span></span>
-								<!-- 私密分享图标 -->
-								<!--{if $value[password]}--><span class="ico-private-share" title="{lang private_share}"></span><!--{/if}-->
-							</div>
-								<h4>
+                  <span node-type="chk" class="chk"> <span class="chk-ico"></span></span>
+                </div>
+								<p>
 									<!--{if $value[img]}--><img class="icon" src="$value[img]" /><!--{/if}-->
 									<!--{if $value[status]<0}--><span node-type="name-tip" style="color: red;">($value[fstatus])</span><!--{/if}-->
 									<span node-type="name-text"  data-href="$value[sharelink]" class="name-text enabled">$value[title]</span>
-								</h4>
+								</p>
 								<p>
+									<!--{if $value[password]}--><span class="ico-private-share" title="{lang private_share}"></span><!--{/if}-->
                   <span data-size="$value[dateline]" style="padding-left: 13px;">$value[fdateline]</span>
 									<span data-type="$value[count]" class="dzz dzz-visibility">$value[count]{lang degree}</span>
                   <!--{if $_G[adminid]==1}--><span data-type="$value[username]">$value[username]</span><!--{/if}-->
@@ -75,11 +66,11 @@
 									<!--{if $value[endtime]}--><span>{lang expiration_time}：$value[fendtime]</span><!--{/if}-->
                   <!--{if $value[times]}--><span>{lang limited_number}：$value[count] / $value[times]</span><!--{/if}-->
                   <!--{if $value[qrcode]}-->
-                  <a href="javascript:;" class="qrcode glyphicon glyphicon-qrcode" title="{lang scon_code_send_mobile}" data-container="body" data-html="true" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="<p class='text-center'><img src='$value[qrcode]'></p>"></a><!--{/if}-->
-                  {lang link}：
+                  <a href="javascript:;" class="qrcode glyphicon glyphicon-qrcode" title="{lang scon_code_send_mobile}" data-container="body" data-html="true" data-bs-trigger="hover" data-bs-toggle="popover" data-bs-placement="right" data-content="<p class='text-center'><img src='$value[qrcode]'></p>"></a><!--{/if}-->
+                  <p>{lang link}：
                   <a href="$value[sharelink]" target="_dzz">$value[sharelink]</a>
-                  <!--{if $value[password]}--><span>{lang extract_password}：$value[password]</span><!--{/if}-->
-                  &nbsp;<button class="btn btn-sm btn-default js_copy" data-clipboard-text="{eval echo $value[password]?(分享名称.':'.$value[title].'
+                  <!--{if $value[password]}--><span>{lang extract_password}：$value[password]</span><!--{/if}--></p>
+                  <button class="btn btn-sm btn-default js_copy" data-clipboard-text="{eval echo $value[password]?(分享名称.':'.$value[title].'
 									'.分享链接.':'.$value[sharelink].'
                   '.提取码.':'.$value[password]):$value[sharelink];}" style="position:relative;padding: 10px;"><i class="glyphicon glyphicon-duplicate"></i>复制信息<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
 									<!--{if $value[password]}-->
@@ -203,7 +194,7 @@
 			showDialog(msg, 'confirm', '{lang affirm_cancel_shielding}', share_allow, 1)
 		});
 		<!--{/if}-->
-		jQuery('[data-toggle="popover"]').popover();
+		jQuery('[data-bs-toggle="popover"]').popover();
 	});
 
 	function item_sort(key, order) {
@@ -295,4 +286,3 @@
 </script>
 <!--{template common/footer_simple}-->
 <script type="text/javascript" src="static/clipboard/clipboard.min.js?{VERHASH}"></script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>

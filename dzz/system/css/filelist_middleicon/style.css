@@ -220,38 +220,6 @@
 
 
 
-
-
-
-
-
-
-
-/*图标图片层start*/
-
-/*图标图片层html
- <div style="position:relative;width:50px;height:50px" class="icoimgContainer icoimgContainer_image">
-	<table width="100%" height="100%" cellspacing="0" cellpadding="0">
-		<tbody>
-			<tr>
-				<td valign="middle" align="center">
-					<img onload="_ico.image_resize(this,50,50,false);" title="cej5GQ6F1GPU.jpg" style="display: inline-block; width: 50px; height: 31.6832px;" src="data/attachment/dzz/201207/22/15284233hkk7yowhk2nkwm.jpg.thumb.jpg" class="Icoblock_icon imageclass">
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<!--图标遮罩前景层-->
-	<div style="position:absolute;left:0px;top:0px;width:50px;height:50px;z-index:1" class="icoimgCover_up"></div>
-	<!--图片tip层-->
-	<div style="position:absolute;left:0px;top:0px;width:50px;height:50px;z-index:2" class="icoimgtips">
-		<div class="icoimg_share_tips"></div>
-	</div>
-	<!--图标遮罩背景层-->
-	<div style="position:absolute;left:0px;top:0px;width:50px;height:50px;z-index:-1" class="icoimgCover_down"></div>
-</div>
-此例中图标样式为50×50的中图标
-*/
-
 .icoimgContainer_folder{}
 .icoimgContainer_image{}
 .icoimgContainer_video{}

@@ -3,22 +3,12 @@
 ul{
 	margin: 0;
 }
-.properties-list{
-	padding: 15px 10px;
-	border-bottom: 1px solid #DDDDDD;
-	position: relative;
-}
-.properties-table{
-	padding-top: 10px;
-}
 .properties-baground{
 	width: 100%;
-	background-color:#f2f2f2;
 	margin-bottom: 15px;
 	border-radius:var(--radius);
 }
 .properties-baground .properties-orange{
-	color: #666;
 	padding-top: 20px;
 	padding-left: 20px;
 }
@@ -42,7 +32,7 @@ ul{
 	font-size: 20px;
 	padding-right: 5px;
 	vertical-align: middle;
-	color: #4c89fb;
+	color: var(--bs-primary);
 	margin-top: -1px;
 	}
 .proper-iconshow{
@@ -50,37 +40,14 @@ ul{
 	overflow: hidden;
 	
 }
-.properties-listRight{
-    width: 250px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    height: 100%;	
-}
-.proper-absoleopera{
-	position: absolute;
-	top: 16px;
-	left:12px;
-}
-.proper-absoleopera .label-gainsboro{
+.label-gainsboro{
 	margin-right: 19px;
-}
-.proper-delhover{
-	position: absolute;
-	top: 17px;
-	right: 20px;
-	cursor: pointer;
 }
 .label-gainsboro{
 	font-weight: 300;
-	color: rgba(102, 102, 102, 1);
-	background-color: #fafafa;
 	border-radius: 2px;
 	padding: 2px 5px;
     border: 1px solid rgba(221, 221, 221, 1);
-}
-.proper-default{
-	color: #333;
 }
 .perm-ok{
 	padding-right: 5px;
@@ -101,59 +68,9 @@ ul{
 	margin-bottom: 15px;
 	height: 30px;
 }
-
-.properties-operation{
-	position: absolute;
-	top: 0;
-	right: 210px;
-}
-.properties-left,.properties-listLeft{
-	margin-right: 250px;
-	overflow: hidden;
-}
-.properties-left p{
-	display:inline-block;
-}
-.properties-left .properties-Name{
-	padding-left: 10px;
-	width: 200px;
-}
-.properties-establish{
-	padding-left: 10px;
-}
-.proper-leftimg{
-	width:200px ;
-	float: left;
-	height: 25px;
-}
-.proper-leftimg img{
-	width: 24px;
-	height: 24px;
-}
-.proper-leftimg .properties-admin{
-	margin-left: 10px;
-	display: inline-block;
-    width: 140px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-}
-.proper-show {
-	overflow: hidden;
-}
-.proper-show li{
-	background-repeat: no-repeat;
-	float: left;
-	padding: 0px 5px;
-}
-
-.proper-show li span{
+.nav.nav-pills li span{
 	font-size: 20px;
-	color: #4c89fb;
-}
-.proper-show li>.read-false{
-	color: #ddd;
+	color: var(--bs-primary);
 }
 .proper-bottom{
 	position: relative;
@@ -164,7 +81,7 @@ ul{
 	color: #2196f3;
 	display: none;
 }
-.properties-list:hover .proper-delhover .proper-set{
+.properties-list:hover .proper-set{
 	display:inline-block;
 }
 .proper-edit{
@@ -176,24 +93,15 @@ ul{
 	vertical-align: middle;
 }
 
-.proper-absoleopera .proper-delete{
+.proper-delete{
 	font-size: 20px;
-	padding-right: 17px;
 	vertical-align: middle;
-	color: #d6d6d6;
+	color: var(--bs-primary);
 	cursor: pointer;
 }
-.proper-absoleopera .proper-delete:hover{
+.proper-delete:hover{
 	color: #2196f3;
 	cursor: pointer;
-}
-.properties-con{
-	margin-bottom: 20px;
-}
-.properties-th{
-	border-bottom: 1px solid #ddd;
-	position: relative;
-	margin-right: 25px;
 }
 .select-properties .checkbox-custom{
 	font-size: 16px;
@@ -202,15 +110,7 @@ ul{
 .proper-bottom .proper-span{
 	font-size: 12px;
 }
-.checkbox-custom label, .radio-custom label{
+.checkbox-custom label, .label{
 	font-size:14px;
-}
-.switchery {
-    height: 16px;
-    width: 40px;
-}
-.switchery>small {
-    width: 15px;
-    height: 15px;
 }
 /*管理文件夹权限结束*/

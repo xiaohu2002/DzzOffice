@@ -2,12 +2,12 @@
 function feed_publish(arr,tid,targetid){
 	
 var html=''
-	html+='<div id="comment_'+arr['cid']+'" class="itemfeed" feed-id="'+arr['cid']+'" style="display:none">';
+	html+='<div id="comment_'+arr['cid']+'" class="card itemfeed" feed-id="'+arr['cid']+'" style="display:none">';
   	html+='	<div class="left_ifed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true">'+arr['avatar']+'</a> </div>';
   	html+='	<div class="right_ifed">';
     html+=' 	<div class="main_fed">';
     html+='  		 <div class="source_fed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" class="appuser_sfed skip_mmfed">'+arr['author']+'</a><span class="cont_sfed">'+__lang.talk+'：</span> </div>';
-    html+='  		<div class="master_mfed"><span class="content_mmfed">'+arr['message']+'</span></div>';
+    html+='  		<div class="card master_mfed"><span class="content_mmfed">'+arr['message']+'</span></div>';
 	html+='	   <div class="attachment_fed">';
 for(var i in arr['attachs']){
 	var attach=arr['attachs'][i];
@@ -113,7 +113,7 @@ function feed_reply(arr){
      html+='   <div class="item_cfed">';
      html+='     <div class="left_icfed"> <a href="user.php?uid='+arr['authorid']+'" title="" hidefocus="true"> '+arr['avatar']+' </a> </div>';
      html+='     <div class="right_icfed">';
-     html+='     <a href="user.php?uid='+arr['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true">'+arr['author']+'</a><span class="source_fed">说：</span><div class="master_cfed">';
+     html+='     <a href="user.php?uid='+arr['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true">'+arr['author']+'</a><span class="source_fed">说：</span><div class="card master_cfed">';
 	 if(arr['rpost']){
 		html+='<span class="amal_fed">对</span>  <a href="user.php?uid='+arr['rpost']['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true" target="_blank">'+arr['rpost']['author']+'</a>'; 
 	 }

@@ -682,7 +682,7 @@ function avatar($uid, $size = 'middle', $returnsrc = FALSE, $real = FALSE, $stat
  * param:$uid    		需要生成的用户UID;
  * param:$headercolors  传递的用户头像信息数组格式为array('1'=>'#e9308d','2'=>'#e74856'),键为UID，值为颜色值
  */
-function avatar_block($uid=0,$headercolors=array(),$class="Topcarousel"){
+function avatar_block($uid=0,$headercolors=array(),$class="img-avatar"){
 	static $colors=array('#6b69d6','#a966ef','#e9308d','#e74856','#f35b42','#00cc6a','#0078d7','#5290f3','#00b7c3','#0099bc','#018574','#c77c52','#ff8c00','#68768a','#7083cb','#26a255');
    
 	if(!$uid){
@@ -695,7 +695,7 @@ function avatar_block($uid=0,$headercolors=array(),$class="Topcarousel"){
 	}
 	if(empty($user)) return '';
 	if($user['avatarstatus']){//用户已经上传头像
-		return '<img src="avatar.php?uid='.$user['uid'].'" class="img-circle special_avatar_class" title="'.$user['username'].'">';
+		return '<img src="avatar.php?uid='.$user['uid'].'" class="img-avatar" title="'.$user['username'].'">';
 	}else{//没有上传头像，使用背景+首字母
 		if($uid){
 			if($headercolors[$uid]) $headerColor=$headercolors[$uid];

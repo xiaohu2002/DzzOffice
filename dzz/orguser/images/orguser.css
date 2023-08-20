@@ -28,7 +28,6 @@
 
 .classtree-topbar a{
 	display:inline-block;
-	margin:0px 5px;
 	width:24px;
 	height:24px;
 	background-image:url(icons_24.png);
@@ -100,7 +99,6 @@
 
 .jstree-default .jstree-icon:empty {
      font-size: 22px; 
-    color: rgba(78,85,99,1);
 }
 .jstree-default-large .jstree-icon:empty{
 	 width: 24px;
@@ -152,11 +150,6 @@
 .moderators-container .user-item-avatar .avatar-face{
 	width:90px;height:90px;margin:5px
 	
-}.moderators-container .user-item-avatar .avatar-face .Topcarousel {
-	width:90px;height:90px;
-	font-size:40px;
-	line-height: 90px
-	
 }
 .moderators-container .user-item-avatar img{
 	width:100%;
@@ -190,9 +183,6 @@
 .main-body{
 	border-top:1px solid #FFF;
 }
-.table-con .form-horizontal .control-label{
-	font-weight: normal;
-}
 .group-head li{
 	float: left;
 	list-style: none;
@@ -205,8 +195,8 @@
     margin-bottom: 0;
 }
 .head-portrait img, .head-file img, .head-file input {
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 .head-file {
@@ -283,9 +273,6 @@ textarea{
 }
 .head-portrait .hover{
 	display: block;
-}
-.has-warning .checkbox, .has-warning .checkbox-inline, .has-warning .control-label, .has-warning .help-block, .has-warning .radio, .has-warning .radio-inline, .has-warning.checkbox label, .has-warning.checkbox-inline label, .has-warning.radio label, .has-warning.radio-inline label{
-	color: #333;
 }
 .has-warning .form-control {
 border-color: #ff3203;

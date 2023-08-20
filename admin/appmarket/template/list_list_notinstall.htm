@@ -1,4 +1,4 @@
-<table class="table table-hover " style="margin:0;">
+<table class="table table-striped table-hover" style="margin:0;">
 	<thead>
 		<th>{lang application_name}</th>
 		<th>{lang group_permissions}</th>
@@ -18,7 +18,7 @@
 		<td>$value[identifier]</td>
 		<td>$value[vendor]</td>
 		<td>
-			<a class="btn btn-link" href="{BASESCRIPT}?mod=appmarket&op=cp&do=install&app_path=$value[app_path]&app_name=$value[identifier]&refer=$refer" title="{lang install}">{lang install}</a>
+			<a class="btn btn-primary" href="{BASESCRIPT}?mod=appmarket&op=cp&do=install&app_path=$value[app_path]&app_name=$value[identifier]&refer=$refer" title="{lang install}">{lang install}</a>
 		</td>
 	</tr>
 	<!--{/loop}-->

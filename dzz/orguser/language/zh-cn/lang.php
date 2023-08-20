@@ -51,14 +51,7 @@ $lang = array (
 	'inport_guide_step'=>'步骤3：选择excel表',
 	'inport_guide_layout'=>'选择编辑好的人员信息表，支持 .xls、.xlsx格式',
 	'inport_guide_notice'=>'编辑人员信息表注意事项',
-	'<li>1. Edit the personnel information to be imported according to the template fields. If there is already a file information table, you only need to change the name of the relevant field in the existing file information table to be consistent with the name provided in the template. As long as the name corresponds, the position of the field does not affect the result</ li>
-<li>2. The "user name" field in the template is required, and other fields can be filled in as required</ li>
-<li>3. The information in the mailbox and user name fields in the table must be unique and cannot be duplicate. If the mailbox is empty, the system will randomly generate the mailbox address when importing</ li>
-< Li class = "danger" > 4. Multi level department creation: Method 1: add multiple columns of "subordinate departments" to the table. From left to right, they are level-1 departments, level-2 departments and level-3 departments. The system will create departments, subordinate departments and lower subordinate departments according to the principle from left to right. Method 2: use a single column in the table, and the superior and subordinate departments use "/" to divide (for example, primary school / grade 1 / class 1)</ li>
-<li>5. Importing users can only import by organization. Multiple organizations need to be imported in batches</ li>
-<li>6. The "login password" field in the table can be blank, and administrators can set unified passwords for users in batches when importing. The user can modify the unified password after logging in</ li>
-<li>7. There are two import methods in the import interface: incremental and overwrite. Incremental method: when encountering the same user, only the missing field information of the user will be added, and the original information will not change. (for example, there is a user a in the system with a password of 123. In the batch import table, there is also a user a, whose unified password is set to ABC when importing. After importing, the passwords of other users are all ABC, and the original user a still keeps his original password, 123.) Overwrite import: completely replace the original user information in the system with the information in the table</ li>
-<li>8. If there are many people to import, it is recommended to make a test table for a small number of people first, and then import all users in an incremental way after the test is correct</ li>'=>'<li>1、根据模板字段来编辑需要导入的人员信息，如果已经有档案信息表，则只需将现有的档案信息表中的相关字段名称改为与“模板”里提供的名称一致即可，只要名称对应，字段的位置不影响结果。</li>
+	'inport_guide_notice_text'=>'<li>1、根据模板字段来编辑需要导入的人员信息，如果已经有档案信息表，则只需将现有的档案信息表中的相关字段名称改为与“模板”里提供的名称一致即可，只要名称对应，字段的位置不影响结果。</li>
 <li>2、模板中“用户名”字段必填，其他字段根据需要填写。</li>
 <li>3、表中“邮箱”、“用户名”字段中的信息必须是唯一的，不可重复。如果邮箱为空，系统导入时将随机生成邮箱地址。</li>
 <li class="danger">4、多级部门创建：方法1：表中添加多列“所属部门”，从左到右分别为一级部门、二级部门、三级部门，顺序排列，系统会根据从左到右的原则，依次创建部门、下级部门、下下级部门等。方法2：表格中使用单列，上下级部门使用“/”来分割（例如：小学/一年级/一班）。</li>

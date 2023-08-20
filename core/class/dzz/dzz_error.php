@@ -244,7 +244,7 @@ EOT;
 		if(!empty($phpmsg)) {
 			echo '<div class="info">';
 			echo '<p><strong>PHP Debug</strong></p>';
-			echo '<table cellpadding="5" cellspacing="1" width="100%" class="table">';
+			echo '<table cellpadding="5" cellspacing="1" width="100%" class="table table-striped table-hover">';
 			echo '<tr class="bg2"><td>No.</td><td>File</td><td>Line</td><td>Code</td></tr>';
 			if(is_array($phpmsg)) {
 				foreach($phpmsg as $k => $msg) {

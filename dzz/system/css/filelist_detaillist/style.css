@@ -172,7 +172,6 @@
 	
 }
 .filemanage .detail_text{
-	text-shadow:1px 1px 1px #FFF;
 	word-break:break-all;
 }
 .filemanage .detail_tr{
@@ -236,7 +235,6 @@
 	line-height:30px;
 	font-size:12px;
 	height:30px;
-	text-shadow:1px 1px 1px #FFF;
 	font-weight:700;
 	overflow:hidden;
 	word-wrap:nowrap;
@@ -247,8 +245,6 @@
 .filemanage .detail_item_info{
 	margin:0 10px;
 	font-size:12px;
-	color:#999;
-	text-shadow:1px 1px 1px #FFF;
 	overflow:hidden;
 	word-wrap:nowrap;
 	height:18px;

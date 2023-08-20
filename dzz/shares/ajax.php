@@ -9,6 +9,10 @@
 if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
+global $_G;
+if(!$_G['setting']['ballowshare']){
+	showmessage('no_privilege');
+}
 $open = false;
 if(isset($_GET['path'])){//打开文件夹
 	$morepath = $_GET['path'];

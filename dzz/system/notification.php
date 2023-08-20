@@ -45,7 +45,7 @@ if($filter=='new'){//列出所有新通知
     foreach(DB::fetch_all("select distinct(from_id) from %t where uid = %d",array('notification',$_G['uid'])) as $v){
         $searchappid[] = $v['from_id'];
     }
-    $sitelogo=IO::getFileUri('attach::'.$_G['setting']['sitelogo']);
+    $sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
     $searchcats = array();
     if(in_array(0,$searchappid)){
         $systemindex = array_search(0,$searchappid);

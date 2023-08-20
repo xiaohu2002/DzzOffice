@@ -134,7 +134,6 @@ div.edui-box {
 /*UI工具栏、编辑区域、底部*/
 .edui-default .edui-editor {
     /*border: 1px solid #d4d4d4;*/
-    background-color: white;
     position: relative;
     overflow: visible;
    /* -webkit-border-radius: 4px;
@@ -190,16 +189,12 @@ div.edui-box {
 
 .edui-default .edui-editor-bottomContainer td {
     white-space: nowrap;
-    border-top: 1px solid #ccc;
     line-height: 20px;
-    font-size: 12px;
-    font-family: Arial, Helvetica, Tahoma, Verdana, Sans-Serif;
 }
 
 .edui-default .edui-editor-wordcount {
     text-align: right;
     margin-right: 5px;
-    color: #aaa;
 }
 .edui-default .edui-editor-scale {
     width: 12px;
@@ -1916,9 +1911,6 @@ div.edui-box {
 	height:282px;
 	overflow:hidden;
 	
-}
-.edui-default .edui-editor{
-	background: #FbFbFb;
 }
 .edui-default .edui-editor-iframeholder{
 	margin: 15px;

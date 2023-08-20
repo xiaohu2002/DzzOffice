@@ -64,18 +64,6 @@ if($do=='importing'){
 				$appendfield['weixinid']=$_GET['weixinid'];
 			}
 			if($appendfield) C::t('user')->update($uid,$appendfield);
-			$email_password_message = <<<EOT
-      <p style="font-size:14px;color:#333; line-height:24px; margin:0;">尊敬的用户$member[username],您好！</p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">您收到这封邮件，是由于 $sitename 的管理员编辑成员信息时使用了这个邮箱地址。如果您不知道 $sitename 请忽略这封邮件。您不需要退订或进行其他进一步的操作。</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;font-weight:bold;">登录帐号和密码</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 12px;">登录帐号：$email</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">登录密码：$_GET[password]</span></p>
-			<p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">感谢您的访问，祝您使用愉快！</span></p>
-EOT;
-					
-					if(!sendmail("$_GET[username] <$email>", '用户帐号和密码', $email_password_message)) {
-						runlog('sendmail', "$email  发送失败");
-					}
 		}else{ //覆盖导入时，覆盖用户的姓名和密码
 			$sitename=$_G['setting']['sitename'];
 			$salt=substr(uniqid(rand()), -6);
@@ -105,6 +93,7 @@ EOT;
 				$setarr['weixinid']=$_GET['weixinid'];
 			}
 			C::t('user')->update($uid,$setarr);
+			if($sendmail){ //发送密码到用户邮箱，延时发送
 				$email_password_message = <<<EOT
       <p style="font-size:14px;color:#333; line-height:24px; margin:0;">尊敬的用户$member[username],您好！</p>
       <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">您收到这封邮件，是由于 $sitename 的管理员编辑成员信息时使用了这个邮箱地址。如果您不知道 $sitename 请忽略这封邮件。您不需要退订或进行其他进一步的操作。</span></p>
@@ -114,9 +103,10 @@ EOT;
 			<p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">感谢您的访问，祝您使用愉快！</span></p>
 EOT;
 					
-					if(!sendmail("$_GET[username] <$email>", '用户帐号和密码', $email_password_message)) {
+					if(!sendmail_cron("$_GET[username] <$email>", lang('email_password_subject'), $email_password_message)) {
 						runlog('sendmail', "$email  发送失败");
 					}
+			}
 		}
 	}else{ //新添用户
 		if(!check_username($_GET['username'])) exit(json_encode(array('error'=>lang('user_name_sensitive'))));
@@ -149,6 +139,7 @@ EOT;
 			}
 		$sitename=$_G['setting']['sitename'];
 		C::t('user')->update($uid,$base);
+		if($sendmail){ //发送密码到用户邮箱，延时发送
 			$email_password_message = <<<EOT
       <p style="font-size:14px;color:#333; line-height:24px; margin:0;">尊敬的用户$member[username],您好！</p>
       <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">您收到这封邮件，是由于 $sitename 的管理员添加成员时使用了这个邮箱地址。如果您不知道 $sitename 请忽略这封邮件。您不需要退订或进行其他进一步的操作。</span></p>
@@ -158,9 +149,10 @@ EOT;
 			<p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">感谢您的访问，祝您使用愉快！</span></p>
 EOT;
 				
-				if(!sendmail("$_GET[username] <$email>", '用户帐号和密码', $email_password_message)) {
+				if(!sendmail_cron("$_GET[username] <$email>", lang('email_password_subject'), $email_password_message)) {
 					runlog('sendmail', "$email  发送失败");
 				}
+		}
 	}
 	//处理用户资料
 	$_GET['gender']=trim($_GET['gender']);

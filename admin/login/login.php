@@ -68,8 +68,9 @@ function html_login_form() {
 	$isguest = !getglobal('uid');
 	$lang1 = lang();
 	$maintitle=lang('title_admincp');
-	$loginuser = $isguest ? '<input class="form-control" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}"   onblur="if(this.value==\'\'){this.value=\'' . lang('login_email_username') . '\'}"  autocomplete="off" />' : '<div class="username">' . $_G['member']['username'] . '</div><div class="email">' . $_G['member']['email'] . '</div>';
-	$loginuser2 = $isguest ? '<div class="relative"><input autofocus class="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}" placeholder='. lang('login_email_username') . ' autocomplete="off" /></div>' : '<div class="relative text-center"><div class="username">' . $_G['member']['username'] . '</div><div class="email">' . $_G['member']['email'] . '</div></div>';
+	$loginuser = $isguest ? '
+    <div class="mb-3 has-feedback"><span class="mdi mdi-account" aria-hidden="true"></span><input class="form-control" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}"   onblur="if(this.value==\'\'){this.value=\'' . lang('login_email_username') . '\'}"  placeholder='. lang('login_email_username') . ' autocomplete="off" autofocus required/></div>' : '<div class="text-center username">' . $_G['member']['username'] . '</div><div class="text-center email">' . $_G['member']['email'] . '</div>';
+	$loginuser2 = $isguest ? '<div class="mb-3"><input autofocus  class="form-control" id="admin_email" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}" placeholder='. lang('login_email_username') . ' onblur="if(this.value==\'\'){this.value=\'' . lang('login_email_username') . '\'}" autocomplete="off" required/></div>' : '<div class="relative text-center"><div class="username">' . $_G['member']['username'] . '</div><div class="email">' . $_G['member']['email'] . '</div></div>';
 	$sid = getglobal('sid');
   $avatarstatus=getglobal('avatarstatus','member');
    if(!$uid ){
@@ -78,9 +79,7 @@ function html_login_form() {
    }else{
 	   $avastar = avatar_block($uid); 
    }
-	$avastar1='<div class="maintitle">'.$maintitle.'</div>';
 	$extra = BASESCRIPT . '?' . $_SERVER['QUERY_STRING'];
-	$forcesecques = '<option value="0">' . ($_G['config']['admincp']['forcesecques'] ? $lang1['forcesecques'] : $lang1['security_question_0']) . '</option>';
 	include template ('common/adminlogin');
 }
 ?>

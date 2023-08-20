@@ -9,7 +9,6 @@
 if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
-$ismobile = helper_browser::ismobile();
 $navtitle = lang('appname');
 $uid1=$_G['uid'];
 $typearr = array('image' => lang('photo'),
@@ -50,16 +49,19 @@ if ($_GET['do'] == 'delete') {
         showmessage($return['error'], $_GET['refer']);
     }
 
-}else {
-    $perpage = 20;
+  }else {
+  $lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
+	$checklpp = array();
+	$checklpp[$lpp] = 'selected="selected"';
     $pfid = isset($_GET['pfid']) ? intval($_GET['pfid']) : '';
     $type = isset($_GET['type']) ? trim($_GET['type']) : '';
     $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
     $orgid = isset($_GET['orgid']) ? intval($_GET['orgid']) : '';
     $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
-    $start = ($page - 1) * $perpage;
+    $start = ($page - 1) * $lpp;
     $gets = array(
         'mod' => 'filemanage',
+        'lpp' => $lpp,
         'keyword' => $keyword,
         'type' => $_GET['type'],
         'ftype' => $_GET['ftype'],
@@ -78,6 +80,18 @@ if ($_GET['do'] == 'delete') {
         $order = 'ORDER BY ext DESC';
     } elseif ($_GET['ftype'] == 'asc') {
         $order = 'ORDER BY ext ASC';
+    }elseif ($_GET['name'] == 'desc') {
+        $order = 'ORDER BY name DESC';
+    } elseif ($_GET['name'] == 'asc') {
+        $order = 'ORDER BY name ASC';
+    }elseif ($_GET['username'] == 'desc') {
+        $order = 'ORDER BY username DESC';
+    } elseif ($_GET['username'] == 'asc') {
+        $order = 'ORDER BY username ASC';
+    }elseif ($_GET['relpath'] == 'desc') {
+        $order = 'ORDER BY relpath DESC';
+    } elseif ($_GET['relpath'] == 'asc') {
+        $order = 'ORDER BY relpath ASC';
     }elseif ($_GET['dateline'] == 'asc') {
         $order = 'ORDER BY dateline ASC';
     }else {
@@ -124,7 +138,7 @@ if ($_GET['do'] == 'delete') {
             $param[] = $fids;
         }*/
     }
-    $limitsql = 'limit ' . $start . ',' . $perpage;
+    $limitsql = 'limit ' . $start . ',' . $lpp;
 	if ($_G['adminid']) {
 		if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('resources') . " WHERE $sql", $param)) {
 			$data = DB::fetch_all("SELECT rid FROM " . DB::table('resources') . " WHERE $sql $order $limitsql", $param);
@@ -134,7 +148,7 @@ if ($_GET['do'] == 'delete') {
 			$data = DB::fetch_all("SELECT rid FROM " . DB::table('resources') . " WHERE uid =$uid1 and $sql $order $limitsql", $param);
 		}
 	}
-  $multi = multi($count, $perpage, $page, $theurl);
+  $multi = multi($count, $lpp, $page, $theurl,'pull-right');
   $list = array();
   foreach ($data as $value) {
       if (!$sourcedata = C::t('resources')->fetch_by_rid($value['rid'])) {
@@ -153,10 +167,6 @@ if ($_GET['do'] == 'delete') {
         $org['depart'] = lang('select_a_organization_or_department');
         $org['orgid'] = $orgid;
     }
-  if($ismobile){
-     include template('mobile_list');
-  }else{
     include template('list');
-  }  
 }
 ?>

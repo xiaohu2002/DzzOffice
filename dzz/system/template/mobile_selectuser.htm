@@ -1,4 +1,4 @@
-<!--{template common/header_ajax}--><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -102,7 +102,7 @@
             if (vals[i].orgid.indexOf('uid_') === 0) {
                 var headimg = '';
                 if (vals[i].icon) {
-                    headimg = '<img src="' + vals[i].icon + '" class="img-circle special_avatar_class" title="' + vals[i].text.replace(/<em.+?<\/em>/i, '') + '">';
+                    headimg = '<img src="' + vals[i].icon + '" class="img-avatar" title="' + vals[i].text.replace(/<em.+?<\/em>/i, '') + '">';
                 } else {
                     headimg = vals[i].text;
                 }
@@ -244,4 +244,4 @@
 
     })
 </script>
-</html><!--{template common/footer_ajax}-->
+</html>

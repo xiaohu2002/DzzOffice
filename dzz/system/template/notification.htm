@@ -5,13 +5,13 @@
       <div class="popbox-body notification-list" style="min-width:300px;max-height:400px;overflow:auto;margin: 0;">
         <!--{if $list}-->
             <!--{loop $list $value}-->
-            <div class="notification-list-item clearfix">
+            <div class="card notification-list-item clearfix">
                 <!--{if $value['avatarstatus']}-->
                 <div class="member member-no-menu">
-                  <a class="member-avatar" style="position: absolute;left: 1px;" href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value[authorid]);}</a>
+                  <a class="member-avatar" href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value[authorid]);}</a>
                 </div>
                 <!--{else}-->
-                  <a class="member-avatar" style="position: absolute;left: 1px;" href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value[authorid]);}</a>
+                  <a class="member-avatar" href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value[authorid]);}</a>
                 <!--{/if}-->
                 <div class="details">
 									<!--{if $value[title]}-->
@@ -27,10 +27,10 @@
             </div>
             <!--{/loop}-->
         <!--{else}-->
-        <p class="text-warning u-bottom" style="line-height:35px;">{lang noapp_notice}</p>
+        <p class="text-center">{lang noapp_notice}</p>
         <!--{/if}-->
       </div>
-     <div class="popbox-footer" style="padding:10px 5px;margin:0 5px">
+     <div class="popbox-footer">
      	<a href="{DZZSCRIPT}?mod=system&op=notification" class="notification-all">{lang lookallapp_notice}</a>
      </div>    
 	<script type="text/javascript" reload="1">

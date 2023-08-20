@@ -93,7 +93,7 @@ _selectfile.select_Scrolly = function (els) {
 _selectfile.icon = function () {
 //修改初始化时的排列方式指示
     jQuery('.icons-thumbnail').attr('iconview', obj.view).find('.dzz').removeClass('dzz-view-module').removeClass('dzz-view-list').addClass(obj.view === 2 ? 'dzz-view-list' : 'dzz-view-module');
-//jQuery('.icons-thumbnail').attr('iconview', obj.view).find('.dzz').attr('data-original-title',obj.view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
+//jQuery('.icons-thumbnail').attr('iconview', obj.view).find('.dzz').attr('data-bs-original-title',obj.view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
     jQuery('.icons-thumbnail').attr('folderid', obj.id);
 }
 //替换列表图和缩略图
@@ -425,7 +425,7 @@ _selectfile.getData = function (url, callback) {
             obj.url = url;
             //修改初始化时的排列方式指示
             jQuery('.icons-thumbnail').attr('iconview', obj.view).find('.dzz').removeClass('dzz-view-module').removeClass('dzz-view-list').addClass(obj.view === 2 ? 'dzz-view-list' : 'dzz-view-module');
-            jQuery('.icons-thumbnail').attr('iconview', obj.view).find('.dzz').attr('data-original-title', obj.view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
+            jQuery('.icons-thumbnail').attr('iconview', obj.view).find('.dzz').attr('data-bs-original-title', obj.view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
             jQuery('.icons-thumbnail').attr('folderid', obj.id);
             if (typeof (callback) === 'function') {
                 callback(obj);
@@ -1285,7 +1285,7 @@ _selectfile.Arrange = function (obj, id, view) {
         view = view * 1;
     }
     jQuery('.icons-thumbnail').attr('iconview', view).find('.dzz').removeClass('dzz-view-module').removeClass('dzz-view-list').addClass(view === 2 ? 'dzz-view-list' : 'dzz-view-module');
-    jQuery('.icons-thumbnail').attr('iconview', view).find('.dzz').attr('data-original-title', view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
+    jQuery('.icons-thumbnail').attr('iconview', view).find('.dzz').attr('data-bs-original-title', view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
     var fid = _selectfile.fid;
     if (fid > 0 && _explorer.Permission_Container('admin', fid)) {
         jQuery.post(_selectfile.saveurl + '&do=folder', {

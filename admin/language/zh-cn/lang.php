@@ -496,16 +496,6 @@ $lang = array
 	'app_internal_frame_text'=>'<li>默认内部窗口打开，有些应用不适合内部打开时，可以选择在新窗口打开</li>
 								<li>当应用地址为类似dzzjs:时，只能内部打开，这里的设置不起作用</li>',
 	'app_form_parameter'=>'窗体参数',
-	'app_form_parameter_text'=>'<li>此项功能属于高级功能,留空表示使用系统默认，未定义的项目使用默认设置，各个值之间用,号隔开</li>
-						<li>如："class=noborder,titlebutton=fullscreen|refresh|close|max|min,width=500,height=400,left=50%,top=50%,right=0,bottom=0,resize=no,size=no,autorun=yes"</li>
-						<li>left,top,right,bottom:设定窗体的默认位置，如果用户拖动，将以用户拖动的位置为准；left优先于right，top优先于bottom；值可以是整数或百分比值</li>
-						<li>autorun：设置此应用是否自动运行，可用值yes 或者 no ,必须用户安装了此应用才有效</li>
-						<li>closetime：自动关闭时间，可用值 整数 单位秒 ,仅对自动运行的应用才有效；如：closetime=3 三秒后自动关闭</li>
-						<li>class：应用窗体的风格，设置后此窗体的风格将不随着桌面的主题变化（必须保证 ./dzz/styles/window/风格名称/style.css 存在</li>
-						<li>size：应用窗体默认大小，可用值 no：(默认); max:窗体最大化；min：窗体最小化；</li>
-						<li>titlebutton：应用窗体的功能按钮;目前仅支持fullscreen,refresh,close,max,min(注意refresh目前只对同域的应用有效);默认值:titlebutton=close|max|min</li>
-						<li>width 、height：应用窗体的默认打开高度和宽度;默认width=800,height=500;</li>
-						<li>resize:应用窗体改变大小;可用值："no",resize,resize-x,resize-y;默认resize=resize|resize-x|resize-y</li>',
 
 	'app_default_installation_location'=>'默认安装位置，应用将会默认安装到相应的位置',
 	'app_application_library'=>'在应用库中',
@@ -1055,7 +1045,7 @@ $lang = array
 	
 	'upgrade_checking' => '正在检测新的升级版本',
 	
-	'upgrade_continue'=> '<p>您上次升级到 <b>{steplang}</b>，请继续完成升级<p><p><input type="button" class="btn btn-success" onclick="window.location.href=\'{stepurl}\'" value="继续升级" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-default" onclick="window.location.href=\'{recheckurl}\'" value="重新检测" /></p>',
+	'upgrade_continue'=> '<p>您上次升级到 <b>{steplang}</b>，请继续完成升级<p><p><input type="button" class="btn btn-outline-primary" onclick="window.location.href=\'{stepurl}\'" value="继续升级" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-outline-info" onclick="window.location.href=\'{recheckurl}\'" value="重新检测" /></p>',
 	'upgrade_website_FTP_set'=>'站点 FTP 设置',
 	'host_IP_address'=>'主机IP地址',
 	'IP_address'=>'IP地址',
@@ -1073,7 +1063,7 @@ $lang = array
 	'general_condition_passive_mode'=>'一般情况下非被动模式即可，如果存在上传失败问题，可尝试打开此设置',
 	'enable_secure_link'=>'启用安全链接',
 	'notice_FTP_open_SSL'=>'注意：FTP 服务器必需开启了 SSL',
-	'upgrade_continue_db'=> '<p>您上次升级到 <b>{steplang}</b>，请继续完成升级<p><p><input type="button" class="btn btn-success" onclick="createIframe(\'{stepurl}\')" value="继续升级">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-default" onclick="window.location.href=\'{recheckurl}\'" value="重新检测" /></p>',
+	'upgrade_continue_db'=> '<p>您上次升级到 <b>{steplang}</b>，请继续完成升级<p><p><input type="button" class="btn btn-outline-primary" onclick="createIframe(\'{stepurl}\')" value="继续升级">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-outline-info" onclick="window.location.href=\'{recheckurl}\'" value="重新检测" /></p>',
 	
   	'upgrade_close_site' => '升级前，请先关闭站点，并对文件及数据备份',
   	'upgrade_none' => '没有该升级信息 {upgradeurl}',

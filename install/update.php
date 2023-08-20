@@ -276,12 +276,6 @@ if($_GET['step'] == 'start') {
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','notification'))){
 		 C::t('setting')->update('notification', '60');
 		}
-		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','quick_login'))){
-		 C::t('setting')->update('notification', '0');
-		}
-		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','Duplicatewatermark'))){
-		 C::t('setting')->update('notification', '0');
-		}
 		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=appmanagement'))){
 			DB::delete('app_market', array('appurl' => '{dzzscript}?mod=appmanagement'));
 			C::t('app_market')->insert(array('appname'=>'管理',
@@ -305,6 +299,30 @@ if($_GET['step'] == 'start') {
 										  'identifier'=>'appmanagement',
 										  'version'=>'2.0',
 											'check_upgrade_time'=>'20171115',
+										  'available'=>1),0,1);
+		}
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=DPlayer'))){
+			C::t('app_market')->insert(array('appname'=>'DPlayer',
+		 								  'appico'=>'appico/202308/19/205443f8ucb4pueqebbrvp.png',
+		 								  'appurl'=>'{dzzscript}?mod=DPlayer',
+										  'appdesc'=>'DPlayer，支持MP3,mp4,flv,wav等格式',
+										  'dateline'=>TIMESTAMP,
+										  'disp'=>0,
+											'mid'=>0,
+										  'vendor'=>'小胡',
+										  'group'=>0,
+											'haveflash'=>0,
+											'isshow'=>0,
+											'havetask'=>0,
+											'hideInMarket'=>0,
+										  'system'=>2,
+										  'notdelete'=>1,
+										  'position'=>1,
+											'open'=>1,
+										  'app_path'=>'dzz',
+										  'identifier'=>'DPlayer',
+										  'version'=>'1.2',
+											'check_upgrade_time'=>'20230819',
 										  'available'=>1),0,1);
 		}
 		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=filemanage'))){

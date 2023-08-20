@@ -12,6 +12,10 @@ if(!defined('IN_DZZ')) {
 }
 
 define('NOROBOT', TRUE);
+global $_G;
+if($_G['setting']['bbclosed']) {
+	dheader("Location: user.php?mod=login");
+}
 $navtitle=lang('getpassword');
 if($_GET['uid'] && $_GET['id']) {
 
@@ -29,6 +33,8 @@ if($_GET['uid'] && $_GET['id']) {
         $uid = $_GET['uid'];
 			if ($_G['setting'][loginset][template] == 2){
 			include template('getpasswd2');
+		}elseif ($_G['setting'][loginset][template] == 3){
+      include template('getpasswd3');
 		}else{
       include template('getpasswd');
 		}

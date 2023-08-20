@@ -469,16 +469,6 @@ $lang = array
   'app_internal_frame_text'=>' <li> the default internal window is open. When some applications are not suitable for internal opening, you can choose to open them in a new window</li>
   <li>When the application address is similar to dzzjs:, it can only be opened internally. The settings here do not work. </Li> ',
   'app_form_parameter'=>' form parameter ',
-  'app_form_parameter_text'=>' <li> this function is an advanced function. If it is left blank, the system default will be used. For undefined items, the default setting will be used. Each value is separated by a,, sign</li>
-  <li>For example: "class=noborder, titlebutton=fullscreen | refresh | close | Max | min, width=500, height=400, left=50%, top=50%, right=0, bottom=0, resize=no, size=no, autorun=yes"</li>
-  <li>Left, top, right, bottom: set the default position of the form. If the user drags, the position dragged by the user will prevail; Left takes precedence over right, and top takes precedence over bottom; The value can be an integer or a percentage value</li>
-  <li>Autorun: set whether this application runs automatically. The available values are yes or no. this application is valid only after the user has installed it</li>
-  <li>Closetime: automatic closing time. The available value is in seconds. It is only valid for automatically running applications; For example: closetime=3 automatically closes after three seconds</li>
-  <li>Class: apply the style of the form. After setting, the style of the form will not change with the theme of the desktop (./dzz/styles/window/style name/style. CSS must exist)</li>
-  <li>Size: the default size of the application form. The available value is no: (default); Max: form maximization; Min: minimize the window</li>
-  <li>Titlebutton: function button of application form; Currently, only fullscreen, refresh, close, Max and min are supported (note that refresh is only valid for applications in the same domain at present); Default value: titlebutton=close | Max | min</li>
-  <li>Width, height: the default opening height and width of the application form; Default width=800, height=500</li>
-  <li>Resize: change the size of the application form; Available values: "no", resize, resize-x, resize-y; Default resize=resize | resize-x | resize-y </Li> ',
   'app_default_installation_location'=>' The default installation location where the application will be installed by default ',
   'app_application_library'=>' in the application library',
   'app_application_library_text'=>' Users will not be able to add this application if it is not displayed in the application library. It is generally suitable for applications installed by default ',
@@ -1030,7 +1020,7 @@ $lang = array
 	
 	'upgrade_checking' => 'Testing for new upgrades',
 	
-	'upgrade_continue'=> '<p>You last upgraded to <b>{steplang}</b>，Please continue to complete the upgrade<p><p><input type="button" class="btn btn-success" onclick="window.location.href=\'{stepurl}\'" value="Continue to upgrade" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-default" onclick="window.location.href=\'{recheckurl}\'" value="To detect" /></p>',
+	'upgrade_continue'=> '<p>You last upgraded to <b>{steplang}</b>，Please continue to complete the upgrade<p><p><input type="button" class="btn btn-outline-primary" onclick="window.location.href=\'{stepurl}\'" value="Continue to upgrade" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-outline-info" onclick="window.location.href=\'{recheckurl}\'" value="To detect" /></p>',
 	'upgrade_website_FTP_set'=>' site FTP Settings ',
   'host_IP_address'=>' host IP address',
   'IP_address' => 'IP address',
@@ -1048,7 +1038,7 @@ $lang = array
   'general_condition_passive_mode'=>'is generally acceptable, but you can try to turn this setting on if there are upload failures ',
   'enable_secure_link'=>' Enable secure link',
 	'notice_FTP_open_SSL'=>'Note: The FTP server must be enabled SSL',
-	'upgrade_continue_db'=> '<p>You last upgraded to <b>{steplang}</b>，Please continue to complete the upgrade<p><p><input type="button" class="btn btn-success" onclick="createIframe(\'{stepurl}\')" value="Continue to upgrade">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-default" onclick="window.location.href=\'{recheckurl}\'" value="To detect" /></p>',
+	'upgrade_continue_db'=> '<p>You last upgraded to <b>{steplang}</b>，Please continue to complete the upgrade<p><p><input type="button" class="btn btn-outline-primary" onclick="createIframe(\'{stepurl}\')" value="Continue to upgrade">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-outline-info" onclick="window.location.href=\'{recheckurl}\'" value="To detect" /></p>',
 	
   'upgrade_close_site' => 'Before upgrading, please close the site and back up files and data ',
   'upgrade_none' => 'There is no upgrade information {upgradeurl}',

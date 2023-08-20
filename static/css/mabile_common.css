@@ -4,7 +4,6 @@
 /*四宫格样式开始*/
 .more-item {
 	width: 25%;
-	padding-top: 30px;
 	padding-bottom: 0px;
 	color: #8D9194;
 }
@@ -19,7 +18,7 @@
 	height: 40px;
 	background-color: #fff;
 	border: 1px solid rgba(214, 214, 214, 1);
-	border-radius: .3rem;
+	border-radius: 3px;
 	line-height: 50px;
 	text-align: center;
 }

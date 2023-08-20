@@ -1,4 +1,4 @@
-<!--{template common/header_simple_start}-->
+<!--{template common/header_simple}-->
 <link href="static/jstree/themes/default/style.min.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="dzz/system/css/selfilewindow.css?{VERHASH}" rel="stylesheet" media="all">
 <style>
@@ -132,7 +132,6 @@
      var moderator=parseInt('$_GET[moderator]')>0?1:0;*/
     var defaultjson = eval('(' + '{$defaultjson}' + ')');
 </script>
-<!--{template common/header_simple_end}-->
 <div class="mechsnismMenu" id="position" class="usertree-container list-unstyled"></div>
 <script type="text/javascript">
 
@@ -309,10 +308,10 @@
                         $('#new_folder').css({'position': 'relative'});
                         var html = '<div id="replace_jstreeli" class="layer" style="position:absolute;top:0px;left:50px;">' +
                             '<input type="text" value="' + data.fname + '" class="nameinput" style="height:24px"/>' +
-                            '<button type="button" class="btn btn-primary-outline button-rightcolor" onclick="realcreate(this,' + node.id + ',' + pnode.id + ')">' +
+                            '<button type="button" class="btn btn-outline-secondary button-rightcolor" onclick="realcreate(this,' + node.id + ',' + pnode.id + ')">' +
                             '<span class="dzz dzz-done"></span>' +
                             '</button>' +
-                            '<button type="button" class="btn btn-primary-outline button-rightcolor" onclick="canclecreate(this,' + node.id + ')">' +
+                            '<button type="button" class="btn btn-outline-secondary button-rightcolor" onclick="canclecreate(this,' + node.id + ')">' +
                             '<span class="dzz dzz-close"></span>' +
                             '</button> ' +
                             '</div>';
@@ -394,12 +393,12 @@
 <div class="modal-footer">
     <input id="$ctrlid" type="hidden" name="fid" value=""/>
     <!--{if $allowcreate}-->
-    <button type="button" class="btn btn-primary-outline pull-left" onclick="createNewFolder();return false;">{lang
+    <button type="button" class="btn btn-outline-secondary pull-left" onclick="createNewFolder();return false;">{lang
         newfolder}
     </button>
     <!--{/if}-->
     <button type="button" class="btn btn-primary" onclick="submitdata()">{lang confirms}</button>
-    <button type="button" class="btn btn-default-outline cancel" data-dismiss="modal" aria-label="Close"
+    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close"
             onclick="hide_window()">{lang cancel}
     </button>
 

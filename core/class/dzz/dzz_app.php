@@ -158,7 +158,6 @@ class dzz_app extends dzz_base{
 
 
         );
-
         $_G['PHP_SELF'] = dhtmlspecialchars($this->_get_script_url());
         $_G['basescript'] = CURSCRIPT.'php';
         $_G['basefilename'] = basename($_G['PHP_SELF']);
@@ -596,8 +595,19 @@ class dzz_app extends dzz_base{
               $appuid= C::t('user_field')->fetch($this->var['member']['uid']);
               $appuidz=explode(',',$appuid['applist']);
               if (in_array($appidxu['appid'],$appuidz)){
-              }else{
-                showmessage(lang('您无权使用该应用，请联系管理员。'));
+              }elseif($config=dzz_userconfig_init()){
+                if($config['applist']){
+                  $applist=explode(',',$config['applist']);
+                }else{
+                  $applist=array();
+                }
+                $appuid= C::t('user_field')->fetch($_G['uid']);
+                $appuidz=explode(',',$appuid['applist']);
+                if (in_array($appidxu['appid'],$appuidz)){
+                }else{
+                  showmessage(lang('您无权使用该应用，请联系管理员。'));
+                }
+
               }
             }elseif($appidxu['group']==0 || $appidxu['group']==-1){
             }else{

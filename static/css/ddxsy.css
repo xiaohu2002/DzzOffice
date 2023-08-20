@@ -6,7 +6,6 @@
     left: 5px;
     right: 5px;
     bottom: 5px;
-    background: #fff;
     border-radius:  var(--radius);
     box-shadow: 0 0 10px rgb(0 0 0 / 5%);
 }

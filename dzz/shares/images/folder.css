@@ -1,16 +1,5 @@
 @charset "utf-8";
 /* CSS Document */
-html, body {
-	min-width:768px;
-	moz-user-select: -moz-none; 
-	-moz-user-select: none; 
-	-o-user-select:none; 
-	-khtml-user-select:none; /* you could also put this in a class */ 
-	-webkit-user-select:none;/* and add the CSS class here instead */ 
-	-ms-user-select:none; 
-	user-select:none;/**禁止选中文字*/ 
-	overflow-x: auto;
-}
 .tooltip fade bottom in{
 	position: fixed
 }
@@ -25,9 +14,6 @@ html, body {
 .module-list-view {
 	margin: 0;
 	font-size:13px;
-}
-.module-list-view .title {
-	color: #888;
 }
 .module-list-view .title .asc {
 	background: url(sort_asc.gif) no-repeat;
@@ -63,10 +49,10 @@ html, body {
 	/*border-bottom: 1px solid transparent;*/
 }
 .module-list-view .item-hover {
-	background-color: #F2F2F2;
+	background-color: rgba(var(--bs-white-rgb), .35);
 }
 .module-list-view .item-block {
-	background-color: #3779ff;
+	background-color: rgba(var(--bs-white-rgb), .35);
 }
 .module-list-view .item-block.item .btns a.dzz{
 	color: #FFFFFF;
@@ -91,17 +77,6 @@ html, body {
 	top: 2px;
 	left: 2px;
 }
-.module-list-view .item .chk-ico {
-	background: transparent url(checkbox.png) no-repeat;
-	width: 16px;
-	height: 16px;
-	position: absolute;
-	top: 12px;
-	left: 12px;
-}
-.module-list-view .item .chked .chk-ico {
-	background: transparent url(selected.png) no-repeat;
-}
 .module-list-view .item .name {
 	width: 100%;
 	white-space: nowrap;
@@ -121,7 +96,7 @@ html, body {
 	_overflow: hidden;
 }
 .module-list-view .title .col:hover {
-	background-color: #F2F2F2;
+	background-color: rgba(var(--bs-black-rgb), .175);
 }
 .module-list-view .col {
 	float: left;
@@ -163,11 +138,9 @@ html, body {
 	padding-right: 10px;
 }
 .select-toperate-center .btns a .dzz,.btns a.dzz{
-	color: #666666;
 	opacity: 0.65;
 }
 .select-toperate-center .btns a:hover .dzz,.btns:hover a.dzz{
-	color: #666666;
 	opacity: 1;
 }
 .breadcrumb > li:hover{
@@ -312,12 +285,10 @@ html, body {
 }
 .sharepame-name{
 	font-size: 14px;
-	color: #666666;
 	margin-bottom: 12px;
 }
 .sharepame-detailed{
 	font-size: 12px;
-	color: #999;
 }
 .sharepame-detailed .sharepame-time{
 	padding-right:5px ;
@@ -327,7 +298,6 @@ html, body {
 }
 
 .breadcrumb{
-	background-color: #fff;
 	margin-bottom: 0px;
 	float: left;
 	padding-right: 100px;
@@ -369,7 +339,6 @@ html, body {
     background: none;
     border: 0;
     box-shadow: none;
-    color: #666;
     line-height: 64px;
 }
 .select-toperate-right .btn-group{
@@ -386,11 +355,9 @@ html, body {
 	padding-right: 1.37rem;*/
 }
 .select-toperate-right .btn-group .btn.btn-group-list i,.select-toperate-right .btn-group .btn.btn-group-thumbnail i{
-	color: #666666;
     opacity: 0.65;
 }
 .select-toperate-right .btn-group .btn.btn-group-list i:hover,.select-toperate-right .btn-group .btn.btn-group-thumbnail i:hover{
-	color: #666666;
     opacity: 1;
 }
 .button-share-group .btn-group a i{
@@ -427,7 +394,7 @@ html, body {
 	right: 0;
 	margin: 5px;
 	height:65px;
-	z-index: 101;
+	z-index: 2201;
 	display: none;
 	min-width: 768px;
 }
@@ -472,7 +439,6 @@ html, body {
 .selectall-box{
    padding-left:2.14rem;
     width: auto;
-    color:#666;
     display: inline-block;
     line-height: 65px;
 }

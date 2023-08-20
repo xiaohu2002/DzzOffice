@@ -1,10 +1,6 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-
-<link rel="stylesheet" href="static/css/checkbox.css">
 <link href="{MOD_PATH}/images/market.css?{VERHASH}" rel="stylesheet" media="all">
 <script type="text/javascript" src="admin/scripts/admin.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <style>
 .app_upgradelist{
 	margin: auto;
@@ -56,7 +52,6 @@
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-	color:#999;
 	font-size:13px;
 	cursor:default;
 }
@@ -103,9 +98,6 @@
 #update_selected{
 	margin-left:20px;
 }
-.checkbox-custom{
-	margin-bottom:0;	
-}
 </style>
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
@@ -118,24 +110,22 @@
 	<div class="bs-main-container">
 		<div class="all-center-top clearfix">
 			<div class="pull-left">
-				 <div class="checkbox-custom checkbox-primary" style="margin-top: .6em;">
-              <input type="checkbox" name="chkall" id="chkall" >
-              <label></label>
-           </div>
-          </div>
-			
-			<div class="app-info pull-left">
+				<div class="form-check">
+          <input class="form-check-input" type="checkbox" name="chkall" id="chkall">
+          <label class="form-check-label" for="seccodestatus2"><div class="app-info pull-left">
                 <a href="{BASESCRIPT}?mod=appmarket">{lang total}<span class="num">$count</span>{lang ge}{lang app}</a>
                 <div class="select-info">
                 {lang selected}<span class="num">0</span>{lang ge}{lang app}
-                <a class="btn btn-success-outline " id="update_selected" title="{lang update_onekey}" href="javascript:;" onclick="upgrade_all();"><i class="glyphicon glyphicon-upload"></i> {lang update_onekey}</a>
+                <a class="btn btn-w-md btn-round btn-primary " id="update_selected" title="{lang update_onekey}" href="javascript:;" onclick="upgrade_all();"><i class="glyphicon glyphicon-upload"></i> {lang update_onekey}</a>
                 </div>
-            </div> 
+            </div></label>
+        </div>
+      </div>
 			<div class="pull-right">
-				<button class="btn btn-success-outline " id="update_check" title="{lang app_upgrade_check_need_update}"  onclick="upgrade_check(this);" data-loading-text="{lang app_upgrade_check_need_update}">{lang app_upgrade_check_need_update2}</button>
+				<button class="btn btn-w-md btn-round btn-primary " id="update_check" title="{lang app_upgrade_check_need_update}"  onclick="upgrade_check(this);" data-loading-text="{lang app_upgrade_check_need_update}">{lang app_upgrade_check_need_update2}</button>
 			</div>
 		</div> 
-		<div class="main-content clearfix" style="border-top:1px solid #FFF;">
+		<div class="main-content clearfix">
 			<form id="appform" name="appform" class="form-horizontal" action="{BASESCRIPT}?mod=appmarket" method="post">
 				<input type="hidden" name="appsubmit" value="true" />
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -144,45 +134,40 @@
 						<div id="progess_{$value[appid]}" class="progess">
 							<span id="upgrade_progess_{$value[appid]}" class="upgrade_progess"></span> 
 						</div>
-						
 						<div class="col-md-4 col-sm-4 col-xs-4" style="padding-left: 4px;"> 
-							<div class="checkbox-custom checkbox-primary" style="float: left; line-height: 50px; ">
+							<div class="checkbox-primary" style="float: left; line-height: 50px; ">
 								<input type="checkbox" name="del[]" value="$value[appid]" data-mid="$value[mid]">
 								<label></label>
 							</div> 
-						 
-                        	<div class="app-name-wrapper" style="margin-left: 30px;">
+              <div class="app-name-wrapper" style="margin-left: 30px;">
 								{eval $appadminurl=$value[appadminurl]?$value[appadminurl]:$value[appurl]}
 								<a href="$appadminurl" target="_blank" class="appicon"><img src="$value[appico]" style="margin:0" /></a>
 								<p class="appname">
 									<a href="$appadminurl" target="_blank" class="">$value[appname]</a>
 								</p>
 								<div class="appdesc" title="$value['appdesc']">{eval echo $value[upgrade_version][desc_short]?$value[upgrade_version][desc_short]:lang('none');}</div>
-                            </div>
+              </div>
 						</div>
-						
 						<div class="col-md-2 col-sm-2 col-xs-2"> 
-                        	<p>{lang installed}:$value[version]</p>
-                            <div>{lang newest}:$value[upgrade_version][version]</div>
+              <p>{lang installed}:$value[version]</p>
+              <div>{lang newest}:$value[upgrade_version][version]</div>
 						</div>
-						
 						<div class="col-md-4 col-sm-4 col-xs-4"> 
 							<div class="group-td-wrapper">
 								$value[upgrade_version][desc]
 							</div>
-                        </div>
-						
+             </div>
 						<div class="col-md-2 col-sm-2 col-xs-2"> 
-							<a class="btn btn-success-outline" id="upgrade_info_{$value[appid]}" href="javascript:;" onclick="start_check_upgrade('$value[appid]',1);" title="{lang update_onekey}">{lang update_onekey}</a>
+							<a class="btn btn-w-md btn-round btn-primary" id="upgrade_info_{$value[appid]}" href="javascript:;" onclick="start_check_upgrade('$value[appid]',1);" title="{lang update_onekey}">{lang update_onekey}</a>
 						</div> 
 					</div> 
 				<!--{/loop}-->
-				<table class="table table-hover">  
-                    <!--{if $multi}-->
+				<table class="table table-striped table-hover">  
+          <!--{if $multi}-->
 					<tr>
 						<td colspan="20" align="center">$multi </td>
 					</tr> 
-                    <!--{/if}-->
+          <!--{/if}-->
 				</table> 
 			</form>
 		</div>
@@ -193,7 +178,6 @@
 	var appids=[];
 	var mids=[];
 	var nowupgradeappid=0;
-	jQuery('.left-drager').leftDrager_layout();
 	jQuery('input[name="del[]"]').on('change',function(){
 		//console.log('change==='+this.value);
 		checkSelected();
@@ -399,5 +383,4 @@
 		});
 	}
 </script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <!--{template common/footer_simple}-->

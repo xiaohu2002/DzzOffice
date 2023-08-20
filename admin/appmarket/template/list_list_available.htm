@@ -1,4 +1,4 @@
-<table class="table table-hover " style="margin:0;">
+<table class="table table-striped table-hover" style="margin:0;">
 	<thead>
 		<th>{lang application_name}</th>
 		<th>{lang group_permissions}</th>
@@ -27,10 +27,10 @@
 		<td>$value[identifier]</td>
 		<td>$value[vendor]</td>
 		<td>
-			<a class="btn btn-link" href="{BASESCRIPT}?mod=app&op=edit&do=edit&appid=$value[appid]&refer=$refer" title="{lang edit}"><i class="glyphicon glyphicon-edit"></i></a>
-			<a class="btn btn-link" href="{BASESCRIPT}?mod=app&op=cp&do=enable&appid=$value[appid]&refer=$refer" title="{lang enable}"><i class="glyphicon glyphicon-ok-circle"></i></a>
-			<a class="btn btn-link" href="{BASESCRIPT}?mod=app&op=cp&do=export&appid=$value[appid]&refer=$refer" title="{lang export}"><i class="glyphicon glyphicon-export"></i></a>
-			<a class="btn btn-link text-danger" style="color:#e83110" href="{BASESCRIPT}?mod=app&op=cp&do=uninstall&appid=$value[appid]&refer=$refer" title="{lang uninstall}" onclick="if(confirm('{lang list_uninstall_application}'))return true;else return false"><i class="glyphicon glyphicon-remove-circle"></i></a>
+			<a class="btn btn-primary" href="{BASESCRIPT}?mod=app&op=edit&do=edit&appid=$value[appid]&refer=$refer" title="{lang edit}"><i class="glyphicon glyphicon-edit"></i></a>
+			<a class="btn btn-primary" href="{BASESCRIPT}?mod=app&op=cp&do=enable&appid=$value[appid]&refer=$refer" title="{lang enable}"><i class="glyphicon glyphicon-ok-circle"></i></a>
+			<a class="btn btn-primary" href="{BASESCRIPT}?mod=app&op=cp&do=export&appid=$value[appid]&refer=$refer" title="{lang export}"><i class="glyphicon glyphicon-export"></i></a>
+			<a class="btn btn-primary text-danger" style="color:#e83110" href="{BASESCRIPT}?mod=app&op=cp&do=uninstall&appid=$value[appid]&refer=$refer" title="{lang uninstall}" onclick="if(confirm('{lang list_uninstall_application}'))return true;else return false"><i class="glyphicon glyphicon-remove-circle"></i></a>
 		</td>
 	</tr>
 	<!--{/loop}-->

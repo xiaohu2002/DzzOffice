@@ -13,12 +13,20 @@ INSERT INTO `dzz_app_market` (`appid`,`mid`, `appname`, `appico`, `appdesc`, `ap
 (9, 9, '系统工具', 'appico/201712/21/160537cikgw2v6s6z4scuv.png', '系统维护相关工具集合，如：更新缓存、数据库备份，计划任务，在线升级等', '{adminscript}?mod=system', '', '', 1377677136, 9, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'system', 'admin', 1, '2.0', '', 20171115, ''),
 (10, 10, '投票', 'appico/201712/21/150002d834yjjqnq82qj8z.png', 'Dzz 内置投票组件，结合其他应用使用，如新闻中用到投票插件，其他开发者也可以为自己的应用调用这个通用评论插件', '{dzzscript}?mod=dzzvote', '', '', 1378615073, 11, '乐云网络', 0, 0, 1, 0, '', '', 1, 0, 0, 2, 1, 1, 0, 'dzzvote', 'dzz', 1, '2.0', '', 20171115, ''), 
 (11, 11, '评论', 'appico/201712/21/128754pb0s666i6sjws1jc.png', 'Dzz 系统评论组件，结合在其他应用使用，如新闻。其他开发者也可以为自己的应用调用这个通用评论插件', '{dzzscript}?mod=comment', '', '', 1378615073, 12, '乐云网络', 0, 1, 0, 0, '', '', 1, 0, 1, 2, 1, 1, 0, 'comment', 'dzz', 1, '2.0', '', 20171115, ''),
-(12, 37, '用户资料管理', 'appico/201712/21/103805dczcm89b0gi8i9gc.png', '管理用户资料、资料审核、认证等', '{adminscript}?mod=member', '', '', 1378615073, 13, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'member', 'admin', 1, '2.0', '', 20171115, '');
+(12, 37, '用户资料管理', 'appico/201712/21/103805dczcm89b0gi8i9gc.png', '管理用户资料、资料审核、认证等', '{adminscript}?mod=member', '', '', 1378615073, 13, '乐云网络', 0, 1, 1, 0, '', '', 3, 0, 0, 2, 1, 0, 0, 'member', 'admin', 1, '2.0', '', 20171115, ''),
+(13, 0, 'DPlayer', 'appico/202308/19/205443f8ucb4pueqebbrvp.png', 'DPlayer，支持MP3,mp4,flv,wav等格式', '{dzzscript}?mod=DPlayer', '', '', 1378615073, 0, '小胡', 1, 0, 1, 0, '', 'mp3,mp4,flv,webm,ogv,ogg,wav,m3u8', 0, 0, 1, 2, 1, 1, 0, 'DPlayer', 'dzz', 1, '1.2', '', 20230819, '');
+
 --
 -- 转存表中的数据 `dzz_app_tag`
 --
 
 INSERT INTO `dzz_app_tag` VALUES(1, 14, '系统工具', 1377677488);
+
+--
+-- 转存表中的数据 `dzz_app_tag`
+--
+
+INSERT INTO `dzz_app_open` VALUES ('mp3',13,0,53,0),('video',13,0,54,0),('m3u8',13,0,55,0);
 
 --
 -- 转存表中的数据 `dzz_app_relative`

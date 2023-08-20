@@ -1,15 +1,15 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-<link href="static/select2/select2.css?{VERHASH}" rel="stylesheet" media="all">
-<link href="static/select2/select2-bootstrap.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
+<link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.css">
 <style>
 	input[type="text"] {
 		margin: 0;
 	}
-	.table tbody:hover{
-    background: #fafafa;
-  }
+	.overflow-auto{
+		max-height: 80px;
+	}
+	.lie{
+		min-width: 130px
+	}
 </style>
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
@@ -18,38 +18,31 @@
 		<!--{template left}--> 
 	</div>
 	<div class="left-drager">
-		
 	</div>
-
 	<div class="bs-main-container  clearfix">
-
 		<div class="main-header clearfix" style="border-bottom:1px solid #e1e1e1">
-			
-			<ul class="nav nav-pills  nav-pills-bottomguide">
-				 
+			<ul class="nav nav-pills">
 				<!--{loop $systemlog_setting $mark $info}-->
 					<!--{if $info[is_open]==1 }-->
-					<li <!--{if $operation==$mark }-->class="active"<!--{/if}-->>
-						<a hidefocus="true" href="{BASESCRIPT}?mod=systemlog&type=list&operation=$mark">{$info['title']}</a>
+					<li class="nav-item">
+						<a hidefocus="true" class="nav-link <!--{if $operation==$mark }-->active<!--{/if}-->" href="{BASESCRIPT}?mod=systemlog&type=list&operation=$mark">{$info['title']}</a>
 					</li>
 					<!--{/if}-->
 				<!--{/loop}-->  
 			</ul>
 		</div>
-		  
 		<div class="main-content"> 
-			 
 			<form id="cpform" action="{BASESCRIPT}?mod=systemlog&type=list&operation=$operation" class="form-horizontal form-horizontal-left" method="post" name="cpform">
 				<input type="hidden" value="{FORMHASH}" name="formhash">
 				<input type="hidden" name="lpp" value="20">
 				<input type="hidden" name="keyword" value="$keyword">
-				<table class="table">
+				<table class="table table-hover">
 					<thead>
-						<th width="100">{lang operator}</th>
-						<th width="100">{lang usergroup}</th>
-						<th width="125">{lang ip}</th>
-						<th width="135">{lang time}</th>
-						<th>{lang info}</th>
+						<th class="lie">{lang operator}</th>
+						<th class="lie">{lang usergroup}</th>
+						<th class="lie">{lang ip}</th>
+						<th class="lie">{lang time}</th>
+						<th class="lie">{lang info}</th>
 					</thead>
 					<!--{if $list}-->
 						<!--{loop $list $key $log}-->
@@ -59,22 +52,22 @@
 							<td>$log[4]</td>
 							<td>$log[1]</td>
 							<td>
-								<a href="javascript:;" onclick="togglecplog('{$key}')">{eval echo cutstr($log[5], 200)}</a>
+								<a href="javascript:;" onclick="togglecplog('{$key}')"><div class="overflow-auto">{eval echo cutstr($log[5], 200)}</div></a>
 							</td>
 						</tr>
 						<thead id="cplog_{$key}" style="display:none">
 							<td colspan="10">
-								{lang loginfo}: $log[5]
-								<br/>{lang visit}: $log[6]
-								<br/>{lang from}: $log[7]
-                <br/>{lang Equipment information}: $log[8]</td>
+								{lang loginfo}：<strong><code>$log[5]</code></strong>
+								<br/>{lang visit}：<strong><code>$log[6]</code></strong>
+								<br/>{lang from}：<strong><code>$log[7]</code></strong>
+                <br/>{lang Equipment information}：<strong><code>$log[8]</code></strong></td>
 						</thead>
 						<!--{/loop}-->
 						<tr>
 							<td colspan="15">
-								<div class="pull-left input-group" style="width:100px;">
-									<span class="input-group-addon">{lang logs_lpp}</span>
-									<select class="input-sm form-control" style="margin:0;width:60px;" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
+								<div class="pull-left input-group" style="width:130px;">
+									<span class="col-form-label">{lang logs_lpp}</span>
+									<select class="form-select" style="margin:0;width:60px;" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
 										<option value="10" $checklpp[10]> 10 </option>
 										<option value="20" $checklpp[20]> 20 </option>
 										<option value="40" $checklpp[40]> 40 </option>
@@ -91,8 +84,12 @@
 					<!--{/if}--> 
 				</table>
 			</form>
-
 			<script type="text/javascript">
+				jQuery(document).ready(function (e) {
+          jQuery('select').lyearSelect({
+						width:70,
+					});
+				});
 				function togglecplog(k) {
 					var cplogobj = document.getElementById('cplog_' + k);
 					if(cplogobj.style.display == 'none') {
@@ -104,10 +101,6 @@
 			</script> 
 		</div>
 	</div>
-    <a class="add-menu leftTopmenu dzz dzz-menu" onclick="_header.leftTopmenu(this)"></a>
 </div>
-<script type="text/javascript">
-	jQuery('.left-drager').leftDrager_layout();
-</script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
+<script type="text/javascript" src="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.js"></script>
 <!--{template common/footer_simple}-->

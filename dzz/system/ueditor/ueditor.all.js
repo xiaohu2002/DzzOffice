@@ -17639,7 +17639,7 @@ UE.plugins['video'] = function (){
                     ' src="' + me.options.UEDITOR_HOME_URL+'themes/default/images/spacer.gif" style="background:url('+me.options.UEDITOR_HOME_URL+'themes/default/images/videologo.gif) no-repeat center center; border:1px solid gray;'+(align ? 'float:' + align + ';': '')+'" />'
                 break;
             case 'iframe':
-                str = '<iframe src="/dzz/bilibili/player.php?url=' +  utils.html(url) + '" width="100%" height="480px"'  + (align ? ' style="float:' + align + '"': '') +' style="border-radius:  var(--radius);border: none;"></iframe>';
+                str = '<iframe src="/dzz/DPlayer/player.php?url=' +  utils.html(url) + '" width="100%" height="480px"'  + (align ? ' style="float:' + align + '"': '') +' style="border-radius:  var(--radius);border: none;"></iframe>';
                 break;
             case 'video':
                 var ext = url.substr(url.lastIndexOf('.') + 1);

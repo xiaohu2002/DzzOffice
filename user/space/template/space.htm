@@ -1,94 +1,53 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <style>
-.userspace{
-	position: relative;
-	height:auto;
-	border:none;
-	padding:0;
-	border-bottom:1px solid #DDD;
-}
-.userspace .avatar{
-	position:absolute;
-	left:8px;
-	top:15px;
-}
-
-.userspace .userinfo{
-	padding:20px 10px 15px 70px;
-	line-height:40px;
-	overflow:hidden;
-}
-.userspace .userinfo a{
-	padding-right:20px;
-	font-size:24px;
-	
-}
-.news{
-		width: 100%;
-    margin-bottom: 20px;
-	}	
-.p_name{
-		width: 100%;
-    color: #999;
-    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-    border: 1px solid #ebeef5;
-    border-radius:  var(--radius);
-    padding: 20px;
+  .avatar,.card-title{
+    text-align: center;
+  }
+	.callout:hover{
+		background-color: var(--bs-light-hover);
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+		border-left-color: var(--bs-info);
 	}
-	.p_x{
-		color: #000;
-    margin-left: 20px;
+	.avatar img.img-circle{
+		width: auto;
+		height: auto;
 	}
-	.form-horizontal{
-      box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-      border: 1px solid #ebeef5;
-      border-radius:  var(--radius);
-      padding: 20px;
-      font-size: large;
-    }
-	
+	.card{
+		box-shadow: none;
+    -webkit-box-shadow: none;
+	}
 </style>
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <div class="bs-container clearfix">
  <div class="bs-main-container  clearfix"> 
-   <div class=" userspace">
-          <div class="avatar">{eval echo avatar_block($uid);}</div>
-          <div class="userinfo clearfix">
-              <a  href="javascript:" class="username"><strong>$space['username']</strong></a>
-              <!--{if $uid==$_G['uid']}--><a href="user.php?mod=profile">{lang edit_data}</a><!--{/if}--><!--{if $_G['adminid']}--><a href="admin.php?mod=orguser#user_$uid">编辑用户</a><!--{/if}-->
-          </div> 
-    </div>
-   <div class="main-content clearfix">
-      <!--{if $uid==$_G['uid'] || $_G['adminid']}-->
-      <div class="news">
-          <div class="p_name">
-              {lang Last_login_time}
-              <span class="p_x">$scdlsj</span>
-          </div>
-       </div>
-      <div class="news">
-          <div class="p_name">
-              {lang email}
-              <span class="p_x">$space['email']</span>
-          </div>
-       </div>
-      <!--{/if}-->
-      <!--{loop $profiles $key $value}-->
-      <div class="news">
-        <div class="p_name">
-            $value[title]
-            <span class="p_x">$value[value]</span>
-        </div>
-      </div>
-      <!--{/loop}-->
-    </div>
+   <div class="main-content">
+		<div class="avatar">{eval echo avatar_block($uid);}</div>
+		<div class="card-body">
+			<h5 class="card-title">$space['username']</h5>
+			<div class="row mb-3">
+				<!--{if $uid==$_G['uid']}--><a href="user.php?mod=profile" class="btn btn-outline-primary">{lang edit_data}</a><!--{/if}--><!--{if $_G['adminid']}--><a href="index.php?mod=orguser#user_$uid" class="btn btn-outline-primary">编辑用户</a><!--{/if}-->
+			</div>
+			<div class="card card-shadowed mb-3">
+				<div class="callout callout-danger">邮箱:<strong><code>$space['email']</code></strong></div>
+				<!--{if $space['phone']}-->
+				<div class="callout callout-success">系统中的手机号:<strong><code>$space['phone']</code></strong></div>
+				<!--{/if}-->
+				<div class="callout callout-warning">最近在线时间:<strong><code>$scdlsj</code></strong></div>
+			</div>
+			<div class="card card-hover-shadow mb-3">
+				<header class="card-header">
+					<div class="card-title">更多信息</div>
+				</header>
+				<!--{loop $profiles $key $value}-->
+				<div class="callout">$value[title]：<strong><code>$value[value]</code></strong></div>
+				<!--{/loop}-->
+
+			</div>
+		</div>
+  </div>
  </div>
 </div>
-<script type="text/javascript">
-  jQuery('.left-drager').leftDrager_layout();
-</script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>	
 <!--{template common/footer_simple}-->

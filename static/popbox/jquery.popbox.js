@@ -60,8 +60,8 @@ function popbox() {
 			var h = target.outerHeight(true);
 			var left = 0,
 				top = 0;
-			box.attr('class', 'popbox popbox-' + me.data('placement'));
-			switch(me.data('placement')) {
+			box.attr('class', 'popbox popbox-' + me.data('bs-placement'));
+			switch(me.data('bs-placement')) {
 				case 'cover':
 					left = p.left;
 					top = p.top;
@@ -90,7 +90,7 @@ function popbox() {
 
 			//判断是否超出屏幕
 			if(me.data('auto-adapt')) {
-				switch(me.data('placement')) {
+				switch(me.data('bs-placement')) {
 					case 'right':
 					case 'left':
 						if(left + bw > clientWidth) left = clientWidth - bw - 10;
@@ -100,7 +100,7 @@ function popbox() {
 						break;
 					case 'top':
 					case 'bottom':
-						if(top + bh > (clientHeight + jQuery(window).scrollTop()) && (me.data('placement') != 'bottom' && me.data('placement') != 'cover')) top = clientHeight - bh - 10 + jQuery(window).scrollTop();
+						if(top + bh > (clientHeight + jQuery(window).scrollTop()) && (me.data('bs-placement') != 'bottom' && me.data('bs-placement') != 'cover')) top = clientHeight - bh - 10 + jQuery(window).scrollTop();
 						if(top < 0) top = 10;
 						if(left + bw > clientWidth) left = clientWidth - bw - 10;
 						if(left < 0) left = 10;
@@ -120,7 +120,7 @@ function popbox() {
 				'left': left,
 				'top': top /*,'min-width':w*/
 			});
-			switch(me.data('placement')) {
+			switch(me.data('bs-placement')) {
 				case 'right':
 				case 'left':
 					var top = p.top - top + h / 2 - 10;

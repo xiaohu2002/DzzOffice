@@ -17,16 +17,12 @@
 	  	options=$.extend(opt,options);
 		var container=$(this);
 		var $this=$(this);
-		var tmpl='<div class="form-group dzzvote-post-text-item">';
-           tmpl+='  <label class="control-label "><span class="badge"></span></label>';
-           tmpl+='   <div class="controls" style="padding-left:130px;float:none">';
-           tmpl+='       <div class="col-xs-10" style="padding:0">';
-           tmpl+='          <input type="text" class="form-control" style="width:100%"  name="voteitemnew[content][]" value="">';
-		   tmpl+='          <input type="hidden"  name="voteitemnew[aid][]" value="">';
-           tmpl+='       </div>';
-           tmpl+='       <div class="col-xs-2" ><a href="javascript:;" data-itemid="0" class="dzzvote-post-delitem ibtn glyphicon glyphicon-trash" ></a></div>';
-           tmpl+='   </div>';
-           tmpl+=' </div>';
+		var tmpl='<div class="input-group mb-3 dzzvote-post-text-item">';
+           tmpl+='  <span class="input-group-text"><span class="badge"></span></span>';
+           tmpl+='  <input type="text" class="form-control" name="voteitemnew[content][]" value="">';
+		   tmpl+='  <input type="hidden"  name="voteitemnew[aid][]" value="">';
+           tmpl+='  <span class="input-group-text"><a href="javascript:;" data-itemid="0" class="dzzvote-post-delitem ibtn glyphicon glyphicon-trash" ></a></span>';
+           tmpl+='</div>';
 		var item_refresh=function(){
 			container.find('#dzzvote_post_text_'+options['voteid']+' .dzzvote-post-item-container .badge').each(function(index){
 				this.innerHTML=index+1;

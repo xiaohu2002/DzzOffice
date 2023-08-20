@@ -1,6 +1,6 @@
 <!--{if $operation=='app'}-->
   <div id="app_context" >
-      <ul id="app_popup" class="app_popup">
+      <ul id="app_popup" class="nav-stacked app_popup">
       <!--{loop $applist_1 $key $value}-->
       {eval if($key>11) continue;}
         <li>
@@ -15,7 +15,7 @@
        </li>
       <!--{/loop}-->
       </ul>
-      <ul id="app_popup1" class="app_popup" style="display: none;border-top:1px solid #EBEBEB;">
+      <ul id="app_popup1" class="nav-stacked app_popup" style="display: none;border-top:1px solid #EBEBEB;">
        <!--{eval for($i=12;$i<count($applist_1);$i++){}-->
       {eval $value=$applist_1[$i];}
         <li>

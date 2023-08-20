@@ -35,7 +35,7 @@
             function clickCallback() {
                 baiduApp.addEventListener( 'getAppHTML', function ( e, data ) {
                     var url = 'http://app.baidu.com/app/enter?appid='+data.data['app_id'] +'&tn=app_canvas&app_spce_id=1&apikey='+apikey+'&api_key=' + apikey;
-                    editor.execCommand( "webapp", {url:url,width:data.uniWidth,height:data.uniHeight+60,logo:data.data['app_logo'],title:data.data['app_name']});
+                    editor.execCommand( "webapp", {url:url,width:data.uniWidth,height:data.uniHeight+60,logo:data.data['app_logo'],title:data.data['appname']});
                     dialog.close();
                 } );
             }

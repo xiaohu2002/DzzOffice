@@ -11,8 +11,6 @@ a,a:hover,a:focus{
 li{
 	list-style: none;
 }
-.modal .modal-header{
-}
 .orgtree-search {
     position: fixed;
     width: 100%;
@@ -108,9 +106,6 @@ li{
     bottom: 0;
     border: none;
 }
- .user-select-search .input-black {
-        margin-bottom: 0;
-    }
 .user-select-body {
     padding-top: 20px!important;
 }
@@ -144,12 +139,16 @@ li{
     height: 40px;
     padding-right: 30px;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
 }
 .user-select-content-right .sele-right-classa li img {
     max-width: 24px;
     max-height: 24px;
+}
+.user-select-content-right .sele-right-classa li span {
+    max-width: 24px;
+    max-height: 24px;
+    line-height:24px;
 }
 .user-select-content-right .sele-right-classa li .ti-close {
     position: absolute;
@@ -163,10 +162,9 @@ li{
     display: none;
     cursor: pointer;
     padding: 0;
-    background-color: #f2f2f2;
 }
 .user-select-content-right .sele-right-classa li:hover {
-    background-color: #f2f2f2;
+    background-color: rgba(0,0,0, .175);
     border-radius:  var(--radius);
 }
 .user-select-content-right .sele-right-classa li:hover .ti-close {
@@ -317,7 +315,6 @@ li{
 }
 .select-change i{
 	font-size:1.28rem;
-	color: #BBBBBB;
 }
 #select-button{
 	min-width: 7.14rem;
@@ -335,18 +332,10 @@ li{
     border: 1px solid #d8d8d8;
     border-radius:  var(--radius);
 }
-.dropdown-menu>li>a {
-    padding: 8px 8px 8px 35px;
-    position: relative;
-}
-.filee-icon.filee-folder, .filee-icon.filee-upload, .filee-icon.filee-file, .filee-icon.filee-language, .filee-icon.filee-description {
-    color: #999;
-}
 .menu-text, .file-text {
     left: 45px;
     height: 36px;
     width: 140px;
-    color: #666666;
 }
 .dropdown-menu .file-text {
     padding-left: 1.3rem;
@@ -376,11 +365,9 @@ li{
 }
 .select-button-dropdown .select-button-folder{
 	font-size: 20px;
-	color: #bbb;
 }
 .select-search-block{
 	font-size: 20px;
-    color: #bbb;
     display: inline-block;
     cursor: pointer;
     /*padding-right: 10px;
@@ -410,9 +397,6 @@ li{
 
 .modal .modal-footer{
 	border-top:none;
-}
-.input-black .input-label{
-	left: auto;
 }
 /*新建文件夹结束*/
 /*内容上部分结束*/
@@ -577,9 +561,6 @@ li{
 /*缩略图结束*/
 /*内容中间部分结束*/
 /*内容下部分开始*/
-.input-black{
-	margin: 0;
-}
 .select-filebottom{
 	padding-top: 10px;
 }
@@ -588,9 +569,5 @@ li{
 }
 .typedropup{
 	width: 100%;
-}
-.select-filebottom .input-black .input-label{
-	text-align: right;
-	min-width: 63px;
 }
 /*内容下部分结束*/

@@ -1,11 +1,5 @@
 <!--{template common/header_ajax}-->
 <style>
-.user-select-search .input-black {
-	margin-bottom: 0;
-}
-.user-select-body {
-	padding-top: 20px!important;
-}
 .user-select-body .user-select-content {
 	margin-top: 0;
 	border-bottom: 1px solid #e1e1e1;
@@ -37,12 +31,16 @@
 	height: 40px;
 	padding-right: 30px;
 	white-space: nowrap;
-	overflow: hidden;
 	text-overflow: ellipsis;
 }
 .user-select-content-right .sele-right-classa li img {
 	max-width: 24px;
 	max-height: 24px;
+}
+.user-select-content-right .sele-right-classa li span {
+	max-width: 24px;
+	max-height: 24px;
+	line-height:24px;
 }
 .user-select-content-right .sele-right-classa li .ti-close {
 	position: absolute;
@@ -56,10 +54,9 @@
 	display: none;
 	cursor: pointer;
 	padding: 0;
-	background-color: #f2f2f2;
 }
 .user-select-content-right .sele-right-classa li:hover {
-	background-color: #f2f2f2;
+	background-color: rgba(0,0,0, .175);
 	border-radius: 3px;
 }
 .user-select-content-right .sele-right-classa li:hover .ti-close {
@@ -67,17 +64,6 @@
 }
 #seluser_dropdown_menu {
 	height: 299px;
-}
-.user-select-body .Topcarousel{
-	width: 24px;
-	height: 24px;
-	border-radius: 50%;
-	display: inline-block;
-	line-height: 24px;
-    text-align: center;
-    margin-right: 2px;
-    color: #FFFFFF;
-	font-size:14px;
 }
 .user-select-body .iconFirstWord{
 	width: 24px;
@@ -106,21 +92,16 @@
     }
 </script>
 <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
   <h4 class="modal-title">{lang user_select_title}</h4>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <form onsubmit="return seluser_submit(this);">
   <input type="hidden" name="formhash" value="{FORMHASH}">
   <input type="hidden" name="selectsubmit" value="true">
   <div class="modal-body user-select-body">
     <div class="user-select-search" >
-      <div class="input-black">
-        <label class="control-label">{lang selecte_user_to_add}</label>
-        <div class="input-animate">
-        	<i class="dzz dzz-search dzz-search-icon"></i>
-          <input id="user_select_search_input" type="text" class="form-control" placeholder="{lang user_select_search_tip}" style="padding-left: 1.42rem;"/>
-        </div>
-      </div>
+        <label>{lang selecte_user_to_add}</label>
+          <input id="user_select_search_input" type="text" class="form-control" placeholder="{lang user_select_search_tip}"/>
     </div>
     <div class="user-select-content">
       <div class="user-select-content-left">
@@ -138,7 +119,7 @@
         <div class="group-content" id="group-contents">
           <ul class="sele-right-classa" id="seluser">
             <!--{loop $selects $key $value}-->
-            <li id="seluser_sl_$key" class="right-classa-depart avatar avatar-xs" data-val="$key"> {eval echo avatar_block($value[uid]);}
+            <li id="seluser_sl_$key" class="right-classa-depart" data-val="$key"> {eval echo avatar_block($value[uid]);}
               $value['username'] <i class="ti-close dzz dzz-close"></i> </li>
             <!--{/loop}-->
           </ul>
@@ -149,16 +130,10 @@
   <div class="modal-footer">
 	 
     <button type="submit" class="btn btn-primary">{lang confirms}</button>
-    <button type="button" class="btn btn-default-outline cancel" data-dismiss="modal" aria-label="Close">{lang cancel} </button>
+    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">{lang cancel} </button>
   </div>
 </form>
 <script type="text/javascript" reload="1">
-    //名称初始化
-    jQuery.getScript('static/js/input_field.js?{VERHASH}',function(){
-        jQuery('.input-black').each(function () {
-            InputAnimate.init(jQuery(this));
-        });
-    });
     jQuery(document).ready(function (e) {
 		/*jQuery('#user_select_search_input').off('blur').on('blur',function(){
 			try{

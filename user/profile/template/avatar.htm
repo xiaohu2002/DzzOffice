@@ -1,11 +1,8 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="user/scripts/jquery.cropbox.css?{VERHASH}" rel="stylesheet" media="all">
 <script type="text/javascript" src="user/scripts/hammer.js"></script>
 <script type="text/javascript" src="user/scripts/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="user/scripts/jquery.cropbox.js"></script>
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
-
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <div class="bs-container clearfix">
@@ -42,18 +39,17 @@
                 <img class="cropimage" src="avatar.php?uid=$_G[uid]&size=big&ramdom=1" />
             </div>
             <div class=" clearfix">
-                <div class="pull-left" style="position:relative;padding:5px;overflow:hidden">
-                    <button class="btn btn-success">{lang upload_image}</button>
+                <div class="pull-left" style="position:relative;overflow:hidden">
+                    <button class="btn btn-outline-primary">{lang upload_image}</button>
                     <input id="upload" name="files[]" tabIndex="-1" style="position: absolute;outline:none; filter: alpha(opacity=0); PADDING-BOTTOM: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font-family: Arial; font-size: 180px;height:40px;width:86px;display:inline-block;top: 0px; cursor: pointer; right: 0px; padding-top: 0px; opacity: 0;direction:ltr;background-image:none" type="file" accept="image/png,image/gif,image/jpeg">
                 </div>
-                <div class="pull-left ml20" style="padding:5px;"><button type="button" id="avatar_form_btn" data-loading-text="{lang are_uploading}" class="btn btn-danger" onclick="return validate()" disabled="disabled">{lang save_avatar}</button></div>
+                <div class="pull-left"><button type="button" id="avatar_form_btn" data-loading-text="{lang are_uploading}" class="btn btn-primary" onclick="return validate()" disabled="disabled">{lang save_avatar}</button></div>
             </div>
 
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    jQuery('.left-drager').leftDrager_layout();
     jQuery(document).ready(function(e) {
         var corp = jQuery('.cropimage').cropbox({ width: 200, height: 200, showControls: 'auto', label: '{lang drag_move}' })
                 .on('cropbox', function(event, results, img) {
@@ -119,7 +115,6 @@
         return false;
     }
 </script>
-<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script type="text/javascript" src="static/jquery_file_upload/jquery.ui.widget.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/jquery_file_upload/jquery.iframe-transport.js?{VERHASH}"></script>

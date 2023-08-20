@@ -53,6 +53,8 @@ EOT;
 }else{
   if ($_G['setting'][loginset][template] == 2){
 			include template('lostpasswd2');
+		}elseif ($_G['setting'][loginset][template] == 3){
+      include template('lostpasswd3');
 		}else{
       include template('lostpasswd');
 		}

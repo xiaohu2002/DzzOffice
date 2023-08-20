@@ -109,7 +109,7 @@ _filemanage.getData = function (url, callback) {
 			obj.url = url;
 			//修改初始化时的排列方式指示
 			jQuery('.sizeMenu .icons-thumbnail').attr('iconview', obj.view).find('.dzz').removeClass('dzz-view-module').removeClass('dzz-view-list').addClass(obj.view === 2 ? 'dzz-view-list':'dzz-view-module');
-            jQuery('.sizeMenu .icons-thumbnail').attr('iconview', obj.view).find('.dzz').attr('data-original-title',obj.view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
+            jQuery('.sizeMenu .icons-thumbnail').attr('iconview', obj.view).find('.dzz').attr('data-bs-original-title',obj.view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
 			jQuery('.sizeMenu .icons-thumbnail').attr('folderid', obj.id);
 			if (typeof (callback) === 'function') {
 				callback(obj);
@@ -138,7 +138,7 @@ _filemanage.Arrange = function (obj, id, view) {
 		view = view * 1;
 	}
 	jQuery('.sizeMenu .icons-thumbnail').attr('iconview', view).find('.dzz').removeClass('dzz-view-module').removeClass('dzz-view-list').addClass(view === 2 ?  'dzz-view-list':'dzz-view-module');
-    jQuery('.sizeMenu .icons-thumbnail').attr('iconview', view).find('.dzz').attr('data-original-title',view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
+    jQuery('.sizeMenu .icons-thumbnail').attr('iconview', view).find('.dzz').attr('data-bs-original-title',view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
 	if (filemanage.subfix === 'f') {
 		var fid = _filemanage.fid;
 		if (fid > 0 && _explorer.Permission_Container('admin', fid)) {

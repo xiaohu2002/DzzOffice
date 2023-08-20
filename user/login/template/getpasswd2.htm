@@ -1,78 +1,72 @@
 <!--{template common/header_simple}-->
-<link href="static/css/dlzc.css?{VERHASH}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/style.min.css">
+<style>
+	html, body{
+		overflow:auto;
+	}
+	<!--{if $_G[setting][loginset][transparency]}-->
+	.card{
+		background-color:$_G[setting][loginset][transparency];
+	}
+	.card:hover{
+		background-color:$_G[setting][loginset][transparency];
+	}
+	<!--{/if}-->
+</style>
 <!--[if lt IE 9]>
   <script src="static/js/jquery.placeholder.js" type="text/javascript"></script>
 <![endif]-->
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
-<!--{if !empty($_GET['inajax'])}--><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><!--{/if}-->
-<div class="relative min-h-screen flex" id="lostpw_container_$loginhash">
-  <div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
-      <div class="sm:w-1/2 xl:w-3/5 h-full hidden md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative"<!--{if $_G['setting']['loginset']['img']}--> style="background-image: url($_G['setting']['loginset']['img'])"<!--{/if}-->>
-          <div class="absolute bg-gradient-to-b opacity-75 inset-0 z-0" style="<!--{if !$_G['setting']['loginset']['img']}-->--tw-gradient-from: #4f46e5;--tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to, rgba(79, 70, 229, 0));<!--{/if}-->--tw-gradient-to:<!--{if $_G['setting']['loginset']['bcolor']}-->$_G['setting']['loginset']['bcolor']<!--{else}-->#3b82f6<!--{/if}-->"></div>
-          <div class="w-full max-w-md z-10">
-						<!--{if $_G[setting][loginset][title]}--><div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">$_G[setting][loginset][title]<!--{/if}--></div>
-            <!--{if $_G[setting][loginset][subtitle]}--><div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">$_G[setting][loginset][subtitle]</div><!--{/if}-->
-            <!--{if $_G[setting][metadescription]}--><div class="sm:text-sm xl:text-md text-gray-200 font-normal">$_G[setting][metadescription]</div><!--{/if}-->
-          </div>
-          <!--{if !$_G['setting']['loginset']['img']}-->
-          <ul class="circles">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-          </ul>
-          <!--{/if}-->
+<!--{if !empty($_GET['inajax'])}--><button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button><!--{/if}-->
+<div class="row vh-100" id="lostpw_container_$loginhash" style="position: absolute;width: 100%">
+  <div class="col-md-6 col-lg-7 col-xl-8 d-none d-md-block">
+
+    <div class="d-flex vh-100">
+      <div class="p-5 align-self-end">
+         <!--{if $_G[setting][loginset][subtitle]}--><h1>$_G[setting][loginset][subtitle]</h1><!--{/if}-->
+        <br><br><br>
+        <!--{if $_G[setting][metadescription]}--><p class="text-white">$_G[setting][metadescription]</p><!--{/if}-->
       </div>
-      <div class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full w-2/5 xl:w-2/5 p-8 md:p-10 lg:p-14 sm:rounded-lg md:rounded-none  bg-white">
-          <div class="max-w-md w-full mx-auto space-y-8">
-            <div class="flex flex-row justify-center items-center space-x-3">
-              <!--{if $_G['setting']['sitelogo']}-->
-              <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}">
-              <!--{else}-->
-              <img src="static/image/common/logo.png">
-              <!--{/if}-->
-              </div>
-						<div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6 text-center">
-                {lang getpassword}
-            </div>
-						<form class="mt-8 space-y-6" method="post" autocomplete="off" id="lostpwform_$loginhash" role="form" onsubmit="return validate(this);" action="user.php?mod=login&op=logging&action=getpasswd&uid=$uid&id=$hashid">
-              <input type="hidden" name="formhash" value="{FORMHASH}" />
-                <div class="relative text-center">
-                    {lang login_email}:$member[email]
-                </div>
-                <div class="relative">
-                  <input class="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500" type="password" id="newpasswd1" name="newpasswd1"  autocomplete="off" placeholder="{lang new_password}"/><span id="chk_newpasswd1" class="help-inline"> <span id="suc_newpasswd1"></span><kbd class="p_chk"></kbd></span>
-                </div>
-                <div class="relative">
-                  <input class="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500" type="password" id="newpasswd2" name="newpasswd2" autocomplete="off" placeholder="{lang new_password_confirm}"/>
-                </div>
-							<div class="col-sm-4">
-							<span id="chk_newpasswd2" class="help-inline">
-            		<span id="suc_newpasswd2"></span>
-								<kbd class="p_chk"></kbd>
-							</span>
-						</div>
-                <div>
-                  <button type="submit" class="w-full flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600 hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500" ole="button" type="submit" name="getpwsubmit" value="true">{lang identify_changes}</button>
-                </div>
-                <p class="error-msg text-center" id="returnmessage3_$loginhash"></p>
-              </form>
-						<p class="items-center justify-center mt-10 text-center text-md text-gray-500">
-              <span>需要返回？</span>
-              <a href="user.php?mod=login" onclick="try{_login.logging();return false}catch(e){return true}" class="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300" title="{lang back_login}">{lang back_login}</a>
-            </p>
-            <div class="w-full max-w-md z-10">
-              <div class="sm:text-sm xl:text-md text-gray-200 font-normal text-center"><!--{template common/copyright}--></div>
-            </div>
-          </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6 col-lg-5 col-xl-4 align-self-center">
+    <div class="p-5">
+      <div class="text-center">
+        <img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}">
       </div>
+      <h2 class="text-center">{lang getpassword}</h2>
+      <form class="signin-form needs-validation" method="post" autocomplete="off" id="lostpwform_$loginhash" role="form" onsubmit="return validate(this);" action="user.php?mod=login&op=logging&action=getpasswd&uid=$uid&id=$hashid">
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<div class="mb-3 text-center">
+          {lang login_email}:$member[email]
+        </div>
+				<div class="mb-3">
+					<label for="password3_$loginhash">{lang new_password}</label>
+          <input class="form-control" type="password" id="newpasswd1" name="newpasswd1"  autocomplete="off" placeholder="{lang new_password}" required>
+					<span id="chk_newpasswd1" class="help-block"> <span id="suc_newpasswd1"></span><kbd class="p_chk"></kbd></span>
+        </div>
+        <div class="mb-3">
+          <label for="password3_$loginhash">{lang new_password_confirm}</label>
+          <input class="form-control" type="password" id="newpasswd2" name="newpasswd2" autocomplete="off" placeholder="{lang new_password_confirm}" required>
+					<span id="chk_newpasswd2" class="help-block">
+						<span id="suc_newpasswd2"></span>
+						<kbd class="p_chk"></kbd>
+					</span>
+        </div>
+				
+        <div class="mb-3 d-grid">
+          <button class="btn btn-primary" type="submit" name="getpwsubmit" value="true">{lang identify_changes}</button>
+        </div>
+				 <p class="text-center">
+					<a href="/">首页</a>
+				</p>
+      </form>
+      <p class="text-center text-muted mb-0"><!--{template common/copyright}--></p>
+    </div>
   </div>
 </div>
 <script type="text/javascript" src="user/scripts/register.js?{VERHASH}"></script>
@@ -98,6 +92,17 @@
 	<!--{/if}-->
 	var pwlength = <!--{if $_G['setting']['pwlength']}-->$_G['setting']['pwlength']<!--{else}-->0<!--{/if}-->;
 		checkPwdComplexity(document.getElementById('newpasswd1'), document.getElementById('newpasswd2'));
+	var loader;
+  $(document).ajaxStart(function(){
+      $("button:submit").html('加载中...').attr("disabled", true);
+      loader = $('button:submit').lyearloading({
+          opacity: 0.2,
+          spinnerSize: 'nm'
+      });
+  }).ajaxStop(function(){
+      loader.destroy();
+      $("button:submit").html('{lang identify_changes}').attr("disabled", false);
+  });
 </script>
 <script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
 <!--{template common/footer}-->

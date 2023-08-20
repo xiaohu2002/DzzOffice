@@ -1,6 +1,7 @@
-<div class="form-group" id="verify-type">
-    <label class="control-label" for="chktype" required>验证方式</label>
-    <select name="chktype" id="chktype" class="form-control input-sm " >
+<div class="row mb-3" id="verify-type">
+  <label class="col-sm-2" for="chktype" required>验证方式</label>
+	<div class="col-sm-10">
+    <select name="chktype" id="chktype" class="form-select" >
         <!--{if $chkarr['emailstatus'] && $chkarr['email']}-->
         <option value="email">$hideemail 验证</option>
         <!--{/if}-->
@@ -11,46 +12,50 @@
         <option value="pass">密码验证</option>
         <!--{/if}-->
     </select>
+  </div>
 </div>
 <div id="emailchk_show"  class="showchktype" style="display:none;">
 <dl>
-    <label class="control-label"></label>
 	<input type="button" class="btn btn-primary return_chk" value="发送验证邮件" onclick="chkemail_verify()">
 </dl>
 </div>
 <div id="passchk_show" class="showchktype" style="display:none;">
-<div class="form-group">
-    <label class="control-label" for="chkpassword" required>密码</label>
+<div class="row mb-3">
+  <label class="col-sm-2" for="chkpassword" required>密码</label>
+	<div class="col-sm-10">
     <input type="password" name="chkpassword" class="form-control" autocomplete="off" id="chkpassword" placeholder="请输入密码">
-    <span id="chk_chkpassword" class="help-inline"><span id="suc_chkpassword"></span> <kbd  class="p_chk"></kbd> </span>
+    <span id="chk_chkpassword" class="help-block"><span id="suc_chkpassword"></span> <kbd  class="p_chk"></kbd> </span>
+  </div>
 </div>
-<div class="form-group" id="codeverify" {if $sessionerrornum > 2}style="display:block;"{else}style="display:none;"{/if}>
+<div class="row mb-3" id="codeverify"{if $sessionerrornum > 2} style="display:block;"{else}style="display:none;"{/if}>
     <!--{block sectpl}-->
     <sec>
         <sec>
             <sec>
                 <!--{/block}-->
-                <div class="form-group">
-                    <label class="control-label">验证码</label>
-                    <div class="controls">
+                <div class="row mb-3">
+                    <label class="col-sm-2">验证码</label>
+                    <div class="col-sm-10">
                         <!--{template common/seccheck}-->
                     </div>
                 </div>
 </div>
 <dl>
-    <label class="control-label"></label>
     <input type="button" class="btn btn-primary return_chk" value="确定" onclick="pass_chk()">
 </dl>
 </div>
 <div id="phonechk_show"   class="showchktype" style="display:none;">
-<div class="form-group">
-    <label class="control-label" for="pcode" required>短信验证码</label>
-    <input type="text" name="pcode" class="form-control" autocomplete="off" id="pcode" placeholder="请输入验证码">
-    <input type="button" class="btn btn-primary" value="获取验证码"  onclick="get_pcode()"/>
-    <span id="chk_pcode" class="help-inline"><span id="suc_pcode"></span> <kbd  class="p_chk"></kbd> </span>
+<div class="row mb-3">
+    <label class="col-sm-2" for="pcode" required>短信验证码</label>
+    <div class="col-sm-10">
+      <input type="text" name="pcode" class="form-control" autocomplete="off" id="pcode" placeholder="请输入验证码">
+      <span id="chk_pcode" class="help-block"><span id="suc_pcode"></span> <kbd  class="p_chk"></kbd> </span>
+    </div>
+    <dl>
+      <input type="button" class="btn btn-primary" value="获取验证码"  onclick="get_pcode()"/>
+    </dl>
 </div>
 <dl>
-    <label class="control-label"></label>
     <input type="button" class="btn btn-primary return_chk" value="确定" onclick="pcode_chk()">
 </dl>
 </div>
@@ -65,8 +70,8 @@
         <p>邮件可能会进入推广邮件或垃圾邮件中，请注意查收。</p>
     </div>
     <div class="email">
-        <button type="button" class="btn btn-success" id="reffer_email">立即进入邮箱</button>
-        <span><span id="sendstart">已发送</span><span id="sendstatus" style="display:none;"><b class="time" id="down_time">3</b>秒后<span id="false_resend">重新发送</span><span id="resend_true" style="display:none"><input type="button" class="btn btn-success"  value="重新发送" onclick="chkemail_verify()" ></span></span></span>
+        <button type="button" class="btn btn-outline-primary" id="reffer_email">立即进入邮箱</button>
+        <span><span id="sendstart">已发送</span><span id="sendstatus" style="display:none;"><b class="time" id="down_time">3</b>秒后<span id="false_resend">重新发送</span><span id="resend_true" style="display:none"><input type="button" class="btn btn-outline-primary"  value="重新发送" onclick="chkemail_verify()" ></span></span></span>
     </div>
 </div>
 <script>

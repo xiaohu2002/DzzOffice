@@ -1,4 +1,4 @@
-<!--{template common/header_simple_start}-->
+<!--{template common/header_simple}-->
 <link href="static/jstree/themes/default/style.min.css?{VERHASH}" rel="stylesheet" media="all">
 <style>
 body{
@@ -59,18 +59,7 @@ body{
 	background:#F7F7F7;
 }
 .jstree-default-responsive .jstree-anchor>.jstree-themeicon{
-	background-size:auto;
-}
-.Topcarousel{
-	width: 24px;
-	height: 24px;
-	border-radius: 50%;
-	display: inline-block;
-	line-height: 24px;
-    text-align: center;
-    margin-right: 2px;
-    color: #FFFFFF;
-	font-size:14px;
+	background-size:100%;
 }
 .iconFirstWord{
 	width: 24px;
@@ -123,12 +112,11 @@ var moderator=parseInt('$_GET[moderator]')>0?1:0;
 var callback_url = '{$callback_url}';
 var ismobile='$ismobile'?1:0;
 </script>
-<!--{template common/header_simple_end}-->
 <div id="orgtree" class="orgtree-container" style=""></div>
 <!--{if intval($_GET['nosearch'])<1}-->
 <div  class="orgtree-search">
         <a href="javascript:;" class="search" onclick="jstree_search();return false" title="{lang search}"><i class="dzz dzz-search"></i></a>
-        <a href="javascript:;" class="delete" onclick="jstree_search('stop');return false" title="{lang close_search}"><i class="dzz dzz-close"></i></a>
+<!--        <a href="javascript:;" class="delete" onclick="jstree_search('stop');return false" title="{lang close_search}"><i class="dzz dzz-close"></i></a>-->
         <input id="jstree_search_input" type="text" placeholder="{lang search_department_user}" class="form-control" onkeyup="if(event.keyCode==13){jstree_search()}"  />
     </div>
 <!--{/if}-->

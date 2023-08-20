@@ -1,222 +1,148 @@
 <!--{template common/header_simple}-->
+<link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/style.min.css">
+<style>
+	body{
+		overflow:auto;
+	}
+	.signin-form .has-feedback {
+    position: relative;
+}
+	.signin-form .has-feedback .form-control {
+			padding-left: 36px;
+	}
+	.signin-form .has-feedback .mdi {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: auto;
+			width: 36px;
+			height: 36px;
+			line-height: 36px;
+			z-index: 4;
+			color: #dcdcdc;
+			display: block;
+			text-align: center;
+			pointer-events: none;
+	}
+	.signin-form .has-feedback.row .mdi {
+			left: 15px;
+	}
+	.signin-form .form-group:last-child,
+	.login-right p:last-child {
+			margin-bottom: 0px;
+	}
+	.login-box {
+			max-width: 700px;
+	}
+	.login-right {
+			max-width: 50%;
+	}
+	<!--{if $_G[setting][loginset][transparency]}-->
+	.card{
+		background-color:$_G[setting][loginset][transparency];
+	}
+	.card:hover{
+		background-color:$_G[setting][loginset][transparency];
+	}
+	<!--{/if}-->
+</style>
 <!--[if lt IE 9]>
   <script src="static/js/jquery.placeholder.js" type="text/javascript"></script>
 <![endif]-->
 <script type="text/javascript" src="static/js/md5.js"></script>
+<!--{template common/beijing}-->
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{if $_G['setting'][loginset][template] == 2}-->
-<link href="static/css/dlzc.css?{VERHASH}" rel="stylesheet" media="all">
-<div class="relative min-h-screen flex">
-  <div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
-      <div class="sm:w-1/2 xl:w-3/5 h-full hidden md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative"<!--{if $_G['setting']['loginset']['img']}--> style="background-image: url($_G['setting']['loginset']['img'])"<!--{/if}-->>
-          <div class="absolute bg-gradient-to-b opacity-75 inset-0 z-0" style="<!--{if !$_G['setting']['loginset']['img']}-->--tw-gradient-from: #4f46e5;--tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to, rgba(79, 70, 229, 0));<!--{/if}-->--tw-gradient-to:<!--{if $_G['setting']['loginset']['bcolor']}-->$_G['setting']['loginset']['bcolor']<!--{else}-->#3b82f6<!--{/if}-->"></div>
-          <div class="w-full max-w-md z-10">
-						<!--{if $_G[setting][sitename]}--><div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">$_G[setting][sitename]</div><!--{/if}-->
-              <!--{if $_G[setting][loginset][subtitle]}--><div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">$_G[setting][loginset][subtitle]</div><!--{/if}-->
-              <!--{if $_G[setting][metadescription]}--><div class="sm:text-sm xl:text-md text-gray-200 font-normal">$_G[setting][metadescription]</div><!--{/if}-->
-          </div>
-          <!--{if !$_G['setting']['loginset']['img']}-->
-          <ul class="circles">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-          </ul>
-          <!--{/if}-->
+<div class="row vh-100" style="position: absolute;width: 100%">
+  <div class="col-md-6 col-lg-7 col-xl-8 d-none d-md-block">
+    <div class="d-flex vh-100">
+      <div class="p-5 align-self-end">
+         <!--{if $_G[setting][loginset][subtitle]}--><h1>$_G[setting][loginset][subtitle]</h1><!--{/if}-->
+        <br><br><br>
+        <!--{if $_G[setting][metadescription]}--><p class="text-white">$_G[setting][metadescription]</p><!--{/if}-->
       </div>
-      <div class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full w-2/5 xl:w-2/5 p-8 md:p-10 lg:p-14 sm:rounded-lg md:rounded-none  bg-white">
-          <div class="max-w-md w-full mx-auto space-y-8">
-            <div class="flex flex-row justify-center items-center space-x-3">
-              $avastar
-              </div>
-						<div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6 text-center">
-                {lang title_admincp}
-            </div>
-              <form class="mt-8 space-y-6" action="$extra" method="POST" name="login" id="loginform" role="form" enctype="multipart/form-data" onsubmit="pwmd5('admin_password')">
-                <input type="hidden" name="sid" value="$sid">
-								$loginuser2
-                <div class="relative" id="admin_password_Container">
-                  <input autofocus class="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500" name="admin_password"  id="admin_password"  type="password" class="form-control"  value="" autocomplete="off" placeholder="$lang1[password]" />
-                </div>
-                <div>
-                  <button type="submit" class="w-full flex justify-center bg-gradient-to-r from-indigo-500 to-blue-600 hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-4 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500" name="loginsubmit" value="true">{lang login}</button>
-                </div>
-                <p class="items-center justify-center mt-10 text-center text-md text-gray-500">
-                  <span>访问首页？</span>
-                  <a href="$_G[siteurl]" class="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300">{lang Home page}</a>
-                  </p>
-              </form>
-              <div class="w-full max-w-md z-10">
-                <div class="sm:text-sm xl:text-md text-gray-200 font-normal text-center"><!--{template common/copyright}--></div>
-              </div>
-          </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-5 col-xl-4 align-self-center" style="background-color: <!--{if $_G['setting']['loginset']['bcolor']}-->$_G['setting']['loginset']['bcolor']<!--{else}-->#fff<!--{/if}-->;height: 100%;">
+    <div class="p-5">
+      <div class="text-center">
+        $avastar
       </div>
+      <p class="text-center text-muted">$maintitle</p>
+      <form class="signin-form needs-validation" action="$extra" method="POST" name="login" id="loginform" role="form" enctype="multipart/form-data" onsubmit="pwmd5('admin_password')">
+				<input type="hidden" name="sid" value="$sid">
+				$loginuser2
+				<div class="mb-3">
+					<span class="mdi mdi-lock" aria-hidden="true"></span>
+          <input autofocus class="form-control" name="admin_password"  id="admin_password"  type="password" class="form-control"  value="" autocomplete="off" placeholder="$lang1[password]"  required>
+        </div>
+				
+        <div class="mb-3 d-grid">
+          <button class="btn btn-primary" name="loginsubmit" value="true">{lang login}</button>
+        </div>
+				<div class="mb-3 text-center">
+          <span>访问首页？</span>
+          <a href="$_G[siteurl]">{lang Home page}</a>
+        </div>
+				
+      </form>
+      <p class="text-center text-muted mt-3"><!--{template common/copyright}--></p>
+    </div>
   </div>
 </div>
-<!--{else}-->
-<link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css" type="text/css" media="all" />
-<link rel="stylesheet" href="static/css/common.css" type="text/css" media="all" />
-<style>
-	.mainContainer{
-    animation-duration: 800ms;
-    position: relative;
-    animation-fill-mode: both;
-    z-index: 10;
-    height: 100%;
-     text-align: center;
-    overflow:auto;
-  }
-	.loginContainer{
-    height: 100%;
-    width: 100%
-  }
-	.loginformContainer {
-    padding: 30px;
-    text-align: center;
-    background-color: RGBA(255,255,255,.9);
-    border-radius: 5px;
-    border: 1px solid #e3e3e3;
-    -webkit-box-shadow: 0 5px 15px RGBA(0,0,0,.3);
-    -moz-box-shadow: 0 5px 15px RGBA(0,0,0,.3);
-    box-shadow: 0 5px 15px RGBA(0,0,0,.3);
-}
-input:-webkit-autofill {
-	box-shadow: 0 0 0px 1000px white inset !important;
-}
-.logintips {
-	color: red;
-	line-height: 30px;
-	padding: 20px;
-	width: 350px;
-	background: #FFF;
-	border-radius: 5px;
-	border: 1px solid #e3e3e3;
-	-webkit-box-shadow: 0 5px 15px RGBA(0,0,0,.3);
-	-moz-box-shadow: 0 5px 15px RGBA(0,0,0,.3);
-	box-shadow: 0 5px 15px RGBA(0,0,0,.3);
-}
-#loginform {
-	margin: 0;
-	text-align: center;
-	width: 320px;
-}
-.login h4 {
-	height: 35px;
-	margin-bottom: 10px;
-}
-.avatarContainer {
-	margin-bottom: 50px;
-	margin-top: 20px;
-	overflow: hidden;
-	text-align: center;
-}
-.avatarContainer img {
-	max-width: 128px;
-	max-height: 128px;
-}
-.avatarContainer .maintitle{
-	font-size:20px;
-	font-weight: 600;
-	padding-top:10px;
-}
-#admin_password_Container {
-	padding: 30px 0 30px 0;
-}
-#admin_password_Container .input-black {
-	margin-bottom: 10px;
-}
-.loginformContainer .username {
-	font-size: 16px;
-	font-weight: bold;
-	text-align: center;
-	margin: 10px 0 0;
-	min-height: 1em;
-}
-.loginformContainer .email {
-	color: #404040;
-	line-height: 2;
-	margin-bottom: 0;
-	font-size: 14px;
-}
-input[type="password"], input[type="text"] {
-	height: 40px;
-	width: 100%;
-	direction: ltr;
-	font-size: 14px;
-	outline: none;
-	width: 286px\0;
- *width:286px;
-}
-input[type="submit"] {
-	width: 100%;
-	height: 40px;
-	font-size: 16px;
-	font-weight: 700;
-	width: 286px\0;
- *width:286px;
-}
-input[type="password"]:focus, input[type="text"]:focus {
-	box-shadow: none;
-	outline: none;
-}
-.footer .copyright {
-	border: medium none;
-	font-size: 12px;
-	position: static;
-	text-align: center;
-}
-.copyright {
-	color: #899;
-	font-family: "微软雅黑";
-	font-size: 12px;
-	left: 5px;
-	line-height: 150%;
-	padding-top: 20px;
-	text-align: center;
-	z-index: 10;
-}
-.copyright a {
-	color: #899;
-}
-.wrapper-placeholder {
-	text-align: left
-}
-.Topcarousel {
-	display: inline-block;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-	line-height: 100px;
-	font-size: 45px;
-	color: #fff;
-}
+<!--{elseif $_G['setting'][loginset][template] == 3}-->
+<body class="center-vh">
+	<div class="card">
+    <div class="flex-box login-box">
 
-</style>
-<!--{template common/beijing}-->
-<div class="mainContainer">
-<table class="loginContainer" wide="100%" height="100%">
-<tr><td align="center" valign="middle">
-<form method="post" name="login" id="loginform" action="$extra" onsubmit="pwmd5('admin_password')">
-     <input type="hidden" name="sid" value="$sid">
-      <div class="loginformContainer">       
-       <div class="avatarContainer">$avastar$avastar1</div>
-         $loginuser
-          <div id="admin_password_Container">
-						<input  name="admin_password"  id="admin_password"  type="password" class="form-control"  value="" autocomplete="off" placeholder="$lang1[password]" />
+        <div class="login-left p-5">
+          <h2 class="text-center">$maintitle</h2>
+          <div class="text-center mb-3">
+            $avastar
           </div>
-          <input name="submit" value="$lang1[login]" type="submit" class="btn btn-primary"  />
-					<a href="$_G[siteurl]" class="btn btn-lg btn-primary btn-block" style="margin-top: 2px;">首页</a>
-          <div class="copyright-container">
-						<!--{template common/copyright}-->
-						</div>
-        </div>    
-		 </form>
+          <form class="signin-form needs-validation"  action="$extra" method="POST" name="login" id="loginform" role="form" enctype="multipart/form-data" onsubmit="pwmd5('admin_password')">
+            <input type="hidden" name="sid" value="$sid">
+            $loginuser
+            <div class="mb-3 has-feedback">
+              <span class="mdi mdi-lock" aria-hidden="true"></span>
+              <input type="password" class="form-control" name="admin_password"  id="admin_password" value="" autocomplete="off" placeholder="$lang1[password]" required/>
+            </div>
+            <div class="mb-3 d-grid">
+              <button class="btn btn-round btn-primary" name="loginsubmit" value="true" type="submit">{lang login}</button>
+              <a href="$_G[siteurl]" class="btn btn-round btn-danger">首页</a>
+            </div>
+          </form>
+          <p class="text-center text-muted mt-3"><!--{template common/copyright}--></p>
+        </div>
+        <div class="login-right p-5 d-none d-sm-block">
+          <p class="mb-3"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" alt="logo" /></p>
+          <!--{if $_G[setting][loginset][subtitle]}--><p class="text-white">$_G[setting][loginset][subtitle]</p><!--{/if}-->
+          <!--{if $_G[setting][metadescription]}--><p class="text-white align-self-end">$_G[setting][metadescription]</p><!--{/if}-->
+        </div>
+      </div>
+  </div>
+<!--{else}-->
+<body class="center-vh">
+  <div class="card card-shadowed p-5 mb-0 mr-2 ml-2" id="register_form">
+    <div class="text-center mb-3">
+      $avastar
+      <h1>$maintitle</h1>
+    </div>
+    <form action="$extra" method="POST" name="login" id="loginform" role="form" enctype="multipart/form-data" onsubmit="pwmd5('admin_password')" class="signin-form needs-validation">
+      <input type="hidden" name="sid" value="$sid">
+       $loginuser
+      <div class="mb-3 has-feedback" id="admin_password_Container">
+				<span class="mdi mdi-lock" aria-hidden="true"></span>
+        <input type="password" class="form-control" name="admin_password"  id="admin_password" value="" autocomplete="off" placeholder="$lang1[password]" required/>
+      </div>
+      <div class="mb-3 d-grid">
+        <button class="btn btn-round btn-primary" name="loginsubmit" value="true" type="submit">{lang login}</button>
+        <a href="$_G[siteurl]" class="btn btn-round btn-danger">首页</a>
+      </div>
+    </form>    
+    <p class="text-center text-muted mb-0"><!--{template common/copyright}--></p>
+  </div>
 <!--{/if}-->
 <script type="text/JavaScript">
  jQuery(document).ready(function(e) {

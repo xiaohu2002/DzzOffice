@@ -17,7 +17,7 @@ $op = $_GET['op'];
 foreach ($oparr as $key => $value) {
 	$leftmenu[$value] = array('title' => lang($value), 'active' => '');
 	if ($value == $op)
-		$leftmenu[$value]['active'] = 'class="active"';
+		$leftmenu[$value]['active'] = 'class="nav-link active"';
 }
 
 include libfile('function/cache');

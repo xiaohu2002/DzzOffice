@@ -1,64 +1,69 @@
-<div class="navbar navbar-inverse resNav bs-top-container">
-  <div class="resNav-item resNav-left">     
-    <ul class="nav navbar-nav navbar-nav-left">
-      <li>
-        <a class="site" href="{$_G[siteurl]}">
-					<span class="site-logo">
-            <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'';}" style="max-height:30px;">
-          </span>
-					<span class="site-name">{lang appname}</span>
-				</a>
-      </li>
-    </ul>
-  </div>
-	<div class="resNav-item resNav-right">
-    <!--{template common/header_right}-->
-</div>
-</div>
-
+<header class="fixed-top lyear-layout-header">
+  <nav class="navbar sticky-top navbar-dark navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="leftTopmenu navbar-brand" href="{MOD_URL}">
+          <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" class="d-inline-block align-middle">
+          {lang appname}
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+					<ul class="nav navbar-right d-flex align-items-center">
+          <!--{template header_right}-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
 <script type="text/javascript">
-jQuery(document).ready(function(e) {
-    _header.init('{FORMHASH}');//初始化头部效果
-	jQuery(".resNav .js-popbox").each(function(){
-		jQuery(this).popbox();
-	});
-	_notice.getNotificationCount();
-});
-_notice={};
-_notice.flashStep=1;
-_notice.checkurl='index.php?mod=system&op=notification&filter=checknew';
-_notice.normalTitle= document.title;
-_notice.getNotificationCount=function(){
-	jQuery.getJSON(_notice.checkurl,function(json){
-		var sum=parseInt(json.sum);
-		_notice.showTips(sum);
-		if(json.timeout>0) window.setTimeout(_notice.getNotificationCount,json.timeout);
-	});
-}
-_notice.showTips=function(sum){
-	if(sum>0){
-		jQuery('#dzz_notification>span.badge').html(sum).removeClass('hide');
-		jQuery('#dzz_notification>span.dzz').hide();
-		_notice.flashTitle();
-	}else{
-		jQuery('#dzz_notification>span.badge').addClass('hide');
-		jQuery('#dzz_notification>span.dzz').show();
-		_notice.flashTitle(1);
-	}
-}
-_notice.flashTitle=function(flag){
-	//仅窗口不在焦点时闪烁title，回到焦点时停止闪烁并将title恢复正常
-	if(flag ||　CurrentActive){//当前处于焦点
-		document.title=_notice.normalTitle;
-		_notice.flashTitleRun = false;
-		return;//退出循环
-	}
-	_notice.flashTitleRun = true;
-	_notice.flashStep++;
-	if (_notice.flashStep==3) {_notice.flashStep=1;}
-	if (_notice.flashStep==1) {document.title="【您有新的通知】";}
-	if (_notice.flashStep==2) {document.title="【$_G[setting][sitename]】";}
-	setTimeout(function(){_notice.flashTitle();},500);  //循环
-}
+  jQuery(document).ready(function(e) {
+		var headerHeight=jQuery('.lyear-layout-header').outerHeight(true);
+		var footerHeight=jQuery('.weui-tabbar').outerHeight(true);
+		if (headerHeight){
+			if(footerHeight){
+				jQuery('.bs-container').css('height',jQuery(document.body).height()-footerHeight-headerHeight);
+			}else{
+				jQuery('.bs-container').css('height',jQuery(document.body).height()-headerHeight);
+			}
+		}
+		jQuery('.bs-container').css('margin-top',jQuery('.lyear-layout-header').height());
+      _header.init('{FORMHASH}');//初始化头部效果
+      _notice.getNotificationCount();
+  });
+  _notice={};
+  _notice.flashStep=1;
+  _notice.checkurl='index.php?mod=system&op=notification&filter=checknew';
+  _notice.normalTitle= document.title;
+  _notice.getNotificationCount=function(){
+      jQuery.getJSON(_notice.checkurl,function(json){
+          var sum=parseInt(json.sum);
+          _notice.showTips(sum);
+          if(json.timeout>0) window.setTimeout(_notice.getNotificationCount,json.timeout);
+      });
+  }
+  _notice.showTips=function(sum){
+      if(sum>0){
+          jQuery('#dzz_notification>span.badge').html(sum).removeClass('hide');
+          _notice.flashTitle();
+      }else{
+          jQuery('#dzz_notification>span.badge').addClass('hide');
+          _notice.flashTitle(1);
+      }
+  }
+  _notice.flashTitle=function(flag){
+      //仅窗口不在焦点时闪烁title，回到焦点时停止闪烁并将title恢复正常
+      if(flag ||　CurrentActive){//当前处于焦点
+          document.title=_notice.normalTitle;
+          _notice.flashTitleRun = false;
+          return;//退出循环
+      }
+      _notice.flashTitleRun = true;
+      _notice.flashStep++;
+      if (_notice.flashStep==3) {_notice.flashStep=1;}
+      if (_notice.flashStep==1) {document.title="【您有新的通知】";}
+      if (_notice.flashStep==2) {document.title="【$_G[setting][sitename]】";}
+      setTimeout(function(){_notice.flashTitle();},500);  //循环
+  }
 </script>
-<div class="bs-main-container  clearfix">
+<div class="bs-container clearfix" style="margin-top: 92px;position: absolute;overflow: auto;width: 100%;">

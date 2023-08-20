@@ -1,6 +1,4 @@
 <!--{template common/header_simple_start}-->
-<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <script src="admin/scripts/admin.js?{VERHASH}"></script>
 <style>
 	.form-horizontal-left .radio-inline {
@@ -21,15 +19,15 @@
 	</div>
 	<div class="bs-main-container  clearfix" style="min-width:250px">
 		<div class="main-header clearfix ">
-			<ul class="nav navbar-nav nav-pills-bottomguide">
-				<li>
+			<ul class="nav nav-pills">
+				<li class="nav-item">
 					<a href="{BASESCRIPT}?mod=setting&operation=smiley">{lang expression_set}</a>
 				</li>
-				<li>
+				<li class="nav-item">
 					<a href="{BASESCRIPT}?mod=setting&op=smiley">{lang expression_class}</a>
 				</li>
-				<li class="active">
-					<a href="{BASESCRIPT}?mod=setting&operation=$operation&op=smiley&id=$id">{lang detailedness} - $smtype[name]</a>
+				<li class="nav-item">
+					<a class="nav-link active" href="{BASESCRIPT}?mod=setting&operation=$operation&op=smiley&id=$id">{lang detailedness} - $smtype[name]</a>
 				</li>
 			</ul>
 		</div>
@@ -38,7 +36,7 @@
 				<input type="hidden" name="editsubmit" value="true" />
 				<input type="hidden" name="id" value="$id" />
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
-				<table class="table table-hover">
+				<table class="table table-striped table-hover">
 					<thead>
 						<th width="30">&nbsp;</th>
 						<th>{lang sort}</th>
@@ -51,7 +49,7 @@
 					<!--{loop $list $key $value}-->
 					<tr>
 						<td align="center">
-							<input type="checkbox" name="delete[]" value="$value[id]" />
+							<input type="checkbox"  class="form-check-input" name="delete[]" value="$value[id]" />
 						</td>
 						<td><input type="text" class="form-control" style="width:45px;" name="displayorder[{$value[id]}]" value="$value[displayorder]" style="width:20px;" /></td>
 						<td><img src="$smurl/$value[url]" border="0" onload="if(this.height>30) {this.resized=true; this.height=30;}" onmouseover="if(this.resized) this.style.cursor='pointer';" onclick="if(!this.resized) {return false;} else {window.open(this.src);}"></td>
@@ -74,11 +72,11 @@
 							</select>
 							+
 							<input type="text" style="margin-right:0;width:40px;height:30px;padding:2px 4px" value=":}" title="{lang suffix}" id="suffix" onclick="clearinput(this, '{lang suffix}')">
-							<input type="button" class="btn btn-default" onclick="addsmileycodes('{$smileynum}', '');" value="{lang type_app}"> &nbsp;&nbsp; <input type="button" class="btn btn-default" onclick="autoaddsmileycodes('{$smileynum}');" value="{lang automatic_set}">
+							<input type="button" class="btn btn-outline-info" onclick="addsmileycodes('{$smileynum}', '');" value="{lang type_app}"> &nbsp;&nbsp; <input type="button" class="btn btn-outline-info" onclick="autoaddsmileycodes('{$smileynum}');" value="{lang automatic_set}">
 						</td>
 					</tr>
 					<thead>
-						<th colspan="15" valign="middle" style="border:none"><label for="chkall" class="checkbox-inline"><input type="checkbox" name="chkall" id="chkall"  onclick="checkAll('prefix', this.form, 'delete')">&nbsp;{lang del}</label>&nbsp;&nbsp;<input type="submit" class="btn btn-primary" value="{lang submit}" /></th>
+						<th colspan="15" valign="middle" style="border:none"><label for="chkall" class="checkbox-inline"><input type="checkbox"  class="form-check-input" name="chkall" id="chkall"  onclick="checkAll('prefix', this.form, 'delete')">&nbsp;{lang del}</label>&nbsp;&nbsp;<input type="submit" class="btn btn-primary" value="{lang submit}" /></th>
 					</thead>
 				</table>
 			</form>
@@ -86,7 +84,6 @@
 	</div>
 </div>
 <script type="text/JavaScript">
-	jQuery('.left-drager').leftDrager_layout(); 
 	function addsmileycodes(smiliesnum, pre) { 
 		smiliesnum = parseInt(smiliesnum);
 		if(smiliesnum > 1) { 

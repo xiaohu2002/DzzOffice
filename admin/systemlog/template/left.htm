@@ -1,4 +1,4 @@
-<ul class="nav-stacked">
-    <li <!--{if $_GET[op]!="admin" }-->  class="active" <!--{/if}-->><a hidefocus="true" href="{MOD_URL}">{lang systemlog_list}</a></li> 
-    <li <!--{if $_GET[op]=="admin" }-->  class="active" <!--{/if}-->><a hidefocus="true" href="{MOD_URL}&op=admin">{lang systemlog_setting}</a></li> 
+<ul class="nav-stacked nav-pills">
+    <li class="nav-item"><a hidefocus="true" <!--{if $_GET[op]!="admin" }-->  class="nav-link active" <!--{/if}-->href="{MOD_URL}">{lang systemlog_list}</a></li> 
+    <li class="nav-item"><a hidefocus="true" <!--{if $_GET[op]=="admin" }-->  class="nav-link active" <!--{/if}-->href="{MOD_URL}&op=admin">{lang systemlog_setting}</a></li> 
 </ul>

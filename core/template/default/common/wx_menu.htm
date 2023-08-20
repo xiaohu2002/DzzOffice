@@ -199,8 +199,8 @@
         </div>
     	<div style="padding:10px;">
         	<button class="btn btn-primary" onclick="menu_save(this)" data-loading-text="{lang In_the_save}" style="width:80px;">{lang save}</button>
-            &nbsp;&nbsp;<button class="btn btn-success" onclick="menu_publish(this)" data-loading-text="{lang release}" style="width:120px;" <!--{if !$setting['agentid']}-->disabled="disabled"<!--{/if}-->>{lang published_weixin}</button>
-            &nbsp;&nbsp;<button class="btn btn-danger" onclick="menu_default(this)" data-loading-text="{lang in_recovery}">{lang restore_defaults}</button>
+            &nbsp;&nbsp;<button class="btn btn-outline-primary" onclick="menu_publish(this)" data-loading-text="{lang release}" style="width:120px;" <!--{if !$setting['agentid']}-->disabled="disabled"<!--{/if}-->>{lang published_weixin}</button>
+            &nbsp;&nbsp;<button class="btn btn-outline-secondary" onclick="menu_default(this)" data-loading-text="{lang in_recovery}">{lang restore_defaults}</button>
             <small class="pull-right gray mt10">{lang release_24_hours_to_update}</small>
         </div>
  </div>
@@ -260,8 +260,8 @@ jQuery(document).ready(function(e) {
 							+'	<a class="icon icon_remove pull-right js_menu_remove hover_visible" href="javascript:;"></a>'
 							+'   <span class="custom_menu_subName">'+cut_val+'</span>'
 							+'	<div class="btn-group pull-right eventkey">'
-							+'	  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">'
-							+'		{lang add_the_event_type} <span class="caret"></span>'
+							+'	  <button type="button" class="btn btn-outline-info btn-sm dropdown-toggle" data-bs-toggle="dropdown">'
+							+'		{lang add_the_event_type} '
 							+'	  </button>'
 							+'	  <ul class="dropdown-menu" role="menu">'
 							+'		<li><a href="javascript:;" onclick="setEventkey(this,\'click\');return false">{lang menu}key</a></li>'
@@ -452,14 +452,14 @@ function check_add_second(){
 					var el=jQuery(this);
 					el.attr('data-id',(i-1)+'_'+index); 
 					if(el.attr('data-type')==''){
-						jQuery('<div class="btn-group pull-right eventkey"><button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">{lang add_the_event_type}<span class="caret"></span></button><ul class="dropdown-menu" role="menu">	<li><a href="javascript:;" onclick="setEventkey(this,\'click\');return false">{lang menu}key</a></li><li><a href="javascript:;" onclick="setEventkey(this,\'link\');return false">{lang jump_page}</a></li></ul>	</div>').appendTo(this);
+						jQuery('<div class="btn-group pull-right eventkey"><button type="button" class="btn btn-outline-info btn-sm dropdown-toggle" data-bs-toggle="dropdown">{lang add_the_event_type}</button><ul class="dropdown-menu" role="menu">	<li><a href="javascript:;" onclick="setEventkey(this,\'click\');return false">{lang menu}key</a></li><li><a href="javascript:;" onclick="setEventkey(this,\'link\');return false">{lang jump_page}</a></li></ul>	</div>').appendTo(this);
 					}
 				 });
 				 li.attr('data-type','').find('.js_click,.js_link,.btn-group').remove();
 			}else{
 				if(li.attr('data-type')==''){
 					li.find('.js_click,.js_link,.btn-group').remove();
-					jQuery('<div class="btn-group pull-right eventkey"><button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">{lang add_the_event_type}<span class="caret"></span></button><ul class="dropdown-menu" role="menu">	<li><a href="javascript:;" onclick="setEventkey(this,\'click\');return false">{lang menu}key</a></li><li><a href="javascript:;" onclick="setEventkey(this,\'link\');return false">{lang jump_page}</a></li></ul>	</div>').appendTo(li);
+					jQuery('<div class="btn-group pull-right eventkey"><button type="button" class="btn btn-outline-info btn-sm dropdown-toggle" data-bs-toggle="dropdown">{lang add_the_event_type}</button><ul class="dropdown-menu" role="menu">	<li><a href="javascript:;" onclick="setEventkey(this,\'click\');return false">{lang menu}key</a></li><li><a href="javascript:;" onclick="setEventkey(this,\'link\');return false">{lang jump_page}</a></li></ul>	</div>').appendTo(li);
 				}
 			}
 			

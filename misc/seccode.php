@@ -12,13 +12,12 @@ if($_GET['action'] == 'update') {
 		$rand = random(5, 1);
 		$flashcode = '';
 		$idhash = isset($_GET['idhash']) && preg_match('/^\w+$/', $_GET['idhash']) ? $_GET['idhash'] : '';
-		$ani = $_G['setting']['seccodedata']['animator'] ? '_ani' : '';
 		if($_G['setting']['seccodedata']['type'] == 2) {
-			$message = '<span id="seccodeswf_'.$idhash.'"></span>'.(extension_loaded('ming') ? "<script type=\"text/javascript\" reload=\"1\">\ndocument.getElementById('seccodeswf_$idhash').innerHTML='".lang('seccode_image'.$ani.'_tips')."' + AC_FL_RunContent(
+			$message = '<span id="seccodeswf_'.$idhash.'"></span>'.(extension_loaded('ming') ? "<script type=\"text/javascript\" reload=\"1\">\ndocument.getElementById('seccodeswf_$idhash').innerHTML=' + AC_FL_RunContent(
 				'width', '".$_G['setting']['seccodedata']['width']."', 'height', '".$_G['setting']['seccodedata']['height']."', 'src', 'misc.php?mod=seccode&update=$rand&idhash=$idhash',
 				'quality', 'high', 'wmode', 'transparent', 'bgcolor', '#ffffff',
 				'align', 'middle', 'menu', 'false', 'allowScriptAccess', 'sameDomain');\n</script>" :
-				"<script type=\"text/javascript\" reload=\"1\">\ndocument.getElementById('seccodeswf_$idhash').innerHTML='".lang('seccode_image'.$ani.'_tips')."' + AC_FL_RunContent(
+				"<script type=\"text/javascript\" reload=\"1\">\ndocument.getElementById('seccodeswf_$idhash').innerHTML=' + AC_FL_RunContent(
 				'width', '".$_G['setting']['seccodedata']['width']."', 'height', '".$_G['setting']['seccodedata']['height']."', 'src', '$_G[siteurl]static/image/seccode/flash/flash2.swf',
 				'FlashVars', 'sFile=".rawurlencode("$_G[siteurl]misc.php?mod=seccode&update=$rand&idhash=$idhash")."', 'menu', 'false', 'allowScriptAccess', 'sameDomain', 'swLiveConnect', 'true', 'wmode', 'transparent');\n</script>");
 				
@@ -48,7 +47,7 @@ if($_GET['action'] == 'update') {
 				}
 				exit;
 			} else {
-				$message = lang('seccode_image'.$ani.'_tips').'<img onclick="updateseccode(\''.$idhash.'\')" width="'.$_G['setting']['seccodedata']['width'].'" height="'.$_G['setting']['seccodedata']['height'].'" src="misc.php?mod=seccode&update='.$rand.'&idhash='.$idhash.'" class="img-seccode" title="'.lang('refresh_verification_code').'" alt="" />';
+				$message ='<img onclick="updateseccode(\''.$idhash.'\')" width="'.$_G['setting']['seccodedata']['width'].'" height="'.$_G['setting']['seccodedata']['height'].'" src="misc.php?mod=seccode&update='.$rand.'&idhash='.$idhash.'" class="pull-right" title="'.lang('refresh_verification_code').'" alt="" />';
 			}
 		}
 	}

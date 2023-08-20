@@ -11,26 +11,26 @@
 <script type="text/javascript">
     function safeverifystep(i){
 
-            jQuery('#safechkbox').html('');
+        jQuery('#safechkbox').html('');
 
-            var index = parseInt(i);
-            switch(index){
-                case 0: className = 'firstme';
-                    break;
-                case 1: className = 'secondme';
-                    break;
-                case 2: className = 'thirdme';
-                    break;
-                default: className = 'firstme';
-            }
+        var index = parseInt(i);
+        switch(index){
+            case 0: className = 'firstme';
+                break;
+            case 1: className = 'secondme';
+                break;
+            case 2: className = 'thirdme';
+                break;
+            default: className = 'firstme';
+        }
 
-            jQuery('#step').removeClass().addClass('all '+className);
+        jQuery('#step').removeClass().addClass('all '+className);
 
-            jQuery('#step').find('ul li').removeClass('active');
+        jQuery('#step').find('ul li').removeClass('active');
 
-            jQuery('#step').find('ul li:eq('+index+')').addClass('active');
+        jQuery('#step').find('ul li:eq('+index+')').addClass('active');
 
-            jQuery('#changeemailbox').show();
+        jQuery('#changeemailbox').show();
 
     }
 </script>
@@ -42,18 +42,18 @@
   <div id="safechkbox">{Hook safe_chk}</div>
     <div id="changeemailbox" style="display:none;">
     <div class="form-group">
-        <label class="control-label" for="newemail" required>{lang email_new}</label>
+        <label for="newemail" required>{lang email_new}</label>
         <input type="text" name="newemail" class="form-control" autocomplete="off" id="newemail" placeholder="{lang fill_email_here}">
-        <span id="chk_newemail" class="help-inline"> <span id="suc_newemail"></span> <kbd  class="p_chk"><!--{if !$emailchange}-->*{lang bind_email_tips}<!--{else}-->*{lang change_bindemail_tips}<!--{/if}--></kbd> </span>
+        <span id="chk_newemail" class="help-block"> <span id="suc_newemail"></span> <kbd  class="p_chk"><!--{if !$emailchange}-->*{lang bind_email_tips}<!--{else}-->*{lang change_bindemail_tips}<!--{/if}--></kbd> </span>
     </div>
     <!--{if !$emailchange}-->
     <dl>
-        <label class="control-label"></label>
+        <label></label>
     <input type="button" class="btn btn-primary" value="{lang set}" onclick="bind_email()">
     </dl> 
     <!--{else}-->
     <dl>
-      <label class="control-label"></label>
+      <label></label>
       <input type="button" class="btn btn-primary" value="{lang change}" onclick="bind_email()">
     </dl>
     <script>
@@ -72,8 +72,8 @@
         {lang verify_email_tips}
     </div>
     <div class="email">
-        <button type="button" class="btn btn-success" id="refferemail">{lang now_your_email}</button>
-        <span><span id="send_start">{lang email_sended}</span><span id="send_status" style="display:none;"><b class="time" id="downtime">60</b>s<span id="falseresend">{lang  validator_send}</span><span id="resend" style="display:none"><input type="button" class="btn btn-success"  value="{lang  validator_send}" onclick="bind_email()" ></span></span></span>
+        <button type="button" class="btn btn-outline-primary" id="refferemail">{lang now_your_email}</button>
+        <span><span id="send_start">{lang email_sended}</span><span id="send_status" style="display:none;"><b class="time" id="downtime">60</b>s<span id="falseresend">{lang  validator_send}</span><span id="resend" style="display:none"><input type="button" class="btn btn-outline-primary"  value="{lang  validator_send}" onclick="bind_email()" ></span></span></span>
     </div>
 </div>
 <!--{elseif $id && $newchange}-->

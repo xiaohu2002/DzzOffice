@@ -1,86 +1,115 @@
 <!--{template common/header_simple}-->
-<link href="static/css/dlzc1.css?{VERHASH}" rel="stylesheet" media="all">
+<link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/style.min.css">
 <!--[if lt IE 9]>
   <script src="static/js/jquery.placeholder.js" type="text/javascript"></script>
 <![endif]-->
 <script src="user/scripts/register.js?{VARHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
-<style type="text/css">
-body,
-html {
-    margin: 0;
-    padding: 0;
-    background-color: <!--{if $_G['setting']['loginset']['bcolor']}-->$_G['setting']['loginset']['bcolor']<!--{else}-->#585858<!--{/if}-->;
-    <!--{if $_G['setting']['loginset']['img']}-->background: url($_G['setting']['loginset']['img']) no-repeat;background-size:100% 100%;background-attachment:fixed;<!--{/if}-->
+<!--{template common/beijing}-->
+<style>
+.signin-form .has-feedback {
+    position: relative;
 }
-	h1 {
+.signin-form .has-feedback .form-control {
+    padding-left: 36px;
+}
+.signin-form .has-feedback .mdi {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    right: auto;
+    width: 26px;
+    height: 36px;
+    line-height: 36px;
+    z-index: 4;
+    color: #dcdcdc;
+    display: block;
     text-align: center;
-    font-size: 40px;
-    font-weight: 500;
-    color:<!--{if $_G['setting']['loginset']['bcolor']}-->$_G['setting']['loginset']['bcolor']<!--{else}-->#000<!--{/if}-->;
+    pointer-events: none;
 }
+.signin-form .has-feedback.row .mdi {
+    left: 15px;
+}
+	html, body{
+		overflow:auto;
+	}
+	<!--{if $_G[setting][loginset][transparency]}-->
+	.card{
+		background-color:$_G[setting][loginset][transparency];
+	}
+	.card:hover{
+		background-color:$_G[setting][loginset][transparency];
+	}
+	<!--{/if}-->
 </style>
-<div class="signinform">
-    <h1>{lang register_welcome_tip}</h1>
-    <div class="container" id="register_form">
-        <div class="w3_info">
-            <form action="user.php?mod=register" method="POST" name="registerform" id="registerform" role="form" enctype="multipart/form-data" onsubmit="check_submit(this);return false">
-              <input type="hidden" name="regsubmit" value="yes"/>
-              <input type="hidden" name="formhash" value="{FORMHASH}"/>
-              <input type="hidden" name="referer" value="$referer"/>
-              <input type="hidden" name="handlekey" value="$_GET[handlekey]"/>
-              <!--{if $_GET[action] != 'activation'}-->
-              <div class="input-group">
-                <input type="text" id="email" name="email" autocomplete="off" placeholder="{lang register_email_tips}"/>
-								<span id="chk_email" class="help-msg"></span> 
-              </div>
-              <div class="input-group">
-                <input type="text" id="username" name="username" autocomplete="off" placeholder="{lang username}"/>
-								<span id="chk_username" class="help-msg"></span>
-              </div>
-              <div class="input-group">
-                <input type="password" id="password" name="password" autocomplete="off" placeholder="{lang register_password_tips}"/>
-								<span id="chk_password" class="help-msg"></span> 
-              </div>
-							<div class="input-group">
-                <input type="password" id="password2" name="password2" autocomplete="off" placeholder="{lang register_repassword_tips}">
-                <span id="chk_password2" class="help-msg"></span> 
-              </div>
-              <!--{/if}-->
-              <!--{if $seccodecheck}-->
-              <div class="form-group seccode-wrapper clearfix"> 
-                <!--{template common/seccheck}--> 
-              </div>
-              <!--{/if}-->
-							<!--<!--{loop $_G['cache']['fields_register'] $field}-->
-							<!--{if $htmls[$field['fieldid']]}-->
-							<div class="relative">
-										<!--{if $field['required']}--><span class="rq">*</span><!--{/if}--><label for="$field['fieldid']">$field[title]:</label>
-										$htmls[$field['fieldid']]
-										<i id="tip_$field['fieldid']" class="p_tip"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></i><kbd id="chk_$field['fieldid']" class="p_chk"></kbd>
-							</div>
-							<!--{/if}-->
-              <!--{/loop}-->-->
-							<!--{if $bbrules}-->
-              <div class="form-row bottom">
-                <div class="form-check">
-                  <input type="checkbox" name="agreebbrule" value="$bbrulehash" id="agreebbrule" checked="checked" />
-                  <label>{lang agree}</label>
-                </div>
-                <a class="forgot" href="javascript:;" onclick="showWindow('bbrule','user.php?mod=register&op=ajax&do=bbrule')">{lang rulemessage}</a> 
-              </div>
-              <!--{/if}-->
-              <button type="submit" class="btn btn-primary btn-block" name="loginsubmit" value="true"><!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}-->$_G[setting][reglinkname]<!--{/if}--></button>
-              <p class="error-msg text-center" id="returnmessage4"></p>
-             </form>
-             <p class="account">已有账号？<a onclick="try{_login.logging();}catch(e){location.href='user.php?mod=login'}">{lang back_login}</a></p>
-        </div>
+<body class="center-vh">
+<div class="card card-shadowed p-5 mb-0 mr-2 ml-2" id="register_form">
+  <div class="text-center mb-3">
+		<img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" style="max-height: 60px;">
+		<h1>{lang register_welcome_tip}</h1>
+  </div>
+  <form action="user.php?mod=register" method="post" class="signin-form needs-validation" name="registerform" id="registerform" role="form" enctype="multipart/form-data" onsubmit="check_submit(this);return false">
+		<input type="hidden" name="regsubmit" value="yes"/>
+    <input type="hidden" name="formhash" value="{FORMHASH}"/>
+    <input type="hidden" name="referer" value="$referer"/>
+    <input type="hidden" name="handlekey" value="$_GET[handlekey]"/>
+		<!--{if $_GET[action] != 'activation'}-->
+    <div class="mb-3 has-feedback">
+			<span class="mdi mdi-mail" aria-hidden="true"></span>
+      <input type="text" class="form-control" id="email" name="email" autocomplete="off" placeholder="{lang register_email_tips}" required/>
+      <span id="chk_email" class="help-msg text-danger"></span> 
     </div>
-    <div class="footer">
-        <p><!--{template common/copyright}--></p>
+    <div class="mb-3 has-feedback">
+			<span class="mdi mdi-account" aria-hidden="true"></span>
+      <input type="text" class="form-control" id="username" name="username" autocomplete="off" placeholder="{lang username}" required/>
+      <span id="chk_username" class="help-msg text-danger"></span>
     </div>
+    <div class="mb-3 has-feedback">
+			<span class="mdi mdi-lock" aria-hidden="true"></span>
+      <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="{lang register_password_tips}" required/>
+      <span id="chk_password" class="help-msg text-danger"></span> 
+    </div>
+    <div class="mb-3 has-feedback">
+			<span class="mdi mdi-lock" aria-hidden="true"></span>
+      <input type="password" class="form-control" id="password2" name="password2" autocomplete="off" placeholder="{lang register_repassword_tips}" required>
+      <span id="chk_password2" class="help-msg text-danger"></span> 
+    </div>
+    <!--{/if}-->
+    <!--{if $seccodecheck}-->
+		<div class="mb-3">
+    <!--{template common/seccheck}--> 
+    </div>
+    <!--{/if}-->
+		<!--{if $bbrules}-->
+    <div class="form-row bottom">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="agreebbrule" value="$bbrulehash" id="agreebbrule" checked="checked" />
+        <label>{lang agree}</label>
+				<a class="forgot" href="javascript:;" onclick="showWindow('bbrule','user.php?mod=register&op=ajax&do=bbrule')">{lang rulemessage}</a> 
+      </div>
+    </div>
+    <!--{/if}-->
+    <div class="mb-3 d-grid">
+      <button class="btn btn-round btn-primary" type="submit" name="loginsubmit" value="true"><!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}-->$_G[setting][reglinkname]<!--{/if}--></button>
+			<a onclick="try{_login.logging();}catch(e){location.href='user.php?mod=login'}" class="btn btn-round btn-danger">{lang back_login}</a>
+    </div>
+    <p class="text-danger text-center" id="returnmessage4"></p>
+  </form>    
+  <p class="text-center text-muted mb-0"><!--{template common/copyright}--></p>
 </div>
 <script type="text/javascript">
+  var loader;
+  $(document).ajaxStart(function(){
+      $("button:submit").html('加载中...').attr("disabled", true);
+      loader = $('button:submit').lyearloading({
+          opacity: 0.2,
+          spinnerSize: 'nm'
+      });
+  }).ajaxStop(function(){
+      loader.destroy();
+      $("button:submit").html('<!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}-->$_G[setting][reglinkname]<!--{/if}-->').attr("disabled", false);
+  });
 	var lastusername = '', lastpassword = '', lastemail = '', lastinvitecode = '', stmp = new Array(), modifypwd = false;
 	var ignoreEmail = false;
 	var strongpw = new Array();
@@ -102,5 +131,4 @@ html {
 	});
 </script> 
 <script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
-<script src="static/bootstrap/js/bootstrap.min.js?vGS" ></script> 
 <!--{template common/footer}-->

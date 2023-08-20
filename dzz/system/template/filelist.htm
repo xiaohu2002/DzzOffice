@@ -1,12 +1,10 @@
 <!--{template common/header_simple_start}-->
 <link href="static/jstree/themes/default/style.min.css?{VERHASH}" rel="stylesheet" media="all">
 <link rel="stylesheet" href="static/perfect-scrollbar/css/perfect-scrollbar.css?{VERHASH}">
-<link rel="stylesheet" href="static/css/common.css">
 <link href="dzz/system/css/selfilewindow.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="dzz/system/css/select-file.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
-<style>  
-<!--{ if $ _GET [ 'nosearch' ] > 0}-->
+<!--{if $_GET['nosearch']>0}-->
+<style>
 .orgtree-search {
     display: none;
 }
@@ -14,9 +12,8 @@
 body {
     padding-bottom: 0;
 }
-
-<!--{/if}-->
 </style>
+<!--{/if}-->
 <script type="text/javascript">
     var ctrlid = '$ctrlid';
     /*var multiple=parseInt('$_GET[multiple]')>0?true:false;
@@ -28,7 +25,7 @@ body {
 <!--{template common/header_simple_end}-->
 <!--内容区开始-->
 <div class="select-fileall clearfix">
-	<div class="select-filetop clearfix bs-top-container">
+	<div class="select-filetop clearfix">
 		<!--地址栏开始-->
 		<div class="select-address">
 			<div class="address-all">
@@ -57,11 +54,11 @@ body {
 		<div class="select-filetopbottom clearfix">
 			<input id="$ctrlid" type="hidden" name="fid" value=""/>
 		    <!--{if $allowcreate}-->
-		    <button type="button" class="btn btn-primary-outline pull-left" onclick="createNewFolder();return false;">{lang newfolder}</button>
+		    <button type="button" class="btn btn-outline-secondary pull-left" onclick="createNewFolder();return false;">{lang newfolder}</button>
 		    <!--{/if}-->
 		    <div class="select-filetopright pull-right">
 		    	<div class="select-display dropdown">
-		    		<button type="text" class="form-control" value="" data-toggle="dropdown" id="select-button">
+		    		<button type="text" class="form-control" value="" data-bs-toggle="dropdown" id="select-button">
 		    			<span class="select-alltype">全部类型</span>
 		    			<span class="dzz dzz-arrow-dropdown dzz-select-button"></span>
 		    		</button>
@@ -90,18 +87,15 @@ body {
 		<div class="bs-left-container scroll-y clearfix">
 			<div class="mechsnismMenu" id="position" class="usertree-container list-unstyled"></div>
 		</div>
-		<div class="left-drager scroll-y">
-  		</div>
+		<div class="left-drager scroll-y"></div>
 		<div class="bs-main-container scroll-y">
 			<div id="selectfile-f-$fid" class="icosContainer"></div>
 		</div>
 	</div>
 	<div class="select-filebottom clearfix">
-		<div class="input-black input-fixation">
-			<label class="control-label input-label">文件名:</label>
-			<div class="input-animate">
+		<div class="input-fixation">
+			<label>文件名:</label>
 				<input type="text" class="form-control" placeholder="文件名" />
-			</div>
 		</div>
 	</div>
 </div>
@@ -115,17 +109,10 @@ body {
 </div>
 <!--模板结束-->
 <script type="text/javascript">
-//拖拽初始化
-jQuery('.left-drager').leftDrager_layout(function(){});
 //左侧jstree操作
 var opened = {};
 /*jstree 左侧个人、机构及群组*/
 $(document).ready(function (e) {
-//input框初始化开始
-$('.input-black').each(function() {			
-	InputAnimate.init($(this));	
-});
-//input框初始化结束
 //左侧jstree操作开始
 opened = window.opener;
 var _explorer = {};
@@ -241,10 +228,10 @@ function createNewFolder() {
                     $('#new_folder').css({'position': 'relative'});
                     var html = '<div id="replace_jstreeli" class="layer" style="position:absolute;top:0px;left:50px;">' +
                         '<input type="text" value="' + data.fname + '" class="nameinput" style="height:24px"/>' +
-                        '<button type="button" class="btn btn-primary-outline button-rightcolor" onclick="realcreate(this,' + node.id + ','+pnode.id+')">' +
+                        '<button type="button" class="btn btn-outline-secondary button-rightcolor" onclick="realcreate(this,' + node.id + ','+pnode.id+')">' +
                         '<span class="dzz dzz-done"></span>' +
                         '</button>' +
-                        '<button type="button" class="btn btn-primary-outline button-rightcolor" onclick="canclecreate(this,' + node.id + ')">' +
+                        '<button type="button" class="btn btn-outline-secondary button-rightcolor" onclick="canclecreate(this,' + node.id + ')">' +
                         '<span class="dzz dzz-close"></span>' +
                         '</button> ' +
                         '</div>';
@@ -326,12 +313,11 @@ function hide_window(){
 <!--底部-->
 <div class="modal-footer">
     <button type="button" class="btn btn-primary" onclick="submitdata()">{lang confirms}</button>
-    <button type="button" class="btn btn-default-outline cancel" data-dismiss="modal" aria-label="Close" onclick="hide_window()">{lang cancel} </button>
+    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close" onclick="hide_window()">{lang cancel} </button>
 </div>
 </body>
 </html>
 <script type="text/javascript" src="static/js/jstree.min.js?{VERHASH}"></script>
 <script type="text/javascript" src="dzz/system/scripts/select-file.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/perfect-scrollbar/js/perfect-scrollbar.min.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/js/input_field.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js"></script> 
+<!--{template common/footer_simple}--> 
