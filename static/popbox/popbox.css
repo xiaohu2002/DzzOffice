@@ -193,9 +193,6 @@ li.langset:hover ul.langlist {
   margin-bottom: 0;
 }
 .popbox-footer {
-  padding: 0 15px 15px 15px;
-  margin-bottom: 0;
-  border-radius: 0 0 6px 6px;
   text-align: center;
 }
 .popbox-footer:before,

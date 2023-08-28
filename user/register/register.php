@@ -10,7 +10,6 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 $setting = $_G['setting'];
-$ismobile=helper_browser::ismobile();
 $showregisterform = 1;
 Hook::listen('register_before');//注册预处理钩子
 

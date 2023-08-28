@@ -43,19 +43,14 @@ $gets = array(
 $urldefined= '&'. url_implode($gets);
 $allowvisit = array('file','listtree','explorerfile','json','ajax','dzzcp','save');
 //如果是移动端
-$ismobile = helper_browser::ismobile();
-if($ismobile){
-    require MOD_PATH.'/mobilefileselection.php';
-}else{
-    if($do){
-        if(!in_array($do,$allowvisit)){
-            showmessage(lang('access_denied'),dreferer());
-        }else{
-            require MOD_PATH.'/fileselection/'.$do.'.php';
-        }
+if($do){
+    if(!in_array($do,$allowvisit)){
+        showmessage(lang('access_denied'),dreferer());
     }else{
-        include template('fileselection/index');
-        exit();
+        require MOD_PATH.'/fileselection/'.$do.'.php';
     }
+}else{
+    include template('fileselection/index');
+    exit();
 }
 

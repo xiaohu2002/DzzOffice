@@ -1292,6 +1292,7 @@ $_G[siteurl]',
 	'quicklogin'=>'XH通用登录',
 	'congratulations' => '恭喜您',
   'login_success' => '登录成功！',
+	'no_relevant_content' => '没有相关的内容…',
 );
 
 ?>

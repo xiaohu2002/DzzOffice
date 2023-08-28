@@ -10,7 +10,7 @@
 @set_time_limit(0);
 include_once  libfile('class/ZipStream');
 global $_G;
-if(!$_G['setting']['ballowshare']){
+if($_G['setting']['allowshare'] && !$_G['setting']['ballowshare']){
 	showmessage('no_privilege');
 }
 $patharr = $_GET['paths'];

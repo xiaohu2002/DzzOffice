@@ -7,7 +7,6 @@
 <link href="dzz/system/css/select-file.css?{VERHASH}" rel="stylesheet" media="all">
 <script type="text/javascript">
     var ctrlid = '$ctrlid';
-    var ismobile = '$ismobile' ? 1 : 0;
     var range = '{$range}';
     var urldefined = '{$urldefined}';
 </script>
@@ -20,10 +19,10 @@
 <iframe id="hideframe" name="hideframe" src="about:blank" frameborder="0" marginheight="0" marginwidth="0" width="0"
         height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" onclick="submitdata()">{lang confirms}</button>
-    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close"
-            onclick="hide_window()">{lang cancel}
-    </button>
+<button type="button" class="btn btn-primary" onclick="submitdata()">{lang confirms}</button>
+<button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close"
+        onclick="hide_window()">{lang cancel}
+</button>
 </div>
 </body>
 </html>

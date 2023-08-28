@@ -38,6 +38,8 @@
     color: #f9b743;
 }
 .jstree-default .jstree-wholerow-hovered{
+    background-color: rgba(0,0,0,0.1);
+	background: rgba(0,0,0,0.1);
 	border-radius:  var(--radius);
 }
 .jstree-default .jstree-wholerow-clicked{

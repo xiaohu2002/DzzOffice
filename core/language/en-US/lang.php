@@ -1265,6 +1265,7 @@ Important!
 	'quicklogin'=>'XH Quick login',
 	'Congratulations' =>' Congratulations ',
   'login_success' => 'Login successful! ',
+	'no_relevant_content'=>' no relevant_content yet ',
 );
 
 ?>

@@ -411,8 +411,11 @@
 	var maxselectnum_{$vote[voteid]} = parseInt('$vote[maxselectnum]');
 	var checkarr_{$vote[voteid]} = [];
 	jcLoader().load({ type: 'css', url: './dzz/dzzvote/images/vote.css?{VERHASH},static/icheck/skins/minimal/blue.css?{VERHASH}' });
-	jcLoader().load({ type: 'js', url: 'static/icheck/icheck.min.js?{VERHASH}' }, 
-									function() {
+	jcLoader().load({ type: 'js', url: 'static/icheck/icheck.min.js?{VERHASH}' }, function() {
+		jQuery('#dzzvote_{$vote[voteid]} input').iCheck({
+			checkboxClass: 'icheckbox_minimal-blue',
+			radioClass: 'iradio_minimal-blue',
+		});
 		jQuery('#dzzvote_{$vote[voteid]} input').on('ifChecked', function(e) {
 			if(checkarr_{$vote[voteid]}.length >= maxselectnum_{$vote[voteid]}) {
 				jQuery('#'+checkarr_{$vote[voteid]}.pop()).iCheck('uncheck');

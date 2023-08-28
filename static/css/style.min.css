@@ -18,7 +18,7 @@
     /* 侧边栏菜单宽度 */
     --sidebar-width: 240px;
     /* header高度 */
-    --header-height: 68px;
+    --header-height: 64px;
     --bs-purple-hover: #a282e3;
     --bs-pink-hover: #fa75a4;
     --bs-yellow-hover: #fdd04d;
@@ -415,27 +415,7 @@ img {
 /** ----------------------------------
  * 重置样式
  -------------------------------------- */
-/* 布局 */
-.container-fluid {
-	padding-left: 1rem !important;
-	padding-right: 1rem !important;
-	padding-top: 1rem !important;
-	padding-bottom: 0 !important;
-}
-.navbar .container-fluid {
-    padding: 0.5rem !important;
-}
-
-/* 标题 */
-
 /* 按钮 */
-.btn {
-	font-size: 14px;
-	padding: 0.4695rem 0.75rem;
-	-webkit-border-radius: 0.25rem;
-	border-radius: 0.25rem;
-	margin: 1px;
-}
 
 .btn-mini {
 	padding: 6px 14px;
@@ -2618,9 +2598,6 @@ hr.dropdown-divider {
 }
 
 /* 通用导航 */
-.nav-link {
-	color: var(--bs-primary);
-}
 
 .nav-link:hover,
 .nav-link:focus {
@@ -2637,6 +2614,7 @@ hr.dropdown-divider {
 	color: #fff;
 	background-color: var(--bs-primary);
   border-color: var(--bs-primary);
+  font-weight: bold;
 }
 
 /* toast */
@@ -3351,19 +3329,20 @@ hr.dropdown-divider {
  * 头部导航
  -------------------------------------- */
 .lyear-layout-header {
-	background-color: var(--bs-white);
+	background-color: var(--bs-primary);
 	-webkit-transition: padding 0.3s;
 	transition: padding 0.3s;
 	-webkit-box-shadow: 0 1px 1px -1px rgb(var(--bs-dark-rgb), 0.25);
 	-moz-box-shadow: 0 1px 1px -1px rgb(var(--bs-dark-rgb), 0.25);
 	box-shadow: 0 1px 1px -1px rgb(var(--bs-dark-rgb), 0.25);
+	margin: 5px;
+	border-radius: var(--radius);
 }
-
 .lyear-layout-header .navbar {
 	min-height: var(--header-height);
-	padding: 0 1rem;
 	margin-bottom: 0;
 	border: 0px;
+	flex: 0 0 auto;
 }
 
 /* 侧边栏开关 */
@@ -3401,7 +3380,6 @@ hr.dropdown-divider {
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
-	width: 100%;
 	justify-content:flex-end;
 }
 

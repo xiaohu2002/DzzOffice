@@ -1,19 +1,23 @@
 <!--{if $share['password'] && (dzzdecode($share['password']) != authcode($_G['cookie']['pass_' . $sid]))}-->
 <!--{else}-->
-<div class="button-share-group">
-  <div class="pull-right">
-      <a type="button" class="btn" data-allrids="$allrids" onclick="allsave();" id="allsave">
-          <span class="dzz dzz-save" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{lang all_save}"></span>
-      </a>
-      <!--{if $share[xiazai]==0}-->
-      <a type="button" class="btn" data-allrids="$allrids" onclick="downAll(this);">
-          <span class="dzz dzz-download dzz-textdecoration" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{lang all_download}"></span>
-      </a>
-      <!--{/if}-->
-      <div class="btn-group" role="group">
-          <a type="button" class="btn btn-group-list" onclick="viewSwitch(this,'.module-list-view')"><i class="dzz dzz-view-list" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="{lang change_list}"></i></a>
-          <a type="button" class="btn btn-group-thumbnail" onclick="viewSwitch(this,'.module-grid-view')"><i class="dzz dzz-view-module" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{lang change_thumbnail}"></i></a>
-      </div>
-  </div>
-</div> 
+<ul class="navbar-nav navbar-right d-flex align-items-center">
+	<li class="nav-item"> 
+		<a type="button" class="btn" data-allrids="$allrids" onclick="allsave();" id="allsave">
+				<span class="dzz dzz-save" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{lang all_save}"></span>
+		</a>
+	</li>
+		<!--{if $share[xiazai]==0}-->
+	<li class="nav-item"> 
+		<a type="button" class="btn" data-allrids="$allrids" onclick="downAll(this);">
+				<span class="dzz dzz-download dzz-textdecoration" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{lang all_download}"></span>
+		</a>
+	</li>
+		<!--{/if}-->
+	<li class="nav-item">
+		<a type="button" class="btn btn-group-list" onclick="viewSwitch(this,'.module-list-view')"><i class="dzz dzz-view-list" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="{lang change_list}"></i></a>
+	</li>
+	<li class="nav-item">
+		<a type="button" class="btn btn-group-thumbnail" onclick="viewSwitch(this,'.module-grid-view')"><i class="dzz dzz-view-module" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{lang change_thumbnail}"></i></a>
+	</li>
+</ul>
 <!--{/if}-->

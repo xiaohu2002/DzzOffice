@@ -96,16 +96,6 @@ li{
      /*top: 0px;*/
     /*bottom: 64px;*/
 }
-.modal-header{
-	border: none;
-}
-.modal-footer{
-    /*position: fixed;*/
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: none;
-}
 .user-select-body {
     padding-top: 20px!important;
 }
@@ -171,7 +161,7 @@ li{
     display: block;
 }
 #seluser_dropdown_menu {
-    height: 600px;
+    height: 650px;
 }
 .iconFirstWord {
     width: 24px;
@@ -196,9 +186,6 @@ li{
 	}
 }
 /*内容上部分开始*/
-.modal-footer {
-    padding: 10px 15px;
-}
 .select-fileall{
 	padding:0 15px
 }
@@ -393,12 +380,6 @@ li{
     z-index: 0;
 }
 /*新建上传按钮结束*/
-/*新建文件夹开始*/
-
-.modal .modal-footer{
-	border-top:none;
-}
-/*新建文件夹结束*/
 /*内容上部分结束*/
 /*内容中间部分开始*/
 .select-filecenter{
@@ -413,15 +394,7 @@ li{
 
 /*列表开始*/
 .filemanage .detail_item_td_div, .DragCopy .detail_item_td_div{
-	overflow: hidden;
-    height: 30px;
     float: left;
-}
-
-.filemanage .detail_item_td_name, .filemanage td, .filemanage th {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 .filemanage .IcoText_folder,.filemanage .detail_item_td{
 	color:#71717a;

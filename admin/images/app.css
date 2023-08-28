@@ -45,11 +45,6 @@ button:focus{
 	background: #FFF;
 	
 }
-.bs-main-container{
-	margin-left:151px;
-	border:0;
-	transition: margin-left .35s ease-in-out;
-}
 /*左边部分*/
 
 .article_left_ul{
@@ -125,9 +120,6 @@ button:focus{
 .navbar-nav>li>a {
     padding-top: 15px;
     padding-bottom: 15px;
-}	
-.navbar-nav{
-	margin: 0;
 }
 }
 @media (min-width: 768px){

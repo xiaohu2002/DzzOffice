@@ -32,6 +32,7 @@
 }
 .button_add_content a:hover{
 	background: #4395FC;
+	color: #fff;
 	webkit-box-shadow: 0px 5px 5px rgba(0,0,0,.2), 0px 10px 14px rgba(0,0,0,.1), inset 0px 1px 0px rgba(255,255,255,.25), inset 0px -1px 0px rgba(0,0,0,.10);
     -moz-box-shadow: 0px 5px 5px rgba(0,0,0,.2),0px 10px 14px rgba(0,0,0,.1),inset 0px 1px 0px rgba(255,255,255,.25),inset 0px -1px 0px rgba(0,0,0,.10);
     box-shadow: 0px 5px 5px rgba(0,0,0,.2), 0px 10px 14px rgba(0,0,0,.1), inset 0px 1px 0px rgba(255,255,255,.25), inset 0px -1px 0px rgba(0,0,0,.10);
@@ -155,6 +156,10 @@ border-radius:  var(--radius);
     cursor: pointer;
     /*pointer-events: none;*/
 }
+.input-search .input-search-icon, .input-search .header-closebutton{
+	color: #fff;
+	opacity: 0.5;
+}
 .form-search::-webkit-input-placeholder { /* WebKit browsers */
     color:    RGBA(255,255,255,.7);
 }
@@ -176,7 +181,11 @@ border-radius:  var(--radius);
 	color: rgba(255,255,255,0.7);
 	height: 48px;
 }
-
+.input-search.focus .form-search{
+	background-color: #fff;
+	color: #333;
+	background: #FFF;
+}
 .input-search.focus .form-search::-webkit-input-placeholder { /* WebKit browsers */
     color:   #999;
 }
@@ -257,10 +266,12 @@ button.input-search-drop {
 .input-search .input-search-icon ,.input-search .header-closebutton{
     opacity: 0.5;
 }
+.input-search.focus .input-search-icon ,.input-search.focus .header-closebutton{
+    color: #666;
+}
 .input-search.focus .input-search-icon,.input-search.focus  .header-closebutton {
     opacity: 0.8;
 }
-
 .input-search  .header-closebutton:hover{
 	background:RGBA(255,255,255,.8);
 	opacity: 1;
@@ -287,10 +298,10 @@ button.input-search-drop {
 }
 .main-allnotice .panel-heading .dzz-allnotice{
 	padding: 7px;
-	background-color:#abaab0;
+	background-color:var(--bs-primary);
 	border-radius:50% ;
 	font-size: 16px;
-	
+	color: #fff;
 }
 .panel-body .details{
 	padding-left: 10px;
@@ -414,7 +425,6 @@ button.input-search-drop {
 .dzz-noticeicon{
 	border-radius: 50%;
 	font-size: 18px;
-	color: #71717a;
 	vertical-align: text-bottom;
 }
 /*通知样式结束*/

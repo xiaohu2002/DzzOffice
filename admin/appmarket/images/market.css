@@ -267,13 +267,6 @@ span.num {
 	margin:0;
 
 }
-.main-header{
-	padding:5px
-}
-.main-header>div{
-	line-height:34px;
-	/*margin:0 5px;*/
-}
 .appname{
 	margin:0;
 	line-height:25px;

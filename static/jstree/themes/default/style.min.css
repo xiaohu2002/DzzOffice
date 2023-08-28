@@ -341,7 +341,10 @@
 .jstree-default .jstree-wholerow {
 	transition: background-color .15s, box-shadow .15s
 }
-
+.jstree-default .jstree-wholerow-hovered{
+	background: rgba(var(--bs-primary-hover),0.1);
+  background-color: rgba(var(--bs-primary-hover),0.1);
+}
 .jstree-default .jstree-hovered {
 	background: #e7f4f9;
 	border-radius: 2px;

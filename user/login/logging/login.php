@@ -9,7 +9,6 @@ if (!defined('IN_DZZ')) {
 
     exit('Access Denied');
 }
-$ismobile=helper_browser::ismobile();
 global $_G;
 if($_G['uid']>0){
 	  $param = array(

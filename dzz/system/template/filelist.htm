@@ -20,10 +20,10 @@ body {
      var nouser=parseInt('$_GET[nouser]')>0?1:0;
      var stype='$_GET[stype]'?parseInt('$_GET[stype]'):0;//0:可以选择机构和用户；1：仅选择机构和部门：2：仅选择用户
      var moderator=parseInt('$_GET[moderator]')>0?1:0;*/
-    var ismobile = '$ismobile' ? 1 : 0;
 </script>
 <!--{template common/header_simple_end}-->
 <!--内容区开始-->
+<div class="modal-body">
 <div class="select-fileall clearfix">
 	<div class="select-filetop clearfix">
 		<!--地址栏开始-->
@@ -93,7 +93,7 @@ body {
 		</div>
 	</div>
 	<div class="select-filebottom clearfix">
-		<div class="input-fixation">
+		<div class="row mb-3">
 			<label>文件名:</label>
 				<input type="text" class="form-control" placeholder="文件名" />
 		</div>
@@ -106,6 +106,7 @@ body {
 </div>
 <div id="template_detaillist"  style="display:none">
 <!--{template template_file_detaillist}-->
+</div>
 </div>
 <!--模板结束-->
 <script type="text/javascript">

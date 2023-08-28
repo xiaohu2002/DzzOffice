@@ -5,6 +5,7 @@
 </div>
 <!--头部结束-->
 <!--内容区开始-->
+<div class="modal-body">
 <div class="select-fileall clearfix">
     <div class="select-filetop clearfix">
         <!--地址栏开始-->
@@ -147,12 +148,13 @@
 
     <div class="select-filebottom clearfix " data-selectHeight="45">
     	    <!--{if $type == 1}-->
-        <div class="input-fixation clearfix">
+        <div class="row mb-3 clearfix">
             <label>文件名:</label>
                 <input type="text" class="form-control" placeholder="文件名" value="$savefile[name]" name="savenewname" id="savenewname"/>
         </div>
          <!--{/if}-->
-        <div class="input-fixation clearfix">
+         <!--{if $exttype}-->
+        <div class="row mb-3 clearfix">
             <label>类型:</label>
 	            <div class="dropup typestyle">
 	            	<button type="text" class="form-control" value="" data-bs-toggle="dropdown" id="type">
@@ -171,10 +173,11 @@
 	            	</ul>
 	            </div>
         </div>
+        <!--{/if}-->
     </div>
    
 </div>
-
+</div>
 <script type="text/javascript" reload="1">
     var opened = {};
     //input框初始化

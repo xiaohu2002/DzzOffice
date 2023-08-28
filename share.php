@@ -11,7 +11,7 @@ define('APPTYPEID', 200);
 require './core/coreBase.php';
 $dzz = C::app();
 $dzz->init();
-if(!$_G['setting']['ballowshare']){
+if($_G['setting']['allowshare'] && !$_G['setting']['ballowshare']){
 	showmessage('no_privilege');
 }
 if(!$path=dzzdecode(trim($_GET['s']))){

@@ -27,6 +27,8 @@
 }
 .add-menu:hover{
 	color: #fff;
+	background: var(--bs-primary);
+	background-color: var(--bs-primary);
 	webkit-box-shadow: 0px 5px 5px rgba(0,0,0,.2), 0px 10px 14px rgba(0,0,0,.1), inset 0px 1px 0px rgba(255,255,255,.25), inset 0px -1px 0px rgba(0,0,0,.10);
   -moz-box-shadow: 0px 5px 5px rgba(0,0,0,.2),0px 10px 14px rgba(0,0,0,.1),inset 0px 1px 0px rgba(255,255,255,.25),inset 0px -1px 0px rgba(0,0,0,.10);
   box-shadow: 0px 5px 5px rgba(0,0,0,.2), 0px 10px 14px rgba(0,0,0,.1), inset 0px 1px 0px rgba(255,255,255,.25), inset 0px -1px 0px rgba(0,0,0,.10);
@@ -59,15 +61,11 @@ line-height: 56px;
 }
 .add-menu1:hover{
 	color: #fff;
-	background: #e11d2a;
+	background: var(--bs-primary);
 	background-color: var(--bs-primary);
 	webkit-box-shadow: 0px 5px 5px rgba(0,0,0,.2), 0px 10px 14px rgba(0,0,0,.1), inset 0px 1px 0px rgba(255,255,255,.25), inset 0px -1px 0px rgba(0,0,0,.10);
   -moz-box-shadow: 0px 5px 5px rgba(0,0,0,.2),0px 10px 14px rgba(0,0,0,.1),inset 0px 1px 0px rgba(255,255,255,.25),inset 0px -1px 0px rgba(0,0,0,.10);
   box-shadow: 0px 5px 5px rgba(0,0,0,.2), 0px 10px 14px rgba(0,0,0,.1), inset 0px 1px 0px rgba(255,255,255,.25), inset 0px -1px 0px rgba(0,0,0,.10);
-}
-.lyear-layout-header{
-	margin: 5px;
-	border-radius: var(--radius);
 }
 .form_name {
     width: 100%;
@@ -341,13 +339,6 @@ dl dd{
 	margin-left:120px;
 	height:100%;
 	overflow:auto;
-}
-.main-header {
-  position:relative;
-  width:100%;
-  border-radius:  var(--radius);
-  padding: 5px;
-  border: .2rem solid var(--bs-pre);
 }
 .main-body{
 	padding: 10px

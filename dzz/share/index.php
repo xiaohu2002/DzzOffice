@@ -78,10 +78,5 @@ foreach ($list as $k=> $value) {
   $list[$k] = $value;
 }
 $multi = multi($count, $perpage, $page, $theurl, 'pull-right');
-$ismobile = helper_browser::ismobile();
-if($ismobile){
-   include template('mobile_share');
-}else{
-  include template('share');
-}
+include template('share');
 ?>

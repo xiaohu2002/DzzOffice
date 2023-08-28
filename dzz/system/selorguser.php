@@ -11,7 +11,6 @@ if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 include_once libfile('function/organization');
-$ismobile=helper_browser::ismobile();
 $ids =isset($_GET['ids'])?rawurldecode($_GET['ids']):'';
 $navtitle='人员管理';
 $zero=$_GET['zero']?urldecode($_GET['zero']):lang('no_institution_users');//无机构用户名称
@@ -102,12 +101,5 @@ if($uids){
 }
 $openarr_length=count($open)?'1':'';
 $openarr=json_encode($open);
-$ismobile = helper_browser::ismobile();
-if($ismobile){
-	include template('mobile_selectuser');
-	dexit();
-}else{
 	include template('selorguser');
 	exit();
-}
-

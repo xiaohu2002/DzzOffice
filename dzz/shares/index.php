@@ -10,13 +10,12 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 global $_G;
-if(!$_G['setting']['ballowshare']){
+if($_G['setting']['allowshare'] && !$_G['setting']['ballowshare']){
 	showmessage('no_privilege');
 }
 $osid = $_GET['sid'];
 $morepath = $osid;
 $sid = dzzdecode($osid);
-$ismobile = helper_browser::ismobile();
 $navtitle='分享文件';
 $do = isset($_GET['do']) ? trim($_GET['do']) : '';
 if ($do == 'adddowns') {
@@ -43,21 +42,13 @@ if ($do == 'adddowns') {
     if ($share['password'] && (dzzdecode($share['password']) != authcode($_G['cookie']['pass_' . $sid]))) {
         if (submitcheck('passwordsubmit')) {
             if ($_GET['password'] != dzzdecode($share['password'])) {
-                if ($ismobile) {
-                    include template('mobile/share_password');
-                } else {
-                    include template('password');
-                }
+                include template('password');
                 exit();
             }
             dsetcookie('pass_' . $sid, authcode($_GET['password'], 'ENCODE'));
         } else {
             $rightpassword = dzzdecode($share['password']);
-            if ($ismobile) {
-                include template('mobile/share_password');
-            } else {
-                include template('password');
-            }
+            include template('password');
             exit();
         }
     }
@@ -111,7 +102,7 @@ if ($do == 'adddowns') {
     //增加浏览次数
     C::t('shares')->add_views_by_id($sid);
     $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
-    $perpage = ($ismobile) ? 20 : 20;
+    $perpage = 20;
     $start = ($page - 1) * $perpage;
     $gets = array('mod' => 'shares', 'sid' => $sid,);
     $theurl = BASESCRIPT . "?" . url_implode($gets);
@@ -185,10 +176,6 @@ if ($do == 'adddowns') {
         $nextpage = 0;
     }
     //echo $nextpage;die;
-    if ($ismobile) {
-        include template('mobile/list');
-    } else {
-        include template('list');
-    }
+    include template('list');
 }
 ?>

@@ -12,7 +12,6 @@ if(!defined('IN_DZZ')) {
 }
 Hook::listen('check_login');
 include_once libfile('function/organization');
-$ismobile=helper_browser::ismobile();
 $uid =isset($_GET['uid'])?intval($_GET['uid']):$_G['uid'];
 $zero=$_GET['zero']?urldecode($_GET['zero']):lang('no_institution_users');
 
@@ -193,7 +192,6 @@ function getuserIcon($uids,$datas,&$data){
 		$data[] = $v;
 	}
 }
-$ismobile=helper_browser::ismobile();
 include template('orgtree');
 
 ?>

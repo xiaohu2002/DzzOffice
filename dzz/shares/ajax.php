@@ -10,7 +10,7 @@ if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 global $_G;
-if(!$_G['setting']['ballowshare']){
+if($_G['setting']['allowshare'] && !$_G['setting']['ballowshare']){
 	showmessage('no_privilege');
 }
 $open = false;
@@ -46,9 +46,8 @@ if(isset($_GET['currentfolder']) && $_GET['currentfolder']){
 }else{
     $currentfolder = false;
 }
-$ismobile = helper_browser::ismobile();
 $page = (isset($_GET['page'])) ? intval($_GET['page']):1;
-$perpage = ($ismobile) ? 20:20;
+$perpage = 20;
 $start = ($page - 1) * $perpage;
 $gets = array('mod' => 'shares', 'sid' => $sid, );
 $theurl = BASESCRIPT . "?" . url_implode($gets);
@@ -124,10 +123,6 @@ if (count($list) >= $perpage) {
 } else {
 	$naxtpage = 0;
 }
-if($ismobile){
-    include template('mobile/list_item');
-}else{
-    include template('list_item');
-}
+include template('list_item');
 dexit();
 ?>

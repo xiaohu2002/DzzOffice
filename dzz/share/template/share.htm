@@ -31,7 +31,10 @@
 		<!--{/if}-->
 		<div class="main-content clearfix">
 			<!--{if !$list}-->
-      <p class="no-result-title text-center">{lang share_file_content}</p>
+			<div style="text-align: center;">
+				<img src="static/image/common/no_list.png" /><br>
+				<span class="no-result-title">{lang share_file_content}</span>
+			  </div>
 			<!--{else}-->
 			<div node-type="module" class="module-list-toolbar" style="display: none;">
 				<div class="bar clearfix">
