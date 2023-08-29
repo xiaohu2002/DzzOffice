@@ -105,7 +105,7 @@
     </div>
     <div class="user-select-content">
       <div class="user-select-content-left">
-        <div class="group-content" id="seluser_dropdown_menu" style="overflow:hidden;border-radius:  var(--radius);">
+        <div class="group-content" id="seluser_dropdown_menu">
           <iframe name="seluser_iframe" class="org-sel-box-iframe"
                                 src="$theurl"
                                 frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%"
@@ -116,14 +116,12 @@
       </div>
       <div class="user-select-content-right">
         <div class="selected-member">{lang user_select_selected}<b class="selected_sum" style="padding:0 5px;">{eval echo count($selects);}</b>{lang selected_ge_user}</div>
-        <div class="group-content" id="group-contents">
           <ul class="sele-right-classa" id="seluser">
             <!--{loop $selects $key $value}-->
             <li id="seluser_sl_$key" class="right-classa-depart" data-val="$key"> {eval echo avatar_block($value[uid]);}
               $value['username'] <i class="ti-close dzz dzz-close"></i> </li>
             <!--{/loop}-->
           </ul>
-        </div>
       </div>
     </div>
   </div>

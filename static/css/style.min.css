@@ -2461,17 +2461,6 @@ hr.dropdown-divider {
 }
 
 /* 卡片 */
-.card {
-	border: none;
-	border-radius: var(--border-radius-mini);
-    margin-bottom: 1rem;
-	-webkit-transition: .5s;
-	-moz-transition: .5s;
-	transition: .5s;
-	-webkit-box-shadow: 0 0 4px rgba(var(--bs-dark-rgb), 0.075);
-	-moz-box-shadow: 0 0 4px rgba(var(--bs-dark-rgb), 0.075);
-	box-shadow: 0 0 4px rgba(var(--bs-dark-rgb), 0.075);
-}
 
 .card[class*="border-"] {
 	border-width: 1px;
@@ -2714,7 +2703,7 @@ hr.dropdown-divider {
 /** ----------------------------------
  * 页面加载loading
  -------------------------------------- */
-#lyear-preloader {
+.lyear-preloader {
     height: 5px;
     left: 0;
     position: fixed;
@@ -3908,6 +3897,7 @@ body[data-theme='dark'] .jconfirm .jconfirm-box,
 [data-theme='dark'] .bs-left-container,
 [data-theme='dark'] .lyear-layout-header,
 [data-theme='dark'] .card,
+[data-theme='dark'] .rightMenu,
 [data-theme='dark'] .nav-tabs .nav-link.active,
 [data-theme='dark'] .nav-tabs .nav-item.show .nav-link {
     background-color: #313844;

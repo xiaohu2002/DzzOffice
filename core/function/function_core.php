@@ -723,7 +723,7 @@ function avatar_group($gid,$groupcolors=array(),$class='iconFirstWord'){
 			if(preg_match('/^\#.+/',$groupcolor)){
 				return '<span class="iconFirstWord" style="background:'.$groupcolor.';" title="'.$groupcolors[$gid]['orgname'].'">'.strtoupper(new_strsubstr($groupcolors[$gid]['orgname'],1,'')).'</span>';
 			}elseif(preg_match('/^\d+$/',$groupcolor) && $groupcolors > 0){
-				return '<img src="index.php?mod=io&op=thumbnail&width=24&height=24&path='. dzzencode('attach::' . $groupcolor).'" class="img-circle" title="'.$groupcolors[$gid]['orgname'].'">';
+				return '<img src="index.php?mod=io&op=thumbnail&width=24&height=24&path='. dzzencode('attach::' . $groupcolor).'" class="img-avatar" title="'.$groupcolors[$gid]['orgname'].'">';
 			}
 		}else{
 			$colorkey = rand(1,15);
@@ -739,7 +739,7 @@ function avatar_group($gid,$groupcolors=array(),$class='iconFirstWord'){
 			if(preg_match('/^\#.+/',$groupinfo['aid'])){
 				return '<span class="iconFirstWord" style="background:'.$groupinfo['aid'].';" title="'.$groupinfo['orgname'].'">'.strtoupper(new_strsubstr($groupinfo['orgname'],1,'')).'</span>';
 			}elseif(preg_match('/^\d+$/',$groupinfo['aid']) && $groupinfo['aid'] > 0){
-				return '<img src="index.php?mod=io&op=thumbnail&width=24&height=24&path='. dzzencode('attach::' . $groupinfo['aid']).'" class="img-circle" title="'.$groupinfo['orgname'].'">';
+				return '<img src="index.php?mod=io&op=thumbnail&width=24&height=24&path='. dzzencode('attach::' . $groupinfo['aid']).'" class="img-avatar" title="'.$groupinfo['orgname'].'">';
 			}
 		}else{
 

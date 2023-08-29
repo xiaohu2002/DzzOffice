@@ -33,7 +33,7 @@
 	flex-wrap:wrap;
 }
 .item-block{
-    background:#F2F2F2;
+    background:rgba(var(--bs-primary-hover),0.1);
 }
 /*文件分享单页开始*/
 .sharepame-selected{

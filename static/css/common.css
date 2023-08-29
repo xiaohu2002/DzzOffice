@@ -979,29 +979,6 @@ dl>dd{
 }
 
 /*选择部门或用户相关 end*/
-
-
-
-/*用户头像css开始*/
-
-.avatar img.img-circle{
-	width:50px;
-	height:50px;
-}
-.avatar.avatar-lg img.img-circle{
-	width:90px;
-	height:90px;
-}
-.avatar.avatar-sm img.img-circle{
-	width:35px;
-	height:35px;
-}
-.avatar.avatar-xs img.img-circle{
-	width:24px;
-	height:24px;
-}
-
-/*用户头像css结束*/
 /*图标旋转*/
 @keyframes dzz-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(359deg);transform:rotate(359deg)}}
 .spin {

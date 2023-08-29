@@ -25,7 +25,6 @@
 /*目录内图标文字样式*/
 .IcoText_folder {font-size:13px; color:#333; font-weight:nomal;font-family:Tahoma,'微软雅黑','Simsun';word-break:break-all;text-decoration:none}
 
-.IcoText_div { max-height:38px; overflow:hidden;word-break:break-all; }
 .IcoText_div table{table-layout:fixed;}
 .IcoText_div a{
 	text-decoration:none;

@@ -342,18 +342,15 @@ button.input-search-drop {
 	margin: var(--radius);
 }
 .notification-list-item .member{
-	position:absolute;
-	left:0px;
-	cursor: pointer;
-	float: left;
+	position: absolute;
+    left: 10px;
+    cursor: pointer;
+    top: 10px;
+    float: left;
 }
 .notification-list-item .member-avatar{
 	position:absolute;
 	left:5px;
-}
-.notification-list-item .member img.img-circle{
-	width:32px;
-	height:32px;
 }
 .notification-list-item .dateline{
 	font-size:12px;
@@ -496,11 +493,9 @@ button.input-search-drop {
 }
 .about-body p{
 	margin-bottom:10px;
-}.about-body a{
-	color:#000;
 }
 .about-body p .guide{
-	color:#000;
+	color:#999;
 }
 .about-copyright>a{
 	color:#000;

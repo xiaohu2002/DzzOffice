@@ -1,0 +1,239 @@
+<!--{template common/header_simple_start}-->
+<script type="text/javascript" src="static/js/jquery.textareaexplander.js?{VERHASH}"></script>
+<script src="admin/scripts/admin.js?{VERHASH}"></script>
+<style>
+ #cpform{
+	margin-top: 15px;
+}
+</style>
+<!--{template common/header_simple_end}-->
+<!--{template common/commer_header}-->
+<div class="bs-container clearfix">
+  <div class="bs-left-container  clearfix">  
+	 <!--{template left}--> 
+  </div>
+  <div class="left-drager">
+    <div class="left-drager-op">
+      <div class="left-drager-sub"></div>
+    </div>
+  </div>
+  <div class="bs-main-container  clearfix">  
+	
+    <div class="main-content">  
+    <form id="cpform" action="{MOD_URL}&op=admin" class="form-horizontal" method="post" name="cpform">
+		<input type="hidden" value="{FORMHASH}" name="formhash">
+		<input type="hidden" name="confirmsubmit" value="true" />
+			<div class="row mb-3">
+				<label class="col-sm-2" for="app_key">{lang input_onlyoffice_url}</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="app_key" name="app_key" autocomplete="off" value="{$app[extra][DocumentUrl]}" required="true">
+					<span class="help-block">{lang input_onlyoffice_url_notice}</span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label class="col-sm-2" for="exts">{lang thumbnail_exts}</label>
+				<div class="col-sm-10">
+					<textarea type="textarea" class="form-control" cols="3" id="exts" name="exts" autocomplete="off">{$app[extra]['exts']}</textarea>
+					<span class="help-block">{lang thumbnail_exts_tips}</span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label class="col-sm-2" for="token">{lang key}</label>
+				<div class="col-sm-10">
+					<textarea type="textarea" class="form-control" cols="3" id="token" name="token" autocomplete="off">{$app[extra]['token']}</textarea>
+					<span class="help-block">{lang Leave blank to indicate that no key is required}</span>
+				</div>
+			</div>
+			<div class="row mb-3">
+          <label class="col-sm-2">回调程序处理方式</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="callback1" name="callback" value="1" <!--{if  $app[extra]['callback']==1}-->checked="chcked"<!--{/if}-->>
+              <label class="form-check-label" for="callback1">方案一</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="callback2" name="callback" value="2" <!--{if $app[extra]['callback']==2}-->checked="chcked"<!--{/if}-->>
+              <label class="form-check-label" for="callback2">方案二</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="callback3" name="callback" value="3" <!--{if $app[extra]['callback']==3}-->checked="chcked"<!--{/if}-->>
+              <label class="form-check-label" for="callback3">方案三</label>
+            </div>
+						<span class="help-block">方案一：最后一个用户关闭所编辑的文档后保存到dzz上。（默认方案）</span>
+						<span class="help-block">方案二：方案一和每次保存时都会保存到dzz上。（例如单击保存按钮和自动强制保存时）</span>
+						<span class="help-block">方案三：方案一和自动强制保存时都会保存到dzz上。（自行配置自动强制保存的间隔时间）</span>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">{lang head}</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="toubu1" name="toubu" <!--{if $app[extra]['toubu']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="toubu1">{lang show}</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="toubu2" name="toubu" <!--{if $app[extra]['toubu']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="toubu2">{lang no_show}</label>
+            </div>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">过滤器</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="modifyFilter1" name="modifyFilter" <!--{if $app[extra]['modifyFilter']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="modifyFilter1">{lang yes}</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="modifyFilter2" name="modifyFilter" <!--{if $app[extra]['modifyFilter']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="modifyFilter2">{lang  no}</label>
+            </div>
+            <span class="help-block">是否可以全局应用影响所有其他用户或仅适用于当前用户。如果用户具有编辑权限，则仅对电子表格编辑器可用。无配置默认为开启。当开启时，会影响筛选功能。</span>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">自动保存</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="autosave1" name="autosave" <!--{if $app[extra]['autosave']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="autosave1">开启</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="autosave2" name="autosave" <!--{if $app[extra]['autosave']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="autosave2">关闭</label>
+            </div>
+            <span class="help-block">无配置默认为关闭。</span>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">聊天</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="chat1" name="chat" <!--{if $app[extra]['chat']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="chat1">{lang yes}</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="chat2" name="chat" <!--{if $app[extra]['chat']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="chat2">{lang  no}</label>
+            </div>
+            <span class="help-block">是否开启聊天功能，无配置默认为开启。</span>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">菜单栏</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="compactHeader1" name="compactHeader" <!--{if $app[extra]['compactHeader']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="compactHeader1">{lang yes}</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="compactHeader2" name="compactHeader" <!--{if $app[extra]['compactHeader']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="compactHeader2">{lang  no}</label>
+            </div>
+            <span class="help-block">是否将菜单栏放在在徽标旁边使界面更加紧凑。无配置默认为否。</span>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">顶部工具栏</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="compactToolbar1" name="compactToolbar" <!--{if $app[extra]['compactToolbar']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="compactToolbar1">紧凑</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="compactToolbar2" name="compactToolbar" <!--{if $app[extra]['compactToolbar']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="compactToolbar2">展开</label>
+            </div>
+            <span class="help-block">展开还是紧凑顶部工具栏。展开后多余菜单将在右侧折叠点击显示。无配置默认为紧凑。</span>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">注释/批注菜单</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="comments1" name="comments" <!--{if $app[extra]['comments']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="comments1">{lang yes}</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="comments2" name="comments" <!--{if $app[extra]['comments']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="comments2">隐藏</label>
+            </div>
+            <span class="help-block">显示还是隐藏“注释”菜单按钮；请注意，如果您隐藏“评论”按钮，则相应的评论功能将仅可用于查看，评论的添加和编辑将不可用。无配置默认为隐藏。</span>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">宏设置</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="macros1" name="macros" <!--{if $app[extra]['macros']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="macros1">{lang yes}</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="macros2" name="macros" <!--{if $app[extra]['macros']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="macros2">{lang  no}</label>
+            </div>
+            <span class="help-block">是否可以运行文档宏以及可用的宏设置。无配置默认为否。</span>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">运行文档宏</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="macrosMode1" name="macrosMode" <!--{if $app[extra]['macrosMode']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="macrosMode1">根本不运行</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="macrosMode2" name="macrosMode" <!--{if $app[extra]['macrosMode']=='2'}-->checked="checked"<!--{/if}--> value="2">
+              <label class="form-check-label" for="macrosMode2">自动运行所有宏</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="macrosMode3" name="macrosMode" <!--{if $app[extra]['macrosMode']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="macrosMode3">警告宏并请求允许运行</label>
+            </div>
+            <span class="help-block">是否将运行文档宏。无配置默认为警告宏并请求允许运行。</span>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">插件</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="plugins1" name="plugins" <!--{if $app[extra]['plugins']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="plugins1">{lang yes}</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="plugins2" name="plugins" <!--{if $app[extra]['plugins']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="plugins2">{lang  no}</label>
+            </div>
+            <span class="help-block">是否将启动插件并可用。无配置默认为关闭。</span>
+          </div>
+        </div>
+			<div class="row mb-3">
+          <label class="col-sm-2">工具栏选项卡样式</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="toolbarNoTabs1" name="toolbarNoTabs" <!--{if $app[extra]['toolbarNoTabs']=='1'}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="toolbarNoTabs1">{lang yes}</label>
+            </div>
+						<div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="toolbarNoTabs2" name="toolbarNoTabs" <!--{if $app[extra]['toolbarNoTabs']=='0'}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="toolbarNoTabs2">{lang  no}</label>
+            </div>
+            <span class="help-block">是否突出显示顶部工具栏选项卡样式。无配置默认为否。</span>
+          </div>
+        </div>
+		<dl>
+			<input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang submit}" type="submit">
+		</dl>
+		
+    </form> 
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function(e) {
+		jQuery('input[required]').on('blur', function() {
+			if(this.value == '') { jQuery(this).addClass('input-error') } else { jQuery(this).removeClass('input-error'); }
+		});
+	}); 
+</script> 
+<!--{template common/footer_simple}-->

@@ -1,0 +1,22 @@
+<!--{template common/header_simple_start}-->
+<script type="text/javascript" src="$onlyDocumentUrl"></script>
+<!--{template common/header_simple_end}-->
+<style>
+  html,body{
+    height:100%;
+    overflow:hidden;
+  }
+</style>
+<div id="placeholder" style="width:100%;height:100%;overflow:auto"></div>
+<script type="text/javascript">
+  var сonnectEditor = function () {
+    config = <!--{eval echo json_encode($config);}-->;
+    docEditor = new DocsAPI.DocEditor("placeholder", config);
+  };
+  if (window.addEventListener) {
+      window.addEventListener("load", сonnectEditor);
+  } else if (window.attachEvent) {
+      window.attachEvent("load", сonnectEditor);
+  }
+</script>
+<!--{template common/footer_simple}-->

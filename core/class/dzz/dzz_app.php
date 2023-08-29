@@ -588,7 +588,7 @@ class dzz_app extends dzz_base{
           }
         }
         if($appidxu=C::t('app_market')->fetch_by_identifier(CURMODULE)){
-					if($this->var['member']['adminid']){
+					if($this->var['member']['adminid'] || $_GET['do']=='savefile'){
 					}elseif($appidxu['available']==0){
               showmessage(lang('您无权使用该应用，请联系管理员。'));
             }elseif($this->var['member']['uid']){

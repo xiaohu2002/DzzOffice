@@ -1,0 +1,30 @@
+<!--{template common/header_simple_start}-->
+<script type="text/javascript" src="$onlyDocumentUrl"></script>
+<!--{template common/header_simple_end}-->
+<style>
+  html,body{
+    height:100%;
+    overflow:hidden;
+  }
+	iframe{
+		border-radius: var(--radius);
+	}
+</style>
+<!--{template commer_header}-->
+<div class="bs-container clearfix">
+  <div class="bs-main-container clearfix">
+    <div id="placeholder" style="width:100%;height:100%;overflow:auto"></div>
+    <script type="text/javascript">
+			var сonnectEditor = function () {
+				config = <!--{eval echo json_encode($config);}-->;
+				docEditor = new DocsAPI.DocEditor("placeholder", config);
+			};
+      if (window.addEventListener) {
+          window.addEventListener("load", сonnectEditor);
+      } else if (window.attachEvent) {
+          window.attachEvent("load", сonnectEditor);
+      }
+    </script>
+	</div>
+</div>
+<!--{template common/footer_simple}-->

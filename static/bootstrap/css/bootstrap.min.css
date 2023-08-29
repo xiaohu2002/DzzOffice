@@ -1083,10 +1083,6 @@ img {
     border-radius: var(--radius);
 }
 
-.img-circle {
-    border-radius: 50%
-}
-
 .sr-only {
     position: absolute;
     width: 1px;
@@ -1419,7 +1415,6 @@ input[type=submit].btn-block {
     font-weight: 400;
     line-height: 1.42857143;
     color: #333;
-    white-space: nowrap;
     margin: var(--radius);
     border-radius: var(--radius);
     position: relative;
@@ -2352,6 +2347,7 @@ input[type=submit].btn-block {
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: var(--radius);
+    color: #fff;
 }
 
 a.label:focus,
@@ -2458,7 +2454,6 @@ a.badge:hover {
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.42857143;
-  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: border .2s ease-in-out;
@@ -4666,7 +4661,6 @@ address {
     line-height: inherit
 }
 
-dl,
 ol,
 ul {
     margin:0;
@@ -4825,7 +4819,7 @@ tr {
 }
 
 label {
-    display: inline-block
+    display: inline-block;
 }
 
 button {
@@ -6737,7 +6731,8 @@ progress {
     -moz-appearance: none;
     appearance: none;
     border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    resize: none;
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -6834,8 +6829,6 @@ progress {
     background-color: #dde0e3
 }
 .form-control:hover,.form-check-input:hover{
-	-webkit-background-size: 100% 1px, 100% 1px;
-	background-size: 100% 1px, 100% 1px;
 	-webkit-transition-duration: .1s;
 	-o-transition-duration: .1s;
 	transition-duration: .1s;
@@ -8720,7 +8713,6 @@ fieldset:disabled .btn {
     color: #212529;
     text-align: inherit;
     text-decoration: none;
-    white-space: nowrap;
     background-color: transparent;
     border: 0
 }
@@ -8915,15 +8907,24 @@ fieldset:disabled .btn {
 }
 
 .card {
+	border-radius: var(--radius);
+    margin-bottom: 1rem;
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	transition: .5s;
+	-webkit-box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    -o-box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    -ms-box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+	-moz-box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+	box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    background-color: #fff;
+    background-clip: border-box;
     position: relative;
     display: flex;
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: .25rem
+    padding: var(--radius);
 }
 .card:hover{
 	background: #4285F4;
@@ -15978,6 +15979,7 @@ fieldset:disabled .btn {
 	max-width: inherit;
     color: #fff;
     font-size: 18px;
+    visibility: visible;
 }
 .has-feedback{
 	position: relative;
@@ -16076,4 +16078,9 @@ fieldset:disabled .btn {
   }
   .resSearch{
     margin-top: 5px;
+  }
+  .member .img-avatar{
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
   }
