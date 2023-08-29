@@ -83,7 +83,7 @@ if ($do == 'adddowns') {
     }
     $rids = explode(',', $share['filepath']);
     if (count($rids) > 1) {
-        $share['img'] = '/dzz/explorer/img/ic-files.png';
+        $share['img'] = 'dzz/images/extimg/folder.png';
     } else {
         $share['img'] = C::t('resources')->get_icosinfo_by_rid($share['filepath']);
     }

@@ -9225,10 +9225,6 @@ fieldset:disabled .btn {
     flex-wrap: wrap;
 }
 
-.breadcrumb>.active {
-    color: #777
-}
-
 .breadcrumb>li+li:before {
     padding: 0;
     vertical-align: top;
@@ -9239,15 +9235,6 @@ fieldset:disabled .btn {
     display: inline-block;
     overflow: hidden;
 }
-
-.breadcrumb>li>a {
-    color: #71717A;
-}
-
-.breadcrumb>li.active>a {
-    color: #4C89FB;
-}
-
 .breadcrumb>li:before {
     font-family: 'dzz' !important;
 }

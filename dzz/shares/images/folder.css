@@ -1,12 +1,5 @@
 @charset "utf-8";
 /* CSS Document */
-.tooltip fade bottom in{
-	position: fixed
-}
-.bs-main-container{
-	margin-left:0;
-	border-top:0;
-}
 .loaded-num{
 	padding:0 5px;
 	font-weight:700;
@@ -32,6 +25,7 @@
 }
 .module-list-view .item {
 	border-bottom: 1px solid #EEEEEE;
+	padding: var(--radius);
 /*	border-top:1px solid #FFF;*/
 }
 .module-list-view .item:first{
@@ -48,8 +42,8 @@
 .module-list-view .title .item {
 	/*border-bottom: 1px solid transparent;*/
 }
-.module-list-view .item-hover {
-	background-color: var(--bs-primary);
+.item-hover {
+	background-color: rgba(var(--bs-black-rgb), .175);
 }
 .module-list-view .item-block {
 	background-color: var(--bs-primary);
@@ -59,14 +53,14 @@
 	opacity: 1;
 }
 .module-list-view .item-block.item {
-	border-bottom:1px solid var(--bs-primary);
+	border-bottom:1px solid #3779ff;
 }
 .module-list-view .item-block .col{
 	color: #FFFFFF;
 }
 .module-list-view .item .icon {
-	max-width:40px;
-	max-height:42px;
+	max-width:24px;
+	max-height:24px;
 	margin-top:-2px;
 }
 
@@ -77,11 +71,19 @@
 	top: 2px;
 	left: 2px;
 }
+.module-list-view .item .chk-ico {
+	background: transparent url(checkbox.png) no-repeat;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: 12px;
+	left: 12px;
+}
+.module-list-view .item .chked .chk-ico {
+	background: transparent url(selected.png) no-repeat;
+}
 .module-list-view .item .name {
 	width: 100%;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
 }
 .module-list-view .list-share .item .name-text {
 	cursor: pointer;
@@ -92,23 +94,31 @@
 
 
 .module-list-view .title .col {
+	/*border-left: 1px solid #fff;
+	border-right: 1px solid #e5e5e5;*/
 	cursor: pointer;
 	_overflow: hidden;
-	padding: var(--radius);
 }
 .module-list-view .title .col:hover {
 	background-color: rgba(var(--bs-black-rgb), .175);
 }
 .module-list-view .col {
 	float: left;
+	height: auto;
+	font-size: larger;
+    padding: 5px;
 }
 .module-list-view .title .col {
+	/*border-left: 1px solid #fff;
+	border-right: 1px solid #e5e5e5;*/
 	cursor: pointer;
 	_overflow: hidden;
 }
 .module-list-view .c1 {
 	position: relative;
-	padding: var(--radius);
+	text-align: left;
+	top: 0;
+	overflow: visible;
 }
 .module-list-view .item .btns {
 	position: absolute;
@@ -120,7 +130,7 @@
 }
 .module-list-view .item .btns a.dzz,.select-toperate-center .btns a .dzz{
 	font-size: 22px;
-	vertical-align: text-top;
+	vertical-align: middle;
 }
 .select-toperate-center .btns{
 	border-right: 1px solid rgba(0, 0, 0, 0.25);
@@ -132,16 +142,11 @@
 .select-toperate-center .btns a .dzz,.btns a.dzz{
 	opacity: 0.65;
 }
-.select-toperate-center .btns a .dzz,.btns a.dzz:hover{
-	opacity: 1;
-	color: #000;
-}
 .select-toperate-center .btns a:hover .dzz,.btns:hover a.dzz{
 	opacity: 1;
 }
-.breadcrumb > li:hover{
-	background-color: #26D8FD;
-	color: #fff;
+.breadcrumb > li{
+	padding-left: 10px;
 }
 .module-list-view .item-hover .btns{
 	display:inline-block;
@@ -153,17 +158,20 @@
 	margin: 10px 0 0 5px;
 }
 .module-grid-view .wrapper {
-	margin: 0 0 0 10px;
 	position: relative;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 .module-grid-view .wrapper .item {
 	float: left;
-	margin: 5px 10px;
-	border: 1px solid #DDDDDD;
+	border: 1px solid transparent;
 	cursor: pointer;
 	position: relative;
 	z-index: 100;
 	border-radius:  var(--radius);
+	margin:var(--radius);
+	padding: var(--radius);
 }
 .module-grid-view .item .backgound_radius {
 	display:none;
@@ -177,7 +185,7 @@
 	opacity: 1;
 	filter: Alpha(opacity=100);
 	transition: all 0.2s ease-in 0s;
-	border-radius:  var(--radius);
+	border-radius: 2px;
 }
 .module-grid-view .item .sharepame-checked{
 	display: none;
@@ -204,16 +212,10 @@
 	box-sizing: content-box; 
 }
 .module-grid-view .wrapper .icoimgContainer{
-	width:100%;
-	height:100%;
 	position:relative;
 }
 .module-grid-view .wrapper .icoimgContainer .imageclass{
 	display:block;
-}
-.module-grid-view .wrapper .icoimgContainer img{
-	max-width: 100px;
-  max-height: 100px;
 }
 .module-grid-view .more{
 	cursor:pointer;
@@ -230,10 +232,6 @@
 	height: 28px;
 }
 .module-grid-view .wrapper .file-name a {
-	color: #333;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
 	display: inline-block;
 	width: 100%;
 	cursor: default;
@@ -242,33 +240,16 @@
 	cursor: pointer;
 }
 .module-grid-view .wrapper .item-block.item{
-	    border: 1px solid #3779ff;
-}
-
-.module-grid-view .wrapper .item-hover .IcoFont_text{
-	background-color:#F2F2F2;
-}
-.module-grid-view .wrapper .item-block .IcoFont_text{
-	background-color:#3779ff;
-}
-.module-grid-view .wrapper .Icoblock .IcoFont_text .IcoText_div{
-	overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-all;
-    white-space: nowrap;
-}
-.module-grid-view .wrapper .item-block .IcoFont_text .IcoText_div .ico_item_name{
-	color: #FFFFFF;
-}
-.module-grid-view .wrapper .item-block .IcoFont_text td{
-	color: #FFFFFF;
+	border: 1px solid var(--bs-primary);
+	border-radius:  var(--radius);
+	background-color: rgba(var(--bs-primary-hover),0.2);
 }
 /*文件分享单页开始*/
 .sharepame-title{
 	line-height: 64px;
+	color: #fff;
 	font-size: 22px;
 	font-family: "微软雅黑";
-	color:#FFF;
 }
 .sharepame-images{
 	width:54px;
@@ -283,9 +264,6 @@
 	font-size: 14px;
 	margin-bottom: 12px;
 }
-.sharepame-detailed{
-	font-size: 12px;
-}
 .sharepame-detailed .sharepame-time{
 	padding-right:5px ;
 }
@@ -294,14 +272,14 @@
 }
 
 .breadcrumb{
-	margin-bottom: 0px;
 	float: left;
-	padding-right: 100px;
-	border-bottom: none;
-	padding: 1.42rem 0px;
 }
 .breadcrumb>li+li:before{
 	content: "";
+}
+.breadcrumb li a span{
+	padding-left: 10px;
+	padding-right: 5px;
 }
 .sharepame-bread .btn-group{
 	padding-top:1.21rem;
@@ -314,6 +292,20 @@
 .window .icoblank_rightbottom{
 	background-color: transparent!important;
 }
+/*.module-grid-view .item-block .backgound_radius{
+	background-color: #e3f2fd;
+	border-radius: 2px;
+	display: block;
+	opacity: 1;
+}
+.module-grid-view .item-block .sharepame-checked{
+	display: block;
+}
+.module-grid-view .item-block .icoblank_rightbottom{
+	display: block;
+	top: 3px;
+	right: 3px;
+}*/
 .sharepame-pictitle{
 	padding-top: 1.42rem;
 	border-bottom: 1px solid #DCDCDC;

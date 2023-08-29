@@ -94,10 +94,10 @@
 	border-bottom: 1px solid transparent;
 }
 .module-list-view .item-hover {
-	background-color: rgba(var(--bs-white-rgb), .35);
+	background-color: rgba(var(--bs-black-rgb), .25);
 }
 .module-list-view .item-active {
-	background-color: rgba(var(--bs-white-rgb), .35);
+	background-color: rgba(var(--bs-black-rgb), .25);
 }
 .module-list-view .item .icon {
 	max-width:24px;
@@ -187,7 +187,6 @@
 	line-height: 38px;
 	border-top: 1px solid #D9E2F1;
 	display: none;
-	color: #666;
 }
 
 .js_copy{
