@@ -3982,6 +3982,7 @@ body[data-theme='dark'] .jconfirm .jconfirm-box,
 }
 [data-theme='dark'] .popbox-container,
 [data-theme='dark'] .popbox-menu,
+[data-theme='dark'] .dzzvote,
 [data-theme='dark'] .dropdown-height,
 [data-theme='dark'] .dropdown-width,
 [data-theme='dark'] .vakata-context,
@@ -4521,6 +4522,7 @@ body[data-theme='translucent-pink'],
 [data-theme|='translucent'] .rightMenu,
 [data-theme|='translucent'] .lyear-layout-header,
 [data-theme|='translucent'] .card,
+[data-theme|='translucent'] .dzzvote,
 [data-theme|='translucent'] .card>.card-header+.callout {
     background-color: rgba(var(--bs-black-rgb), .175);
 }

@@ -36,7 +36,7 @@ if($filter=='new'){//列出所有新通知
     $perpage=20;
     $start=($page-1)*$perpage;
     $gets = array(
-        'mod'=>'system',
+        'mod'=>MOD_NAME,
         'op' =>'notification',
         'filter'=>'all'
     );

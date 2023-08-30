@@ -13,16 +13,16 @@
     <div class="bs-main-container  clearfix">
         <div class="main-header clearfix">
             <ul class="nav nav-pills">
-                <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod=cloud&op=edit&bz=dzz"> {lang set}</a> </li>
-                <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod=cloud&op=space">{lang space_management}</a> </li>
-                <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod=cloud&op=oauth&bz=QCOS">{lang oauth_QCOS_add_ALY}</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&op=edit&bz=dzz"> {lang set}</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&op=space">{lang space_management}</a> </li>
+                <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&op=oauth&bz=QCOS">{lang oauth_QCOS_add_ALY}</a> </li>
             </ul>
         </div>
         <div class="main-content">
             <div class="col-md-12">
               <div style="">
                   <!--<h4 style="margin-bottom:20px">{lang set}Accesscess Key ID & Access Key Secret</h4>-->
-                  <form name="aliform" class="form-horizontal form-horizontal-left" action="{BASESCRIPT}?mod=cloud&op=oauth" method="post" onsubmit="return validate(this)">
+                  <form name="aliform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=oauth" method="post" onsubmit="return validate(this)">
                       <input type="hidden" name="alisubmit" value="true" />
                       <input type="hidden" name="bz" id="bz" value="QCOS" />
                       <input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -104,7 +104,7 @@
         if(id == '' || key == '' || region == '') {
             return;
         }
-        jQuery.getJSON('{BASESCRIPT}?mod=cloud&op=oauth&do=getBucket', { id: id, key: key,region:region,bz:bz }, function(json) {
+        jQuery.getJSON('{MOD_URL}&op=oauth&do=getBucket', { id: id, key: key,region:region,bz:bz }, function(json) {
             if(json.error){
                 showmessage(json.error);
             }else{

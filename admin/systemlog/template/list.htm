@@ -25,16 +25,16 @@
 				<!--{loop $systemlog_setting $mark $info}-->
 					<!--{if $info[is_open]==1 }-->
 					<li class="nav-item">
-						<a hidefocus="true" class="nav-link <!--{if $operation==$mark }-->active<!--{/if}-->" href="{BASESCRIPT}?mod=systemlog&type=list&operation=$mark">{$info['title']}</a>
+						<a hidefocus="true" class="nav-link <!--{if $operation==$mark }-->active<!--{/if}-->" href="{MOD_URL}&type=list&operation=$mark">{$info['title']}</a>
 					</li>
 					<!--{/if}-->
 				<!--{/loop}-->  
 			</ul>
 		</div>
 		<div class="main-content"> 
-			<form id="cpform" action="{BASESCRIPT}?mod=systemlog&type=list&operation=$operation" class="form-horizontal form-horizontal-left" method="post" name="cpform">
+			<form id="cpform" action="{MOD_URL}&type=list&operation=$operation" class="form-horizontal form-horizontal-left" method="post" name="cpform">
 				<input type="hidden" value="{FORMHASH}" name="formhash">
-				<input type="hidden" name="lpp" value="20">
+				<input type="hidden" name="lpp" value="$lpp">
 				<input type="hidden" name="keyword" value="$keyword">
 				<table class="table table-hover">
 					<thead>

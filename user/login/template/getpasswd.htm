@@ -69,20 +69,6 @@
 <!--{if $_G['setting']['pwdsafety']}--> 
 <script type="text/javascript" src="user/scripts/md5.js?{VERHASH}" reload="1"></script> 
 <!--{/if}--> 
-<script type="text/javascript">
-var loader;
-$(document).ajaxStart(function(){
-    $("button:submit").html('加载中...').attr("disabled", true);
-    loader = $('button:submit').lyearloading({
-        opacity: 0.2,
-        spinnerSize: 'nm'
-    });
-}).ajaxStop(function(){
-    loader.destroy();
-    $("button:submit").html('立即登录').attr("disabled", false);
-});
-
-</script> 
 <script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
 <script type="text/javascript" src="user/scripts/register.js?{VERHASH}"></script>
 <script type="text/javascript">

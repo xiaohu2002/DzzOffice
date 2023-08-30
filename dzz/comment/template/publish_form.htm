@@ -1,7 +1,7 @@
 <div  class="pubblog_home">
   <div id="publish_{$idtype}_{$id}" class="publishsharewrap">
     <div id="return_publish_{$idtype}_{$id}" style="display:none"></div>
-    <form id="form_{$idtype}_{$id}" name="form_{$idtype}_{$id}" class="form-horizontal" action="{DZZSCRIPT}?mod=comment&op=ajax" method="post"  onsubmit="ajaxpost('form_{$idtype}_{$id}', 'return_publish_{$idtype}_{$id}','return_publish_{$idtype}_{$id}');" style="margin:0">
+    <form id="form_{$idtype}_{$id}" name="form_{$idtype}_{$id}" class="form-horizontal" action="{MOD_URL}&op=ajax" method="post"  onsubmit="ajaxpost('form_{$idtype}_{$id}', 'return_publish_{$idtype}_{$id}','return_publish_{$idtype}_{$id}');" style="margin:0">
       <input type="hidden" name="formhash" value="{FORMHASH}" />
  	   <input type="hidden" name="replysubmit" value="true" />
       <input type="hidden" name="handlekey" value="publish_{$idtype}_{$id}" />
@@ -40,7 +40,7 @@
         </script>
           <!--{/if}-->
         </ul>
-         <a id="publish_submit_{$idtype}_{$id}" class="btn btn-primary btn-sm" type="button" disabled="disabled" title="{lang publish}(Ctrl+Enter)" href="javascript:void(0);" ><b>{lang publish}</b></a> 
+         <a id="publish_submit_{$idtype}_{$id}" class="btn btn-primary" type="button" disabled="disabled" title="{lang publish}(Ctrl+Enter)" href="javascript:void(0);" ><b>{lang publish}</b></a> 
       </div>
        <div id="attachmentViewBox_{$idtype}_{$id}" class="attachmentContainer clearfix"> </div>
     </form>

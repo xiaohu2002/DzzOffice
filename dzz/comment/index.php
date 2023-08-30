@@ -30,19 +30,21 @@ if ($_GET['do'] == 'delete') {
     }
 
 }else {
-  $perpage = 20;
   $type = isset($_GET['type']) ? trim($_GET['type']) : '';
-  $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
+  $keyword = trim($_GET['keyword']);
+	$lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
+	$checklpp = array();
+	$checklpp[$lpp] = 'selected="selected"';
   $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
-  $start = ($page - 1) * $perpage;
+  $start = ($page - 1) * $lpp;
   $gets = array(
-    'mod' => 'comment',
+    'mod' => MOD_NAME,
+		'lpp' => $lpp,
     'keyword' => $keyword,
 		'dateline' => $_GET['dateline'],
     'type' => $_GET['type']
   );
   $theurl = BASESCRIPT . "?" . url_implode($gets);
-  $refer = $theurl . '&page=' . $page;
 	if ($_GET['dateline'] == 'desc') {
     $order = 'ORDER BY dateline DESC';
 	}elseif ($_GET['author'] == 'asc') {
@@ -54,12 +56,11 @@ if ($_GET['do'] == 'delete') {
     $order = 'ORDER BY dateline ASC';
   }
   $sql = "cid!='app'";
-  $foldername = array();
   $param = array();
   if ($keyword) {
     $sql .= 'and (message LIKE %s or author LIKE %s)';
     $param[] = '%' . $keyword . '%';
-    $param[] = $keyword;
+		$param[] =$keyword;
   }
   if ($type) {
     $sql .= ' and module=%s';
@@ -69,7 +70,7 @@ if ($_GET['do'] == 'delete') {
     $navtitle=$appidxu['appname'].' - '.$navtitle;
     }
   }
-  $limitsql = 'limit ' . $start . ',' . $perpage;
+  $limitsql = 'limit ' . $start . ',' . $lpp;
   if ($_G['adminid']) {
     if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('comment') . " WHERE $sql", $param)) {
       $data = DB::fetch_all("SELECT * FROM " . DB::table('comment') . " WHERE $sql $order $limitsql", $param);
@@ -79,7 +80,7 @@ if ($_GET['do'] == 'delete') {
       $data = DB::fetch_all("SELECT * FROM " . DB::table('comment') . " WHERE authorid =$uid and $sql $order $limitsql", $param);
     }
   }
-  $multi = multi($count, $perpage, $page, $theurl);
+  $multi = multi($count, $lpp, $page, $theurl,'pull-right');
   $list = array();
   foreach ($data as $value) {
       $list[] = $value;

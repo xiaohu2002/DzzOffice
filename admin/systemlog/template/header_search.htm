@@ -1,12 +1,11 @@
-
- <div class="input-search">
-	 <form name="search" action="{BASESCRIPT}" method="get">
-			<input type="hidden" name="mod" value="{MOD_NAME}" />
-			<input type="hidden" name="type" value="$_GET['type']" />
-			<input type="hidden" name="operation" value="$operation" />
-		 <input type="hidden" name="lpp" value="$lpp" /> 
-			<i class="input-search-icon glyphicon glyphicon-search" aria-hidden="true" onclick="this.parentNode.submit()"></i>
-			 <input type="text" class="form-control search form-search" name="keyword" value="$_GET[keyword]" placeholder="关键词" id="searchval">
+<div class="input-search">
+ <form name="search" action="{MOD_URL}" method="get">
+		<input type="hidden" name="mod" value="{MOD_NAME}" />
+		<input type="hidden" name="type" value="$_GET['type']" />
+		<input type="hidden" name="operation" value="$operation" />
+		<input type="hidden" name="lpp" value="$lpp" /> 
+		<i class="input-search-icon glyphicon glyphicon-search" aria-hidden="true" onclick="this.parentNode.submit()"></i>
+		<input type="text" class="form-control search form-search" name="keyword" value="$keyword" placeholder="关键词" id="searchval">
 	</form>
 </div>
 <script type="text/javascript">

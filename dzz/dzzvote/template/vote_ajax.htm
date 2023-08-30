@@ -170,7 +170,7 @@
 			jQuery('#dzzvote_endtime_{$vote[voteid]}').datepicker();
 		});
 		jQuery('#dzzvote_post_image_upload_{$vote[voteid]}').fileupload({
-			url: '{DZZSCRIPT}?mod=dzzvote&op=ajax&do=imageUpload',
+			url: '{MOD_URL}&op=ajax&do=imageUpload',
 			dataType: 'json',
 			autoUpload: true,
 			paramName: 'dzzvotefiles[]',
@@ -295,14 +295,12 @@
 	<div class="dzzvote-body" id="vote_text_$vote[voteid]">
 		<!--{if $vote[type]==1}-->
 		<!--{loop $vote['items']['type_1'] $value}-->
-		<div class="form-group clearfix">
 			<div class="row mb-3">
         <label class="col-sm-2">$value[content]</label>
         <div class="progress">
           <div class="progress-bar  progress-bar-success" role="progressbar" aria-valuenow="{eval echo floor(($value[number]/$votetotal)*100);}" aria-valuemin="0" aria-valuemax="100" style="width: {eval echo floor(($value[number]/$votetotal)*100);}%;min-width: 20px;"> {eval echo floor(($value[number]/$votetotal)*100);}% </div>
         </div>
       </div>
-		</div>
 		<!--{/loop}-->
 		<!--{else}-->
 		<div class="dzzvote-image-body clearfix">
@@ -332,7 +330,7 @@
 	<!--{/if}-->
 
 	<!--{else}-->
-	<form id="voteform_$vote[voteid]" name="voteform" action="{DZZSCRIPT}?mod=dzzvote&op=ajax&do=itemvote" method="post" onsubmit="validate_{$vote[voteid]}(this);return false">
+	<form id="voteform_$vote[voteid]" name="voteform" action="{MOD_URL}&op=ajax&do=itemvote" method="post" onsubmit="validate_{$vote[voteid]}(this);return false">
 		<input type="hidden" name="votesubmit" value="true" />
 		<input type="hidden" name="handlekey" value="dzzvote_{$vote[voteid]}" />
 		<input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -401,7 +399,7 @@
 	<!--{if $vote[showuser]}-->
 	<div id="voteuser_{$vote[voteid]}" class="dzzvote-user clearfix">
 		<script type="text/javascript" reload="1">
-			jQuery('#voteuser_{$vote[voteid]}').load('{DZZSCRIPT}?mod=dzzvote&op=ajax&do=getvoteuser&voteid=$vote[voteid]&page=1');
+			jQuery('#voteuser_{$vote[voteid]}').load('{MOD_URL}&op=ajax&do=getvoteuser&voteid=$vote[voteid]&page=1');
 		</script>
 	</div>
 	<!--{/if}-->
@@ -461,7 +459,7 @@
 	}
 
 	function succeedhandle_dzzvote_{$vote[voteid]}(url, message, values) {
-		ajaxget('{DZZSCRIPT}?mod=dzzvote&op=ajax&do=getvoteresult&voteid=$vote[voteid]', 'dzzvote_$vote[voteid]', 'dzzvote_$vote[voteid]');
+		ajaxget('{MOD_URL}&op=ajax&do=getvoteresult&voteid=$vote[voteid]', 'dzzvote_$vote[voteid]', 'dzzvote_$vote[voteid]');
 	};
 </script>
 
@@ -478,14 +476,12 @@
 <div class="dzzvote-body" id="vote_text_$vote[voteid]">
 	<!--{if $vote[type]==1}-->
 	<!--{loop $vote['items']['type_1'] $value}-->
-	<div class="form-group clearfix">
 		<div class="row mb-3">
       <label for="colFormLabel" class="col-sm-2">$value[content]</label>
 			<div class="progress">
         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{eval echo floor(($value[number]/$votetotal)*100);}" aria-valuemin="0" aria-valuemax="100" style="width: {eval echo floor(($value[number]/$votetotal)*100);}%;min-width: 20px;"> {eval echo floor(($value[number]/$votetotal)*100);}% </div>
       </div>
     </div>
-	</div>
 	<!--{/loop}-->
 	<!--{else}-->
 	<div class="dzzvote-image-body clearfix">
@@ -513,7 +509,7 @@
 <!--{if $vote[showuser]}-->
 <div id="voteuser_{$vote[voteid]}" class="dzzvote-user clearfix">
 	<script type="text/javascript" reload="1">
-		jQuery('#voteuser_{$vote[voteid]}').load('{DZZSCRIPT}?mod=dzzvote&op=ajax&do=getvoteuser&voteid=$vote[voteid]&page=1');
+		jQuery('#voteuser_{$vote[voteid]}').load('{MOD_URL}&op=ajax&do=getvoteuser&voteid=$vote[voteid]&page=1');
 	</script>
 </div>
 <!--{/if}-->

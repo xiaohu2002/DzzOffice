@@ -667,14 +667,14 @@ function avatar($uid, $size = 'middle', $returnsrc = FALSE, $real = FALSE, $stat
     $size = in_array($size, array('big', 'middle', 'small')) ? $size : 'middle';
     $uid = abs(intval($uid));
     if (!$staticavatar && !$static) {
-        return $returnsrc ? 'avatar.php?uid=' . $uid . '&size=' . $size : '<img src="avatar.php?uid=' . $uid . '&size=' . $size . ($real ? '&type=real' : '') . '" />';
+        return $returnsrc ? 'avatar.php?uid=' . $uid . '&size=' . $size : '<img class="img-avatar" src="avatar.php?uid=' . $uid . '&size=' . $size . ($real ? '&type=real' : '') . '" />';
     } else {
         $uid = sprintf("%09d", $uid);
         $dir1 = substr($uid, 0, 3);
         $dir2 = substr($uid, 3, 2);
         $dir3 = substr($uid, 5, 2);
         $file = 'data/avatar/' . $dir1 . '/' . $dir2 . '/' . $dir3 . '/' . substr($uid, -2) . ($real ? '_real' : '') . '_avatar_' . $size . '.jpg';
-        return $returnsrc ? $file : '<img src="' . $file . '" onerror="this.onerror=null;this.src=\'data/avatar/noavatar_' . $size . '.gif\'" />';
+        return $returnsrc ? $file : '<img class="img-avatar" src="' . $file . '" onerror="this.onerror=null;this.src=\'data/avatar/noavatar_' . $size . '.gif\'" />';
     }
 }
 
@@ -999,7 +999,7 @@ function dgmdate($timestamp, $format = 'dt', $timeoffset = '9999', $uformat = ''
                 $return = $s;
             }
             if ($time >= 0 && !defined('IN_MOBILE')) {
-                $return = '<span  title="' . $s . '">' . $return . '</span>';
+                $return = '<span  class="p-2" title="' . $s . '">' . $return . '</span>';
             }
         } elseif (($days = intval(($todaytimestamp - $timestamp) / 86400)) >= 0 && $days < 7) {
             if ($days == 0) {
@@ -1010,10 +1010,10 @@ function dgmdate($timestamp, $format = 'dt', $timeoffset = '9999', $uformat = ''
                 $return = ($days + 1) . '&nbsp;' . $lang['day'] . $lang['before'];
             }
             if (!defined('IN_MOBILE')) {
-                $return = '<span  title="' . $s . '">' . $return . '</span>';
+                $return = '<span  class="p-2" title="' . $s . '">' . $return . '</span>';
             }
         } else {
-            $return = gmdate('Y-m-d', $timestamp) . '&nbsp;<span class="hidden-xs" title="' . $s . '">' . gmdate('H:s', $timestamp) . '</span>';
+            $return ='<span class="p-2" title="' . $s . '">'.gmdate('Y-m-d', $timestamp) .'&nbsp;' . gmdate('H:s', $timestamp) . '</span>';
         }
         return $return;
     } else {

@@ -15,12 +15,12 @@
 	<div class="bs-main-container  clearfix">
 		<div class="main-header clearfix">
 			<ul class="nav nav-pills">
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod=setting&operation=mail">{lang set}</a> </li>
-		        <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod=setting&op=mailcheck">{lang setting_mail_check}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=mail">{lang set}</a> </li>
+		        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&op=mailcheck">{lang setting_mail_check}</a> </li>
 			</ul>
 		</div>
 		<div class="main-content">
-			<form id="cpform" action="{BASESCRIPT}?mod=setting&op=mailcheck" class="form-horizontal form-horizontal-left" autocomplete="off" method="post" name="cpform" target="mailcheckiframe">
+			<form id="cpform" action="{MOD_URL}&op=mailcheck" class="form-horizontal form-horizontal-left" autocomplete="off" method="post" name="cpform" target="mailcheckiframe">
 				<input type="hidden" value="{FORMHASH}" name="formhash">
 				<input type="hidden" value="true" name="mailchecksubmit">
 				<div class="row mb-3">

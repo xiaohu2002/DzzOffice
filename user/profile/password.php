@@ -137,12 +137,11 @@ elseif($do == 'login'){
   $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
   $start = ($page - 1) * $lpp;
   $gets = array(
-    'mod' => 'profile',
+    'mod' => MOD_NAME,
 		'op' => $_GET['op'],
 		'do' => $_GET['do']
   );
   $theurl = BASESCRIPT . "?" . url_implode($gets);
-  $refer = $theurl . '&page=' . $page;
 	$logdir = DZZ_ROOT.'./data/log/';
 	$logfiles = get_log_files($logdir, $operation);
 	 

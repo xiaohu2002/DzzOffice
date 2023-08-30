@@ -175,7 +175,7 @@ if (preg_match('/win/i', $agent)) {
 	$perpage = 10;
 	$start = ($page - 1) * $perpage;
 	$limit = $start . "-" . $perpage;
-	$gets = array('mod' => 'comment', 'op' => 'ajax', 'do' => 'getcomment', 'id' => $id, 'idtype' => $idtype, );
+	$gets = array('mod' => MOD_NAME, 'op' => 'ajax', 'do' => 'getcomment', 'id' => $id, 'idtype' => $idtype, );
 	$theurl = BASESCRIPT . "?" . url_implode($gets);
 	$count = C::t('comment') -> fetch_all_by_idtype($id, $idtype, $limit, true);
 	$list = array();

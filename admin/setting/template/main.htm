@@ -70,122 +70,122 @@
       </ul>
       <!--{elseif $operation=='mail'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"><a class="nav-link active" href="{BASESCRIPT}?mod=setting&operation=mail">{lang set}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{BASESCRIPT}?mod=setting&op=mailcheck">{lang setting_mail_check}</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{MOD_URL}&operation=mail">{lang set}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{MOD_URL}&op=mailcheck">{lang setting_mail_check}</a></li>
       </ul>
       <!--{elseif $operation=='smiley'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"><a class="nav-link active" href="{BASESCRIPT}?mod=setting&operation=smiley">{lang expression_set}</a> </li>
-        <li class="nav-item"><a class="nav-link" href="{BASESCRIPT}?mod=setting&op=smiley">{lang expression_class}</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{MOD_URL}&operation=smiley">{lang expression_set}</a> </li>
+        <li class="nav-item"><a class="nav-link" href="{MOD_URL}&op=smiley">{lang expression_class}</a></li>
       </ul>
       <!--{elseif $operation=='qywechat'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"><a class="nav-link active" href="{BASESCRIPT}?mod=setting&operation=qywechat">{lang
+        <li class="nav-item"><a class="nav-link active" href="{MOD_URL}&operation=qywechat">{lang
           enterprise_binding}</a></li>
         <!--{if $setting[CorpID] && $setting[CorpSecret]}-->
-        <li class="nav-item"><a class="nav-link" href="{BASESCRIPT}?mod=setting&op=assistant">{lang enterprise_little_helper}</a></li>
-        <li class="nav-item"><a class="nav-link" href="{BASESCRIPT}?mod=setting&op=wxsyn">{lang data_synchronization}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{MOD_URL}&op=assistant">{lang enterprise_little_helper}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{MOD_URL}&op=wxsyn">{lang data_synchronization}</a></li>
         <!--{/if}-->
       </ul>
       <!--{elseif $operation=='basic'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=basic">{lang members_verify_base}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=datetime">{lang time_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
+        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=basic">{lang members_verify_base}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=datetime">{lang time_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=upload">{lang upload_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=at">@{lang sector_set}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=notification">{lang Notification Settings}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=watermark">水印设置</a></li>
       </ul>
       <!--{elseif $operation=='at'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=basic">{lang members_verify_base}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=datetime">{lang time_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=basic">{lang members_verify_base}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=datetime">{lang time_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=upload">{lang upload_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=at">@{lang sector_set}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=notification">{lang Notification Settings}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=watermark">水印设置</a></li>
       </ul>
 			<!--{elseif $operation=='notification'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=basic">{lang members_verify_base}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=datetime">{lang time_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=basic">{lang members_verify_base}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=datetime">{lang time_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=upload">{lang upload_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=at">@{lang sector_set}</a> </li>
+				<li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=notification">{lang Notification Settings}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=watermark">水印设置</a></li>
       </ul>
       <!--{elseif $operation=='upload'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=basic">{lang members_verify_base}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=datetime">{lang time_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=basic">{lang members_verify_base}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=datetime">{lang time_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=upload">{lang upload_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=at">@{lang sector_set}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=notification">{lang Notification Settings}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=watermark">水印设置</a></li>
       </ul>
       <!--{elseif $operation=='loginset'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
-        <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=denlu">{lang basicSet}</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=access">{lang register_visit}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=sec">{lang verification_code_set}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=qqlogin">{lang QQ login Settings}</a> </li>
+        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='denlu'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=denlu">{lang basicSet}</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=access">{lang register_visit}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=sec">{lang verification_code_set}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=qqlogin">{lang QQ login Settings}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
 			<!--{elseif $operation=='qqlogin'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li> 
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=denlu">{lang basicSet}</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=access">{lang register_visit}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=sec">{lang verification_code_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=qqlogin">{lang QQ login Settings}</a> </li> 
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='access'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
-        <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=denlu">{lang basicSet}</a></li>
+        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=access">{lang register_visit}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=sec">{lang verification_code_set}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=qqlogin">{lang QQ login Settings}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='datetime'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=basic">{lang members_verify_base}</a> </li>
-        <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=datetime">{lang time_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=basic">{lang members_verify_base}</a> </li>
+        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=datetime">{lang time_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=upload">{lang upload_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=at">@{lang sector_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=notification">{lang Notification Settings}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=watermark">水印设置</a></li>
       </ul>
 			<!--{elseif $operation=='watermark'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=basic">{lang members_verify_base}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=datetime">{lang time_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=upload">{lang upload_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=at">@{lang sector_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=notification">{lang Notification Settings}</a> </li>
-				<li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=watermark">水印设置</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=basic">{lang members_verify_base}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=datetime">{lang time_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=upload">{lang upload_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=at">@{lang sector_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=notification">{lang Notification Settings}</a> </li>
+				<li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=watermark">水印设置</a></li>
       </ul>
       <!--{elseif $operation=='sec'}-->
       <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=denlu">{lang basicSet}</a></li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=access">{lang register_visit}</a> </li>
-        <li class="nav-item"> <a class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&operation=sec">{lang verification_code_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=qqlogin">{lang QQ login Settings}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{BASESCRIPT}?mod={MOD_NAME}&operation=loginset">{lang login_page_set}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=denlu">{lang basicSet}</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=access">{lang register_visit}</a> </li>
+        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=sec">{lang verification_code_set}</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=qqlogin">{lang QQ login Settings}</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{/if}--> 
     </div>
     <div class="main-content">
       <!--{if $operation=='basic'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post"  name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post"  name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="basic" name="operation">
         <div class="row mb-3">
@@ -390,7 +390,7 @@
           }
       </script> 
       <!--{elseif $operation=='at'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform" style="margin-top: 15px;">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform" style="margin-top: 15px;">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="upload" name="operation">
           <!--{loop $usergroups $value}-->
@@ -427,7 +427,7 @@
         </dl>
       </form>
       <!--{elseif $operation=='notification'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="notification" name="operation">
         <div class="row mb-3">
@@ -477,7 +477,7 @@
       });
       </script>
       <!--{elseif $operation=='watermark'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="watermark" name="operation">
         <div class="row mb-3">
@@ -499,7 +499,7 @@
         </dl>
       </form>
       <!--{elseif $operation=='upload'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="upload" name="operation">
 
@@ -570,7 +570,7 @@
           })
       </script>
       <!--{elseif $operation=='qqlogin'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="qqlogin" name="operation">
         <div class="row mb-3">
@@ -590,14 +590,14 @@
           <div class="row mb-3">
             <label class="col-sm-2">QQ APPID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" required name="settingnew[qq_appid]" value="$setting[qq_appid]" />
+              <input type="text" class="form-control" name="settingnew[qq_appid]" value="$setting[qq_appid]" />
               <span class="help-block">{lang qq_app_id}</span>
             </div>
           </div>
           <div class="row mb-3">
             <label class="col-sm-2" for="settingnew[qq_appkey]">QQ APPKAY</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" required name="settingnew[qq_appkey]" value="$setting[qq_appkey]" />
+              <input type="text" class="form-control" name="settingnew[qq_appkey]" value="$setting[qq_appkey]" />
               <span class="help-block">{lang qq_app_key}</span>
             </div>
           </div>
@@ -627,7 +627,7 @@
         </dl>
       </form>
       <!--{elseif $operation=='loginset'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="loginset" name="operation">
         <input type="hidden" value="1" name="settingnew[loginset][available]">
@@ -715,7 +715,7 @@
           })
       </script> 
       <!--{elseif $operation=='mail'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="mail" name="operation">
         <div class="row mb-3">
@@ -871,7 +871,7 @@
         }
       </script>
       <!--{elseif $operation=='denlu'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="denlu" name="operation">
         <div class="row mb-3">
@@ -916,7 +916,7 @@
       </script>
       <!--文件夹权限设置-->
       <!--{elseif $operation=='access'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="access" name="operation">
         <div class="row mb-3">
@@ -1025,7 +1025,7 @@
               selorg.openarr = openarr;
           });
       </script>
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash"/>
         <input type="hidden" value="space" name="operation"/>
         <div class="row mb-3">
@@ -1102,7 +1102,7 @@
       <link rel="stylesheet" type="text/css" href="static/tagsinput/jquery.tagsinput.css">
       <script type="text/javascript" src="static/tagsinput/jquery.tagsinput.js"></script>
       <!--{elseif $operation=='smiley'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="smiley" name="operation">
         <div class="row mb-3">
@@ -1131,7 +1131,7 @@
         </dl>
       </form>
       <!--{elseif $operation=='datetime'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="datetime" name="operation">
         <div class="row mb-3">
@@ -1201,7 +1201,7 @@
           </ul>
         </div>
       </div>
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="sec" name="operation">
         <div class="row mb-3">
@@ -1443,7 +1443,7 @@
       }
       </style>
       <!--{elseif $operation=='censor'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="censor" name="operation">
         <div class="row mb-3">
@@ -1465,7 +1465,7 @@
         </dl> 
       </form>
       <!--{elseif $operation=='qywechat'}-->
-      <form id="cpform" action="{BASESCRIPT}?mod=setting" class="form-horizontal-left" method="post" name="cpform" onsubmit="return validate(this);">
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform" onsubmit="return validate(this);">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="true" name="settingsubmit">
         <input type="hidden" value="qywechat" name="operation">

@@ -27,7 +27,7 @@
         <img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}">
       </div>
       <h2 class="text-center">{lang register_welcome_tip}</h2>
-      <form class="signin-form needs-validation" action="user.php?mod=register" method="POST" name="registerform" id="registerform" role="form" enctype="multipart/form-data" onsubmit="check_submit(this);return false">
+      <form class="signin-form needs-validation" action="{MOD_URL}" method="POST" name="registerform" id="registerform" role="form" enctype="multipart/form-data" onsubmit="check_submit(this);return false">
 				<input type="hidden" name="regsubmit" value="yes"/>
 				<input type="hidden" name="formhash" value="{FORMHASH}"/>
 				<input type="hidden" name="referer" value="$referer"/>
@@ -66,7 +66,7 @@
 				<div class="mb-3">
 					<div class="form-check">
 						<input type="checkbox" class="form-check-input" name="agreebbrule" value="$bbrulehash" id="agreebbrule" checked="checked" />
-						<label for="agreebbrule">{lang agree}<a class="ml20 pull-left" href="javascript:;" onclick="showWindow('bbrule','user.php?mod=register&op=ajax&do=bbrule')">{lang rulemessage}</a></label>
+						<label for="agreebbrule">{lang agree}<a class="ml20 pull-left" href="javascript:;" onclick="showWindow('bbrule','{MOD_URL}&op=ajax&do=bbrule')">{lang rulemessage}</a></label>
 					</div>
 				</div>
 				<!--{/if}-->
@@ -105,17 +105,6 @@
 			});
 		}
 	});
-	var loader;
-  $(document).ajaxStart(function(){
-      $("button:submit").html('加载中...').attr("disabled", true);
-      loader = $('button:submit').lyearloading({
-          opacity: 0.2,
-          spinnerSize: 'nm'
-      });
-  }).ajaxStop(function(){
-      loader.destroy();
-      $("button:submit").html('<!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}-->$_G[setting][reglinkname]<!--{/if}-->').attr("disabled", false);
-  });
 </script> 
 <script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
 <!--{template common/footer}-->

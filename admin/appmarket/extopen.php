@@ -50,7 +50,7 @@ $appid = intval($_GET['appid']);
 
 $page = empty($_GET['page']) ? 1 : intval($_GET['page']);
 $perpage = 20;
-$gets = array('mod' => 'appmarket', 'op' => 'extopen', 'ext' => $ext, 'appid' => $appid);
+$gets = array('mod' => MOD_NAME, 'op' => 'extopen', 'ext' => $ext, 'appid' => $appid);
 $theurl = BASESCRIPT . "?" . url_implode($gets);
 $refer = urlencode($theurl . '&page=' . $page);
 

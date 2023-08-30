@@ -104,7 +104,7 @@
 				<div class="form-check">
           <input class="form-check-input" type="checkbox" name="chkall" id="chkall">
           <label class="form-check-label" for="seccodestatus2"><div class="app-info pull-left">
-                <a href="{BASESCRIPT}?mod=appmarket">{lang total}<span class="num">$count</span>{lang ge}{lang app}</a>
+                <a href="{MOD_URL}">{lang total}<span class="num">$count</span>{lang ge}{lang app}</a>
                 <div class="select-info">
                 {lang selected}<span class="num">0</span>{lang ge}{lang app}
                 <a class="btn btn-w-md btn-round btn-primary " id="update_selected" title="{lang update_onekey}" href="javascript:;" onclick="upgrade_all();"><i class="glyphicon glyphicon-upload"></i> {lang update_onekey}</a>
@@ -117,7 +117,7 @@
 			</div>
 		</div> 
 		<div class="main-content clearfix">
-			<form id="appform" name="appform" class="form-horizontal" action="{BASESCRIPT}?mod=appmarket" method="post">
+			<form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}" method="post">
 				<input type="hidden" name="appsubmit" value="true" />
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 				<!--{loop $list $value}--> 

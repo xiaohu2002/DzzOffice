@@ -4,9 +4,6 @@
 <script type="text/javascript" src="static/dzzthumb/jquery.dzzthumb.js?{VERHASH}"></script>
 <link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.css">
 <style type="text/css">
-	.overflow-auto{
-		max-height: 60px;
-	}
 	.lie{
 		min-width: 120px
 	}
@@ -35,8 +32,8 @@
 		<!--{if !$list}-->
     <div style="text-align: center;">
       <img src="static/image/common/no_list.png" /><br>
-      <span class="no-result-title">{lang share_file_content}</span>
-      </div>
+      <span class="no-result-title">{lang no_relevant_content}</span>
+    </div>
 		<!--{else}-->
     <div class="clearfix">
       <ol class="breadcrumb">
@@ -55,7 +52,7 @@
       </ol>
     </div>
     <div class="main-header clearfix">
-      <form name="search" class="form-horizontal" action="{BASESCRIPT}" method="get">
+      <form name="search" class="form-horizontal" action="{MOD_URL}" method="get">
         <input type="hidden" name="mod" value="filemanage" />
         <ul class="nav nav-pills">
           <li>
@@ -89,12 +86,12 @@
         </ul>
       </form>
     </div>
-    <form id="appform" name="appform" class="form-horizontal " action="{BASESCRIPT}?mod=filemanage" method="post" >
+    <form id="appform" name="appform" class="form-horizontal " action="{MOD_URL}" method="post" >
       <input type="hidden" name="delsubmit" value="true" />
       <input type="hidden" name="formhash" value="{FORMHASH}" />
-			<input type="hidden" name="lpp" value="20">
+			<input type="hidden" name="lpp" value="$lpp">
       <input type="hidden" name="refer" value="$refer" />
-
+			<input type="hidden" name="keyword" value="$keyword" /> 
       <table class="table table-hover">
         <thead node-type="title" class="title">
           <tr class="item clearfix">
@@ -126,23 +123,23 @@
                 </div>
               </div>
             </td>
-            <td node-type="name" class="name" title="$value[name]" data-size="$value[name]"><div class="overflow-auto"> 
+            <td node-type="name" class="name" title="$value[name]" data-size="$value[name]">
               <!--{if $value[img]}--><img class="icon" title="$value[name]" src="$value[img]" <!--{if $value[type]=='image' }--> data-original="$value[url]" data-dpath="$value[dpath]" 
               <!--{/if}-->/> 
               <!--{/if}--> 
-              <span node-type="name-text" data-href="$value[shareurl]" class="name-text enabled">$value[name]</span></div>
+              <span node-type="name-text" data-href="$value[shareurl]" class="name-text enabled">$value[name]</span>
             </td>
-            <td><!--{if $value[type]=='folder'}--><!--{else}--><div class="overflow-auto">$value[fsize]</div><!--{/if}--></td>
-            <td><div class="overflow-auto">$value[ftype]</div></td>
-            <td><div class="overflow-auto">$value[relpath]</div></td>
+            <td><!--{if $value[type]=='folder'}--><!--{else}--><div>$value[fsize]</div><!--{/if}--></td>
+            <td><div>$value[ftype]</div></td>
+            <td><div>$value[relpath]</div></td>
             <!--{if $_G[adminid]}-->
-            <td><div class="overflow-auto">$value[username]</div></td>
+            <td><div>$value[username]</div></td>
             <!--{/if}-->
-            <td><div class="overflow-auto">$value[fdateline]</div></td>
+            <td><div>$value[fdateline]</div></td>
             <td>
               <div>
                 <a node-type="btn-item" data-key="download" class="btn btn-outline-info" title="下载" href="javascript:void(0);"><i class="dzz dzz-download"></i></a>
-                <a class="btn btn-outline-info" href="{BASESCRIPT}?mod=filemanage&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" data-bs-toggle="tooltip" title="{lang delete}" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="dzz dzz-delete"></i></a>
+                <a class="btn btn-outline-info" href="{MOD_URL}&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" data-bs-toggle="tooltip" title="{lang delete}" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="dzz dzz-delete"></i></a>
                 <!--{if $value[type]=='folder'}--><!--{else}-->
                 <a class="btn btn-outline-info" href="javascript:;" onclick="togglecplog('{$key}')" data-bs-toggle="tooltip" title="更多信息"><i class="dzz dzz-description"></i></a>
                 <!--{/if}-->

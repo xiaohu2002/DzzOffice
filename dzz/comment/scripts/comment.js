@@ -6,7 +6,7 @@ var html=''
   	html+='	<div class="left_ifed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true">'+arr['avatar']+'</a> </div>';
   	html+='	<div class="right_ifed">';
     html+=' 	<div class="main_fed">';
-    html+='  		 <div class="source_fed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" class="appuser_sfed skip_mmfed">'+arr['author']+'</a><span class="cont_sfed">'+__lang.talk+'：</span> </div>';
+    html+='  		 <div class="source_fed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" class="appuser_sfed">'+arr['author']+'</a><span class="text-muted">'+__lang.talk+'：</span> </div>';
     html+='  		<div class="card master_mfed"><span class="content_mmfed">'+arr['message']+'</span></div>';
 	html+='	   <div class="attachment_fed">';
 for(var i in arr['attachs']){
@@ -19,11 +19,11 @@ for(var i in arr['attachs']){
      html+='		<div class="file_fed imgfile_fed clearfix"> '+attach['title']+'<span class="kb_nffed">('+attach['filesize']+')</span>';
      html+='			<p class="down_ffed">';
 	 if(attach.downloads>0){
-     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
+     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
 	 }else{
-	 	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
+	 	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
 	 }
-   	html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed skip_mmfed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+   	html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
      html+='	        </p>';
      html+='	     </div>';
 	}else if(attach.type=='video'){
@@ -33,11 +33,11 @@ for(var i in arr['attachs']){
      html+='           <p class="down_ffed">';
 	 
      if(attach.downloads>0){
-     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
+     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
 	 }else{
-	 	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
+	 	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
 	 }
-   	 html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed skip_mmfed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+   	 html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
      html+='	        </p>';
      html+='	     </div>';
 }else if(attach.type=='dzzdoc' || attach.type=='link'){
@@ -45,7 +45,7 @@ for(var i in arr['attachs']){
       html+='          <div class="ico_ffed "><a href="javascript:;" onclick="feed_attach_preview(\''+attach['qid']+'\')"><img src="'+attach['img']+'" alt="'+attach['title']+'" style="height:50px;"></a></div>';
       html+='          <p class="name_ffed">'+attach['title']+'</p>';
       html+='           <p class="down_ffed">';
-      html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
+      html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
       html+='	</div>';
 }else{
       html+='	<div class="file_fed file_fed_'+attach.type+' clearfix">';
@@ -53,14 +53,14 @@ for(var i in arr['attachs']){
       html+='          <p class="name_ffed">'+attach['title']+'</p>';
      html+='           <p class="down_ffed">';
 	 if(attach.preview>0){
-     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
+     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
 	 }
      if(attach.downloads>0){
-     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
+     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
 	 }else{
-	 	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
+	 	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
 	 }
-   		 html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed skip_mmfed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+   		 html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
      	html+='	        </p>';
      	html+='	     </div>';
  }
@@ -130,11 +130,11 @@ function feed_reply(arr){
      html+='		<div class="file_fed imgfile_fed clearfix"> '+attach['title']+'<span class="kb_nffed">('+attach['filesize']+')</span>';
      html+='			<p class="down_ffed">';
 	 if(attach.downloads>0){
-     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
+     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
 	 }else{
-	 	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
+	 	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
 	 }
-   	 html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed skip_mmfed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+   	 html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
      html+='	        </p>';
      html+='	     </div>';
 }else if(attach.type=='video'){
@@ -142,8 +142,8 @@ function feed_reply(arr){
       html+='          <div class="ico_ffed " style="margin-right:20px"><a href="javascript:;" onclick="feed_attach_preview(\''+attach['qid']+'\')"><img src="'+attach['img']+'" alt="'+attach['title']+'" class="videoclass50_50" ></a></div>';
       html+='          <p class="name_ffed">'+attach['title']+'</p>';
       html+='           <p class="down_ffed">';
-      html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
-   	 // html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed skip_mmfed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+      html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
+   	 // html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
      html+='	        </p>';
      html+='	     </div>';
 }else if(attach.type=='dzzdoc' || attach.type=='link'){
@@ -151,7 +151,7 @@ function feed_reply(arr){
       html+='          <div class="ico_ffed "><a href="javascript:;" onclick="feed_attach_preview(\''+attach['qid']+'\')"><img src="'+attach['img']+'" alt="'+attach['title']+'" style="height:50px;"></a></div>';
       html+='          <p class="name_ffed">'+attach['title']+'</p>';
       html+='           <p class="down_ffed">';
-      html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
+      html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
       html+='	</div>';
 }else{
       html+='	<div class="file_fed file_fed_'+attach.type+' clearfix">';
@@ -159,14 +159,14 @@ function feed_reply(arr){
       html+='          <p class="name_ffed">'+attach['title']+'</p>';
      html+='           <p class="down_ffed">';
 	 if(attach.preview>0){
-     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
+     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
 	 }
      if(attach.downloads>0){
-     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
+     	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
 	 }else{
-	 	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
+	 	html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
 	 }
-   		 html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed skip_mmfed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+   		 html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
      	html+='	        </p>';
      	html+='	     </div>';
 	 }

@@ -6,7 +6,7 @@
 	<div class="right_ifed">
 		<div class="main_fed">
 			<div class="source_fed">
-				<a href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true" class="appuser_sfed skip_mmfed">$value[author]</a><span class="cont_sfed">{lang talk}：</span> </div>
+				<a href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true" class="appuser_sfed">$value[author]</a><span class="text-muted">{lang talk}：</span> </div>
 			<div class="card master_mfed"><span class="content_mmfed">$value[message]</span></div>
 			<div class="attachment_fed">
 				<!--{loop $value[attachs] $attach}-->
@@ -20,10 +20,10 @@
 					</div><div class="file_fed imgfile_fed clearfix">
 					<a class="min_ipfed" hidefocus="true" href="javascript:;"> $attach[title]<span class="kb_nffed">($attach[filesize])</span>
 						</a><p class="down_ffed"><a class="min_ipfed" hidefocus="true" href="javascript:;">
-							</a><a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed" onclick="feed_downAttach('$attach[qid]')">{lang download}
+							</a><a href="javascript:;" title="" hidefocus="true" class="btn_dffed" onclick="feed_downAttach('$attach[qid]')">{lang download}
 								<!--{if $attach[downloads]>0}-->($attach[downloads]{lang degree})<!--{/if}-->
 							</a>
-							<a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed skip_mmfed" onclick="feed_attach_saveto('$attach[qid]')">{lang js_saved_my_documents}</a>
+							<a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed" onclick="feed_attach_saveto('$attach[qid]')">{lang js_saved_my_documents}</a>
 						</p>
 					</div>
 					<!--{elseif $attach['type']=='video'}-->
@@ -34,7 +34,7 @@
 						<p class="name_ffed">$attach[title]</p>
 						<p class="down_ffed">
 							<!--{if $attach[preview]>0}-->
-							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed skip_mmfed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
+							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
 							<!--{/if}-->
 						</p>
 					</div>
@@ -45,7 +45,7 @@
 						</div>
 						<p class="name_ffed">$attach[title]</p>
 						<p class="down_ffed">
-							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed skip_mmfed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
+							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
 
 						</p>
 					</div>
@@ -57,12 +57,12 @@
 						</p>
 						<p class="down_ffed">
 							<!--{if $attach[preview]>0}-->
-							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed skip_mmfed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
+							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
 							<!--{/if}-->
-							<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed" onclick="feed_downAttach('$attach[qid]')">{lang download}
+							<a href="javascript:;" title="" hidefocus="true" class="btn_dffed" onclick="feed_downAttach('$attach[qid]')">{lang download}
 								<!--{if $attach[downloads]>0}--><span class="text-gray">($attach[downloads]{lang degree})</span><!--{/if}-->
 							</a>
-							<a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed skip_mmfed" onclick="feed_attach_saveto('$attach[qid]')">{lang js_saved_my_documents}</a>
+							<a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed" onclick="feed_attach_saveto('$attach[qid]')">{lang js_saved_my_documents}</a>
 						</p>
 					</div>
 					<!--{/if}-->
@@ -113,7 +113,7 @@
 				<!--{/loop}-->
 				<script type="text/javascript" reload="1">
 					jQuery('#comment_$value[cid]').find('.txt_cfed a').on('click', function() {
-						ajaxget('{DZZSCRIPT}?mod=comment&op=ajax&do=getreplys&cid=$value[cid]&allowattach=$_GET[allowattach]&allowat=$_GET[allowat]&allowsmiley=$_GET[allowsmiley]', 'reply_list_$value[cid]', 'reply_list_$value[cid]');
+						ajaxget('{MOD_URL}&op=ajax&do=getreplys&cid=$value[cid]&allowattach=$_GET[allowattach]&allowat=$_GET[allowat]&allowsmiley=$_GET[allowsmiley]', 'reply_list_$value[cid]', 'reply_list_$value[cid]');
 						return false;
 					});
 				</script>

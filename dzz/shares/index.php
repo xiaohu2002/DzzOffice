@@ -104,7 +104,7 @@ if ($do == 'adddowns') {
     $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
     $perpage = 20;
     $start = ($page - 1) * $perpage;
-    $gets = array('mod' => 'shares', 'sid' => $sid,);
+    $gets = array('mod' => MOD_NAME, 'sid' => $sid,);
     $theurl = BASESCRIPT . "?" . url_implode($gets);
     $ordersql = '';
     $asc = (isset($_GET['asc'])) ? intval($_GET['asc']) : 1;

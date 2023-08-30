@@ -401,15 +401,13 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	font: 12px/20px Verdana, "\5B8B\4F53", "\65B0\5B8B\4F53", sans-serif
 }
 .source_fed a{
-	text-decoration: none
+	text-decoration: none;
+	color: var(--bs-primary);
 }
 .appuser_sfed {
 	vertical-align: middle;
 	margin-left: 5px;
 	margin-right: 5px;
-}
-.cont_sfed {
-	vertical-align: middle
 }
 .master_mfed {
 	background: #f2f6fc;

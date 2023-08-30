@@ -64,7 +64,7 @@
 	   });
 	 <!--{else}-->  
 	  jQuery('#comment_{$cid}').find('.txt_cfed a').on('click',function(){
-			 ajaxget('{DZZSCRIPT}?mod=comment&op=ajax&do=getreplys&cid=$cid','reply_list_$cid','reply_list_$cid');
+			 ajaxget('{MOD_URL}&op=ajax&do=getreplys&cid=$cid','reply_list_$cid','reply_list_$cid');
 			 return false;
 	  });
 	 <!--{/if}-->

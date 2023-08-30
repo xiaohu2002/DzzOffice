@@ -110,17 +110,6 @@
       });
     }
     });
-	var loader;
-  $(document).ajaxStart(function(){
-      $("button:submit").html('加载中...').attr("disabled", true);
-      loader = $('button:submit').lyearloading({
-          opacity: 0.2,
-          spinnerSize: 'nm'
-      });
-  }).ajaxStop(function(){
-      loader.destroy();
-      $("button:submit").html('{lang now_your_email}').attr("disabled", false);
-  });
 </script>
 <script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
 <!--{template common/footer}-->

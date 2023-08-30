@@ -18,16 +18,16 @@
 		<div class="main-header clearfix">
 			<ul class="nav nav-pills">
 				<li class="nav-item">
-					<a hidefocus="true" class="nav-link <!--{if empty($_GET[ 'edit']) && empty($_GET[ 'run'])}-->active<!--{/if}-->" href="{BASESCRIPT}?mod={MOD_NAME}&op=cron">{lang cron}</a>
+					<a hidefocus="true" class="nav-link <!--{if empty($_GET[ 'edit']) && empty($_GET[ 'run'])}-->active<!--{/if}-->" href="{MOD_URL}&op=cron">{lang cron}</a>
 				</li>
 				<!--{if !empty($_GET['edit'])}-->
 				<li class="nav-item">
-					<a hidefocus="true" class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&op=cron&edit=$_GET[edit]">{lang misc_cron_edit}</a>
+					<a hidefocus="true" class="nav-link active" href="{MOD_URL}&op=cron&edit=$_GET[edit]">{lang misc_cron_edit}</a>
 				</li>
 				<!--{/if}-->
 				<!--{if !empty($_GET['run'])}-->
 				<li class="nav-item">
-					<a hidefocus="true" class="nav-link active" href="{BASESCRIPT}?mod={MOD_NAME}&op=cron&run=$_GET[run]">{lang misc_cron_operation}</a>
+					<a hidefocus="true" class="nav-link active" href="{MOD_URL}&op=cron&run=$_GET[run]">{lang misc_cron_operation}</a>
 				</li>
 				<!--{/if}-->
 			</ul>
@@ -48,7 +48,7 @@
 			<ul class="help-block">
 				<h4>{lang board_message}</h4> {lang misc_cron_edit_tips}
 			</ul>
-			<form id="cpform" action="{BASESCRIPT}?mod=system&op=cron&edit=$cronid" class="form-horizontal form-horizontal-left" method="post" name="cpform">
+			<form id="cpform" action="{MOD_URL}&op=cron&edit=$cronid" class="form-horizontal form-horizontal-left" method="post" name="cpform">
 				<input type="hidden" value="{FORMHASH}" name="formhash">
 				<input type="hidden" value="true" name="editsubmit">
 				<div class="row mb-3">
@@ -107,7 +107,7 @@
 			<ul class="help-block">
 				<h5>{lang board_message}</h5> {lang misc_cron_tips}
 			</ul>
-			<form id="cpform" action="{BASESCRIPT}?mod=system&op=cron" class="form-horizontal form-horizontal-left" method="post" name="cpform">
+			<form id="cpform" action="{MOD_URL}&op=cron" class="form-horizontal form-horizontal-left" method="post" name="cpform">
 				<input type="hidden" value="{FORMHASH}" name="formhash">
 				<input type="hidden" value="true" name="cronssubmit">
 				<table class="table table-striped table-hover">
@@ -143,10 +143,10 @@
 						<td>$cron[nextrun]</td>
 
 						<td>
-							<a href="{BASESCRIPT}?mod=system&op=cron&edit=$cron[cronid]">{lang edit}</a>
+							<a href="{MOD_URL}&op=cron&edit=$cron[cronid]">{lang edit}</a>
 							<br />
 							<!--{if $cron['run']}-->
-							<a href="{BASESCRIPT}?mod=system&op=cron&run=$cron[cronid]">{lang execute}</a>
+							<a href="{MOD_URL}&op=cron&run=$cron[cronid]">{lang execute}</a>
 							<!--{else}-->
 							<a href="javascript:;" class="text-muted">{lang execute}</a>
 							<!--{/if}-->

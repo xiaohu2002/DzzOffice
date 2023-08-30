@@ -68,7 +68,7 @@
             })
         } else {
             jQuery('#upload').fileupload({
-                url: 'user.php?mod=profile&op=avatar&do=imageupload',
+                url: '{MOD_URL}&op=avatar&do=imageupload',
                 dataType: 'json',
                 autoUpload: true,
                 maxChunkSize: 2000000, //2M
@@ -103,10 +103,10 @@
         var inst = jQuery('.cropimage').data('cropbox');
         jQuery('#imagedata').val(inst.getDataURL());
         jQuery('#avatar_form_btn').button('loading');
-        jQuery.post('user.php?mod=profile&op=avatar', jQuery('#avatar_form').serialize(), function(json) {
+        jQuery.post('{MOD_URL}&op=avatar', jQuery('#avatar_form').serialize(), function(json) {
             if(json.msg == 'success') {
                 showmessage('{lang avatar_uploaded_successfully_time}', 'success', 3000, 1);
-                window.setTimeout(function() { window.location.href = 'user.php?mod=profile&op=avatar&t=' + new Date().getTime(); }, 3000);
+                window.setTimeout(function() { window.location.href = '{MOD_URL}&op=avatar&t=' + new Date().getTime(); }, 3000);
             } else {
                 showmessage(json.error, 'success', 3, 1);
             }

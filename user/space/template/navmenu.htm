@@ -11,7 +11,7 @@
           <ul class="langlist popbox-menu u-bottom list-unstyled">
           <!--{loop $langList $key $value}-->
             <li>
-              <a href="user.php?mod=space&op=yuyan&do=$key" class="langset-item" data-lang="$key">
+              <a href="{MOD_URL}&op=yuyan&do=$key" class="langset-item" data-lang="$key">
                 <!--{if $space[language] == $key}--><span class="dzz dzz-done"></span><!--{/if}-->$value
               </a>
             </li>
@@ -20,7 +20,7 @@
         </li>
 		<!--{/if}-->
 		<li>
-          <a href="javascript:;" onclick="showWindow('about','user.php?mod=space&op=about&modname=$_GET[modname]');popbox();">{lang about}</a>
+          <a href="javascript:;" onclick="showWindow('about','{MOD_URL}&op=about&modname=$_GET[modname]');popbox();">{lang about}</a>
 		</li>
 		<!--{if $_G['uid']>0}-->
 		<!--{if !$_G['setting']['bbclosed'] || !$_G['adminid'] ==0}-->

@@ -21,18 +21,18 @@
 		<div class="main-header clearfix ">
 			<ul class="nav nav-pills">
 				<li class="nav-item">
-					<a href="{BASESCRIPT}?mod=setting&operation=smiley">{lang expression_set}</a>
+					<a href="{MOD_URL}&operation=smiley">{lang expression_set}</a>
 				</li>
 				<li class="nav-item">
-					<a href="{BASESCRIPT}?mod=setting&op=smiley">{lang expression_class}</a>
+					<a href="{MOD_URL}&op=smiley">{lang expression_class}</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="{BASESCRIPT}?mod=setting&operation=$operation&op=smiley&id=$id">{lang detailedness} - $smtype[name]</a>
+					<a class="nav-link active" href="{MOD_URL}&operation=$operation&op=smiley&id=$id">{lang detailedness} - $smtype[name]</a>
 				</li>
 			</ul>
 		</div>
 		<div class="main-content clearfix" style="border-top:1px solid #FFF">
-			<form id="appform" name="appform" class="form-horizontal" action="{BASESCRIPT}?mod=setting&op=smiley&operation=edit" method="post">
+			<form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}&op=smiley&operation=edit" method="post">
 				<input type="hidden" name="editsubmit" value="true" />
 				<input type="hidden" name="id" value="$id" />
 				<input type="hidden" name="formhash" value="{FORMHASH}" />

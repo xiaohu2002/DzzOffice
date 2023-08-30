@@ -351,6 +351,7 @@ button.input-search-drop {
 .notification-list-item .member-avatar{
 	position:absolute;
 	left:5px;
+    top: 10px;
 }
 .notification-list-item .dateline{
 	font-size:12px;
@@ -493,15 +494,5 @@ button.input-search-drop {
 }
 .about-body p{
 	margin-bottom:10px;
-}
-.about-body p .guide{
-	color:#999;
-}
-.about-copyright>a{
-	color:#000;
-}
-.about-copyright>a:hofer{
-	color:#44CDFF;
-	text-decoration: underline;
 }
 /*about 关于页 end*/

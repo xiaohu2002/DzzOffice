@@ -18,10 +18,12 @@ $asc = isset($_GET['asc']) ? intval($_GET['asc']) : 1;
 $uid = intval($_GET['uid']);
 $order = in_array($_GET['order'], array('title', 'dateline', 'type', 'count')) ? trim($_GET['order']) : 'dateline';
 $page = empty($_GET['page']) ? 1 : intval($_GET['page']);
-$perpage = 20;
+$lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
+$checklpp = array();
+$checklpp[$lpp] = 'selected="selected"';
 $uid1=$_G['uid'];
-$start = ($page - 1) * $perpage;
-$gets = array('mod' => 'share', 'type' => $type, 'keyword' => $keyword, 'order' => $order, 'asc' => $asc, 'uid' => $uid, 'username' => $username);
+$start = ($page - 1) * $lpp;
+$gets = array('mod' => MOD_NAME, 'type' => $type, 'keyword' => $keyword,'lpp' => $lpp, 'order' => $order, 'asc' => $asc, 'uid' => $uid, 'username' => $username);
 $theurl = BASESCRIPT . "?" . url_implode($gets);
 $orderby = " order by $order " . ($asc ? 'DESC' : '');
 
@@ -49,11 +51,11 @@ if ($uid) {
 $list = array();
 if ($_G['adminid']) {
 	if ($count = DB::result_first("SELECT COUNT(*) FROM %t WHERE $sql", $param)) {
-		$list = DB::fetch_all("SELECT * FROM %t WHERE $sql $orderby limit $start,$perpage", $param);
+		$list = DB::fetch_all("SELECT * FROM %t WHERE $sql $orderby limit $start,$lpp", $param);
 	}
 }else{
 	if ($count = DB::result_first("SELECT COUNT(*) FROM %t WHERE uid =$uid1 and $sql", $param)) {
-		$list = DB::fetch_all("SELECT * FROM %t WHERE uid =$uid1 and $sql $orderby limit $start,$perpage", $param);
+		$list = DB::fetch_all("SELECT * FROM %t WHERE uid =$uid1 and $sql $orderby limit $start,$lpp", $param);
 	}
 }
 foreach ($list as $k=> $value) {
@@ -77,6 +79,6 @@ foreach ($list as $k=> $value) {
   $value['shareurl'] = $_G['siteurl'] . 's.php?sid=' . $value['sid'];
   $list[$k] = $value;
 }
-$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
+$multi = multi($count, $lpp, $page, $theurl, 'pull-right');
 include template('share');
 ?>

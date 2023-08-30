@@ -2,7 +2,7 @@
    <h4 class="modal-title" id="return_$_GET[handlekey]">{lang edit}</h4>
 	 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
  </div>
-  <form id="form_edit_{$cid}" name="form_edit_{$cid}" class="form-horizontal" action="{DZZSCRIPT}?mod=comment&op=ajax&do=edit" method="post"  onsubmit="ajaxpost('form_edit_{$cid}','return_publish_edit_{$cid}','return_publish_edit_{$cid}');return false">
+  <form id="form_edit_{$cid}" name="form_edit_{$cid}" class="form-horizontal" action="{MOD_URL}&op=ajax&do=edit" method="post"  onsubmit="ajaxpost('form_edit_{$cid}','return_publish_edit_{$cid}','return_publish_edit_{$cid}');return false">
     <input type="hidden" name="formhash" value="{FORMHASH}" />
     <input type="hidden" name="editsubmit" value="true" />
     <input type="hidden" name="handlekey" value="publish_edit_{$cid}" />

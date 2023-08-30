@@ -3,7 +3,7 @@ $lang = array (
 	'appname' => 'file management',
 	'folder' => 'folder', 
 	'rotation'=>'rotate',
-  'checkednum'=>'<span><span class="ex-number"></span> items selected',
+  'checkednum'=>'<span class="ex-number"></span> items selected',
   'file_position'=>'file location',
   'in_recycle'=>'In the recycle bin',
 	'filemanage_file_user'=>'File name or user name',

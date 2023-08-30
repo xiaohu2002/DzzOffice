@@ -35,11 +35,13 @@
 }
 .dzzvote-post-image-item .thumbnail {
 	max-height:100%;
+	max-width: 100px;
 	float:left;
 	margin:0;
 }
 .dzzvote-post-image-item .thumbnail img {
 	max-height:100px;
+	max-width: 100px;
 }
 .dzzvote-post-image-item .thumbnail .caption {
 	max-width:200px;
@@ -50,7 +52,6 @@
 	border-bottom:1px solid #e7e7e7;
 }
 .dzzvote-header-plate{
-
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -59,7 +60,6 @@
 	box-shadow: 0 1px 1px rgba(88, 88, 92, .3);
 	min-width: 60px;
 	height: 60px;
-	background-color: #FFF;
 	border: 1px solid #EBEFF6;
 	text-align: center;
 	margin-right:10px;

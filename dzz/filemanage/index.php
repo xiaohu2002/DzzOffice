@@ -53,92 +53,92 @@ if ($_GET['do'] == 'delete') {
   $lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
 	$checklpp = array();
 	$checklpp[$lpp] = 'selected="selected"';
-    $pfid = isset($_GET['pfid']) ? intval($_GET['pfid']) : '';
-    $type = isset($_GET['type']) ? trim($_GET['type']) : '';
-    $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
-    $orgid = isset($_GET['orgid']) ? intval($_GET['orgid']) : '';
-    $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
-    $start = ($page - 1) * $lpp;
-    $gets = array(
-        'mod' => 'filemanage',
-        'lpp' => $lpp,
-        'keyword' => $keyword,
-        'type' => $_GET['type'],
-        'ftype' => $_GET['ftype'],
-        'size' => $_GET['size'],
-        'dateline' => $_GET['dateline'],
-        'orgid' => $orgid,
-        'pfid' => $pfid
-    );
-    $theurl = BASESCRIPT . "?" . url_implode($gets);
-    $refer = $theurl . '&page=' . $page;
-    if ($_GET['size'] == 'desc') {
-        $order = 'ORDER BY size DESC';
-    } elseif ($_GET['size'] == 'asc') {
-        $order = 'ORDER BY size ASC';
-    } elseif ($_GET['ftype'] == 'desc') {
-        $order = 'ORDER BY ext DESC';
-    } elseif ($_GET['ftype'] == 'asc') {
-        $order = 'ORDER BY ext ASC';
-    }elseif ($_GET['name'] == 'desc') {
-        $order = 'ORDER BY name DESC';
-    } elseif ($_GET['name'] == 'asc') {
-        $order = 'ORDER BY name ASC';
-    }elseif ($_GET['username'] == 'desc') {
-        $order = 'ORDER BY username DESC';
-    } elseif ($_GET['username'] == 'asc') {
-        $order = 'ORDER BY username ASC';
-    }elseif ($_GET['relpath'] == 'desc') {
-        $order = 'ORDER BY relpath DESC';
-    } elseif ($_GET['relpath'] == 'asc') {
-        $order = 'ORDER BY relpath ASC';
-    }elseif ($_GET['dateline'] == 'asc') {
-        $order = 'ORDER BY dateline ASC';
-    }else {
-        $_GET['dateline'] = 'desc';
-        $order = 'ORDER BY dateline DESC';
-    }
-    $sql = "type!='app' and type!='shortcut'";
-    $foldername = array();
-    $param = array();
-    if ($keyword) {
-        $sql .= ' and (name like %s OR username=%s)';
-        $param[] = '%' . $keyword . '%';
-        $param[] = $keyword;
-    }
-    if ($type) {
-        $sql .= ' and type=%s';
-        $param[] = $type;
-    }
-    if ($pfid) {
-        $sql .= ' and (pfid = %d)';
-        $param[] = $pfid;
-        $pathkey = DB::result_first("select pathkey from %t where fid = %d", array('resources_path', $pfid));
-        $patharr = explode('-', str_replace('_', '', $pathkey));
-        unset($patharr[0]);
-        foreach (DB::fetch_all("select fname,fid from %t where fid in(%n)", array('folder', $patharr)) as $v) {
-            $foldername[] = array('fid' => $v['fid'], 'fname' => $v['fname']);
-        }
-    } else {
-        if ($orgid) {
-            if ($org = C::t('organization')->fetch($orgid)) {
-                $fids = array($org['fid']);
-                foreach (DB::fetch_all("select fid from %t where pfid=%d", array('folder', $org['fid'])) as $value) {
-                    $fids[] = $value['fid'];
-                }
-                $sql .= ' and  pfid IN(%n)';
-                $param[] = $fids;
-            }
-        }/*else{
-            $sql .= ' and pfid > 0';
-        }*//* else {
-            $flags = array('home', 'organization');
-            $fids = C::t('folder')->fetch_fid_by_flags($flags);
-            $sql .= ' and  pfid IN(%n)';
-            $param[] = $fids;
-        }*/
-    }
-    $limitsql = 'limit ' . $start . ',' . $lpp;
+	$pfid = isset($_GET['pfid']) ? intval($_GET['pfid']) : '';
+	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
+	$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
+	$orgid = isset($_GET['orgid']) ? intval($_GET['orgid']) : '';
+	$page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
+	$start = ($page - 1) * $lpp;
+	$gets = array(
+			'mod' => MOD_NAME,
+			'lpp' => $lpp,
+			'keyword' => $keyword,
+			'type' => $_GET['type'],
+			'ftype' => $_GET['ftype'],
+			'size' => $_GET['size'],
+			'dateline' => $_GET['dateline'],
+			'orgid' => $orgid,
+			'pfid' => $pfid
+	);
+	$theurl = BASESCRIPT . "?" . url_implode($gets);
+	$refer = $theurl . '&page=' . $page;
+	if ($_GET['size'] == 'desc') {
+			$order = 'ORDER BY size DESC';
+	} elseif ($_GET['size'] == 'asc') {
+			$order = 'ORDER BY size ASC';
+	} elseif ($_GET['ftype'] == 'desc') {
+			$order = 'ORDER BY ext DESC';
+	} elseif ($_GET['ftype'] == 'asc') {
+			$order = 'ORDER BY ext ASC';
+	}elseif ($_GET['name'] == 'desc') {
+			$order = 'ORDER BY name DESC';
+	} elseif ($_GET['name'] == 'asc') {
+			$order = 'ORDER BY name ASC';
+	}elseif ($_GET['username'] == 'desc') {
+			$order = 'ORDER BY username DESC';
+	} elseif ($_GET['username'] == 'asc') {
+			$order = 'ORDER BY username ASC';
+	}elseif ($_GET['relpath'] == 'desc') {
+			$order = 'ORDER BY relpath DESC';
+	} elseif ($_GET['relpath'] == 'asc') {
+			$order = 'ORDER BY relpath ASC';
+	}elseif ($_GET['dateline'] == 'asc') {
+			$order = 'ORDER BY dateline ASC';
+	}else {
+			$_GET['dateline'] = 'desc';
+			$order = 'ORDER BY dateline DESC';
+	}
+	$sql = "type!='app' and type!='shortcut'";
+	$foldername = array();
+	$param = array();
+	if ($keyword) {
+			$sql .= ' and (name like %s OR username=%s)';
+			$param[] = '%' . $keyword . '%';
+			$param[] = $keyword;
+	}
+	if ($type) {
+			$sql .= ' and type=%s';
+			$param[] = $type;
+	}
+	if ($pfid) {
+			$sql .= ' and (pfid = %d)';
+			$param[] = $pfid;
+			$pathkey = DB::result_first("select pathkey from %t where fid = %d", array('resources_path', $pfid));
+			$patharr = explode('-', str_replace('_', '', $pathkey));
+			unset($patharr[0]);
+			foreach (DB::fetch_all("select fname,fid from %t where fid in(%n)", array('folder', $patharr)) as $v) {
+					$foldername[] = array('fid' => $v['fid'], 'fname' => $v['fname']);
+			}
+	} else {
+			if ($orgid) {
+					if ($org = C::t('organization')->fetch($orgid)) {
+							$fids = array($org['fid']);
+							foreach (DB::fetch_all("select fid from %t where pfid=%d", array('folder', $org['fid'])) as $value) {
+									$fids[] = $value['fid'];
+							}
+							$sql .= ' and  pfid IN(%n)';
+							$param[] = $fids;
+					}
+			}/*else{
+					$sql .= ' and pfid > 0';
+			}*//* else {
+					$flags = array('home', 'organization');
+					$fids = C::t('folder')->fetch_fid_by_flags($flags);
+					$sql .= ' and  pfid IN(%n)';
+					$param[] = $fids;
+			}*/
+	}
+	$limitsql = 'limit ' . $start . ',' . $lpp;
 	if ($_G['adminid']) {
 		if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('resources') . " WHERE $sql", $param)) {
 			$data = DB::fetch_all("SELECT rid FROM " . DB::table('resources') . " WHERE $sql $order $limitsql", $param);

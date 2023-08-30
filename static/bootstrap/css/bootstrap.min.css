@@ -4820,6 +4820,7 @@ tr {
 
 label {
     display: inline-block;
+    font-weight:700;
 }
 
 button {

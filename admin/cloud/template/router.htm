@@ -20,7 +20,7 @@
       <!--{template right_header}--> 
     </div>
     <div class="main-content clearfix">
-      <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{BASESCRIPT}?mod=cloud&op=router" method="post">
+      <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=router" method="post">
         <input type="hidden" name="routersubmit" value="true" />
         <input type="hidden" name="formhash" value="{FORMHASH}" />
         <table class="table table-striped table-hover">
@@ -44,14 +44,14 @@
               <!--{/if}--></td>
             <td style="word-break:break-all">$value[drouter]</td>
             <td width="60"><input type="checkbox"  class="form-check-input" name="available[{$value[routerid]}]" value="1" <!--{if $value[available]>0}-->checked<!--{/if}-->></td>
-            <td width="60"><a href="{BASESCRIPT}?mod=cloud&op=routeredit&routerid=$value[routerid]" class="glyphicon glyphicon-edit " title="{lang edit}">&nbsp;</a></td>
+            <td width="60"><a href="{MOD_URL}&op=routeredit&routerid=$value[routerid]" class="glyphicon glyphicon-edit " title="{lang edit}">&nbsp;</a></td>
           </tr>
           <!--{/loop}-->
           <thead>
           <td valign="middle" colspan="7"><input type="checkbox"  class="form-check-input" name="chkall" id="chkall" onclick="checkAll('prefix', this.form, 'delete')">
               &nbsp;{lang del}&nbsp;&nbsp;&nbsp;
               <input type="submit" class="btn btn-primary" value="{lang save_set}" />
-              <a href="{BASESCRIPT}?mod=cloud&op=routeredit" title="{lang add_routing}" class="btn btn-outline-primary">{lang add_routing}</a>
+              <a href="{MOD_URL}&op=routeredit" title="{lang add_routing}" class="btn btn-outline-primary">{lang add_routing}</a>
               
               </td>
               </thead>

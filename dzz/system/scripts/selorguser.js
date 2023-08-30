@@ -11,7 +11,7 @@ selorg.add=function(ctrlid,vals){
 		if(vals[i].orgid.indexOf('uid_')===0){
 			var headimg = '';
 			if(vals[i].icon){
-				headimg = '<img src="'+vals[i].icon+'" title="'+vals[i].text.replace(/<em.+?<\/em>/i,'')+'">';
+				headimg = '<img src="'+vals[i].icon+'" class="img-avatar" title="'+vals[i].text.replace(/<em.+?<\/em>/i,'')+'">';
 			}
 		    html='<li id="'+ctrlid+'_sl_'+vals[i].orgid+'" class="right-classa-depart" data-val="'+vals[i].orgid+'">' +
 				headimg+vals[i].text+' <i class="ti-close dzz dzz-close"></i></li>';

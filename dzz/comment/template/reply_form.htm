@@ -1,6 +1,6 @@
 <div id="publish_{$cid}" class="publishsharewrap">
   <div id="return_publish_{$cid}" style="display:none"></div>
-  <form id="form_{$cid}" name="form_{$cid}" class="form-horizontal" action="{DZZSCRIPT}?mod=comment&op=ajax" method="post"  onsubmit="ajaxpost('form_{$cid}','return_publish_{$cid}','return_publish_{$cid}');return false">
+  <form id="form_{$cid}" name="form_{$cid}" class="form-horizontal" action="{MOD_URL}&op=ajax" method="post"  onsubmit="ajaxpost('form_{$cid}','return_publish_{$cid}','return_publish_{$cid}');return false">
     <input type="hidden" name="formhash" value="{FORMHASH}" />
     <input type="hidden" name="replysubmit" value="true" />
     <input type="hidden" name="handlekey" value="publish_{$cid}" />

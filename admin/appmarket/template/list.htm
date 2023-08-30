@@ -14,15 +14,15 @@
 		<div class="main-header clearfix">
 			<ul class="nav nav-pills">
 				<li class="nav-item">
-					<a  class="nav-link <!--{if $op=='cloudappmarket'}-->active<!--{/if}-->" href="{BASESCRIPT}?mod={MOD_NAME}&op=cloudappmarket">{lang appmarket}</a>
+					<a  class="nav-link <!--{if $op=='cloudappmarket'}-->active<!--{/if}-->" href="{MOD_URL}&op=cloudappmarket">{lang appmarket}</a>
 				</li>
                 <li class="nav-item">
-					<a  class="nav-link <!--{if $op=='list'}-->active<!--{/if}-->" href="{BASESCRIPT}?mod={MOD_NAME}&op=list&do=notinstall">{lang appInLocal}</a>
+					<a  class="nav-link <!--{if $op=='list'}-->active<!--{/if}-->" href="{MOD_URL}&op=list&do=notinstall">{lang appInLocal}</a>
 				</li>
 			</ul>
 			<div  class="button_add_content">
-				<a href="{BASESCRIPT}?mod=appmarket&op=edit&do=add&refer=$refer" id="button_add1" title="{lang add_app}" class="hide">+</a>				
-				<a href="{BASESCRIPT}?mod=appmarket&op=cp&do=import&refer=$refer" id="button_add2" class="hide" title="{lang import_type_app}" style="font-size:20px ;"><i class="glyphicon glyphicon-download-alt"></i></a>				
+				<a href="{MOD_URL}&op=edit&do=add&refer=$refer" id="button_add1" title="{lang add_app}" class="hide">+</a>				
+				<a href="{MOD_URL}&op=cp&do=import&refer=$refer" id="button_add2" class="hide" title="{lang import_type_app}" style="font-size:20px ;"><i class="glyphicon glyphicon-download-alt"></i></a>				
 				<a href="javascript:;" id="button_add" style="z-index: 10;">+</a>				
 			</div>					
 		</div>		

@@ -1,5 +1,5 @@
 <!--{template common/header_simple_start}-->
-<link href="{MOD_PATH}/images/folder.css?{VERHASH}" rel="stylesheet" media="all">
+<link href="dzz/images/folder/folder.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="static/dzzthumb/jquery.dzzthumb.css?{VERHASH}" rel="stylesheet" media="all">
 <script type="text/javascript" src="static/dzzthumb/jquery.dzzthumb.js?{VERHASH}"></script>
 <script type="text/javascript" src="{MOD_PATH}/scripts/_hotkey.js?"></script>
@@ -119,21 +119,21 @@
                     </div>
                 </div>
                 <div node-type="module" class="module-list-view data-list" style="display:block;">
-                    <div node-type="wrapper" class="list-view-home" style="min-width: 600px;">
+                    <div node-type="wrapper" class="list-view-home">
                         <div node-type="title" class="title">
                             <div class="item  col-first clearfix">
                                 <!--选框-->
                                 <!-- 第一列 -->
-                                <div node-type="title-col" data-key="name" class="col c1" style="width: 50%">
+                                <div node-type="title-col" data-key="name" class="col c1">
                                     <div class="name"><span>{lang filename}</span> <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span>
                                     </div>
                                 </div>
                                 <!-- 其他列 -->
 
-                                <div node-type="title-col" data-key="size" class="col" style="width: 12%;"> {lang file_size} <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span></div>
-                                <div node-type="title-col" data-key="type" class="col" style="width: 15%;border-right: none;"> {lang file_type} <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span>
+                                <div node-type="title-col" data-key="size" class="col"> {lang file_size} <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span></div>
+                                <div node-type="title-col" data-key="type" class="col" style="border-right: none;"> {lang file_type} <span node-type="order-status" class="asc desc" style="visibility: hidden;"></span>
                                 </div>
-                                <div node-type="title-col" data-key="dateline" class="col" style="width: 20%;"> {lang edit_time} <span node-type="order-status" class="asc desc" style="visibility: visible;"></span></div>
+                                <div node-type="title-col" data-key="dateline" class="col"> {lang edit_time} <span node-type="order-status" class="asc desc" style="visibility: visible;"></span></div>
                             </div>
                         </div>
                         <div node-type="list" class="list list-share">
@@ -144,7 +144,7 @@
                                 <!--{/if}-->data-type="$value[type]" class="item shareitem clearfix Icoblock"
                                 id="$value[rid]">
                                 <!-- 第一列 -->
-                                <div class="col c1 name" style="width: 50%;" data-name="$value[name]">
+                                <div class="col c1 name" data-name="$value[name]">
                                     <div node-type="name" class="name" title="$value[name]">
                                         <!--{if $value[img]}--><img class="icon" title="$value[name]" src="$value[img]"
                                         <!--{if $value[type]=='image' }--> data-original="$value[url]"
@@ -160,9 +160,9 @@
                                     <!--{/if}-->
                                 </div>
                                 <!-- 其他列 -->
-                                <div class="col size" style="width: 12%" data-size="$value[size]"><!--{if $value[type]=='folder' }--><!--{else}-->$value[fsize]<!--{/if}--></div>
-                                <div class="col type" style="width:15%" data-type="$value[ftype]">$value[ftype]</div>
-                                <div class="col dateline" style="width: 20%" data-dateline="$value[dateline]">
+                                <div class="col size" data-size="$value[size]"><!--{if $value[type]=='folder' }--><!--{else}-->$value[fsize]<!--{/if}--></div>
+                                <div class="col type" data-type="$value[ftype]">$value[ftype]</div>
+                                <div class="col dateline" data-dateline="$value[dateline]">
                                     $value[fdateline]
                                 </div>
                             </div>

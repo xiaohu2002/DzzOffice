@@ -116,7 +116,7 @@ overflow-y:hidden;
                <!--{if $org}-->
                <a href="javascript:;" data-bs-toggle="dropdown" role="button" id="drop-org" _orgid="$org[orgid]" style="padding:8px 10px;">$org[orgname]</a>
               <!--{else}-->
-               <a href="{BASESCRIPT}?mod=$mod&orgid=0" data-bs-toggle="dropdown" role="button" id="drop-org" _orgid="0">{lang all}</a>
+               <a href="{MOD_URL}&orgid=0" data-bs-toggle="dropdown" role="button" id="drop-org" _orgid="0">{lang all}</a>
               <!--{/if}-->
                 <ul aria-labelledby="drop-org" role="menu" class="dropdown-menu" id="drop-org-menu">
                     $orgtree

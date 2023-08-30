@@ -28,18 +28,17 @@ if($type=="list"){
 	$operationarr = array_keys($systemlog_setting);  
 	$operation = in_array($_GET['operation'], $operationarr) ? $_GET['operation'] : "cplog"; 
 	$navtitle=$systemlog_setting[$operation]["title"].' - '.lang('appname');//lang('nav_logs_'.$operation).' - '.lang('admin_navtitle');
-  $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
+  	$page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
 	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
-  $start = ($page - 1) * $lpp;
-  $gets = array(
-    'mod' => 'systemlog',
-		'type' => $type,
+  	$start = ($page - 1) * $lpp;
+ 	 $gets = array(
+    'mod' => MOD_NAME,
+	'type' => $type,
     'operation' => $operation,
     'lpp' => $lpp,
-		'keyword' => $keyword,
-  );
-  $theurl = BASESCRIPT . "?" . url_implode($gets);
-  $refer = $theurl . '&page=' . $page;
+	'keyword' => $keyword,
+  	);
+	$theurl = BASESCRIPT . "?" . url_implode($gets);
 	$logdir = DZZ_ROOT.'./data/log/';
 	$logfiles = get_log_files($logdir, $operation);
 	 

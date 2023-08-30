@@ -2,29 +2,6 @@
 	padding:5px 0 0 10px;
 	line-height:24px;
 }
-
-.classtree-search{
-	position:absolute;
-	left:1px;
-	top:2px;
-	display:none;
-}
-.classtree-search .form-control{
-	padding:5px 40px 5px 5px;
-}
-.classtree-search .form-control:focus{
-	box-shadow:none;
-}
-.classtree-search .search{
-	position:absolute;
-	right:28px;
-	top:8px;
-}
-.classtree-search .delete{
-	position:absolute;
-	right:8px;
-	top:8px;
-}
 /*重定义图标*/
 .jstree-default a i{
   _filter: Alpha(opacity=80);

@@ -25,11 +25,11 @@
 					</div>
 					<div class="file_fed imgfile_fed clearfix"> $attach[title]<span class="kb_nffed">($attach[filesize])</span>
 						<p class="down_ffed">
-							<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed" onclick="feed_downAttach('$attach[qid]')">{lang download}
+							<a href="javascript:;" title="" hidefocus="true" class="btn_dffed" onclick="feed_downAttach('$attach[qid]')">{lang download}
 								<!--{if $attach[downloads]>0}-->($attach[downloads]{lang degree})
 								<!--{/if}-->
 							</a>
-							<a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed skip_mmfed" onclick="feed_attach_saveto('$attach[qid]')">{lang js_saved_my_documents}</a>
+							<a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed" onclick="feed_attach_saveto('$attach[qid]')">{lang js_saved_my_documents}</a>
 						</p>
 					</div>
 					<!--{elseif $attach['type']=='video'}-->
@@ -40,7 +40,7 @@
 						<p class="name_ffed">$attach[title]</p>
 						<p class="down_ffed">
 							<!--{if $attach[preview]>0}-->
-							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed skip_mmfed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
+							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
 							<!--{/if}-->
 
 						</p>
@@ -52,7 +52,7 @@
 						</div>
 						<p class="name_ffed">$attach[title]</p>
 						<p class="down_ffed">
-							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed skip_mmfed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
+							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
 
 						</p>
 					</div>
@@ -64,13 +64,13 @@
 						<p class="name_ffed">$attach[filename]<span class="kb_nffed">($attach[filesize])</span> </p>
 						<p class="down_ffed">
 							<!--{if $attach[preview]>0}-->
-							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed skip_mmfed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
+							<a href="javascript:void(0);" title="" hidefocus="true" class="preview_dffed" onclick="feed_attach_preview('$attach[qid]')">{lang preview}</a>
 							<!--{/if}-->
-							<a href="javascript:;" title="" hidefocus="true" class="btn_dffed skip_mmfed" onclick="feed_downAttach('$attach[qid]')">{lang download}
+							<a href="javascript:;" title="" hidefocus="true" class="btn_dffed" onclick="feed_downAttach('$attach[qid]')">{lang download}
 								<!--{if $attach[downloads]>0}--><span class="text-gray">($attach[downloads]{lang degree})</span>
 								<!--{/if}-->
 							</a>
-							<a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed skip_mmfed" onclick="feed_attach_saveto('$attach[qid]')">{lang js_saved_my_documents}</a>
+							<a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed" onclick="feed_attach_saveto('$attach[qid]')">{lang js_saved_my_documents}</a>
 						</p>
 					</div>
 					<!--{/if}-->

@@ -15,25 +15,25 @@
 		<div class="main-header clearfix">
 			<ul class="nav nav-pills">
 				<li class="nav-item">
-					<a class="nav-link <!--{if $group=='0' && !$org}-->active<!--{/if}-->" href="{BASESCRIPT}?mod={MOD_NAME}&op=default&group=0">{lang universal_application}</a>
+					<a class="nav-link <!--{if $group=='0' && !$org}-->active<!--{/if}-->" href="{MOD_URL}&op=default&group=0">{lang universal_application}</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link <!--{if $group=='-1' && !$org}-->active<!--{/if}-->" href="{BASESCRIPT}?mod={MOD_NAME}&op=default&group=-1">{lang tourist_application}</a>
+					<a class="nav-link <!--{if $group=='-1' && !$org}-->active<!--{/if}-->" href="{MOD_URL}&op=default&group=-1">{lang tourist_application}</a>
 				</li>
 	
 				<li class="nav-item">
-					<a class="nav-link <!--{if $group=='1'}-->active<!--{/if}-->" href="{BASESCRIPT}?mod={MOD_NAME}&op=default&group=1">{lang rank_file_application}</a>
+					<a class="nav-link <!--{if $group=='1'}-->active<!--{/if}-->" href="{MOD_URL}&op=default&group=1">{lang rank_file_application}</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link <!--{if $group=='3' && !$org}-->active<!--{/if}-->" href="{BASESCRIPT}?mod={MOD_NAME}&op=default&group=3">{lang system_administrator_application}</a>
+					<a class="nav-link <!--{if $group=='3' && !$org}-->active<!--{/if}-->" href="{MOD_URL}&op=default&group=3">{lang system_administrator_application}</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link <!--{if $group=='2' && !$org}-->active<!--{/if}-->" href="{BASESCRIPT}?mod={MOD_NAME}&op=default&group=2">{lang section_administrator_application}</a>
+					<a class="nav-link <!--{if $group=='2' && !$org}-->active<!--{/if}-->" href="{MOD_URL}&op=default&group=2">{lang section_administrator_application}</a>
 				</li>
 			</ul>
 		</div> 
 		<div class="main-content clearfix">
-			<form id="appform" name="appform" class="form-horizontal" action="{BASESCRIPT}?mod={MOD_NAME}&op=default" method="post">
+			<form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}&op=default" method="post">
 				<input type="hidden" name="appsubmit" value="true" />
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 				<table class="table table-striped table-hover">

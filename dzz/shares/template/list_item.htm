@@ -4,7 +4,7 @@
 <div class="module-list">
 	<!--{loop $list $value}-->
 	<div node-type="item" data-value="true" data-dpath="$value[dpath]" <!--{if $value[type] == 'folder' && $value[dhpath]}--> data-containpath="$value[dhpath]"<!--{/if}--> data-type="$value[type]" class="item shareitem Icoblock clearfix">
-		<div class="col c1 name" style="width: 50%;" data-name="$value[name]">
+		<div class="col c1 name" data-name="$value[name]">
 			<div node-type="name" class="name" title="$value[name]">
 				<!--{if $value[img]}--><img title="$value[name]" class="icon" src="$value[img]" data-original="$value[url]" data-dpath="$value[dpath]" />
 				<!--{/if}-->
@@ -17,9 +17,9 @@
 			<!--{/if}-->
 		</div>
 		<!-- 其他列 -->
-		<div class="col size" style="width: 12%" data-size="$value[size]"><!--{if $value[type]=='folder' }--><!--{else}-->$value[fsize]<!--{/if}--></div>
-		<div class="col type" style="width:15%" data-type="$value[ftype]">$value[ftype]</div>
-		<div class="col dateline" style="width: 20%" data-dateline="$value[dateline]">$value[fdateline]</div>
+		<div class="col size" data-size="$value[size]"><!--{if $value[type]=='folder' }--><!--{else}-->$value[fsize]<!--{/if}--></div>
+		<div class="col type" data-type="$value[ftype]">$value[ftype]</div>
+		<div class="col dateline" data-dateline="$value[dateline]">$value[fdateline]</div>
 	</div>
 	<!--{/loop}-->
 	<!--{if $nextpage}-->

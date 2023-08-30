@@ -1,5 +1,6 @@
 <!--{template common/header_simple_start}-->
-<link href="{MOD_PATH}/images/share.css?{VERHASH}" rel="stylesheet" media="all">
+<link href="dzz/images/folder/folder.css?{VERHASH}" rel="stylesheet" media="all">
+<link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.css">
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <div class="bs-container clearfix">
@@ -19,10 +20,25 @@
 			<ul class="nav nav-pills clearfix">	
 				<li class="pull-right " style="margin:5px 0;">
 					<form name="search" action="{DZZSCRIPT}" class="form-inline" method="get">
-						<input type="hidden" name="mod" value="share" />
+						<input type="hidden" name="mod" value="{MOD_NAME}" />
+						<input type="hidden" name="lpp" value="$lpp">
 						<input type="hidden" name="type" value="$type" />
-						<input name="username" type="text" value="$username" class="form-control input-sm" style="width:90px ;display:inline-block" placeholder="{lang username}" />&nbsp;<input name="keyword" type="text" class="form-control input-sm" value="$keyword" style="width:90px ;display:inline-block" placeholder="{lang share_title}">
+						<input type="hidden" name="keyword" value="$keyword" /> 
+						<input name="username" type="text" value="$username" class="form-control input-sm" style="width:90px ;display:inline-block" placeholder="{lang username}" />
 						<button class="btn btn-outline-info" onclick="this.parentNode.submit()"><i class="glyphicon glyphicon-search"></i></button>
+						<div class="pull-right">
+							<div class="input-group mb-3">
+								<span class="input-group-text">每页显示</span>
+								<select class="form-select" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
+									<option value="10" $checklpp[10]> 10 </option>
+									<option value="20" $checklpp[20]> 20 </option>
+									<option value="40" $checklpp[40]> 40 </option>
+									<option value="100" $checklpp[100]> 100 </option>
+									<option value="200" $checklpp[200]> 200 </option>
+								</select>
+								<span class="input-group-text">条记录</span>
+							</div>
+						</div>
 					</form>
 				</li>
 			</ul>
@@ -33,42 +49,41 @@
 			<!--{if !$list}-->
 			<div style="text-align: center;">
 				<img src="static/image/common/no_list.png" /><br>
-				<span class="no-result-title">{lang share_file_content}</span>
+				<span class="no-result-title">{lang no_relevant_content}</span>
 			  </div>
 			<!--{else}-->
 			<div node-type="module" class="module-list-toolbar" style="display: none;">
 				<div class="bar clearfix">
-					<span node-type="chk" class="chk-box"> 
-            	<span class="chk"></span>
+					<span class="text"><span node-type="chk" class="chk-box"> 
+            			<span class="chk chk-ico"></span>
 					</span>
-					<span class="text">{lang checked}<span node-type="num">0</span>{lang file_number_type}</span>
-					<button class="btn btn-sm btn-danger" data-key="unshare"><span>{lang del_share}</span> </button><!--{if $_G[adminid]==1}-->&nbsp;
-					<button class="btn btn-sm btn-warning" data-key="forbidden"><span>{lang screen_share}</span> </button> &nbsp;
-					<button class="btn btn-sm btn-success" data-key="allow"><span>{lang cancel_shielding}</span> </button><!--{/if}-->
+					{lang checked}<span node-type="num">0</span>{lang file_number_type}</span>
+					<button class="btn btn-danger" data-key="unshare"><span>{lang del_share}</span> </button><!--{if $_G[adminid]==1}-->
+					<button class="btn btn-warning" data-key="forbidden"><span>{lang screen_share}</span> </button>
+					<button class="btn btn-success" data-key="allow"><span>{lang cancel_shielding}</span> </button><!--{/if}-->
 				</div>
 			</div>
 			<div node-type="module" class="module-list-view">
 				<div node-type="wrapper" class="list-view-home">
-					<div node-type="title" class="title" style="padding-right: 16px;">
+					<div node-type="title" class="title">
 						<div class="item clearfix">
 							<!-- 第一列 -->
-							<div node-type="title-col" data-key="title" class="col c1" style="width:<!--{if $_G[adminid]==1}-->58%<!--{else}-->69%<!--{/if}-->">
-								<span node-type="chk-all" class="chk"> </span>
+							<div node-type="title-col" data-key="title" class="col c1">
 								<div class="name"> <span>{lang sharing_file}</span>
 									<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='title'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </div>
 							</div>
 							<!-- 其他列 -->
-							<div node-type="title-col" data-key="dateline" class="col" style="width: 15%;"> {lang share_time}
+							<div node-type="title-col" data-key="dateline" class="col"> {lang share_time}
 								<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='dateline'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
 							</div>
-							<div node-type="title-col" data-key="count" class="col" style="width: 8%;"> {lang view_count}
+							<div node-type="title-col" data-key="count" class="col"> {lang view_count}
 								<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='count'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
 							</div>
-							<div node-type="title-col" data-key="type" class="col" style="width: 8%;<!--{if $_G[adminid]==1}--><!--{else}-->border-right: none;<!--{/if}-->"> {lang file_type}
+							<div node-type="title-col" data-key="type" class="col"> {lang file_type}
 								<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='type'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
 							</div>
 							<!--{if $_G[adminid]==1}-->
-							<div node-type="title-col" data-key="username" class="col" style="width: 8%; border-right: none;"> {lang share_user}
+							<div node-type="title-col" data-key="username" class="col"> {lang share_user}
 								<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='username'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
 							</div>
 							<!--{/if}-->
@@ -79,26 +94,21 @@
 						<!--{loop $list $value}-->
 						<div node-type="item" data-sid="$value[id]" data-status="$value[status]" class="item clearfix">
 							<!-- 第一列 -->
-							<div class="col c1 name" style="width: <!--{if $_G[adminid]==1}-->57%<!--{else}-->68%<!--{/if}-->;" data-name="$value[title]">
+							<div node-type="name" class="col c1 name" title="$value[title]" data-name="$value[title]">
 								<span node-type="chk" class="chk"> <span class="chk-ico"></span></span>
+								<!--{if $value[img]}--><img class="icon" src="$value[img]" />
+								<!--{/if}-->
+								<!--{if $value[status]<0}--><span node-type="name-tip" style="color: red;display: inline-block;">($value[fstatus])</span><!--{/if}-->
+								<span class="name-text-wrapper"> <span node-type="name-text"  data-href="$value[sharelink]" class="name-text enabled">$value[title]</span> </span>
 								<!-- 私密分享图标 -->
-								<!--{if $value[password]}--><span class="ico-private-share" title="{lang private_share}"></span><!--{/if}-->
-
-								<div node-type="name" class="name" title="$value[title]">
-									<!--{if $value[img]}--><img class="icon" src="$value[img]" />
-									<!--{/if}-->
-									<!--{if $value[status]<0}--><span node-type="name-tip" style="color: red;">($value[fstatus])</span><!--{/if}-->
-									<span class="name-text-wrapper"> <span node-type="name-text"  data-href="$value[sharelink]" class="name-text enabled">$value[title]</span> </span>
-								</div>
-
+							<!--{if $value[password]}--><span class="ico-private-share" title="{lang private_share}"></span><!--{/if}-->
 							</div>
-
 							<!-- 其他列 -->
-							<div class="col dateline" style="width: 15%" data-dateline="$value[dateline]">$value[fdateline]</div>
-							<div class="col count" style="width: 8%" data-count="$value[count]">$value[count]{lang degree}</div>
-							<div class="col type" style="width: 8%" data-type="$value[ftype]">$value[ftype]</div>
+							<div class="col dateline" data-dateline="$value[dateline]">$value[fdateline]</div>
+							<div class="col count" data-count="$value[count]">$value[count]{lang degree}</div>
+							<div class="col type" data-type="$value[ftype]">$value[ftype]</div>
 							<!--{if $_G[adminid]==1}-->
-							<div class="col username" style="width: 8%" data-type="$value[username]">
+							<div class="col username" data-type="$value[username]">
 								<a href="user.php?uid=$value[uid]">$value[username]</a>
 							</div>
 							<!--{/if}-->
@@ -109,11 +119,11 @@
 								{lang link}：
 								<a href="$value[sharelink]" target="_dzz">$value[sharelink]</a>
 								<!--{if $value[password]}-->&nbsp;{lang extract_password}：$value[password]<!--{/if}-->
-								&nbsp;<button class="btn btn-sm btn-default js_copy" data-clipboard-text="{eval echo $value[password]?(分享名称.':'.$value[title].'
+								&nbsp;<button class="btn btn-primary js_copy" data-clipboard-text="{eval echo $value[password]?(分享名称.':'.$value[title].'
 									'.分享链接.':'.$value[sharelink].'
 									'.提取码.':'.$value[password]):$value[sharelink];}" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>复制<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
 								<!--{if $value[password]}-->
-								<button class="btn btn-sm btn-default js_copy" data-clipboard-text="$value[password]" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>提取码<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
+								<button class="btn btn-primary js_copy" data-clipboard-text="$value[password]" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>提取码<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
 								<!--{/if}-->
 								<!--{if $value[endtime]}-->&nbsp;{lang expiration_time}：$value[fendtime]<!--{/if}-->
 								<!--{if $value[times]}-->&nbsp;{lang limited_number}：$value[count] / $value[times]<!--{/if}-->
@@ -132,7 +142,9 @@
 </div>
 <script type="text/javascript">
 	jQuery(document).ready(function(e) {
-
+		jQuery('select').lyearSelect({
+      width:70,
+    });
 		jQuery(document).on('mouseenter', 'div[node-type=item]', function() {
 			jQuery(this).addClass('item-hover');
 		});
@@ -267,7 +279,7 @@
 					if(jQuery(this).find('span[node-type=name-tip]').length) {
 						jQuery(this).find('span[node-type=name-tip]').html('({lang been_blocked})');
 					} else {
-						jQuery('<span node-type="name-tip" style="color: red;">({lang been_blocked})</span>').insertBefore('.list .item-active .name-text-wrapper');
+						jQuery('<span node-type="name-tip" style="color: red;display: inline-block;">({lang been_blocked})</span>').insertBefore('.list .item-active .name-text-wrapper');
 					}
 				});
 				refresh_header();
@@ -321,5 +333,6 @@
 		}
 	}
 </script>
+<script type="text/javascript" src="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.js"></script>
 <script type="text/javascript" src="static/clipboard/clipboard.min.js?{VERHASH}"></script>
 <!--{template common/footer_simple}-->

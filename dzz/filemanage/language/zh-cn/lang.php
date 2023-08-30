@@ -3,7 +3,7 @@ $lang = array (
 	'appname' => '文件管理', 
 	'folder' => '文件夹', 
 	'rotation'=>'旋转',
-  'checkednum'=>'<span>已选择<span class="ex-number"></span>项',
+  'checkednum'=>'已选择<span class="ex-number"></span>项',
   'file_position'=>'文件位置',
   'in_recycle'=>'在回收站',
 	'filemanage_file_user'=>'文件名称或用户名',
