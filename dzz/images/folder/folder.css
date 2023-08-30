@@ -83,7 +83,7 @@
 .module-list-view .item-hover {
 	background-color: rgba(var(--bs-black-rgb), .15);
 }
-.module-list-view .item .icon {
+.item .icon {
 	max-width:24px;
 	max-height:24px;
 	margin-top:-2px;
@@ -122,7 +122,7 @@ span .chk-ico {
 	font-size: 22px;
 	vertical-align: middle;
 }
-.module-list-view .title .asc {
+.title .asc {
 	background: url(sort_asc.gif) no-repeat;
 	display: inline-block;
 	width: 13px;
@@ -131,7 +131,7 @@ span .chk-ico {
 	visibility: hidden;
 	vertical-align: middle;
 }
-.module-list-view .title .desc {
+.title .desc {
 	background: url(sort_desc.gif) no-repeat;
 }
 .module-list-view .list-file .item .name-text {
@@ -147,7 +147,7 @@ span .chk-ico {
 	font-size: larger;
 	border-radius: var(--radius);
 }
-.module-list-view .title .col:hover {
+.title .col:hover {
 	background-color: rgba(var(--bs-black-rgb), .175);
 }
 .module-list-view .col {
@@ -465,10 +465,6 @@ span .chk-ico {
     padding: 10px 15px;
     text-shadow: 1px 1px 1px #000;
 }
-.list-file{
-	overflow-y:auto;
-	overflow-x:hidden;
-}
 .module-list-toolbar .chk.chked{
 	background: transparent url(selected.png) no-repeat;
 }
@@ -574,4 +570,20 @@ span .chk-ico {
 }
 .module-list-toolbar .bar {
 	position: absolute;
+}
+
+.col1{
+	float: left;
+	height: 51px;
+	line-height: 51px;
+	width: 10%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: flex;
+	align-content:center;
+	flex-wrap:wrap;
+}
+.item-block{
+    background:rgba(var(--bs-primary-hover),0.1);
 }
