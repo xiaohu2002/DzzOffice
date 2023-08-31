@@ -587,3 +587,9 @@ span .chk-ico {
 .item-block{
     background:rgba(var(--bs-primary-hover),0.1);
 }
+.list-wrapper1{
+		display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}

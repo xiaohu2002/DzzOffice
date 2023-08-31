@@ -40,15 +40,6 @@ ul{
 	overflow: hidden;
 	
 }
-.label-gainsboro{
-	margin-right: 19px;
-}
-.label-gainsboro{
-	font-weight: 300;
-	border-radius: 2px;
-	padding: 2px 5px;
-    border: 1px solid rgba(221, 221, 221, 1);
-}
 .perm-ok{
 	padding-right: 5px;
 }

@@ -2546,7 +2546,6 @@ hr.dropdown-divider {
 	display: inline-block;
 	padding: 0 4px;
 	margin: 0 4px;
-	color: var(--bs-secondary);
 	opacity: .8;
 	-webkit-transition: 0.3s linear;
 	transition: 0.3s linear;
@@ -2579,11 +2578,13 @@ hr.dropdown-divider {
 	right: 0;
 	bottom: 0;
 	margin-bottom: 0 !important;
-	z-index: 998;
+	z-index: 2998;
 }
 
 .card-fullscreen .card-btn-fullscreen {
 	color: var(--bs-primary);
+	background-color: rgba(var(--bs-white-rgb), 0.5);
+	border-radius: 50%;
 }
 
 /* 通用导航 */
@@ -3993,6 +3994,9 @@ body[data-theme='dark'] .jconfirm .jconfirm-box,
 [data-theme='dark'] .da {
     background-color: #292F39;
 }
+[data-theme='dark'] .btn {
+    color: #fff;
+}
 [data-theme='dark'] .offcanvas-start,
 [data-theme='dark'] .offcanvas-end,
 [data-theme='dark'] .offcanvas-top,
@@ -4522,6 +4526,7 @@ body[data-theme='translucent-pink'],
 [data-theme|='translucent'] .rightMenu,
 [data-theme|='translucent'] .lyear-layout-header,
 [data-theme|='translucent'] .card,
+[data-theme|='translucent'] .bei,
 [data-theme|='translucent'] .dzzvote,
 [data-theme|='translucent'] .card>.card-header+.callout {
     background-color: rgba(var(--bs-black-rgb), .175);

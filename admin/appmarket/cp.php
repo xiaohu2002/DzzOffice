@@ -12,6 +12,7 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 require_once  libfile('function/admin');
 $do = trim($_GET['do']);
 $op=$_GET['op'];
+$navtitle=lang('appname');
 if ($do == 'export') {//应用导出
 	$appid = intval($_GET['appid']);
 	$app = C::t('app_market') -> fetch($appid);

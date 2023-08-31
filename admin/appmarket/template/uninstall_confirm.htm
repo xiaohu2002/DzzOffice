@@ -10,10 +10,10 @@
             <p class="text-danger">
             	{$app_delete_confirm}
             </p>
-            <p><input id="confirm" type="text" class="form-control" style="max-width:200px;" name="confirm" value="" /></p>
+            <p><input id="confirm" type="text" class="form-control" name="confirm" value="" /></p>
 
             <button type="button" class="btn btn1 btn-danger" onclick="if(document.getElementById('confirm').value!='DELETE'){document.getElementById('confirm').focus();}else{document.getElementById('confirm_uninstall_form').submit()}">{lang app_sure_delete}</button>
-            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn1 btn-default" onclick="location.href='{$refer}';return false;">{lang app_not_delete}</button>
+            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-secondary" onclick="location.href='{$refer}';return false;">{lang app_not_delete}</button>
     </form>
    </div>
 </div>
