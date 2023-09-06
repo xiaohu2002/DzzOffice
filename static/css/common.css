@@ -298,11 +298,11 @@ dl dd{
 .seccode-wrapper .dzz{
 	font-size:20px;
 }
-.seccode-input.input-group input.form-control+.input-group-addon{
+.seccode-input.input-group input.form-control+.input-group-text{
 	padding:0;
 	min-width:34px;
 }
-.seccode-wrapper .input-group-addon .dzz{
+.seccode-wrapper .input-group-text .dzz{
 	font-size:32px;
 }
 .seccode-wrapper .dzz.dzz-close{

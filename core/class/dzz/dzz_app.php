@@ -590,7 +590,7 @@ class dzz_app extends dzz_base{
         if($appidxu=C::t('app_market')->fetch_by_identifier(CURMODULE)){
 					if($this->var['member']['adminid'] || $_GET['do']=='savefile'){
 					}elseif($appidxu['available']==0){
-              showmessage(lang('您无权使用该应用，请联系管理员。'));
+              showmessage(lang('该应用已关闭，请联系管理员。'));
             }elseif($this->var['member']['uid']){
               $appuid= C::t('user_field')->fetch($this->var['member']['uid']);
               $appuidz=explode(',',$appuid['applist']);
@@ -605,7 +605,7 @@ class dzz_app extends dzz_base{
                 $appuidz=explode(',',$appuid['applist']);
                 if (in_array($appidxu['appid'],$appuidz)){
                 }else{
-                  showmessage(lang('您无权使用该应用，请联系管理员。'));
+                  showmessage(lang('您无权限使用该应用，请联系管理员。'));
                 }
 
               }
