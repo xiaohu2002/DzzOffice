@@ -1,5 +1,6 @@
 <!--{if empty($_GET['inajax'])}-->
 <!--{template common/header_simple}-->
+<!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css"><!--{/if}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
 <link rel="stylesheet" type="text/css" href="static/css/style.min.css">
 <!--{template common/beijing}-->
@@ -37,11 +38,13 @@
 	.login-right {
 			max-width: 50%;
 	}
-	<!--{if $_G[setting][loginset][transparency]}-->
+	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
-		background-color:$_G[setting][loginset][transparency];
+		background-color:$_G[setting][loginset][kbcolor];
 	}
-	.card:hover{
+	<!--{/if}-->
+  <!--{if $_G[setting][loginset][transparency]}-->
+	.form-control{
 		background-color:$_G[setting][loginset][transparency];
 	}
 	<!--{/if}-->
@@ -53,7 +56,7 @@
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{if !empty($_GET['inajax'])}--><button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button><!--{/if}-->
 <body class="center-vh">
-	<div class="card">
+	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box" id="lostpw_container_$loginhash">
         <div class="login-left p-5">
           <div class="text-center mb-3 d-sm-none">
@@ -89,7 +92,7 @@
             <button type="button" class="btn btn-primary toMail" >{lang now_your_email}</button>
             <button type="button" class="btn btn-outline-secondary toIndex" onclick="location.href='$_G[siteurl]'">{lang back_homepage}</button>
           </div>
-          <p class="text-center text-muted mt-3"><!--{template common/copyright}--></p>
+          <p class="text-center mt-3"><!--{template common/copyright}--></p>
         </div>
         <div class="login-right p-5 d-none d-sm-block">
           <p class="mb-3"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" alt="logo" /></p>

@@ -1,7 +1,7 @@
 <?php
 namespace core\dzz;
 
-class Config{
+class config{
 
     public function run(&$param){
 

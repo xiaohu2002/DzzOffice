@@ -216,7 +216,6 @@ if($method == 'show_license') {
 		if(!preg_match("/^[a-z][a-z0-9]+_$/i",$tablepre)) {
 			show_msg('tablepre_invalid', $tablepre, 0);
 		}
-
 		$uid = 1 ;
 		$authkey = substr(md5($_SERVER['SERVER_ADDR'].$_SERVER['HTTP_USER_AGENT'].$dbhost.$dbuser.$dbpw.$dbname.$pconnect.substr($timestamp, 0, 6)), 8, 6).random(10);
 		$_config['db'][1]['dbhost'] = $dbhost;

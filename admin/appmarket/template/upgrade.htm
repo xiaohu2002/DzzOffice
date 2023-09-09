@@ -4,30 +4,17 @@
 <style>
 .app_upgradelist{
 	margin: auto;
-	padding: 8px;
+	padding: 8px 0;
 	border-bottom: 1px solid #f2f2f2;
 	position: relative;
 }
-.app_upgradelist .progess{
+.app_upgradelist .upgrade_progess{
+	background-color:#dff0d8;
 	position: absolute;
 	top:0;
 	left: 0;
-	height:30px;width:0%;
-	height: 100%;
-	width:100%;
-}
-.app_upgradelist .progess .upgrade_progess{
-	background-color:#dff0d8;
-	position: absolute;
 	width:0%;
 	height: 100%;
-}
-
-.app-name-wrapper {
-    padding-left: 55px;
-    position: relative;
-	max-width:350px;
-	min-height:50px;
 }
 .app-name-wrapper .appicon {
     position: absolute;
@@ -37,11 +24,6 @@
     max-width: 45px;
     max-height: 45px;
     margin: 0;
-}
-.app-name-wrapper .appname{
-	margin:0;
-	line-height:30px;
-	
 }
 .app-name-wrapper .appname a{
 	color:#000;
@@ -73,21 +55,8 @@
 	margin:0;
 	vertical-align: text-bottom;
 }
-
-.app-info a{
-	color:#999;
-}
 .app-info .select-info{
-	position:absolute;
-	left:30px;
-	top:9px;
 	display:none;
-	background-color:#FFF;
-	padding:5px 10px;
-	line-height: 34px;
-}
-#update_selected{
-	margin-left:20px;
 }
 </style>
 <!--{template common/header_simple_end}-->
@@ -101,16 +70,14 @@
 	<div class="bs-main-container">
 		<div class="all-center-top clearfix">
 			<div class="pull-left">
-				<div class="form-check">
-          <input class="form-check-input" type="checkbox" name="chkall" id="chkall">
-          <label class="form-check-label" for="seccodestatus2"><div class="app-info pull-left">
-                <a href="{MOD_URL}">{lang total}<span class="num">$count</span>{lang ge}{lang app}</a>
-                <div class="select-info">
+				<input class="form-check-input" type="checkbox" name="chkall" id="chkall">
+				<a href="{MOD_URL}">{lang total}<span class="num">$count</span>{lang ge}{lang app}</a>
+			<div class="app-info">
+                <div class="app-info select-info">
                 {lang selected}<span class="num">0</span>{lang ge}{lang app}
                 <a class="btn btn-w-md btn-round btn-primary " id="update_selected" title="{lang update_onekey}" href="javascript:;" onclick="upgrade_all();"><i class="glyphicon glyphicon-upload"></i> {lang update_onekey}</a>
                 </div>
-            </div></label>
-        </div>
+            </div>
       </div>
 			<div class="pull-right">
 				<button class="btn btn-w-md btn-round btn-primary " id="update_check" title="{lang app_upgrade_check_need_update}"  onclick="upgrade_check(this);" data-loading-text="{lang app_upgrade_check_need_update}">{lang app_upgrade_check_need_update2}</button>
@@ -122,25 +89,23 @@
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 				<!--{loop $list $value}--> 
 					<div id="app_div_{$value[appid]}" class="row app_upgradelist" > 
-						<div id="progess_{$value[appid]}" class="progess">
+						<div id="progess_{$value[appid]}">
 							<span id="upgrade_progess_{$value[appid]}" class="upgrade_progess"></span> 
 						</div>
-						<div class="col-md-4 col-sm-4 col-xs-4" style="padding-left: 4px;"> 
-							<div class="checkbox-primary" style="float: left; line-height: 50px; ">
-								<input type="checkbox" name="del[]" value="$value[appid]" data-mid="$value[mid]">
+						<div class="col-md-4 col-sm-4 col-xs-4"> 
+							<div style="float: left;">
+								<input type="checkbox" name="del[]" class="form-check-input" value="$value[appid]" data-mid="$value[mid]">
 								<label></label>
 							</div> 
-              <div class="app-name-wrapper" style="margin-left: 30px;">
+              <div class="app-name-wrapper">
 								{eval $appadminurl=$value[appadminurl]?$value[appadminurl]:$value[appurl]}
 								<a href="$appadminurl" target="_blank" class="appicon"><img src="$value[appico]" style="margin:0" /></a>
-								<p class="appname">
 									<a href="$appadminurl" target="_blank" class="">$value[appname]</a>
-								</p>
 								<div class="appdesc" title="$value['appdesc']">{eval echo $value[upgrade_version][desc_short]?$value[upgrade_version][desc_short]:lang('none');}</div>
               </div>
 						</div>
 						<div class="col-md-2 col-sm-2 col-xs-2"> 
-              <p>{lang installed}:$value[version]</p>
+							<div>{lang installed}:$value[version]</div>
               <div>{lang newest}:$value[upgrade_version][version]</div>
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-4"> 
@@ -153,7 +118,7 @@
 						</div> 
 					</div> 
 				<!--{/loop}-->
-				<table class="table table-striped table-hover">  
+				<table class="table table-hover">  
           <!--{if $multi}-->
 					<tr>
 						<td colspan="20" align="center">$multi </td>

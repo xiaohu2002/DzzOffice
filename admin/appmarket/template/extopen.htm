@@ -21,13 +21,13 @@
 		border:1px solid transparent;
 	
 	}
-	.app_default_list li a{padding:2px;color:#333}
+	.app_default_list li a{padding:2px;}
 	.app_default_list li.isdefault1 a{color:rgba(76, 137, 251, 1)}
 	.app_default_list li .label-rightimg{margin:auto;display: none;position:absolute;right:3px;top:3px}
 	.app_default_list li.isdefault1 .label-rightimg{display: inline-block;width: auto} 
 	.app_default_list li.isdefault,.app_default_list li.isdefault1{ 
 		border: 1px solid rgba(76, 137, 251, 1); 
-
+		border-radius: var(--radius);
 	}
 	.table td img{max-height: 32px;max-width: 32px;}
 	.app_default_list li.ui-state-default{width: 150px;height: 38px;border: 1px solid #e1e1e1;display: block;background:#FFF }
@@ -44,7 +44,7 @@
 	<div class="bs-main-container"> 
 		<div class="main-content clearfix">
 			
-			<table class="table table-striped table-hover">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th width="100">{lang default}</th> 
@@ -63,7 +63,7 @@
 						<ul class="app_default_list clearfix">
 						<!--{loop $value $key2 $value2}-->
 							<li class="default_li isdefault{$value2[isdefault]}" title="{lang drag_can_be_sorted}"  onclick="setdefault(this, '{$value2[extid]}' )">
-								<input class="form-control industry-add-one"  name="extid[]" type="hidden" value="{$value2[extid]}" />
+								<input class="form-control"  name="extid[]" type="hidden" value="{$value2[extid]}" />
 								<img class="default_li_icon" src="$value2[appdata][appico]" /><a  href="javascript:;" title="{lang set_default}">$value2[appdata][appname]</a>
 								<img src="static/image/common/ic-filtrate.png" class="label-rightimg">
 							</li>

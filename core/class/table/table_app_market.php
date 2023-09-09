@@ -41,7 +41,6 @@ class table_app_market extends dzz_table
 		$data['icon']=$data['appico'];
 		$data['title']=$data['appname'];
 		$data['url']=replace_canshu($data['appurl']);
-		$data['noticeurl']=replace_canshu($data['noticeurl']);
 		if($havecount){
 			$data['viewnum']=intval($count['viewnum']);
 			$data['replynum']=intval($count['replynum']);
@@ -68,7 +67,6 @@ class table_app_market extends dzz_table
 			$data['icon']=$data['appico'];
 			$data['title']=$data['appname'];
 			$data['url']=replace_canshu($data['appurl']);
-			$data['noticeurl']=replace_canshu($data['noticeurl']);
 			if($havecount){
 				$data['viewnum']=intval($count['viewnum']);
 				$data['replynum']=intval($count['replynum']);
@@ -177,6 +175,13 @@ class table_app_market extends dzz_table
 			$sql=" appurl = %s";
 			$param[]=$mod;
 		}
+		return DB::result_first("select appid from %t where $sql ",$param);
+	}
+	public function fetch_appid($mod){
+		$sql='';
+		$param=array($this->_table);
+			$sql=" identifier = %s";
+			$param[]=$mod;
 		return DB::result_first("select appid from %t where $sql ",$param);
 	}
 	public function fetch_by_identifier($identifier,$app_path='dzz'){

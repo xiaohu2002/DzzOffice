@@ -26,7 +26,7 @@ if ($operation == 'check_upgrade' ) {//根据appid检查app应用是否需要更
     $appinfo = C::t('app_market')->fetch($appid);//C::tp_t('app_market')->find( $appid );
     $time =dgmdate(TIMESTAMP,'Ymd');
     $return=array(
-        "url"=>ADMINSCRIPT .'?mod=appmarket&op=upgrade', 
+        "url"=>MOD_URL.'&op=upgrade', 
         "status"=>1,
         "percent"=>5,
         "second"=>500,
@@ -39,9 +39,9 @@ if ($operation == 'check_upgrade' ) {//根据appid检查app应用是否需要更
     
     if($appinfo["check_upgrade_time"]==$time){//今天已经检查过是否需要更新 
         if(  $appinfo["upgrade_version"]!="" ){
-            $return["url"] = ADMINSCRIPT .'?mod=appmarket&op=upgrade_app_ajax&appid='.$appid;
+            $return["url"] = MOD_URL.'&op=upgrade_app_ajax&appid='.$appid;
             if($appinfo["mid"]==0){
-                $return["url"] = ADMINSCRIPT .'?mod=appmarket&op=upgrade_app_ajax&operation=localupgrade&appid='.$appid; 
+                $return["url"] = MOD_URL.'&op=upgrade_app_ajax&operation=localupgrade&appid='.$appid; 
             }
             exit(json_encode($return));//已获取更新版本信息,待更新
         }else{
@@ -57,7 +57,7 @@ if ($operation == 'check_upgrade' ) {//根据appid检查app应用是否需要更
             $importtxt = @implode('', file($file));
             $apparray = getimportdata('Dzz! app'); 
             if($apparray["app"]["version"]!=$appinfo["version"]){
-                $return["url"] = ADMINSCRIPT .'?mod=appmarket&op=upgrade_app_ajax&operation=localupgrade&appid='.$appid; 
+                $return["url"] = MOD_URL.'&op=upgrade_app_ajax&operation=localupgrade&appid='.$appid; 
             } else{
                 $return["status"]=0;
                 $return["msg"]=lang("app_upgrade_to_lastversion"); 
@@ -82,7 +82,7 @@ if ($operation == 'check_upgrade' ) {//根据appid检查app应用是否需要更
                 "check_upgrade_time"=>dgmdate(TIMESTAMP,'Ymd')
             );
             $re=C::t('app_market')->update($appid,$map);//C::tp_t('app_market')->where("appid=".$appid)->save( $map );
-            $return["url"] = ADMINSCRIPT .'?mod=appmarket&op=upgrade_app_ajax&appid='.$appid;
+            $return["url"] = MOD_URL.'&op=upgrade_app_ajax&appid='.$appid;
             exit(json_encode($return));//需要更新
         } else {
             $map=array(
@@ -100,7 +100,7 @@ if ($operation == 'check_upgrade' ) {//根据appid检查app应用是否需要更
 elseif($operation == 'upgrade' ){ 
     $appid = $_GET["appid"];
     $return=array(
-        "url"=>ADMINSCRIPT .'?mod=appmarket&op=upgrade',
+        "url"=>MOD_URL.'&op=upgrade',
         "status"=>1,
         "percent"=>10,
         "second"=>1, 
@@ -166,13 +166,13 @@ elseif($operation == 'upgrade' ){
         } 
     }*/
     
-    $linkurl = ADMINSCRIPT . '?mod=appmarket&op=upgrade_app_ajax&operation=patch&appid=' .$appid. '&locale=' . $locale . '&charset=' . $charset;
+    $linkurl = MOD_URL.'&op=upgrade_app_ajax&operation=patch&appid=' .$appid. '&locale=' . $locale . '&charset=' . $charset;
     $return["url"]=$linkurl;
     exit(json_encode($return)); 
 }
 elseif($operation == 'cross' || $operation == 'patch'){
     $return=array(
-        "url"=>ADMINSCRIPT .'?mod=appmarket&op=upgrade',
+        "url"=>MOD_URL.'&op=upgrade',
         "status"=>1,
         "percent"=>10,
         "second"=>0,
@@ -204,7 +204,7 @@ elseif($operation == 'cross' || $operation == 'patch'){
     $appid = $_GET["appid"]; 
     $appinfo = C::t('app_market')->fetch($appid);//C::tp_t('app_market')->find( $appid );
     if( !$appinfo["upgrade_version"] ){
-        $linkurl=ADMINSCRIPT.'?mod=appmarket&op=upgrade';
+        $linkurl=MOD_URL.'&op=upgrade';
         $return["url"]=$linkurl;
         $return["status"]=0;
         $return["msg"]= lang( "app_upgrade_data_error" );
@@ -222,7 +222,7 @@ elseif($operation == 'cross' || $operation == 'patch'){
         $upgradeinfo=getappidentifier($upgradeinfo); //获取并判断新标识名称
         //如果有新标识名称 抛出错误停止更新
         if( isset( $upgradeinfo["new_identifier"]) &&  $upgradeinfo["new_identifier"] ){
-            $linkurl=ADMINSCRIPT.'?mod=appmarket&op=upgrade';
+            $linkurl=MOD_URL.'&op=upgrade';
             $return["url"]=$linkurl;
             $return["status"]=0;
             $return["msg"]= lang( $upgradeinfo["app_path"]."/".$upgradeinfo["identifier"]." 目录已存在,请重命名该目录或移除,防止重复或覆盖" );
@@ -260,13 +260,13 @@ elseif($operation == 'cross' || $operation == 'patch'){
         
         //与本地文件对比过滤出更新文件
         list($updatefilelist, $updatemd5filelist) = $dzz_upgrade->compare_basefile_bymd5($appinfo, $updatefilelist,$updatemd5filelist);
-        $theurl = ADMINSCRIPT . '?mod=appmarket&op=upgrade_app_ajax&operation=' . $operation . '&appid=' .$appid. '&locale=' . $locale . '&charset=' . $charset;
+        $theurl = MOD_URL.'&op=upgrade_app_ajax&operation=' . $operation . '&appid=' .$appid. '&locale=' . $locale . '&charset=' . $charset;
         if(empty($updatefilelist)) {
             $return["status"]=0;
             $return["msg"]=  lang('app_upgrade_exchange_none', array('upgradeurl' => upgradeinformation_app(-9))); 
             exit(json_encode($return));  
         }*/
-        $theurl = ADMINSCRIPT . '?mod=appmarket&op=upgrade_app_ajax&operation=' . $operation . '&appid=' .$appid. '&locale=' . $locale . '&charset=' . $charset;
+        $theurl = MOD_URL.'&op=upgrade_app_ajax&operation=' . $operation . '&appid=' .$appid. '&locale=' . $locale . '&charset=' . $charset;
     }
     
     if($step == 1) {
@@ -353,7 +353,7 @@ elseif($operation == 'cross' || $operation == 'patch'){
         
         //与本地文件对比过滤出更新文件
         list($updatefilelist, $updatemd5filelist) = $dzz_upgrade->compare_basefile_bymd5($appinfo, $updatefilelist,$updatemd5filelist);
-        $theurl = ADMINSCRIPT . '?mod=appmarket&op=upgrade_app_ajax&operation=' . $operation . '&appid=' .$appid. '&locale=' . $locale . '&charset=' . $charset;
+        $theurl = MOD_URL.'&op=upgrade_app_ajax&operation=' . $operation . '&appid=' .$appid. '&locale=' . $locale . '&charset=' . $charset;
         if(empty($updatefilelist)) {//不存在修改的继续执行
             //$return["status"]=0;
             //$return["msg"]=  lang('app_upgrade_exchange_none', array('upgradeurl' => upgradeinformation_app(-9))); 
@@ -517,7 +517,6 @@ elseif($operation == 'cross' || $operation == 'patch'){
                     $apparray['app']['identifier']=$appinfo['identifier'];//$appinfo['new_identifier'];
                     $apparray['app']['appurl']= str_replace("mod=".$upgradeinfo['identifier'],"mod=".$appinfo['identifier'],$appinfo['app']['appurl']);
                     $apparray['app']['appadminurl']= str_replace("mod=".$upgradeinfo['identifier'],"mod=".$appinfo['identifier'],$appinfo['app']['appadminurl']);
-                    $apparray['app']['noticeurl']= str_replace("mod=".$upgradeinfo['identifier'],"mod=".$appinfo['identifier'],$appinfo['app']['noticeurl']);
                     $apparray['app']['identifier']=  $appinfo['identifier'];  
                     $apparray['app']['check_upgrade_time']= 0 ; 
                 }
@@ -528,7 +527,7 @@ elseif($operation == 'cross' || $operation == 'patch'){
                 writelog('otherlog', "更新应用 ".$apparray['app']['appname']); 
             } 
             
-            $linkurl = ADMINSCRIPT . '?mod=appmarket&op=upgrade_app_ajax&operation=' . $operation . '&appid=' .$_GET["appid"]. '&step=5&confirm=' . $confirm; 
+            $linkurl = MOD_URL.'&op=upgrade_app_ajax&operation=' . $operation . '&appid=' .$_GET["appid"]. '&step=5&confirm=' . $confirm; 
             $return["url"]=$linkurl;
             $return["percent"]=80;
             $return["second"]=300;
@@ -538,7 +537,7 @@ elseif($operation == 'cross' || $operation == 'patch'){
             exit;
         }
         
-        $linkurl = ADMINSCRIPT . '?mod=appmarket&op=upgrade_app_ajax&operation=' . $operation . '&appid=' .$appid. '&step=5&confirm=' . $confirm; 
+        $linkurl = MOD_URL.'&op=upgrade_app_ajax&operation=' . $operation . '&appid=' .$appid. '&step=5&confirm=' . $confirm; 
         
         $return["url"]=$linkurl;
         $return["percent"]=80;
@@ -564,7 +563,7 @@ elseif($operation == 'cross' || $operation == 'patch'){
         $re=C::t('app_market')->update( $appid,$map);
         updatecache('setting'); 
          
-        $return["url"] = ADMINSCRIPT . '?mod=appmarket&op=upgrade_app_ajax&operation=check_upgrade&appid='.$appinfo["appid"];
+        $return["url"] = MOD_URL.'&op=upgrade_app_ajax&operation=check_upgrade&appid='.$appinfo["appid"];
         $return["percent"]=100;
         $return["second"]=300;
         $return["step"]=5;
@@ -609,15 +608,23 @@ elseif($operation == 'localupgrade' ){
 	if ($finish) {
         $map=array(
             "mid"=>$mid,
-            "version"=>$toversion, 
+            "version"=>$toversion,
+            "vendor"=>$apparray['app']['vendor'],
+			"appurl"=>$apparray['app']['appurl'],
+			"isshow"=>$apparray['app']['isshow'],
+			"open"=>$apparray['app']['open'],
+			"fileext"=>$apparray['app']['fileext'],
+			"appname"=>$apparray['app']['appname'],
+            "app_path"=>$apparray['app']['app_path'],
+            "appdesc"=>$apparray['app']['appdesc'],
             "upgrade_version"=>"",
             "check_upgrade_time"=>0
         );
-        
+        C::t('app_open') -> insert_by_exts($appid, $apparray['app']['fileext']);
         $re=C::t('app_market')->update($appid,$map);//C::tp_t('app_market')->where("appid=".$appid)->save( $map );  
 	}
     
-    $return["url"] = ADMINSCRIPT . '?mod=appmarket&op=upgrade_app_ajax&operation=check_upgrade&appid='.$app["appid"];
+    $return["url"] = MOD_URL.'&op=upgrade_app_ajax&operation=check_upgrade&appid='.$app["appid"];
     $return["percent"]=100;
     $return["second"]=300;
     $return["step"]=5;

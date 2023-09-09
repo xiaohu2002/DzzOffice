@@ -406,7 +406,6 @@ elseif($operation == 'cross' || $operation == 'patch'){
                     $apparray['app']['identifier']=$baseinfo['new_identifier'];
                     $apparray['app']['appurl']= str_replace("mod=".$baseinfo['identifier'],"mod=".$baseinfo['new_identifier'],$apparray['app']['appurl']);
                     $apparray['app']['appadminurl']= str_replace("mod=".$baseinfo['identifier'],"mod=".$baseinfo['new_identifier'],$apparray['app']['appadminurl']);
-                    $apparray['app']['noticeurl']= str_replace("mod=".$baseinfo['identifier'],"mod=".$baseinfo['new_identifier'],$apparray['app']['noticeurl']);
                     $apparray['app']['identifier']=  $baseinfo['new_identifier'];
                 }
                 

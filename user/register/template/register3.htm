@@ -1,4 +1,5 @@
 <!--{template common/header_simple}-->
+<!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css"><!--{/if}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
 <link rel="stylesheet" type="text/css" href="static/css/style.min.css">
 <!--{template common/beijing}-->
@@ -36,11 +37,13 @@
 	.login-right {
 			max-width: 50%;
 	}
-	<!--{if $_G[setting][loginset][transparency]}-->
+	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
-		background-color:$_G[setting][loginset][transparency];
+		background-color:$_G[setting][loginset][kbcolor];
 	}
-	.card:hover{
+	<!--{/if}-->
+  <!--{if $_G[setting][loginset][transparency]}-->
+	.form-control{
 		background-color:$_G[setting][loginset][transparency];
 	}
 	<!--{/if}-->
@@ -51,7 +54,7 @@
 <script src="user/scripts/register.js?{VARHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <body class="center-vh">
-	<div class="card">
+	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box">
         <div class="login-left p-5">
           <div class="text-center mb-3 d-sm-none">
@@ -84,19 +87,19 @@
               <input type="password" class="form-control" id="password2" name="password2" autocomplete="off" placeholder="{lang register_repassword_tips}">
               <span id="chk_password2" class="help-msg"></span> 
             </div>
+						<!--{loop $_G['cache']['fields_register'] $field}-->
+            <!--{if $htmls[$field['fieldid']]}-->
+            <div class="mb-3 has-feedback">
+              <!--{if $field['required']}--><span class="mdi mdi-asterisk" aria-hidden="true"></span><!--{/if}-->
+              $htmls[$field['fieldid']]
+              <i id="tip_$field['fieldid']" class="help-msg"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></i><kbd id="chk_$field['fieldid']" class="help-msg"></kbd>
+            </div>
+            <!--{/if}-->
+            <!--{/loop}-->
             <!--{/if}-->
             <!--{if $seccodecheck}-->
             <!--{template common/seccheck}--> 
             <!--{/if}-->
-            <!--<!--{loop $_G['cache']['fields_register'] $field}-->
-            <!--{if $htmls[$field['fieldid']]}-->
-            <div class="mb-3">
-                  <!--{if $field['required']}--><span class="rq">*</span><!--{/if}--><label for="$field['fieldid']">$field[title]:</label>
-                  $htmls[$field['fieldid']]
-                  <i id="tip_$field['fieldid']" class="p_tip"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></i><kbd id="chk_$field['fieldid']" class="p_chk"></kbd>
-            </div>
-            <!--{/if}-->
-            <!--{/loop}-->-->
             <!--{if $bbrules}-->
             <div class="mb-3">
               <div class="form-check">
@@ -116,7 +119,7 @@
                 <a href="user.php?mod=login">{lang back_login}</a>
               </p>
             </div>
-          <p class="text-center text-muted mt-3"><!--{template common/copyright}--></p>
+          <p class="text-center mt-3"><!--{template common/copyright}--></p>
         </div>
         <div class="login-right p-5 d-none d-sm-block">
           <p class="mb-3"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" alt="logo" /></p>

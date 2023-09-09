@@ -30,7 +30,7 @@ if( $json["status"]==1){
 	$total = $json["data"]["total"];
 	$perpage = $json["data"]["perpage"]; 
 	//$perpage =1;
-	$theurl = BASESCRIPT."?mod=".MOD_NAME."&op=cloudappmarket"; 
+	$theurl = MOD_URL."&op=cloudappmarket"; 
 	$multi=multi($total, $perpage, $page, $theurl);
 }
 //print_r($list);exit;

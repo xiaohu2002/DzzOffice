@@ -16,7 +16,7 @@
           <input type="text" class="form-control" id="email" name="email" autocomplete="off" value="$user[email]" onblur="checkemail(this.id);">
           <p id="emailmore" style="height:1px;margin:0;">&nbsp;</p>
           <span id="chk_email" class="help-block">
-            <span id="suc_email"></span><kbd class="p_chk"></kbd> 
+            <span id="suc_email"></span><kbd class="help-msg"></kbd> 
           </span>
           <small class="help-block">{lang adduser_login_email_text}</small>
         </div>
@@ -26,7 +26,7 @@
         <div class="col-sm-10">
           <input type="text" class="form-control" id="username" name="username" placeholder="{lang login_username_placeholder}" autocomplete="off" value="$user[username]" onblur="checknick(this.id);">
           <span id="chk_username" class="help-block">
-            <span id="suc_username"></span><kbd class="p_chk"></kbd> 
+            <span id="suc_username"></span><kbd class="help-msg"></kbd> 
           </span>
           <small class="help-block">{lang login_username_tips}</small>
         </div>
@@ -51,7 +51,7 @@
           <input type="text" class="form-control" name="password" autocomplete="off" id="password" placeholder="{lang register_password_tips}">
           <span id="chk_password" class="help-block">
             <span id="suc_password"></span>
-          <kbd id="chk_password" class="p_chk"></kbd>
+          <kbd id="chk_password" class="help-msg"></kbd>
           </span>
         </div>
       </div>
@@ -61,7 +61,7 @@
           <input type="text" class="form-control" id="password2" name="password2" autocomplete="off" placeholder="{lang register_repassword_tips}">
           <span id="chk_password2" class="help-block">
             <span id="suc_password2"></span>
-          <kbd id="chk_password2" class="p_chk"></kbd>
+          <kbd id="chk_password2" class="help-msg"></kbd>
           </span>
         </div>
       </div>
@@ -234,7 +234,7 @@
 		var flag = 0;
 		jQuery('#accountform kbd').each(function(){
 			var self=jQuery(this);
-			if(self.hasClass('p_chk') && self.html() != '') {
+			if(self.hasClass('help-msg') && self.html() != '') {
 				flag=1;
 				return false;
 			}

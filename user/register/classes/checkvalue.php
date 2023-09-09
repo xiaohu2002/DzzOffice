@@ -95,7 +95,6 @@ class Checkvalue{
 
             showTips(array('error'=>lang('profile_passwd_illegal')), $type);
         }
-
         $profile = $verifyarr = array();
 
         foreach($_G['cache']['fields_register'] as $field) {

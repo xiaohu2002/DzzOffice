@@ -49,7 +49,7 @@
 				<form id="cpform" action="{MOD_URL}&op=profileset" method="post" name="cpform">
 					<input type="hidden" value="{FORMHASH}" name="formhash">
 					<input type="hidden" value="true" name="ordersubmit">
-					<table id="table-header" class="table table-striped table-hover">
+					<table id="table-header" class="table table-hover">
 						<thead>
               <th width="60">{lang sort}</th>
               <th width="120">{lang identifier}</th>
@@ -63,7 +63,7 @@
 						<!--{loop $list $fieldid $value}-->
 						<tr>
 
-							<td width="60"><input type="text" class="form-control input-sm" name="displayorder[$fieldid]" value="$value[displayorder]"></td>
+							<td width="60"><input type="text" class="form-control" name="displayorder[$fieldid]" value="$value[displayorder]"></td>
 							<td class="fieldid <!--{if !$value[customable]}-->gray<!--{/if}-->" width="120">$fieldid</td>
 							<td>$value[title] </td>
 							<td width="60"><input type="checkbox" class="form-check-input" name="available[$fieldid]" <!--{if $value[available]}-->checked="checked"<!--{/if}-->value="1"></td>
@@ -130,9 +130,9 @@
 
 	function addRow(obj) {
 		var html = '<tr class="add">' +
-			'<td  width="60"><input type="text" class="form-control input-sm" name="add[displayorder][]" value="0" ></td>' +
-			'<td  width="120"><input type="text" class="form-control input-sm fieldid" name="add[fieldid][]" value="" placeholder="{lang can_not_repeat}" required="true"></td>' +
-			'<td ><input type="text" class="form-control input-sm" name="add[title][]" value="" style="max-width:150px;" placeholder="{lang data_name}"></td>' +
+			'<td  width="60"><input type="text" class="form-control" name="add[displayorder][]" value="0" ></td>' +
+			'<td  width="120"><input type="text" class="form-control fieldid" name="add[fieldid][]" value="" placeholder="{lang can_not_repeat}" required="true"></td>' +
+			'<td ><input type="text" class="form-control" name="add[title][]" value="" style="max-width:150px;" placeholder="{lang data_name}"></td>' +
 			'<td width="60"><input type="checkbox" class="form-check-input" name="add[available][]" value="1"></td>' +
 			'<td width="60"><input type="checkbox" class="form-check-input" name="add[invisible][]" value="1"></td>' +
 			'<td width="60"><input type="checkbox" class="form-check-input" name="add[showincard][]" value="1"></td>' +

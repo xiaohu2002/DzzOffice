@@ -55,7 +55,7 @@ if($do=='delete'){
 			if(!$field['isfixed2']) {
 				$_POST['title'] = dhtmlspecialchars(trim($_POST['title']));
 				if(empty($_POST['title'])) {
-					showmessage('data_name_empty', ADMINSCRIPT.'?mod=member&op=profileset&fieldid='.$fieldid, array(),array('alert'=>'error'));
+					showmessage('data_name_empty', MOD_URL.'&op=profileset&fieldid='.$fieldid, array(),array('alert'=>'error'));
 				}
 				$setarr['title'] = $_POST['title'];
 				$setarr['description'] = dhtmlspecialchars(trim($_POST['description']));
@@ -100,7 +100,7 @@ if($do=='delete'){
 			}
 			updatecache(array('profilesetting','fields_required', 'fields_optional', 'fields_register', 'setting'));
 			
-			showmessage('subscriber_data_edit_success', ADMINSCRIPT.'?mod=member&op=profileset', array(),array('alert'=>'right'));
+			showmessage('subscriber_data_edit_success', MOD_URL.'&op=profileset', array(),array('alert'=>'right'));
 		}
 }else {
 		

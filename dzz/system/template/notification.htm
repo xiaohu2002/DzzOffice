@@ -6,13 +6,9 @@
         <!--{if $list}-->
             <!--{loop $list $value}-->
             <div class="card notification-list-item clearfix">
-                <!--{if $value['avatarstatus']}-->
                 <div class="member member-no-menu">
                   <a class="member-avatar" href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value[authorid]);}</a>
                 </div>
-                <!--{else}-->
-                  <a class="member-avatar" href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value[authorid]);}</a>
-                <!--{/if}-->
                 <div class="details">
 									<!--{if $value[title]}-->
                   <p class="note u-title" >$value[title]</p>

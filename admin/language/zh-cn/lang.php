@@ -13,7 +13,7 @@ if(!defined('IN_DZZ')) {
 
 $lang = array
 (
-	'page_background'=>'登录背景',
+	'page_background'=>'登录页面背景',
 	'database_export_custom_invalid' => '您至少需要选择一个数据表进行备份',
 	'database_export_file_invalid' => '数据文件无法保存到服务器，请检查目录属性',
 	'admin_navtitle'=>'管理中心',

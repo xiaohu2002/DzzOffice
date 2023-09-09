@@ -649,27 +649,29 @@
           <label class="col-sm-2" for="settingnew[loginset][background]">{lang page_background}</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="settingnew[loginset][background]" name="settingnew[loginset][background]" value="$setting[loginset][background]"/>
-            <span class="help-block">可以输入以('jpg', 'jpeg', 'gif', 'png')为后缀名的图片或输入网址,设置的图片或网站会同步到首页背景设置。</span>
+            <span class="help-block">{lang for_color_set}设置的图片或网站会同步到首页背景设置。</span>
           </div>
         </div>
         <div class="row mb-3">
-          <label class="col-sm-2" for="settingnew[loginset][bcolor]">登录背景颜色</label>
+          <label class="col-sm-2" for="settingnew[loginset][kbcolor]">登录框背景</label>
 					<div class="col-sm-10">
-            <div class="input-group js-colorpicker mb-3 colorpicker-element" data-colorpicker-id="6">
-              <input type="text" class="form-control" id="settingnew[loginset][bcolor]" name="settingnew[loginset][bcolor]" value="$setting[loginset][bcolor]">
-              <span class="input-group-text colorpicker-input-addon" tabindex="0"><i style="background: $setting[loginset][bcolor];"></i></span>
-            </div>
-            <span class="help-block">只能输入颜色(如:#fff)</span>
+              <input type="text" class="form-control" id="settingnew[loginset][kbcolor]" name="settingnew[loginset][kbcolor]" value="$setting[loginset][kbcolor]">
+              <span class="help-block">可以为颜色(如:#FFF);图片(以.jpeg,.jpg,.png结尾)。</span>
           </div>
         </div>
 				<div class="row mb-3">
-          <label class="col-sm-2" for="settingnew[loginset][transparency]">登录框背景颜色</label>
+          <label class="col-sm-2" for="settingnew[loginset][transparency]">输入框背景颜色</label>
 					<div class="col-sm-10">
-            <div class="input-group js-colorpicker mb-3 colorpicker-element" data-colorpicker-mode="rgb" data-colorpicker-id="6">
               <input type="text" id="settingnew[loginset][transparency]" class="form-control" name="settingnew[loginset][transparency]" value="$setting[loginset][transparency]">
-              <span class="input-group-text colorpicker-input-addon" tabindex="0"><i style="background: $setting[loginset][transparency];"></i></span>
-            </div>
             <span class="help-block">只能输入颜色(如:rgba(8, 169, 249, 0.57))</span>
+          </div>
+        </div>
+				<div class="row mb-3">
+          <label class="col-sm-2" for="settingnew[loginset][lwaveanimation]">登录框水波动画</label>
+					<div class="col-sm-10">
+              <div class="form-check form-switch">
+            <input type="checkbox" name="settingnew[loginset][lwaveanimation]" id="settingnew[loginset][lwaveanimation]" class="form-check-input" <!--{if $setting[loginset][lwaveanimation]}-->checked="checked"<!--{/if}-->> 
+          </div>
           </div>
         </div>
         <div class="row mb-3">
@@ -703,10 +705,6 @@
             <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
         </dl>
       </form>
-      <!--引入选色器css-->
-      <link type="text/css" rel="stylesheet" href="static/lyear/js/bootstrap-colorpicker/bootstrap-colorpicker.min.css" />
-      <!--引入选色器js-->
-      <script type="text/javascript" src="static/lyear/js/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
       <script type="text/javascript">
           jQuery(document).on('click', '.loginset-template-icon', function () {
               jQuery(this).addClass('loginset-template-icon1').closest('.loginset-template').siblings().find('.loginset-template-icon').removeClass('loginset-template-icon1');
@@ -769,7 +767,7 @@
                 <td colspan="7" align="left"><a href="javascript:;" onclick="addSMTP(this,1)"><i class="glyphicon glyphicon-plus"></i>{lang add_SMTP_server}</a></td>
               </tr>
             </table>
-            <table id="hidden2" class="table table-striped table-hover" style="margin-bottom:0; <!--{if $setting[mail][mailsend]!=3}-->display:none<!--{/if}-->">
+            <table id="hidden2" class="table table-hover" style="margin-bottom:0; <!--{if $setting[mail][mailsend]!=3}-->display:none<!--{/if}-->">
               <thead>{lang add_SMTP_server_set}</thead>
               <!--{loop $smtps $id $smtp}-->
               <tr>

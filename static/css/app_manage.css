@@ -176,10 +176,26 @@ border-radius:  var(--radius);
 .input-search .form-search{
 	background: rgba(0,0,0,0.1);
 	border: 1px solid transparent;
-	border-radius: 4px;
-	/*padding-right: 80px;*/
-	color: rgba(255,255,255,0.7);
 	height: 48px;
+}
+.input-search .form-search:hover{
+    -webkit-transition-duration: .1s;
+	-o-transition-duration: .1s;
+	transition-duration: .1s;
+	border-color: var(--bs-primary);
+	outline: 0;
+	box-shadow: 1px 1px 10px rgba(var(--bs-primary-hover));
+	border-width: 1px;
+	background: rgba(0,0,0,0.3);
+	-webkit-box-shadow: 1px 1px 10px rgba(var(--bs-primary-hover));
+	-moz-box-shadow: 1px 1px 10px rgba(var(--bs-primary-hover));
+	-o-box-shadow: 1px 1px 10px rgba(var(--bs-primary-hover));
+	-ms-box-shadow: 1px 1px 10px rgba(var(--bs-primary-hover));
+	-webkit-transition: all .25s linear;
+	-moz-transition: all .25s linear;
+	-ms-transition: all .25s linear;
+	-o-transition: all .25s linear;
+	transition: all .25s linear;
 }
 .input-search.focus .form-search{
 	background-color: #fff;
@@ -350,7 +366,7 @@ button.input-search-drop {
 }
 .notification-list-item .member-avatar{
 	position:absolute;
-	left:5px;
+	left:-2px;
     top: 10px;
 }
 .notification-list-item .dateline{
@@ -452,13 +468,6 @@ button.input-search-drop {
 /*版权信息样式 end*/
 
 /*about 关于页*/
-.modal .modal-header.about-header{
-	padding:10px;
-	border-bottom: 1px solid #e5e5e5;
-}
-.modal .about-header .about-title{
-	text-align: left;
-}
 .about-header .img-sitelogo{
 	max-height:32px;
 } 
@@ -466,21 +475,15 @@ button.input-search-drop {
 	margin-left:10px;
 	font-size:20px;
 }
-.modal .modal-header.about-header.about-header-noborder{
-	border-bottom:0;
-}
 .modal .modal-body.about-body{
 	text-align: center;
-}
-.about-body .logo{
-	margin:0;
 }
 
 .about-body .logo>img{
 	width:128px;
 }
 .about-copyright{
-	color: 000;
+	color: #000;
 	font-size:15px;
 	text-align: center;
 	padding:10px;
@@ -488,11 +491,5 @@ button.input-search-drop {
 .about-body .name{
 	font-size:28px;
 	margin-bottom:20px;
-}
-.about-body .name>span{
-	padding:0 2px;
-}
-.about-body p{
-	margin-bottom:10px;
 }
 /*about 关于页 end*/

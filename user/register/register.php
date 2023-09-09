@@ -36,7 +36,6 @@ $seccodecheck = $setting['seccodestatus'] & 1;
 
 //判断是否提交
 if(!submitcheck('regsubmit', 0, $seccodecheck)) {
-
     //应用注册页挂载点
     Hook::listen('appregister');
 		$bbrules = $setting['bbrules'];
@@ -50,8 +49,21 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
 		if($seccodecheck) {
 			$seccode = random(6, 1);
 		}
+    $allowitems = array();
+		foreach ($_G['cache']['profilesetting'] as $key => $value) {
+			if ($value['available'] > 0)
+				$allowitems[] = $key;
+		}
+    $htmls = $settings = array();
+    foreach($_G['cache']['fields_register'] as $field) {
+      $fieldid = $field['fieldid'];
+      $html = profile_setting($fieldid, array(), false, false, true);
+      if($html) {
+        $settings[$fieldid] = $_G['cache']['profilesetting'][$fieldid];
+        $htmls[$fieldid] = $html;
+      }
+    }
 		$navtitle = $setting['reglinkname'];
-
 		$dreferer = dreferer();
     if ($setting[loginset][template] == 2){
 			include template('register2');
@@ -86,7 +98,26 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
     );
     //插入用户状态表
     DB::insert('user_status',$status,1); 
+    $setarr = array();
+		foreach ($_GET as $key => $value) {
+			$field = $_G['cache']['profilesetting'][$key];
+			if (empty($field)) {
+				continue;
+			} elseif (profile_check($key, $value, $space)) {
+				$setarr[$key] = dhtmlspecialchars(trim($value));
+			}
+		}
+		if (isset($_POST['birthmonth']) && ($space['birthmonth'] != $_POST['birthmonth'] || $space['birthday'] != $_POST['birthday'])) {
+			$setarr['constellation'] = get_constellation($_POST['birthmonth'], $_POST['birthday']);
+		}
+		if (isset($_POST['birthyear']) && $space['birthyear'] != $_POST['birthyear']) {
+			$setarr['zodiac'] = get_zodiac($_POST['birthyear']);
+		}
 
+		if ($setarr) {
+			$setarr['uid'] = $result['uid'];
+			C::t('user_profile') -> insert($setarr);
+		}
     //新用户登录
     setloginstatus(array(
         'uid' => $result['uid'],
@@ -94,23 +125,23 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
         'password' => $result['password'],
         'groupid' => $result['groupid'],
     ), 0);
-	if ($_G['uid']) {
-    //发送通知
-        $notevars=array(
-                'from_id' => '0',
-                'from_idtype' => 'app',
-                'url' => '',
-                'author' => getglobal('username'),
-                'authorid' => getglobal('uid'),
-                'dataline' => dgmdate(TIMESTAMP),
-                'title'=> replacesitevar($_G['setting']['welcomemsgtxt'])
-                );
+	if($_G['setting']['welcomemsgtitle'] || $_G['setting']['welcomemsgtxt']){
+		$notevars=array(
+      'from_id' => '0',
+      'from_idtype' => 'app',
+      'url' => '',
+      'author' => getglobal('username'),
+      'authorid' => getglobal('uid'),
+      'dataline' => dgmdate(TIMESTAMP),
+      'title'=> $_G['setting']['welcomemsgtitle'],
+      'comment'=>replacesitevar($_G['setting']['welcomemsgtxt']),
+    );
 
-          $action = 'register';
-          $type = 'register_'.$_G['uid'];
+    $action = 'register';
+    $type = 'register_' . $result['uid'];
 
-        dzz_notification::notification_add($_G['uid'], $type, $action, $notevars);
-    }
+    dzz_notification::notification_add($result['uid'], $type, $action, $notevars);
+	}
     //设置显示提示文字
     $param = daddslashes(array('sitename' => $setting['sitename'], 'username' => $result['username'], 'usergroup' => $_G['cache']['usergroups'][$result['groupid']]['grouptitle'], 'uid' => $result['uid']));
 

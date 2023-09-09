@@ -6,11 +6,13 @@
 	body{
 		overflow:auto;
 	}
-	<!--{if $_G[setting][loginset][transparency]}-->
+	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
-		background-color:$_G[setting][loginset][transparency];
+		background-color:$_G[setting][loginset][kbcolor];
 	}
-	.card:hover{
+	<!--{/if}-->
+	<!--{if $_G[setting][loginset][transparency]}-->
+	.form-control{
 		background-color:$_G[setting][loginset][transparency];
 	}
 	<!--{/if}-->
@@ -33,7 +35,7 @@
 
   </div>
 
-  <div class="col-md-6 col-lg-5 col-xl-4 align-self-center" style="background-color: <!--{if $_G['setting']['loginset']['bcolor']}-->$_G['setting']['loginset']['bcolor']<!--{else}-->#fff<!--{/if}-->;height: 100%;">
+  <div class="col-md-6 col-lg-5 col-xl-4 align-self-center" style="background-color: <!--{if $_G['setting']['loginset']['kbcolor']}-->$_G['setting']['loginset']['kbcolor']<!--{else}-->#fff<!--{/if}-->;height: 100%;display: flex;align-items: center;justify-content: center;">
     <div class="p-5">
       <div class="text-center">
         <img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}">
@@ -43,18 +45,18 @@
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 				<input type="hidden" name="referer" value="{$referer}" />
 				<!--{if $auth}-->
-				<div class="mb-3">
-          <label for="auth">用户名</label>
+				<div class="mb-3 has-feedback">
+					<span class="mdi mdi-account" aria-hidden="true"></span>
           <input type="text" class="form-control" id="auth" name="auth" value="$auth">
         </div>
 				<!--{else}-->
-				<div class="mb-3">
-          <label for="email_$loginhash">用户名</label>
+				<div class="mb-3 has-feedback">
+					<span class="mdi mdi-account" aria-hidden="true"></span>
           <input type="text" class="form-control" id="email_$loginhash" name="email" autocomplete="off" placeholder="{lang email_username}" required>
         </div>
 
-        <div class="mb-3">
-          <label for="password3_$loginhash">密码</label>
+        <div class="mb-3 has-feedback">
+			<span class="mdi mdi-lock" aria-hidden="true"></span>
           <input type="password" class="form-control" type="password" id="password3_$loginhash" name="password" onfocus="this.type='password'" autocomplete="off" placeholder="{lang user_login_password}" required>
         </div>
 				<!--{/if}-->

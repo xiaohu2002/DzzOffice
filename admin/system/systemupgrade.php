@@ -49,7 +49,7 @@ if ($operation == 'patch' || $operation == 'cross') {
 
     if ($_GET['ungetfrom']) {
         if (md5($_GET['ungetfrom'] . $_G['config']['security']['authkey']) == $_GET['ungetfrommd5']) {
-            $dbreturnurl = $_G['siteurl'] . ADMINSCRIPT . '?mod=system&op=systemupgrade&operation=' . $operation . '&version=' . $version . '&step=5'; 
+            $dbreturnurl = $_G['siteurl'] . MOD_URL.'&op=systemupgrade&operation=' . $operation . '&version=' . $version . '&step=5'; 
             $url = outputurl(  $_G['siteurl'] . 'install/update.php?step=prepare&from=' . rawurlencode($dbreturnurl) . '&frommd5=' . rawurlencode(md5($dbreturnurl . $_G['config']['security']['authkey'])) );
             dheader('Location: ' . $url);
         } else {
@@ -102,7 +102,7 @@ if ($operation == 'patch' || $operation == 'cross') {
         $updatefilelist = $dzz_upgrade -> fetch_updatefile_list($upgradeinfo);
         $updatemd5filelist = $updatefilelist['md5'];
         $updatefilelist = $updatefilelist['file'];
-        $theurl = $_G['siteurl'].ADMINSCRIPT . '?mod=system&op=systemupgrade&operation=' . $operation . '&version=' . $version . '&locale=' . $locale . '&charset=' . $charset;
+        $theurl = $_G['siteurl'].MOD_URL.'&op=systemupgrade&operation=' . $operation . '&version=' . $version . '&locale=' . $locale . '&charset=' . $charset;
 
         if (empty($updatefilelist)) {
             $msg = '<p style="margin:10px 0;color:red">' . lang('upgrade_download_upgradelist_error', array('upgradeurl' => upgradeinformation(-2))) . '</p>';
@@ -312,7 +312,7 @@ if ($operation == 'patch' || $operation == 'cross') {
             }
             $upgrade_step['step'] = 'dbupdate';
             C::t('cache') -> insert(array('cachekey' => 'upgrade_step', 'cachevalue' => serialize($upgrade_step), 'dateline' => $_G['timestamp'], ), false, true);
-            $dbreturnurl = $_G['siteurl'] . ADMINSCRIPT . '?mod=system&op=systemupgrade&operation=' . $operation . '&version=' . $version . '&step=5';
+            $dbreturnurl = $_G['siteurl'] . MOD_URL.'&op=systemupgrade&operation=' . $operation . '&version=' . $version . '&step=5';
             $linkurl = $_G['siteurl'] . 'install/update.php?step=prepare&from=' . rawurlencode($dbreturnurl) . '&frommd5=' . rawurlencode(md5($dbreturnurl . $_G['config']['security']['authkey']));
             $msg = '<p style="margin:10px 0">' . lang('upgrade_file_successful', array('upgradeurl' => upgradeinformation(4))) . '</p>';
             $msg .= '<script type="text/JavaScript">setTimeout(function(){createIframe(\'' . $linkurl . '\');}, 1000);</script>';
@@ -354,9 +354,9 @@ elseif ($operation == 'check') {
         if (!empty($upgrade_step['cachevalue'])) {
             $upgrade_step['cachevalue'] = dunserialize($upgrade_step['cachevalue']);
             if (!empty($upgrade_step['cachevalue']['step'])) {
-                $theurl = ADMINSCRIPT . '?mod=system&op=systemupgrade&operation=' . $upgrade_step['cachevalue']['operation'] . '&version=' . $upgrade_step['cachevalue']['version'] . '&locale=' . $upgrade_step['cachevalue']['locale'] . '&charset=' . $upgrade_step['cachevalue']['charset'];
+                $theurl = MOD_URL.'&op=systemupgrade&operation=' . $upgrade_step['cachevalue']['operation'] . '&version=' . $upgrade_step['cachevalue']['version'] . '&locale=' . $upgrade_step['cachevalue']['locale'] . '&charset=' . $upgrade_step['cachevalue']['charset'];
 
-                $recheckurl = ADMINSCRIPT . '?mod=system&op=systemupgrade&operation=recheck';
+                $recheckurl = MOD_URL.'&op=systemupgrade&operation=recheck';
                 if ($upgrade_step['cachevalue']['step'] == 'dbupdate') {
                     $dbreturnurl = $_G['siteurl'] . $theurl . '&step=5';
                     $stepurl = $_G['siteurl'] . 'install/update.php?step=prepare&from=' . rawurlencode($dbreturnurl) . '&frommd5=' . rawurlencode(md5($dbreturnurl . $_G['config']['security']['authkey']));
@@ -416,7 +416,7 @@ elseif ($operation == 'showupgrade') {
             if (version_compare($upgrade['phpversion'], PHP_VERSION) > 0 || version_compare($upgrade['mysqlversion'], $dbversion) > 0) {
                 $unupgrade = 1;
             }
-            $list[$type]['linkurl'] = $linkurl = ADMINSCRIPT . '?mod=system&op=systemupgrade&operation=' . $type . '&version=' . $upgrade['latestversion'] . '&locale=' . $locale . '&charset=' . $charset;
+            $list[$type]['linkurl'] = $linkurl = MOD_URL.'&op=systemupgrade&operation=' . $type . '&version=' . $upgrade['latestversion'] . '&locale=' . $locale . '&charset=' . $charset;
             if ($unupgrade) {
                 $list[$type]['title'] = 'DzzOffice' . $upgrade['latestversion'] . '_' . $locale . '_' . $charset;
                 $list[$type]['btn1'] = lang('founder_upgrade_require_config') . ' php v' . PHP_VERSION . 'MYSQL v' . $dbversion;

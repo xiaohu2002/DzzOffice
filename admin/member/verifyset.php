@@ -92,7 +92,7 @@ if ($do == 'edit') {
 		C::t('setting') -> update('verify', $_G['setting']['verify']);
 
 		updatecache(array('setting'));
-		showmessage('members_verify_save_success', ADMINSCRIPT . '?mod=member&op=verifyset', array(), array('alert' => 'right'));
+		showmessage('members_verify_save_success', MOD_URL.'&op=verifyset', array(), array('alert' => 'right'));
 	}
 	include template('verifyset_edit');
 } else {

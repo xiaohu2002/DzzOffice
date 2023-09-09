@@ -60,7 +60,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 	$field['unchangeable'] = !$ignoreunchangable && $field['unchangeable'] ? 1 : 0;
 	if($fieldid == 'birthday') {
 		if($field['unchangeable'] && !empty($space[$fieldid])) {
-			return '<p class="form-control-static profile profile-'.$fieldid.'">'.$space['birthyear'].'-'.$space['birthmonth'].'-'.$space['birthday'].'</p><input type="hidden" name="birthyear" value="'.$space['birthyear'].'" />			<input type="hidden" name="birthmonth" value="'.$space['birthmonth'].'" /><input type="hidden" name="birthday" value="'.$space['birthday'].'" />';
+			return '<p class="form-control-static profile-'.$fieldid.'">'.$space['birthyear'].'-'.$space['birthmonth'].'-'.$space['birthday'].'</p><input type="hidden" name="birthyear" value="'.$space['birthyear'].'" />			<input type="hidden" name="birthmonth" value="'.$space['birthmonth'].'" /><input type="hidden" name="birthday" value="'.$space['birthday'].'" />';
 		}
 		$birthyeayhtml = '';
 		$nowy = dgmdate($_G['timestamp'], 'Y-m-d');
@@ -69,7 +69,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 	} elseif($fieldid=='gender') {
 		$space[$fieldid] = isset($space[$fieldid]) ? $space[$fieldid]:'';
 		if($field['unchangeable']  && $space[$fieldid] > 0) {
-			return '<p class="form-control-static profile profile-'.$fieldid.'">'.lang('gender_'.intval($space[$fieldid])).'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
+			return '<p class="form-control-static profile-'.$fieldid.'">'.lang('gender_'.intval($space[$fieldid])).'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
 		}
 		$selected = array($space[$fieldid]=>' selected="selected"');
 		$html = '<select name="gender" id="gender" class="form-select" >';
@@ -85,7 +85,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 	} elseif($fieldid=='department') {
 		$space[$fieldid] = !empty($space[$fieldid]) ? $space[$fieldid]:'';
 		if($field['unchangeable']  && $space[$fieldid] > 0) {
-			return '<p class="form-control-static profile profile-'.$fieldid.'">'.$space['department_tree'].'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
+			return '<p class="form-control-static profile-'.$fieldid.'">'.$space['department_tree'].'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
 		}
 			$html=' <script type="text/javascript">'
 				  .'	var selorg={};'
@@ -108,13 +108,13 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 		if($field['unchangeable'] && $space[$fieldid]!='') {
 			if($field['formtype']=='file') {
 				$imgurl = getglobal('setting/attachurl').$space[$fieldid];
-				return '<p class="form-control-static profile profile-'.$fieldid.'"><a href="'.$imgurl.'" target="_blank"><img src="'.$imgurl.'" /></a></span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
+				return '<p class="form-control-static profile-'.$fieldid.'"><a href="'.$imgurl.'" target="_blank"><img src="'.$imgurl.'" /></a></span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
 			} else {
-				return '<p class="form-control-static profile profile-'.$fieldid.'">'.nl2br($space[$fieldid]).'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
+				return '<p class="form-control-static profile-'.$fieldid.'">'.nl2br($space[$fieldid]).'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
 			}
 		}
 		if($field['formtype']=='textarea') {
-			$html = "<textarea name=\"$fieldid\"  id=\"$fieldid\" class=\"form-control input-sm profile profile-$fieldid\" rows=\"3\"   >$space[$fieldid]</textarea>";
+			$html = "<textarea name=\"$fieldid\"  id=\"$fieldid\" class=\"form-control profile-$fieldid\" rows=\"3\"   >$space[$fieldid]</textarea>";
 		} elseif($field['formtype']=='select') {
 			$field['choices'] = explode("\n", $field['choices']);
 			$html = "<select name=\"$fieldid\" id=\"$fieldid\" class=\"form-select\" >";
@@ -133,7 +133,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 		} elseif($field['formtype']=='checkbox') {
 			$field['choices'] = explode("\n", $field['choices']);
 			$space[$fieldid] = explode("\n", $space[$fieldid]);
-			$html.='<div class="class="profile profile-'.$fieldid.'" >';
+			$html.='<div class="class="profile-'.$fieldid.'" >';
 			foreach($field['choices'] as $op) {
 				$html .= ''
 					."<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"{$fieldid}[]\" id=\"$fieldid\"  value=\"$op\" ".(in_array($op, $space[$fieldid]) ? ' checked="checked"' : '')." />"
@@ -142,7 +142,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 			$html.='</div>';
 		} elseif($field['formtype']=='radio') {
 			$field['choices'] = explode("\n", $field['choices']);
-			$html.='<div class="profile profile-'.$fieldid.'" >';
+			$html.='<div class="profile-'.$fieldid.'" >';
 			foreach($field['choices'] as $op) {
 				$html .= ''
 						."<label class=\"radio-inline\"><input type=\"radio\" name=\"{$fieldid}\"  value=\"$op\" ".($op == $space[$fieldid] ? ' checked="checked"' : '')." />"
@@ -150,14 +150,14 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 			}
 			$html.='</div>';
 		} elseif($field['formtype']=='file') {
-			$html = "<input type=\"file\" value=\"\" name=\"$fieldid\" id=\"$fieldid\" class=\"form-control input-sm profile profile-$fieldid\" /><input type=\"hidden\" name=\"$fieldid\" value=\"$space[$fieldid]\"  />";
+			$html = "<input type=\"file\" value=\"\" name=\"$fieldid\" id=\"$fieldid\" class=\"form-control profile-$fieldid\" /><input type=\"hidden\" name=\"$fieldid\" value=\"$space[$fieldid]\"  />";
 			if(!empty($space[$fieldid])) {
 				$url = getglobal('setting/attachurl').$space[$fieldid];
 				$html .= "&nbsp;<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"deletefile[$fieldid]\" id=\"$fieldid\" value=\"yes\" />".lang('delete')."</label><br /><a href=\"$url\" target=\"_blank\"><img src=\"$url\" width=\"200\" class=\"mtm\" /></a>";
 			}
 		
 		} else {
-			$html = "<input type=\"text\" name=\"$fieldid\" id=\"$fieldid\"  value=\"$space[$fieldid]\"  class=\"form-control input-sm profile profile-$fieldid\" />";
+			$html = "<input type=\"text\" name=\"$fieldid\" id=\"$fieldid\"  value=\"$space[$fieldid]\"  placeholder=\"$field[title]\" class=\"form-control profile-$fieldid\" />";
 		}
 	}
 	$showerror = !$ignoreshowerror ? "id=\"showerror_$fieldid\"" : '';

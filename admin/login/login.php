@@ -66,11 +66,11 @@ function html_login_form() {
 	global $_G;
 	$uid = getglobal('uid');
 	$isguest = !getglobal('uid');
+	$navtitle = lang('title_admincp');
 	$lang1 = lang();
 	$maintitle=lang('title_admincp');
 	$loginuser = $isguest ? '
     <div class="mb-3 has-feedback"><span class="mdi mdi-account" aria-hidden="true"></span><input class="form-control" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}"   onblur="if(this.value==\'\'){this.value=\'' . lang('login_email_username') . '\'}"  placeholder='. lang('login_email_username') . ' autocomplete="off" autofocus required/></div>' : '<div class="text-center username">' . $_G['member']['username'] . '</div><div class="text-center email">' . $_G['member']['email'] . '</div>';
-	$loginuser2 = $isguest ? '<div class="mb-3"><input autofocus  class="form-control" id="admin_email" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}" placeholder='. lang('login_email_username') . ' onblur="if(this.value==\'\'){this.value=\'' . lang('login_email_username') . '\'}" autocomplete="off" required/></div>' : '<div class="relative text-center"><div class="username">' . $_G['member']['username'] . '</div><div class="email">' . $_G['member']['email'] . '</div></div>';
 	$sid = getglobal('sid');
   $avatarstatus=getglobal('avatarstatus','member');
    if(!$uid ){

@@ -1,9 +1,11 @@
 <!--{template common/header_simple}-->
+<!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css"><!--{/if}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
 <link rel="stylesheet" type="text/css" href="static/css/style.min.css">
 <!--[if lt IE 9]>
   <script src="static/js/jquery.placeholder.js" type="text/javascript"></script>
 <![endif]-->
+<!--{template common/beijing}-->
 <style>
 .signin-form .has-feedback {
     position: relative;
@@ -27,11 +29,13 @@
 	html, body{
 		overflow:auto;
 	}
-	<!--{if $_G[setting][loginset][transparency]}-->
+	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
-		background-color:$_G[setting][loginset][transparency];
+		background-color:$_G[setting][loginset][kbcolor];
 	}
-	.card:hover{
+	<!--{/if}-->
+	<!--{if $_G[setting][loginset][transparency]}-->
+	.form-control{
 		background-color:$_G[setting][loginset][transparency];
 	}
 	<!--{/if}-->
@@ -39,7 +43,7 @@
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <body class="center-vh">
-<div class="card card-shadowed p-5 mb-0 mr-2 ml-2">
+<div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
   <div class="text-center mb-3">
 		<img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" style="max-height: 60px;">
 		<h1>{lang getpassword}</h1>
@@ -49,19 +53,21 @@
 		<input type="hidden" name="formhash" value="{FORMHASH}" />
 		<h5 class="text-center">{lang login_email}:$member[email]</h5>
     <div class="mb-3 has-feedback">
+		<span class="mdi mdi-lock" aria-hidden="true"></span>
       <input class="form-control" type="password" id="newpasswd1" name="newpasswd1" autocomplete="off" placeholder="{lang new_password}" required/>
-			<span id="chk_newpasswd1" class="help-block"> <span id="suc_newpasswd1"></span><kbd class="p_chk"></kbd></span>
+			<span id="chk_newpasswd1" class="help-block"> <span id="suc_newpasswd1"></span><kbd class="help-msg"></kbd></span>
     </div>
 		<div class="mb-3 has-feedback">
+			<span class="mdi mdi-lock" aria-hidden="true"></span>
       <input class="form-control" type="password" id="newpasswd2" name="newpasswd2" autocomplete="off" placeholder="{lang new_password_confirm}" required/>
-			<span id="chk_newpasswd2" class="help-block"><span id="suc_newpasswd2"></span><kbd class="p_chk"></kbd></span>
+			<span id="chk_newpasswd2" class="help-block"><span id="suc_newpasswd2"></span><kbd class="help-msg"></kbd></span>
     </div>
     <div class="mb-3 d-grid">
       <button class="btn btn-round btn-primary" role="button" type="submit" name="getpwsubmit" value="true">{lang identify_changes}</button>
 			<a href="$_G['siteurl']" title="{lang back_homepage}" class="btn btn-round btn-danger">{lang back_homepage}</a>
     </div>
   </form>    
-  <p class="text-center text-muted mb-0"><!--{template common/copyright}--></p>
+  <p class="text-center mb-0"><!--{template common/copyright}--></p>
 </div>
 <!--{if $_G['setting']['pwdsafety']}--> 
 <script type="text/javascript" src="user/scripts/md5.js?{VERHASH}" reload="1"></script> 

@@ -39,7 +39,7 @@ if ($anchor != 'pass') {
 if (!submitcheck('verifysubmit', true)) {
 	$navtitle = $vid ? $_G['setting']['verify'][$vid]['title'] : lang('members_verify_profile').' - '.lang('appname');
 
-	$thurl = ADMINSCRIPT . '?mod=member&op=verify&anchor=' . $anchor . '&vid=' . $vid;
+	$thurl = MOD_URL.'&op=verify&anchor=' . $anchor . '&vid=' . $vid;
 	if ($anchor == 'refusal') {
 		$_GET['flag'] = -1;
 	} elseif ($anchor == 'authstr') {
@@ -255,7 +255,7 @@ if (!submitcheck('verifysubmit', true)) {
 			echo $verifylist;
 			exit();
 		} else {
-			showmessage('members_verify_succeed', ADMINSCRIPT . '?mod=member&op=verify&vid=' . $vid . '&anchor=pass', array(), array('alert' => 'right'));
+			showmessage('members_verify_succeed', MOD_URL.'&op=verify&vid=' . $vid . '&anchor=pass', array(), array('alert' => 'right'));
 		}
 	} else {
 		$vids = array();
@@ -342,7 +342,7 @@ if (!submitcheck('verifysubmit', true)) {
 		if ($single) {
 			echo "<script type=\"text/javascript\">var trObj = parent.document.getElementById('mod_{$single}_row');trObj.parentNode.removeChild(trObj);</script>";
 		} else {
-			showmessage('members_verify_succeed', ADMINSCRIPT . '?mod=member&op=verify&vid=' . $vid . '&anchor=' . $_GET['anchor'], array(), array('alert' => 'right'));
+			showmessage('members_verify_succeed', MOD_URL.'&op=verify&vid=' . $vid . '&anchor=' . $_GET['anchor'], array(), array('alert' => 'right'));
 		}
 	}
 }

@@ -1,10 +1,15 @@
-<!--{template common/header_simple_start}-->
+<!--{template common/header_common}-->
 <link href="static/jstree/themes/default/style.min.css?{VERHASH}" rel="stylesheet" media="all">
-<link rel="stylesheet" href="static/perfect-scrollbar/css/perfect-scrollbar.css?{VERHASH}">
 <link href="dzz/system/css/selfilewindow.css?{VERHASH}" rel="stylesheet" media="all">
 <link rel="stylesheet" href="{MOD_PATH}/css/rightmenu/style.css"/>
 <link href="dzz/system/css/rightmenu.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="dzz/system/css/select-file.css?{VERHASH}" rel="stylesheet" media="all">
+<style>
+html, body{
+	background: transparent;
+	background-color:transparent;
+}
+</style>
 <script type="text/javascript">
     var ctrlid = '$ctrlid';
     var range = '{$range}';
@@ -189,7 +194,6 @@
 <script type="text/javascript" src="dzz/system/scripts/_hotkey.js?{VERHASH}"></script>
 <script type="text/javascript" src="dzz/system/scripts/_select.js?{VERHASH}"></script>
 <script type="text/javascript" src="dzz/system/scripts/contextmenu.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/perfect-scrollbar/js/perfect-scrollbar.min.js?{VERHASH}"></script>
 <!-- The basic File Upload plugin -->
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script type="text/javascript" src="static/jquery_file_upload/jquery.ui.widget.js?{VERHASH}"></script>
@@ -198,6 +202,6 @@
 <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload-process.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload-validate.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/perfect-scrollbar/js/perfect-scrollbar.min.js?{VERHASH}"></script>
+<script type="text/javascript" src="static/js/perfect-scrollbar.min.js?{VERHASH}"></script>
 <!-- The basic File Upload plugin -->
 <!--{template common/footer_simple}--> 

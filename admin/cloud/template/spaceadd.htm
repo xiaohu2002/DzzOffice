@@ -41,23 +41,23 @@
 	function connect_start(bz, type) { //开始云连接
 		switch(type) {
 			case 'pan':
-				url = '{ADMINSCRIPT}?mod=cloud&bz=' + bz + '&op=oauth';
+				url = '{MOD_URL}&bz=' + bz + '&op=oauth';
 				window.location.href = url;
 				break;
 			case 'storage':
-				url = '{ADMINSCRIPT}?mod=cloud&bz=' + bz + '&op=oauth';
+				url = '{MOD_URL}&bz=' + bz + '&op=oauth';
 				window.location.href = url;
 				break;
 			case 'ftp':
-				url = '{ADMINSCRIPT}?mod=cloud&bz=' + bz + '&op=oauth';
+				url = '{MOD_URL}&bz=' + bz + '&op=oauth';
 				window.location.href = url;
 				break;
 			case 'disk':
-				url = '{ADMINSCRIPT}?mod=cloud&bz=' + bz + '&op=oauth';
+				url = '{MOD_URL}&bz=' + bz + '&op=oauth';
 				window.location.href = url;
 				break;
 			default:
-			   url = '{ADMINSCRIPT}?mod=cloud&bz=' + bz + '&op=oauth';
+			   url = '{MOD_URL}&bz=' + bz + '&op=oauth';
 				window.location.href = url;
 				break;
 		}

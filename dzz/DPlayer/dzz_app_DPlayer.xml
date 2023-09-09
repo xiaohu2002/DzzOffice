@@ -11,12 +11,10 @@
 			<item id="appdesc"><![CDATA[DPlayer，支持MP3,mp4,flv,wav等格式]]></item>
 			<item id="appurl"><![CDATA[{dzzscript}?mod=DPlayer]]></item>
 			<item id="appadminurl"><![CDATA[]]></item>
-			<item id="noticeurl"><![CDATA[]]></item>
 			<item id="disp"><![CDATA[9]]></item>
 			<item id="vendor"><![CDATA[小胡]]></item>
 			<item id="haveflash"><![CDATA[0]]></item>
 			<item id="isshow"><![CDATA[0]]></item>
-			<item id="havetask"><![CDATA[1]]></item>
 			<item id="hideInMarket"><![CDATA[0]]></item>
 			<item id="feature"><![CDATA[]]></item>
 			<item id="fileext"><![CDATA[mp3,mp4,flv,webm,ogv,ogg,wav,m3u8]]></item>
@@ -28,7 +26,7 @@
 			<item id="nodup"><![CDATA[0]]></item>
 			<item id="identifier"><![CDATA[DPlayer]]></item>
 			<item id="app_path"><![CDATA[dzz]]></item>
-			<item id="version"><![CDATA[小胡版1.2]]></item>
+			<item id="version"><![CDATA[1.2]]></item>
 			<item id="extra"><![CDATA[
 			]]></item>
 			<item id="mid"><![CDATA[0]]></item>

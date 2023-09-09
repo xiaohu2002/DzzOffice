@@ -5094,10 +5094,10 @@ progress {
 }
 
 .img-thumbnail {
-    padding: .25rem;
+    padding: var(--radius);
     background-color: #fff;
     border: 1px solid #dee2e6;
-    border-radius: .25rem;
+    border-radius: var(--radius);
     max-width: 100%;
     height: auto
 }
@@ -6718,7 +6718,6 @@ progress {
     padding: .375rem .75rem;
     font-size: 1rem;
     font-weight: 400;
-    line-height: 1.5;
     color: #212529;
     background-color: #fff;
     background-clip: padding-box;
@@ -6837,13 +6836,11 @@ progress {
 	-moz-box-shadow: 1px 1px 10px rgba(var(--bs-primary-hover));
 	-o-box-shadow: 1px 1px 10px rgba(var(--bs-primary-hover));
 	-ms-box-shadow: 1px 1px 10px rgba(var(--bs-primary-hover));
- 
 	-webkit-transition: all .25s linear;
 	-moz-transition: all .25s linear;
 	-ms-transition: all .25s linear;
 	-o-transition: all .25s linear;
 	transition: all .25s linear;
-
 }
 .form-control::-webkit-file-upload-button {
     padding: .375rem .75rem;
@@ -7653,7 +7650,6 @@ textarea.form-control.is-invalid {
 .btn {
     display: inline-block;
     font-weight: 400;
-    line-height: 1.5;
     color: #212529;
     text-align: center;
     text-decoration: none;
@@ -7671,6 +7667,7 @@ textarea.form-control.is-invalid {
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     margin: 1px;
     opacity: 0.8;
+    position: relative;
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -10003,7 +10000,8 @@ fieldset:disabled .btn {
     width: -moz-max-content;
     width: max-content;
     max-width: 100%;
-    pointer-events: none
+    pointer-events: none;
+    z-index: 5;
 }
 
 .toast-container>:not(:last-child) {
@@ -16092,3 +16090,21 @@ fieldset:disabled .btn {
     height: 32px;
     line-height: 32px;
   }
+.info-item .img-avatar{
+	width: 24px;
+    height: 24px;
+    line-height: 24px;
+}
+.user-item .thumbnail .img-avatar {
+    width: 84px;
+    height: 84px;
+    line-height: 84px;
+    font-size: 30px;
+    margin-top: 0;
+}
+.user-item .delete {
+	display: none;
+}
+.user-item.hover .delete{
+	display: block;
+}

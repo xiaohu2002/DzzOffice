@@ -1,15 +1,18 @@
 <!--{template common/header_simple}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
 <link rel="stylesheet" type="text/css" href="static/css/style.min.css">
+<!--{template common/beijing}-->
 <style>
 	html, body{
 		overflow:auto;
 	}
-	<!--{if $_G[setting][loginset][transparency]}-->
+	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
-		background-color:$_G[setting][loginset][transparency];
+		background-color:$_G[setting][loginset][kbcolor];
 	}
-	.card:hover{
+	<!--{/if}-->
+	<!--{if $_G[setting][loginset][transparency]}-->
+	.form-control{
 		background-color:$_G[setting][loginset][transparency];
 	}
 	<!--{/if}-->
@@ -33,7 +36,7 @@
 
   </div>
 
-  <div class="col-md-6 col-lg-5 col-xl-4 align-self-center">
+  <div class="col-md-6 col-lg-5 col-xl-4 align-self-center" style="background-color: <!--{if $_G['setting']['loginset']['kbcolor']}-->$_G['setting']['loginset']['kbcolor']<!--{else}-->#fff<!--{/if}-->;height: 100%;display: flex;align-items: center;justify-content: center;">
     <div class="p-5">
       <div class="text-center">
         <img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}">
@@ -44,18 +47,18 @@
 				<div class="mb-3 text-center">
           {lang login_email}:$member[email]
         </div>
-				<div class="mb-3">
-					<label for="password3_$loginhash">{lang new_password}</label>
+		<div class="mb-3 has-feedback">
+		<span class="mdi mdi-lock" aria-hidden="true"></span>
           <input class="form-control" type="password" id="newpasswd1" name="newpasswd1"  autocomplete="off" placeholder="{lang new_password}" required>
-					<span id="chk_newpasswd1" class="help-block"> <span id="suc_newpasswd1"></span><kbd class="p_chk"></kbd></span>
+					<span id="chk_newpasswd1" class="help-block"> <span id="suc_newpasswd1"></span><kbd class="help-msg"></kbd></span>
         </div>
-        <div class="mb-3">
-          <label for="password3_$loginhash">{lang new_password_confirm}</label>
+        <div class="mb-3 has-feedback">
+			<span class="mdi mdi-lock" aria-hidden="true"></span>
           <input class="form-control" type="password" id="newpasswd2" name="newpasswd2" autocomplete="off" placeholder="{lang new_password_confirm}" required>
-					<span id="chk_newpasswd2" class="help-block">
-						<span id="suc_newpasswd2"></span>
-						<kbd class="p_chk"></kbd>
-					</span>
+			<span id="chk_newpasswd2" class="help-block">
+				<span id="suc_newpasswd2"></span>
+				<kbd class="help-msg"></kbd>
+			</span>
         </div>
 				
         <div class="mb-3 d-grid">

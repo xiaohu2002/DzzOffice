@@ -290,30 +290,44 @@ if (!submitcheck('settingsubmit')) {
 		savecache('censor', $data);
 		showmessage('do_success', dreferer());
 	}elseif ($operation == 'loginset') {
-		if ($back = trim($settingnew['loginset']['background'])) {
+    if ($back = trim($settingnew['loginset']['background'])) {
 			if (strpos($back, '#') === 0) {
-				$settingnew['loginset']['url'] = '';
-				$settingnew['loginset']['img'] = '';
+				$settingnew['loginset']['bcolor'] = $back;
 			} else {
 				$arr = explode('.', $back);
 				$ext = array_pop($arr);
 				if ($ext && in_array(strtolower($ext), array('jpg', 'jpeg', 'gif', 'png'))) {
 					$settingnew['loginset']['img'] = $back;
-					$settingnew['loginset']['url'] = '';
+					$settingnew['loginset']['bcolor'] = '';
 				} else {
 					$settingnew['loginset']['url'] = $back;
-					$settingnew['loginset']['img'] = '';
+					$settingnew['loginset']['bcolor'] = '';
 				}
 			}
+		} else {
+			$settingnew['loginset']['bcolor'] = '';
 		}
-    if ($back = trim($settingnew['loginset']['bcolor'])) {
-      if (strpos($back, '#') === 0) {
-        $settingnew['loginset']['bcolor'] = $back;
+		if ($back = trim($settingnew['loginset']['kbcolor'])) {
+      if (strpos($back, '#') === 0 || strpos($back, 'rgb') === 0) {
+        $settingnew['loginset']['kbcolor'] = $back;
 			}else {
-        $settingnew['loginset']['bcolor'] ='';
+				$arr = explode('.', $back);
+				$ext = array_pop($arr);
+				if ($ext && in_array(strtolower($ext), array('jpg', 'jpeg', 'gif', 'png'))) {
+					$settingnew['loginset']['kbcolor'] = $back;
+				}else {
+          $settingnew['loginset']['kbcolor'] ='';
+        }
+			}
+		}
+    if ($back = trim($settingnew['loginset']['transparency'])) {
+      if (strpos($back, '#') === 0 || strpos($back, 'rgb') === 0) {
+        $settingnew['loginset']['transparency'] = $back;
+			}else {
+        $settingnew['loginset']['transparency'] ='';
       }
 		}
-	} elseif ($operation == 'qywechat') {
+	}elseif ($operation == 'qywechat') {
 		switch($_GET['fbind']) {
 			case 'bind' :
 				$wechat = new qyWechat( array('appid' => $settingnew['CorpID'], 'appsecret' => $settingnew['CorpSecret']));

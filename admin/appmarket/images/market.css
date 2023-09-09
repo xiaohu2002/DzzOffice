@@ -251,13 +251,11 @@ span.attach-item img{
 	overflow: hidden;
     text-overflow: ellipsis;
 }
-.app-info>a{
-	color:#999;
+
+.app-info{
+	display: inline-block;
 }
 .app-info .select-info{
-	position:absolute;
-	left:0;
-	top:0;
 	display:none;
 }
 span.num {
@@ -267,10 +265,12 @@ span.num {
 	margin:0;
 
 }
-.appname{
-	margin:0;
-	line-height:25px;
-	
+.app-name-wrapper {
+	padding-left: 55px;
+	position: relative;
+	max-width: 350px;
+	min-height: 50px;
+	display: inline-block;
 }
 .appname a{
 	font-weight:600;

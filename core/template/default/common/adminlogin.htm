@@ -1,4 +1,5 @@
 <!--{template common/header_simple}-->
+<!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css"><!--{/if}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
 <link rel="stylesheet" type="text/css" href="static/css/style.min.css">
 <style>
@@ -35,8 +36,13 @@
 	.login-right {
 			max-width: 50%;
 	}
-	<!--{if $_G[setting][loginset][transparency]}-->
+	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
+		background-color:$_G[setting][loginset][kbcolor];
+	}
+	<!--{/if}-->
+  <!--{if $_G[setting][loginset][transparency]}-->
+	.form-control{
 		background-color:$_G[setting][loginset][transparency];
 	}
 	<!--{/if}-->
@@ -58,7 +64,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 col-lg-5 col-xl-4 align-self-center" style="background-color: <!--{if $_G['setting']['loginset']['bcolor']}-->$_G['setting']['loginset']['bcolor']<!--{else}-->#fff<!--{/if}-->;height: 100%;">
+  <div class="col-md-6 col-lg-5 col-xl-4 align-self-center" style="background-color: <!--{if $_G['setting']['loginset']['kbcolor']}-->$_G['setting']['loginset']['kbcolor']<!--{else}-->#fff<!--{/if}-->;height: 100%;display: flex;align-items: center;justify-content: center;">
     <div class="p-5">
       <div class="text-center">
         $avastar
@@ -66,8 +72,8 @@
       <p class="text-center text-muted">$maintitle</p>
       <form class="signin-form needs-validation" action="$extra" method="POST" name="login" id="loginform" role="form" enctype="multipart/form-data" onsubmit="pwmd5('admin_password')">
 				<input type="hidden" name="sid" value="$sid">
-				$loginuser2
-				<div class="mb-3">
+				$loginuser
+				<div class="mb-3 has-feedback">
 					<span class="mdi mdi-lock" aria-hidden="true"></span>
           <input autofocus class="form-control" name="admin_password"  id="admin_password"  autofocus type="password" class="form-control"  value="" autocomplete="off" placeholder="$lang1[password]"  required>
         </div>
@@ -87,14 +93,16 @@
 </div>
 <!--{elseif $_G['setting'][loginset][template] == 3}-->
 <body class="center-vh">
-	<div class="card">
+	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box">
 
         <div class="login-left p-5">
           <h2 class="text-center">$maintitle</h2>
+          <!--{if $_G[uid]}-->
           <div class="text-center mb-3">
             $avastar
           </div>
+          <!--{/if}-->
           <form class="signin-form needs-validation"  action="$extra" method="POST" name="login" id="loginform" role="form" enctype="multipart/form-data" onsubmit="pwmd5('admin_password')">
             <input type="hidden" name="sid" value="$sid">
             $loginuser
@@ -107,7 +115,7 @@
               <a href="$_G[siteurl]" class="btn btn-round btn-danger">首页</a>
             </div>
           </form>
-          <p class="text-center text-muted mt-3"><!--{template common/copyright}--></p>
+          <p class="text-center mt-3"><!--{template common/copyright}--></p>
         </div>
         <div class="login-right p-5 d-none d-sm-block">
           <p class="mb-3"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" alt="logo" /></p>
@@ -118,7 +126,7 @@
   </div>
 <!--{else}-->
 <body class="center-vh">
-  <div class="card card-shadowed p-5 mb-0 mr-2 ml-2" id="register_form">
+  <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->" id="register_form">
     <div class="text-center mb-3">
       $avastar
       <h1>$maintitle</h1>
@@ -135,7 +143,7 @@
         <a href="$_G[siteurl]" class="btn btn-round btn-danger">首页</a>
       </div>
     </form>    
-    <p class="text-center text-muted mb-0"><!--{template common/copyright}--></p>
+    <p class="text-center mb-0"><!--{template common/copyright}--></p>
   </div>
 <!--{/if}-->
 <script type="text/JavaScript">

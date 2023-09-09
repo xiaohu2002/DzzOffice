@@ -528,6 +528,7 @@ class dzz_app extends dzz_base{
     }
 
     private function _init_misc() {
+        global $_G;
         if(!$this->init_misc) {
             return false;
         }

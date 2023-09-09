@@ -36,7 +36,7 @@
 			<form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}&op=default" method="post">
 				<input type="hidden" name="appsubmit" value="true" />
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
-				<table class="table table-striped table-hover">
+				<table class="table table-hover">
 					<thead>
 						<th style="min-width: 40px">{lang sort}</th>
 						<th style="min-width: 120px">{lang application_name}</th>
@@ -47,7 +47,7 @@
 					</thead>
 					<!--{loop $list $value}-->
 					<tr>
-						<td width="40"><input type="text" class="form-control input-sm" name="disp[{$value[appid]}]" value="$value[disp]" style="width:45px;" /></td>
+						<td width="40"><input type="text" class="form-control" name="disp[{$value[appid]}]" value="$value[disp]" style="width:45px;" /></td>
 						<td>
 							<a href="$value[appurl]"><img src="$value[appico]" />$value[appname]</a>
 						</td>

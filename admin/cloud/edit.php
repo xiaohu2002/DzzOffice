@@ -27,7 +27,7 @@ if($_GET['do']=='usercloud'){
 		$page = empty($_GET['page'])?1:intval($_GET['page']);
 		$perpage=20;
 		$start=($page-1)*$perpage;
-		$theurl=BASESCRIPT.'?mod=cloud&op=edit&do=usercloud&bz='.$bz;
+		$theurl=MOD_URL.'&op=edit&do=usercloud&bz='.$bz;
 		$dname=$cloud['dname'];
 		$count=DB::result_first("select COUNT(*) from ".DB::table($dname)." where bz='{$bz}' and uid>0");
 		foreach(DB::fetch_all("select * from ".DB::table($dname)." where bz='{$bz}' and uid>0 order by dateline DESC limit $start,$perpage") as $value1){

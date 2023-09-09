@@ -256,7 +256,7 @@
 									if(data['success']){
 										//jQuery('.head-checkbox').removeClass('hover').find('.headinput-checkbox').prop('checked',false);*/
 										var html ='<li class="head-portrait">'+'<img src="'+file.data.img+'"><div class="head-checkbox hover">'+
-												'<div class="checkbox-custom checkbox-primary"> <input type="checkbox" class="headinput-checkbox" name="arr[aid]" value="'+file.data.aid+'" checked="checked" onchange="set_org_logo(\'$org[orgid]\',this.value)" />'+
+												'<div class="checkbox-custom"> <input type="checkbox" class="headinput-checkbox" name="arr[aid]" value="'+file.data.aid+'" checked="checked" onchange="set_org_logo(\'$org[orgid]\',this.value)" />'+
 												' </div> </div> ';
 										jQuery('.head-portrait').replaceWith(html);
 										set_org_logo('$orgid',file.data.aid);

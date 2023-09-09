@@ -22,7 +22,7 @@
       <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=space" method="post" >
         <input type="hidden" name="cloudsubmit" value="true" />
         <input type="hidden" name="formhash" value="{FORMHASH}" />
-        <table class="table table-striped table-hover">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th width="30">{lang sort}</th>
@@ -67,7 +67,7 @@
 
  function checkspace(obj,remoteid){
 	 jQuery(obj).html('<img src="admin/images/loadding.gif">');
-	 jQuery.getJSON('{ADMINSCRIPT}?mod=cloud&op=space&do=checkspace&remoteid='+remoteid,function(json){
+	 jQuery.getJSON('{MOD_URL}&op=space&do=checkspace&remoteid='+remoteid,function(json){
 		 if(json.error){
 			 jQuery(this).html('<i class="glyphicon glyphicon-refresh"></i><span class="text-danger">'+json.error+'</span>');
 		 }else{

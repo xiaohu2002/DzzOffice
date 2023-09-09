@@ -185,7 +185,7 @@ $lang=array (
    'sending_wait'=>'发送中，请稍后...',
 	'myCountCenter'=>'个人中心',
 	'register_welcome_tip'=>'欢迎注册',
-	'register'=>'{title}',
-	'register_title'=>$_G['setting']['welcomemsgtitle'],
+	'register'=>'{comment}',
+	'register_title'=>'{title}',
 
 );

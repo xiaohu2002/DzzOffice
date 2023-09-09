@@ -1,19 +1,23 @@
 <!--{template common/header_simple}-->
+<!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css"><!--{/if}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
 <link rel="stylesheet" type="text/css" href="static/css/style.min.css">
 <style>
 	html, body{
 		overflow:auto;
 	}
-	<!--{if $_G[setting][loginset][transparency]}-->
+	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
-		background-color:$_G[setting][loginset][transparency];
+		background-color:$_G[setting][loginset][kbcolor];
 	}
-	.card:hover{
+	<!--{/if}-->
+	<!--{if $_G[setting][loginset][transparency]}-->
+	.form-control{
 		background-color:$_G[setting][loginset][transparency];
 	}
 	<!--{/if}-->
 </style>
+<!--{template common/beijing}-->
 <!--[if lt IE 9]>
   <script src="static/js/jquery.placeholder.js" type="text/javascript"></script>
 <![endif]-->
@@ -21,7 +25,7 @@
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{if !empty($_GET['inajax'])}--><button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button><!--{/if}-->
 <body class="center-vh">
-	<div class="card">
+	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
 <div class="flex-box login-box">
   <div class="login-left p-5">
 		<div class="text-center mb-3 d-sm-none">
@@ -33,16 +37,17 @@
 			<div class="mb-3 text-center">
 				{lang login_email}:$member[email]
 			</div>
-			<div class="mb-3">
+			<div class="mb-3 has-feedback">
+			<span class="mdi mdi-lock" aria-hidden="true"></span>
 				<input class="form-control" type="password" id="newpasswd1" name="newpasswd1"  autocomplete="off" placeholder="{lang new_password}" required>
-				<span id="chk_newpasswd1" class="help-block"> <span id="suc_newpasswd1"></span><kbd class="p_chk"></kbd></span>
+				<span id="chk_newpasswd1" class="help-block"> <span id="suc_newpasswd1"></span><kbd class="help-msg"></kbd></span>
 			</div>
-			<div class="mb-3">
-				<label for="password3_$loginhash">密码</label>
+			<div class="mb-3 has-feedback">
+			<span class="mdi mdi-lock" aria-hidden="true"></span>
 				<input class="form-control" type="password" id="newpasswd2" name="newpasswd2" autocomplete="off" placeholder="{lang new_password_confirm}" required>
 				<span id="chk_newpasswd2" class="help-block">
 					<span id="suc_newpasswd2"></span>
-					<kbd class="p_chk"></kbd>
+					<kbd class="help-msg"></kbd>
 				</span>
 			</div>
 			<div class="mb-3 d-grid">
@@ -52,7 +57,7 @@
 				<a href="/">首页</a>
 			</p>
 		</form>
-    <p class="text-center text-muted mt-3"><!--{template common/copyright}--></p>
+    <p class="text-center mt-3"><!--{template common/copyright}--></p>
   </div>
     <div class="login-right p-5 d-none d-sm-block">
       <p class="mb-3"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" alt="logo" /></p>

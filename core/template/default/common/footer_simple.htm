@@ -37,7 +37,7 @@ try{
     try{jQuery('#systemNotice').load('misc.php?mod=upgrade&action=upgradenotice');}catch(e){};	
   });
 </script>
-<div id="systemNotice" class="systemNotice" style="border-radius: var(--radius);position: fixed;right:10px;bottom:10px;max-width:50%;box-shadow:0px 5px 10px RGBA(0,0,0,0.3);z-index:999999"></div>
+<div id="systemNotice" class="toast-container position-absolute p-3 bottom-0 end-0" role="alert" aria-live="assertive" aria-atomic="true"></div>
 <!--{/if}-->
 <!--{/if}-->
 <!--{if $_G['setting']['statcode']}-->

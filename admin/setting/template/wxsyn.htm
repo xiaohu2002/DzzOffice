@@ -80,10 +80,10 @@
 		if(!i) i = 0;
 		var el = jQuery(button);
 		if(i == 0) el.button('loading');
-		var url='{ADMINSCRIPT}?mod=setting&op=wxsyn&do=qiwechat_syn_org&i=' + i;
+		var url='{MOD_URL}&op=wxsyn&do=qiwechat_syn_org&i=' + i;
 		var msg = '{lang start_sync_section_weixin}';
 		if( j==1 ){
-			url='{ADMINSCRIPT}?mod=setting&op=wxsyn_down&do=qiwechat_syn_org&i=' + i;
+			url='{MOD_URL}&op=wxsyn_down&do=qiwechat_syn_org&i=' + i;
 			msg = '{lang start_sync_section_weixin_down}';
 		}
 		jQuery.getJSON(url, function(json) {
@@ -108,11 +108,11 @@
 		if(!i) i = 0;
 		var el = jQuery(button);
 		if(i == 0) el.button('loading');
-		var url='{ADMINSCRIPT}?mod=setting&op=wxsyn&do=qiwechat_syn_user&i=' + i;
+		var url='{MOD_URL}&op=wxsyn&do=qiwechat_syn_user&i=' + i;
 		var msg = '{lang synchronization_weinxin}';
 		var msg2 = '{lang synchronization_weinxin_success_down}';
 		if( j==1 ){
-			url='{ADMINSCRIPT}?mod=setting&op=wxsyn_down&do=qiwechat_syn_user&i=' + i;
+			url='{MOD_URL}&op=wxsyn_down&do=qiwechat_syn_user&i=' + i;
 			msg =  '{lang synchronization_weinxin_down}'; 
 			msg2 =  '{lang synchronization_weinxin_success_down}';
 		}

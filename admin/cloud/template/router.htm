@@ -23,7 +23,7 @@
       <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=router" method="post">
         <input type="hidden" name="routersubmit" value="true" />
         <input type="hidden" name="formhash" value="{FORMHASH}" />
-        <table class="table table-striped table-hover">
+        <table class="table table-hover">
           <thead>
           <th width="20">&nbsp;</th>
             <th width="80">{lang priority}</th>
@@ -73,7 +73,7 @@
 
 	function checkspace(obj, routerid) {
 		jQuery(obj).html('<img src="admin/images/loadding.gif">');
-		jQuery.getJSON('{ADMINSCRIPT}?mod=cloud&op=space&do=checkspace&routerid=' + routerid, function(json) {
+		jQuery.getJSON('{MOD_URL}&op=space&do=checkspace&routerid=' + routerid, function(json) {
 			if(json.error) {
 				jQuery(this).html('<i class="icon-refresh"></i><span class="text-danger">' + json.error + '</span>');
 			} else {

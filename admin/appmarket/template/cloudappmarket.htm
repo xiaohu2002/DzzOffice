@@ -3,7 +3,7 @@
 <style>
 .app_upgradelist {
 	margin: auto;
-	padding: 8px;
+	padding: 8px 0;
 	border-bottom: 1px solid #f2f2f2;
 	position: relative;
 	display: flex;
@@ -16,12 +16,6 @@
 	height: 100%;
 	top:0;
 }
-.app-name-wrapper {
-	padding-left: 55px;
-	position: relative;
-	max-width: 350px;
-	min-height: 50px;
-}
 .app-name-wrapper .appicon {
 	position: absolute;
 	left: 0;
@@ -32,21 +26,10 @@
 	max-height: 45px;
 	margin: 0;
 }
-.app-name-wrapper .appname {
-	margin: 0;
-	line-height: 25px;
-}
 .app-name-wrapper .appname a {
 	color: #000;
 	font-weight: 500;
 	font-size: 14px;
-}
-.app-name-wrapper .appdesc {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	font-size: 13px;
-	cursor: default;
 }
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
 	white-space: nowrap;
@@ -66,19 +49,10 @@
 	margin: 0;
 	vertical-align: text-bottom;
 }
-.app-info a {
-	color: #999;
-}
 .app-info .select-info {
-	position: absolute;
-	left: 30px;
-	top: 0;
 	display: none;
 	background-color: #FFF;
 	padding: 5px 10px;
-}
-#update_selected {
-	margin-left: 20px;
 }
 .checkbox-custom {
 	margin-bottom: 0;
@@ -96,7 +70,7 @@
       <div class="app-info pull-left"> <a href="{MOD_URL}">{lang total}<span class="num">$total</span>{lang ge}{lang app}</a> 
 		 
       </div>
-       <div class="pull-right" style="color:#999;line-height: 34px;">{lang manual_install_tip}</div>
+       <div class="pull-right">{lang manual_install_tip}</div>
     </div>
     <div class="main-content clearfix" >
       <div class="market-container" id="loopcontent"> 
@@ -105,7 +79,7 @@
           <div id="progess_{$value[mid]}"> <span id="upgrade_progess_{$value[mid]}" class="upgrade_progess"></span> </div>
           <div class="col-md-5  col-sm-5 col-xs-5" style="padding-left: 4px;">
             <div class="app-name-wrapper" > <a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer"  class="appicon view-detail" title="$value[name]"><img src="$value[coverimg]" style="margin:0" /></a>
-              <p class="appname"> <a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer" target="_blank" class="view-detail" title="$value[name]">$value[name]</a> <small class="text-muted" title="{lang version}">$value[version]</small></p>
+               <a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer" target="_blank" class="view-detail" title="$value[name]">$value[name]</a> <small class="text-muted" title="{lang version}">$value[version]</small>
               <div class="appdesc" title="$value['appdesc']">{eval echo $value[desc_short]?$value[desc_short]:lang('none');}</div>
             </div>
           </div>

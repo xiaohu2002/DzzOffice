@@ -964,10 +964,7 @@ CREATE TABLE dzz_resources_version (
 DROP TABLE IF EXISTS dzz_session;
 CREATE TABLE dzz_session (
   sid char(6) NOT NULL DEFAULT '',
-  ip1 tinyint(3) unsigned NOT NULL DEFAULT '0',
-  ip2 tinyint(3) unsigned NOT NULL DEFAULT '0',
-  ip3 tinyint(3) unsigned NOT NULL DEFAULT '0',
-  ip4 tinyint(3) unsigned NOT NULL DEFAULT '0',
+  ip varchar(45) NOT NULL DEFAULT '',
   uid int(10) unsigned NOT NULL DEFAULT '0',
   username char(15) NOT NULL DEFAULT '',
   groupid smallint(6) unsigned NOT NULL DEFAULT '0',

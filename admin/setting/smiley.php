@@ -92,7 +92,7 @@ if (!$operation) {
 		$smurl = './static/image/smiley/' . $smtype['directory'];
 		$smdir = DZZ_ROOT . $smurl;
 		if (!is_dir($smdir)) {
-			showmessage(lang('smilies_directory_invalid', array('smurl' => $smurl)), ADMINSCRIPT . '?mod=setting&op=smiley');
+			showmessage(lang('smilies_directory_invalid', array('smurl' => $smurl)), MOD_URL.'&op=smiley');
 		}
 	}
 
@@ -101,9 +101,9 @@ if (!$operation) {
 	if ($smilies['smilies']) {
 		addsmilies($id, $smilies['smilies']);
 		updatecache(array('smilies', 'smileycodes', 'smilies_js'));
-		showmessage(lang('smilies_update_succeed', array('smurl' => $smurl, 'num' => $smilies['num'], 'typename' => $smtype['name'])), ADMINSCRIPT . '?mod=setting&op=smiley');
+		showmessage(lang('smilies_update_succeed', array('smurl' => $smurl, 'num' => $smilies['num'], 'typename' => $smtype['name'])), MOD_URL.'&op=smiley');
 	} else {
-		showmessage(lang('smilies_update_error', array('smurl' => $smurl)), ADMINSCRIPT . '?mod=setting&op=smiley');
+		showmessage(lang('smilies_update_error', array('smurl' => $smurl)), MOD_URL.'&op=smiley');
 	}
 } elseif ($operation == 'edit' && $id) {
 	$smtype = C::t('imagetype') -> fetch($id);
@@ -119,7 +119,7 @@ if (!$operation) {
 		$start_limit = ($page - 1) * $smiliesperpage;
 
 		$num = C::t('smiley') -> count_by_type_typeid('smiley', $id);
-		$multipage = multi($num, $smiliesperpage, $page, ADMINSCRIPT . '?mod=setting&op=smiley&operation=edit&id=' . $id);
+		$multipage = multi($num, $smiliesperpage, $page, MOD_URL.'&op=smiley&operation=edit&id=' . $id);
 
 		$smileynum = 1;
 		$smilies = '';

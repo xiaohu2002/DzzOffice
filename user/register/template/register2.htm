@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 col-lg-5 col-xl-4 align-self-center" style="background-color: <!--{if $_G['setting']['loginset']['bcolor']}-->$_G['setting']['loginset']['bcolor']<!--{else}-->#fff<!--{/if}-->;height: 100%;">
+  <div class="col-md-6 col-lg-5 col-xl-4 align-self-center" style="background-color: <!--{if $_G['setting']['loginset']['kbcolor']}-->$_G['setting']['loginset']['kbcolor']<!--{else}-->#fff<!--{/if}-->;height: 100%;display: flex;align-items: center;justify-content: center;">
     <div class="p-5">
       <div class="text-center">
         <img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}">
@@ -33,35 +33,39 @@
 				<input type="hidden" name="referer" value="$referer"/>
 				<input type="hidden" name="handlekey" value="$_GET[handlekey]"/>
 				<!--{if $_GET[action] != 'activation'}-->
-				<div class="mb-3">
+				<div class="mb-3 has-feedback">
+					<span class="mdi mdi-mail" aria-hidden="true"></span>
           <input type="text" class="form-control" id="email" name="email" autocomplete="off" placeholder="{lang register_email_tips}">
 					<span id="chk_email" class="help-msg"></span>  
         </div>
-				<div class="mb-3">
+		<div class="mb-3 has-feedback">
+			<span class="mdi mdi-account" aria-hidden="true"></span>
           <input type="text" class="form-control" id="username" name="username" autocomplete="off" placeholder="{lang username}">
 					<span id="chk_username" class="help-msg"></span>
         </div>
-				<div class="mb-3">
+		<div class="mb-3 has-feedback">
+			<span class="mdi mdi-lock" aria-hidden="true"></span>
           <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="{lang register_password_tips}">
 					<span id="chk_password" class="help-msg"></span> 
         </div>
-				<div class="mb-3">
+		<div class="mb-3 has-feedback">
+			<span class="mdi mdi-lock" aria-hidden="true"></span>
           <input type="password" class="form-control" id="password2" name="password2" autocomplete="off" placeholder="{lang register_repassword_tips}">
 					<span id="chk_password2" class="help-msg"></span> 
         </div>
+				<!--{loop $_G['cache']['fields_register'] $field}-->
+        <!--{if $htmls[$field['fieldid']]}-->
+        <div class="mb-3 has-feedback">
+          <!--{if $field['required']}--><span class="mdi mdi-asterisk" aria-hidden="true"></span><!--{/if}-->
+          $htmls[$field['fieldid']]
+          <i id="tip_$field['fieldid']" class="help-msg"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></i><kbd id="chk_$field['fieldid']" class="help-msg"></kbd>
+        </div>
+        <!--{/if}-->
+        <!--{/loop}-->
 				<!--{/if}-->
 				<!--{if $seccodecheck}-->
 				<!--{template common/seccheck}--> 
 				<!--{/if}-->
-				<!--<!--{loop $_G['cache']['fields_register'] $field}-->
-				<!--{if $htmls[$field['fieldid']]}-->
-				<div class="mb-3">
-							<!--{if $field['required']}--><span class="rq">*</span><!--{/if}--><label for="$field['fieldid']">$field[title]:</label>
-							$htmls[$field['fieldid']]
-							<i id="tip_$field['fieldid']" class="p_tip"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></i><kbd id="chk_$field['fieldid']" class="p_chk"></kbd>
-				</div>
-				<!--{/if}-->
-				<!--{/loop}-->-->
 				<!--{if $bbrules}-->
 				<div class="mb-3">
 					<div class="form-check">

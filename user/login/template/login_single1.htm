@@ -1,4 +1,5 @@
 <!--{template common/header_simple}-->
+<!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css"><!--{/if}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
 <link rel="stylesheet" type="text/css" href="static/css/style.min.css">
 <!--[if lt IE 9]>
@@ -28,11 +29,13 @@
 	html, body{
 		overflow:auto;
 	}
-	<!--{if $_G[setting][loginset][transparency]}-->
+	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
-		background-color:$_G[setting][loginset][transparency];
+		background-color:$_G[setting][loginset][kbcolor];
 	}
-	.card:hover{
+	<!--{/if}-->
+	<!--{if $_G[setting][loginset][transparency]}-->
+	.form-control{
 		background-color:$_G[setting][loginset][transparency];
 	}
 	<!--{/if}-->
@@ -40,7 +43,7 @@
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <body class="center-vh">
-<div class="card card-shadowed p-5 mb-0 mr-2 ml-2">
+<div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
   <div class="text-center mb-3">
   	<img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}">
 		<h1><!--{if $_G[setting][loginset][title]}-->$_G[setting][loginset][title]<!--{else}-->$_G[setting][sitename]<!--{/if}--></h1>
@@ -92,7 +95,7 @@
 		<!--{/if}-->
 		<!--{/if}-->
   </form>
-  <p class="text-center text-muted mb-0"><!--{template common/copyright}--></p>
+  <p class="text-center mb-0"><!--{template common/copyright}--></p>
 </div>
 <!--{if $_G['setting']['pwdsafety']}--> 
 <script type="text/javascript" src="user/scripts/md5.js?{VERHASH}" reload="1"></script> 

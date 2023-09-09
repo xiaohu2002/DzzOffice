@@ -1,12 +1,6 @@
 <!--{template common/header_simple_start}-->
 <link href="{MOD_PATH}/images/market.css?{VERHASH}" rel="stylesheet" media="all"> 
 <style>
-.app-name-wrapper {
-    padding-left: 55px;
-    position: relative;
-	max-width:250px;
-	min-height:50px;
-}
 .app-name-wrapper .appicon {
     position: absolute;
     left: 0;
@@ -15,11 +9,6 @@
     max-width: 45px;
     max-height: 45px;
     margin: 0;
-}
-.app-name-wrapper .appname{
-	margin:0;
-	line-height:30px;
-	
 }
 .app-name-wrapper .appname a{
 	color:#000;
@@ -58,20 +47,13 @@
     text-overflow: ellipsis;
 }
 .tag-td-wrapper a{
-	color:#333;
 	display:inline-block;
 	padding:0 2px;
 	white-space:nowrap;
 	overflow: hidden;
     text-overflow: ellipsis;
 }
-.app-info a{
-	color:#999;
-}
 .app-info .select-info{
-	position:absolute;
-	left:0;
-	top:10px;
 	display:none;
 }
 .checkbox-custom{
@@ -131,7 +113,7 @@
 			<form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}" method="post">
 				<input type="hidden" name="appsubmit" value="true" />
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
-				<table class="table table-striped table-hover">
+				<table class="table table-hover">
 					<thead> 
 						<th >{lang application_name}</th>
 						<th >{lang supplier}</th>
@@ -143,14 +125,12 @@
 					<tr> 
 						<td>
               <a href="$value[appurl]" target="_blank" class="appicon" style="float: left;padding-right: 5px;"><img src="$value[appico]" style="margin:0" /></a>
-              <p class="appname">
                 <!--{if $value[appadminurl]}-->
                   <a href="$value[appadminurl]" target="_blank" >$value[appname]</a>
                 <!--{else}-->
                   <a href="$value[appurl]" target="_blank" >$value[appname]</a>
                 <!--{/if}--> 
                 <small class="text-muted" title="{lang version}">$value[version]</small>    
-              </p>
 							<div class="appdesc" title="$value['appdesc']"> {eval echo $value['appdesc']?$value['appdesc']:lang('none');}</div>
               <!-- </div> -->
 						</td>

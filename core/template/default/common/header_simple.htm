@@ -8,7 +8,7 @@
     <meta name="description" content="{if !empty($_G[setting][metadescription])}{echo htmlspecialchars($_G[setting][metadescription])} {/if}" />
     <meta name="generator" content="$_G[setting][sitename]" />
     <meta name="author" content="$_G[setting][sitename]" />
-    <meta name="copyright" content="2012-{eval echo dgmdate(TIMESTAMP,'Y-m-d');} $_G[setting][sitename]" />
+    <meta name="copyright" content="<!--{eval echo replacesitevar($_G['setting']['sitecopyright'])}-->" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-capable" content="yes">
