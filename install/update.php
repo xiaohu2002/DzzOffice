@@ -264,9 +264,6 @@ if($_GET['step'] == 'start') {
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','fileVersionNumber'))){
 		 C::t('setting')->update('fileVersionNumber', '50');
 		}
-		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','default_mod'))){
-     C::t('setting')->update('default_mod', 'index_simple');
-		}
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','forbiddentime'))){
 		 C::t('setting')->update('forbiddentime', '900');
 		}
