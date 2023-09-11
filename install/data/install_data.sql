@@ -185,7 +185,6 @@ INSERT INTO `dzz_setting` VALUES('timeoffset', '8');
 INSERT INTO `dzz_setting` VALUES('reginput', 'a:4:{s:8:"username";s:8:"username";s:8:"password";s:8:"password";s:9:"password2";s:9:"password2";s:5:"email";s:5:"email";}');
 INSERT INTO `dzz_setting` VALUES('newusergroupid', '9');
 INSERT INTO `dzz_setting` VALUES('dateformat', 'Y-n-j');
-INSERT INTO `dzz_setting` VALUES('default_mod', 'index_simple');
 INSERT INTO `dzz_setting` VALUES('forbiddentime', '900');
 INSERT INTO `dzz_setting` VALUES('numberoflogins', '5');
 INSERT INTO `dzz_setting` VALUES('notification', '60');
