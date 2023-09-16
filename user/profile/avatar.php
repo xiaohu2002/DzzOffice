@@ -19,7 +19,7 @@ if(submitcheck('avatarsubmit')) {
 	if($success) exit(json_encode(array('msg'=>'success')));
 	else exit(json_encode(array('error'=>'头像保存错误，请稍候重试')));
 
-	showmessage('do_success', '{MOD_URL}&op=avatar');
+	showmessage('do_success', MOD_URL.'&op=avatar');
 
 }elseif($_GET['do']=='imageupload'){
 
