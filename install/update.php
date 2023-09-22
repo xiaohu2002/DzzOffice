@@ -6,7 +6,7 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-require '../core/coreBase.php';
+require './core/coreBase.php';
 @set_time_limit(0);
 $cachelist = array();
 $dzz = C::app();
@@ -265,7 +265,7 @@ if($_GET['step'] == 'start') {
 		 C::t('setting')->update('fileVersionNumber', '50');
 		}
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','default_mod'))){
-     C::t('setting')->update('default_mod', 'index_simple');
+     C::t('setting')->update('default_mod', 'index');
 		}
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','forbiddentime'))){
 		 C::t('setting')->update('forbiddentime', '900');
@@ -897,5 +897,4 @@ function create_table($sql, $dbcharset) {
 	return preg_replace("/^\s*(CREATE TABLE\s+.+\s+\(.+?\)).*$/isU", "\\1", $sql).
 	(" ENGINE=$type DEFAULT CHARSET=".$dbcharset);
 }
-
 ?>

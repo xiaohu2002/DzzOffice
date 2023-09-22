@@ -24,7 +24,7 @@
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{if !empty($_GET['inajax'])}--><button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button><!--{/if}-->
-<body class="center-vh">
+<div class="center-vh">
 	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
 <div class="flex-box login-box">
   <div class="login-left p-5">
@@ -64,6 +64,7 @@
       <!--{if $_G[setting][loginset][subtitle]}--><p class="text-white">$_G[setting][loginset][subtitle]</p><!--{/if}-->
       <!--{if $_G[setting][metadescription]}--><p class="text-white align-self-end">$_G[setting][metadescription]</p><!--{/if}-->
     </div>
+</div>
 </div>
 <script type="text/javascript" src="user/scripts/register.js?{VERHASH}"></script>
 <script type="text/javascript">

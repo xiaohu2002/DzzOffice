@@ -42,7 +42,7 @@
 </style>
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
-<body class="center-vh">
+<div class="center-vh">
 <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
   <div class="text-center mb-3">
   	<img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}">
@@ -96,6 +96,7 @@
 		<!--{/if}-->
   </form>
   <p class="text-center mb-0"><!--{template common/copyright}--></p>
+</div>
 </div>
 <!--{if $_G['setting']['pwdsafety']}--> 
 <script type="text/javascript" src="user/scripts/md5.js?{VERHASH}" reload="1"></script> 

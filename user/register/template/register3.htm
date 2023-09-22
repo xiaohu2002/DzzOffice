@@ -53,7 +53,7 @@
 <![endif]-->
 <script src="user/scripts/register.js?{VARHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
-<body class="center-vh">
+<div class="center-vh">
 	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box">
         <div class="login-left p-5">
@@ -128,6 +128,7 @@
         </div>
       </div>
   </div>
+</div>
 <script type="text/javascript">
 	var lastusername = '', lastpassword = '', lastemail = '', lastinvitecode = '', stmp = new Array(), modifypwd = false;
 	var ignoreEmail = false;

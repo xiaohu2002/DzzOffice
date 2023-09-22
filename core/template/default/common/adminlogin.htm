@@ -92,7 +92,7 @@
   </div>
 </div>
 <!--{elseif $_G['setting'][loginset][template] == 3}-->
-<body class="center-vh">
+<div class="center-vh">
 	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box">
 
@@ -124,8 +124,9 @@
         </div>
       </div>
   </div>
+</div>
 <!--{else}-->
-<body class="center-vh">
+<div class="center-vh">
   <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->" id="register_form">
     <div class="text-center mb-3">
       $avastar
@@ -145,6 +146,7 @@
     </form>    
     <p class="text-center mb-0"><!--{template common/copyright}--></p>
   </div>
+</div>
 <!--{/if}-->
 <script type="text/JavaScript">
  jQuery(document).ready(function(e) {

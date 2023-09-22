@@ -9984,7 +9984,7 @@ fieldset:disabled .btn {
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .1);
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
-    border-radius: .25rem
+    border-radius: var(--radius);
 }
 
 .toast.showing {
@@ -10001,7 +10001,7 @@ fieldset:disabled .btn {
     width: max-content;
     max-width: 100%;
     pointer-events: none;
-    z-index: 5;
+    z-index: 2111;
 }
 
 .toast-container>:not(:last-child) {

@@ -2611,7 +2611,6 @@ hr.dropdown-divider {
 /* toast */
 .toast {
 	box-shadow: 0 0.125rem 0.75rem rgba(var(--bs-dark-rgb), .0375);
-	border-radius: 0.25rem;
 }
 
 .toast-header i {
