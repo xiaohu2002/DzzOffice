@@ -6,7 +6,7 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-require './core/coreBase.php';
+require '../core/coreBase.php';
 @set_time_limit(0);
 $cachelist = array();
 $dzz = C::app();
