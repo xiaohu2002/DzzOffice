@@ -3156,40 +3156,38 @@ function get_resources_some_setting()
         'allownewcat'=>false,
         'finallydelete'=>false
     );
-    if (!isset($setting['explorer_usermemoryOn'])) {
-        $data['useronperm'] = true;
-    } else {
-        //用户存储开启
-        if ($setting['explorer_usermemoryOn'] == 1) {
-            $spaceon = isset($setting['explorer_mermoryusersetting']) ? $setting['explorer_mermoryusersetting'] : '';
-            if ($spaceon == 'appoint') {//指定用户时
-                $usersarr = explode(',', $setting['explorer_memoryorgusers']);
-                $uesrs = array();
-                foreach ($usersarr as $v) {
-                    //群组id
-                    if (preg_match('/^\d+$/', $v)) {
-                        foreach (C::t('organization_user')->get_all_user_byorgid($v) as $val) {
-                            $users[] = $val['uid'];
-                        }
-                    } elseif ($v == 'other') {
-                        foreach (C::t('user')->fetch_uid_by_groupid(9) as $val) {
-                            $users[] = $val['uid'];
-                        }
-                    } elseif (preg_match('/^uid_\d+$/', $v)) {
-                        $users[] = preg_replace('/uid_/', '',$v);
+    //用户存储开启
+    if ($setting['explorer_usermemoryOn'] == 1) {
+        $spaceon = isset($setting['explorer_mermoryusersetting']) ? $setting['explorer_mermoryusersetting'] : '';
+        if ($spaceon == 'appoint') {//指定用户时
+            $usersarr = explode(',', $setting['explorer_memoryorgusers']);
+            $uesrs = array();
+            foreach ($usersarr as $v) {
+                //群组id
+                if (preg_match('/^\d+$/', $v)) {
+                    foreach (C::t('organization_user')->get_all_user_byorgid($v) as $val) {
+                        $users[] = $val['uid'];
                     }
-
+                } elseif ($v == 'other') {
+                    foreach (C::t('user')->fetch_uid_by_groupid(9) as $val) {
+                        $users[] = $val['uid'];
+                    }
+                } elseif (preg_match('/^uid_\d+$/', $v)) {
+                    $users[] = preg_replace('/uid_/', '',$v);
                 }
-                $users = array_unique($users);
-                $data['userallowonperm'] = $users;
-                if (in_array($_G['uid'], $data['userallowonperm'])) {
-                    $data['useronperm'] = true;
-                }
 
-            } else {//未指定用户时
+            }
+            $users = array_unique($users);
+            $data['userallowonperm'] = $users;
+            if (!in_array($_G['uid'], $data['userallowonperm'])) {
                 $data['useronperm'] = true;
             }
+
+        } else {//未指定用户时
+            $data['useronperm'] = true;
         }
+    }else {//未指定用户时
+        $data['useronperm'] = true;
     }
 
     if (!isset($setting['fileVersion']) || (isset($setting['fileVersion']) && $setting['fileVersion'] == 1)) {

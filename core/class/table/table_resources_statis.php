@@ -126,7 +126,7 @@ class table_resources_statis extends dzz_table
         $uid = getglobal('uid');
         $data = array();
         $param = array($this->_table,$uid);
-        $wheresql = " where uid = $uid and fid = 0 and rid != '' ";
+        $wheresql = " where uid = %d and fid = 0 and rid != '' ";
 
         $orderby = ' order by edits desc,views desc,editdateline desc,opendateline desc';
         $limitsql = ' limit '.$limit;

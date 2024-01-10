@@ -141,7 +141,7 @@ elseif($do == 'login'){
 		'op' => $_GET['op'],
 		'do' => $_GET['do']
   );
-  $theurl = BASESCRIPT . "?" . url_implode($gets);
+  $theurl = CURSCRIPT . "?" . url_implode($gets);
 	$logdir = DZZ_ROOT.'./data/log/';
 	$logfiles = get_log_files($logdir, $operation);
 	 

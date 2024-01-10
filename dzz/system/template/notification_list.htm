@@ -105,10 +105,6 @@ jQuery('.js-search-addon').on('click',function(){
 	}
 	return false;
 });
-function filter_by_orgid(orgid){
-	jQuery('#archive_search_orgid').val(orgid);
-	jQuery('#board_list_archive').load('{DZZSCRIPT}?mod=corpus&op=archive&do=list&orgid='+orgid);
-}
 function search_validate(form){
 	jQuery('#board_list_archive').load(form.action+'?'+jQuery(form).serialize(),function(){
 		if(jQuery('#archive_search_form .js-search-input').val()!=''){

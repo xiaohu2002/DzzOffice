@@ -14,19 +14,20 @@ $navtitle="用户资料";
 include_once libfile('function/profile');
 include_once libfile('function/organization');
 $uid=intval($_GET['uid']?$_GET['uid']:$_G['uid']);
+$users = getuserbyuid($uid);
 $userstatus = C::t('user_status')->fetch($uid);//用户状态
-$scdlsj=dgmdate($userstatus['lastvisit']);
 $space = C::t('user_profile')->get_user_info_by_uid($uid);
-
 $privacy = $space['privacy']['profile'] ? $space['privacy']['profile'] : array();
 
 $space['regdate'] = dgmdate($space['regdate']);
 
 if($space['lastvisit']) $profiles['lastvisit']=array('title'=>lang('last_visit'),'value'=>dgmdate($space['lastvisit']));
 
-
-$profiles['regdate']=array('title'=>lang('registration_time'),'value'=>$space['regdate']);
-
+if($users['regip']){
+    $profiles['regdate']=array('title'=>lang('registration_time'),'value'=>$space['regdate']);
+}else{
+    $profiles['regdate']=array('title'=>lang('add_time'),'value'=>$space['regdate']);
+}
 $user=array();
 
 $space['fusesize']=formatsize($space['usesize']);

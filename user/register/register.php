@@ -137,8 +137,8 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
       'comment'=>replacesitevar($_G['setting']['welcomemsgtxt']),
     );
 
-    $action = 'register';
-    $type = 'register_' . $result['uid'];
+    $action = 'registers';
+    $type = 'registers_' . $result['uid'];
 
     dzz_notification::notification_add($result['uid'], $type, $action, $notevars);
 	}

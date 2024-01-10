@@ -35,22 +35,22 @@
       <span class="no-result-title">{lang no_relevant_content}</span>
     </div>
 		<!--{else}-->
-    <div class="clearfix">
-      <ol class="breadcrumb">
-        <li class="home" data-href="{MOD_URL}"><a href="{MOD_URL}" >{lang all_typename_attach}<span>></span></a></li>
-        <!--{if !empty($foldername)}-->
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" data-href="{MOD_URL}"><a href="{MOD_URL}">{lang all_typename_attach}</a></li>
+          <!--{if !empty($foldername)}-->
         {eval $i=0;}
        {loop $foldername $v}
        {eval $i++;}
        <!--{if $i==count($foldername)}-->
-       <li class="active"  data-fid="$v[fid]">$v[fname]<span></span></li>
-       <!--{else}-->
-        <li class=""  data-fid="$v[fid]"><a href="{MOD_URL}&pfid=$v[fid]">$v[fname]<span>></span></a></li>
+          <li class="breadcrumb-item active" data-fid="$v[fid]" aria-current="page">$v[fname]</li>
+          <!--{else}-->
+        <li class="breadcrumb-item" data-fid="$v[fid]"><a href="{MOD_URL}&pfid=$v[fid]">$v[fname]</a></li>
         <!--{/if}-->
         {/loop} 
         <!--{/if}--> 
-      </ol>
-    </div>
+        </ol>
+      </nav>
     <div class="main-header clearfix">
       <form name="search" class="form-horizontal" action="{MOD_URL}" method="get">
         <input type="hidden" name="mod" value="filemanage" />

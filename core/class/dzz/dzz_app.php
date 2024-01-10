@@ -50,7 +50,7 @@ class dzz_app extends dzz_base{
         return $object;
     }
 
-    public function __construct($params) {
+    public function __construct($params=array()) {
         foreach($params as $k=>$v){
             $this->$k = $v;
         }
@@ -77,11 +77,21 @@ class dzz_app extends dzz_base{
     public function init() {
 
         if(!$this->initated) {
-            $this->_init_setting();
-            $this->_init_user();
-            $this->_init_session();
-            $this->_init_cron();
-            $this->_init_misc();
+			if($this->init_setting){
+				$this->_init_setting();	
+			} 
+			if($this->init_user){
+				 $this->_init_user();	
+			} 
+           if($this->init_session){
+				 $this->_init_session();	
+			} 
+			if($this->init_cron){
+				 $this->_init_cron();	
+			} 
+           if($this->init_misc){
+				 $this->_init_misc();	
+			} 
         }
         $this->initated = true;
     }
@@ -140,6 +150,7 @@ class dzz_app extends dzz_base{
 
             'PHP_SELF' => '',
             'siteurl' => '',
+            'localurl' => '',
             'siteroot' => '',
             'siteport' => '',
 
@@ -169,11 +180,15 @@ class dzz_app extends dzz_base{
         }
         $_G['isHTTPS'] = $this->is_HTTPS();//($_SERVER['HTTPS'] && strtolower($_SERVER['HTTPS']) != 'off') ? true : false;
         $_G['siteurl'] = dhtmlspecialchars('http'.($_G['isHTTPS'] ? 's' : '').'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
-
+        if(strpos($_SERVER['HTTP_HOST'],'127.')!==false && strpos($_SERVER['HTTP_HOST'],'localhost')!==false){
+			$_G['localurl']=dhtmlspecialchars('http'.($_G['isHTTPS'] ? 's' : '').'://127.0.0.1'.$sitepath.'/');
+		}else{
+			$_G['localurl']=$_G['siteurl'];
+		}
         $url = parse_url($_G['siteurl']);
         $_G['siteroot'] = isset($url['path']) ? $url['path'] : '';
-        $_G['siteport'] = empty($_SERVER['SERVER_PORT']) || $_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] == '443' ? '' : ':'.$_SERVER['SERVER_PORT'];
-
+        $_G['siteport'] = (empty($_SERVER['SERVER_PORT']) || $_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] == '443' || $_SERVER['HTTP_X_FORWARDED_PORT'] == '443')? '' : ':'.$_SERVER['SERVER_PORT'];
+        
         if(defined('SUB_DIR')) {
             $_G['siteurl'] = str_replace(SUB_DIR, '/', $_G['siteurl']);
             $_G['siteroot'] = str_replace(SUB_DIR, '/', $_G['siteroot']);
@@ -192,6 +207,8 @@ class dzz_app extends dzz_base{
         }elseif($_SERVER['SERVER_PORT'] == 443){ //其他
             return TRUE;
         }elseif($_SERVER['REQUEST_SCHEME'] == 'https'){ //其他
+            return TRUE;
+		 }elseif(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'){ //其他
             return TRUE;
         }
         return FALSE;
@@ -357,6 +374,9 @@ class dzz_app extends dzz_base{
         if($this->config['output']['forceheader']) {
             @header('Content-Type: text/html; charset='.CHARSET);
         }
+		if($this->config['localurl']){
+			 setglobal('localurl', $this->config['localurl']);
+		}
 
     }
 
@@ -441,7 +461,9 @@ class dzz_app extends dzz_base{
             }
 
             if($this->var['uid'] && !$sessionclose && ($this->session->isnew || ($this->session->get('lastactivity') + 600) < TIMESTAMP)) {
+                Hook::listen("core_session",$this->session);
                 $this->session->set('lastactivity', TIMESTAMP);
+                $this->session->update();
                 if($this->session->isnew) {
                     if($this->var['member']['lastip'] && $this->var['member']['lastvisit']) {
                         dsetcookie('lip', $this->var['member']['lastip'].','.$this->var['member']['lastvisit']);
@@ -528,7 +550,6 @@ class dzz_app extends dzz_base{
     }
 
     private function _init_misc() {
-        global $_G;
         if(!$this->init_misc) {
             return false;
         }
@@ -627,6 +648,7 @@ class dzz_app extends dzz_base{
     }
 
     private function _init_setting() {
+        global $_G;
         if($this->init_setting) {
             if(empty($this->var['setting'])) {
                 $this->cachelist[] = 'setting';
@@ -639,7 +661,7 @@ class dzz_app extends dzz_base{
         !empty($this->cachelist) && loadcache($this->cachelist);
 
         if(!is_array($this->var['setting'])) {
-            $this->var['setting'] = array();
+            $this->var['setting'] =C::t('setting')->fetch_all();
         }
         if($ismobile=helper_browser::ismobile()) define('IN_MOBILE',$ismobile);
         define('VERHASH',isset($this->var['setting']['verhash'])?$this->var['setting']['verhash']:random(3));

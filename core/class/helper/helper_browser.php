@@ -114,18 +114,20 @@ class helper_browser
             return false;//return 'WindowsWechat';pc微信客户端打开pc版
         }
         elseif (preg_match("/macintosh/i", $agent) && preg_match("/MicroMessenger/i", $agent)) {
-             return false;//苹果电脑系统pc端
-        }
-        elseif (preg_match("/MicroMessenger/i", $agent)) {
-            return 'wechat';
-        }
-        elseif (preg_match("/iphone/i", $agent) && preg_match("/mac os/i", $agent)) {
-            return 'iPhone';
-        } elseif (preg_match("/ipod/i", $agent) && preg_match("/mac os/i", $agent)) {
-            return 'iPod';
-        } elseif (preg_match("/linux/i", $agent) && preg_match("/Android/i", $agent)) {
-            return 'Android';
-        }
+            return false;//苹果电脑系统pc端
+       }
+       elseif (preg_match("/MicroMessenger/i", $agent)) {
+           return 'wechat';
+       }
+       elseif (preg_match("/iphone/i", $agent) && preg_match("/mac os/i", $agent)) {
+           return 'iPhone';
+       } elseif (preg_match("/ipod/i", $agent) && preg_match("/mac os/i", $agent)) {
+           return 'iPod';
+       } elseif (preg_match("/ipad/i", $agent) && preg_match("/mac os/i", $agent)) {
+           return 'iPad';
+       } elseif (preg_match("/linux/i", $agent) && preg_match("/Android/i", $agent)) {
+           return 'Android';
+       }
         return false;
     }
 
@@ -153,7 +155,9 @@ class helper_browser
             $os = array('Windows' => '8');
         } elseif (preg_match("/win/i", $agent) && preg_match("/nt 6.3/i", $agent)) {
             $os = array('Windows' => '8.1');
-        } elseif (preg_match("/win/i", $agent) && preg_match("/nt/i", $agent)) {
+        } elseif (preg_match("/win/i", $agent) && preg_match("/nt 10/i", $agent)) {
+            $os = array('Windows' => '10');
+        }elseif (preg_match("/win/i", $agent) && preg_match("/nt/i", $agent)) {
             $os = array('Windows' => 'nt');
         } elseif (preg_match("/ipad/i", $agent) && preg_match('/mac os/i', $agent)) {
             $os = array('iPad' => true);

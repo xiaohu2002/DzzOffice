@@ -21,6 +21,12 @@
     </div>
 </form>
 <script type="text/javascript" reload="1">
+ //名称初始化
+    jQuery(document).ready(function (e) {
+        $('.input-black').each(function() {			
+			InputAnimate.init($(this));			
+		});
+    });
     function chk_create(form) {
         $.post('{MOD_URL}&op=fileselection&do=ajax&operation=newFolder&createfolder=true&fid=' + '{$fid}', $(form).serialize(), function (data) {
             if (data.msg == 'success') {
@@ -125,6 +131,11 @@
 
 </form>
 <script type="text/javascript" reload="1">
+ jQuery(document).ready(function (e) {
+        $('.input-black').each(function() {			
+			InputAnimate.init($(this));			
+		});
+    });
     function editsvae(form) {
         var text = $(form).find('input[name="text"]').val();
         var path = $(form).find('input[name="path"]').val();

@@ -376,10 +376,11 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 .comment_ifed .itemfeed{
 	border-top: none;
 }
-.left_ifed img{
+.left_ifed .img-avatar{
 	width:35px;
 	height:35px;
-	border-radius: 50%
+	border-radius: 50%;
+	line-height: 35px;
 }
 .right_ifed {
 	padding-left: 45px

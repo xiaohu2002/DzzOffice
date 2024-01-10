@@ -23,7 +23,7 @@ if ($_GET['do'] == 'delete') {
     exit(json_encode($return));
 	
 
-} elseif ($_GET['do'] == 'forbidden') {
+} elseif ($_GET['do'] == 'forbidden' && $_G['adminid']) {
 	$sids = $_GET['sids'];
 	if ($_GET['flag'] == 'forbidden') {
 		$status = -4;
@@ -35,5 +35,7 @@ if ($_GET['do'] == 'delete') {
 	} else {
 		exit(json_encode(array('error' => lang('share_screen_failure'))));
 	}
+}else{
+	exit(json_encode(array('error' => '非法操作')));
 }
 ?>

@@ -417,7 +417,10 @@ function uc_add_user($username, $password, $email, $nickname = '', $uid = 0, $qu
         'email' => $email,
         'regdate' => TIMESTAMP,
     );
-
+    Hook::listen('uc_add_user',$setarr);
+	if($setarr['error']){
+		return $setarr;
+	}
     $setarr['uid'] = DB::insert('user', $setarr, 1);
     return $setarr;
 }

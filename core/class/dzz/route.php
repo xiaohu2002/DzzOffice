@@ -11,7 +11,8 @@ class Route{
     public static function dzzRoute(&$params,$extra=null,&$break)
     {
 
-        global $_G,$_config;
+        global $_G,$_config,$_GET;
+        //判断是否开启pathinfo，默认不开启，测试时将其设为1
         $mod = !empty($params[MOULD]) ? $params[MOULD]:$_config['default_mod'];
 
         $op  = !empty($params[DIVIDE]) ? $params[DIVIDE]:$_config['default_op'];
@@ -29,7 +30,7 @@ class Route{
         }else{
 
             if(strpos(strtolower($mod),':')!==false){
-
+                define('CURMODULE',str_replace(':', '/', $mod));
                 $patharr=explode(':',$mod);
 
                 foreach($patharr as $path){
@@ -50,7 +51,7 @@ class Route{
                 }
 
             }else{
-
+                define('CURMODULE',$mod);
                 if(!preg_match("/^\w+$/i",$mod) && $mod !== '') showmessage('undefined_action');
 
                 if(!preg_match("/^\w+$/i",$op)) showmessage('undefined_action');

@@ -177,6 +177,7 @@ border-radius:  var(--radius);
 	background: rgba(0,0,0,0.1);
 	border: 1px solid transparent;
 	height: 48px;
+    color: rgba(255,255,255,0.7);
 }
 .input-search .form-search:hover{
     -webkit-transition-duration: .1s;
@@ -321,9 +322,6 @@ button.input-search-drop {
 }
 .panel-body .details{
 	padding-left: 10px;
-}
-.details{
-	margin: var(--radius);
 }
 .main-allnotice .panel-body .note{
 	padding-right:40px;

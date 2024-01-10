@@ -176,9 +176,15 @@
     </div>
 </div>
 <script type="text/javascript" reload="1">
+//拖拽初始化
+    jQuery('.left-drager').leftDrager_layout(function () {
+    });
     var opened = {};
     //input框初始化
     $(document).ready(function (e) {
+$('.input-black').each(function () {
+            InputAnimate.init($(this));
+        });
 
         /*jstree 左侧个人、机构及群组*/
         opened = window.opener;

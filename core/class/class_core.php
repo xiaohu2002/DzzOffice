@@ -104,7 +104,10 @@ class core
 	}
 
 	public static function import($name, $folder = '', $force = true) {
-		
+		//如果文件名为空或者false，阻止向下进行
+	    if(preg_match('/^\s*$/',$name) || $name == false){
+	        return false;
+        }
 		$key = $folder.$name;
 		if(!isset(self::$_imports[$key])) {
 			if($folder){
@@ -146,7 +149,10 @@ class core
 	}
 
 	public static function handleException($exception) {
-		dzz_error::exception_error($exception);
+		global $_config;
+		if($_config['debug']>0){
+			dzz_error::exception_error($exception);
+		}
 	}
 
 

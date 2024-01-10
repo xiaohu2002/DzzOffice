@@ -48,7 +48,6 @@ if($_GET['do']=='saveIndex'){
 				C::t('user_field')->update($_G['uid'], array('applist' => implode(',', $applist)));
 			}
 		 }
-
 	}else{
 		 $applist =array_keys(C::t('app_market')->fetch_all_by_default());
 	}

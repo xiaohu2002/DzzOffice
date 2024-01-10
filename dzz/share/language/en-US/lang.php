@@ -27,7 +27,6 @@ $lang = array (
   'extract_password'=>' extract password ',
   'been_blocked'=>' blocked ',
   'file_been_deleted'=>' file deleted ',
-  'degree_exhaust'=>' times exhausted ',
 	'share_stop_sharing1'=>'<p class="text-center">After canceling sharing, this sharing record will be deleted and you will no longer be able to access this sharing link</p> <p class="text center"> are you sure you want to cancel sharing?</p>',
 	'share_stop_sharing2'=>'<p class="text center"> this sharing record will be blocked and you will no longer be able to access this sharing link</p> <p class="text center"> are you sure to block this sharing</p>',
 	'share_stop_sharing3'=>'<p class="text center"> access to this shared record will be restored</p> <p class="text center"> are you sure you want to cancel blocking this sharing</p>',

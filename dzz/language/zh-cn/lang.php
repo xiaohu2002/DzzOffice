@@ -182,7 +182,6 @@ $lang = array(
     'image_desc_default' => '<a href="home.php?mod=space&uid={uid}&from=dzz">{username}</a>上传于{dateline}',
     'notice' => '通知',
     'finish' => '完成',
-    'degree_exhaust' => '次数用尽',
     'to_of_completed' => '待完成',
     'over_of_date' => '已完成',
     'out_of_date' => '已过期',

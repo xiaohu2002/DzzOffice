@@ -182,7 +182,6 @@ $lang = array(
     'image_desc_default' => '<a href="home.php?mod=space&uid={uid}&from=dzz">{username}</a>Upload to{dateline}',
     'notice' => 'notice',
     'finish' => 'finish',
-    'degree_exhaust '=> 'degree_exhaust',
     'to_of_completed' => 'to be completed',
     'over_of_date' => 'finished ',
     'out_of_date' => 'expired ',

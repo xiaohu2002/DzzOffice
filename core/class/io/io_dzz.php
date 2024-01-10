@@ -129,7 +129,7 @@ class io_dzz extends io_api
         global $_G;//123
         if (strpos($path, 'attach::') === 0) {
             $attach = C::t('attachment')->fetch(intval(str_replace('attach::', '', $path)));
-			Hook::listen('io_dzz_getstream_attach',$attach);//挂载点
+            Hook::listen('io_dzz_getstream_attach',$attach);//挂载点
             $bz = io_remote::getBzByRemoteid($attach['remote']);
             if ($bz == 'dzz') {
                 return $_G['setting']['attachdir'] . $attach['attachment'];
@@ -145,7 +145,7 @@ class io_dzz extends io_api
         } elseif (preg_match('/\w{32}/i', $path)) {
             $icoid = trim($path);
             $icoarr = C::t('resources')->fetch_by_rid($path);
-			Hook::listen('io_dzz_getstream_attach',$icoarr);//挂载点
+            Hook::listen('io_dzz_getstream_attach',$icoarr);//挂载点
             $bz = io_remote::getBzByRemoteid($icoarr['remote']);
             if ($bz == 'dzz') {
                 if ($icoarr['type'] == 'video' || $icoarr['type'] == 'dzzdoc' || $icoarr['type'] == 'link') {
@@ -166,7 +166,7 @@ class io_dzz extends io_api
                 return false;
             }
             $icoarr = C::t('resources')->fetch_by_rid($rid);
-			Hook::listen('io_dzz_getstream_attach',$icoarr);//挂载点
+            Hook::listen('io_dzz_getstream_attach',$icoarr);//挂载点
             $bz = io_remote::getBzByRemoteid($icoarr['remote']);
             if ($bz == 'dzz') {
                 if ($icoarr['type'] == 'video' || $icoarr['type'] == 'dzzdoc' || $icoarr['type'] == 'link') {
@@ -188,14 +188,13 @@ class io_dzz extends io_api
         global $_G;
         if (strpos($path, 'attach::') === 0) {
             $attach = C::t('attachment')->fetch(intval(str_replace('attach::', '', $path)));
-			Hook::listen('io_dzz_getstream_attach',$attach);//挂载点
-			$bz = io_remote::getBzByRemoteid($attach['remote']);
+            Hook::listen('io_dzz_getstream_attach',$attach);//挂载点
+            $bz = io_remote::getBzByRemoteid($attach['remote']);
             if ($bz == 'dzz') {
                 return $_G['siteurl'] . $_G['setting']['attachurl'] . $attach['attachment'];
             } else {
                 return IO::getFileUri($bz . '/' . $attach['attachment'], $fop);
             }
-            
         } elseif (strpos($path, 'dzz::') === 0) {
             if (strpos($path, './') !== false) return '';
             return $_G['siteurl'] . $_G['setting']['attachurl'] . preg_replace("/^dzz::/", '', $path);
@@ -207,7 +206,7 @@ class io_dzz extends io_api
             if ($icoarr['aid']) {
                 $attachment = C::t('attachment')->fetch($icoarr['aid']);
                 $icoarr['remote'] = $attachment['remote'];
-				Hook::listen('io_dzz_getstream_attach',$icoarr);//挂载点
+                Hook::listen('io_dzz_getstream_attach',$icoarr);//挂载点
                 $bz = io_remote::getBzByRemoteid($icoarr['remote']);
                 if ($bz == 'dzz') {
                     if ($icoarr['type'] == 'video' || $icoarr['type'] == 'dzzdoc' || $icoarr['type'] == 'link') {

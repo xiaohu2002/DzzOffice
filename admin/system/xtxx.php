@@ -41,7 +41,7 @@ if($do == 'phpinfo'){
   $env_items = array
   (
     '操作系统' => array('c' => 'PHP_OS', 'r' => '不限制', 'b' => 'Linux'),
-    'PHP 版本' => array('c' => 'PHP_VERSION', 'r' => '5.3+', 'b' => 'php7+'),
+    'PHP 版本' => array('c' => 'PHP_VERSION', 'r' => '7+', 'b' => 'php7+'),
     '附件上传' => array('r' => '不限制', 'b' => '50M'),
     'GD 库' => array('r' => '1.0', 'b' => '2.0'),
     '磁盘空间' => array('r' => '50M', 'b' => '10G以上'),

@@ -39,7 +39,7 @@
             var bsVersion = this.bsVersion;
             $select.hide();
             
-            var $selectHtml = '<input type="text" class="form-control" value="' + $selected.text() + '" '+ ($configs.search ? '' : 'readonly') +' placeholder="' + $configs.placeholder + '" ' + (bsVersion == 5 ? 'data-bs-toggle' : 'data-toggle') + '="dropdown" />';
+            var $selectHtml = '<input type="text" class="form-control" value="' + $selected.text() + '" '+ ($configs.search ? '' : 'readonly') +' placeholder="' + $configs.placeholder + '" ' + (bsVersion == 5 ? 'data-bs-toggle' : 'data-bs-toggle') + '="dropdown" />';
           
             var $divObj = $('<div></div>');
             

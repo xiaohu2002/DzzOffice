@@ -1,5 +1,5 @@
 <div class="hide breadcrumb-data">
-	<li class="active" data-href="{DZZSCRIPT}?mod=shares&op=ajax&path=$morepath">$foldername<span>></span></li>
+	<li class="breadcrumb-item active" data-href="{MOD_URL}&op=ajax&path=$morepath" aria-current="page">$foldername</li>
 </div>
 <div class="module-list">
 	<!--{loop $list $value}-->
@@ -23,7 +23,7 @@
 	</div>
 	<!--{/loop}-->
 	<!--{if $nextpage}-->
-	<div class="more text-center clearfix" onclick="getMore(this,'{DZZSCRIPT}?mod=shares&op=ajax&morepath=$morepath&page=$nextpage&rander=list&marker=$marker')" style="padding-top: 10px;padding-bottom: 10px;">{lang upload_more}</div>
+	<div class="more text-center clearfix" onclick="getMore(this,'{MOD_URL}&op=ajax&morepath=$morepath&page=$nextpage&rander=list&marker=$marker')" style="padding-top: 10px;padding-bottom: 10px;">{lang upload_more}</div>
 	<!--{/if}-->
 </div>
 <div class="module-grid">
@@ -62,7 +62,7 @@
 	</div>
 	<!--{/loop}-->
 	<!--{if $nextpage}-->
-	<div class="more text-center pull-left" onclick="getMore(this,'{DZZSCRIPT}?mod=shares&op=ajax&morepath=$morepath&page=$nextpage&rander=grid&marker=$marker')">
+	<div class="more text-center pull-left" onclick="getMore(this,'{MOD_URL}&op=ajax&morepath=$morepath&page=$nextpage&rander=grid&marker=$marker')">
 		<table width="150" height="120" style="table-layout:fixed;">
 			<tbody>
 				<tr>

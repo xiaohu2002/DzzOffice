@@ -144,7 +144,8 @@ class template {
 	}
 
 	function parse_template(&$template) {
-		$var_regexp = "((\\\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*(\-\>)?[a-zA-Z0-9_\x7f-\xff]*)(\[[a-zA-Z0-9_\-\.\"\'\[\]\$\x7f-\xff]+\])*)";
+		$template = str_replace('self.$', 'self.＄', $template);
+		$var_regexp = "((?!\\\$[a-zA-Z]+\()(\\\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*(\-\>)?[a-zA-Z0-9_\x7f-\xff]*)(\[[a-zA-Z0-9_\-\.\"\'\[\]\$\x7f-\xff]+\])*)";
 		$const_regexp = "([A-Z_\x7f-\xff][A-Z0-9_\x7f-\xff]*)";
 
 		$template = preg_replace("/([\n\r]+)\t+/s", "\\1", $template);
@@ -174,7 +175,7 @@ class template {
 		$template = str_replace("{LF}", "<?=\"\\n\"?>", $template);
 		$template = preg_replace("/\{(\\\$[a-zA-Z0-9_\-\>\[\]\'\"\$\.\x7f-\xff]+)\}/s", "<?=\\1?>", $template);
         $template = preg_replace_callback("/[\n\r\t]*\{Hook\s+([\w]+)\}[\n\r\t]*/is", array($this, 'parse_template_callback_hook'), $template);//钩子解析
-        //$template = preg_replace_callback("/[\n\r\t]*\{Hook\s+([\w]+)\#(.+?)\#\}[\n\r\t]*/is", array($this, 'parse_template_callback_hook'), $template);//钩子解析,传参形式
+        $template = preg_replace_callback("/[\n\r\t]*\{Hook\s+([\w]+)\#(.+?)\#\}[\n\r\t]*/is", array($this, 'parse_template_callback_hook_1'), $template);//钩子解析,传参形式
 		$template = preg_replace_callback("/$var_regexp/s", array($this, 'parse_template_callback_addquote_1'), $template);
 		$template = preg_replace_callback("/\<\?\=\<\?\=$var_regexp\?\>\?\>/s", array($this, 'parse_template_callback_addquote_1'), $template);
 
@@ -199,6 +200,7 @@ class template {
 		$template = preg_replace_callback("/[\n\r\t]*\{block\s+([a-zA-Z0-9_\[\]]+)\}(.+?)\{\/block\}/is", array($this, 'parse_template_callback_stripblock_12'), $template);
 		$template = preg_replace("/\<\?(\s{1})/is", "<?php\\1", $template);
 		$template = preg_replace("/\<\?\=(.+?)\?\>/is", "<?php echo \\1;?>", $template);
+		$template = str_replace('self.＄','self.$',  $template);
 	}
 
 	function parse_template_callback_javascript($matches) {
@@ -206,9 +208,11 @@ class template {
 	}
 
     function parse_template_callback_hook($matches){
-
-        //return "<?php Hook::listen('".$matches[1]."',$".$matches[2].") //传参形式
-        return "<?php Hook::listen('".$matches[1]."') ?>";
+        return "<?php Hook::listen('".$matches[1]."'); ?>";
+    }
+   function parse_template_callback_hook_1($matches){
+	   $param=array($matches[2]);
+        return "<?php Hook::listen('".$matches[1]."',".$param.");?>"; //传参形式
     }
 
 	function replace_js_language_var($arr) {

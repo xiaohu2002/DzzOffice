@@ -1,0 +1,117 @@
+<!--{template common/header_simple}-->
+<!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css"><!--{/if}-->
+<link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/style.min.css">
+<!--[if lt IE 9]>
+  <script src="static/js/jquery.placeholder.js" type="text/javascript"></script>
+<![endif]-->
+<!--{template common/beijing}-->
+<style>
+.signin-form .has-feedback {
+    position: relative;
+}
+.signin-form .has-feedback .form-control {
+    padding-left: 36px;
+}
+.signin-form .has-feedback .mdi {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    right: auto;
+    width: 26px;
+    height: 36px;
+    line-height: 36px;
+    z-index: 4;
+    display: block;
+    text-align: center;
+    pointer-events: none;
+}
+	html, body{
+		overflow:auto;
+	}
+	<!--{if $_G[setting][loginset][kbcolor]}-->
+	.card{
+		background-color:$_G[setting][loginset][kbcolor];
+	}
+	<!--{/if}-->
+	<!--{if $_G[setting][loginset][transparency]}-->
+	.form-control{
+		background-color:$_G[setting][loginset][transparency];
+	}
+	<!--{/if}-->
+</style>
+<script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
+<!--{eval $loginhash = 'L'.random(4);}-->
+<div class="center-vh">
+<div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
+  <div class="text-center mb-3">
+  	<img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}">
+		<h1><!--{if $_G[setting][loginset][title]}-->$_G[setting][loginset][title]<!--{else}-->$_G[setting][sitename]<!--{/if}--></h1>
+		<p>请选择下列用户登录</p>
+  </div>
+  <form class="signin-form needs-validation" action="user.php?mod=login&op=logging&action=login&loginsubmit=yes" method="POST" name="login" role="form" onsubmit="if(this.uid.value=='') return false">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" name="referer" value="{$referer}" />
+    <input type="hidden" id="login_uid" name="uid" value="" />
+    <ul class="user-ul">
+    <!--{loop $orgids $v}-->
+      <li class="border border-primary">
+        <a data-uid="$v[uid]" class="user-a" onClick="$('#login_uid').val('$v[uid]');$('#loginsubmit').removeClass('disabled');$(this).closest('.user-ul').find('li').removeClass('hover');$(this).parent().addClass('hover')">
+          <span class="cavatar">{eval echo avatar_block($v[uid]);}</span>
+          <span class="cusername">
+            <span class="username"><!--{eval $result=getuserbyuid($v[uid], 1);}-->$result['username']</span>
+          </span>
+        </a>
+      </li>
+    <!--{/loop}-->
+    </ul>
+    <div class="mb-3 d-grid">
+      <button class="btn btn-round btn-primary btn-block disabled" id="loginsubmit" name="loginsubmit" type="submit" value="true">立即登录</button>
+      <a class="btn btn-round btn-success" href="admin.php">管理员登录</a>
+    </div>
+    <!--{if !$_G['setting']['bbclosed']}-->
+    <!--{if $_G['setting']['regstatus']>0}--> 
+    <p class="text-center">
+      <span>还没有账号？</span>
+      <a href="user.php?mod=register&referer={eval echo urlencode($referer);}" <!--{if !empty($_GET['inajax'])}-->onclick="_login.register($referer);return false;"<!--{/if}--> title="$_G['setting']['reglinkname']">$_G['setting']['reglinkname']</a>
+    </p>
+    <!--{/if}-->
+    <!--{/if}-->
+  </form>
+  <p class="text-center mb-0"><!--{template common/copyright}--></p>
+</div>
+</div>
+<!--{if $_G['setting']['pwdsafety']}--> 
+<script type="text/javascript" src="user/scripts/md5.js?{VERHASH}" reload="1"></script> 
+<!--{/if}--> 
+<script type="text/javascript">
+var pwdclear = 1;
+function initinput_login() {
+	document.body.focus();
+	<!--{if !$auth}-->
+		if(document.getElementById('loginform_$loginhash')) {
+			document.getElementById('loginform_$loginhash').email.focus();
+		}
+	<!--{/if}-->
+}
+
+function clearpwd() {
+	if(pwdclear) {
+		document.getElementById('password3_$loginhash').value = '';
+	}
+	pwdclear = 0;
+}
+jQuery(document).ready(function(e) {
+
+	initinput_login();
+	
+	if(jQuery('.ie8,.ie9').length){ //ie8模拟placeholder;
+		jQuery(':input[placeholder]').each(function(){
+			jQuery(this).placeholder();
+		});
+	}
+});
+
+</script> 
+<script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
+<!--{template common/footer}-->

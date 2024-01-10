@@ -381,12 +381,21 @@ class dzz_io
 	public function clean($str) {//清除路径
 		if(is_array($str)){
 			foreach($str as $key=> $value){
-				$str[$key]=str_replace(array( "\n", "\r", '../'), '', $value);
+				$str[$key]=self::clean_path(str_replace(array( "\n", "\r", '../'), '', $value));
 			}
 		}else{
-			$str= str_replace(array( "\n", "\r", '../'), '', $str);
+			$str= self::clean_path(str_replace(array( "\n", "\r", '../'), '', $str));
 		}
+
 		return $str;
+	}
+	private function clean_path($str){
+		if(preg_match("/\.\.\//",$str)){
+			$str=str_replace('../','',$str);
+			return self::clean_path($str);
+		}else{
+			return $str;
+		}
 	}
 	public function name_filter($name){
 		return str_replace(array('/','\\',':','*','?','<','>','|','"',"\n"),'',$name);

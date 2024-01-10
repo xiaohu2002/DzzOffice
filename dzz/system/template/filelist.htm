@@ -1,4 +1,4 @@
-<!--{template common/header_simple}-->
+<!--{template common/header_simple_start}-->
 <link href="static/jstree/themes/default/style.min.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="dzz/system/css/selfilewindow.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="dzz/system/css/select-file.css?{VERHASH}" rel="stylesheet" media="all">
@@ -108,10 +108,17 @@ body {
 </div>
 <!--模板结束-->
 <script type="text/javascript">
+//拖拽初始化
+jQuery('.left-drager').leftDrager_layout(function(){});
 //左侧jstree操作
 var opened = {};
 /*jstree 左侧个人、机构及群组*/
 $(document).ready(function (e) {
+//input框初始化开始
+$('.input-black').each(function() {			
+	InputAnimate.init($(this));	
+});
+//input框初始化结束
 //左侧jstree操作开始
 opened = window.opener;
 var _explorer = {};

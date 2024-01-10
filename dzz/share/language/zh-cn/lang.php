@@ -27,7 +27,6 @@ $lang = array (
 	'extract_password'=>'提取密码',
 	'been_blocked'=>'已屏蔽',
 	'file_been_deleted'=>'文件已删除',
-	'degree_exhaust'=>'次数用尽',
 	'share_stop_sharing1'=>'<p class="text-center">取消分享后，该条分享记录将被删除，将无法再访问此分享链接。</p><p class="text-center">你确认要取消分享吗？</p>',
 	'share_stop_sharing2'=>'<p class="text-center">该条分享记录将被屏蔽，将无法再访问此分享链接。</p><p class="text-center">你确认要屏蔽该条分享吗？</p>',
 	'share_stop_sharing3'=>'<p class="text-center">该条分享记录将被恢复访问。</p><p class="text-center">你确认要取消屏蔽该条分享吗？</p>',

@@ -77,10 +77,6 @@ pre {
 	color: var(--bs-pre-font);
 }
 
-img {
-    max-width: 100%;
-}
-
 /** ----------------------------------
  * 演示新增样式，为了演示效果用，实际部署中用不到可以删除
  -------------------------------------- */
@@ -1639,7 +1635,7 @@ img {
 .form-select {
 	color: var(--bs-body-color);
 	border-color: var(--bs-gray-300);
-	padding: 0.4695rem 0.75rem;
+	padding: 0.4695rem 2.25rem 0.4695rem 0.75rem;
 	border-radius:var(--radius);
 	-webkit-border-radius:var(--radius);
 }

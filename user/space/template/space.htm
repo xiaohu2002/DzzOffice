@@ -31,7 +31,14 @@
 				<!--{if $space['phone']}-->
 				<div class="callout callout-success">系统中的手机号:<strong><code>$space['phone']</code></strong></div>
 				<!--{/if}-->
-				<div class="callout callout-warning">最近在线时间:<strong><code>$scdlsj</code></strong></div>
+				<!--{if $_G['adminid']}-->
+        <div class="callout callout-warning">邮箱状态:<strong><code><!--{if $users[emailstatus]}-->已验证<!--{else}-->未验证<!--{/if}--></code></strong></div>
+				<div class="callout callout-warning"><!--{if $users[regip]}-->{lang registration_time}<!--{else}-->{lang add_time}<!--{/if}-->:<strong><code><!--{eval echo dgmdate($users[regdate])}--></code></strong></div>
+				<!--{if $users[regip]}--><div class="callout callout-warning">{lang register} IP:<strong><code>$users[regip]</code></strong></div><!--{/if}-->
+				<!--{if $userstatus['lastip']}--><div class="callout callout-warning">上次登录 IP:<strong><code>$userstatus['lastip']</code></strong></div><!--{/if}-->
+				<!--{if $userstatus['lastactivity']}--><div class="callout callout-warning">上次登录时间:<strong><code><!--{eval echo dgmdate($userstatus['lastactivity'])}--></code></strong></div><!--{/if}-->
+				<!--{/if}-->
+				<!--{if $userstatus['lastactivity']}--><div class="callout callout-warning">最近访问时间:<strong><code><!--{eval echo dgmdate($userstatus['lastvisit'])}--></code></strong></div><!--{/if}-->
 			</div>
 			<div class="card card-hover-shadow mb-3">
 				<header class="card-header">

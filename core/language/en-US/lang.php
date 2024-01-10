@@ -1266,6 +1266,7 @@ Important!
 	'Congratulations' =>' Congratulations ',
   'login_success' => 'Login successful! ',
 	'no_relevant_content'=>' no relevant_content yet ',
+	'degree_exhaust '=> 'times exhausted',
 );
 
 ?>

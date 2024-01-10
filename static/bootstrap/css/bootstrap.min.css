@@ -4641,6 +4641,11 @@ h5 {
 h6 {
     font-size: 1rem
 }
+p {
+    margin-top: 0;
+    margin-bottom: 1rem
+}
+
 abbr[data-bs-original-title],
 abbr[title] {
     -webkit-text-decoration: underline dotted;
@@ -4824,6 +4829,10 @@ button {
 
 button:focus:not(:focus-visible) {
     outline: 0
+}
+
+input,textarea {
+	caret-color: var(--bs-primary);
 }
 
 button,
@@ -9374,6 +9383,7 @@ fieldset:disabled .btn {
   margin-bottom: 1rem;
   border: 1px solid transparent;
 	border-radius: .25rem;
+    padding: 1rem;
 }
 
 .alert-heading {
@@ -15987,6 +15997,36 @@ fieldset:disabled .btn {
     font-size: 18px;
     visibility: visible;
 }
+.has-error .checkbox,
+.has-error .checkbox-inline,
+.has-error .control-label,
+.has-error .help-block,
+.has-error .radio,
+.has-error .radio-inline,
+.has-error.checkbox label,
+.has-error.checkbox-inline label,
+.has-error.radio label,
+.has-error.radio-inline label {
+  color: #dc3545;
+}
+.has-error .form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.has-error .form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+}
+.has-error .input-group-addon {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #a94442;
+}
+.has-error .form-control-feedback {
+  color: #a94442;
+}
 .has-feedback{
 	position: relative;
 }
@@ -16107,4 +16147,118 @@ fieldset:disabled .btn {
 }
 .user-item.hover .delete{
 	display: block;
+}
+.user-name {
+	width: 100%;
+}
+.user-ul {
+	padding-left: 0;
+	margin-top: 0;
+	list-style: none;
+}
+.user-ul li  {
+	position:relative;
+	display: block;
+	float:left;
+	padding: 6px 15px;
+	cursor: pointer;
+	margin: var(--radius);
+	width: 135px;
+	oveflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border-radius:5px;
+	border:1px solid transparent;
+}
+.user-ul li:hover,.user-ul li.hover {
+	background: rgba(241, 241, 241, 1);
+}
+.user-ul li.hover {
+	background: rgba(241, 241, 241, 1);
+	border:1px solid #3779ff;
+}
+
+.user-ul li .user-a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-size: 18px;
+	font-weight: 300;
+	color: rgba(43, 43, 43, 1);
+	padding-left:40px;
+	
+} 
+
+.user-ul li .user-a .cavatar {
+	position:absolute;
+	left:6px;
+	top:5px;
+}
+.user-ul li .user-a .cavatar .img-avatar {
+	width:35px;
+	height:35px;
+	line-height: 35px;
+	margin-right:10px;
+}
+.user-ul li .user-a .cusername>span {
+	display:block;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.user-ul li .user-a:hover {
+	text-decoration: none;
+}
+.user-ul {
+	width: 100%;
+	margin: var(--radius);
+	text-align:left;
+	display: flex;
+	flex-wrap: wrap;
+}
+.signin-form{
+	max-width: 480px;
+}
+
+.main-content {
+    width: 100%;
+    padding-right: var(--bs-gutter-x, .75rem);
+    padding-left: var(--bs-gutter-x, .75rem);
+    margin-right: auto;
+    margin-left: auto
+}
+
+@media (min-width:576px) {
+
+    .main-content{
+        max-width: 540px
+    }
+}
+
+@media (min-width:768px) {
+
+    .main-content{
+        max-width: 720px
+    }
+}
+
+@media (min-width:992px) {
+
+    .main-content{
+        max-width: 960px
+    }
+}
+
+@media (min-width:1200px) {
+
+    .main-content {
+        max-width: 1140px
+    }
+}
+
+@media (min-width:1400px) {
+
+    .main-content {
+        max-width: 1320px
+    }
 }

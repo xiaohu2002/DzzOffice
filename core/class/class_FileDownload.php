@@ -29,6 +29,7 @@ class FileDownload{ // class start
      if(!$fp = fopen($file, 'rb')){
 		 topshowmessage(lang('file_not_exist1'));
 	 }
+   $charset = CHARSET;
 	 $db = DB::object();
 	 $db->close();
 	 @ob_end_clean();
@@ -36,11 +37,21 @@ class FileDownload{ // class start
 	  if(!$file_size)   $file_size = filesize($file);
       $ranges = $this->getRange($file_size);
 
-      header('cache-control:public'); 
-	  header('Date: '.gmdate('D, d M Y H:i:s', $dateline).' GMT');
-	  header('Last-Modified: '.gmdate('D, d M Y H:i:s', $dateline).' GMT');
-      header('content-type:application/octet-stream'); 
-      header('content-disposition:attachment; filename='.$name); 
+      header('cache-control:public');
+      header('Date: '.gmdate('D, d M Y H:i:s', $dateline).' GMT');
+      header('Last-Modified: '.gmdate('D, d M Y H:i:s', $dateline).' GMT');
+      header('content-type:application/octet-stream');
+      if (preg_match("/Firefox/", $_SERVER["HTTP_USER_AGENT"])) {
+          $attachment = 'attachment; filename*='.$charset.'\'\'' . $name;
+      } elseif (!preg_match("/Chrome/", $_SERVER["HTTP_USER_AGENT"]) && preg_match("/Safari/", $_SERVER["HTTP_USER_AGENT"])) {
+          $name = trim($name,'"');
+          $filename = rawurlencode($name); // 注意：rawurlencode与urlencode的区别
+          $attachment = 'attachment; filename*='.$charset.'\'\'' . $filename;
+      } else{
+          $attachment = 'attachment; filename='.$name;
+      }
+      //header('content-disposition:attachment; filename='.$name);
+      header('content-disposition:'.$attachment);
       if($reload && $ranges!=null){ // 使用续传
         header('HTTP/1.1 206 Partial Content'); 
         header('Accept-Ranges:bytes'); 

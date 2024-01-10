@@ -10,7 +10,7 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 $navtitle = lang('appname');
-$uid1=$_G['uid'];
+$uid=$_G['uid'];
 $typearr = array('image' => lang('photo'),
     'document' => lang('type_attach'),
     'link' => lang('type_link'),
@@ -144,8 +144,8 @@ if ($_GET['do'] == 'delete') {
 			$data = DB::fetch_all("SELECT rid FROM " . DB::table('resources') . " WHERE $sql $order $limitsql", $param);
 		}
 	}else{
-		if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('resources') . " WHERE uid =$uid1 and $sql", $param)) {
-			$data = DB::fetch_all("SELECT rid FROM " . DB::table('resources') . " WHERE uid =$uid1 and $sql $order $limitsql", $param);
+		if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('resources') . " WHERE uid =$uid and $sql", $param)) {
+			$data = DB::fetch_all("SELECT rid FROM " . DB::table('resources') . " WHERE uid =$uid and $sql $order $limitsql", $param);
 		}
 	}
   $multi = multi($count, $lpp, $page, $theurl,'pull-right');

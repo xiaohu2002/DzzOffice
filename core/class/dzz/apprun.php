@@ -3,7 +3,7 @@ namespace core\dzz;
 
 use \core as C;
 
-class apprun{
+class Apprun{
 
     public  function run(){
 

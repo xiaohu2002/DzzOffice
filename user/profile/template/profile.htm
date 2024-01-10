@@ -82,14 +82,14 @@
           <div class="col-sm-10"><strong><code>$_G[username]</code></strong>&nbsp; <!--{if $qqlogin[openid] && $qqlogin[unbind]<1}--><img src="user/images/qq.png" height="16" title="{lang qq_bind}" />&nbsp;&nbsp;<a  href="{MOD_URL}&action=qq_unbind&openid=$qqlogin[openid]">{lang do_unbind}</a><!--{/if}-->
           </div>
         </div>
-       <div class="row mb-3">
+        <div class="row mb-3">
           <label class="col-sm-2">最近在线时间</label>
-          <div class="col-sm-10"><strong><code>$scdlsj</code></strong>
+          <div class="col-sm-10"><strong><code><!--{eval echo dgmdate($userstatus['lastvisit'])}--></code></strong>
           </div>
         </div>
 				<div class="row mb-3">
-          <label class="col-sm-2">{lang registration_time}</label>
-          <div class="col-sm-10"><strong><code>$zcsj</code></strong>
+          <label class="col-sm-2"><!--{if $users[regip]}-->{lang registration_time}<!--{else}-->{lang add_time}<!--{/if}--></label>
+          <div class="col-sm-10"><strong><code><!--{eval echo dgmdate($users[regdate])}--></code></strong>
           </div>
         </div>
 				<div class="row mb-3">

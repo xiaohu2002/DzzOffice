@@ -8,7 +8,6 @@
 if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
-include libfile('function/filerouterule');
 $savefile = isset($_GET['savefile']) ? intval($_GET['savefile']) : 0;//是否直接保存文件
 $callback = isset($_GET['callback']) ? $_GET['callback'] : 'callback_selectposition';//回调函数名称
 $allowcreate = isset($_GET['allowcreate']) ? intval($_GET['allowcreate']):0;//是否允许新建文件夹
@@ -25,8 +24,7 @@ $gets = array(
     'selhome'=>$selhome,
     'selorg'=>$selorg,
     'selgroup'=>$selgroup,
-    'range'=>$range,
-    'savefile'=>$savefile
+    'range'=>$range
 );
 $theurl = MOD_URL . "&op=filelist&callback=".$callback.'&'. url_implode($gets);
 include template('selectfile');

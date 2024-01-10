@@ -407,7 +407,6 @@
                 };
             }
         },
-
         _isInstanceOf: function (type, obj) {
             // Cross-frame instanceof check
             return Object.prototype.toString.call(obj) === '[object ' + type + ']';

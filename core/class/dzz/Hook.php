@@ -4,9 +4,11 @@ class Hook
 {
 
     private static $tags = array();
+    public static $usetag = array();
     /**
      * 动态添加行为扩展到某个标签
      * @param string    $tag 标签名称
+     * @param mixed     $behavior 行为名称
      * @param mixed     $behavior 行为名称
      * @param bool      $first 是否放到开头执行
      * @return void
