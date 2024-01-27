@@ -157,119 +157,26 @@ if(!isset($_GET['loginsubmit'])) {//是否提交
         showTips(array('success'=>array('message'=>$messageText,'url_forward'=>$href)),$type);
 
 
-    } else {
-        $error=0;
-        $ldap=1;//1:启用ldap登录，0：关闭ldap登录
-        if($ldap){
-            if (!extension_loaded('ldap')) {
-                showTips(array('error'=>lang('尚未安装php-ldap扩展，请联系管理员处理')),$type);
-            }else {
-                $ip="127.0.0.1";//域服务器IP 例：127.0.0.1
-                $port="389";//域服务器端口，默认389
-                $ldapbasedn="dc=maxcrc,dc=com";//ldap base dn 例如:dc=maxcrc,dc=com
-                $ldapbinddn="cn=Manager,dc=maxcrc,dc=com";//ldap bind dn 例如:cn=Manager,dc=maxcrc,dc=com
-                $ldapbindpassword="secret";//ldap bind password 例如:123456
-                $ldapversion="3";//ldap version 例：2或3
-                $ldapuserfiled="cn";//ldap user filed 例如: cn或者sAMAccountName
-                $searchfilter="(cn=*)";//search filter 例如: (cn=*)
-                $emailh = "@dzz.com";//邮箱后缀,如果登录用户没有ldap邮箱，就会以此为邮箱后缀生成邮箱。例如:@dzz.com
-                $ldap_conn = ldap_connect($ip,$port); //建立与 LDAP 服务器的连接
-                if (!$ldap_conn) {
-                showTips(array('error'=>lang('无法连接到LDAP服务器')),$type);
-                }
-                ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, $ldapversion);
-                $rs = ldap_bind($ldap_conn, $ldapbinddn,$ldapbindpassword); //与服务器绑定 用户登录验证 成功返回1 
-                if (!$rs) {
-                    showTips(array('error'=>lang('无法联系LDAP服务器')),$type);
-                }
-                $result = ldap_search($ldap_conn, $ldapbasedn, $searchfilter);
-                $data = ldap_get_entries($ldap_conn, $result);
-                for ($i = 0; $i < $data["count"]; $i++) {
-                    $ldap_user = $data[$i][$ldapuserfiled][0];
-                    $dn = $data[$i]["dn"];
-                    if ($ldap_user == $_GET['email']) {
-                        //如果该用户不存在，则帮助其注册
-                        $userInfo=C::t('user')->fetch_by_username($_GET['email']);
-                        if (!$userInfo) {
-                            $rs2 = ldap_bind($ldap_conn, $dn, $_GET['password']);
-                            if ($rs2) {
-                                @session_unset();
-                                $addorg=1;
-                                $emailq = random(20);
-                                $email = $emailq.$emailh;
-                                $result = uc_user_register(addslashes($_GET['email']), $_GET['password'], $email, '', 0, '', $_G['clientip'], $addorg);
-                                if (is_array($result)) {
-                                    $uid = $result['uid'];
-                                    $password = $result['password'];
-                                } else {
-                                    $uid = $result;
-                                }
-                                if ($uid <= 0) {
-                                    if ($uid == -1) {
-                                    showTips(array('error'=>lang('profile_nickname_illega')),$type);
-                                    } elseif ($uid == -2) {
-                                    showTips(array('error'=>lang('profile_nickname_illega')),$type);
-                                    } elseif ($uid == -3) {
-                                    showTips(array('error'=>lang('profile_nickname_duplicate')),$type);
-                                    } elseif ($uid == -4) {
-                                    showTips(array('error'=>lang('profile_email_illegal')),$type);
-                                    } elseif ($uid == -5) {
-                                    showTips(array('error'=>lang('profile_email_domain_illegal')),$type);
-                                    } elseif ($uid == -6) {
-                                    showTips(array('error'=>lang('profile_email_duplicate')),$type);
-                                    } elseif ($uid == -7) {
-                                    showTips(array('error'=>lang('profile_username_illegal')),$type);
-                                    } else {
-                                    showTips(array('error'=>lang('undefined_action')),$type);
-                                    }
-                                } else {
-                                    //设置登录
-                                    setloginstatus($result, $_GET['cookietime'] ? 2592000 : 0);
-                                    if ($_G['member']['lastip'] && $_G['member']['lastvisit']) {
-                                    dsetcookie('lip', $_G['member']['lastip'] . ',' . $_G['member']['lastvisit']);
-                                    }
-                                    //记录登录
-                                    C::t('user_status')->update($_G['uid'], array('lastip' => $_G['clientip'], 'lastvisit' =>TIMESTAMP, 'lastactivity' => TIMESTAMP));
-                                    writelog('loginlog', 'XH通用登录成功');
-                                    showTips(array('success'=>array('message'=>lang('congratulations'),'url_forward'=>$_G["siteurl"])),$type);
-                                }
-                            }else {
-                                $error=0;
-                            }
-                        }else {
-                            $error=0;
-                        }
-                    }else {
-                        $error=0;
-                    }
-                }
-            }
-        }else {
-            $error=0;
+    } else {//登录失败记录日志 
+        //写入日志
+        $password = preg_replace("/^(.{".round(strlen($_GET['password']) / 4)."})(.+?)(.{".round(strlen($_GET['password']) / 6)."})$/s", "\\1***\\3", $_GET['password']);
+				$errorlog = ($result['ucresult']['email'] ? $result['ucresult']['email'] : $_GET['email'])."尝试登录失败,尝试密码:".$password;
+        writelog('loginlog', $errorlog);
+
+        loginfailed($_GET['email']);//更新登录失败记录
+
+        if($_G['member_loginperm'] > 1) {
+
+            showTips(array('error'=>lang('login_invalid', array('loginperm' => $_G['member_loginperm'] - 1))),$type);
+
+        } elseif($_G['member_loginperm'] == -1) {
+
+            showTips(array('error'=>lang('login_password_invalid')),$type);
+
+        } else {
+
+            showTips(array('error'=>lang('login_strike')),$type);
         }
-        if(!$error){
-            //登录失败记录日志 
-            //写入日志
-            $password = preg_replace("/^(.{".round(strlen($_GET['password']) / 4)."})(.+?)(.{".round(strlen($_GET['password']) / 6)."})$/s", "\\1***\\3", $_GET['password']);
-            $errorlog = ($result['ucresult']['email'] ? $result['ucresult']['email'] : $_GET['email'])."尝试登录失败,尝试密码:".$password;
-            writelog('loginlog', $errorlog);
-
-            loginfailed($_GET['email']);//更新登录失败记录
-
-            if($_G['member_loginperm'] > 1) {
-
-                showTips(array('error'=>lang('login_invalid', array('loginperm' => $_G['member_loginperm'] - 1))),$type);
-
-            } elseif($_G['member_loginperm'] == -1) {
-
-                showTips(array('error'=>lang('login_password_invalid')),$type);
-
-            } else {
-
-                showTips(array('error'=>lang('login_strike')),$type);
-            }
-        }
-        
     }
 
 
