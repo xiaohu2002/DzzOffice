@@ -3,64 +3,20 @@
 <!--{template common/header_simple_start}-->
 <script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <!--{template common/header_simple_end}-->
-<nav class="navbar sticky-top navbar-dark navbar-expand-lg navbar-light">
-	<div class="container-fluid">
-		<a class="leftTopmenu navbar-brand" href="{$_G[siteurl]}">
-      <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" class="d-inline-block align-middle">
-     $_G['setting']['sitename']
-    </a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarScroll">
+<header class="fixed-top lyear-layout-header">
+  <nav class="navbar sticky-top navbar-dark navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <!--{template header_left}-->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+			<!--{template header_search}-->
 			<!--{template header_right}-->
-		</div>
-	</div>
-</nav>
-<script type="text/javascript">
-  jQuery(document).ready(function(e) {
-      _header.init('{FORMHASH}');//初始化头部效果
-      //_header.Topcolor();
-    //_notice.init();
-    _notice.getNotificationCount();
-  });
-  _notice={};
-  _notice.flashStep=1;
-  _notice.checkurl='index.php?mod=system&op=notification&filter=checknew';
-  _notice.normalTitle= document.title;
-  _notice.getNotificationCount=function(){
-    jQuery.getJSON(_notice.checkurl,function(json){
-      var sum=parseInt(json.sum);
-      _notice.showTips(sum);
-      if(json.timeout>0) window.setTimeout(_notice.getNotificationCount,json.timeout);
-    });
-  }
-  _notice.showTips=function(sum){
-    if(sum>0){
-      jQuery('#dzz_notification>span.badge').html(sum).removeClass('hide');
-      jQuery('#dzz_notification>span.dzz').hide();
-      _notice.flashTitle();
-    }else{
-      jQuery('#dzz_notification>span.badge').addClass('hide');
-      jQuery('#dzz_notification>span.dzz').show();
-      _notice.flashTitle(1);
-    }
-  }
-  _notice.flashTitle=function(flag){
-    //仅窗口不在焦点时闪烁title，回到焦点时停止闪烁并将title恢复正常
-    if(flag ||　CurrentActive){//当前处于焦点
-      document.title=_notice.normalTitle;
-      _notice.flashTitleRun = false;
-      return;//退出循环
-    }
-    _notice.flashTitleRun = true;
-    _notice.flashStep++;
-    if (_notice.flashStep==3) {_notice.flashStep=1;}
-    if (_notice.flashStep==1) {document.title="【您有新的通知】";}
-    if (_notice.flashStep==2) {document.title="【$_G[setting][sitename]】";}
-    setTimeout(function(){_notice.flashTitle();},500);  //循环
-  }
-</script>
+      </div>
+    </div>
+  </nav>
+</header>
 <!--{else}-->
 <!--{template common/header_simple}-->
 <style>
@@ -86,12 +42,8 @@
 <!--{if $param[msgtype] == 1 || $param[msgtype] == 2 && !$_G[inajax]}-->
   <div id="ct" class="text-center" style="display: flex;align-items: center;justify-content: center;min-height: -webkit-fill-available;margin: 0;text-align: center;">
 			<div id="messagetext">
-				<!--{if $_G['setting']['sitelogo']}-->
-        <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}">
-        <!--{else}-->
-        <img src="static/image/common/logo.png">
-        <!--{/if}-->
-				<h4 style="font-size: large;">$show_message</h4>
+        <img src="<!--{if $_G['setting']['bbclosed'] && !$_G['adminid']}-->static/image/common/logo.png<!--{else}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{/if}-->">
+				<h4>$show_message</h4>
 				<!--{if !$_G['setting']['bbclosed']|| !$_G['adminid'] ==0}-->
 				<!--{if $url_forward}-->
         <!--{if !$param[redirectmsg]}-->

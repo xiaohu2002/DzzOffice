@@ -192,11 +192,7 @@
           <label class="col-sm-2">{lang sitelogo}</label>
           <div class="col-sm-10">		
             <div class="file-hidde-content">
-              <!--{if $setting[sitelogo] > 0}-->
-              <img src="index.php?mod=io&op=thumbnail&size=small&path={eval echo dzzencode('attach::'.$setting[sitelogo]);}" class="upold-add">
-              <!--{else}-->
-              <img src="static/image/common/logo.png" class="upold-add">
-              <!--{/if}-->
+              <img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" class="upold-add">
               <input type="file" name="files[]" value="" class="file-hidde" />
               <input type="hidden" name="settingnew[sitelogo]" value="$setting[sitelogo]" class="build-images" /> 
               <div class="progress-bar"></div>
