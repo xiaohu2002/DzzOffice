@@ -1,0 +1,32 @@
+{eval
+	$_G['sechashi'] = !empty($_G['cookie']['sechashi']) ? $_G['sechash'] + 1 : 0;
+	$sechash = 'S'.($_G['inajax'] ? 'A' : '').$_G['sid'].$_G['sechashi'];
+	$sectpl = !empty($sectpl) ? explode("<sec>", $sectpl) : array('',': ','','');
+	$sectpldefault = $sectpl;
+	$sectplqaa = str_replace('<hash>', 'qaa'.$sechash, $sectpldefault);
+	$sectplcode = str_replace('<hash>', 'code'.$sechash, $sectpldefault);
+	$secshow = !isset($secshow) ? 1 : $secshow;
+	$sectabindex = !isset($sectabindex) ? 1 : $sectabindex;
+}
+<!--{block seccheckhtml}-->
+<input name="sechash" type="hidden" value="$sechash" />
+<!--{if $sectpl}-->
+	<!--{if $seccodecheck}-->
+  <div class="mb-3 has-feedback row seccode-wrapper seccode_type_{$_G[setting][seccodedata][type]}">
+		<div class="col-7">
+			<span class="mdi form-control-feedback" id="checkseccodeverify_$sechash"></span>
+      <input name="seccodeverify" class="form-control" id="seccodeverify_$sechash" type="text" autocomplete="off" style="{if $_G[setting][seccodedata][type] != 1}ime-mode:disabled;{/if}"  onblur="checksec('code', '$sechash')"  placeholder="{lang seccode}" />
+    </div>
+			{$sectplcode[2]}
+      <div class="col-5 text-right" id="seccode_$sechash"></div>
+      <!--{if $secshow}-->
+      <script type="text/javascript" reload="1">updateseccode('$sechash');</script>
+      <!--{/if}-->
+      $sectplcode[3]
+    <span class="help-msg"></span>
+  </div>
+	<!--{/if}-->
+<!--{/if}-->
+<!--{/block}-->
+<!--{eval unset($secshow);}-->
+<!--{if empty($secreturn)}-->$seccheckhtml<!--{/if}-->

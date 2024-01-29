@@ -1,0 +1,17 @@
+<script type="text/javascript" src="static/js/common.js?{VERHASH}"></script>
+{eval
+$hex_color=$_config['ztys']?$_config['ztys']:'#0d6efd';
+sscanf($hex_color, "#%2x%2x%2x", $red, $green, $blue);
+$hex_colorr=$red.', '.$green.', '.$blue;
+}
+<style type="text/css">
+	:root {
+		--bs-primary:$hex_color;
+		--bs-primary-hover:$hex_colorr;
+		--bs-primary-rgb:$hex_colorr;
+	}
+</style>
+</head>
+<body id="nv_{$_G[basescript]}" class="$bodyClass">
+<div id="append_parent" style="z-index:99999;"></div>
+<div id="ajaxwaitid" style="z-index:99999;"></div>
