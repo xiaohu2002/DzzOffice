@@ -85,8 +85,7 @@ if ($operation == 'export') {
 		}
 
 		$volume = intval($_GET['volume']) + 1;
-		$idstring = '# Identify: ' . base64_encode($_G['timestamp']."," . $_G['setting']['version'] . "," .$_GET['type']."," .$_GET['method']."," .$volume."," .$tablepre."," .$dbcharset) . "\n";
-
+		$idstring = '# Identify: ' . base64_encode("$_G[timestamp]," . $_G['setting']['version'] . ",{$_GET['type']},{$_GET['method']},{$volume},{$tablepre},{$dbcharset}") . "\n";
 		$dumpcharset = $_GET['sqlcharset'] ? $_GET['sqlcharset'] : str_replace('-', '', $_G['charset']);
 		$setnames = ($_GET['sqlcharset'] && $db -> version() > '4.1' && (!$_GET['sqlcompat'] || $_GET['sqlcompat'] == 'MYSQL41')) ? "SET NAMES '$dumpcharset';\n\n" : '';
 		if ($db -> version() > '4.1') {
@@ -499,7 +498,7 @@ function sqldumptablestruct($table) {
 	}
 
 	$tablestatus = DB::fetch_first("SHOW TABLE STATUS LIKE '$table'");
-	$tabledump .= ($tablestatus['Auto_increment'] ? " AUTO_INCREMENT=$tablestatus['Auto_increment']" : ''). ";\n\n";
+	$tabledump .= ($tablestatus['Auto_increment'] ? " AUTO_INCREMENT=$tablestatus[Auto_increment]" : ''). ";\n\n";
 	if ($_GET['sqlcompat'] == 'MYSQL40' && $db -> version() >= '4.1' && $db -> version() < '5.1') {
 		if ($tablestatus['Auto_increment'] <> '') {
 			$temppos = strpos($tabledump, ',');
@@ -540,7 +539,7 @@ function sqldumptable($table, $startfrom = 0, $currsize = 0) {
 		if ($_GET['extendins'] == '0') {
 			while ($currsize + strlen($tabledump) + 500 < $_GET['sizelimit'] * 1000 && $numrows == $offset) {
 				if ($firstfield['Extra'] == 'auto_increment') {
-					$selectsql = "SELECT * FROM $table WHERE$firstfield['Field']> $startfrom ORDER BY$firstfield['Field']LIMIT $offset";
+					$selectsql = "SELECT * FROM $table WHERE $firstfield[Field] > $startfrom ORDER BY $firstfield[Field] LIMIT $offset";
 				} else {
 					$selectsql = "SELECT * FROM $table LIMIT $startfrom, $offset";
 				}
@@ -571,7 +570,7 @@ function sqldumptable($table, $startfrom = 0, $currsize = 0) {
 		} else {
 			while ($currsize + strlen($tabledump) + 500 < $_GET['sizelimit'] * 1000 && $numrows == $offset) {
 				if ($firstfield['Extra'] == 'auto_increment') {
-					$selectsql = "SELECT * FROM $table WHERE$firstfield['Field']> $startfrom LIMIT $offset";
+					$selectsql = "SELECT * FROM $table WHERE $firstfield[Field] > $startfrom LIMIT $offset";
 				} else {
 					$selectsql = "SELECT * FROM $table LIMIT $startfrom, $offset";
 				}
