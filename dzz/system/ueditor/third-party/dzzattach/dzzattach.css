@@ -40,18 +40,11 @@
 .tip {
 	position: absolute;
 	padding: 10px;
-	_width: 200px;
-	max-width:350px;
-	border:solid 1px #b1b1b1;
 	box-shadow: 0 1px 3px #eee, inset 0 0 3px #fff;
-	border-radius:5px;
-	/*box-shadow:0 5px 15px RGBA(0,0,0,0.5);*/
 	word-break:break-all;
 	margin:0 10px;
 }
 .tip .tip-op a{
-	
-	color:#4c8afb;
 	padding-top: 1px;
 	margin-right: 10px;
 	padding-bottom: 1px;
@@ -95,9 +88,6 @@
 /*}*/
 .tip_1, .tip_2 {
 	margin-top: 8px;
-}
-.tip_3, .tip_4 {
-	margin-top: -8px;
 }
 .tip_horn {
 	position: absolute;

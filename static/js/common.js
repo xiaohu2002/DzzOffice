@@ -1,4 +1,4 @@
-﻿/*
+/*
  * @copyright   Leyun internet Technology(Shanghai)Co.,Ltd
  * @license     http://www.dzzoffice.com/licenses/license.txt
  * @package     DzzOffice
@@ -1828,7 +1828,7 @@ function showTip(ctrlobj,pos,msg) {
 	if(!document.getElementById(menuid)) {
 		var div = document.createElement('div');
 		div.id = ctrlobj.id + '_menu';
-		div.className = 'tip '+tip_classname;
+		div.className = 'tip da '+tip_classname;
 		div.style.display = 'none';
 		div.innerHTML = '<div class="tip_horn"></div><div class="tip_c">' + (msg?msg:ctrlobj.getAttribute('tip')) + '</div>';
 		document.getElementById('append_parent').appendChild(div);
