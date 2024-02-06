@@ -889,7 +889,7 @@ class table_resources extends dzz_table
                     $fileinfo['isgroup'] = ($currentfolder['flag'] == 'organization') ? true : false;
                 }
             } elseif ($fileinfo['ext']) {
-                $fileinfo['type'] = $fileinfo['ext'] . lang('typename_attach');
+                $fileinfo['type'] = getFileTypeName($fileinfo['type'], $fileinfo['ext']);
             } else {
                 $fileinfo['type'] = lang('undefined_file_type');
             }
