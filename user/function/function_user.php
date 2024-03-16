@@ -17,15 +17,13 @@ function uc_user_login($username, $password, $isuid, $checkques = '', $questioni
     $hookdata = array($username, $password, $isuid, $checkques, $questionid,$answer, $ip);
     \Hook::listen('applogin', $hookdata);
     list($username, $password, $isuid, $checkques, $questionid, $answer, $ip) = $hookdata;
-
     if ($isuid == 1) {
         $user = C::t('user')->fetch_by_uid($username);
-
     } elseif ($isuid == 2) {
         $user = C::t('user')->fetch_by_email($username);
     } elseif ($isuid == 3) {//手机号码登录
         $user = C::t('user')->fetch_by_phone($username);
-    }else {
+    } else {
         $user = C::t('user')->fetch_by_username($username);
     }
 

@@ -273,7 +273,6 @@ $lang = array
   'thread' => 'thread',
   'subject' => 'title ',
   'nosubject' => 'no title ',
-  'message' => 'content ',
   'mergeto' => 'merge into ',
   'doings' => 'records ',
   'blogs' => 'logs',
@@ -644,9 +643,6 @@ $lang = array
   'oauth_JSS_bucket'=>' Select the bucket you want to use, click the link on the left to automatically get the bucket list, if you do not have a bucket, please create a bucket first ',
   'oauth_JSS_bucket_success'=>'bucket successfully obtained, please select ',
 	// admin/cloud/template/oauth_qinniu.html
-	'oauth_JSS_add_JD'=>' add JD.com ',
-  'oauth_JSS_JD_storage'=>' JD cloud storage',
-  'add_oauth_JSS_JD_storage'=>' add JD cloud storage',
   'oauth_qinniu_add'=>' Add Qiuyun ',
   'oauth_qinniu_set'=>' Set the Seven cow clouds ',
   'oauth_qinniu_storage'=>' Qiniu cloud storage',
@@ -654,7 +650,6 @@ $lang = array
   'oauth_qinniu_storage_bucket'=>' Enter the access domain name of the bucket entered above in Qiniu cloud Storage. ',
   'storage_region'=>' storage region',
   'oauth_qinniu_storage_region'=>' Please select a storage region. ',
-  'oauth_JSS_bucket_success'=>'bucket successfully obtained, please select ',
 	// admin/cloud/template/router.html
 	'priority'=>' priority',
   'use_storage'=>' use storage',
@@ -1091,17 +1086,7 @@ $lang = array
   'import_volume_classification2'=>' failed! The database structure may be damaged! Please try importing from Volume 1 ',
 	'volume_classification_success'=>'All the sub volume backups were imported successfully！<br />',
 	'jurisdiction' => 'permissions',
-  'folder_permission_name'=>' folder permission name',
   'edit_folder_permissions'=>' Edit folder permissions',
-
-  'file_multiple_version_features'=>' file multiversion Settings ',
-  'allow_number_uploaded_versions'=>' maximum number of versions',
-  'allow_number_uploaded_versions_tip'=>' Control the number of file versions, the default value is 0, which means no limit on the number of versions ',
-
-  'setSystemSpace'=>' system space Settings ',
-  'setSystemSpace_tip'=>' Set the size of system space, if left blank or 0, the space is unlimited, if -1, no storage space ',
-
-  'space_organization_set'=>' Organization storage setting ',
   'support_upload_pictures_extensions'=>' Sorry, we don’t support uploading pictures with such extension ',
   'upload_await'=>' upload, please wait',
   'folder_permissions'=>' Folder permissions',
@@ -1121,22 +1106,15 @@ $lang = array
   'delete_permission_group_sure'=>' Are you sure you want to delete the permission group? Unrecoverable after deletion ',
   'space_group_set'=>' group storage space setting ',
   'space_group_set_tip'=>' Set the default group space size. If left blank or 0, all system space is shared. If -1, no storage space is available. ',
-	'jurisdiction' => 'permissions',
   'folder_permission_name'=>' folder permission name',
-  'edit_folder_permissions'=>' Edit folder permissions',
 
   'file_multiple_version_features'=>' file multiversion Settings ',
   'allow_number_uploaded_versions'=>' maximum number of versions',
   'allow_number_uploaded_versions_tip'=>' Control the number of file versions, the default value is 0, which means no limit on the number of versions ',
 
   'setSystemSpace'=>' system space Settings ',
-  'setSystemSpace_tip'=>' Set the size of system space, if left blank or 0, the space is unlimited, if -1, no storage space ',
-
   'space_organization_set'=>' Organization storage setting ',
   'space_organization_set_tip'=>' Sets the default organization space size. If left blank or 0, all system space is shared, if -1, no storage space is available ',
-  'space_group_set'=>' group storage space setting ',
-  'space_group_set_tip'=>' Set the default group space size. If left blank or 0, all system space is shared. If -1, no storage space is available. ',
-	
 	'open_qq_login'=>' Whether to open QQ login',
   'qq_app_id'=>' APP ID applied in QQ interconnection ',
   'qq_app_key'=>' Application APP KEY applied in QQ interconnection ',

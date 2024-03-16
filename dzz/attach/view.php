@@ -31,10 +31,6 @@ if($_GET['a']=='down'){
 		$url=$_G['siteurl'].'index.php?mod=sound&path='.$_GET['s'];
 		@header("Location: $url");
 		exit();
-	}elseif($icoarr['type']=='dzzdoc'){
-		$url=$_G['siteurl'].'index.php?mod=document&icoid='.$_GET['s'];
-		@header("Location: $url");
-		exit();
 	}
 	$bzarr=explode(':',$icoarr['rbz']?$icoarr['rbz']:$icoarr['bz']);
 	$bz=$bzarr[0];

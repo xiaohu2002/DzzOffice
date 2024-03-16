@@ -274,7 +274,6 @@ $lang = array
 	'thread' => '帖子',
 	'subject' => '标题',
 	'nosubject' => '无标题',
-	'message' => '内容',
 	'mergeto' => '合并到',
 	'doings' => '记录',
 	'blogs' => '日志',

@@ -1,7 +1,6 @@
 <?php
 $lang = array (
 	'appmarket' => '应用市场',
-    'installed' => '已安装',
     'upgrade' => '升级',
     'open_way'=>'打开方式',
     'permission_management'=>'权限管理',

@@ -627,12 +627,10 @@ function isemail($email)
 {
     return strlen($email) > 6 && strlen($email) <= 32 && preg_match("/^([A-Za-z0-9\-_.+]+)@([A-Za-z0-9\-]+[.][A-Za-z0-9\-.]+)$/", $email);
 }
-
 function isphone($phone)
 {
     return preg_match("/^1[3456789]\d{9,10}$/", $phone);
 }
-
 function quescrypt($questionid, $answer)
 {
     return $questionid > 0 && $answer != '' ? substr(md5($answer . md5($questionid)), 16, 8) : '';

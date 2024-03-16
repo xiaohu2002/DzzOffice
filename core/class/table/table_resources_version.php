@@ -19,8 +19,6 @@ class table_resources_version extends dzz_table
             $data['img']=DZZSCRIPT.'?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$data['aid']);
         }elseif($data['type']=='attach' || $data['type']=='document'){
             $data['img']=geticonfromext($data['ext'],$data['type']);
-        }elseif($data['type']=='dzzdoc'){
-            $data['img']=isset($data['img'])?$data['img']:geticonfromext($data['ext'],$data['type']);
         }else{
             $data['img']=isset($data['img'])?$data['img']:geticonfromext($data['ext'],$data['type']);
         }

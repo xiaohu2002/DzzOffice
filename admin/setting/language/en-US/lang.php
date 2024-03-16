@@ -18,7 +18,6 @@ $lang = array
   'loginSet'=>' Login Settings ',
   'basicSet'=>' Basic Settings ',
   'permGroupSet'=>' permission package set ',
-  'spaceSet'=>' Space setup ',
   'sitelogo' =>' platform LOGO',
   'default_app'=>' default homepage ',
 	'Notification Settings'=>'Notification Settings',

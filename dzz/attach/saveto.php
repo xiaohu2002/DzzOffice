@@ -29,15 +29,6 @@ if($_GET['type']=='link'){
 	}
 	if(!preg_match("/^(http|ftp|https|mms)\:\/\/.{4,300}$/i",($link))) topshowmessage(lang('invalid_format_url'));
 	$icoarr=io_dzz::linktourl($link,$pfid);
-}elseif($_GET['type']=='dzzdoc'){
-	$aid=empty($_GET['aid'])?0:intval($_GET['aid']);
-	$attach=C::t('attachment')->fetch($aid);
-	if(!$attach){
-		topshowmessage(lang('attachment_nonexistence'));
-	}
-	if(!empty($_GET['filename'])) $attach['filename']=trim($_GET['filename']);
-	$icoarr=IO::upload_by_content(IO::getFileContent('attach::'.$attach['aid']),$pfid,(trim($attach['filename'],'.dzzdoc').'.dzzdoc'));
-	
 }else{
 	$aid=empty($_GET['aid'])?0:intval($_GET['aid']);
 	$attach=C::t('attachment')->fetch($aid);

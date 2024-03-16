@@ -396,9 +396,6 @@ class table_resources extends dzz_table
         } elseif ($data['type'] == 'shortcut') {
             $data['ttype'] = $data['tdata']['type'];
             $data['ext'] = $data['tdata']['ext'];
-        } elseif ($data['type'] == 'dzzdoc') {
-            $data['url'] = DZZSCRIPT . '?mod=document&icoid=' . dzzencode('attach::' . $data['aid']);
-            $data['img'] = isset($data['img']) ? $data['img'] : geticonfromext($data['ext'], $data['type']);
         } elseif ($data['type'] == 'folder') {
             //$contaions = self::get_contains_by_fid($data['oid'], true);
             //$data['contaions'] = $contaions;
@@ -872,6 +869,11 @@ class table_resources extends dzz_table
             $fileinfo['opendateline'] = ($filestatis['opendateline']) ? dgmdate($filestatis['opendateline'], 'Y-m-d H:i:s') : dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
             $fileinfo['editdateline'] = ($filestatis['editdateline']) ? dgmdate($filestatis['editdateline'], 'Y-m-d H:i:s') : dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
             $fileinfo['fdateline'] = dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
+            if ($_G['adminid']) {
+                $fileinfo['downs'] = $filestatis['downs'];
+                $fileinfo['views'] = $filestatis['views'];
+                $fileinfo['edits'] = $filestatis['edits'];
+            }
             //编辑权限信息
             $fileinfo['editperm'] = 1;
             if ($fileinfo['gid'] > 0) {
@@ -1029,9 +1031,6 @@ function get_icosinfo_by_rid($rid)
         $data['img'] = geticonfromext($data['ext'], $data['type']);
     } elseif ($data['type'] == 'shortcut') {
         $data['img'] = isset($data['tdata']['img']) ? $data['tdata']['img'] : geticonfromext($data['tdata']['ext'], $data['tdata']['type']);
-    } elseif ($data['type'] == 'dzzdoc') {
-
-        $data['img'] = isset($data['img']) ? $data['img'] : geticonfromext($data['ext'], $data['type']);
     } elseif ($data['type'] == 'folder') {
        $data['img'] = $data['img']?$data['img']:'dzz/images/default/system/'.$data['flag'].'.png';
     } else {

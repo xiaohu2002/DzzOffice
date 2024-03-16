@@ -18,7 +18,6 @@ $lang = array
 	'loginSet'=>'登录设置',
 	'basicSet'=>'基本设置',
 	'permGroupSet'=>'权限包设置',
-	'spaceSet'=>'空间设置',
 	'sitelogo' =>'平台LOGO',
 	'default_app'=>'默认首页',
 	'Notification Settings'=>'通知设置',

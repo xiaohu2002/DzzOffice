@@ -495,10 +495,6 @@ _selectfile.Open = function (rid, extid, title) {
     if (obj.type === 'link') {
         window.open(data.url);
         return;
-    } else if (obj.type === 'dzzdoc') {
-        obj.url = "index.php?mod=document&icoid=" + obj.id;
-        window.open(obj.url);
-        return;
     } else if (obj.type === 'folder') {
         var hash = '';
         var fid = data.oid;

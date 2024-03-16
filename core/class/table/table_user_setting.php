@@ -51,7 +51,6 @@ class table_user_setting extends dzz_table
             if(!$uid)$uid = getglobal('uid');
             if(!DB::update($this->_table,array('svalue'=>$val),array('uid'=>$uid,'skey'=>$skey))){
 				 $setarr=array('uid'=>$uid,
-					'uid'=>$uid,
 					'skey'=>$skey,
 					'svalue'=>$val
 				);

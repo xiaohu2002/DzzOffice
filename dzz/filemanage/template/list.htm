@@ -140,9 +140,9 @@
               <div>
                 <a node-type="btn-item" data-key="download" class="btn btn-outline-info" title="下载" href="javascript:void(0);"><i class="dzz dzz-download"></i></a>
                 <a class="btn btn-outline-info" href="{MOD_URL}&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" data-bs-toggle="tooltip" title="{lang delete}" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="dzz dzz-delete"></i></a>
-                <!--{if $value[type]=='folder'}--><!--{else}-->
+                <!--{if $_G[adminid]}--><!--{if $value[type]=='folder'}--><!--{else}-->
                 <a class="btn btn-outline-info" href="javascript:;" onclick="togglecplog('{$key}')" data-bs-toggle="tooltip" title="更多信息"><i class="dzz dzz-description"></i></a>
-                <!--{/if}-->
+                <!--{/if}--><!--{/if}-->
               </div>
             </td>
           <!--{if $value[type]=='folder'}--><!--{else}-->
@@ -155,6 +155,8 @@
                 直链地址：<a href="<!--{eval echo IO::getFileUri($value[path])}-->"><!--{eval echo IO::getFileUri($value[path])}--></a>
               <br/>
                 引用：$value[copys]
+              <br/>
+              是否在回收站：<!--{if $value[isdelete]}-->是<!--{else}-->否<!--{/if}-->
             <!--{/if}-->
             <!--{/if}--></td>
           </tr>
@@ -325,6 +327,7 @@ function delete_file(){
 		})
 	}
 }
+<!--{if $_G[adminid]}-->
 function togglecplog(k) {
   var cplogobj = document.getElementById('cplog_' + k);
   if(cplogobj.style.display == 'none') {
@@ -333,6 +336,7 @@ function togglecplog(k) {
     cplogobj.style.display = 'none';
   }
 }
+<!--{/if}-->
 </script>
 <script type="text/javascript" src="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.js"></script>
 <!--{template common/footer_simple}-->

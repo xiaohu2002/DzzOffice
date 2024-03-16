@@ -151,7 +151,6 @@ class dzz_app extends dzz_base{
             'PHP_SELF' => '',
             'siteurl' => '',
             'localurl' => '',
-            'siteroot' => '',
             'siteport' => '',
 
 

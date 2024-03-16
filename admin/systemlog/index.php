@@ -131,7 +131,6 @@ if($type=="list"){
 		$log[2] = $log[2];
 		$log[2] = ($log[2] != $_G['member']['username'] ? "<b>$log[2]</b>" : $log[2]);
 		$log[3] = $usergroup[$log[3]];
-		
 		$list[$k]=$log;
 	}
 	$multipage = multi($count, $lpp, $page, $theurl,'pull-right'); 
