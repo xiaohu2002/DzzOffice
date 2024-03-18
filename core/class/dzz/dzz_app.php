@@ -608,12 +608,16 @@ class dzz_app extends dzz_base{
 						}
           }
         }
-        if($appidxu=C::t('app_market')->fetch_by_identifier(CURMODULE)){
-            if($this->var['member']['adminid'] || $_GET['do']=='savefile'){
-            }elseif($appidxu['available']==0){
+        if(!$this->var['member']['adminid'] && $appidxu=C::t('app_market')->fetch_by_identifier(CURMODULE)){
+            if($this->var['member']['uid']){
+                $uid=$this->var['member']['uid'];
+            }elseif($_GET['uidtoken']){
+                $uid=intval(dzzdecode($_GET['uidtoken']));
+            }
+            if(!$appidxu['available']){
                 showmessage(lang('该应用已关闭，请联系管理员。'));
-            }elseif($this->var['member']['uid']){
-                $appuid= C::t('user_field')->fetch($this->var['member']['uid']);
+            }elseif($uid){
+                $appuid= C::t('user_field')->fetch($uid);
                 $appuidz=explode(',',$appuid['applist']);
                 if (in_array($appidxu['appid'],$appuidz)){
                 }elseif($config=dzz_userconfig_init()){
@@ -622,7 +626,7 @@ class dzz_app extends dzz_base{
                     }else{
                         $applist=array();
                     }
-                    $appuid= C::t('user_field')->fetch($_G['uid']);
+                    $appuid= C::t('user_field')->fetch($uid);
                     $appuidz=explode(',',$appuid['applist']);
                     if (in_array($appidxu['appid'],$appuidz)){
                     }else{
