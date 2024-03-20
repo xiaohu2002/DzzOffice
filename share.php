@@ -77,7 +77,8 @@ if($_GET['a']=='down'){
 			}, $url);
 			//添加path参数；
 			if(strpos($url,'?')!==false  && strpos($url,'path=')===false){
-				$url.='&path='.$icoarr['icoid'];
+				$shareLink=dzzdecode($icoarr['icoid']);
+				$url.='&path='.$icoarr['icoid'].'&shareLink='.dzzencode($shareLink.$shareLink);
 			}
 			$url = $_G['siteurl'].$url;
 			@header("Location: $url");

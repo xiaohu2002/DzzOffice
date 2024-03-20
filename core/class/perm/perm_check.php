@@ -20,6 +20,7 @@ class perm_check{
         }
         return $perm;
     }
+	
     function getPerm($fid, $bz='',$i=0){
         global $_G;
 		if(isset($_G['gperm'])) return intval($_G['gperm']);//可以通过这个参数直接使用此权限值不去查询权限
@@ -62,6 +63,21 @@ class perm_check{
                 }else{ //继承上级，查找上级
                     if($folder['pfid']>0 && $folder['pfid']!=$folder['fid']){ //有上级目录
                         return self::getPerm($folder['pfid'],$bz,$i);
+                    }elseif (shareLink($_GET['shareLink'],$_GET['path'])){
+                        return perm_binPerm::getGroupPower('read');
+                    }elseif($folder = C::t('folder')->fetch_home_by_uid($uid)){//查看当前用户的个人网盘fid
+                        if($folder['fid']){
+                            if(!($folder['fid']==$fid)){//判断当前用户的个人网盘fid是否等于当前用户访问的fid
+                                $fids = array();
+                                $fids[] = $folder['fid'];
+                                foreach (C::t('folder')->fetch_all_folderfid_by_pfid($folder['fid']) as $v) {//查看当前用户的个人网盘下的所有目录
+                                    $fids[] = $v;
+                                }
+                                if (!(in_array($fid,$fids))){
+                                    return false;
+                                }
+                            }  
+                        } 
                     }else{   //其他的情况使用
                     	return self::getuserPerm();
                     }
@@ -181,7 +197,7 @@ class perm_check{
                 if(!perm_FolderSPerm::isPower($folder['fsperm'],$action)) return false;
             }
             if($_G['adminid']==1) return true; //网站管理员 有权限;
-            if($_G['uid']==$arr['uid']) return true;
+           
             return self::checkperm_Container($arr['pfid'],$action,$bz);
         }
     }

@@ -3572,3 +3572,11 @@ function dzz_userconfig_init()
      return $result[0];
 
  }
+ 
+ function shareLink($shareLink,$path){
+    $path=dzzdecode($path);
+    $pathh=dzzencode($path.$path);
+    if ($pathh==$shareLink){
+        return true;
+    }
+}
