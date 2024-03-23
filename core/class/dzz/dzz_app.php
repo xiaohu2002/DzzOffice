@@ -616,6 +616,7 @@ class dzz_app extends dzz_base{
             }
             if(!$appidxu['available']){
                 showmessage(lang('该应用已关闭，请联系管理员。'));
+            }elseif($appidxu['group']==0){
             }elseif($uid){
                 $appuid= C::t('user_field')->fetch($uid);
                 $appuidz=explode(',',$appuid['applist']);
@@ -633,7 +634,7 @@ class dzz_app extends dzz_base{
                         showmessage(lang('您无权限使用该应用，请联系管理员。'));
                     }
                 }
-            }elseif($appidxu['group']==0 || $appidxu['group']==-1){
+            }elseif($appidxu['group']==-1){
             }else{
                 Hook::listen('check_login');
             }
