@@ -424,8 +424,8 @@ if($method == 'show_license') {
 <p class="text-danger">这个页面是初始安装后临时指导页，并且此页面只会出现一次。</p>
 <p><b>请使用管理员账号登录、并且按照下面的步骤依次配置系统！</b></p>
 <ol>
-<li>在<a href="https://gitee.com/xh2002/projects">https://gitee.com/xh2002/projects</a>选择需要的插件，下载按说明安装或升级；
-<p class="help-block">使用dzzoffice 小胡版的话，需优先使用小胡版的插件，官方版的不确定兼容性</p>
+<li>请访问<a href="https://gitee.com/xiaohu2024/">团队主页（https://gitee.com/xiaohu2024/）</a>或查阅DzzOffice 笔记进行插件安装与配置；
+<p class="help-block">使用DzzOffice 小胡版的话，需优先使用小胡版的插件，官方版的不确定兼容性</p>
 </li>
 <li>进入<a href="admin.php?mod=setting">系统设置</a>设置平台名称、logo、平台版权等系统基本设置；</li>
 </ol>
