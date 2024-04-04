@@ -357,15 +357,13 @@ button.input-search-drop {
 }
 .notification-list-item .member{
 	position: absolute;
-    left: 10px;
+    left: 2px;
     cursor: pointer;
     top: 10px;
     float: left;
 }
 .notification-list-item .member-avatar{
-	position:absolute;
-	left:-2px;
-    top: 10px;
+	position:relative;
 }
 .notification-list-item .dateline{
 	font-size:12px;
