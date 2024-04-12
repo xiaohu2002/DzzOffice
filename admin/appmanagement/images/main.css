@@ -21,7 +21,7 @@ a{
 	overflow: hidden;
 	border-radius: 8px;
 	margin:10px;
-	background: rgba(196,196,196,0.75);
+	background-color: rgba(255,255,255,0.55);
 }
 .main-content-ul .main-content-li:hover{
 	background: #D8DEEA;

@@ -2130,7 +2130,7 @@ function showWindow(k, url, mode, cache, showWindow_callback,disablebacktohide) 
 				 
 		menuObj = document.createElement('div');
 		menuObj.id = menuid;
-		menuObj.className = ' modal fade ';
+		menuObj.className = ' modal ';
 		if(disablebacktohide){
 			menuObj.setAttribute('data-backdrop','static');
 			menuObj.setAttribute('data-keyboard','false');

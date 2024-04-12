@@ -3134,7 +3134,7 @@ button.close {
     }
 }
 .tooltip {
-    z-index: 2280;
+    z-index: 11200;
     display: block;
     margin: 0;
     font-family: var(--bs-font-sans-serif);
