@@ -3,15 +3,6 @@
 ul{
 	margin: 0;
 }
-.properties-baground{
-	width: 100%;
-	margin-bottom: 15px;
-	border-radius:var(--radius);
-}
-.properties-baground .properties-orange{
-	padding-top: 20px;
-	padding-left: 20px;
-}
 .properties-explain{
 	padding-left: 20px;
 	padding-top: 10px;
@@ -20,8 +11,6 @@ ul{
 .properties-explain li{
 	width: 145px;
 	float: left;	
-	font-size: 12px;
-	margin-bottom:15px ;
 	/*padding-left: 24px;*/
 	/*background-image: url(../img/icons_ZG-QuanXian.png);*/
 	background-repeat: no-repeat;

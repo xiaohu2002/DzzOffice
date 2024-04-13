@@ -95,7 +95,7 @@ if (empty($_GET['edit']) && empty($_GET['run'])) {
 	if (!$cron) {
 		$msg = lang('cron_not_found');
 		$redirecturl = BASESCRIPT . '?mod=system&op=cron';
-		$msg_type = 'text-error';
+		$msg_type = 'text-danger';
 		include template('cron');
 		exit();
 	}
@@ -158,7 +158,7 @@ if (empty($_GET['edit']) && empty($_GET['run'])) {
 				$msg = lang('crons_time_invalid');
 			}
 			if (!empty($msg)) {
-				$msg_type = 'text-error';
+				$msg_type = 'text-danger';
 				$redirecturl = dreferer();
 				include template('cron');
 				exit();
@@ -186,7 +186,7 @@ if (empty($_GET['edit']) && empty($_GET['run'])) {
 
 		if (!file_exists($cronfile)) {
 			$msg = lang('crons_run_invalid', array('cronfile' => $cronfile));
-			$msg_type = 'text-error';
+			$msg_type = 'text-danger';
 
 		} else {
 			dzz_cron::run($cron['cronid']);

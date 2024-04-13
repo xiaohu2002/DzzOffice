@@ -84,15 +84,10 @@
 					</tr>
 				</table>
 			</form>
-			<div class="tip">
-				<div class="alert alert-warning">
-					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-					<h5>{lang board_message}</h5>
-					<ul class="help-block">
-						{lang appdefault_board_message_text}
-					</ul>
-				</div>
-			</div>
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<strong>{lang board_message}</strong> {lang appdefault_board_message_text}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			  </div>
 		</div>
 	</div>
 </div>

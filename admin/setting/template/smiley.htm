@@ -74,14 +74,9 @@
           </thead>
         </table>
       </form>
-      <div class="tip">
-        <div class="alert alert-warning">
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          <h5>{lang board_message}</h5>
-          <ul>
-            {lang seeting_smiley_board_message_state}
-          </ul>
-        </div>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{lang board_message}</strong> {lang seeting_smiley_board_message_state}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     </div>
 		<a href="javascript:;" onclick="_header.leftTopmenu(this)" class="leftTopmenu add-menu dzz dzz-menu"></a>

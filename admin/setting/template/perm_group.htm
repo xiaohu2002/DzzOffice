@@ -97,16 +97,13 @@
       <!--{/loop}--> 
     </tbody>
   </table>
-  <div class="properties-title">
-    <div class="properties-baground">
-      <p class="properties-orange">{lang folder_property_group_permission}</p>
+  <div class="alert alert-warning">
+      <p>{lang folder_property_group_permission}</p>
       <ul class="properties-explain">
         <!--{loop $perms $k $val}-->
         <li><span class="{$val[2]}"></span>$val[0]</li>
         <!--{/loop}-->
       </ul>
-    </div>
-  </div>
 </div>
 <script type="text/javascript">
     function permchk(form) {

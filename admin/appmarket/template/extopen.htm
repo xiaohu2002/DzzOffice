@@ -55,7 +55,7 @@
 				<!--{loop $list $key $value}-->
 				<tr>  
 					<td width="100" >
-						<a href="{MOD_URL}&op=extopen&ext=$key">$key</a>
+						<a class="btn btn-outline-success" href="{MOD_URL}&op=extopen&ext=$key">$key</a>
 					</td>
 					<td>
 						<form  name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=extopen" method="post">
@@ -80,18 +80,10 @@
 					</tr> 
 				</thead>
 			</table>
-		 
-			<div class="tip">
-				<div class="alert alert-warning">
-					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-					<h5>
-						<b>{lang board_message}</b>
-					</h5>
-					<ul class="help-block">
-						{lang extopen_board_message_text}
-					</ul>
-				</div>
-			</div>
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<strong>{lang board_message}</strong> {lang extopen_board_message_text}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			  </div>
 		</div>
 	</div>
 </div>

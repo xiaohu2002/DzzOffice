@@ -16,6 +16,7 @@ if($_G['adminid']!=1) showmessage('system_administrator_export',dreferer());
 	$h1=getProfileForImport();
 	$h0=array_merge($h0,$h1);
 $orgid=intval($_GET['orgid']);
+$navtitle = lang('export_user').' - '.lang('appname');
 if(!submitcheck('exportsubmit')){
 	$orgpath=C::t('organization')->getPathByOrgid($orgid);
 	if(empty($orgpath)) $orgpath=lang('please_select_range_export');

@@ -263,7 +263,7 @@ if ($operation == 'export') {
 
 			} else {
 				$msg = lang('database_shell_fail');
-				$msg_type = 'text-error';
+				$msg_type = 'text-danger';
 
 			}
 
@@ -277,7 +277,7 @@ if ($operation == 'export') {
 	$navtitle = lang('db_recover') . ' - ' . lang('appname');
 	if (($re = checkpermission('dbimport')) !== true) {
 		$msg = $re;
-		$msg_type = 'text-error';
+		$msg_type = 'text-danger';
 		include  template('database');
 		exit();
 	}
@@ -306,7 +306,7 @@ if ($operation == 'export') {
 			$dir -> close();
 		} else {
 			$msg = lang('database_export_dest_invalid');
-			$msg_type = 'text-error';
+			$msg_type = 'text-danger';
 			include  template('database');
 			exit();
 		}
@@ -369,7 +369,7 @@ if ($operation == 'export') {
 			$redirecturl = dreferer();
 		} else {
 			$msg = lang('database_file_delete_invalid');
-			$msg_type = 'text-error';
+			$msg_type = 'text-danger';
 			$redirecturl = dreferer();
 		}
 	}
@@ -380,7 +380,7 @@ if ($operation == 'export') {
 	$checkperm = checkpermission('runquery', 0);
 	if ($checkperm !== true) {
 		$msg = $checkperm;
-		$msg_type = 'text-error';
+		$msg_type = 'text-danger';
 		include  template('database');
 		exit();
 	}
@@ -406,7 +406,7 @@ if ($operation == 'export') {
 		}
 		if ($sqlerror) {
 			$msg = lang('database_run_query_invalid', array('sqlerror' => $sqlerror));
-			$msg_type = 'text-error';
+			$msg_type = 'text-danger';
 			$redirecturl = dreferer();
 		} else {
 			$msg = lang('database_run_query_succeed', array('affected_rows' => $affected_rows));

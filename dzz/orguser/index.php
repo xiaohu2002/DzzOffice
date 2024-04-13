@@ -9,7 +9,7 @@
 if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
-$navtitle= lang('appname');
+$navtitle = lang('appname');
 $orgtree = array();
 if ($_G['adminid'] != 1) {
 	//获取用户的有权限的部门树

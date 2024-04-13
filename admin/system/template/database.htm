@@ -106,7 +106,9 @@
       <!--{else}-->
       <div class="well">
       <!--{if $msg}-->
-        <p class="$msg_type">$msg</p>
+	  <div style="text-align: center;">
+		<span class="no-result-title $msg_type">$msg</span>
+	  </div>
         <!--{/if}-->
         <!--{if $redirecturl}-->
         <p class="text-info">
@@ -119,7 +121,9 @@
       <!--{elseif $operation=='import'}-->
       <!--{if $msg}-->
 			<div class="well">
-				<p class="$msg_type">$msg</p>
+				<div style="text-align: center;">
+					<span class="no-result-title $msg_type">$msg</span>
+				  </div>
 				<!--{if $redirecturl}-->
 				<p class="text-info">
 					<a href="{$redirecturl}" class="lightlink">{lang message_redirect}</a>
@@ -205,7 +209,9 @@
 			</ul>
 			<!--{if $msg}-->
 			<div class="well">
-				<p class="$msg_type">$msg</p>
+				<div style="text-align: center;">
+					<span class="no-result-title $msg_type">$msg</span>
+				  </div>
 				<!--{if $redirecturl}-->
 				<p class="text-info">
 					<a href="{$redirecturl}" class="lightlink">{lang message_redirect}</a>

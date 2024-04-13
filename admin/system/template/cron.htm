@@ -143,12 +143,12 @@
 						<td>$cron[nextrun]</td>
 
 						<td>
-							<a href="{MOD_URL}&op=cron&edit=$cron[cronid]">{lang edit}</a>
+							<a class="btn btn-outline-primary" href="{MOD_URL}&op=cron&edit=$cron[cronid]">{lang edit}</a>
 							<br />
 							<!--{if $cron['run']}-->
-							<a href="{MOD_URL}&op=cron&run=$cron[cronid]">{lang execute}</a>
+							<a class="btn btn-outline-success" href="{MOD_URL}&op=cron&run=$cron[cronid]">{lang execute}</a>
 							<!--{else}-->
-							<a href="javascript:;" class="text-muted">{lang execute}</a>
+							<a class="btn btn-outline-success" href="javascript:;" class="text-muted">{lang execute}</a>
 							<!--{/if}-->
 						</td>
 					</tr>

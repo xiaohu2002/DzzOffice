@@ -71,6 +71,7 @@ if ($do == 'export') {//应用导出
 
 }
 elseif ($do == 'import') {//导入应用
+	$navtitle=lang('import_type_app').' - '.lang('appname');
 	if (!submitcheck('importsubmit')) {
 		include template('import');
 	} else {

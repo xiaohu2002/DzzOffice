@@ -134,6 +134,11 @@ if (submitcheck('appsubmit')) {
 	echo "</script>";
 	exit();
 } else {
+	if (!$appid) {
+		$navtitle=lang('add_app').' - '.lang('appname');
+	}else{
+		$navtitle=lang('edit_app').' - '.lang('appname');
+	}
 	include_once libfile('function/organization');
 	$sexts = array();
 	foreach ($exts as $ext) {
