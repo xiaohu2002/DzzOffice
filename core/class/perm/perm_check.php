@@ -68,11 +68,7 @@ class perm_check{
                     }elseif($folder = C::t('folder')->fetch_home_by_uid($uid)){//查看当前用户的个人网盘fid
                         if($folder['fid']){
                             if(!($folder['fid']==$fid)){//判断当前用户的个人网盘fid是否等于当前用户访问的fid
-                                $fids = array();
-                                $fids[] = $folder['fid'];
-                                foreach (C::t('folder')->fetch_all_folderfid_by_pfid($folder['fid']) as $v) {//查看当前用户的个人网盘下的所有目录
-                                    $fids[] = $v;
-                                }
+                                $fids = get_all_chilrdenfid_by_pfid($folder['fid']);
                                 if (!(in_array($fid,$fids))){
                                     return false;
                                 }
