@@ -42,7 +42,7 @@
 <!--{if $param[msgtype] == 1 || $param[msgtype] == 2 && !$_G[inajax]}-->
   <div id="ct" class="text-center" style="display: flex;align-items: center;justify-content: center;min-height: -webkit-fill-available;margin: 0;text-align: center;">
 			<div id="messagetext">
-        <img src="<!--{if $_G['setting']['bbclosed'] && !$_G['adminid']}-->static/image/common/logo.png<!--{else}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{/if}-->">
+        <img src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->">
 				<h4>$show_message</h4>
 				<!--{if !$_G['setting']['bbclosed']|| !$_G['adminid'] ==0}-->
 				<!--{if $url_forward}-->

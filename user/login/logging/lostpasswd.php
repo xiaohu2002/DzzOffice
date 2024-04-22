@@ -34,7 +34,11 @@ elseif(isset($_GET['lostpwsubmit'])) {
 
     $idstring = random(6);
     $sitename=$_G['setting']['sitename'];
-    $sitelogo=IO::getFileUri('attach::'.$_G['setting']['sitelogo']);
+    if(!$_G['setting']['bbclosed']){
+		$sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+	}else{
+		$sitelogo = 'static/image/common/logo.png'; 
+	}
     C::t('user')->update($member['uid'], array('authstr' => "$_G[timestamp]\t1\t$idstring"));
     //require_once libfile('function/mail');
     $get_passwd_message = <<<EOT

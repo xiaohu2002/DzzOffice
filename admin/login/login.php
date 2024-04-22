@@ -73,9 +73,13 @@ function html_login_form() {
     <div class="mb-3 has-feedback"><span class="mdi mdi-account" aria-hidden="true"></span><input class="form-control" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}"   onblur="if(this.value==\'\'){this.value=\'' . lang('login_email_username') . '\'}"  placeholder='. lang('login_email_username') . ' autocomplete="off" autofocus required/></div>' : '<div class="text-center username">' . $_G['member']['username'] . '</div><div class="text-center email">' . $_G['member']['email'] . '</div>';
 	$sid = getglobal('sid');
   $avatarstatus=getglobal('avatarstatus','member');
-   if(!$uid ){
-		 $sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
-	   $avastar='<img src="'.$sitelogo.'">';
+   if(!$uid){
+	if(!$_G['setting']['bbclosed']){
+		$sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+	}else{
+		$sitelogo = 'static/image/common/logo.png'; 
+	}
+		 $avastar='<img src="'.$sitelogo.'">';
    }else{
 	   $avastar = avatar_block($uid); 
    }

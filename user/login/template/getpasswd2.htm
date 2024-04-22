@@ -39,7 +39,7 @@
   <div class="col-md-6 col-lg-5 col-xl-4 align-self-center" style="background-color: <!--{if $_G['setting']['loginset']['kbcolor']}-->$_G['setting']['loginset']['kbcolor']<!--{else}-->#fff<!--{/if}-->;height: 100%;display: flex;align-items: center;justify-content: center;">
     <div class="p-5">
       <div class="text-center">
-        <img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}">
+        <img alt="light year admin" src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->">
       </div>
       <h2 class="text-center">{lang getpassword}</h2>
       <form class="signin-form needs-validation" method="post" autocomplete="off" id="lostpwform_$loginhash" role="form" onsubmit="return validate(this);" action="user.php?mod=login&op=logging&action=getpasswd&uid=$uid&id=$hashid">

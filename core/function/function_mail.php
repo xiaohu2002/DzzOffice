@@ -23,9 +23,13 @@ function sendmail($toemail, $subject, $message, $from = '') {
 		}
 	}
   $sitename=$_G['setting']['sitename'];
-	$sitecopyright=replacesitevar($_G['setting']['sitecopyright']);
-  $sitelogo=IO::getFileUri('attach::'.$_G['setting']['sitelogo']);
-  $message = <<<EOT
+  $sitecopyright=replacesitevar($_G['setting']['sitecopyright']);
+  if(!$_G['setting']['bbclosed']){
+		$sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+	}else{
+		$sitelogo = 'static/image/common/logo.png'; 
+	}
+	$message = <<<EOT
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=$_G[charset]">

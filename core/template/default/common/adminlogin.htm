@@ -116,7 +116,7 @@
           <p class="text-center mt-3"><!--{template common/copyright}--></p>
         </div>
         <div class="login-right p-5 d-none d-sm-block">
-          <p class="mb-3"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" alt="logo" /></p>
+          <p class="mb-3"><img src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" alt="logo" /></p>
           <!--{if $_G[setting][loginset][subtitle]}--><p class="text-white">$_G[setting][loginset][subtitle]</p><!--{/if}-->
           <!--{if $_G[setting][metadescription]}--><p class="text-white align-self-end">$_G[setting][metadescription]</p><!--{/if}-->
         </div>

@@ -17,7 +17,11 @@ if($identify && file_exists($appConfig)){
 	$config=include($appConfig);
 	if(isset($config['about'])){
 		$about=$config['about'];
-		$about['sitelogo']=$_G['setting']['sitelogo']?\IO::getFileUri('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+		if(!$_G['setting']['bbclosed']){
+			$about['logo']=$_G['setting']['sitelogo']?\IO::getFileUri('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+		}else{
+			$about['logo']='static/image/common/logo.png'; 
+		}
 		$appinfo=C::t('app_market')->fetch_by_identifier($identify);
 		if(empty($about['logo'])){
 			$about['logo']=$_G['setting']['attachurl'].$appinfo['appico'];
@@ -32,7 +36,11 @@ if(empty($appinfo['appname'])){
 	$about['name_en']=$_G['setting']['sitename'];//英文名称，注意前面的dzz去掉，留空不显示
 	$about['version']='V'.CORE_VERSION;//版本信息，留空不显示
 	//中间大图
+	if(!$_G['setting']['bbclosed']){
 		$about['logo']=$_G['setting']['sitelogo']?\IO::getFileUri('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+	}else{
+		$about['logo']='static/image/common/logo.png'; 
+	}
 }
 
 //站点logo,留空不显示
