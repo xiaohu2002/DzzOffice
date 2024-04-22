@@ -45,15 +45,15 @@ if ($_GET['do'] == 'delete') {
         'type' => $_GET['type']
     );
     $theurl = BASESCRIPT . "?" . url_implode($gets);
-    if ($_GET['dateline'] == 'desc') {
-        $order = 'ORDER BY dateline DESC';
+    if ($_GET['dateline'] == 'asc') {
+        $order = 'ORDER BY dateline ASC';
     } elseif ($_GET['author'] == 'asc') {
         $order = 'ORDER BY author ASC';
     } elseif ($_GET['author'] == 'desc') {
         $order = 'ORDER BY author DESC';
     } else {
-        $_GET['dateline'] = 'asc';
-        $order = 'ORDER BY dateline ASC';
+        $_GET['dateline'] = 'desc';
+        $order = 'ORDER BY dateline DESC';
     }
     $sql = "cid!='app'";
     $param = array();
