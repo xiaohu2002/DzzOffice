@@ -1,5 +1,5 @@
 <!--{template common/header_simple_start}-->
-<link rel='stylesheet' type="text/css" href="static/css/ddxsy.css"/>
+<link rel='stylesheet' type="text/css" href="static/css/ddxsy.css?{VERHASH}"/>
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <style>
@@ -56,12 +56,12 @@
 <div id="dplayer"></div>
 <!--{/if}-->
 </div>
-<script src="{MOD_PATH}/js/flv.min.js"></script>
-<script src="{MOD_PATH}/js/dash.all.min.js"></script>
-<script src="{MOD_PATH}/js/DPlayer.min.js"></script>
-<script src="{MOD_PATH}/js/hls.min.js"></script>
-<script src="{MOD_PATH}/js/dash.all.min.js"></script>
-<script src="{MOD_PATH}/js/webtorrent.min.js"></script>
+<script src="{MOD_PATH}/js/flv.min.js?{VERHASH}"></script>
+<script src="{MOD_PATH}/js/dash.all.min.js?{VERHASH}"></script>
+<script src="{MOD_PATH}/js/DPlayer.min.js?{VERHASH}"></script>
+<script src="{MOD_PATH}/js/hls.min.js?{VERHASH}"></script>
+<script src="{MOD_PATH}/js/dash.all.min.js?{VERHASH}"></script>
+<script src="{MOD_PATH}/js/webtorrent.min.js?{VERHASH}"></script>
 <script>
 const dp = new DPlayer({
     container: document.getElementById('dplayer'),
