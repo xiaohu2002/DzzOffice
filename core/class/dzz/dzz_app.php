@@ -593,49 +593,52 @@ class dzz_app extends dzz_base{
             }
         }
         if ($this->var['member']['adminid']){
-           }elseif(in_array(CURSCRIPT, array('admin', 'user', 'api')) || defined('ALLOWGUEST') && ALLOWGUEST) {
-          }elseif($_GET['mod']=='system') {
-				}else{
-          if ($this->var['member']['uid']){
+        }elseif(in_array(CURSCRIPT, array('admin', 'user', 'api')) || defined('ALLOWGUEST') && ALLOWGUEST) {
+        }elseif($_GET['mod']=='system') {
+        }else{
+        if ($this->var['member']['uid']){
             foreach($this->var['setting']['verify'] as $key=>$value){
-              $verify = C::t('user_verify')->fetch($this->var['member']['uid']);
-              if($value['available'] && $key==1){
-              if($verify['verify1']==1){
-							}else {
-								dheader("Location: user.php?mod=profile&vid=1");
-							}
-							}
-						}
-          }
+            $verify = C::t('user_verify')->fetch($this->var['member']['uid']);
+            if($value['available'] && $key==1){
+            if($verify['verify1']==1){
+                }else {
+                    dheader("Location: user.php?mod=profile&vid=1");
+                }
+                }
+            }
         }
-        if(!$this->var['member']['adminid'] && $appidxu=C::t('app_market')->fetch_by_identifier(CURMODULE)){
-            if($this->var['member']['uid']){
-                $uid=$this->var['member']['uid'];
-            }elseif($_GET['uidtoken']){
+        }
+        if (!$this->var['member']['adminid'] && $appidxu = C::t('app_market')->fetch_by_identifier(CURMODULE)) {
+            $uid = null;
+            if ($this->var['member']['uid']) {
+                $uid = $this->var['member']['uid'];
+            } elseif ($_GET['uidtoken']) {
                 $uid=intval(dzzdecode($_GET['uidtoken']));
             }
-            if(!$appidxu['available']){
+            if (!$appidxu['available']) {
                 showmessage(lang('该应用已关闭，请联系管理员。'));
-            }elseif($appidxu['group']==0){
-            }elseif($uid){
-                $appuid= C::t('user_field')->fetch($uid);
-                $appuidz=explode(',',$appuid['applist']);
-                if (in_array($appidxu['appid'],$appuidz)){
-                }elseif($config=dzz_userconfig_init()){
-                    if($config['applist']){
-                        $applist=explode(',',$config['applist']);
-                    }else{
-                        $applist=array();
-                    }
-                    $appuid= C::t('user_field')->fetch($uid);
-                    $appuidz=explode(',',$appuid['applist']);
-                    if (in_array($appidxu['appid'],$appuidz)){
-                    }else{
+            } elseif ($appidxu['group'] == 0) {
+                // 全员使用跳过
+            } elseif ($uid) {
+                try {
+                    $config = dzz_userconfig_init();
+                    if ($config && isset($config['applist'])) {
+                        $applist = explode(',', $config['applist'] ?: '');
+                        if (in_array($appidxu['appid'], $applist, true)) {
+                            // 用户配置中包含该应用，有权限
+                        } else {
+                            showmessage(lang('您无权限使用该应用，请联系管理员。'));
+                        }
+                    } else {
                         showmessage(lang('您无权限使用该应用，请联系管理员。'));
                     }
+                } catch (\Exception $e) {
+                    // 处理数据库操作异常，例如记录日志或显示错误信息
+                    showmessage(lang('系统错误，请联系管理员。'));
                 }
-            }elseif($appidxu['group']==-1){
-            }else{
+            } elseif ($appidxu['group'] == -1) {
+                // 游客可以使用，跳过
+            } else {
                 Hook::listen('check_login');
             }
         }
