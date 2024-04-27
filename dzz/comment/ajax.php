@@ -27,12 +27,10 @@ if (empty($_G['uid']) && !in_array($do, $guests)) {
 }
 }
 if (submitcheck('replysubmit')) {
-	foreach ($_G['platform'] as $key => $value) {
-    $os= $key;
-  }
-  foreach ($_G['browser'] as $key => $value) {
-    $outputer= $key;
-  }
+	$os= get_os();
+	foreach ($_G['browser'] as $key => $value) {
+		$outputer= $key;
+	}
 	$message = censor($_GET['message']);
 
 	if (empty($message)) {

@@ -195,8 +195,6 @@ class dzz_app extends dzz_base{
         $_G['browser']=helper_browser::getbrowser();
         $_G['platform']=helper_browser::getplatform();
         $this->var = & $_G;
-
-
     }
     private function is_HTTPS(){
         if($_SERVER['HTTPS'] === 1){  //Apache
