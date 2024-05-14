@@ -151,8 +151,8 @@ INSERT INTO `dzz_usergroup_field` VALUES(5, -1, '', 0, 1);
 INSERT INTO `dzz_usergroup_field` VALUES(6, -1, '', 0, 1);
 INSERT INTO `dzz_usergroup_field` VALUES(7, -1, 'gif, jpg, jpeg, png', 0, 7);
 INSERT INTO `dzz_usergroup_field` VALUES(8, -1, '', 0, 7);
-INSERT INTO `dzz_usergroup_field` VALUES(9, 0, '', 0, 524287);
-INSERT INTO `dzz_usergroup_field` VALUES(10, 0, '', 0, 229039);
+INSERT INTO `dzz_usergroup_field` VALUES(9, 10240, '', 0, 524287);
+INSERT INTO `dzz_usergroup_field` VALUES(10, 10240, '', 0, 229039);
 
 
 --
