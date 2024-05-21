@@ -47,7 +47,7 @@ if($type=="list"){
 	$firstlogs = file( $logdir.$logfiles[0] ) ; 
 	$firstlogsnum = count($firstlogs);
 	$countlogfile=count($logfiles);
-	 
+	$count = ($countlogfile-1)*4000+$firstlogsnum;
 	$logs = array();
 	$jishu=4000;//每个日志文件最多行数
 	$start = ($page - 1) * $lpp;
@@ -87,13 +87,13 @@ if($type=="list"){
 	$logs = file( $logdir.$lastlog["file"] );
 	$logs = array_reverse($logs);
 	if($keyword){
-    foreach($logs as $key => $value) {
-      if(!empty($_GET['keyword']) && strpos($value, $_GET['keyword']) === FALSE) {
-        unset($logs[$key]);
-      }
-    }
-  }
-	$count = count($logs);
+		foreach($logs as $key => $value) {
+		if(!empty($_GET['keyword']) && strpos($value, $_GET['keyword']) === FALSE) {
+			unset($logs[$key]);
+		}
+		}
+		$count = count($logs);
+  	}
 	if( $lastlog["file"]!=$logfiles[0] ){
 		$j++;
 	}

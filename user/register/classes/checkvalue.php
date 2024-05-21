@@ -24,10 +24,10 @@ class Checkvalue{
 		}
 		
         //验证码
-			if($secqaacheck || $seccodecheck){
-        if(!check_seccode( $_GET['seccodeverify'],$_GET['sechash'])){
-            showTips(array('error'=>lang('submit_seccode_invalid')), $type);
-        }
+        if($secqaacheck || $seccodecheck){
+            if(!check_seccode( $_GET['seccodeverify'],$_GET['sechash'])){
+                showTips(array('error'=>lang('submit_seccode_invalid')), $type);
+            }
 		}
        
         //验证用户名 

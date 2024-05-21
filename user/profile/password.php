@@ -141,7 +141,7 @@ elseif($do == 'login'){
 		'op' => $_GET['op'],
 		'do' => $_GET['do']
   );
-  $theurl = CURSCRIPT . "?" . url_implode($gets);
+  $theurl = BASESCRIPT . "?" . url_implode($gets);
 	$logdir = DZZ_ROOT.'./data/log/';
 	$logfiles = get_log_files($logdir, $operation);
 	 
@@ -189,11 +189,11 @@ elseif($do == 'login'){
 	//获取数据开始
 	$logs = file( $logdir.$lastlog["file"] );
 	$logs = array_reverse($logs);
-  foreach($logs as $key => $value) {
-    if(!empty($keyword) && strpos($value, $keyword) === FALSE) {
-      unset($logs[$key]);
-    }
-  }
+	foreach($logs as $key => $value) {
+		if(!empty($keyword) && strpos($value, $keyword) === FALSE) {
+		unset($logs[$key]);
+		}
+	}
 	$count = count($logs);
 	if( $lastlog["file"]!=$logfiles[0] ){
 		$j++;
