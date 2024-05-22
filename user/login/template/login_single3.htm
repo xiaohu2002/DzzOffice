@@ -54,14 +54,14 @@
 <![endif]-->
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
-<div class="center-vh">
+<div class="center-vh p-2">
 	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box">
       <div class="login-left p-5">
         <div class="text-center mb-3 d-sm-none">
           <img src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" alt="logo" />
         </div>
-        <h2 class="text-center"><!--{if $_G[setting][loginset][title]}-->$_G[setting][loginset][title]<!--{else}-->$_G[setting][sitename]<!--{/if}--></h2>
+        <h2 class="text-center d-sm-none"><!--{if $_G[setting][loginset][title]}-->$_G[setting][loginset][title]<!--{else}-->$_G[setting][sitename]<!--{/if}--></h2>
         <form class="signin-form needs-validation" action="user.php?mod=login&op=logging&action=login&loginsubmit=yes{if !empty($_GET['handlekey'])}&handlekey=$_GET[handlekey]{/if}{if isset($_GET['frommessage'])}&frommessage{/if}&loginhash=$loginhash" method="POST" name="login" id="loginform_$loginhash" role="form" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}pwdclear = 1; loginsub('loginform_$loginhash', 'returnmessage_$loginhash');return false;">
           <input type="hidden" name="formhash" value="{FORMHASH}" />
           <input type="hidden" name="referer" value="{$referer}" />
@@ -107,12 +107,14 @@
           <!--{/if}-->
           <!--{/if}-->
         </form>
-        <p class="text-center mt-3"><!--{template common/copyright}--></p>
+        <p class="text-center mt-3 d-sm-none"><!--{template common/copyright}--></p>
       </div>
       <div class="login-right p-5 d-none d-sm-block">
         <p class="mb-3"><img src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" alt="logo" /></p>
+        <h2 class="text-white"><!--{if $_G[setting][loginset][title]}-->$_G[setting][loginset][title]<!--{else}-->$_G[setting][sitename]<!--{/if}--></h2>
         <!--{if $_G[setting][loginset][subtitle]}--><p class="text-white">$_G[setting][loginset][subtitle]</p><!--{/if}-->
         <!--{if $_G[setting][metadescription]}--><p class="text-white align-self-end">$_G[setting][metadescription]</p><!--{/if}-->
+        <p class="text-white align-self-end"><!--{template common/copyright}--></p>
       </div>
     </div>
   </div>

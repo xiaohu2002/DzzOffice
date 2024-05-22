@@ -47,7 +47,8 @@
   <div class="text-center mb-3">
   	<img alt="light year admin" src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->">
 		<h1><!--{if $_G[setting][loginset][title]}-->$_G[setting][loginset][title]<!--{else}-->$_G[setting][sitename]<!--{/if}--></h1>
-		<p>请选择下列用户登录</p>
+    <!--{if $_G[setting][loginset][subtitle]}--><p>$_G[setting][loginset][subtitle]</p><!--{/if}-->
+		<p><small>请选择下列用户登录</small></p>
   </div>
   <form class="signin-form needs-validation" action="user.php?mod=login&op=logging&action=login&loginsubmit=yes" method="POST" name="login" role="form" onsubmit="if(this.uid.value=='') return false">
     <input type="hidden" name="formhash" value="{FORMHASH}" />

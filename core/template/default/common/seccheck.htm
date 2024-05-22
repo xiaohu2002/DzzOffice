@@ -12,7 +12,7 @@
 <input name="sechash" type="hidden" value="$sechash" />
 <!--{if $sectpl}-->
 	<!--{if $seccodecheck}-->
-  <div class="mb-3 has-feedback row seccode-wrapper seccode_type_{$_G[setting][seccodedata][type]}">
+  <div class="mb-3 has-feedback row seccode-wrapper seccode_type_{$_G[setting][seccodedata][type]}" style="display: flex;align-content: center;align-items: center;">
 		<div class="col-7">
 			<span class="mdi form-control-feedback" id="checkseccodeverify_$sechash"></span>
       <input name="seccodeverify" class="form-control" id="seccodeverify_$sechash" type="text" autocomplete="off" style="{if $_G[setting][seccodedata][type] != 1}ime-mode:disabled;{/if}"  onblur="checksec('code', '$sechash')"  placeholder="{lang seccode}" />
