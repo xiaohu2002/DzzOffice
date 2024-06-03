@@ -81,6 +81,9 @@ $lang = array (
 	'buy'=>'购买',
 	'view_detail'=>'查看详细',
 	'buy_contract'=>'联系购买',
-	'manual_install_tip'=>'注：如不能在线安装，请通过 <a class="num" href="http://www.dzzoffice.com/index.php?mod=dzzmarket" target="_blank">官方应用市场</a> 下载应用安装包手动下载'
+	'manual_install_tip'=>'<li>小胡版的插件并不提供在线安装，请手动下载离线安装包进行安装。小胡版的插件下载地址：<a href="https://gitee.com/xiaohu2024" target="_blank">https://gitee.com/xiaohu2024</a></li>
+    <li>本应用市场提供的是官方版本的插件，当官方与小胡版都有共同的插件时，请优先使用小胡版的插件以确保最佳的兼容性和稳定性。</li>
+    <li>当然，如果某些功能在小胡版中暂时无法找到，您也可以选择使用官方的插件，但请注意可能会出现一些不适配的问题。</li>
+    <li>如不能在线安装官方版的插件，请通过 <a href="http://www.dzzoffice.com/index.php?mod=dzzmarket" target="_blank">官方应用市场</a> 下载应用安装包进行离线安装</li>'
 );
 ?>

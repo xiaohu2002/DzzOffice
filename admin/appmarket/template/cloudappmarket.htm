@@ -68,10 +68,13 @@
   <div class="bs-main-container">
     <div class="all-center-top clearfix">
       <div class="app-info pull-left"> <a href="{MOD_URL}">{lang total}<span class="num">$total</span>{lang ge}{lang app}</a> 
-		 
       </div>
-       <div class="pull-right">{lang manual_install_tip}</div>
     </div>
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		<strong>{lang board_message}</strong> 
+			{lang manual_install_tip}
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	  </div>
     <div class="main-content clearfix" >
       <div class="market-container" id="loopcontent"> 
         <!--{loop $list $value}-->
@@ -124,8 +127,9 @@
   </div>
   <!-- /.modal-dialog --> 
 </div>
-<!-- /.modal --> 
+<!-- /.modal -->
 <script type="text/javascript">
+	
 	jQuery('.view-detail').on('click',function(){
 		showBuyInfo(this,'modal-lg');
 		return false;

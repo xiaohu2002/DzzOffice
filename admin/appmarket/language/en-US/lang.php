@@ -82,6 +82,9 @@ $lang = array (
   'buy' => 'buy',
   'view_detail'=>' View detail',
   'buy_contract'=>' contact to buy ',
-	'manual_install_tip'=>'Note: if you cannot install online, please click <a class="num" href="http://www.dzzoffice.com/index.php?mod=dzzmarket" target="_ Blank "> official app market </a> download the app installation package manually'
+	'manual_install_tip'=>'<li> Hu version of the plug-in does not provide online installation, please manually download the offline installation package for installation. Small version of the plug-in download address: <a href="https://gitee.com/xiaohu2024" target="_blank">https://gitee.com/xiaohu2024</a> </li>
+    <li> This application market provides the official version of the plug-in, when the official and Xiaohu version have a common plug-in, please preferentially use the Xiaohu version of the plug-in to ensure the best compatibility and stability. </li>
+    Of course, if some functions cannot be found in the Hu version for the time being, you can also choose to use the official plug-in, but please note that there may be some incompatibility problems. </li>
+    <li> If the official plug-in cannot be installed online, Please download <a href="http://www.dzzoffice.com/index.php?mod=dzzmarket" target="_blank">official application market</a> application installation package offline </li>'
 );
 ?>
