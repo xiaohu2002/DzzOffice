@@ -302,16 +302,18 @@
             <label class="col-sm-2" for="sitecopyright">{lang platform_copyright}</label>
             <div class="col-sm-10">
               <textarea type="textarea" class="form-control" id="sitecopyright" required name="settingnew[sitecopyright]" row="6">$setting[sitecopyright]</textarea>
-              <span class="help-block">支持html代码和变量替换，可以使用如下变量:
+              <ul class="help-block">
+                支持html代码和变量替换，可以使用如下变量:
                 <li><code>{xhversion}</code> : 小胡版版本</li>
                 <li><code>{xversion}</code> : 官方版本</li>
                 <li><code>{years}</code> : 当前年份</li>
-                <li><code>{username}</code> : 用户名</li>
-                <li><code>{time}</code> : 发送时间</li>
+                <li><code>{username}</code> : 当前用户名</li>
+                <li><code>{time}</code> : 当前时间</li>
                 <li><code>{sitename}</code> : 网站名称（显示在页面底部的联系方式处的名称）</li>
                 <li><code>{bbname}</code> : 站点名称（显示在浏览器窗口标题等位置的名称）</li>
                 <li><code>{adminemail}</code> : 管理员 Email</li>
-              </span>
+                <li>例如输入<code>{username} {time}</code>就可以显示为<code>admin 2024-6-6 21:26</code></li>
+              </ul>
             </div>
         </div>
         <div class="row mb-3">
