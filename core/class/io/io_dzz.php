@@ -148,7 +148,7 @@ class io_dzz extends io_api
 			Hook::listen('io_dzz_getstream_attach',$icoarr);//挂载点
             $bz = io_remote::getBzByRemoteid($icoarr['remote']);
             if ($bz == 'dzz') {
-                if ($icoarr['type'] == 'video' || $icoarr['type'] == 'link') {
+                if ($icoarr['type'] == 'video' || $icoarr['type'] == 'dzzdoc' || $icoarr['type'] == 'link') {
                     return $icoarr['url'];
                 }
                 return $_G['setting']['attachdir'] . $icoarr['attachment'];
@@ -169,7 +169,7 @@ class io_dzz extends io_api
 			Hook::listen('io_dzz_getstream_attach',$icoarr);//挂载点
             $bz = io_remote::getBzByRemoteid($icoarr['remote']);
             if ($bz == 'dzz') {
-                if ($icoarr['type'] == 'video' || $icoarr['type'] == 'link') {
+                if ($icoarr['type'] == 'video' || $icoarr['type'] == 'dzzdoc' || $icoarr['type'] == 'link') {
                     return $icoarr['url'];
                 }
 				
@@ -211,7 +211,7 @@ class io_dzz extends io_api
 				Hook::listen('io_dzz_getstream_attach',$icoarr);//挂载点
                 $bz = io_remote::getBzByRemoteid($icoarr['remote']);
                 if ($bz == 'dzz') {
-                    if ($icoarr['type'] == 'video' || $icoarr['type'] == 'link') {
+                    if ($icoarr['type'] == 'video' || $icoarr['type'] == 'dzzdoc' || $icoarr['type'] == 'link') {
                         return $icoarr['url'];
                     }
                     return $_G['siteurl'] . $_G['setting']['attachurl'] . $icoarr['attachment'];
@@ -1652,7 +1652,7 @@ class io_dzz extends io_api
             return array('error' => lang('file_not_exist1'));
         }
         $gid = DB::result_first("select gid from %t where fid=%d", array('folder', $icoarr['pfid']));
-        if (in_array($icoarr['type'], array('folder', 'link', 'video'))) {
+        if (in_array($icoarr['type'], array('folder', 'link', 'video', 'dzzdoc'))) {
             if (!perm_check::checkperm_Container($icoarr['pfid'], 'upload')) {
                 return array('error' => lang('privilege'));
             }
