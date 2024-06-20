@@ -374,9 +374,9 @@
         } else {
             $.post(MOD_URL + '&op=positionlist&do=geffolderinfo', {'fid': fid}, function (data) {
                 if (parent.$callback) {
-                    parent.$callback(fid, data);
+                    parent.$callback (fid, data);
                 } else {
-                    opened.$callback(fid, data);
+                    opened.$callback (fid, data);
                 }
                 hide_window();
             }, 'json')
