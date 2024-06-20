@@ -286,26 +286,26 @@ function canclecreate(obj, node) {
     $(obj).closest('.layer').remove();
     inst.delete_node(node);
 }
-function submitdata() {
-        var fid = $('#' + ctrlid).val();
-        if (!fid) {
-            //showDialog(__lang.please_select_dir);
-            showmessage(__lang.please_select_dir, "danger", 2000, 1);
-            return false;
-        }else{
-            $.post(MOD_URL+'&op=positionlist&do=geffolderinfo',{'fid':fid},function(data){
-                try{if(typeof parent.showWindow_callback == 'function') parent.showWindow_callback(fid,data);}catch(e){}
-                if(parent.$callback){
-                try{ parent.$callback(fid,data);}catch(e){}
-                }else{
-                try{ opened.$callback(fid,data);}catch(e){}
-                }
-                
-                hide_window();
-            },'json')
-        }
+function submitdata(){
+    var fid = $('#'+ctrlid).val();
+    if(!fid){
+//            showDialog(__lang.please_select_dir);
+        showmessage(__lang.please_select_dir,"danger",2000,1);
         return false;
+    }else{
+        $.post(MOD_URL+'&op=positionlist&do=geffolderinfo',{'fid':fid},function(data){
+			try{if(typeof parent.showWindow_callback == 'function') parent.showWindow_callback(fid,data);}catch(e){}
+            if(parent.$callback){
+               try{ parent.$callback(fid,data);}catch(e){}
+            }else{
+               try{ opened.$callback(fid,data);}catch(e){}
+            }
+			
+            hide_window();
+        },'json')
     }
+    return false;
+}
 function hide_window(){
     if(opened){
         window.close();
