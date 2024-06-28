@@ -61,11 +61,16 @@ class table_resources_attr extends dzz_table
             return $returndata;
         }
         $returndata = array();
-        foreach(DB::fetch_all("select * from %t where rid = %s and vid = %d",array($this->_table,$rid,$vid)) as $val ){
+        foreach(DB::fetch_all("select * from %t where rid = %s and (vid = %d or vid='0') order by vid",array($this->_table,$rid,$vid)) as $val ){
 			if($val['skey']=='icon'){
-				$val['sval']=C::t('attachment')->getThumbByAid($val['sval'],0,0,1);
-				$val['skey']='img';
+
+				if($img=C::t('attachment')->getThumbByAid($val['sval'],0,0,1)){
+                    $val['sval']=$img;
+                    $val['skey']='img';
+                }
+
 			}
+            
             $returndata[$val['skey']] = $val['sval'];
         }
         $this->store_cache($cachekey,$returndata);
@@ -113,7 +118,7 @@ class table_resources_attr extends dzz_table
     }
     public function update_vid_by_rvid($rid,$oldvid,$vid){
        $i=0;
-	   foreach(DB::fetch_all("select id from %t where rid=%s and vid = %d",array($this->_table,$rid,$oldvid)) as $value){
+	   foreach(DB::fetch_all("select * from %t where rid=%s and vid = %d",array($this->_table,$rid,$oldvid)) as $value){
 			if(self::update($value['id'],array('vid'=>$vid))){
 				$i++;
 			}
