@@ -275,7 +275,7 @@ class table_resources extends dzz_table
                 return 1;
             default :
                 if (!$resource['vid']) {
-                    C::t('attachment')->delete_by_aid($resource['aid']);
+                    C::t('attachment')->delete_by_aid($resource['aid'], -1);
                 }
                 return 1;
         }
@@ -307,10 +307,6 @@ class table_resources extends dzz_table
             C::t('resources_statis')->delete_by_rid($rid);
             //删除resources表数据
             if (parent::delete($rid)) {
-				//处理删除后空间大小
-				 if (!$data['vid'] && $data['size']) {//更新空间大小
-                    SpaceSize(-$data['size'], $data['gid'], true, $data['uid']);
-                }
                 //记录删除事件
                 $hash = C::t('resources_event')->get_showtpl_hash_by_gpfid($data['pfid'], $data['gid']);
                 $eventdata = array('username' => $_G['username'], 'position' => $data['relpath'], 'filename' => $data['name'], 'hash' => $hash);
@@ -396,6 +392,9 @@ class table_resources extends dzz_table
         } elseif ($data['type'] == 'shortcut') {
             $data['ttype'] = $data['tdata']['type'];
             $data['ext'] = $data['tdata']['ext'];
+        } elseif ($data['type'] == 'dzzdoc') {
+            $data['url'] = DZZSCRIPT . '?mod=document&icoid=' . dzzencode('attach::' . $data['aid']);
+            $data['img'] = isset($data['img']) ? $data['img'] : geticonfromext($data['ext'], $data['type']);
         } elseif ($data['type'] == 'folder') {
             //$contaions = self::get_contains_by_fid($data['oid'], true);
             //$data['contaions'] = $contaions;
@@ -818,7 +817,9 @@ class table_resources extends dzz_table
                 $fileinfo['type'] = lang('more_file_type');
                 $judgesecond = true;
 
-            } else {
+            } elseif ($tmpinfo['ext'][0]=='folder') {
+                $fileinfo['type'] = lang('均为文件夹');
+							} else {
                 $fileinfo['type'] = lang('louis_vuitton') . $tmpinfo['ext'][0] . lang('type_of_file');
             }
             if (in_array('', $tmpinfo['ext']) || $judgesecond) {
@@ -848,7 +849,7 @@ class table_resources extends dzz_table
                 $fileinfo['ffsize'] = lang('property_info_size', array('fsize' => formatsize($tmpinfo['contains']['size']), 'size' => $tmpinfo['contains']['size']));
                 $fileinfo['contain'] = lang('property_info_contain', array('filenum' => $tmpinfo['contains']['contain'][0], 'foldernum' => $tmpinfo['contains']['contain'][1]));
             }
-			 $fileinfo['img'] = self::get_icosinfo_by_rid($fileinfo['rid']);
+					$fileinfo['img'] = self::get_icosinfo_by_rid($fileinfo['rid']);
 
             unset($tmpinfo);
         } else {//单个文件信息
@@ -869,11 +870,6 @@ class table_resources extends dzz_table
             $fileinfo['opendateline'] = ($filestatis['opendateline']) ? dgmdate($filestatis['opendateline'], 'Y-m-d H:i:s') : dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
             $fileinfo['editdateline'] = ($filestatis['editdateline']) ? dgmdate($filestatis['editdateline'], 'Y-m-d H:i:s') : dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
             $fileinfo['fdateline'] = dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
-            if ($_G['adminid']) {
-                $fileinfo['downs'] = $filestatis['downs'];
-                $fileinfo['views'] = $filestatis['views'];
-                $fileinfo['edits'] = $filestatis['edits'];
-            }
             //编辑权限信息
             $fileinfo['editperm'] = 1;
             if ($fileinfo['gid'] > 0) {
@@ -903,10 +899,66 @@ class table_resources extends dzz_table
                     $fileinfo['fsize'] = formatsize($contaions['size']);
                     $fileinfo['ffsize'] = lang('property_info_size', array('fsize' => formatsize($contaions['size']), 'size' => $contaions['size']));
                     $fileinfo['contain'] = lang('property_info_contain', array('filenum' => $contaions['contain'][0], 'foldernum' => $contaions['contain'][1]));
+									
                 } elseif ($fileinfo['ext']) {
                     $fileinfo['fsize'] = formatsize($fileinfo['size']);
                 } else {
-                    $fileinfo['fsize'] = formatsize($fileinfo['size']);
+                  //获取文件基本信息
+                  $fileinfos = DB::fetch_all("select r.*,f.perm_inherit,p.path from %t  r left join %t f on r.pfid = f.fid left join %t p  on p.fid = r.pfid $wheresql", $param);
+                  $fileinfo = array();
+                  $tmpinfo = array();
+                  $infos = array();
+                  $fileinfo = DB::fetch_first("select r.*,f.perm_inherit,p.path from %t r left join %t f on r.pfid = f.fid left join %t p on r.pfid = p.fid $wheresql", $param);
+                  if (!$fileinfo) {
+                      return array('error' => lang('no_privilege'));
+                  }
+                  //位置信息
+                  $fileinfo['realpath'] = preg_replace('/dzz:(.+?):/', '', $fileinfo['path']);
+                  //统计信息
+                  $fileinfo['opendateline'] = ($filestatis['opendateline']) ? dgmdate($filestatis['opendateline'], 'Y-m-d H:i:s') : dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
+                  $fileinfo['editdateline'] = ($filestatis['editdateline']) ? dgmdate($filestatis['editdateline'], 'Y-m-d H:i:s') : dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
+                  $fileinfo['fdateline'] = dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
+                  //编辑权限信息
+                  $fileinfo['editperm'] = 1;
+                  if ($fileinfo['gid'] > 0) {
+                      $powerarr = perm_binPerm::getPowerArr();
+                      if (!(C::t('organization_admin')->chk_memberperm($fileinfo['gid'])) && !($uid == $fileinfo['uid'] && $fileinfo['perm_inherit'] & $powerarr['edit1']) && !($fileinfo['perm_inherit'] & $powerarr['edit2'])) {
+                          $fileinfo['editperm'] = 0;
+                      }
+                  }
+                  foreach ($fileinfos as $v) {
+                      $infos[$v['rid']] = $v;
+                      $tmpinfo['rids'][] = $v['rid'];
+                      $tmpinfo['names'][] = $v['name'];
+                      $tmpinfo['pfid'][] = $v['pfid'];
+                      $tmpinfo['ext'][] = ($v['ext']) ? $v['ext'] : $v['type'];
+                      $tmpinfo['type'][] = $v['type'];
+                      $tmpinfo['username'][] = $v['username'];
+                      $tnpinfo['hascontain'][$v['rid']] = ($v['type'] == 'folder') ? 1 : 0;
+                      $tmpinfo['realpath'][] = $v['path'];
+                  }
+                  $fileinfo['name'] = getstr(implode(',', array_unique($tmpinfo['names'])), 60);
+                  //判断文件归属
+                  $fileinfo['username'] = (count(array_unique($tmpinfo['username'])) > 1) ? lang('more_member_owner') : $tmpinfo['username'][0];
+                  $fileinfo['type'] = lang('type_folder');
+                  //文件大小和文件个数信息
+                  $tmpinfo['contains'] = array('size' => 0, 'contain' => array(0, 0));
+                  foreach ($tnpinfo['hascontain'] as $k => $v) {
+                      if ($v) {
+                          $tmpinfo['contains']['contain'][1] += 1;
+                          $childcontains = self::get_contains_by_fid($infos[$k]['oid'], true);
+                          $tmpinfo['contains']['contain'][0] += $childcontains['contain'][0];
+                          $tmpinfo['contains']['contain'][1] += $childcontains['contain'][1];
+                          $tmpinfo['contains']['size'] += $childcontains['size'];
+                      } else {
+                          $tmpinfo['contains']['contain'][0] += 1;
+                          $tmpinfo['contains']['size'] += $infos[$k]['size'];
+                      }
+                  }
+                  $fileinfo['fsize'] = formatsize($tmpinfo['contains']['size']);
+                  $fileinfo['ffsize'] = lang('property_info_size', array('fsize' => formatsize($tmpinfo['contains']['size']), 'size' => $tmpinfo['contains']['size']));
+                  $fileinfo['contain'] = lang('property_info_contain', array('filenum' => $tmpinfo['contains']['contain'][0], 'foldernum' => $tmpinfo['contains']['contain'][1]));
+                  $fileinfo['img'] = self::get_icosinfo_by_rid($fileinfo['rid']);
                 }
 
             }
@@ -1031,6 +1083,9 @@ function get_icosinfo_by_rid($rid)
         $data['img'] = geticonfromext($data['ext'], $data['type']);
     } elseif ($data['type'] == 'shortcut') {
         $data['img'] = isset($data['tdata']['img']) ? $data['tdata']['img'] : geticonfromext($data['tdata']['ext'], $data['tdata']['type']);
+    } elseif ($data['type'] == 'dzzdoc') {
+
+        $data['img'] = isset($data['img']) ? $data['img'] : geticonfromext($data['ext'], $data['type']);
     } elseif ($data['type'] == 'folder') {
        $data['img'] = $data['img']?$data['img']:'dzz/images/default/system/'.$data['flag'].'.png';
     } else {
