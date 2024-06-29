@@ -15986,7 +15986,7 @@ fieldset:disabled .btn {
 .error-msg{
 	color: #FF0000;
 }
-.img-avatar{
+.avatar,.img-avatar{
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center;
