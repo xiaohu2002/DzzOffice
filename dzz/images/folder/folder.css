@@ -238,8 +238,6 @@ span .chk-ico {
 }
 .module-grid-view .wrapper .icoimgContainer{
 	position:relative;
-	width: 100px;
-    height: 100px;
 }
 .module-grid-view .wrapper .icoimgContainer .imageclass{
 	display:block;
@@ -289,7 +287,10 @@ span .chk-ico {
 }
 .sharepame-name{
 	font-size: 14px;
-	margin-bottom: 12px;
+	margin-bottom: 10px;
+}
+.sharepame-detailed {
+	color: #6c757d;
 }
 .sharepame-detailed .sharepame-time{
 	padding-right:5px ;

@@ -46,10 +46,10 @@
               <input type="checkbox" class="form-check-input" name="available[{$value[bz]}]" value="{eval echo ($value[available]?$value[available]:1)}" <!--{if $value[available]>0}-->checked<!--{/if}--> <!--{if $value[warning]}-->disabled<!--{/if}--> > <span class="text-danger" style="padding-left:3px">$value[warning]</span> 
               <!--{/if}-->
             </td>
-            <td><a href="{MOD_URL}&op=edit&bz=$value[bz]">{lang set}</a> 
+            <td width="140"><a class="btn btn-outline-primary" href="{MOD_URL}&op=edit&bz=$value[bz]">{lang set}</a> 
               <!--{if $value[warning]}--> 
               <!-- <br /> -->
-              <a class="text-danger" href="{MOD_URL}&operation=delete&bz=$value[bz]" style="margin-left:15px;">{lang delete}</a> 
+              <a class="btn btn-outline-danger" href="{MOD_URL}&operation=delete&bz=$value[bz]" style="margin-left:15px;">{lang delete}</a> 
               <!--{/if}-->
               </td>
           </tr>

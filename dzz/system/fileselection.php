@@ -17,7 +17,7 @@ $type =  isset($_GET['type']) ? intval($_GET['type']):0;//2,选择位置；1，�
 $exttype =  isset($_GET['exttype']) ? trim($_GET['exttype']):'';//类型范围
 $filename = isset($_GET['filename'])?trim($_GET['filename']):'';
 $token = isset($_GET['token']) ? trim($_GET['token']):'';//调用地方传递参数，将原样返回给回调函数
-$perm = isset($_GET['perm']) ? trim($_GET['perm']):'';//权限判断值：比如 write,判断是否有写入权限；再如，write,copy，判断是否有写入和copy权限(即多个权限用逗号分隔)
+$perm = isset($_GET['perm']) ? trim($_GET['perm']):'write';//权限判断值：比如 write,判断是否有写入权限；再如，write,copy，判断是否有写入和copy权限(即多个权限用逗号分隔)
 $mulitype =  isset($_GET['mulitype']) ? intval($_GET['mulitype']):0;//0，不允许多选；1，允许多选
 if($type == 1){
     $rid = isset($_GET['rid']) ? trim($_GET['rid']):'';

@@ -1508,9 +1508,10 @@ input[type=submit].btn-block {
 	display: block;
 }
 .nav>li>a {
-  position: relative;
-  padding: 8px;
+    position: relative;
+    padding: 8px;
 	display: table;
+    cursor: pointer;
 }
 .nav>li>a:focus,
 .nav>li>a:hover {
@@ -1579,7 +1580,9 @@ input[type=submit].btn-block {
     border: 1px solid #ddd;
     border-bottom-color: transparent
 }
-
+.nav-pills {
+    width: 100%;
+}
 .nav-pills>li {
     float: left
 }
@@ -8804,7 +8807,8 @@ fieldset:disabled .btn {
 .btn-group-vertical {
     position: relative;
     display: inline-flex;
-    vertical-align: middle
+    vertical-align: middle;
+    padding: var(--radius);
 }
 
 .btn-group-vertical>.btn,
@@ -16123,6 +16127,8 @@ fieldset:disabled .btn {
     border: .2rem solid var(--bs-pre);
     background: rgba(var(--bs-primary-hover),0.1);
     background-color: rgba(var(--bs-primary-hover),0.1);
+    margin-right: auto;
+    margin-left: auto;
   }
   .navbar-right .nav-item{
     padding: var(--radius);
@@ -16238,35 +16244,35 @@ fieldset:disabled .btn {
 
 @media (min-width:576px) {
 
-    .main-content{
+    .main-content,.main-header{
         max-width: 540px
     }
 }
 
 @media (min-width:768px) {
 
-    .main-content{
+    .main-content,.main-header{
         max-width: 720px
     }
 }
 
 @media (min-width:992px) {
 
-    .main-content{
+    .main-content,.main-header{
         max-width: 960px
     }
 }
 
 @media (min-width:1200px) {
 
-    .main-content {
+    .main-content,.main-header{
         max-width: 1140px
     }
 }
 
 @media (min-width:1400px) {
 
-    .main-content {
+    .main-content,.main-header{
         max-width: 1320px
     }
 }

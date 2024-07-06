@@ -1,14 +1,5 @@
 <!--{template common/header_simple_start}-->
 <script src="admin/scripts/admin.js?{VERHASH}"></script>
-<style>
-	.progress.active .progress-bar {
-		-webkit-animation: none;
-		animation: none;
-		transition: none;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-	}
-</style>
 <!--{template common/header_simple_end}-->
 <!--{template common/commer_header}-->
 <div class="bs-container clearfix">
@@ -16,18 +7,19 @@
 		<!--{template left}-->
 	</div>
 	<div class="left-drager">
-		
-	</div>
-
+		<div class="left-drager-op">
+		  <div class="left-drager-sub"></div>
+		</div>
+	  </div>
 	<div class="bs-main-container  clearfix">
 		<!--{if $operation == 'patch' || $operation == 'cross'}-->		
 		<div class="main-header clearfix">
-				<strong style="font-size:14px;">{lang upgrade}</strong>
-				<!--{loop $steplang $key $value}-->
-				<!--{if $key>0 && $key<=5}-->
-				<span class="text-muted" <!--{if $key==$step}-->style="color:green"<!--{/if}-->>{$key}.{$value}</span>
-				<!--{/if}-->
-				<!--{/loop}-->
+			<strong style="font-size:14px;">{lang upgrade}</strong>
+			<!--{loop $steplang $key $value}-->
+			<!--{if $key>0 && $key<=5}-->
+			<span class="text-muted" <!--{if $key==$step}-->style="color:green"<!--{/if}-->>{$key}.{$value}</span>
+			<!--{/if}-->
+			<!--{/loop}-->
 		</div>
 		<!--{/if}-->
 		<!--{if $operation=='check'}-->
@@ -83,7 +75,6 @@
 			<!--{/if}-->
 		</div>
 		<!--{elseif $operation=='patch' || $operation=='cross' }-->
-
 		<div class="main-content">
 			<!--{if !$_G['setting']['bbclosed']}-->
 			<div style="padding:20px;height:450px">
@@ -225,9 +216,7 @@
 			</div>
 			<!--{/if}-->
 		</div>
-
 		<!--{/if}-->
-
 	</div>
 </div>
 <script type="text/javascript">

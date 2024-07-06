@@ -50,116 +50,115 @@
 				<!--{/if}-->
 			</ul>
 		</div>
-    <form class="row gx-3 gy-2 align-items-center" action="{MOD_URL}" method="get">
-			<input type="hidden" name="mod" value="{MOD_NAME}">
-      <input type="hidden" name="op" value="verify">
-      <input type="hidden" name="vid" value="$vid">
-      <input type="hidden" name="anchor" value="$anchor">
-      <div class="col-sm-3">
-        <label class="visually-hidden" for="username">{lang user_name}*</label>
-        <input type="text" class="form-control" id="username" name="username" value="$_GET[username]" placeholder="{lang user_name}*">
-    </div>
-      <div class="col-sm-3">
-        <label class="visually-hidden" for="uid">UID：</label>
-        <input type="text" class="form-control" id="uid" name="uid" value="$_GET[uid]"  placeholder="UID">
-      </div>
-      <!--{if $anchor!='pass'}-->
-			<div class="mb-3">
-        <div class="input-group" data-provide="datepicker">
-          <span class="input-group-text">从</span>
-          <input type="text" class="form-control" id="dateline1" name="dateline1" placeholder="{lang members_verify_dateline}" value="$_GET[dateline1]">
-          <span class="input-group-text">至</span>
-          <input type="text" class="form-control" id="dateline2" name="dateline2" placeholder="{lang members_verify_dateline}" value="$_GET[dateline2]">
-        </div>
-      </div>
-			<!--{/if}-->
-      <div class="col-sm-3">
-        <label class="visually-hidden">{lang result_ranking}</label>
-        <select class="form-select" name="orderby">
-          <!--{if $anchor!='pass'}-->
-          <option value="dateline">{lang members_verify_dateline}</option>
-          <!--{else}-->
-          <option value="uid">UID</option>
-          <!--{/if}-->
-        </select>
-      </div>
-			<div class="col-sm-3">
-        <select name="ordersc" class="form-select">
-          <option value="desc" <!--{if $_GET[ordersc]=='desc' }-->selected="selected"<!--{/if}-->>{lang pass_subtract}</option>
-          <option value="asc" <!--{if $_GET[ordersc]=='asc' }-->selected="selected"<!--{/if}-->>{lang pass_add}</option>
-        </select>
-      </div>
-      <div class="col-sm-3">
-        <select name="perpage" class="form-select">
-          <option value="10" <!--{if $_GET[perpage]=='10' }-->selected="selected"<!--{/if}-->>{lang logs_lpp}10{lang individual}</option>
-          <option value="20" <!--{if $_GET[perpage]=='20' }-->selected="selected"<!--{/if}-->>{lang logs_lpp}20{lang individual}</option>
-          <option value="50" <!--{if $_GET[perpage]=='50' }-->selected="selected"<!--{/if}-->>{lang logs_lpp}50{lang individual}</option>
-          <option value="100" <!--{if $_GET[perpage]=='100' }-->selected="selected"<!--{/if}-->>{lang logs_lpp}100{lang individual}</option>
-        </select>
-      </div>
-      <div class="col-auto">
-        <button type="submit" name="searchsubmit" value="{lang search}" class="btn btn-primary">{lang search}</button>
-        <span class="help-block">&nbsp;&nbsp;&nbsp;*{lang fuzzy_search}</span>
-      </div>
-    </form>
 		<div class="main-content">
-			<iframe id="frame_profile" name="frame_profile" style="display: none"></iframe>
+		<form class="row gx-3 gy-2 align-items-center" action="{MOD_URL}" method="get">
+			<input type="hidden" name="mod" value="{MOD_NAME}">
+			<input type="hidden" name="op" value="verify">
+			<input type="hidden" name="vid" value="$vid">
+			<input type="hidden" name="anchor" value="$anchor">
+			<div class="col-sm-3">
+				<label class="visually-hidden" for="username">{lang user_name}*</label>
+				<input type="text" class="form-control" id="username" name="username" value="$_GET[username]" placeholder="{lang user_name}*">
+			</div>
+		<div class="col-sm-3">
+			<label class="visually-hidden" for="uid">UID：</label>
+			<input type="text" class="form-control" id="uid" name="uid" value="$_GET[uid]"  placeholder="UID">
+		</div>
+		<!--{if $anchor!='pass'}-->
+		<div class="col-sm-6">
+			<div class="input-group" data-provide="datepicker">
+			<span class="input-group-text">从</span>
+			<input type="text" class="form-control" id="dateline1" name="dateline1" placeholder="{lang members_verify_dateline}" value="$_GET[dateline1]">
+			<span class="input-group-text">至</span>
+			<input type="text" class="form-control" id="dateline2" name="dateline2" placeholder="{lang members_verify_dateline}" value="$_GET[dateline2]">
+			</div>
+		</div>
+		<!--{/if}-->
+		<div class="col-sm-3">
+			<label class="visually-hidden">{lang result_ranking}</label>
+			<select class="form-select" name="orderby">
+			<!--{if $anchor!='pass'}-->
+			<option value="dateline">{lang members_verify_dateline}</option>
+			<!--{else}-->
+			<option value="uid">UID</option>
+			<!--{/if}-->
+			</select>
+		</div>
+		<div class="col-sm-3">
+			<select name="ordersc" class="form-select">
+			<option value="desc" <!--{if $_GET[ordersc]=='desc' }-->selected="selected"<!--{/if}-->>{lang pass_subtract}</option>
+			<option value="asc" <!--{if $_GET[ordersc]=='asc' }-->selected="selected"<!--{/if}-->>{lang pass_add}</option>
+			</select>
+		</div>
+		<div class="col-sm-3">
+			<select name="perpage" class="form-select">
+			<option value="10" <!--{if $_GET[perpage]=='10' }-->selected="selected"<!--{/if}-->>{lang logs_lpp}10{lang individual}</option>
+			<option value="20" <!--{if $_GET[perpage]=='20' }-->selected="selected"<!--{/if}-->>{lang logs_lpp}20{lang individual}</option>
+			<option value="50" <!--{if $_GET[perpage]=='50' }-->selected="selected"<!--{/if}-->>{lang logs_lpp}50{lang individual}</option>
+			<option value="100" <!--{if $_GET[perpage]=='100' }-->selected="selected"<!--{/if}-->>{lang logs_lpp}100{lang individual}</option>
+			</select>
+		</div>
+		<dl>
+			<button type="submit" name="searchsubmit" value="{lang search}" class="btn btn-primary">{lang search}</button>
+			<span class="help-block">&nbsp;&nbsp;&nbsp;*{lang fuzzy_search}</span>
+		</dl>
+		</form>
+		<iframe id="frame_profile" name="frame_profile" style="display: none"></iframe>
+		<form id="cpform" action="{MOD_URL}&op=verify&" class="form-horizontal" method="post" name="cpform">
+			<input type="hidden" value="{FORMHASH}" name="formhash">
+			<input type="hidden" value="true" name="verifysubmit">
+			<input type="hidden" value="$vid" name="vid">
+			<input type="hidden" name="anchor" value="$anchor">
+			<table class="table table-hover">
+				<!--{if $anchor!='pass'}-->
+				<thead>
+					<th width="90" style="text-align:center">{lang username}</th>
+					<th width="120">{lang members_verify_dateline}</th>
+					<th>{lang members_verify_info}</th>
+				</thead>
+				<!--{loop $list  $value}-->
+				<tr id="mod_{$value[vid]}_row" verifyid="{$value[vid]}" class="hover">
+					<td width="90" align="center">$value[username]</td>
+					<td width="120">$value[dateline]</td>
+					<td>$value[fieldstr]</td>
+				</tr>
+				<!--{/loop}-->
+				<thead>
+					<td colspan="15">
 
-			<form id="cpform" action="{MOD_URL}&op=verify&" class="form-horizontal" method="post" name="cpform">
-				<input type="hidden" value="{FORMHASH}" name="formhash">
-				<input type="hidden" value="true" name="verifysubmit">
-				<input type="hidden" value="$vid" name="vid">
-				<input type="hidden" name="anchor" value="$anchor">
-				<table class="table table-hover">
-					<!--{if $anchor!='pass'}-->
-					<thead>
-						<th width="90" style="text-align:center">{lang username}</th>
-						<th width="120">{lang members_verify_dateline}</th>
-						<th>{lang members_verify_info}</th>
-					</thead>
-					<!--{loop $list  $value}-->
-					<tr id="mod_{$value[vid]}_row" verifyid="{$value[vid]}" class="hover">
-						<td width="90" align="center">$value[username]</td>
-						<td width="120">$value[dateline]</td>
-						<td>$value[fieldstr]</td>
-					</tr>
-					<!--{/loop}-->
-					<thead>
-						<td colspan="15">
+						<input type="submit" class="btn btn-primary" id="submit_batchverifysubmit" name="batchverifysubmit" title="" value="{lang submit}"> &nbsp;
+						<a href="javascript:;" class="btn btn-primary" onclick="mod_setbg_all('validate')">{lang all_validate}</a> &nbsp;
+						<a class="btn btn-primary" href="javascript:;" onclick="mod_setbg_all('refusal')">{lang select_all_refuse}</a> &nbsp;
+						<a class="btn btn-primary" href="javascript:;" onclick="mod_cancel_all();">{lang cancel_select}</a>
+						$multi
+					</td>
+				</thead>
+				<!--{else}-->
+				<thead>
+					<th width="80"></th>
+					<th width="90" style="text-align:center">{lang username}</th>
 
-							<input type="submit" class="btn btn-primary" id="submit_batchverifysubmit" name="batchverifysubmit" title="" value="{lang submit}"> &nbsp;
-							<a href="javascript:;" class="btn btn-primary" onclick="mod_setbg_all('validate')">{lang all_validate}</a> &nbsp;
-							<a class="btn btn-primary" href="javascript:;" onclick="mod_setbg_all('refusal')">{lang select_all_refuse}</a> &nbsp;
-							<a class="btn btn-primary" href="javascript:;" onclick="mod_cancel_all();">{lang cancel_select}</a>
-							$multi
-						</td>
-					</thead>
-					<!--{else}-->
-					<thead>
-						<th width="80"></th>
-						<th width="90" style="text-align:center">{lang username}</th>
-
-						<th>{lang members_verify_info}</th>
-					</thead>
-					<!--{loop $list  $value}-->
-					<tr id="mod_{$value[uid]}_row" verifyid="{$value[uid]}" class="hover">
-						<td width="80">$value[opstr]</td>
-						<td width="90" align="center">$value[username]</td>
-						<td>$value[fieldstr]</td>
-					</tr>
-					<!--{/loop}-->
-					<thead>
-						<td colspan="15">
-							<input type="submit" class="btn btn-primary" id="submit_batchverifysubmit" name="batchverifysubmit" title="" value="{lang submit}"> &nbsp;
-							<a href="javascript:;" class="btn btn-primary" onclick="mod_setbg_all('export')">{lang select_all_export}</a> &nbsp;
-							<a class="btn btn-primary" href="javascript:;" onclick="mod_setbg_all('refusal')">{lang select_all_refuse}</a> &nbsp;
-							<a class="btn btn-primary" href="{MOD_URL}&op=verify&vid=$vid&anchor=pass&verifysubmit=yes">{lang all_export}</a>
-							$multi
-						</td>
-					</thead>
-					<!--{/if}-->
-				</table>
-			</form>
+					<th>{lang members_verify_info}</th>
+				</thead>
+				<!--{loop $list  $value}-->
+				<tr id="mod_{$value[uid]}_row" verifyid="{$value[uid]}" class="hover">
+					<td width="80">$value[opstr]</td>
+					<td width="90" align="center">$value[username]</td>
+					<td>$value[fieldstr]</td>
+				</tr>
+				<!--{/loop}-->
+				<thead>
+					<td colspan="15">
+						<input type="submit" class="btn btn-primary" id="submit_batchverifysubmit" name="batchverifysubmit" title="" value="{lang submit}"> &nbsp;
+						<a href="javascript:;" class="btn btn-primary" onclick="mod_setbg_all('export')">{lang select_all_export}</a> &nbsp;
+						<a class="btn btn-primary" href="javascript:;" onclick="mod_setbg_all('refusal')">{lang select_all_refuse}</a> &nbsp;
+						<a class="btn btn-primary" href="{MOD_URL}&op=verify&vid=$vid&anchor=pass&verifysubmit=yes">{lang all_export}</a>
+						$multi
+					</td>
+				</thead>
+				<!--{/if}-->
+			</table>
+		</form>
 		</div>
 	</div>
 </div>

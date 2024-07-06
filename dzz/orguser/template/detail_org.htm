@@ -19,12 +19,16 @@
 
 </style>
 <div class="main-header clearfix">
-	<ul class="nav nav-pills">
-		<strong class="pull-left" id="title_orgname">$org['orgname']</strong>
-		<!--{if $_G['adminid']==1}-->
-		<a href="{MOD_URL}&op=export&orgid=$orgid" class="btn btn-outline-primary pull-right" title="{lang export_excl}" target="_blank">{lang export_user}</a>
-		<!--{/if}-->
-  </ul>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <strong class="pull-left" id="title_orgname">$org['orgname']</strong>
+        <div class="collapse navbar-collapse">
+          <!--{if $_G['adminid']==1}-->
+          <a href="{MOD_URL}&op=export&orgid=$orgid" class="btn btn-outline-primary pull-right" title="{lang export_excl}" target="_blank">{lang export_user}</a> 
+          <!--{/if}-->
+      </div>
+    </div>
+  </nav>
 </div>
 <div class="main-content">
       <div class="col-md-12">
