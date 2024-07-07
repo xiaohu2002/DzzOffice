@@ -41,7 +41,7 @@
             <td><input type="text" class="form-control " name="namenew[{$value[typeid]}]" value="$value[name]" /></td>
             <td valign="middle">./static/image/smiley/{$value[directory]}</td>
             <td>$value[smiliesnum] <input type="hidden" name="smiliesnum[{$value[typeid]}]" value="$value[smiliesnum]" /></td>
-            <td valign="middle"><a href="{MOD_URL}&op=smiley&operation=update&id=$value[typeid]" class="" onclick="return confirm('{lang seeting_smiley_search}')">{lang update}</a>&nbsp;&nbsp; <a href="{MOD_URL}&op=smiley&operation=edit&id=$value[typeid]" class="">{lang detailedness}</a></td>
+            <td valign="middle"><a href="{MOD_URL}&op=smiley&operation=update&id=$value[typeid]" class="btn btn-outline-primary" onclick="return confirm('{lang seeting_smiley_search}')">{lang update}</a>&nbsp;&nbsp; <a href="{MOD_URL}&op=smiley&operation=edit&id=$value[typeid]" class="btn btn-outline-success">{lang detailedness}</a></td>
           </tr>
           <!--{/loop}--> 
           <!--{if $list_no}--> 

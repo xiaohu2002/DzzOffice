@@ -721,8 +721,8 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 }
 .sllt { padding: 5px !important; }
 .sllt .sllt-wrap{
-	width:288px;
-	height:188px;
+	width:100%;
+	height:100%;
 }
 .sllt td { padding: 6px; border: none; cursor: pointer; }
 .sllt_p { *float: left; text-align: right; }

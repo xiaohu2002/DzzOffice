@@ -49,7 +49,7 @@ function smilies_onload(id, smcols, seditorkey) {
 			key = i.substring(1);
 			if(smilies_type[i][0]) {
 				k++;
-				smiliestype += '<li class="nav-item" id="'+seditorkey+'stype_'+key+'" onclick="smilies_switch(\'' + id + '\', \'' + smcols + '\', '+key+', 1, \'' + seditorkey + '\');if(CURRENTSTYPE) {document.getElementById(\''+seditorkey+'stype_\'+CURRENTSTYPE).className=\'\';}this.className=\'active\';CURRENTSTYPE='+key+';doane(event);" ><a class="nav-link ' + (CURRENTSTYPE == key ? 'active"' : '') + ' href="javascript:;" hidefocus="true">'+smilies_type[i][0]+'</a></>';
+				smiliestype += '<li class="nav-item"><a class="' + (CURRENTSTYPE == key ? 'active"' : '') + '" id="'+seditorkey+'stype_'+key+'" onclick="smilies_switch(\'' + id + '\', \'' + smcols + '\', '+key+', 1, \'' + seditorkey + '\');if(CURRENTSTYPE) {document.getElementById(\''+seditorkey+'stype_\'+CURRENTSTYPE).className=\'\';}this.className=\'nav-link active\';CURRENTSTYPE='+key+';doane(event);" href="javascript:;" hidefocus="true">'+smilies_type[i][0]+'</a></>';
 			}
 		}
 		smiliestype += '</ul></div>';

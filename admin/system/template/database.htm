@@ -111,9 +111,9 @@
 	  </div>
         <!--{/if}-->
         <!--{if $redirecturl}-->
-        <p class="text-info">
-          <a href="{$redirecturl}" class="lightlink">{lang message_redirect}</a>
-        </p>
+		<dl>
+			<a href="{$redirecturl}" class="btn btn-primary">{lang message_redirect}</a>
+		</dl>
         <script type="text/JavaScript">setTimeout(function(){location.href='{$redirecturl}';}, 2000);</script>
         <!--{/if}-->
       </div>
@@ -125,9 +125,9 @@
 					<span class="no-result-title $msg_type">$msg</span>
 				  </div>
 				<!--{if $redirecturl}-->
-				<p class="text-info">
-					<a href="{$redirecturl}" class="lightlink">{lang message_redirect}</a>
-				</p>
+				<dl>
+					<a href="{$redirecturl}" class="btn btn-primary">{lang message_redirect}</a>
+				</dl>
 				<script type="text/JavaScript">setTimeout(function(){location.href='{$redirecturl}';}, 2000);</script>
 				<!--{/if}-->
 			</div>
@@ -169,9 +169,9 @@
 						<td>$val[volume]</td>
 						<td>
 							<!--{if $val['list']}-->
-							<a href="{$datasiteurl}restore.php?operation=import&from=server&datafile_server=$val[datafile_server]&importsubmit=yes" <!--{if $info[ 'version'] !=$_G[ 'setting'][ 'version']}--> onclick="return confirm('{lang db_import_confirm}');"<!--{else}-->onclick="return confirm('{lang db_import_confirm_sql}');"<!--{/if}-->target="_blank">{lang import}</a>
+							<a href="{$datasiteurl}restore.php?operation=import&from=server&datafile_server=$val[datafile_server]&importsubmit=yes" class="btn btn-outline-primary" <!--{if $info[ 'version'] !=$_G[ 'setting'][ 'version']}--> onclick="return confirm('{lang db_import_confirm}');"<!--{else}-->onclick="return confirm('{lang db_import_confirm_sql}');"<!--{/if}-->target="_blank">{lang import}</a>
 							<!--{else}-->
-							<a href="{$datasiteurl}restore.php?operation=importzip&datafile_server=$info[datafile_server]&importsubmit=yes" onclick="return confirm('{lang db_import_confirm_zip}');" target="_blank">{lang db_import_unzip}</a>
+							<a href="{$datasiteurl}restore.php?operation=importzip&datafile_server=$info[datafile_server]&importsubmit=yes" class="btn btn-outline-primary" onclick="return confirm('{lang db_import_confirm_zip}');" target="_blank">{lang db_import_unzip}</a>
 							<!--{/if}-->
 						</td>
 					</tr>
@@ -213,9 +213,9 @@
 					<span class="no-result-title $msg_type">$msg</span>
 				  </div>
 				<!--{if $redirecturl}-->
-				<p class="text-info">
-					<a href="{$redirecturl}" class="lightlink">{lang message_redirect}</a>
-				</p>
+				<dl>
+					<a href="{$redirecturl}" class="btn btn-primary">{lang message_redirect}</a>
+				</dl>
 				<script type="text/JavaScript">setTimeout(function(){location.href='{$redirecturl}';}, 5000);</script>
 				<!--{/if}-->
 			</div>

@@ -37,9 +37,9 @@
 			<div class="well">
 				<p class="$msg_type">$msg</p>
 				<!--{if $redirecturl}-->
-				<p class="text-info">
-					<a href="{$redirecturl}" class="lightlink">{lang message_redirect}</a>
-				</p>
+				<dl>
+					<a href="{$redirecturl}" class="btn btn-primary">{lang message_redirect}</a>
+				</dl>
 				<script type="text/JavaScript">setTimeout(function(){location.href='{$redirecturl}';}, 2000);</script>
 				<!--{/if}-->
 			</div>

@@ -9,8 +9,8 @@
 }
 .sllt { padding: 5px !important; }
 .sllt .sllt-wrap{
-	width:288px;
-	height:188px;
+	width:100%;
+	height:100%;
 }
 .sllt td { padding: 6px; border: none; cursor: pointer; }
 .sllt_p { *float: left; text-align: right; }

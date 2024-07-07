@@ -86,100 +86,102 @@
         </ul>
       </form>
     </div>
-    <form id="appform" name="appform" class="form-horizontal " action="{MOD_URL}" method="post" >
-      <input type="hidden" name="delsubmit" value="true" />
-      <input type="hidden" name="formhash" value="{FORMHASH}" />
-			<input type="hidden" name="lpp" value="$lpp">
-      <input type="hidden" name="refer" value="$refer" />
-			<input type="hidden" name="keyword" value="$keyword" /> 
-      <table class="table table-hover">
-        <thead node-type="title" class="title">
-          <tr class="item clearfix">
-            <th>
-              <div class="col-sm-10">
-                <div class="form-check">
-                  <input class="form-check-input" name="del[]" type="checkbox" id="chkall"><label></label>
+    <div class="main-content clearfix">
+      <form id="appform" name="appform" class="form-horizontal " action="{MOD_URL}" method="post" >
+        <input type="hidden" name="delsubmit" value="true" />
+        <input type="hidden" name="formhash" value="{FORMHASH}" />
+        <input type="hidden" name="lpp" value="$lpp">
+        <input type="hidden" name="refer" value="$refer" />
+        <input type="hidden" name="keyword" value="$keyword" /> 
+        <table class="table table-hover">
+          <thead node-type="title" class="title">
+            <tr class="item clearfix">
+              <th>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" name="del[]" type="checkbox" id="chkall"><label></label>
+                  </div>
                 </div>
-              </div>
-            </th>
-            <th node-type="title-col" data-key="name" class="lie col">{lang filename}<span node-type="order-status" class="asc $_GET[name]" style="visibility: <!--{if $_GET[name]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></span></th>
-            <th node-type="title-col" data-key="size" class="lie col">{lang file_size}<span node-type="order-status" class="asc $_GET[size]" style="visibility:<!--{if $_GET[size]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-            <th node-type="title-col" data-key="ftype" class="lie col">{lang file_type}<span node-type="order-status" class="asc $_GET[ftype]" style="visibility: <!--{if $_GET[ftype]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-            <th class="lie">{lang file_location}</th>
-            <!--{if $_G[adminid]}-->
-            <th node-type="title-col" data-key="username" class="lie col">{lang possessor}<span node-type="order-status" class="asc $_GET[username]" style="visibility: <!--{if $_GET[username]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-            <!--{/if}-->
-            <th node-type="title-col" data-key="dateline" class="lie col">{lang add_time} <span node-type="order-status" class="asc $_GET[dateline]" style="visibility: <!--{if $_GET[dateline]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-            <th class="lie">操作</th>
-          </tr>
-        </thead>
-        <tbody node-type="list" class="list list-share">
-          <!--{loop $list $key $value}-->
-          <tr node-type="item" data-dpath="$value[dpath]" data-rid="$value[rid]" <!--{if $value[type] == 'folder' && $value[oid]}--> data-containpath="$value[oid]"<!--{/if}--> data-type="$value[type]" class="item shareblock clearfix">
-            <td data-name="$value[name]" class="col">
-              <div class="col-sm-10">
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input"  name="del[]" value="$value[rid]" data-rid="$value[rid]">
-                </div>
-              </div>
-            </td>
-            <td node-type="name" class="name" title="$value[name]" data-size="$value[name]">
-              <!--{if $value[img]}--><img class="icon" title="$value[name]" src="$value[img]" <!--{if $value[type]=='image' }--> data-original="$value[url]" data-dpath="$value[dpath]" 
-              <!--{/if}-->/> 
-              <!--{/if}--> 
-              <span node-type="name-text" data-href="$value[shareurl]" class="name-text enabled">$value[name]</span>
-            </td>
-            <td><!--{if $value[type]=='folder'}--><!--{else}--><div>$value[fsize]</div><!--{/if}--></td>
-            <td><div>$value[ftype]</div></td>
-            <td><div>$value[relpath]</div></td>
-            <!--{if $_G[adminid]}-->
-            <td><div>$value[username]</div></td>
-            <!--{/if}-->
-            <td><div>$value[fdateline]</div></td>
-            <td>
-              <div>
-                <a node-type="btn-item" data-key="download" class="btn btn-outline-info" title="下载" href="javascript:void(0);"><i class="dzz dzz-download"></i></a>
-                <a class="btn btn-outline-info" href="{MOD_URL}&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" data-bs-toggle="tooltip" title="{lang delete}" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="dzz dzz-delete"></i></a>
-                <!--{if $_G[adminid]}--><!--{if $value[type]=='folder'}--><!--{else}-->
-                <a class="btn btn-outline-info" href="javascript:;" onclick="togglecplog('{$key}')" data-bs-toggle="tooltip" title="更多信息"><i class="dzz dzz-description"></i></a>
-                <!--{/if}--><!--{/if}-->
-              </div>
-            </td>
-          <!--{if $value[type]=='folder'}--><!--{else}-->
-          <tr id="cplog_{$key}" style="display:none">
-            <td colspan="8">
+              </th>
+              <th node-type="title-col" data-key="name" class="lie col">{lang filename}<span node-type="order-status" class="asc $_GET[name]" style="visibility: <!--{if $_GET[name]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></span></th>
+              <th node-type="title-col" data-key="size" class="lie col">{lang file_size}<span node-type="order-status" class="asc $_GET[size]" style="visibility:<!--{if $_GET[size]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
+              <th node-type="title-col" data-key="ftype" class="lie col">{lang file_type}<span node-type="order-status" class="asc $_GET[ftype]" style="visibility: <!--{if $_GET[ftype]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
+              <th class="lie">{lang file_location}</th>
               <!--{if $_G[adminid]}-->
+              <th node-type="title-col" data-key="username" class="lie col">{lang possessor}<span node-type="order-status" class="asc $_GET[username]" style="visibility: <!--{if $_GET[username]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
+              <!--{/if}-->
+              <th node-type="title-col" data-key="dateline" class="lie col">{lang add_time} <span node-type="order-status" class="asc $_GET[dateline]" style="visibility: <!--{if $_GET[dateline]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
+              <th class="lie">操作</th>
+            </tr>
+          </thead>
+          <tbody node-type="list" class="list list-share">
+            <!--{loop $list $key $value}-->
+            <tr node-type="item" data-dpath="$value[dpath]" data-rid="$value[rid]" <!--{if $value[type] == 'folder' && $value[oid]}--> data-containpath="$value[oid]"<!--{/if}--> data-type="$value[type]" class="item shareblock clearfix">
+              <td data-name="$value[name]" class="col">
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input"  name="del[]" value="$value[rid]" data-rid="$value[rid]">
+                  </div>
+                </div>
+              </td>
+              <td node-type="name" class="name" title="$value[name]" data-size="$value[name]">
+                <!--{if $value[img]}--><img class="icon" title="$value[name]" src="$value[img]" <!--{if $value[type]=='image' }--> data-original="$value[url]" data-dpath="$value[dpath]" 
+                <!--{/if}-->/> 
+                <!--{/if}--> 
+                <span node-type="name-text" data-href="$value[shareurl]" class="name-text enabled">$value[name]</span>
+              </td>
+              <td><!--{if $value[type]=='folder'}--><!--{else}--><div>$value[fsize]</div><!--{/if}--></td>
+              <td><div>$value[ftype]</div></td>
+              <td><div>$value[relpath]</div></td>
+              <!--{if $_G[adminid]}-->
+              <td><div>$value[username]</div></td>
+              <!--{/if}-->
+              <td><div>$value[fdateline]</div></td>
+              <td>
+                <div>
+                  <a node-type="btn-item" data-key="download" class="btn btn-outline-info" title="下载" href="javascript:void(0);"><i class="dzz dzz-download"></i></a>
+                  <a class="btn btn-outline-info" href="{MOD_URL}&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" data-bs-toggle="tooltip" title="{lang delete}" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="dzz dzz-delete"></i></a>
+                  <!--{if $_G[adminid]}--><!--{if $value[type]=='folder'}--><!--{else}-->
+                  <a class="btn btn-outline-info" href="javascript:;" onclick="togglecplog('{$key}')" data-bs-toggle="tooltip" title="更多信息"><i class="dzz dzz-description"></i></a>
+                  <!--{/if}--><!--{/if}-->
+                </div>
+              </td>
             <!--{if $value[type]=='folder'}--><!--{else}-->
-                文件位置：<!--{eval echo IO::getStream($value[path])}-->
-              <br/>
-                直链地址：<a href="<!--{eval echo IO::getFileUri($value[path])}-->"><!--{eval echo IO::getFileUri($value[path])}--></a>
-              <br/>
-                引用：$value[copys]
-              <br/>
-              是否在回收站：<!--{if $value[isdelete]}-->是<!--{else}-->否<!--{/if}-->
+            <tr id="cplog_{$key}" style="display:none">
+              <td colspan="8">
+                <!--{if $_G[adminid]}-->
+              <!--{if $value[type]=='folder'}--><!--{else}-->
+                  文件位置：<!--{eval echo IO::getStream($value[path])}-->
+                <br/>
+                  直链地址：<a href="<!--{eval echo IO::getFileUri($value[path])}-->"><!--{eval echo IO::getFileUri($value[path])}--></a>
+                <br/>
+                  引用：$value[copys]
+                <br/>
+                是否在回收站：<!--{if $value[isdelete]}-->是<!--{else}-->否<!--{/if}-->
+              <!--{/if}-->
+              <!--{/if}--></td>
+            </tr>
             <!--{/if}-->
-            <!--{/if}--></td>
-          </tr>
-          <!--{/if}-->
-          </tr>
-          <!--{/loop}--> 
-        </tbody>
-      </table>
-      <div class="pull-left">
-        <div class="input-group mb-3">
-          <span class="input-group-text">每页显示</span>
-          <select class="form-select" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
-            <option value="10" $checklpp[10]> 10 </option>
-            <option value="20" $checklpp[20]> 20 </option>
-            <option value="40" $checklpp[40]> 40 </option>
-            <option value="100" $checklpp[100]> 100 </option>
-						<option value="200" $checklpp[200]> 200 </option>
-          </select>
-          <span class="input-group-text">条记录</span>
+            </tr>
+            <!--{/loop}--> 
+          </tbody>
+        </table>
+        <div class="pull-left">
+          <div class="input-group mb-3">
+            <span class="input-group-text">每页显示</span>
+            <select class="form-select" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
+              <option value="10" $checklpp[10]> 10 </option>
+              <option value="20" $checklpp[20]> 20 </option>
+              <option value="40" $checklpp[40]> 40 </option>
+              <option value="100" $checklpp[100]> 100 </option>
+              <option value="200" $checklpp[200]> 200 </option>
+            </select>
+            <span class="input-group-text">条记录</span>
+          </div>
         </div>
-      </div>
-      $multi
-    </form>
+        $multi
+      </form>
+    </div>
   </div>
 	<!--{/if}-->
   </div>
