@@ -1,19 +1,18 @@
-ul,ul li,li{
-	list-style: none;
+.main-content {
 	padding: 0;
-	margin: 0;
-}
-a{
-	text-decoration: none;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 .main-content-ul{
-	overflow: hidden;
 	display: flex;
-  vertical-align: middle;
-  text-align: center;
-  flex-wrap: wrap;
-  align-content: space-around;
-  justify-content: space-around;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 .main-content-ul .main-content-li{
 	float: left;

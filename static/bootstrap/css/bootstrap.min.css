@@ -16243,36 +16243,37 @@ fieldset:disabled .btn {
 }
 
 @media (min-width:576px) {
-
     .main-content,.main-header{
         max-width: 540px
     }
 }
 
 @media (min-width:768px) {
-
     .main-content,.main-header{
         max-width: 720px
     }
 }
 
 @media (min-width:992px) {
-
     .main-content,.main-header{
         max-width: 960px
     }
 }
 
 @media (min-width:1200px) {
-
     .main-content,.main-header{
         max-width: 1140px
     }
 }
 
 @media (min-width:1400px) {
-
     .main-content,.main-header{
         max-width: 1320px
+    }
+}
+
+@media (min-width:1500px) {
+    .main-content,.main-header{
+        max-width: 100%
     }
 }

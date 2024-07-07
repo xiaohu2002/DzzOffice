@@ -24,25 +24,26 @@
     </div>
   </div>
   <div class="bs-main-container">
-		<!--{if !$list}-->
-		<div style="text-align: center;">
-			<img src="static/image/common/no_list.png" /><br>
-			<span class="no-result-title">{lang no_relevant_content}</span>
-		  </div>
-		<!--{else}-->
-		<div class="main-header clearfix">
-			<form name="search" class="form-horizontal" action="{MOD_URL}" method="get">
-        <input type="hidden" name="mod" value="{MOD_NAME}" />
-        <ul class="nav nav-pills">
-          <li class="pull-left btn-secetlt" style="display: none;">
-            <button  class="btn btn-danger " type="submit" value="{lang delete}" onclick="delete_file();">{lang delete}</button>
-          </li>
-					<li class="pull-left btn-secetlt" style="display: none;">
-            <button  class="btn btn-primary col sharepame-selected" disabled>已选择<span class="ex-number"></span>项</button>
-          </li>
-        </ul>
-      </form>
-    </div>
+	<!--{if !$list}-->
+	<div style="text-align: center;">
+		<img src="static/image/common/no_list.png" /><br>
+		<span class="no-result-title">{lang no_relevant_content}</span>
+	</div>
+	<!--{else}-->
+	<div class="main-header clearfix">
+		<form name="search" class="form-horizontal" action="{MOD_URL}" method="get">
+			<input type="hidden" name="mod" value="{MOD_NAME}" />
+			<ul class="nav nav-pills">
+			<li class="pull-left btn-secetlt" style="display: none;">
+				<button  class="btn btn-danger " type="submit" value="{lang delete}" onclick="delete_file();">{lang delete}</button>
+			</li>
+			<li class="pull-left btn-secetlt" style="display: none;">
+				<button  class="btn btn-primary col sharepame-selected" disabled>已选择<span class="ex-number"></span>项</button>
+			</li>
+			</ul>
+		</form>
+	</div>
+	<div class="main-content clearfix">
       <form id="appform" name="appform" class="form-horizontal " action="{MOD_URL}" method="post" >
 				<input type="hidden" name="lpp" value="$lpp">
         <input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -107,7 +108,8 @@
           </div>
         </div>
       </form>
-    $multi
+		$multi
+	</div>
 	<!--{/if}-->
   </div>
 </div>

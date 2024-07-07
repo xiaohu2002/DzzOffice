@@ -2,14 +2,14 @@
 	<a name="comment_anchor_$value1[cid]"></a>
 	<div class="item_cfed">
 		<div class="left_icfed">
-			<a href="user.php?uid=$value1[authorid]" title="" hidefocus="true"> {eval echo avatar_block($value[authorid]);} </a>
+			<a href="user.php?uid=$value1[authorid]" title="" hidefocus="true"> {eval echo avatar_block($value1[authorid]);} </a>
 		</div>
 		<div class="right_icfed">
 			<a href="user.php?uid=$value1[authorid]" title="" class="avatar_mcfed skip_cmfed" hidefocus="true">$value1[author]</a>
 				<!--{if $value1['rpost']}-->
 				<span class="amal_fed">对</span>
 				<a href="user.php?uid=$value1[rpost][authorid]" title="" class="avatar_mcfed skip_cmfed" hidefocus="true" target="_blank">$value1[rpost][author]</a>
-				<!--{/if}--><span class="source_fed">说：</span>
+				<!--{/if}--><span class="text-muted">{lang reply} $value[dateline]</span>
 			<div class="card master_cfed">
 				<span>$value1[message]</span>
 			</div>
@@ -99,7 +99,7 @@
 						</li>
 					</ul>
 				</div>
-				<span class="time_acfed">$value1[dateline] $value1[xtllq] <!--{if $_G[adminid]==1}-->$value1[ip]<!--{/if}--></span> </div>
+				<span class="time_acfed">$value1[xtllq] <!--{if $_G[adminid]==1}-->$value1[ip]<!--{/if}--></span> </div>
 		</div>
 	</div>
 </div>

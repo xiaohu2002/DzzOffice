@@ -87,9 +87,9 @@
 			</div>
 		</div>
 		<div class="row mb-3">
-      <label class="col-sm-2">{lang vote_choose1}</label>
-      <div class="col-sm-10">
-        <select id="dzzvote_maxselect_num_$vote[voteid]" name="vote[maxselectnum]" class="form-control">
+     		<label class="col-sm-2">{lang vote_choose1}</label>
+			<div class="col-sm-10">
+				<select id="dzzvote_maxselect_num_$vote[voteid]" name="vote[maxselectnum]" class="form-control">
 					<!--{if $vote[voteid] && $vote['items']['type_'.$vote[type]]}-->
 					<!--{loop $vote['items']['type_'.$vote[type]] $key $value}-->
 					{eval $i=$key+1};
@@ -102,13 +102,13 @@
 					<option value="3">{lang most_can_choose} 3 {lang item}</option>
 					<!--{/if}-->
 				</select>
-        <div style="clear:both"></div>
-      </div>
-    </div>
+			<div style="clear:both"></div>
+			</div>
+		</div>
     <div class="row mb-3">
       <label class="col-sm-2">{lang deadline}</label>
       <div class="col-sm-10">
-				<div class="input-group">
+		<div class="input-group">
           <select class="form-control col-xs-10" onchange="if(this.value){jQuery('#dzzvote_endtime_$vote[voteid]').datepicker('setDate',this.value)}else{jQuery('#dzzvote_endtime_$vote[voteid]').val('')}">
             <option value="" selected="">{lang unlimited}</option>
             <option value="now" <!--{if $vote[endtime]}-->selected="selected"<!--{/if}-->>{lang custom}
@@ -295,12 +295,12 @@
 	<div class="dzzvote-body" id="vote_text_$vote[voteid]">
 		<!--{if $vote[type]==1}-->
 		<!--{loop $vote['items']['type_1'] $value}-->
-			<div class="row mb-3">
-        <label class="col-sm-2">$value[content]</label>
-        <div class="progress">
-          <div class="progress-bar  progress-bar-success" role="progressbar" aria-valuenow="{eval echo floor(($value[number]/$votetotal)*100);}" aria-valuemin="0" aria-valuemax="100" style="width: {eval echo floor(($value[number]/$votetotal)*100);}%;min-width: 20px;"> {eval echo floor(($value[number]/$votetotal)*100);}% </div>
-        </div>
-      </div>
+		<dl>
+			<label class="col-sm-2">$value[content]</label>
+			<div class="progress">
+				<div class="progress-bar  progress-bar-success" role="progressbar" aria-valuenow="{eval echo floor(($value[number]/$votetotal)*100);}" aria-valuemin="0" aria-valuemax="100" style="width: {eval echo floor(($value[number]/$votetotal)*100);}%;min-width: 20px;"> {eval echo floor(($value[number]/$votetotal)*100);}% </div>
+			</div>
+		</dl>
 		<!--{/loop}-->
 		<!--{else}-->
 		<div class="dzzvote-image-body clearfix">
@@ -339,14 +339,14 @@
 			<!--{loop $vote['items']['type_1'] $value}-->
 				<!--{if $vote['isvisible']>0}-->
 				<div class="form-check">
-          <input type="checkbox" class="form-check-input" id="item_$value[itemid]"  name="vote[]" value="$value[itemid]">
-          <label class="form-check-label" for="item_$value[itemid]">$value[content]</label>
-        </div>
+					<input type="checkbox" class="form-check-input" id="item_$value[itemid]"  name="vote[]" value="$value[itemid]">
+					<label class="form-check-label" for="item_$value[itemid]">$value[content]</label>
+				</div>
 				<!--{else}-->
 				<div class="form-check">
-          <input type="checkbox" class="form-check-input" id="item_$value[itemid]" name="vote[]" value="$value[itemid]">
-          <label class="form-check-label" for="item_$value[itemid]">$value[content]</label>
-        </div>
+					<input type="checkbox" class="form-check-input" id="item_$value[itemid]" name="vote[]" value="$value[itemid]">
+					<label class="form-check-label" for="item_$value[itemid]">$value[content]</label>
+				</div>
 				<div class="col-sm-4">
 					<div class="progress">
 						<div class="progress-bar  progress-bar-success" role="progressbar" aria-valuenow="{eval echo floor(($value[number]/$votetotal)*100);}" aria-valuemin="0" aria-valuemax="100" style="width: {eval echo floor(($value[number]/$votetotal)*100);}%;min-width: 20px;"> {eval echo floor(($value[number]/$votetotal)*100);}% </div>
@@ -476,12 +476,12 @@
 <div class="dzzvote-body" id="vote_text_$vote[voteid]">
 	<!--{if $vote[type]==1}-->
 	<!--{loop $vote['items']['type_1'] $value}-->
-		<div class="row mb-3">
-      <label for="colFormLabel" class="col-sm-2">$value[content]</label>
+		<dl>
+      		<label for="colFormLabel" class="col-sm-2">$value[content]</label>
 			<div class="progress">
-        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{eval echo floor(($value[number]/$votetotal)*100);}" aria-valuemin="0" aria-valuemax="100" style="width: {eval echo floor(($value[number]/$votetotal)*100);}%;min-width: 20px;"> {eval echo floor(($value[number]/$votetotal)*100);}% </div>
-      </div>
-    </div>
+       			 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{eval echo floor(($value[number]/$votetotal)*100);}" aria-valuemin="0" aria-valuemax="100" style="width: {eval echo floor(($value[number]/$votetotal)*100);}%;min-width: 20px;"> {eval echo floor(($value[number]/$votetotal)*100);}% </div>
+			</div>
+		</dl>
 	<!--{/loop}-->
 	<!--{else}-->
 	<div class="dzzvote-image-body clearfix">

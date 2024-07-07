@@ -6,7 +6,7 @@ var html=''
   	html+='	<div class="left_ifed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true">'+arr['avatar']+'</a> </div>';
   	html+='	<div class="right_ifed">';
     html+=' 	<div class="main_fed">';
-    html+='  		 <div class="source_fed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" class="appuser_sfed">'+arr['author']+'</a><span class="text-muted">'+__lang.talk+'：</span> </div>';
+    html+='  		 <div class="source_fed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" class="appuser_sfed">'+arr['author']+'</a><span class="text-muted">'+__lang.reply+'</span> </div>';
     html+='  		<div class="card master_mfed"><span class="content_mmfed">'+arr['message']+'</span></div>';
 	html+='	   <div class="attachment_fed">';
 for(var i in arr['attachs']){
@@ -75,7 +75,6 @@ for(var i in arr['attachs']){
    html+='         				<li class="reply_bamfed"><a hidefocus="true" href="javascript:void(0);" onclick="getReplyForm(\''+arr['cid']+'\',\'0\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\');">'+__lang.reply+'</a></li>';
    html+='      	 		</ul>';
    html+='     			</div>';
-   html+='    		   '+arr['dateline'];
    html+='  		</div>';
    html+=' 		</div>';
    html+='		<div id="comment_reply_'+arr['cid']+'" class="comment_ifed" ></div>';
@@ -113,7 +112,7 @@ function feed_reply(arr){
      html+='   <div class="item_cfed">';
      html+='     <div class="left_icfed"> <a href="user.php?uid='+arr['authorid']+'" title="" hidefocus="true"> '+arr['avatar']+' </a> </div>';
      html+='     <div class="right_icfed">';
-     html+='     <a href="user.php?uid='+arr['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true">'+arr['author']+'</a><span class="source_fed">说：</span><div class="card master_cfed">';
+     html+='     <a href="user.php?uid='+arr['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true">'+arr['author']+'</a><span class="text-muted">'+' '+__lang.reply+' '+arr['dateline']+'</span><div class="card master_cfed">';
 	 if(arr['rpost']){
 		html+='<span class="amal_fed">对</span>  <a href="user.php?uid='+arr['rpost']['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true" target="_blank">'+arr['rpost']['author']+'</a>'; 
 	 }
@@ -184,7 +183,7 @@ function feed_reply(arr){
      html+='             <li class="reply_bacfed"><a hidefocus="true" href="javascript:void(0);" onclick="getReplyForm(\''+arr['pcid']+'\',\''+arr['cid']+'\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\');">'+__lang.reply+'</a></li>';
      html+='           </ul>';
      html+='         </div>';
-	 html+='       <span class="time_acfed">'+arr['dateline']+'</span> </div>';
+	 html+='       </div>';
      html+='     </div>';
      html+='   </div>';
      html+=' </div>';

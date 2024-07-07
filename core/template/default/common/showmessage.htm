@@ -48,11 +48,10 @@
 				<!--{if $url_forward}-->
         <!--{if !$param[redirectmsg]}-->
           <button class="btn btn-primary" onclick="location.href='$url_forward';return false;" >立即跳转（<span class="num">3</span>s）</button>
-          <button class="btn btn-primary" onclick="location.href='$_G['siteurl']';return false;" >首页</button>
           <!--{else}-->
           <button class="btn btn-primary" onclick="location.href='$url_forward';return false;">{lang return_to_the_naxt_level}（<span class="num">3</span>s）</button>
-          <button class="btn btn-primary" onclick="location.href='$_G['siteurl']';return false;" >首页</button>
         <!--{/if}-->
+        <button class="btn btn-primary" onclick="location.href='$_G['siteurl']';return false;" >首页</button>
 				<!--{elseif $allowreturn}-->
 				<script type="text/javascript">
 					if(history.length > (BROWSER.ie ? 0 : 1)) {

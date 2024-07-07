@@ -1384,13 +1384,15 @@ class io_dzz extends io_api
                     $icoarr['apath'] = dzzencode('attach::' . $attach['aid']);
                     $event = 'creat_file';
                     $path = preg_replace('/dzz:(.+?):/', '', $path) ? preg_replace('/dzz:(.+?):/', '', $path) : '';
+                    $hash = C::t('resources_event')->get_showtpl_hash_by_gpfid($fid, $icoarr['gid']);
                     $eventdata = array(
                         'title' => $icoarr['name'],
                         'aid' => $icoarr['aid'],
                         'username' => $icoarr['username'],
                         'uid' => $icoarr['uid'],
                         'path' => $icoarr['path'],
-                        'position' => $path
+                        'position' => $path,
+                        'hash' => $hash
                     );
                     C::t('resources_event')->addevent_by_pfid($fid, $event, 'create', $eventdata, $icoarr['gid'], $icoarr['rid']);
                 } else {

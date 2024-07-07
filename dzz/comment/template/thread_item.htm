@@ -6,7 +6,7 @@
 	<div class="right_ifed">
 		<div class="main_fed">
 			<div class="source_fed">
-				<a href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true" class="appuser_sfed">$value[author]</a><span class="text-muted">{lang talk}：</span> </div>
+				<a href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true" class="appuser_sfed">$value[author]</a><span class="text-muted">{lang reply} $value[dateline]</span> </div>
 			<div class="card master_mfed"><span class="content_mmfed">$value[message]</span></div>
 			<div class="attachment_fed">
 				<!--{loop $value[attachs] $attach}-->
@@ -91,7 +91,7 @@
 						</li>
 					</ul>
 				</div>
-				$value[dateline] $value[xtllq] <!--{if $_G[adminid]==1}-->$value[ip]<!--{/if}--></div>
+				$value[xtllq] <!--{if $_G[adminid]==1}-->$value[ip]<!--{/if}--></div>
 		</div>
 		<div id="comment_reply_{$value[cid]}" class="comment_ifed">
 			<!--{if $value[replies]>0}-->
