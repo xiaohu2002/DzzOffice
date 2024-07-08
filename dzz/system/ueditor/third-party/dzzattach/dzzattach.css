@@ -43,6 +43,7 @@
 	box-shadow: 0 1px 3px #eee, inset 0 0 3px #fff;
 	word-break:break-all;
 	margin:0 10px;
+	border: 1px solid rgb(0 0 0 / 10%);
 }
 .tip .tip-op a{
 	padding-top: 1px;
