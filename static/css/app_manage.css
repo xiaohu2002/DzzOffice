@@ -357,7 +357,7 @@ button.input-search-drop {
 }
 .notification-list-item .member{
 	position: absolute;
-    left: 2px;
+    left: 9px;
     cursor: pointer;
     top: 10px;
     float: left;
@@ -385,6 +385,9 @@ button.input-search-drop {
 }
 .u-bottom b{
 	border-bottom: 2px solid #d8e5f9;
+}
+.u-bottom a{
+    color: var(--bs-primary);
 }
 .member-initials {
   display: block;

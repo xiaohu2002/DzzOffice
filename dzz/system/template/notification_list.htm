@@ -13,7 +13,7 @@
 		<!--{loop $searchcats $val}-->
 		<li class="nav-item" data-appid="$val[appid]">
 			<a <!--{if $fromid == $val['appid']}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=notification&appid=$val[appid]">
-				<img src="$val[appico]">
+				<img style="margin-right: 5px;"src="$val[appico]">
 				<span class="notice-text">$val[appname]</span>
 			</a>
 		</li>
@@ -24,63 +24,59 @@
 
 <div class="panel-container main-allcontent clearfix">
 	<!--{if $list}-->
-  <div class="panel-heading">
-		<!--{if $img}-->
-		<img src="$img">
-		<!--{else}-->
+	<div class="panel-heading">
+	<!--{if $img}-->
+	<img src="$img">
+	<!--{else}-->
     <span class="dzz dzz-notifications dzz-allnotice"></span>
-		<!--{/if}-->
+	<!--{/if}-->
     <h3>{$tongzhileixing}($count)</h3>
   </div>
 	<!--{/if}-->
   <div class="panel-body">
       <ul id="notification-list" class="notification-list list-unstyled u-gutter clearfix"> 
-             <!--{if $list}-->
-             <!--{loop $list $value}-->
-                <li class="card notification-list-item clearfix">
-
-                    <div class="member member-no-menu">
-											<a href="user.php?uid=$value[authorid]">
-                         {eval echo avatar_block($value[authorid]);}
-                      </a>
-                    </div>
-
-                    <div class="details">
-											<!--{if $value[title]}-->
-											<p class="note u-title" >$value[title]</p>
-											<!--{/if}-->
-											<!--{if $value[note]}-->
-											<p class="note u-bottom" >$value[note]</p>
-											<!--{else}-->
-                      <p class="note u-bottom" >无内容</p>
-											<!--{/if}-->
-											<!--{if $value[redirecturl]}-->
-											<p class="dateline u-bottom" >来源地址:<a href="$value[redirecturl]" target="_blank">$value[redirecturl]</a></p>
-											<!--{/if}-->
-                      {if !isset($fromid) || is_string($fromid)}
-											<div class="note-iconimg">
-                        <img src="$value[appico]">
-											</div>
-											{/if}
-                      <p class="dateline u-bottom">$value[dateline]</p>
-                    </div>
-                </li>
-                <!--{/loop}-->
-             <!--{else}-->
-              <div style="text-align: center;">
-              <img src="static/image/common/no_list.png" /><br>
-              <span class="no-result-title">{lang noappall_notice}…</span>
-              </div>
-            <!--{/if}-->
-            </ul>
-
+			<!--{if $list}-->
+			<!--{loop $list $value}-->
+			<li class="card notification-list-item clearfix">
+				<div class="member member-no-menu">
+					<a href="user.php?uid=$value[authorid]">
+						{eval echo avatar_block($value[authorid]);}
+					</a>
+				</div>
+				<div class="details">
+				<!--{if $value[title]}-->
+				<p class="note u-title">$value[title]</p>
+				<!--{/if}-->
+				<!--{if $value[note]}-->
+				<p class="note u-bottom">$value[note]</p>
+				<!--{else}-->
+				<p class="note u-bottom">无内容</p>
+				<!--{/if}-->
+				<!--{if $value[redirecturl]}-->
+				<p class="dateline u-bottom text-muted">来源地址:<a href="$value[redirecturl]" target="_blank">$value[redirecturl]</a></p>
+				<!--{/if}-->
+				<!--{if !isset($fromid) || is_string($fromid)}-->
+				<div class="note-iconimg">
+					<img src="$value[appico]">
+				</div>
+				<!--{/if}-->
+					<p class="dateline u-bottom text-muted">$value[dateline]</p>
+				</div>
+			</li>
+			<!--{/loop}-->
+			<!--{else}-->
+			<div style="text-align: center;">
+			<img src="static/image/common/no_list.png" /><br>
+			<span class="no-result-title">{lang noappall_notice}…</span>
+			</div>
+		<!--{/if}-->
+		</ul>
    </div>
-
 </div>
 	<div class="all-notice">
-  <nav aria-label="Page navigation" class="notice-navigation">
-    {$multi}
-  </nav>
+		<nav aria-label="Page navigation" class="notice-navigation">
+			{$multi}
+		</nav>
 	</div>
 </div>
 <script type="text/javascript">

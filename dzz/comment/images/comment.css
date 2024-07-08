@@ -13,7 +13,12 @@
     min-width: 120px;
     z-index: 99999;
 }
-
+.atwho-view .img-avatar {
+	width: 24px;
+	height: 24px;
+	line-height: 20px;
+    font-size: 10px;
+}
 .atwho-view .cur {
     background: #428bca;
     color: white;
