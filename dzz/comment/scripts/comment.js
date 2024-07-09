@@ -2,12 +2,12 @@
 function feed_publish(arr,tid,targetid){
 	
 var html=''
-	html+='<div id="comment_'+arr['cid']+'" class="card itemfeed" feed-id="'+arr['cid']+'" style="display:none">';
+	html+='<div id="comment_'+arr['cid']+'" class="card" feed-id="'+arr['cid']+'" style="display:none"><div class="card-body">';
   	html+='	<div class="left_ifed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true">'+arr['avatar']+'</a> </div>';
   	html+='	<div class="right_ifed">';
     html+=' 	<div class="main_fed">';
-    html+='  		 <div class="source_fed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" class="appuser_sfed">'+arr['author']+'</a><span class="text-muted">'+__lang.reply+'</span> </div>';
-    html+='  		<div class="card master_mfed"><span class="content_mmfed">'+arr['message']+'</span></div>';
+    html+='  		 <p class="text-muted"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" class="appuser_sfed">'+arr['author']+'</a> '+__lang.reply+'</p>';
+    html+='  		<div class="card master_mfed"><span class="card-body">'+arr['message']+'</span></div>';
 	html+='	   <div class="attachment_fed">';
 for(var i in arr['attachs']){
 	var attach=arr['attachs'][i];
@@ -68,25 +68,25 @@ for(var i in arr['attachs']){
          
 }
     html+='	</div>';
-   html+='   		<div class="action_mfed clearfix">';
+   html+='   		<p class="text-muted clearfix">';
    html+='     			<div class="btn_amfed">';
    html+='      	 		<ul>';
    html+='        	 			<li class="more_bamfed"><a hidefocus="true" href="javascript:void(0);" onclick="feed_delete(\''+arr['cid']+'\',\'comment_'+arr['cid']+'\')">'+__lang.delete+'</a></li>';
    html+='         				<li class="reply_bamfed"><a hidefocus="true" href="javascript:void(0);" onclick="getReplyForm(\''+arr['cid']+'\',\'0\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\');">'+__lang.reply+'</a></li>';
    html+='      	 		</ul>';
    html+='     			</div>';
-   html+='  		</div>';
+   html+='  		</p>';
    html+=' 		</div>';
    html+='		<div id="comment_reply_'+arr['cid']+'" class="comment_ifed" ></div>';
    html+='	</div>';
 
-   html+='</div>';
+   html+='</div></div>';
    if(targetid && jQuery('#'+targetid).length){
-	    var el=jQuery('#'+targetid+' > .itemfeed:first'); 
+	    var el=jQuery('#'+targetid+' > .card:first'); 
 		 if(el.length>0) el.before(html);
   		 else jQuery('#'+targetid).html(html);
    }else{
-  	  var el=jQuery('#comment_container > .itemfeed:first');
+  	  var el=jQuery('#comment_container > .card:first');
 	    if(el.length>0) el.before(html);
   		else jQuery('#comment_container').html(html);
    }
@@ -111,12 +111,12 @@ function feed_reply(arr){
 	 html+='<div id="comment_'+arr['cid']+'" class="cmt_fed">';
      html+='   <div class="item_cfed">';
      html+='     <div class="left_icfed"> <a href="user.php?uid='+arr['authorid']+'" title="" hidefocus="true"> '+arr['avatar']+' </a> </div>';
-     html+='     <div class="right_icfed">';
-     html+='     <a href="user.php?uid='+arr['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true">'+arr['author']+'</a><span class="text-muted">'+' '+__lang.reply+' '+arr['dateline']+'</span><div class="card master_cfed">';
+     html+='     <p class="text-muted">';
+     html+='     <a href="user.php?uid='+arr['authorid']+'" title="" class="avatar_mcfed" hidefocus="true">'+arr['author']+'</a>'+' '+__lang.reply+' '+arr['dateline']+'</p><div class="card master_cfed">';
 	 if(arr['rpost']){
-		html+='<span class="amal_fed">对</span>  <a href="user.php?uid='+arr['rpost']['authorid']+'" title="" class="avatar_mcfed skip_cmfed" hidefocus="true" target="_blank">'+arr['rpost']['author']+'</a>'; 
+		html+='<span class="amal_fed">对</span>  <a href="user.php?uid='+arr['rpost']['authorid']+'" title="" class="avatar_mcfed" hidefocus="true" target="_blank">'+arr['rpost']['author']+'</a>'; 
 	 }
-	 html+='          <span>'+arr['message']+'</span> ';
+	 html+='          <span class="card-body">'+arr['message']+'</span> ';
 	 html+='		</div>';
 	html+='	   <div class="attachment_fed">';
 	for(var i in arr['attachs']){
@@ -215,7 +215,7 @@ function feed_reply(arr){
  
 }
 function getReplyForm(tid,pid,allowattach,allowat,allowsmiley){
-	jQuery('#comment_container .itemfeed .publishsharewrap').hide();
+	jQuery('#comment_container .card .publishsharewrap').hide();
 	if(!document.getElementById('reply_publish_'+tid)){
 		var el = jQuery('<div id="reply_publish_'+tid+'"></div>').appendTo('#comment_'+tid);
 		ajaxget(DZZSCRIPT+'?mod=comment&op=ajax&do=getReplyForm&cid='+tid+'&allowattach='+allowattach+'&allowat='+allowat+'&allowsmiley='+allowsmiley,'reply_publish_'+tid,'reply_publish_'+tid,'','',function(){

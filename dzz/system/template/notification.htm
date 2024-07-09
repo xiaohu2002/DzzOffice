@@ -6,6 +6,7 @@
         <!--{if $list}-->
             <!--{loop $list $value}-->
             <div class="card notification-list-item clearfix">
+              <div class="card-body">
                 <div class="member member-no-menu">
                   <a class="member-avatar" href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value[authorid]);}</a>
                 </div>
@@ -20,6 +21,7 @@
                   <!--{/if}-->
                   <p class="dateline u-bottom text-muted">$value[dateline]</p>
                 </div>
+              </div>
             </div>
             <!--{/loop}-->
         <!--{else}-->

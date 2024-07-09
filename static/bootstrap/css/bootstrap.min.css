@@ -1343,6 +1343,7 @@ img {
 
 .help-block {
     display: block;
+    color: #6c757d;
 }
 
 .btn-group-lg>.btn,
@@ -16002,8 +16003,8 @@ fieldset:disabled .btn {
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center;
-	display: inline-block;
 	position: relative;
+    display: inline-block;
 	background-color: #f9fafb;
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
@@ -16022,6 +16023,23 @@ fieldset:disabled .btn {
     -webkit-transition: .15s linear;
     transition: .15s linear;
     cursor: pointer;
+}
+/* 头像带文字 */
+.img-avatar-pill {
+    width: auto;
+    border-radius: 32px;
+    color: #4d5259;
+    text-transform: none;
+    letter-spacing: 0;
+    background-color: #f9fafb;
+    display: -webkit-inline-box;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: var(--radius);
+}
+.img-avatar-pill:hover {
+    background-color: #f5f6f7;
 }
 .has-error .checkbox,
 .has-error .checkbox-inline,

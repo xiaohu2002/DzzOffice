@@ -58,7 +58,6 @@
 }
 .dropdown-cap{
 	padding:0px 24px;
-	font-size: 12px;
 }
 .dzz.basil{
 	font-size: 24px;
@@ -320,9 +319,6 @@ button.input-search-drop {
 	font-size: 16px;
 	color: #fff;
 }
-.panel-body .details{
-	padding-left: 10px;
-}
 .main-allnotice .panel-body .note{
 	padding-right:40px;
 }
@@ -333,7 +329,6 @@ button.input-search-drop {
 }
 .main-allnotice .panel-body .note-iconimg img{
 	width: 28px;
-	height: 28px;
 }
 .window-module-archive .window-module-title{
 	margin-top:10px;
@@ -353,13 +348,11 @@ button.input-search-drop {
   min-height: 50px;
   padding: 5px 0 5px 38px;
   position: relative;
-	margin: var(--radius);
 }
 .notification-list-item .member{
 	position: absolute;
     left: 9px;
     cursor: pointer;
-    top: 10px;
     float: left;
 }
 .notification-list-item .member-avatar{
@@ -386,7 +379,7 @@ button.input-search-drop {
 .u-bottom b{
 	border-bottom: 2px solid #d8e5f9;
 }
-.u-bottom a{
+.details a{
     color: var(--bs-primary);
 }
 .member-initials {

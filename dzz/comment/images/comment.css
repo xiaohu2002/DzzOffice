@@ -203,9 +203,6 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 .line_publishsharewrap .count_cpsw {
 	display: none
 }
-.itemfeed .publishsharewrap {
-	margin-left: 60px;
-}
 .count_cpsw {
 	padding: 3px 0;
 	text-align: right;
@@ -368,20 +365,6 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	height:25px;
 	overflow:hidden;
 }
-
-.itemfeed {
-	font-size: 12px;
-	line-height: 14px;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	padding: 5px 0 5px;
-	box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
-  border-radius: var(--radius);
-  padding: 10px;
-  margin: 10px 0;
-}
-.comment_ifed .itemfeed{
-	border-top: none;
-}
 .left_ifed .img-avatar{
 	width:35px;
 	height:35px;
@@ -403,7 +386,7 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	position: absolute;
 	z-index: 1
 }
-.source_fed a,.right_icfed a{
+.text-muted a,.text-muted a{
 	text-decoration: none;
 	color: var(--bs-primary);
 }
@@ -415,32 +398,11 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	margin-left: 5px;
 	margin-right: 5px;
 }
-.master_mfed {
-	background: #f2f6fc;
-  padding: 15px;
-  border-radius: var(--radius);
-}
 .item_afed{
 	padding-bottom:10px;
 }
 .item_afed:hover {
 	border-radius: var(--radius)
-}
-.itemfeed .comment_ifed {
-	padding:5px 0 
-}
-.content_mmfed{
-	font-size: larger;
-}
-.main_fed{
-	min-height:60px;	
-}
-.action_mfed {
-	height: 26px;
-	padding: 10px 0 0;
-	position: relative;
-	z-index: 2;
-	color: #6c757d;
 }
 .btn_amfed {
 	float: right;
@@ -546,12 +508,10 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	display: inline-block
 }
 .item .list_fed {
-	padding-left: 60px
+	padding-left: 50px
 }
 .cmt_fed {
-	/*padding: 0 5px;*/
-	margin-top: 1px;
-*zoom:1
+	padding-left: 50px
 }
 .item_cfed {
 	padding: 10px 0 10px 40px;
@@ -573,11 +533,8 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	height: 30px;
 	line-height: 30px;
 }
-.master_cfed {
+.master_cfed ,.master_mfed{
 	background: #f2f6fc;
-  padding: 10px;
-  border-radius: var(--radius);
-  font-size: larger;
 }
 
 .dehua_mcfed {
@@ -587,9 +544,7 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 .dehua_mcfed:hover {
 	color: #2d83cf
 }
-.action_cfed {
-	height: 18px;
-	padding-top: 5px;
+.action_cfed ,.action_mfed{
 	color: #6c757d;
 }
 .action_cfed .lock_fed {

@@ -2008,6 +2008,7 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
         s += '</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="hideMenu(\'fwin_dialog\', \'dialog\')" ></button></div>';
     }else {
         s=hidedom + shadow+ '<div class="modal-header"><h4 class="modal-title">';
+		s += '提示信息';
         s += '</h4><button id="fwin_dialog_close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="hideMenu(\'fwin_dialog\', \'dialog\')" ></button></div>';
     }
     if(mode.indexOf('alert_icon_' )!== -1){

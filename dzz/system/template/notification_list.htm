@@ -38,29 +38,31 @@
 			<!--{if $list}-->
 			<!--{loop $list $value}-->
 			<li class="card notification-list-item clearfix">
-				<div class="member member-no-menu">
-					<a href="user.php?uid=$value[authorid]">
-						{eval echo avatar_block($value[authorid]);}
-					</a>
-				</div>
-				<div class="details">
-				<!--{if $value[title]}-->
-				<p class="note u-title">$value[title]</p>
-				<!--{/if}-->
-				<!--{if $value[note]}-->
-				<p class="note u-bottom">$value[note]</p>
-				<!--{else}-->
-				<p class="note u-bottom">无内容</p>
-				<!--{/if}-->
-				<!--{if $value[redirecturl]}-->
-				<p class="dateline u-bottom text-muted">来源地址:<a href="$value[redirecturl]" target="_blank">$value[redirecturl]</a></p>
-				<!--{/if}-->
-				<!--{if !isset($fromid) || is_string($fromid)}-->
-				<div class="note-iconimg">
-					<img src="$value[appico]">
-				</div>
-				<!--{/if}-->
-					<p class="dateline u-bottom text-muted">$value[dateline]</p>
+				<div class="card-body">
+					<div class="member member-no-menu">
+						<a href="user.php?uid=$value[authorid]">
+							{eval echo avatar_block($value[authorid]);}
+						</a>
+					</div>
+					<div class="details">
+					<!--{if $value[title]}-->
+					<p class="note u-title">$value[title]</p>
+					<!--{/if}-->
+					<!--{if $value[note]}-->
+					<p class="note u-bottom">$value[note]</p>
+					<!--{else}-->
+					<p class="note u-bottom">无内容</p>
+					<!--{/if}-->
+					<!--{if $value[redirecturl]}-->
+					<p class="dateline u-bottom text-muted">来源地址:<a href="$value[redirecturl]" target="_blank">$value[redirecturl]</a></p>
+					<!--{/if}-->
+					<!--{if !isset($fromid) || is_string($fromid)}-->
+					<div class="note-iconimg">
+						<img src="$value[appico]">
+					</div>
+					<!--{/if}-->
+						<p class="dateline u-bottom text-muted">$value[dateline]</p>
+					</div>
 				</div>
 			</li>
 			<!--{/loop}-->

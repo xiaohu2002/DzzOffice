@@ -8,15 +8,15 @@
   background-color: #fff;
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding;
-  border: 1px solid #d6dadc;
-  border-bottom-color: #c4c9cc;
-  *border: 1px solid #e1e1e1;
   font-size: 14px;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
+  -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
   background-clip: padding-box;
   outline: none;
   border-radius: var(--radius);
+  padding: var(--radius);
+  margin: 10px 0;
+  border: 1px solid rgb(0 0 0 / 10%);
 }
 .popbox-menu{
 	background-color: #fff;

@@ -4,14 +4,15 @@
 		<div class="left_icfed">
 			<a href="user.php?uid=$value1[authorid]" title="" hidefocus="true"> {eval echo avatar_block($value1[authorid]);} </a>
 		</div>
-		<div class="right_icfed">
-			<a href="user.php?uid=$value1[authorid]" title="" class="avatar_mcfed skip_cmfed" hidefocus="true">$value1[author]</a>
-				<!--{if $value1['rpost']}-->
-				<span class="amal_fed">对</span>
-				<a href="user.php?uid=$value1[rpost][authorid]" title="" class="avatar_mcfed skip_cmfed" hidefocus="true" target="_blank">$value1[rpost][author]</a>
-				<!--{/if}--><span class="text-muted">{lang reply} $value[dateline]</span>
+		<p class="text-muted">
+		<a href="user.php?uid=$value1[authorid]" title="" class="avatar_mcfed" hidefocus="true">$value1[author]</a>
+			<!--{if $value1['rpost']}-->
+			<span class="amal_fed">对</span>
+			<a href="user.php?uid=$value1[rpost][authorid]" title="" class="avatar_mcfed" hidefocus="true" target="_blank">$value1[rpost][author]</a>
+			<!--{/if}-->{lang reply} $value[dateline]
+		</p>
 			<div class="card master_cfed">
-				<span>$value1[message]</span>
+				<span class="card-body">$value1[message]</span>
 			</div>
 			<div class="attachment_fed">
 				<!--{loop $value1[attachs] $attach}-->
