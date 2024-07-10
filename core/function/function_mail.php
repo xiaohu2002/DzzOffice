@@ -25,9 +25,9 @@ function sendmail($toemail, $subject, $message, $from = '') {
   $sitename=$_G['setting']['sitename'];
   $sitecopyright=replacesitevar($_G['setting']['sitecopyright']);
   if(!$_G['setting']['bbclosed']){
-		$sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+		$sitelogo=$_G['setting']['sitelogo']?$_G['siteurl'].'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):$_G['siteurl'].'static/image/common/logo.png';
 	}else{
-		$sitelogo='static/image/common/logo.png'; 
+		$sitelogo=$_G['siteurl'].'static/image/common/logo.png';
 	}
 	$message = <<<EOT
 <html>
@@ -42,8 +42,8 @@ function sendmail($toemail, $subject, $message, $from = '') {
             <tr style="font-weight:300">
               <td style="width:3%;"></td>
               <td>
-                <h2>
-                  <a href="$_G[siteurl]" rel="noopener" target="_blank" style="text-decoration:none;">
+                <h2 style="display: flex;align-content: center;align-items: center;flex-wrap: wrap;justify-content: center;">
+                  <a href="$_G[siteurl]" rel="noopener" target="_blank" style="text-decoration:none;display: flex;align-content: center;align-items: center;flex-wrap: wrap;justify-content: center;">
                     <img border="0" src="$sitelogo">
 					$sitename
                   </a>
