@@ -27,7 +27,7 @@ function sendmail($toemail, $subject, $message, $from = '') {
   if(!$_G['setting']['bbclosed']){
 		$sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
 	}else{
-		$sitelogo = 'static/image/common/logo.png'; 
+		$sitelogo='static/image/common/logo.png'; 
 	}
 	$message = <<<EOT
 <html>
@@ -42,11 +42,12 @@ function sendmail($toemail, $subject, $message, $from = '') {
             <tr style="font-weight:300">
               <td style="width:3%;"></td>
               <td>
-                <div>
-                  <a href="$_G[siteurl]" rel="noopener" target="_blank">
+                <h2>
+                  <a href="$_G[siteurl]" rel="noopener" target="_blank" style="text-decoration:none;">
                     <img border="0" src="$sitelogo">
+					$sitename
                   </a>
-                </div>
+                </h2>
                 <p style="height:2px;background-color: #00a4ff;border: 0;font-size:0;padding:0;width:100%;margin-top:20px;"></p>
                 <div style="background-color:#fff; padding:23px 0 20px;border-radius:0 0 .5rem .5rem;box-shadow: 0px 1px 1px 0px rgba(122, 55, 55, 0.2);text-align:left;">
                   <table style="width:100%;font-weight:300;margin-bottom:10px;border-collapse:collapse;text-align:left;">
