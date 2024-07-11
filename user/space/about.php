@@ -18,9 +18,9 @@ if($identify && file_exists($appConfig)){
 	if(isset($config['about'])){
 		$about=$config['about'];
 		if(!$_G['setting']['bbclosed']){
-			$about['logo']=$_G['setting']['sitelogo']?\IO::getFileUri('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+			$about['sitelogo']=$_G['setting']['sitelogo']?\IO::getFileUri('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
 		}else{
-			$about['logo']='static/image/common/logo.png'; 
+			$about['sitelogo']='static/image/common/logo.png'; 
 		}
 		$appinfo=C::t('app_market')->fetch_by_identifier($identify);
 		if(empty($about['logo'])){
@@ -31,7 +31,6 @@ if($identify && file_exists($appConfig)){
 }
 $about['xhversion']='V'.CORE_XHVERSION;//版本信息，留空不显示
 if(empty($appinfo['appname'])){
-	$about['sitelogo']='';
 	$about['name_zh']='';//中文名称:大桌子协同办公，留空不显示
 	$about['name_en']=$_G['setting']['sitename'];//英文名称，注意前面的dzz去掉，留空不显示
 	$about['version']='V'.CORE_VERSION;//版本信息，留空不显示
