@@ -98,7 +98,7 @@ line-height: 56px;
 	height: 32px;
 	line-height: 32px;
 }
-ul,ul li,li{
+ul {
 	list-style: none;
 }
 .close:focus{
