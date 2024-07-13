@@ -498,18 +498,6 @@ UEDITOR_CONFIG.mode = {
                 'insertorderedlist', 'insertunorderedlist','|','simpleupload','dzzfile'
         ]
     ],
-	mini_exam: [
-        ['bold', 'italic', 'underline', 'strikethrough','superscript', 'subscript','removeformat', '|',
-                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
-                'insertorderedlist', 'insertunorderedlist','|','spechars','inserttable', 'scrawl','wordimage','kityformula','|','simpleupload','dzzfile'
-        ]
-    ],
-	mini_shou: [
-        ['bold', 'italic', 'underline', 'strikethrough','superscript', 'subscript','removeformat', '|',
-                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
-                'insertorderedlist', 'insertunorderedlist','|','spechars','inserttable', 'scrawl','wordimage','kityformula','|','simpleupload','attachment'
-        ]
-    ],
     xiaohuxiugai: [
         ['fullscreen','source', 'undo', 'redo','drafts','|','bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|','rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 'paragraph', 'fontfamily', 'fontsize', '|','directionalityltr', 'directionalityrtl', 'indent', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|','link', 'unlink','|','simpleupload', 'emotion', 'scrawl', 'insertvideo', 'attachment','dzzfile', 'map', 'insertframe', 'insertcode', 'template', 'background','|','horizontal', 'date', 'time', 'spechars', 'searchreplace', '|','inserttable','insertcharts', 'charts','|','print', 'preview', 'help', 'kityminder', 'kityformula'
         ]

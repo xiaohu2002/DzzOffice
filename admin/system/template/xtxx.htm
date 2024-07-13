@@ -86,70 +86,90 @@
 	</div>
 	<div class="bs-main-container  clearfix">
 		<div class="main-content">
-			<div class="dagai">
-			<dl>
-        <h2 class="title">用户信息</h2>
-        <table class="tb">
-          <tbody>
-            <tr>
-              <th class="padleft">当前在线数</th>
-              <th class="padleft">总用户数</th>
-              <th class="padleft">停用人数</th>
-            </tr>
-            <tr>
-              <td class="padleft">$zaixianrenshu</td>
-              <td class="padleft">$yonghurenshu</td>
-              <td class="w pdleft1">$tingyongrenshu</td>
-            </tr>
-          </tbody>
-        </table>
-      </dl>
-      <dl>
-        <h2 class="title">文件信息</h2>
-        <table class="tb">
-          <tbody>
-            <tr>
-              <th class="padleft">文件个数</th>
-              <th class="padleft">空间使用</th>
-            </tr>
-            <tr>
-              <td class="padleft">$wenjiangeshu</td>
-              <td class="padleft">$kongjianshiyong</td>
-            </tr>
-          </tbody>
-        </table>
-      </dl>
-      <dl>
-        <h2 class="title">版本信息</h2>
-        <table class="tb">
-          <tbody>
-            <tr>
-              <th class="padleft">官方版本</th>
-              <th class="padleft">小胡版本</th>
-              <th class="padleft">小胡版更新日期</th>
-            </tr>
-            <tr>
-              <td class="padleft">$about[version]</td>
-              <td class="padleft">$about[xhversion]</td>
-              <td class="w pdleft1">$about[XHFIXBUG]</td>
-            </tr>
-          </tbody>
-        </table>
-      </dl>
-				</div>
-      <dl>
-        <!--{eval echo shuchu();}-->
-      </dl>
-      <dl>
-        <h3>PHP扩展信息<a href="{MOD_URL}&op=xtxx&do=phpinfo" target="_blank" style="position: relative;">PHP详情</a></h3>
-          <div class="container">
-						<!--{eval echo kuozhan();}-->
-						</div>
-					<div>已加载的扩展:</div>
-          <div class="container">
-							$extensions
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card bg-primary text-white">
+					  <div class="card-body">
+						<h2 class="title">用户信息</h2>
+						<table class="tb">
+						<tbody>
+							<tr>
+							<th class="padleft">当前在线数</th>
+							<th class="padleft">总用户数</th>
+							<th class="padleft">停用人数</th>
+							</tr>
+							<tr>
+							<td class="padleft">$zaixianrenshu</td>
+							<td class="padleft">$yonghurenshu</td>
+							<td class="w pdleft1">$tingyongrenshu</td>
+							</tr>
+						</tbody>
+						</table>
+					  </div>
 					</div>
-      </dl>
+				  </div>
+				  <div class="col-md-4">
+					<div class="card bg-primary text-white">
+					  <div class="card-body">
+						<h2 class="title">文件信息</h2>
+						<table class="tb">
+						<tbody>
+							<tr>
+							<th class="padleft">文件个数</th>
+							<th class="padleft">空间使用</th>
+							</tr>
+							<tr>
+							<td class="padleft">$wenjiangeshu</td>
+							<td class="padleft">$kongjianshiyong</td>
+							</tr>
+						</tbody>
+						</table>
+					  </div>
+					</div>
+				  </div>
+				  <div class="col-md-4">
+					<div class="card bg-primary text-white">
+					  <div class="card-body">
+						<h2 class="title">版本信息</h2>
+							<table class="tb">
+							<tbody>
+								<tr>
+								<th class="padleft">官方版本</th>
+								<th class="padleft">小胡版本</th>
+								<th class="padleft">小胡版更新日期</th>
+								</tr>
+								<tr>
+								<td class="padleft">$about[version]</td>
+								<td class="padleft">$about[xhversion]</td>
+								<td class="w pdleft1">$about[XHFIXBUG]</td>
+								</tr>
+							</tbody>
+							</table>
+					  </div>
+					</div>
+				  </div>
+				</div>
+				<div class="col-md-12">
+					<div class="card bg-primary text-white">
+					  <div class="card-body">
+						<!--{eval echo shuchu();}-->
+					  </div>
+					</div>
+				  </div>
+				  <div class="col-md-12">
+					<div class="card bg-primary text-white">
+					  <div class="card-body">
+						<h3>PHP扩展信息<a href="{MOD_URL}&op=xtxx&do=phpinfo" target="_blank" style="position: relative;">PHP详情</a></h3>
+							<div class="container">
+											<!--{eval echo kuozhan();}-->
+											</div>
+										<div>已加载的扩展:</div>
+							<div class="container">
+							$extensions
+						</div>
+					  </div>
+					</div>
+				  </div>
 			<dl>	
 			<div class="main-header clearfix">
       <ul class="nav nav-pills " style="padding:4px 10px 0 10px">

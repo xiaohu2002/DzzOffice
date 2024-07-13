@@ -17,7 +17,7 @@
         $focus($G("videoUrl"));
         initTabs();
         initVideo();
-        /*initUpload();*/
+        initUpload();
     };
 
     /* 初始化tab标签 */
@@ -41,7 +41,7 @@
     }
 
     function initVideo(){
-        createAlignButton( ["videoFloat"] );
+        createAlignButton( ["videoFloat", "upload_alignment"] );
         addUrlChangeListener($G("videoUrl"));
         addOkListener();
 
@@ -119,7 +119,6 @@
             url=$G('videoUrl').value,
             align = findFocus("videoFloat","name");
         if(!url) return false;
-		
         if ( !checkNum( [width, height] ) ) return false;
         editor.execCommand('insertvideo', {
             url: convert_url(url),
@@ -168,7 +167,7 @@
     function convert_url(url){
         if ( !url ) return '';
         url = utils.trim(url)
-            .replace(/v\.youku\.com\/v_show\/id_([\w\-=]+)\.html(.*?)$/i, 'player.youku.com/player.php/sid/$1/v.swf')
+            .replace(/v\.youku\.com\/v_show\/id_([\w\-=]+)\.html/i, 'player.youku.com/player.php/sid/$1/v.swf')
             .replace(/(www\.)?youtube\.com\/watch\?v=([\w\-]+)/i, "www.youtube.com/v/$2")
             .replace(/youtu.be\/(\w+)$/i, "www.youtube.com/v/$1")
             .replace(/v\.ku6\.com\/.+\/([\w\.]+)\.html.*$/i, "player.ku6.com/refer/$1/v.swf")
@@ -265,11 +264,15 @@
     /**
      * 根据url生成视频预览
      * @param url
-     */
+     */    
     function createPreviewVideo(url){
         if ( !url )return;
         var conUrl = convert_url(url);
-        $G("preview").innerHTML = '<video controls="controls" style="width:100%;height:280px;" src="' + conUrl + '"></video>';
+        conUrl = utils.unhtml(conUrl);
+        $G("preview").innerHTML = '<div class="previewMsg"><span>' + lang.urlError + '</span></div>' +
+            '<iframe class="previewVideo" ' +
+            ' src="' + conUrl + '"style="width:100%;height:280px;" frameborder=0 allowfullscreen>' +
+            '</iframe>';
     }
 
 
@@ -707,7 +710,9 @@
 
             uploader.on('uploadBeforeSend', function (file, data, header) {
                 //这里可以通过data对象添加POST参数
-                header['X_Requested_With'] = 'XMLHttpRequest';
+                if (actionUrl.toLowerCase().indexOf('jsp') != -1) {
+                    header['X_Requested_With'] = 'XMLHttpRequest';
+                }
             });
 
             uploader.on('uploadProgress', function (file, percentage) {

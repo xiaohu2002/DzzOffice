@@ -7675,6 +7675,7 @@ textarea.form-control.is-invalid {
 .btn {
     display: inline-block;
     font-weight: 400;
+    line-height: 1.5;
     color: #212529;
     text-align: center;
     text-decoration: none;
@@ -7691,7 +7692,6 @@ textarea.form-control.is-invalid {
     -webkit-border-radius: var(--radius);
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     margin: 1px;
-    opacity: 0.8;
     position: relative;
 }
 

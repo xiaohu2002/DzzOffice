@@ -606,22 +606,25 @@ class dzz_app extends dzz_base{
             }
         }
         }
+        
         if (!$this->var['member']['adminid'] && $appidxu = C::t('app_market')->fetch_by_identifier(CURMODULE)) {
-            $uid = null;
-            if ($this->var['member']['uid']) {
-                $uid = $this->var['member']['uid'];
-            } elseif ($_GET['uidtoken']) {
-                $uid=intval(dzzdecode($_GET['uidtoken']));
-            }
             if (!$appidxu['available']) {
                 showmessage(lang('该应用已关闭，请联系管理员。'));
             } elseif ($appidxu['group'] == 0) {
                 // 全员使用跳过
-            } elseif ($uid) {
-                try {
-                    $config = dzz_userconfig_init();
+            } else {
+                if ($this->var['member']['uid']) {
+                    $uid = $this->var['member']['uid'];
+                } elseif ($_GET['uidtoken']) {
+                    $uid = intval(dzzdecode($_GET['uidtoken']));
+                }
+                if ($uid) {
+                    $config = array();
+                    if(!$config=C::t('user_field')->fetch($uid)){
+                        $config= dzz_userconfig_init();
+                    }
                     if ($config && isset($config['applist'])) {
-                        $applist = explode(',', $config['applist'] ?: '');
+                        $applist = explode(',', $config['applist']);
                         if (in_array($appidxu['appid'], $applist, true)) {
                             // 用户配置中包含该应用，有权限
                         } else {
@@ -630,16 +633,14 @@ class dzz_app extends dzz_base{
                     } else {
                         showmessage(lang('您无权限使用该应用，请联系管理员。'));
                     }
-                } catch (\Exception $e) {
-                    // 处理数据库操作异常，例如记录日志或显示错误信息
-                    showmessage(lang('系统错误，请联系管理员。'));
+                } elseif ($appidxu['group'] == -1) {
+                    // 游客可以使用，跳过
+                } else {
+                    Hook::listen('check_login');
                 }
-            } elseif ($appidxu['group'] == -1) {
-                // 游客可以使用，跳过
-            } else {
-                Hook::listen('check_login');
             }
         }
+
         if(isset($this->var['setting']['nocacheheaders']) && $this->var['setting']['nocacheheaders']) {
             @header("Expires: -1");
             @header("Cache-Control: no-store, private, post-check=0, pre-check=0, max-age=0", FALSE);
