@@ -65,7 +65,7 @@ class perm_check{
                         return self::getPerm($folder['pfid'],$bz,$i);
                     }elseif (shareLink($_GET['shareLink'],$_GET['path'])){
                         return perm_binPerm::getGroupPower('read');
-                    }elseif($folder = C::t('folder')->fetch_home_by_uid($uid)){//查看当前用户的个人网盘fid
+                    }elseif($folder = C::t('folder')->fetch_home_by_uid($_G['uid'])){//查看当前用户的个人网盘fid
                         if($folder['fid']){
                             if(!($folder['fid']==$fid)){//判断当前用户的个人网盘fid是否等于当前用户访问的fid
                                 $fids = get_all_chilrdenfid_by_pfid($folder['fid']);
