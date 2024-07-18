@@ -96,7 +96,7 @@ if ($operation == 'upload') {//上传图片文件
 
             //是图片时处理
             if ($isimage) {
-                if (!perm_check::checkperm_Container($fid, 'upload')) {
+                if (!perm_check::checkperm($fid, 'upload')) {
                     $arr['error'] = lang('target_not_accept_image');
                 }
                 if ($data = io_dzz::linktoimage($link, $fid)) {
@@ -110,7 +110,7 @@ if ($operation == 'upload') {//上传图片文件
             } else {
                 //试图作为视频处理
                 if ($data = io_dzz::linktovideo($link, $fid)) {
-                    if (!perm_check::checkperm_Container($fid, 'upload')) {
+                    if (!perm_check::checkperm($fid, 'upload')) {
                         $arr['error'] = lang('target_not_accept_video');
                     } else {
                         if ($data['error']) $arr['error'] = $data['error'];
@@ -121,7 +121,7 @@ if ($operation == 'upload') {//上传图片文件
                     }
                 }
                 //作为网址处理
-                if (!perm_check::checkperm_Container($fid, 'upload')) {
+                if (!perm_check::checkperm($fid, 'upload')) {
                     $arr['error'] = lang('target_not_accept_link');
                 } else {
                     if ($data = io_dzz::linktourl($link, $fid)) {
@@ -168,41 +168,41 @@ if ($operation == 'upload') {//上传图片文件
     switch ($type) {
         case 'newTxt':
             $filename = lang('new_txt') . '.txt';
-            if (!perm_check::checkperm_Container($path, 'upload', $bz)) {
+            if (!perm_check::checkperm($path, 'upload', $bz)) {
                 exit(json_encode(array('error' => lang('privilege'))));
             }
             $content = ' ';
             break;
         case 'newDzzDoc':
             $filename = lang('new_dzzdoc') . '.dzzdoc';
-            if (!perm_check::checkperm_Container($path, 'upload', $bz)) {
+            if (!perm_check::checkperm($path, 'upload', $bz)) {
                 exit(json_encode(array('error' => lang('privilege'))));
             }
             $content = ' ';
             break;
         case 'newDoc':
             $filename = lang('new_word') . '.docx';
-            if (!perm_check::checkperm_Container($path, 'upload', $bz)) {
+            if (!perm_check::checkperm($path, 'upload', $bz)) {
                 exit(json_encode(array('error' => lang('privilege'))));
             }
             $content = file_get_contents(DZZ_ROOT . './dzz/images/newfile/word.docx');
             break;
         case 'newExcel':
             $filename = lang('new_excel') . '.xlsx';
-            if (!perm_check::checkperm_Container($path, 'upload', $bz)) {
+            if (!perm_check::checkperm($path, 'upload', $bz)) {
                 exit(json_encode(array('error' => lang('privilege'))));
             }
             $content = file_get_contents(DZZ_ROOT . './dzz/images/newfile/excel.xlsx');
             break;
         case 'newPowerPoint':
             $filename = lang('new_PowerPoint') . '.pptx';
-            if (!perm_check::checkperm_Container($path, 'upload', $bz)) {
+            if (!perm_check::checkperm($path, 'upload', $bz)) {
                 exit(json_encode(array('error' => lang('privilege'))));
             }
             $content = file_get_contents(DZZ_ROOT . './dzz/images/newfile/ppt.pptx');
             break;
         default:
-            if (!perm_check::checkperm_Container($path, 'upload', $bz)) {
+            if (!perm_check::checkperm($path, 'upload', $bz)) {
                 exit(json_encode(array('error' => lang('privilege'))));
             }
             $content = ' ';
