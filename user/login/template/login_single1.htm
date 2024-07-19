@@ -26,9 +26,6 @@
     text-align: center;
     pointer-events: none;
 }
-	html, body{
-		overflow:auto;
-	}
 	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
 		background-color:$_G[setting][loginset][kbcolor];
@@ -42,7 +39,7 @@
 </style>
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
-<div class="center-vh">
+<div class="center-vh overflow-auto">
 <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
   <div class="text-center mb-3">
   	<img alt="light year admin" src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->">
@@ -50,51 +47,52 @@
 		<!--{if $_G[setting][loginset][subtitle]}--><p>$_G[setting][loginset][subtitle]</p><!--{/if}-->
   </div>
   <form action="user.php?mod=login&op=logging&action=login&loginsubmit=yes{if !empty($_GET['handlekey'])}&handlekey=$_GET[handlekey]{/if}{if isset($_GET['frommessage'])}&frommessage{/if}&loginhash=$loginhash" method="post" class="signin-form needs-validation" name="login" id="loginform_$loginhash" role="form" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}pwdclear = 1; loginsub('loginform_$loginhash', 'returnmessage_$loginhash');return false;">
-		<input type="hidden" name="formhash" value="{FORMHASH}" />
-    <input type="hidden" name="referer" value="{$referer}" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="referer" value="{$referer}" />
     <!--{if $auth}-->
     <div class="mb-3 has-feedback">
       <input type="hidden" class="form-control" name="auth" value="$auth" required/>
     </div>
     <!--{else}-->
     <div class="mb-3 has-feedback">
-			<span class="mdi mdi-account" aria-hidden="true"></span>
-      <input type="text" class="form-control" id="email_$loginhash" name="email" autocomplete="off" placeholder="{lang email_username}" required/>
+		<span class="mdi mdi-account" aria-hidden="true"></span>
+      	<input type="text" class="form-control" id="email_$loginhash" name="email" autocomplete="off" placeholder="{lang email_username}" required/>
     </div>
     <div class="mb-3 has-feedback">
-			<span class="mdi mdi-lock" aria-hidden="true"></span>
-      <input type="password" class="form-control" id="password3_$loginhash" name="password" onfocus="this.type='password'" autocomplete="off" placeholder="{lang user_login_password}" required/>
+		<span class="mdi mdi-lock" aria-hidden="true"></span>
+      	<input type="password" class="form-control" id="password3_$loginhash" name="password" onfocus="this.type='password'" autocomplete="off" placeholder="{lang user_login_password}" required/>
     </div>
     <!--{/if}-->
     <!--{if $seccodecheck}-->
-		<div class="mb-3 has-feedback">
+	<div class="mb-3 has-feedback">
     <!--{template common/seccheck}--> 
     </div>
     <!--{/if}-->
-
     <div class="mb-3">
       <div class="form-check">
         <input type="checkbox" class="form-check-input" id="cookietime_$loginhash" name="cookietime" type="checkbox" value="2592000" $cookietimecheck>
         <label class="form-check-label not-user-select" for="cookietime_$loginhash">记住我？</label>
-				<!--{if !$_G['setting']['bbclosed']}--><a href="user.php?mod=login&op=logging&action=lostpasswd" class="text-indigo-400 hover:text-blue-500">忘记密码？</a><!--{/if}-->
+		<!--{if !$_G['setting']['bbclosed']}--><a href="user.php?mod=login&op=logging&action=lostpasswd" class="text-indigo-400 hover:text-blue-500">忘记密码？</a><!--{/if}-->
       </div>
     </div>
-		<div class="mb-3 d-grid">
-			<button class="btn btn-round btn-primary" name="loginsubmit" type="submit">立即登录</button>
-			<a class="btn btn-round btn-success" href="admin.php">管理员登录</a>
-		</div>
-		<p class="error-msg text-center" id="returnmessage_$loginhash"><!--{if $_G[setting][bbclosed]}-->{lang site_closed_please_admin}<!--{/if}--></p>
-		<!--{if !$_G['setting']['bbclosed']}-->
-		<!--{if $_G['setting']['regstatus']>0}--> 
-		<p class="text-center">
-			<span>还没有账号？</span>
-			<a href="user.php?mod=register&referer={eval echo urlencode($referer);}" <!--{if !empty($_GET['inajax'])}-->onclick="_login.register($referer);return false;"<!--{/if}--> title="$_G['setting']['reglinkname']">$_G['setting']['reglinkname']</a>
-		</p>
+	<div class="mb-3 d-grid">
+		<button class="btn btn-round btn-primary" name="loginsubmit" type="submit">立即登录</button>
+		<!--{if $_G[setting][loginset][adminlogin]}-->
+		<a class="btn btn-round btn-success" href="admin.php">管理员登录</a>
 		<!--{/if}-->
-		<!--{if $_G['setting']['qq_login']>0}-->
-		<p class="text-center"><a href="user.php?mod=qqlogin" title="{lang qq_login}"><i class="mdi mdi-qqchat"></i></a></p>
-		<!--{/if}-->
-		<!--{/if}-->
+	</div>
+	<p class="error-msg text-center" id="returnmessage_$loginhash"><!--{if $_G[setting][bbclosed]}-->{lang site_closed_please_admin}<!--{/if}--></p>
+	<!--{if !$_G['setting']['bbclosed']}-->
+	<!--{if $_G['setting']['regstatus']>0}--> 
+	<p class="text-center">
+		<span>还没有账号？</span>
+		<a href="user.php?mod=register&referer={eval echo urlencode($referer);}" <!--{if !empty($_GET['inajax'])}-->onclick="_login.register($referer);return false;"<!--{/if}--> title="$_G['setting']['reglinkname']">$_G['setting']['reglinkname']</a>
+	</p>
+	<!--{/if}-->
+	<!--{if $_G['setting']['qq_login']>0}-->
+	<p class="text-center"><a href="user.php?mod=qqlogin" title="{lang qq_login}"><i class="mdi mdi-qqchat"></i></a></p>
+	<!--{/if}-->
+	<!--{/if}-->
   </form>
   <p class="text-center mb-0"><!--{template common/copyright}--></p>
 </div>

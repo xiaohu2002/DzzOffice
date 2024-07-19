@@ -4,9 +4,6 @@
 <link rel="stylesheet" type="text/css" href="static/css/style.min.css?{VERHASH}">
 <!--{template common/beijing}-->
 <style>
-	body{
-		overflow:auto;
-	}
 	.signin-form .has-feedback {
     position: relative;
 }
@@ -54,7 +51,7 @@
 <![endif]-->
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
-<div class="center-vh p-2">
+<div class="center-vh p-2 overflow-auto">
 	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box">
       <div class="login-left p-5">
@@ -92,7 +89,9 @@
 
           <div class="mb-3 d-grid">
             <button class="btn btn-round btn-primary" name="loginsubmit" type="submit">立即登录</button>
-            <a class="btn btn-round btn-success" href="admin.php">管理员登录</a>
+            <!--{if $_G[setting][loginset][adminlogin]}-->
+              <a class="btn btn-round btn-success" href="admin.php">管理员登录</a>
+            <!--{/if}-->
           </div>
           <p class="error-msg text-center" id="returnmessage_$loginhash"><!--{if $_G[setting][bbclosed]}-->{lang site_closed_please_admin}<!--{/if}--></p>
           <!--{if !$_G['setting']['bbclosed']}-->

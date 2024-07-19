@@ -29,9 +29,6 @@
     text-align: center;
     pointer-events: none;
 }
-	html, body{
-		overflow:auto;
-	}
 	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
 		background-color:$_G[setting][loginset][kbcolor];
@@ -43,7 +40,7 @@
 	}
 	<!--{/if}-->
 </style>
-<div class="center-vh">
+<div class="center-vh overflow-auto">
 <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->" id="register_form">
   <div class="text-center mb-3">
 		<img alt="light year admin" src="{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}" style="max-height: 60px;">

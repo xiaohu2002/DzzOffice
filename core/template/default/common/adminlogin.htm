@@ -52,7 +52,7 @@
 <!--{template common/beijing}-->
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{if $_G['setting'][loginset][template] == 2}-->
-<div class="row vh-100" style="position: absolute;width: 100%">
+<div class="row vh-100 overflow-auto" style="position: absolute;width: 100%;">
   <div class="col-md-6 col-lg-7 col-xl-8 d-none d-md-block">
     <div class="d-flex vh-100">
       <div class="p-5 align-self-end">
@@ -90,7 +90,7 @@
   </div>
 </div>
 <!--{elseif $_G['setting'][loginset][template] == 3}-->
-<div class="center-vh">
+<div class="center-vh overflow-auto">
 	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box">
 
@@ -124,7 +124,7 @@
   </div>
 </div>
 <!--{else}-->
-<div class="center-vh">
+<div class="center-vh overflow-auto">
   <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->" id="register_form">
     <div class="text-center mb-3">
       $avastar

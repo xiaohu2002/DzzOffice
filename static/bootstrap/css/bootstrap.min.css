@@ -15999,7 +15999,7 @@ fieldset:disabled .btn {
 .error-msg{
 	color: #FF0000;
 }
-.avatar,.img-avatar{
+.avatar, .img-avatar{
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center;
@@ -16015,7 +16015,7 @@ fieldset:disabled .btn {
     line-height: 48px;
 	max-width: inherit;
     color: #fff;
-    font-size: 18px;
+    font-size: large;
     visibility: visible;
     border: 2px solid #fff;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
@@ -16238,7 +16238,7 @@ fieldset:disabled .btn {
 .user-ul li .user-a .cavatar {
 	position:absolute;
 	left:6px;
-	top:5px;
+	top:3px;
 }
 .user-ul li .user-a .cavatar .img-avatar {
 	width:35px;
@@ -16261,9 +16261,6 @@ fieldset:disabled .btn {
 	text-align:left;
 	display: flex;
 	flex-wrap: wrap;
-}
-.signin-form{
-	max-width: 480px;
 }
 
 .main-content {

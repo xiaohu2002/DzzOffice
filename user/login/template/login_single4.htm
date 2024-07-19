@@ -26,9 +26,6 @@
     text-align: center;
     pointer-events: none;
 }
-	html, body{
-		overflow:auto;
-	}
 	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
 		background-color:$_G[setting][loginset][kbcolor];
@@ -42,7 +39,7 @@
 </style>
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
-<div class="center-vh">
+<div class="center-vh overflow-auto">
 <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
   <div class="text-center mb-3">
   	<img alt="light year admin" src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->">
@@ -68,7 +65,9 @@
     </ul>
     <div class="mb-3 d-grid">
       <button class="btn btn-round btn-primary btn-block disabled" id="loginsubmit" name="loginsubmit" type="submit" value="true">立即登录</button>
-      <a class="btn btn-round btn-success" href="admin.php">管理员登录</a>
+      <!--{if $_G[setting][loginset][adminlogin]}-->
+        <a class="btn btn-round btn-success" href="admin.php">管理员登录</a>
+      <!--{/if}-->
     </div>
 	<p class="error-msg text-center" id="returnmessage_$loginhash"><!--{if $_G[setting][bbclosed]}-->{lang site_closed_please_admin}<!--{/if}--></p>
     <!--{if !$_G['setting']['bbclosed']}-->

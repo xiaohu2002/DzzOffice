@@ -3,9 +3,6 @@
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css?{VERHASH}">
 <!--{template common/beijing}-->
 <style>
-	html, body{
-		overflow:auto;
-	}
 	<!--{if $_G[setting][loginset][kbcolor]}-->
 	.card{
 		background-color:$_G[setting][loginset][kbcolor];
@@ -23,7 +20,7 @@
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{if !empty($_GET['inajax'])}--><button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button><!--{/if}-->
-<div class="row vh-100" id="lostpw_container_$loginhash" style="position: absolute;width: 100%">
+<div class="row vh-100 overflow-auto" id="lostpw_container_$loginhash" style="position: absolute;width: 100%;">
   <div class="col-md-6 col-lg-7 col-xl-8 d-none d-md-block">
 
     <div class="d-flex vh-100">

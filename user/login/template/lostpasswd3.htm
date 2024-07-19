@@ -5,9 +5,6 @@
 <link rel="stylesheet" type="text/css" href="static/css/style.min.css?{VERHASH}">
 <!--{template common/beijing}-->
 <style>
-	body{
-		overflow:auto;
-	}
 	.signin-form .has-feedback {
     position: relative;
 }
@@ -56,7 +53,7 @@
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{if !empty($_GET['inajax'])}--><button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button><!--{/if}-->
-<div class="center-vh">
+<div class="center-vh overflow-auto">
 	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box" id="lostpw_container_$loginhash">
         <div class="login-left p-5">
