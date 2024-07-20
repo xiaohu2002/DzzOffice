@@ -6,7 +6,7 @@ img{
 body.view{
 	font-weight: 100;
 	line-height: 30px;
-	padding:42px;
+	padding:var(--radius);
 }
 .dzz-attach,.dzz-link,.dzz-dzzdoc {
 	padding:0 10px;

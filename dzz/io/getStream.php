@@ -11,9 +11,7 @@
 }
 
 if(!$path=dzzdecode(rawurldecode($_GET['path']))){
-	@header('HTTP/1.1 404 Not Found');
-	@header('Status: 404 Not Found');
-	exit('Access Denied');
+	header('Location:/404.html');exit();
 }
 
 if(!$url=(IO::getStream($path))){

@@ -47,7 +47,6 @@ $lang = array
   'scan_qr_code'=>' Scan QR code, send to mobile phone ',
   'download_link'=>' Download address ',
   'share_status'=>' share status',
-  'delete_share'=>' delete share',
   'delete_share1'=>' After deleting a share, all links that have been sent to this share will become invalid and cannot be restored. Are you sure you want to delete this share? ',
   'please_fill_share_title'=>' Please fill in the share title',
   'create_failure'=>' create failure',

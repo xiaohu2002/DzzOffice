@@ -258,7 +258,6 @@ $lang = array
   'available' => 'available',
   'action' => 'action',
   'ignore' => 'ignore',
-  'operation' => 'operation',
   'reason' => 'reason',
   'selling_price' => 'price',
   'original_price' => 'original',

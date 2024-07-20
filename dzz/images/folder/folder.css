@@ -361,9 +361,6 @@ span .chk-ico {
 	border-radius:  var(--radius);
 	color:#4c89fb;
 }
-.nav-pills li{
-	padding-right: 5px;
-}
 .navtopheader{
 	position: fixed;
 	top: 0;

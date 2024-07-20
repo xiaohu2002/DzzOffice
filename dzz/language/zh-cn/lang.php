@@ -472,7 +472,11 @@ $lang = array(
     'all_type' => '全部类型',
     'some_day_after' => '{day}天后',
     'within_a_day' => '1天内',
-	
-	'savetosuccess'=>' 保存成功，文件路径： '
+	'savetosuccess'=>' 保存成功，文件路径： ',
+
+    'delete_share'=>'删除分享',
+    'affirm_stop_sharing'=>'确定取消分享',
+    'stop_sharing_success'=>'取消分享成功',
+    'share_stop_sharing1'=>'<p class="text-center">取消分享后，该条分享记录将被删除，将无法再访问此分享链接。</p><p class="text-center">你确认要取消分享吗？</p>',
 );
 ?>

@@ -63,7 +63,7 @@
     <tbody class="properties-con">
       <!--{loop $permgroups $v}-->
       <tr class="properties-list" id="perm_$v[id]">
-        <td><img src="dzz/styles/thame/colorful/system/folder.png">
+        <td><img src="dzz/images/extimg/folder.png">
           <span class="d-inline-block text-truncate" style="max-width: 150px;">$v[pername]</span>
           <!--{if $v['system']}--> 
           <p class="label">{lang system_default}</p>
@@ -128,7 +128,7 @@
 
               var html ='<tr class="properties-list" id="perm_'+data['success']['id']+'"> ' +
                       '<td>' +
-                      '<img src="dzz/styles/thame/colorful/system/folder.png"><span class="d-inline-block text-truncate" style="max-width: 150px;">' + data['success']['pername'] + '</span> '+'</td>'+
+                      '<img src="dzz/images/extimg/folder.png"><span class="d-inline-block text-truncate" style="max-width: 150px;">' + data['success']['pername'] + '</span> '+'</td>'+
                       '<td><ul class="nav nav-pills">' +permstr+'</ul></td>' +
 											'<td>' +
 											'<div class="form-check form-switch"><input type="checkbox" onchange="edit_perm(this,'+data['success']['id']+')" class="form-check-input" checked="checked"/></div>' +

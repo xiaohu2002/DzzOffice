@@ -1304,7 +1304,7 @@ class UploadHandler
         }
         $file_name = $this->get_file_name_param();
         if (!$this->is_valid_file_object($file_name)) {
-            return $this->header('HTTP/1.1 404 Not Found');
+            header('Location:/404.html');exit();
         }
         if ($redirect_header) {
             return $this->header(

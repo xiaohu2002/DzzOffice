@@ -58,7 +58,7 @@
             			<span class="chk chk-ico"></span>
 					</span>
 					{lang checked}<span node-type="num">0</span>{lang file_number_type}</span>
-					<button class="btn btn-danger" data-key="unshare"><span>{lang del_share}</span> </button><!--{if $_G[adminid]==1}-->
+					<button class="btn btn-danger" data-key="unshare"><span>{lang delete_share}</span> </button><!--{if $_G[adminid]==1}-->
 					<button class="btn btn-warning" data-key="forbidden"><span>{lang screen_share}</span> </button>
 					<button class="btn btn-success" data-key="allow"><span>{lang cancel_shielding}</span> </button><!--{/if}-->
 				</div>
@@ -70,7 +70,8 @@
 							<!-- 第一列 -->
 							<div node-type="title-col" data-key="title" class="col c1">
 								<div class="name"> <span>{lang sharing_file}</span>
-									<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='title'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </div>
+									<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='title'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
+								</div>
 							</div>
 							<!-- 其他列 -->
 							<div node-type="title-col" data-key="dateline" class="col"> {lang share_time}
@@ -88,7 +89,6 @@
 							</div>
 							<!--{/if}-->
 						</div>
-
 					</div>
 					<div node-type="list" class="list list-share">
 						<!--{loop $list $value}-->
@@ -132,10 +132,8 @@
 						<!--{/loop}-->
 						<div class="page clearfix" style="padding: 20px 0">$multi</div>
 					</div>
-
 				</div>
 			</div>
-
 			<!--{/if}-->
 		</div>
 	</div>
@@ -143,8 +141,8 @@
 <script type="text/javascript">
 	jQuery(document).ready(function(e) {
 		jQuery('select').lyearSelect({
-      width:70,
-    });
+			width:70,
+		});
 		jQuery(document).on('mouseenter', 'div[node-type=item]', function() {
 			jQuery(this).addClass('item-hover');
 		});

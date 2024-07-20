@@ -15,6 +15,9 @@ $dzz->init_misc=false;
 $dzz->init();
 $sid=$_GET['sid'];
 $short=C::t('shorturl')->fetch($sid);
+if(!$short){
+	header('Location:/404.html');exit();
+}
 C::t('shorturl')->addview($sid);
 @header("Location: ". outputurl($short['url']));
 exit();

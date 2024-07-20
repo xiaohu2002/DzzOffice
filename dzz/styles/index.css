@@ -138,16 +138,6 @@ height: expression(this.height > 50 && this.width<=this.height ? 50 : true);
 	overflow: hidden;
 	background: url(../images/b.gif);
 }
-#hidebackground_button {
-	position: absolute;
-	width: 30px;
-	height: 30px;
-	bottom: 0px;
-	right: 0px;
-	z-index: 100;
-	cursor: pointer;
-	background: url(images/desktop.png) center center no-repeat;
-}
 ._text {
 	color: #00F;
 }

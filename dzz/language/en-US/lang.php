@@ -472,6 +472,10 @@ $lang = array(
     'some_day_after' => '{day} days later',
     'within_a_day' => '1 days',
 	
-	'savetosuccess'=>' Saved successfully, file path: '
+	'savetosuccess'=>' Saved successfully, file path: ',
+    'delete_share'=>' delete share',
+    'affirm_stop_sharing'=>'Confirm to cancel sharing',
+    'stop_sharing_success'=>'Confirm to block sharing',
+    'share_stop_sharing1'=>'<p class="text-center">After canceling sharing, this sharing record will be deleted and you will no longer be able to access this sharing link</p> <p class="text center"> are you sure you want to cancel sharing?</p>',
 );
 ?>

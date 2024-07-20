@@ -7,10 +7,7 @@ $lang = array (
 	'sharing_file'=>'分享文件',
 	'share_user'=>'分享用户',
 	'share_title'=>'分享标题',
-	'del_share'=>'删除分享',
 	'screen_share'=>'屏蔽分享',
-	'affirm_stop_sharing'=>'确定取消分享',
-	'stop_sharing_success'=>'取消分享成功',
 	'affirm_screen_share'=>'确定屏蔽分享',
 	'share_screen'=>'分享屏蔽',
 	'share_screen_success'=>'分享屏蔽成功',
@@ -27,7 +24,6 @@ $lang = array (
 	'extract_password'=>'提取密码',
 	'been_blocked'=>'已屏蔽',
 	'file_been_deleted'=>'文件已删除',
-	'share_stop_sharing1'=>'<p class="text-center">取消分享后，该条分享记录将被删除，将无法再访问此分享链接。</p><p class="text-center">你确认要取消分享吗？</p>',
 	'share_stop_sharing2'=>'<p class="text-center">该条分享记录将被屏蔽，将无法再访问此分享链接。</p><p class="text-center">你确认要屏蔽该条分享吗？</p>',
 	'share_stop_sharing3'=>'<p class="text-center">该条分享记录将被恢复访问。</p><p class="text-center">你确认要取消屏蔽该条分享吗？</p>',
 );

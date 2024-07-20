@@ -49,7 +49,6 @@ $lang = array
 	'scan_qr_code'=>'扫描二维码,发送到手机',
 	'download_link'=>'下载地址',
 	'share_status'=>'分享状态',	
-	'delete_share'=>'删除分享',
 	'delete_share1'=>'删除分享后，已经发出去的此分享链接都将失效，无法恢复，您确定要删除此分享吗？',
 	'please_fill_share_title'=>'请填写分享标题',
 	'create_failure'=>'创建失败',

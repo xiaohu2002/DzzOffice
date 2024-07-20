@@ -21,8 +21,26 @@ if ($_GET['do'] == 'delete') {
         }
     }
     exit(json_encode($return));
-	
-
+} elseif ($_GET['do'] == 'shortdel' && $_G['adminid']) {
+	$sid = $_GET['sid'];
+	if (empty($sid)) {
+		exit(json_encode(lang('parameters_error')));
+	}
+	$return = array();
+	try {
+		foreach ($sid as $v) {
+			$deleteResult=DB::delete('shorturl',"sid='{$v}'");//删除短链接
+			if ($deleteResult) {
+				$return['msg'][$v] = array('success'=>true);
+			} else {
+				$return['msg'][$v] = lang('parameters_error');
+			}
+		}
+	} catch (Exception $e) {
+		// 捕获在执行删除操作时可能抛出的异常
+		$return['msg'] = 'An exception occurred during deletion: ' . $e->getMessage();
+	}
+    exit(json_encode($return));
 } elseif ($_GET['do'] == 'forbidden' && $_G['adminid']) {
 	$sids = $_GET['sids'];
 	if ($_GET['flag'] == 'forbidden') {

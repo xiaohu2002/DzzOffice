@@ -16271,6 +16271,13 @@ fieldset:disabled .btn {
     margin-left: auto
 }
 
+.mask_div {
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none;    /* Firefox 2+ */
+    -ms-user-select: none;     /* IE 10+ */
+    user-select: none;         /* 标准语法 */
+}
+
 @media (min-width:576px) {
     .main-content,.main-header{
         max-width: 540px

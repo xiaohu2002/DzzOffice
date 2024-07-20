@@ -258,7 +258,6 @@ $lang = array
 	'available' => '可用',
 	'action' => '动作',
 	'ignore' => '忽略',
-	'operation' => '操作',
 	'reason' => '原因',
 	'selling_price'=>'售价',
 	'original_price'=>'原价',

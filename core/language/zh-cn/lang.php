@@ -1294,6 +1294,7 @@ $_G[siteurl]',
   'login_success' => '登录成功！',
 	'no_relevant_content' => '没有相关的内容…',
 	'degree_exhaust'=>'次数用尽',
+	'short'=>'短链接',
 );
 
 ?>
