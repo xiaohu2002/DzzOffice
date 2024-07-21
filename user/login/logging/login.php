@@ -178,6 +178,4 @@ if(!isset($_GET['loginsubmit'])) {//是否提交
             showTips(array('error'=>lang('login_strike')),$type);
         }
     }
-
-
 }

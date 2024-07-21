@@ -13,12 +13,16 @@ function loginsub(formid,rspaceid){
     jQuery.post(url+'&returnType='+type,formData,function(json){
 
         if(json['success']){
+            showmessage(json['success']['message'], 'success', '', 1,'right-top');
 			location.href=json['success']['url_forward'];
         }else if(json['error']){
-
+            clearpwd();
+            showmessage(json['error'], 'danger', '', 1,'right-top');
             jQuery('#'+rspaceid).html(json['error']);
 
         }else{
+            clearpwd();
+            showmessage(__lang.system_busy, 'danger', '', 1,'right-top');
             jQuery('#'+rspaceid).html(__lang.system_busy);
         }
     },'json');

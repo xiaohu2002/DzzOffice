@@ -13,5 +13,6 @@ $lang = array (
 	'user_growth_statistics'=>'用户数据统计',
 	'user_total'=>'用户总数',
 	'add_users'=>'新增用户',
+	'fileperms'=>'文件权限检查',
 );
 ?>

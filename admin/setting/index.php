@@ -143,7 +143,6 @@ if (!submitcheck('settingsubmit')) {
 		$replace = empty($_G['cache']['censor']['replace']) ? '*' : $_G['cache']['censor']['replace'];
 	}
 } else {
-
 	$settingnew = $_GET['settingnew'];
 	if ($operation == 'basic') {
 		$settingnew['bbname'] = $settingnew['sitename'];
@@ -203,14 +202,14 @@ if (!submitcheck('settingsubmit')) {
 		}
 	} elseif ($operation == 'notification') {
 		$settingnew['notification'] = intval($settingnew['notification']);
-	}elseif ($operation == 'watermark') {
+	} elseif ($operation == 'cachethread') {
+		$settingnew['onlinehold'] = intval($settingnew['onlinehold']) > 0 ? intval($settingnew['onlinehold']) : 15;
+	} elseif ($operation == 'watermark') {
 		$settingnew['watermark'] = intval($settingnew['watermark']);
-	}
-	elseif ($operation == 'denlu') {
+	} elseif ($operation == 'denlu') {
 		$settingnew['numberoflogins'] = intval($settingnew['numberoflogins']);
 		$settingnew['forbiddentime'] = intval($settingnew['forbiddentime']);
-	}
-    elseif ($operation == 'access') {
+	} elseif ($operation == 'access') {
 		isset($settingnew['reglinkname']) && empty($settingnew['reglinkname']) && $settingnew['reglinkname'] = lang('register_immediately');
 		$settingnew['pwlength'] = intval($settingnew['pwlength']);
 		$settingnew['regstatus'] = intval($settingnew['regstatus']);
@@ -237,7 +236,7 @@ if (!submitcheck('settingsubmit')) {
 		if (empty($settingnew['strongpw'])) {
 			$settingnew['strongpw'] = array();
 		}
-	}elseif($operation == 'space'){//空间设置
+	} elseif($operation == 'space'){//空间设置
 		$group = $_GET['group'];
 		foreach ($group as $key => $value) {
 			C::t('usergroup_field') -> update(intval($key), array('maxspacesize' => intval($value['maxspacesize']), 'maxattachsize' => intval($value['maxattachsize']), 'attachextensions' => trim($value['attachextensions'])));
@@ -270,7 +269,7 @@ if (!submitcheck('settingsubmit')) {
 			}
 
 		}*/
-	}elseif ($operation == 'datetime') {
+	} elseif ($operation == 'datetime') {
 		if (isset($settingnew['timeformat'])) {
 			$settingnew['timeformat'] = $settingnew['timeformat'] == '24' ? 'H:i' : 'h:i A';
 		}
@@ -289,45 +288,45 @@ if (!submitcheck('settingsubmit')) {
 		$data = array('replace' => trim($_GET['replace']), 'words' => $_GET['badwords']);
 		savecache('censor', $data);
 		showmessage('do_success', dreferer());
-	}elseif ($operation == 'loginset') {
-    if ($back = trim($settingnew['loginset']['background'])) {
-			if (strpos($back, '#') === 0) {
-				$settingnew['loginset']['bcolor'] = $back;
-			} else {
-				$arr = explode('.', $back);
-				$ext = array_pop($arr);
-				if ($ext && in_array(strtolower($ext), array('jpg', 'jpeg', 'gif', 'png'))) {
-					$settingnew['loginset']['img'] = $back;
-					$settingnew['loginset']['bcolor'] = '';
+	} elseif ($operation == 'loginset') {
+		if ($back = trim($settingnew['loginset']['background'])) {
+				if (strpos($back, '#') === 0) {
+					$settingnew['loginset']['bcolor'] = $back;
 				} else {
-					$settingnew['loginset']['url'] = $back;
-					$settingnew['loginset']['bcolor'] = '';
+					$arr = explode('.', $back);
+					$ext = array_pop($arr);
+					if ($ext && in_array(strtolower($ext), array('jpg', 'jpeg', 'gif', 'png'))) {
+						$settingnew['loginset']['img'] = $back;
+						$settingnew['loginset']['bcolor'] = '';
+					} else {
+						$settingnew['loginset']['url'] = $back;
+						$settingnew['loginset']['bcolor'] = '';
+					}
+				}
+			} else {
+				$settingnew['loginset']['bcolor'] = '';
+			}
+			if ($back = trim($settingnew['loginset']['kbcolor'])) {
+		if (strpos($back, '#') === 0 || strpos($back, 'rgb') === 0) {
+			$settingnew['loginset']['kbcolor'] = $back;
+				}else {
+					$arr = explode('.', $back);
+					$ext = array_pop($arr);
+					if ($ext && in_array(strtolower($ext), array('jpg', 'jpeg', 'gif', 'png'))) {
+						$settingnew['loginset']['kbcolor'] = $back;
+					}else {
+			$settingnew['loginset']['kbcolor'] ='';
+			}
 				}
 			}
-		} else {
-			$settingnew['loginset']['bcolor'] = '';
-		}
-		if ($back = trim($settingnew['loginset']['kbcolor'])) {
-      if (strpos($back, '#') === 0 || strpos($back, 'rgb') === 0) {
-        $settingnew['loginset']['kbcolor'] = $back;
-			}else {
-				$arr = explode('.', $back);
-				$ext = array_pop($arr);
-				if ($ext && in_array(strtolower($ext), array('jpg', 'jpeg', 'gif', 'png'))) {
-					$settingnew['loginset']['kbcolor'] = $back;
-				}else {
-          $settingnew['loginset']['kbcolor'] ='';
-        }
+		if ($back = trim($settingnew['loginset']['transparency'])) {
+			if (strpos($back, '#') === 0 || strpos($back, 'rgb') === 0) {
+				$settingnew['loginset']['transparency'] = $back;
+					}else {
+				$settingnew['loginset']['transparency'] ='';
 			}
 		}
-    if ($back = trim($settingnew['loginset']['transparency'])) {
-      if (strpos($back, '#') === 0 || strpos($back, 'rgb') === 0) {
-        $settingnew['loginset']['transparency'] = $back;
-			}else {
-        $settingnew['loginset']['transparency'] ='';
-      }
-		}
-	}elseif ($operation == 'qywechat') {
+	} elseif ($operation == 'qywechat') {
 		switch($_GET['fbind']) {
 			case 'bind' :
 				$wechat = new qyWechat( array('appid' => $settingnew['CorpID'], 'appsecret' => $settingnew['CorpSecret']));
@@ -345,7 +344,6 @@ if (!submitcheck('settingsubmit')) {
 				break;
 		}
 	}
-
 	$updatecache = FALSE;
 	$settings = array();
 	foreach ($settingnew as $key => $val) {

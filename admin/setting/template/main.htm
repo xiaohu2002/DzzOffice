@@ -96,6 +96,10 @@
 				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=notification">{lang Notification Settings}</a> </li>
 				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=watermark">水印设置</a></li>
       </ul>
+      <!--{elseif $operation=='cachethread'}-->
+      <ul class="nav nav-pills">
+        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=cachethread">{lang set}</a></li>
+      </ul>
       <!--{elseif $operation=='at'}-->
       <ul class="nav nav-pills">
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=basic">{lang members_verify_base}</a> </li>
@@ -269,6 +273,20 @@
           </div>
         </div>
         <div class="row mb-3">
+          <label class="col-sm-2">图片处理库类型</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="imagelib1" name="settingnew[imagelib]" value="0" <!--{if !$setting[imagelib]}-->checked="checked" <!--{/if}-->>
+              <label class="form-check-label" for="imagelib1">GD</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="imagelib2" name="settingnew[imagelib]" value="1" <!--{if $setting[imagelib]}-->checked="checked"<!--{/if}-->>
+              <label class="form-check-label" for="imagelib2">ImageMagick</label>
+            </div>
+            <span class="help-block">处理缩略图和水印的图像处理库。GD 是最广泛的处理库但是使用的系统资源较多。ImageMagick速度快系统资源占用少，但安全性相对较差，且需要服务器安装 ImageMagick 扩展。</span>
+          </div>
+        </div>
+        <div class="row mb-3">
           <label class="col-sm-2">{lang file_sharing}</label>
           <div class="col-sm-10">
             <div class="form-check form-check-inline">
@@ -386,7 +404,66 @@
               jQuery('#' + ctrlid + '_Menu').html(vals[0].path + ' ');
               jQuery('#sel_' + ctrlid).val(vals[0].orgid);
           }
-      </script> 
+      </script>
+      <!--{elseif $operation=='cachethread'}-->
+      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+        <input type="hidden" value="{FORMHASH}" name="formhash">
+        <input type="hidden" value="denlu" name="operation">
+        <div class="row mb-3">
+          <label class="col-sm-2">禁止浏览器缓冲</label>
+					<div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="nocacheheaders1" name="settingnew[nocacheheaders]" value="1" <!--{if $setting[nocacheheaders]}-->checked<!--{/if}-->>
+              <label class="form-check-label" for="nocacheheaders1">{lang yes}</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="nocacheheaders2" name="settingnew[nocacheheaders]" value="0" <!--{if !$setting[nocacheheaders]}-->checked<!--{/if}-->>
+              <label class="form-check-label" for="nocacheheaders2">{lang no}</label>
+            </div>
+            <span class="help-block">禁止浏览器对系统页面进行缓冲，可用于解决极个别浏览器内容刷新不正常的问题，会加重服务器负担。</span>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="onlinehold" class="col-sm-2">在线保持时间</label>
+          <div class="col-sm-10">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" id="onlinehold" name="settingnew[onlinehold]" <!--{if isset($setting['onlinehold'])}-->value="$setting[onlinehold]" <!--{/if}-->>
+              <span class="input-group-text">{lang minute}</span>
+            </div>
+            <ul class="help-block">
+              <li>请根据访问情况设置合理的数值，访问量大的站点应当调小该数值，设置范围<code>5 - 60</code>，过大或者过小的设置都有可能会增大服务器资源开销本。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-2">关闭session机制</label>
+					<div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="sessionclose1" name="settingnew[sessionclose]" value="1" <!--{if $setting[sessionclose]}-->checked<!--{/if}-->>
+              <label class="form-check-label" for="sessionclose1">{lang yes}</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="sessionclose2" name="settingnew[sessionclose]" value="0" <!--{if !$setting[sessionclose]}-->checked<!--{/if}-->>
+              <label class="form-check-label" for="sessionclose2">{lang no}</label>
+            </div>
+            <span class="help-block">关闭session机制以后，可明显降低站点的服务器负担，建议在线用户数超过2万时开启本功能。（注意：游客数和用户的在线时长将不再进行统计，在线用户列表功能将不可用）</span>
+          </div>
+        </div>
+        <dl>
+          <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit"  value="{lang save_changes}" type="submit">
+        </dl> 
+      </form>
+      <script type="text/javascript" src="static/lyear/js/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+            // 初始化数值
+            $("#onlinehold").TouchSpin({
+                min: 5,
+                initval: 60,
+                max:60,
+            });
+        });
+      </script>
       <!--{elseif $operation=='at'}-->
       <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform" style="margin-top: 15px;">
         <input type="hidden" value="{FORMHASH}" name="formhash">
@@ -500,7 +577,6 @@
       <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">
         <input type="hidden" value="upload" name="operation">
-
         <div class="row mb-3">
           <label for="upload_file_ext" class="col-sm-2">{lang setting_main_suffix}</label>
           <div class="col-sm-10">
@@ -630,53 +706,53 @@
         <input type="hidden" value="loginset" name="operation">
         <input type="hidden" value="1" name="settingnew[loginset][available]">
         <div class="row mb-3">
-          <label class="col-sm-2" for="settingnew[loginset][title]">{lang main_title_page}</label>
+          <label class="col-sm-2" for="title">{lang main_title_page}</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="settingnew[loginset][title]" name="settingnew[loginset][title]" value="$setting[loginset][title]"/>
+            <input type="text" class="form-control" id="title" name="settingnew[loginset][title]" value="$setting[loginset][title]"/>
             <span class="help-block">{lang main_title_page_state}</span>
           </div>
         </div>
         <div class="row mb-3">
-          <label class="col-sm-2" for="settingnew[loginset][subtitle]">{lang page_subtitle}</label>
+          <label class="col-sm-2" for="subtitle">{lang page_subtitle}</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="settingnew[loginset][subtitle]" name="settingnew[loginset][subtitle]" value="$setting[loginset][subtitle]"/>
+            <input type="text" class="form-control" id="subtitle" name="settingnew[loginset][subtitle]" value="$setting[loginset][subtitle]"/>
             <span class="help-block">{lang page_subtitle_state}</span>
           </div>
         </div>
         <div class="row mb-3">
-          <label class="col-sm-2" for="settingnew[loginset][background]">{lang page_background}</label>
+          <label class="col-sm-2" for="background">{lang page_background}</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="settingnew[loginset][background]" name="settingnew[loginset][background]" value="$setting[loginset][background]"/>
+            <input type="text" class="form-control" id="background" name="settingnew[loginset][background]" value="$setting[loginset][background]"/>
             <span class="help-block">{lang for_color_set}设置的图片或网站会同步到首页背景设置。</span>
           </div>
         </div>
         <div class="row mb-3">
-          <label class="col-sm-2" for="settingnew[loginset][kbcolor]">登录框背景</label>
+          <label class="col-sm-2" for="kbcolor">登录框背景</label>
 					<div class="col-sm-10">
-              <input type="text" class="form-control" id="settingnew[loginset][kbcolor]" name="settingnew[loginset][kbcolor]" value="$setting[loginset][kbcolor]">
+              <input type="text" class="form-control" id="kbcolor" name="settingnew[loginset][kbcolor]" value="$setting[loginset][kbcolor]">
               <span class="help-block">可以为颜色(如:#FFF);图片(以.jpeg,.jpg,.png结尾)。</span>
           </div>
         </div>
 				<div class="row mb-3">
-          <label class="col-sm-2" for="settingnew[loginset][transparency]">输入框背景颜色</label>
+          <label class="col-sm-2" for="transparency">输入框背景颜色</label>
 					<div class="col-sm-10">
-              <input type="text" id="settingnew[loginset][transparency]" class="form-control" name="settingnew[loginset][transparency]" value="$setting[loginset][transparency]">
+              <input type="text" id="transparency" class="form-control" name="settingnew[loginset][transparency]" value="$setting[loginset][transparency]">
             <span class="help-block">只能输入颜色(如:rgba(8, 169, 249, 0.57))</span>
           </div>
         </div>
 				<div class="row mb-3">
-          <label class="col-sm-2" for="settingnew[loginset][lwaveanimation]">登录框水波动画</label>
+          <label class="col-sm-2" for="lwaveanimation">登录框水波动画</label>
 					<div class="col-sm-10">
               <div class="form-check form-switch">
-            <input type="checkbox" name="settingnew[loginset][lwaveanimation]" id="settingnew[loginset][lwaveanimation]" class="form-check-input" <!--{if $setting[loginset][lwaveanimation]}-->checked="checked"<!--{/if}-->> 
+            <input type="checkbox" name="settingnew[loginset][lwaveanimation]" id="lwaveanimation" class="form-check-input" <!--{if $setting[loginset][lwaveanimation]}-->checked="checked"<!--{/if}-->> 
           </div>
           </div>
         </div>
         <div class="row mb-3">
-          <label class="col-sm-2" for="settingnew[loginset][lwaveanimation]">管理员登录按钮</label>
+          <label class="col-sm-2" for="adminlogin">管理员登录按钮</label>
 					<div class="col-sm-10">
               <div class="form-check form-switch">
-                <input type="checkbox" name="settingnew[loginset][adminlogin]" id="settingnew[loginset][adminlogin]" class="form-check-input" <!--{if $setting[loginset][adminlogin]}-->checked="checked"<!--{/if}-->> 
+                <input type="checkbox" name="settingnew[loginset][adminlogin]" id="adminlogin" class="form-check-input" <!--{if $setting[loginset][adminlogin]}-->checked="checked"<!--{/if}-->> 
               </div>
           </div>
         </div>
@@ -903,6 +979,46 @@
             </div>
             <span class="help-block">{lang How many login failures are allowed before you can log in again}</span>
          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-2">登录密码加密</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="pwdsafety1" name="settingnew[pwdsafety]" value="1" <!--{if $setting[pwdsafety]}-->checked<!--{/if}-->>
+              <label class="form-check-label" for="pwdsafety1">{lang enable}</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="pwdsafety2" name="settingnew[pwdsafety]" value="0" <!--{if !$setting[pwdsafety]}-->checked<!--{/if}-->>
+              <label class="form-check-label" for="pwdsafety2">{lang no_enable}</label>
+            </div>
+          <span class="help-block">选择“启用”，系统登录时的密码将进行加密后再传输</span>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-2">UID登录</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="uidlogin1" name="settingnew[uidlogin]" value="1" <!--{if $setting[uidlogin]}-->checked<!--{/if}-->>
+              <label class="form-check-label" for="uidlogin1">{lang enable}</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="uidlogin2" name="settingnew[uidlogin]" value="0" <!--{if !$setting[uidlogin]}-->checked<!--{/if}-->>
+              <label class="form-check-label" for="uidlogin2">{lang no_enable}</label>
+            </div>
+          <span class="help-block">选择“启用”，系统登录时允许通过UID的方式登录验证</span>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="oltimespan" class="col-sm-2">用户在线时间更新时长</label>
+          <div class="col-sm-10">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" id="oltimespan" name="settingnew[oltimespan]" <!--{if isset($setting['fileVersion'])}-->value="$setting[oltimespan]" <!--{/if}-->>
+              <span class="input-group-text">{lang minute}</span>
+            </div>
+            <ul class="help-block">
+              <li>本设置用以设定更新用户在线时间的时间频率。例如设置为<code>15</code>，则用户每在线<code>15分钟</code>更新一次记录。设置的值越小，则统计越精确，但消耗资源越大。建议设置为<code>5～30</code>范围内，<code>0</code>为不记录用户在线时间。</li>
+            </ul>
+          </div>
         </div>
         <dl>
           <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit"  value="{lang save_changes}" type="submit">

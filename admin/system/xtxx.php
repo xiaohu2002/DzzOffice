@@ -19,7 +19,7 @@ if($do == 'phpinfo'){
   $navtitle = lang('xtxx') . ' - ' . lang('appname');
   $about['version']='V'.CORE_VERSION;//版本信息
   $about['xhversion']='V'.CORE_XHVERSION;//版本信息
-  $about['XHFIXBUG']=CORE_XHFIXBUG;//更新日期
+  $about['XHFIXBUG']=CORE_XHRELEASE;//更新日期
   function shuchu(){
   define('ROOT_PATH', dirname(__FILE__));
   $lang=array (
