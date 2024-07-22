@@ -212,7 +212,11 @@ EOT;
 
 			showmessage('edit_user_success', MOD_URL.'#user_' . $uid, array());
 		}
-	
+		//禁用创始人验证
+		$status = intval($_GET['status']) ? 1 : 0;
+		if($status == 1 && C::t('user') -> checkfounder($user)) {
+			showmessage('创始人账号不能禁用');
+		}
 
 		//用户名验证
 		$username = trim($_GET['username']);
