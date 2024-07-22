@@ -94,7 +94,7 @@ class helper_page {
 "'.$ajaxtarget.' title="下一页"></a></li>' : '').
 			($showkbd && !$simple && $pages > $page && !$ajaxtarget && !$wml ? '<li><kbd><input type="text" name="custompage" size="3" onkeydown="if(event.keyCode==13) {window.location=\''.$jsurl.'}" /></kbd></li>' : '');
 
-			$multipage = $multipage ? '<ul class="pagination '.($classname?$classname:'').'">'.$multipage.($shownum && !$simple ? '<li class="disable"><a class="page-link" title="共有'.$num.'条记录">'.$num.'</a></li>' : '').'</ul>' : '';
+			$multipage = $multipage ? '<div class="text-center"><ul class="pagination '.($classname?$classname:'').'">'.$multipage.($shownum && !$simple ? '<li class="disable"><a class="page-link" title="共有'.$num.'条记录">'.$num.'</a></li>' : '').'</ul></div>' : '';
 		}
 		$maxpage = $realpages;
 		return $multipage;

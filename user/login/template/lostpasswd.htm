@@ -2,7 +2,6 @@
 <!--{template common/header_common}-->
 <!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css?{VERHASH}"><!--{/if}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css?{VERHASH}">
-<link rel="stylesheet" type="text/css" href="static/css/style.min.css?{VERHASH}">
 <script src="user/scripts/login.js?{VERHASH}" type="text/javascript"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{template common/beijing}-->
@@ -51,7 +50,7 @@
     <button type="button" class="btn btn-round btn-primary toMail" >{lang now_your_email}</button>
     <button type="button" class="btn btn-outline-info" onclick="location.href='$_G[siteurl]'">{lang back_homepage}</button>
   </div>
-  <p class="text-center mb-0"><!--{template common/copyright}--></p>
+  <p class="text-center mb-0 text-white"><!--{template common/copyright}--></p>
 </div>
 </div>
 <script type="text/javascript">

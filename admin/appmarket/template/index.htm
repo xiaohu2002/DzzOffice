@@ -5,7 +5,8 @@
     position: absolute;
     left: 0;
     top: 2px;
-}.app-name-wrapper .appicon img {
+}
+.app-name-wrapper .appicon img {
     max-width: 45px;
     max-height: 45px;
     margin: 0;
@@ -21,9 +22,6 @@
     text-overflow: ellipsis;
 	font-size:13px;
 	cursor:default;
-}
-.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
-	white-space:nowrap;
 }
 .group-td-wrapper{
 	max-width:120px;
@@ -74,40 +72,39 @@
 	</div>	
 	<div class="bs-main-container">
 		<div class="all-center-top clearfix">
-				<div class="app-info pull-left">
-          <a href="{MOD_URL}">{lang total}<span class="num">$count</span>{lang ge}{lang app}</a>
-            <span class="select-info">{lang selected}<span class="num">$count</span>{lang ge}{lang app}</span>
-        </div>
-				<div class="tag-filter dropdown pull-right">
-          <a href="javascript:;" data-bs-toggle="dropdown" role="button" id="tag-drop" class="btn btn-primary dropdown-toggle" aria-expanded="false">{eval echo $tagid?$tags[$tagid][tagname]:lang('label');}
-					</a>
-					<ul aria-labelledby="tag-drop" role="menu" class="dropdown-menu" id="tag-drop-menu">
-						<li>
-							<a href="javascript:;"  onclick="screen_app('0','$_GET[group]')";>{lang all}</a>
-						</li>
-						<!--{loop $tags  $value}-->
-						<li>
-							<a href="javascript:;"  onclick="screen_app('$value[tagid]','$_GET[group]')";>$value[tagname]</a>
-						</li>
-						<!--{/loop}-->
-					</ul>
-				</div>
-        <div class="group-filter dropdown pull-right">
-					<a href="{MOD_URL}&group=$group" data-bs-toggle="dropdown" role="button" id="drop-group" class="btn btn-primary dropdown-toggle" aria-expanded="false">{eval echo $group?$grouptitle[$group]:lang('group_permissions');}
-					</a>
-					<ul aria-labelledby="drop-group" role="menu" class="dropdown-menu" id="drop-group-menu">
-						<!--{loop $grouptitle $key $value}-->
-						<li role="presentation"> 
-							<a href="javascript:;" onclick="screen_app('$_GET[tagid]','$key')"; tabindex="-1" role="menuitem">$value</a>
-						</li>
-						<!--{/loop}-->
-					</ul>
-				</div>
-        <div  class="button_add_content">
-          <a href="{MOD_URL}&op=edit&do=add&refer=$refer" id="button_add1" title="{lang add_app}" class="hide">+</a>				
-          <a href="{MOD_URL}&op=import&refer=$refer" id="button_add2" class="hide" title="{lang import_type_app}" style="font-size:20px ;"><i  class="glyphicon glyphicon-download-alt"></i></a>				
-          <a href="javascript:;" id="button_add" style="z-index: 10;">+</a>				
-        </div>	
+			<div class="app-info pull-left">
+         		<a href="{MOD_URL}">{lang total}<span class="num">$count</span>{lang ge}{lang app}</a>
+            	<span class="select-info">{lang selected}<span class="num">$count</span>{lang ge}{lang app}</span>
+        	</div>
+			<div class="tag-filter dropdown pull-right">
+          		<a href="javascript:;" data-bs-toggle="dropdown" role="button" id="tag-drop" class="btn btn-primary dropdown-toggle" aria-expanded="false">{eval echo $tagid?$tags[$tagid][tagname]:lang('label');}</a>
+				<ul aria-labelledby="tag-drop" role="menu" class="dropdown-menu" id="tag-drop-menu">
+					<li>
+						<a href="javascript:;"  onclick="screen_app('0','$_GET[group]')";>{lang all}</a>
+					</li>
+					<!--{loop $tags  $value}-->
+					<li>
+						<a href="javascript:;"  onclick="screen_app('$value[tagid]','$_GET[group]')";>$value[tagname]</a>
+					</li>
+					<!--{/loop}-->
+				</ul>
+			</div>
+       		<div class="group-filter dropdown pull-right">
+				<a href="{MOD_URL}&group=$group" data-bs-toggle="dropdown" role="button" id="drop-group" class="btn btn-primary dropdown-toggle" aria-expanded="false">{eval echo $group?$grouptitle[$group]:lang('group_permissions');}
+				</a>
+				<ul aria-labelledby="drop-group" role="menu" class="dropdown-menu" id="drop-group-menu">
+					<!--{loop $grouptitle $key $value}-->
+					<li role="presentation"> 
+						<a href="javascript:;" onclick="screen_app('$_GET[tagid]','$key')"; tabindex="-1" role="menuitem">$value</a>
+					</li>
+					<!--{/loop}-->
+				</ul>
+			</div>
+        	<div  class="button_add_content">
+				<a href="{MOD_URL}&op=edit&do=add&refer=$refer" id="button_add1" title="{lang add_app}" class="hide">+</a>				
+				<a href="{MOD_URL}&op=import&refer=$refer" id="button_add2" class="hide" title="{lang import_type_app}" style="font-size:20px ;"><i  class="glyphicon glyphicon-download-alt"></i></a>				
+				<a href="javascript:;" id="button_add" style="z-index: 10;">+</a>				
+        	</div>	
 		</div> 
 		<div class="main-content clearfix">
 			<form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}" method="post">
@@ -124,38 +121,38 @@
 					<!--{loop $list $value}-->
 					<tr> 
 						<td>
-              <a href="$value[appurl]" target="_blank" class="appicon" style="float: left;padding-right: 5px;"><img src="$value[appico]" style="margin:0" /></a>
-                <!--{if $value[appadminurl]}-->
-                  <a href="$value[appadminurl]" target="_blank" >$value[appname]</a>
-                <!--{else}-->
-                  <a href="$value[appurl]" target="_blank" >$value[appname]</a>
-                <!--{/if}--> 
-                <small class="text-muted" title="{lang version}">$value[version]</small>    
-							<div class="appdesc" title="$value['appdesc']"> {eval echo $value['appdesc']?$value['appdesc']:lang('none');}</div>
-              <!-- </div> -->
+							<a href="$value[appurl]" target="_blank" class="appicon" style="float: left;padding-right: 5px;"><img src="$value[appico]" style="margin:0" /></a>
+							<!--{if $value[appadminurl]}-->
+							<a href="$value[appadminurl]" target="_blank" >$value[appname]</a>
+							<!--{else}-->
+							<a href="$value[appurl]" target="_blank" >$value[appname]</a>
+							<!--{/if}--> 
+							<small class="text-muted" title="{lang version}">$value[version]</small>    
+							<div class="appdesc help-block" title="$value['appdesc']"> {eval echo $value['appdesc']?$value['appdesc']:lang('none');}</div>
+							<!-- </div> -->
 						</td>
 						<td>$value[vendor]</td>
 						<td>
 							<div class="tag-td-wrapper">
-                <!--{loop $value[tags] $key $value1}-->
-                <a href="{MOD_URL}&tagid=$value1[tagid]">$value1[tagname]</a>
-                <!--{/loop}-->
+							<!--{loop $value[tags] $key $value1}-->
+							<a href="{MOD_URL}&tagid=$value1[tagid]">$value1[tagname]</a>
+							<!--{/loop}-->
 							</div>
 						</td>
 						<td>
-              <!--{if $value['department']}-->
-              <div class="group-td-wrapper">
-              <!--{loop $value['department'] $key $value1}-->
-								<span appid="$value[appid]" orgid="$key" class="label label-default " style="display:inline-block"> <img src="dzz/system/images/organization.png" >{eval $i=0;}
-									<!--{loop $value1 $value2}-->
-									<!--{if $i>0}-->-<!--{/if}-->$value2[orgname] {eval $i++;}
-									<!--{/loop}-->
-								</span>
-								<!--{/loop}-->
-							</div>
-							<!--{else}-->
-							$value[grouptitle]
-							<!--{/if}-->
+						<!--{if $value['department']}-->
+						<div class="group-td-wrapper">
+							<!--{loop $value['department'] $key $value1}-->
+							<span appid="$value[appid]" orgid="$key" class="label label-default " style="display:inline-block"> <img src="dzz/system/images/organization.png" >{eval $i=0;}
+							<!--{loop $value1 $value2}-->
+							<!--{if $i>0}-->-<!--{/if}-->$value2[orgname] {eval $i++;}
+							<!--{/loop}-->
+							</span>
+							<!--{/loop}-->
+						</div>
+						<!--{else}-->
+						$value[grouptitle]
+						<!--{/if}-->
 						</td>
 						<td>
 							<!--{if $value[appadminurl]}-->
@@ -204,24 +201,6 @@
 		console.log(url);
 //		return false;
 		window.location.href =url;	 
-	}
-	<!--{loop $list $value}-->
-		//start_check_upgrade( '{$value[appid]}' );
-	<!--{/loop}-->
-	function start_check_upgrade(appid){
-		jQuery.post({
-			type:'post',
-			async: true, 
-			url:'{MOD_URL}&op=upgrade_app_ajax&operation=check_upgrade&appid='+appid+'&t='+new Date().getTime(),
-			data:{},
-			success:function(json){ 
-				if(json.status==0){
-					jQuery('#upgrade_info_'+mid).show().text(json.msg);  
-				}else{ 
-					jQuery("#"+appid+"_update").removeClass("hidden"); 
-				}
-			} 
-		});
 	}
 	
 	jQuery('#button_add').click(function(){

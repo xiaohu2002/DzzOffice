@@ -266,35 +266,6 @@ transform: perspective(120px) rotateX(180deg)
 transform: perspective(120px)
 }
 }
-/*加载样式*/
-.loading_img {
-	position: relative;
-	width: 54px;
-	height: 54px;
-	background: url(./images/logo.png);
-	-webkit-animation: rotateplane 3.2s infinite ease-in-out;
-	animation: rotateplane 3.2s infinite ease-in-out;
-}
-.loading_process {
-	position: absolute;
-	z-index: 999999;
-	left: 11px;
-	top: 11px;
-	width: 32px;
-	height: 32px;/*background:url(./images/loading.gif);*/
-}
-.ie8 .loading_process {
-	background: url(./images/loading.gif);
-}
-.ie9 .loading_process {
-	background: url(./images/loading.gif);
-}
-.ie8 .loading_img {
-	background: none;
-}
-.ie9 .loading_img {
-	background: none;
-}
 /*图片浏览器相关*/
 
 #picWin_img {
