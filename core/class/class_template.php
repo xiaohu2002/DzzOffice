@@ -144,7 +144,6 @@ class template {
 	}
 
 	function parse_template(&$template) {
-		$template = str_replace('self.$', 'self.＄', $template);
 		$var_regexp = "((?!\\\$[a-zA-Z]+\()(\\\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*(\-\>)?[a-zA-Z0-9_\x7f-\xff]*)(\[[a-zA-Z0-9_\-\.\"\'\[\]\$\x7f-\xff]+\])*)";
 		$const_regexp = "([A-Z_\x7f-\xff][A-Z0-9_\x7f-\xff]*)";
 
@@ -153,9 +152,9 @@ class template {
 		$template = preg_replace("/\<\!\-\-\{(.+?)\}\-\-\>/s", "{\\1}", $template);
 //	    js的lang替换
 		$template = preg_replace_callback("/<script[^>]+?src=\"(.+?)\".*?>[\s\S]*?/is", array($this, 'parse_template_callback_javascript'), $template);
-//       模版lang替换
+//      模版lang替换
 		$template = preg_replace_callback("/\{lang\s+(.+?)\}/is", array($this, 'parse_template_callback_languagevar_1'), $template);
-//	       模版__lang替换
+//	    模版__lang替换
 		$template = preg_replace_callback("/__lang\.(\w+)/i", array($this, 'parse_template_callback_languagevar_2'), $template);		
 //		img的src替换
 		$template = preg_replace_callback("/<img(.+?)src=([\"])(.+?)([\"])([^>]*?)>/is", array($this, 'parse_template_callback_img'), $template);
@@ -200,8 +199,6 @@ class template {
 		$template = preg_replace_callback("/[\n\r\t]*\{block\s+([a-zA-Z0-9_\[\]]+)\}(.+?)\{\/block\}/is", array($this, 'parse_template_callback_stripblock_12'), $template);
 		$template = preg_replace("/\<\?(\s{1})/is", "<?php\\1", $template);
 		$template = preg_replace("/\<\?\=(.+?)\?\>/is", "<?php echo \\1;?>", $template);
-		$template = str_replace('self.＄','self.$',  $template);
-        $template = str_replace('_＄','$',  $template);
 	}
 
 	function parse_template_callback_javascript($matches) {

@@ -39,7 +39,7 @@ html, body {
 	top:0px;
 	width:24px;
 	height:32px;
-	padding:8px 5px;
+	padding:2px 5px;
 	font-size: 18px;
 	color: rgba(78,85,99,0.65);
 }
@@ -117,7 +117,7 @@ var callback_url = '{$callback_url}';
 <!--{if intval($_GET['nosearch'])<1}-->
 <div  class="orgtree-search">
         <a href="javascript:;" class="search" onclick="jstree_search();return false" title="{lang search}"><i class="dzz dzz-search"></i></a>
-<!--        <a href="javascript:;" class="delete" onclick="jstree_search('stop');return false" title="{lang close_search}"><i class="dzz dzz-close"></i></a>-->
+		<a href="javascript:;" class="delete" onclick="jstree_search('stop');return false" title="{lang close_search}"><i class="dzz dzz-close"></i></a>
         <input id="jstree_search_input" type="text" placeholder="{lang search_department_user}" class="form-control" onkeyup="if(event.keyCode==13){jstree_search()}"  />
     </div>
 <!--{/if}-->
@@ -173,8 +173,10 @@ jQuery(document).ready(function(e) {
 		  "keep_selected_style" : false
 		  <!--{if $_GET['stype']==1}-->
 		   ,"three_state": false//父子级别级联选择
-           ,"tie_selection": false
+		   <!--{else}-->
+		   ,"three_state": true//父子级别级联选择
 		   <!--{/if}-->
+		   ,"tie_selection": true
 		},
 		
 	   "search":{ 
