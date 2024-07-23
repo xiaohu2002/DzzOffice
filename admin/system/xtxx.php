@@ -143,7 +143,7 @@ function kuozhan(){
 $loaded_extensions = get_loaded_extensions();
 $extensions = '';
 foreach ($loaded_extensions as $key => $value) {
-    $extensions .= '<div class="extt"><span class="card beijing">'.$value . '</span></div>';
+    $extensions .= '<div class="extt"><span class="card">'.$value . '</span></div>';
 }
 $zaixianrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('session') . " WHERE uid");
 $yonghurenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE uid");

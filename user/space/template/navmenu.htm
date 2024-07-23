@@ -2,7 +2,7 @@
 	<ul class="popbox-menu u-bottom list-unstyled">
 		<!--{if !$_G['setting']['bbclosed'] || !$_G['adminid'] ==0}-->
 		<li>
-			<a href="$_G['siteurl']" target="_blank">{lang Home page}</a>
+			<a href="$_G['siteurl']" target="_blank"><span class="dzz dzz-home"></span>{lang Home page}</a>
 		</li>
 		<li class="langset">
           <a href="javascript:;">
@@ -20,20 +20,20 @@
         </li>
 		<!--{/if}-->
 		<li>
-          <a href="javascript:;" onclick="showWindow('about','user.php?mod=space&op=about&modname=$_GET[modname]');popbox();">{lang about}</a>
+          <a href="javascript:;" onclick="showWindow('about','user.php?mod=space&op=about&modname=$_GET[modname]');popbox();"><span class="dzz dzz-info"></span>{lang about}</a>
 		</li>
 		<!--{if $_G['uid']>0}-->
 		<!--{if !$_G['setting']['bbclosed'] || !$_G['adminid'] ==0}-->
 		<li>
-			<a href="user.php?mod=profile" target="_blank">{lang userCenter}</a>
+			<a href="user.php?mod=profile" target="_blank"><span class="dzz dzz-portrait"></span>{lang userCenter}</a>
 		</li>
 		<!--{/if}-->
 		<li>
-			<a href="javascript:;" onclick="_header.loging_close();popbox();">{lang logout}</a>
+			<a href="javascript:;" onclick="_header.loging_close();popbox();"><span class="dzz dzz-settings-resource"></span>{lang logout}</a>
 		</li>
 		<!--{else}-->
 		<li>
-			<a href="user.php?mod=login">{lang login}</a>
+			<a href="user.php?mod=login"><span class="dzz dzz-login"></span>{lang login}</a>
 		</li>
 		<!--{/if}-->
 	</ul>
