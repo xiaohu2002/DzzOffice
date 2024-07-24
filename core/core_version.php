@@ -14,7 +14,7 @@ if(!defined('CORE_VERSION')) {
 	define('CORE_VERSION', '2.02');
 	define('CORE_RELEASE', '20180909');
 	define('CORE_FIXBUG' , '20000000');
-	define('CORE_XHVERSION', '1.88.6');
-	define('CORE_XHRELEASE', '20240723');
+	define('CORE_XHVERSION', '1.88.7');
+	define('CORE_XHRELEASE', '20240724');
 	define('CORE_XHFIXBUG' , '20240706');
 }

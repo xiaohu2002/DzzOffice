@@ -411,19 +411,17 @@ class dzz_app extends dzz_base{
 		return filter_var($ip, FILTER_VALIDATE_IP) !== false;
 	}
     private function _get_client_ip() {
-		
-		if (!array_key_exists('security', $this->config) || !$this->config['security']['onlyremoteaddr']) {
-			if (isset($_SERVER['HTTP_CLIENT_IP']) && ip::validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
-				$ip = $_SERVER['HTTP_CLIENT_IP'];
-			} elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-				if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ",") > 0) {
-					$exp = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR']);
-					$ip = ip::validate_ip(trim($exp[0])) ? $exp[0] : $ip;
-				} else {
-					$ip = ip::validate_ip($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $ip;
-				}
-			}
-		}
+		$ip = $_SERVER['REMOTE_ADDR'];
+        if (isset($_SERVER['HTTP_CLIENT_IP']) && $this->validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ",") > 0) {
+                $exp = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR']);
+                $ip = $this->validate_ip(trim($exp[0])) ? $exp[0] : $ip;
+            } else {
+                $ip = $this->validate_ip($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $ip;
+            }
+        }
 		return $ip;
 	}
 

@@ -3,7 +3,7 @@ CREATE TABLE dzz_admincp_session (
   uid int(10) unsigned NOT NULL DEFAULT '0',
   adminid smallint(6) unsigned NOT NULL DEFAULT '0',
   panel tinyint(1) NOT NULL DEFAULT '0',
-  ip varchar(15) NOT NULL DEFAULT '',
+  ip varchar(45) NOT NULL DEFAULT '',
   dateline int(10) unsigned NOT NULL DEFAULT '0',
   errorcount tinyint(1) NOT NULL DEFAULT '0',
   `storage` mediumtext NOT NULL,
