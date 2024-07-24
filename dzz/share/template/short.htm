@@ -98,7 +98,7 @@
 							</div>
 						</div>
 						<!--{/loop}-->
-						<div class="page clearfix" style="padding: 20px 0">$multi</div>
+						<!--{if $multi}--><div class="page clearfix" style="padding: 20px 0">$multi</div><!--{/if}-->
 					</div>
 
 				</div>
@@ -218,6 +218,8 @@
 		    for(var o in json.msg){
 				if(json.msg[o]['success']){
                     jQuery('.list div[data-sid="'+o+'"]').remove();
+				} else {
+					showmessage('db_error_message', 'error', 3000, 1);
 				}
 			}
             refresh_header();

@@ -15,41 +15,51 @@ $typearr = array('image' => lang('photo'),
     'document' => lang('type_attach'),
     'link' => lang('type_link'),
     'video' => lang('video'),
-		'folder' => lang('folder'),
+	'folder' => lang('folder'),
     'dzzdoc' => 'DZZ' . lang('type_attach'),
     'attach' => lang('rest_attachment')
 );
 require libfile('function/organization');
 if ($_GET['do'] == 'delete') {
     $icoid = isset($_GET['icoid']) ? trim($_GET['icoid']) : '';
+    if (!$icoid) {
+        die(json_encode(['msg' => 'access denied'])); // 使用简化的die函数
+    }
     $icoids = explode(',', $icoid);
+    // 初始化数组
     $ridarr = array();
     $bz = isset($_GET['bz']) ? trim($_GET['bz']) : '';
+
     foreach ($icoids as $icoid) {
         if (empty($icoid)) {
             continue;
         }
-        $return = IO::Delete($icoid, true);
-        if (!$return['error']) {
-            //处理数据
-            $arr['sucessicoids'][$return['rid']] = $return['rid'];
-            $arr['msg'][$return['rid']] = 'success';
-            $arr['name'][$return['rid']] = $return['name'];
-            $ridarr[] = $return['rid'];
-            $i++;
-        } else {
-            $arr['msg'][$return['rid']] = $return['error'];
-            $dels[] =  $icoid.'_0';
+        try {
+            $return = IO::Delete($icoid, true);
+            if (!$return['error']) {
+                $arr['sucessicoids'][$return['rid']] = $return['rid'];
+                $arr['msg'][$return['rid']] = 'success';
+                $arr['name'][$return['rid']] = $return['name'];
+                $ridarr[] = $return['rid'];
+				$i++;
+            } else {
+                $arr['msg'][$return['rid']] = $return['error'];
+                $dels[] =  $icoid . '_0';
+            }
+        } catch (Exception $e) {
+            exit(json_encode(['msg' => 'No items were deleted successfully']));
         }
     }
-    if (!$return['error']) {
-        Hook::listen('solrdel',$dels);
-        showmessage('do_success', $_GET['refer']);
+
+    // 执行成功的条目数检查
+    if (!empty($return['error'])) {
+        Hook::listen('solrdel', $dels);
+        exit(json_encode(['msg' => 'success']));
     } else {
-        showmessage($return['error'], $_GET['refer']);
+        exit(json_encode(array('msg' => $return['error'])));
     }
 
-  }else {
+  } else {
   $lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
 	$checklpp = array();
 	$checklpp[$lpp] = 'selected="selected"';

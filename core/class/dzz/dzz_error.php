@@ -204,7 +204,7 @@ class dzz_error
 	.info {
 	    background: none repeat scroll 0 0 #F3F3F3;
 	    border: 0px solid #aaaaaa;
-	    border-radius: 10px 10px 10px 10px;
+	    border-radius: 10px;
 	    color: #000000;
 	    font-size: 11pt;
 	    line-height: 160%;
@@ -214,11 +214,11 @@ class dzz_error
 
 	.help {
 	    background: #F3F3F3;
-	    border-radius: 10px 10px 10px 10px;
-	    font: 12px verdana, arial, sans-serif;
+	    border-radius: 10px;
 	    text-align: center;
 	    line-height: 160%;
 	    padding: 1em;
+		margin-bottom: 1rem;
 	}
 
 	.sql {
@@ -261,11 +261,9 @@ EOT;
 			}
 			echo '</table></div>';
 		}
-
-
+		echo '<div class="help">'.lang('suggestion_user').'</div>';
+		echo '<div class="help">'.lang('suggestion').'</div>';
 		$helplink = '';
-		
-
 		$endmsg = lang('error_end_message', array('host'=>$host));
 		echo <<<EOT
 <div class="help">$endmsg. $helplink</div>

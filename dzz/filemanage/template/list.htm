@@ -321,10 +321,10 @@ function delete_file(){
 	var icoids = rids.join(',');
 	if(confirm('{lang Are you sure you want to delete this}'+delnums+'{lang file (if it is a folder, all the sub files under it will be deleted)? Cannot recover after deletion}')){
 		jQuery.post('{MOD_URL}&do=delete',{'icoid':icoids},function(data){
-			if(data['success']){
+			if(data['msg']['success']){
 				window.location.reload();
-			}else{
-
+			} else{
+				showmessage(data['msg']['error'], 'error', 3000, 1);
 			}
 		})
 	}

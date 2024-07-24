@@ -76,7 +76,7 @@
 <script type="text/javascript" reload="1">
 jQuery(document).ready(function(e) {
 	jQuery('#upload_from_edit_{$cid}_menu.tobody').removeClass('tobody').appendTo('body');
-    jQuery('#message_edit_{$cid}').TextAreaExpander(25,99999)
+    jQuery('#message_edit_{$cid}').TextAreaExpander(37,99999)
     jQuery('#publish_submit_edit_{$cid}').click(function(){
 		var val=jQuery('#message_edit_{$cid}').val();
 			if(strlen(val)>0 && strlen(val)<1000){

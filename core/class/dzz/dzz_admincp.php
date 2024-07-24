@@ -88,6 +88,7 @@ class dzz_admincp
 				$this->cpaccess = 1;
 
 			} elseif ($this->cpsetting['checkip'] && ($session['ip'] != $this->core->var['clientip'])) {
+				showmessage($session['ip']);
 				$this->cpaccess = 1;
 
 			} elseif ($session['errorcount'] >= 0 && $session['errorcount'] <= 3) {

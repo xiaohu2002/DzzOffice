@@ -123,10 +123,6 @@ html,  body {
 		jQuery('input').on('ifChecked', function(e) {
 			jQuery(this).trigger('click');
 		});
-		 
-		jQuery('input[required]').on('blur', function() {
-			if(this.value == '') { jQuery(this).addClass('input-error') } else { jQuery(this).removeClass('input-error'); }
-		});
 	});
 	function addsystemtype( obj ){
 		var num=jQuery("#systemlogtable").find("tr").length-1; 
