@@ -18,6 +18,42 @@ try{
 <!--{if $_G['setting']['statcode']}-->
 	$_G['setting']['statcode']
 <!--{/if}-->
+<script type="text/javascript">
+    // 全局错误处理
+    $(document).ready(function() {
+        // 设置jQuery全局的Ajax错误处理
+        $.ajaxSetup({
+            error: function(xhr, textStatus, errorThrown) {
+                var errorMsg = "Ajax Error: " + textStatus + ", " + errorThrown;
+                showmessage(errorMsg, 'error', 3000, 1);
+            }
+        });
+        // 保持原有的错误监听器
+        window.addEventListener('error', function(event) {
+            handleErrors(event);
+        }, true);
+    });
+    
+    function handleErrors(event) {
+        try {
+            // 检查是否存在错误对象
+            if (event.error && event.error.stack) {
+                const stack = event.error.stack;
+                // 过滤或脱敏stack信息（根据需要实现）
+                reportError(stack);
+                showmessage(stack, 'error', 3000, 1);
+            } else if (event.target && (event.target.src || event.target.href)) {
+                // 构造错误信息
+                const errorMsg = "fail to load resource: " + (event.target.src || event.target.href);
+                reportError(errorMsg);
+                showmessage(errorMsg, 'error', 3000, 1);
+            }
+        } catch (error) {
+            // 对reportError和showmessage的调用进行了异常捕获
+            console.error("Failed to report or show error:", error);
+        }
+    }
+</script>
 <script type="text/javascript" src="static/js/popper.min.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/js/main.min.js?{VERHASH}"></script>

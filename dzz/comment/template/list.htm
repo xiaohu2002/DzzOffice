@@ -45,11 +45,10 @@
 	</div>
 	<div class="main-content clearfix">
       <form id="appform" name="appform" class="form-horizontal " action="{MOD_URL}" method="post" >
-				<input type="hidden" name="lpp" value="$lpp">
+		<input type="hidden" name="lpp" value="$lpp">
         <input type="hidden" name="formhash" value="{FORMHASH}" />
-				<input type="hidden" name="keyword" value="$keyword" /> 
-				<div class="table-responsive-xxl">
-				<table class="table table-hover">
+		<input type="hidden" name="keyword" value="$keyword" /> 
+		<table class="table table-hover">
           <thead node-type="title" class="title">
             <tr class="item clearfix">
               <th node-type="title-col"  class="col">
@@ -93,8 +92,7 @@
             <!--{/loop}--> 
           </tbody>
         </table>
-        </div>
-				<div class="pull-left">
+		<div class="pull-left">
           <div class="input-group mb-3">
             <span class="input-group-text">每页显示</span>
             <select class="form-select" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">

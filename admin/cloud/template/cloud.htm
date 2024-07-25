@@ -14,7 +14,6 @@
       <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}" method="post" >
         <input type="hidden" name="cloudsubmit" value="true" />
         <input type="hidden" name="formhash" value="{FORMHASH}" />
-        <div class="table-responsive"  style="margin-top: 8px;">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -55,10 +54,9 @@
           </tr>
           <!--{/loop}-->
         </table>
-			<dl>
-				<input type="submit" class="btn btn-primary" value="{lang save_set}" />
-			</dl>
-        </div>
+        <dl>
+          <input type="submit" class="btn btn-primary" value="{lang save_set}" />
+        </dl>
       </form>
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>{lang board_message}</strong> {lang cloud_cloud_board_message_text}
