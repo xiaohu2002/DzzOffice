@@ -142,12 +142,14 @@ $_G['setting']['statcode']
                 showmessage(errorMsg, 'error', 3000, 1);
             }
         });
-        // 保持原有的错误监听器
+
+        <!--{if $_G['setting']['addEventListener']}-->
         window.addEventListener('error', function(event) {
             handleErrors(event);
         }, true);
+        <!--{/if}-->
     });
-    
+    <!--{if $_G['setting']['addEventListener']}-->
     function handleErrors(event) {
         try {
             // 检查是否存在错误对象
@@ -167,6 +169,7 @@ $_G['setting']['statcode']
             console.error("Failed to report or show error:", error);
         }
     }
+    <!--{/if}-->
 </script>
 <script type="text/javascript" src="static/js/popper.min.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
