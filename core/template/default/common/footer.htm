@@ -158,11 +158,6 @@ $_G['setting']['statcode']
                 // 过滤或脱敏stack信息（根据需要实现）
                 reportError(stack);
                 showmessage(stack, 'error', 3000, 1);
-            } else if (event.target && (event.target.src || event.target.href)) {
-                // 构造错误信息
-                const errorMsg = "fail to load resource: " + (event.target.src || event.target.href);
-                reportError(errorMsg);
-                showmessage(errorMsg, 'error', 3000, 1);
             }
         } catch (error) {
             // 对reportError和showmessage的调用进行了异常捕获
