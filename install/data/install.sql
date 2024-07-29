@@ -453,7 +453,7 @@ CREATE TABLE dzz_document_reversion (
 
 DROP TABLE IF EXISTS dzz_failedlogin;
 CREATE TABLE dzz_failedlogin (
-  ip char(15) NOT NULL DEFAULT '',
+  ip varchar(45) NOT NULL DEFAULT '',
   username char(32) NOT NULL DEFAULT '',
   count tinyint(1) unsigned NOT NULL DEFAULT '0',
   lastupdate int(10) unsigned NOT NULL DEFAULT '0',
