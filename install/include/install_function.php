@@ -526,19 +526,42 @@ function redirect($url) {
 	exit();
 
 }
+function validate_ip($ip) {
+	return filter_var($ip, FILTER_VALIDATE_IP) !== false;
+}
 
 function get_onlineip() {
-	$onlineip = '';
-	if(getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
-		$onlineip = getenv('HTTP_CLIENT_IP');
-	} elseif(getenv('HTTP_X_FORWARDED_FOR') && strcasecmp(getenv('HTTP_X_FORWARDED_FOR'), 'unknown')) {
-		$onlineip = getenv('HTTP_X_FORWARDED_FOR');
-	} elseif(getenv('REMOTE_ADDR') && strcasecmp(getenv('REMOTE_ADDR'), 'unknown')) {
-		$onlineip = getenv('REMOTE_ADDR');
-	} elseif(isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
-		$onlineip = $_SERVER['REMOTE_ADDR'];
+	$onlineip = $_SERVER['REMOTE_ADDR'];
+	if (isset($_SERVER['HTTP_CLIENT_IP']) && validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
+		$onlineip = $_SERVER['HTTP_CLIENT_IP'];
+	} elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ",") > 0) {
+			$exp = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR']);
+			$onlineip = validate_ip(trim($exp[0])) ? $exp[0] : $onlineip;
+		} else {
+			$onlineip = validate_ip($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $onlineip;
+		}
 	}
 	return $onlineip;
+}
+
+function is_https() {
+	if(isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') {
+		return true;
+	}
+	if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https') {
+		return true;
+	}
+	if(isset($_SERVER['HTTP_X_CLIENT_SCHEME']) && strtolower($_SERVER['HTTP_X_CLIENT_SCHEME']) == 'https') {
+		return true;
+	}
+	if(isset($_SERVER['HTTP_FROM_HTTPS']) && strtolower($_SERVER['HTTP_FROM_HTTPS']) != 'off') {
+		return true;
+	}
+	if(isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) {
+		return true;
+	}
+	return false;
 }
 function timezone_set($timeoffset = 8) {
 	if(function_exists('date_default_timezone_set')) {

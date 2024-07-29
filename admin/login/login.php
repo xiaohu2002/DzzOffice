@@ -70,7 +70,7 @@ function html_login_form() {
 	$lang1 = lang();
 	$maintitle=lang('title_admincp');
 	$loginuser = $isguest ? '
-    <div class="mb-3 has-feedback"><span class="mdi mdi-account" aria-hidden="true"></span><input class="form-control" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}"   onblur="if(this.value==\'\'){this.value=\'' . lang('login_email_username') . '\'}"  placeholder='. lang('login_email_username') . ' autocomplete="off" autofocus required/></div>' : '<div class="text-center email">' . $_G['member']['email'] . '</div>';
+    <div class="mb-3 has-feedback"><span class="mdi mdi-account" aria-hidden="true"></span><input class="form-control" name="admin_email"  type="text" title="" onfocus="if(this.value==\'' . lang('login_email_username') . '\'){this.value=\'\'}"   onblur="if(this.value==\'\'){this.value=\'' . lang('login_email_username') . '\'}"  placeholder='. lang('login_email_username') . ' autocomplete="off" autofocus required/></div>' : '<div class="text-center username">' . $_G['member']['username'] . '</div><div class="text-center email">' . $_G['member']['email'] . '</div>';
 	$sid = getglobal('sid');
   $avatarstatus=getglobal('avatarstatus','member');
    if(!$uid){
