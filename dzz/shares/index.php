@@ -175,7 +175,11 @@ if ($do == 'adddowns') {
     } else {
         $nextpage = 0;
     }
-    //echo $nextpage;die;
-    include template('list');
+    $ismobile = helper_browser::ismobile();
+    if ($ismobile) {
+        include template('mobile/list');
+    } else {
+        include template('list');
+    }
 }
 ?>

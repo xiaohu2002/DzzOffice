@@ -43,40 +43,20 @@ function getOpenUrl($icoarr,$share){
 	static $extall=array();
 	$ext=$icoarr['ext'];
 	$dpath=$icoarr['dpath'];//(array('path'=>$icoarr['rid'],'perm'=>$share['perm']));
-	if(empty($extall)) $extall=C::t('app_open')->fetch_all_ext();
+	$extall=C::t('app_open')->fetch_all_ext();
     $exts=array();
-	$canedit=0;
-	if($share['perm'] & 64){
-		$canedit=1;
-	}
-	$candownload=0;
-	if($share['perm'] & 256){
-		$candownload=1;
-	}
 	$extarr=array();
     foreach($extall as $value){
-		if($value['ext']==$icoarr['ext']){
-			$extarr['edit_'.$value['canedit']][]=$value;
-		}
-    }
-	$data=array();
-	if($canedit){
-		if($extarr['edit_1']){
-			foreach($extarr['edit_1'] as $v){
-				if($v['isdefult']) break; 
-			}
-			$data=$v;
-		}
+		if(!isset($exts[$value['ext']]) || $value['isdefault']) $exts[$value['ext']]=$value;
 	}
-
-	if(empty($data)){
-		if($extarr['edit_0']){
-			foreach($extarr['edit_0'] as $v){
-
-				if($v['isdefult']) break; 
-			}
-			$data=$v;
-		}
+	if(isset($exts[$bz.':'.$ext])){
+		$data=$exts[$bz.':'.$ext];
+	}elseif($exts[$ext]){
+		$data=$exts[$ext];
+	}elseif($exts[$icoarr['type']]){
+		$data=$exts[$icoarr['type']];
+	}else {
+		$data=array();
 	}
 	if($data){
 		$url=$data['url'];
@@ -106,11 +86,7 @@ function getOpenUrl($icoarr,$share){
 		
 	}else{//没有可用的打开方式，转入下载；
 		$sid=dzzencode($share['id'],'',0,0);
-		if($candownload){
-			return array('type'=>'download','url'=>'index.php?mod=shares&op=download&operation=download&sid='.$sid.'&filename='.$icoarr['name'].'&path='.$dpath);
-		}else{
-			return array('type'=>'download','url'=>'index.php?mod=shares&op=download&operation=download&sid='.$sid.'&filename='.$icoarr['name'].'&path='.$dpath);
-		}
+		return array('type'=>'download','url'=>'index.php?mod=shares&op=download&operation=download&sid='.$sid.'&filename='.$icoarr['name'].'&path='.$dpath);
 		//IO::download($path,$_GET['filename']);
 	}
 }

@@ -3,3 +3,9 @@
 <div class="gb_fc"><span class="dzz dzz-menu"></span></div>
 {lang appname}</a>
 <!--{/if}-->
+<!--{if $_GET[op] == 'mobilefileselection'}-->
+<a class="leftTopmenu" href="{$_G[siteurl]}">
+    <img src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" style="max-height:30px;">
+    <!--{if $type == 1}-->另存为<!--{elseif $type == 0}-->选择文件<!--{elseif $type == 2}-->选择位置
+        <!--{/if}--></a>
+    <!--{/if}-->

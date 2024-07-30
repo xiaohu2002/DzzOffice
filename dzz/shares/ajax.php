@@ -123,6 +123,11 @@ if (count($list) >= $perpage) {
 } else {
 	$naxtpage = 0;
 }
-include template('list_item');
+$ismobile = helper_browser::ismobile();
+if($ismobile){
+    include template('mobile/list_item');
+}else{
+    include template('list_item');
+}
 dexit();
 ?>
