@@ -69,6 +69,9 @@
       <!--{/if}-->
     </div>
 	<p class="error-msg text-center" id="returnmessage_$loginhash"><!--{if $_G[setting][bbclosed]}-->{lang site_closed_please_admin}<!--{/if}--></p>
+  <div class="third-wrapper clearfix">
+            <!--{hook third_login}-->
+          </div>
     <!--{if !$_G['setting']['bbclosed']}-->
     <!--{if $_G['setting']['regstatus']>0}--> 
     <p class="text-center">

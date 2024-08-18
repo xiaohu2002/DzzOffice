@@ -33,7 +33,7 @@ if($_G['uid']>0){
 		showmessage($messageText,$href);
 }
 if ($_G['setting']['loginset']['template'] == 4){
-  $orgids=array('1','2','3');
+  $orgids=array('1','2','4');
 	if(isset($_GET['loginsubmit'])) {//是否提交
     if(in_array($_GET['uid'],$orgids)){
         if(C::t('user')->fetch_by_uid($_GET['uid'])){

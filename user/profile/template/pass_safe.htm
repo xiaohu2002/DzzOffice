@@ -16,7 +16,6 @@
                 <li class="nav-item"><a class="nav-link {if $do == 'editpass'}active{/if}" href="{MOD_URL}&op=password">{lang password_edit}</a></li>
                 <li class="nav-item"><a class="nav-link {if $do == 'login'}active{/if}" href="{MOD_URL}&op=password&do=login">登录记录</a></li>
                 <li class="nav-item"><a class="nav-link {if $do == 'changeemail'}active{/if}" href="{MOD_URL}&op=password&do=changeemail">{lang bindemail_subject}</a></li>
-                <!--{if $qqlogin[openid] && $qqlogin[unbind]<1}--><li class="nav-item"><a class="nav-link {if $do == 'bindqq'}active{/if}" href="{MOD_URL}&op=password&do=bindqq">绑定QQ</a></li><!--{/if}--> 
             </ul>
         </div>
         <div class="main-content">

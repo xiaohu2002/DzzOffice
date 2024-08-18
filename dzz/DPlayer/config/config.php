@@ -3,6 +3,6 @@
 return array(
     'allow_robot'=>false,
     'about'=>array('name_en'=>'DPlayer',
-									'version'=>'小胡版 1.2')
+									'version'=>'X1.2 小胡(gitee.com/xiaohu2024)')
 
 );

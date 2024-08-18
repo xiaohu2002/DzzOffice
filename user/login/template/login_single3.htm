@@ -93,15 +93,15 @@
             <!--{/if}-->
           </div>
           <p class="error-msg text-center" id="returnmessage_$loginhash"><!--{if $_G[setting][bbclosed]}-->{lang site_closed_please_admin}<!--{/if}--></p>
+          <div class="third-wrapper clearfix">
+            <!--{hook third_login}-->
+          </div>
           <!--{if !$_G['setting']['bbclosed']}-->
           <!--{if $_G['setting']['regstatus']>0}--> 
           <p class="text-center">
             <span>还没有账号？</span>
             <a href="user.php?mod=register&referer={eval echo urlencode($referer);}" <!--{if !empty($_GET['inajax'])}-->onclick="_login.register($referer);return false;"<!--{/if}--> title="$_G['setting']['reglinkname']">$_G['setting']['reglinkname']</a>
           </p>
-          <!--{/if}-->
-          <!--{if $_G['setting']['qq_login']>0}-->
-          <p class="text-center"><a href="user.php?mod=qqlogin" title="{lang qq_login}"><i class="mdi mdi-qqchat"></i></a></p>
           <!--{/if}-->
           <!--{/if}-->
         </form>

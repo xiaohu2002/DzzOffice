@@ -131,7 +131,6 @@
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=denlu">{lang basicSet}</a></li>
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=access">{lang register_visit}</a> </li>
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=sec">{lang verification_code_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='denlu'}-->
@@ -139,15 +138,6 @@
         <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=denlu">{lang basicSet}</a></li>
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=access">{lang register_visit}</a> </li>
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=sec">{lang verification_code_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=qqlogin">{lang QQ login Settings}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=loginset">{lang login_page_set}</a> </li>
-      </ul>
-			<!--{elseif $operation=='qqlogin'}-->
-      <ul class="nav nav-pills">
-        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=denlu">{lang basicSet}</a></li>
-        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=access">{lang register_visit}</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=sec">{lang verification_code_set}</a> </li>
-        <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=qqlogin">{lang QQ login Settings}</a> </li> 
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='access'}-->
@@ -155,7 +145,6 @@
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=denlu">{lang basicSet}</a></li>
         <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=access">{lang register_visit}</a> </li>
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=sec">{lang verification_code_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{elseif $operation=='datetime'}-->
@@ -181,7 +170,6 @@
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=denlu">{lang basicSet}</a></li>
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=access">{lang register_visit}</a> </li>
         <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&operation=sec">{lang verification_code_set}</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=qqlogin">{lang QQ login Settings}</a> </li>
         <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=loginset">{lang login_page_set}</a> </li>
       </ul>
       <!--{/if}--> 
@@ -322,7 +310,7 @@
               <ul class="help-block">
                 支持html代码和变量替换，可以使用如下变量:
                 <li><code>{xhversion}</code> : 小胡版版本</li>
-                <li><code>{xversion}</code> : 官方版本</li>
+                <li><code>{version}</code> : 官方版本</li>
                 <li><code>{years}</code> : 当前年份</li>
                 <li><code>{username}</code> : 当前用户名</li>
                 <li><code>{time}</code> : 当前时间</li>
@@ -659,63 +647,6 @@
               }
           })
       </script>
-      <!--{elseif $operation=='qqlogin'}-->
-      <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
-        <input type="hidden" value="{FORMHASH}" name="formhash">
-        <input type="hidden" value="qqlogin" name="operation">
-        <div class="row mb-3">
-          <label class="col-sm-2">{lang open_qq_login}</label>
-          <div class="col-sm-10">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="qq_login1" name="settingnew[qq_login]" value="0" <!--{if !$setting[qq_login]}-->checked<!--{/if}--> onclick="jQuery('#qqlogin_wrapper').addClass('hide');">
-              <label class="form-check-label" for="qq_login1">{lang no_enable}</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="qq_login2" name="settingnew[qq_login]" value="1" <!--{if $setting[qq_login]=='1'}-->checked<!--{/if}--> onclick="jQuery('#qqlogin_wrapper').removeClass('hide');">
-              <label class="form-check-label" for="qq_login2">{lang enable}</label>
-            </div>
-          </div>
-        </div>
-        <div id="qqlogin_wrapper"<!--{if !$setting[qq_login]}--> class="hide"<!--{/if}-->>
-          <div class="row mb-3">
-            <label class="col-sm-2">QQ APPID</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="settingnew[qq_appid]" value="$setting[qq_appid]" />
-              <span class="help-block">{lang qq_app_id}</span>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2" for="settingnew[qq_appkey]">QQ APPKAY</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" name="settingnew[qq_appkey]" value="$setting[qq_appkey]" />
-              <span class="help-block">{lang qq_app_key}</span>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2">{lang whether_allow_direct}</label>
-            <div class="col-sm-10">
-              <div class="input-group mb-3">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" id="qq_bind1" name="settingnew[qq_bind]" value="1" <!--{if $setting[qq_bind]=='1'}-->checked<!--{/if}-->>
-                  <label class="form-check-label" for="qq_bind1">{lang user_must_binding}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" id="qq_bind2" name="settingnew[qq_bind]" value="0" <!--{if !$setting[qq_bind]}-->checked<!--{/if}-->>
-                  <label class="form-check-label" for="qq_bind2">{lang allow_direct_use}</label>
-                </div>
-              </div>
-              <span class="help-block">{lang user_must_binding_text}</span>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2">{lang token_url}</label>
-            <div class="col-sm-10"> <b class="help-block">$_G['siteurl']user.php</b> </div>
-          </div>
-        </div>
-        <dl>
-            <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
-        </dl>
-      </form>
       <!--{elseif $operation=='loginset'}-->
       <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
         <input type="hidden" value="{FORMHASH}" name="formhash">

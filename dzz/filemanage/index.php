@@ -90,21 +90,21 @@ if ($_GET['do'] == 'delete') {
 			$order = 'ORDER BY ext DESC';
 	} elseif ($_GET['ftype'] == 'asc') {
 			$order = 'ORDER BY ext ASC';
-	}elseif ($_GET['name'] == 'desc') {
+	} elseif ($_GET['name'] == 'desc') {
 			$order = 'ORDER BY name DESC';
 	} elseif ($_GET['name'] == 'asc') {
 			$order = 'ORDER BY name ASC';
-	}elseif ($_GET['username'] == 'desc') {
+	} elseif ($_GET['username'] == 'desc') {
 			$order = 'ORDER BY username DESC';
 	} elseif ($_GET['username'] == 'asc') {
 			$order = 'ORDER BY username ASC';
-	}elseif ($_GET['relpath'] == 'desc') {
+	} elseif ($_GET['relpath'] == 'desc') {
 			$order = 'ORDER BY relpath DESC';
 	} elseif ($_GET['relpath'] == 'asc') {
 			$order = 'ORDER BY relpath ASC';
-	}elseif ($_GET['dateline'] == 'asc') {
+	} elseif ($_GET['dateline'] == 'asc') {
 			$order = 'ORDER BY dateline ASC';
-	}else {
+	} else {
 			$_GET['dateline'] = 'desc';
 			$order = 'ORDER BY dateline DESC';
 	}
@@ -131,22 +131,15 @@ if ($_GET['do'] == 'delete') {
 			}
 	} else {
 			if ($orgid) {
-					if ($org = C::t('organization')->fetch($orgid)) {
-							$fids = array($org['fid']);
-							foreach (DB::fetch_all("select fid from %t where pfid=%d", array('folder', $org['fid'])) as $value) {
-									$fids[] = $value['fid'];
-							}
-							$sql .= ' and  pfid IN(%n)';
-							$param[] = $fids;
-					}
-			}/*else{
-					$sql .= ' and pfid > 0';
-			}*//* else {
-					$flags = array('home', 'organization');
-					$fids = C::t('folder')->fetch_fid_by_flags($flags);
-					$sql .= ' and  pfid IN(%n)';
-					$param[] = $fids;
-			}*/
+				if ($org = C::t('organization')->fetch($orgid)) {
+						$fids = array($org['fid']);
+						foreach (DB::fetch_all("select fid from %t where pfid=%d", array('folder', $org['fid'])) as $value) {
+								$fids[] = $value['fid'];
+						}
+						$sql .= ' and  pfid IN(%n)';
+						$param[] = $fids;
+				}
+			}
 	}
 	$limitsql = 'limit ' . $start . ',' . $lpp;
 	if ($_G['adminid']) {
