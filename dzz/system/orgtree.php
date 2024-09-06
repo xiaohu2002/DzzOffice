@@ -192,6 +192,6 @@ function getuserIcon($uids,$datas,&$data){
 		$data[] = $v;
 	}
 }
+$ismobile=helper_browser::ismobile();
 include template('orgtree');
-
 ?>

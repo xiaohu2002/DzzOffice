@@ -52,10 +52,9 @@ class dzz_notification {
 			'from_num' => ($oldnote['from_num']+$notevars['from_num']),
 			'category'=>$category
 		);
-		/*if($category==1) {
-			$setarr['authorid'] = 0;
-			$setarr['author'] = '';
-		}*/
+		$redirect = (strpos($redirect, 'http://') === 0 || strpos($redirect, 'https://') === 0) 
+             ? $redirect 
+             : $_G['siteurl'] . $redirect;
 		$_G['setting']['mail'] = dunserialize($_G['setting']['mail']);
 		if($_G['setting']['mail']['tzxxyjtz']) {
 		//发送邮件
@@ -66,7 +65,7 @@ class dzz_notification {
         <p style="font-size:14px;color:#333; line-height:24px; margin:0;">尊敬的用户$member[username],您好！</p>
         <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">$notestring</span></p>
         <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">链接：</span></p>
-        <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 12px;"><a href="$_G[siteurl]$redirect" title="$_G[siteurl]$redirect" style="text-decoration-line: none; word-break: break-all; overflow-wrap: normal; color: rgb(51, 51, 51); font-size: 12px;" rel="noopener" target="_blank"><span style="color: rgb(0, 164, 255);">$_G[siteurl]$redirect</span></a><span style="font-size: 12px; color: rgb(51, 51, 51);">,(如果上面不是链接形式，请将该地址手工粘贴到浏览器地址栏再访问)</span></p>															
+        <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 12px;"><a href="$redirect" title="$redirect" style="text-decoration-line: none; word-break: break-all; overflow-wrap: normal; color: rgb(51, 51, 51); font-size: 12px;" rel="noopener" target="_blank"><span style="color: rgb(0, 164, 255);">$redirect</span></a><span style="font-size: 12px; color: rgb(51, 51, 51);">,(如果上面不是链接形式，请将该地址手工粘贴到浏览器地址栏再访问)</span></p>															
 EOT;
         ;
         if(!sendmail("$member[username] <$member[email]>", $title, $youjiantz)) {

@@ -50,7 +50,7 @@ class dzz_app extends dzz_base{
         return $object;
     }
 
-    public function __construct($params=array()) {
+    public function __construct($params) {
         foreach($params as $k=>$v){
             $this->$k = $v;
         }
@@ -77,21 +77,11 @@ class dzz_app extends dzz_base{
     public function init() {
 
         if(!$this->initated) {
-			if($this->init_setting){
-				$this->_init_setting();	
-			} 
-			if($this->init_user){
-				 $this->_init_user();	
-			} 
-           if($this->init_session){
-				 $this->_init_session();	
-			} 
-			if($this->init_cron){
-				 $this->_init_cron();	
-			} 
-           if($this->init_misc){
-				 $this->_init_misc();	
-			} 
+            $this->_init_setting();
+            $this->_init_user();
+            $this->_init_session();
+            $this->_init_cron();
+            $this->_init_misc();
         }
         $this->initated = true;
     }
@@ -151,6 +141,7 @@ class dzz_app extends dzz_base{
             'PHP_SELF' => '',
             'siteurl' => '',
             'localurl' => '',
+            'siteroot' => '',
             'siteport' => '',
 
 
@@ -656,7 +647,6 @@ class dzz_app extends dzz_base{
     }
 
     private function _init_setting() {
-        global $_G;
         if($this->init_setting) {
             if(empty($this->var['setting'])) {
                 $this->cachelist[] = 'setting';
@@ -669,7 +659,7 @@ class dzz_app extends dzz_base{
         !empty($this->cachelist) && loadcache($this->cachelist);
 
         if(!is_array($this->var['setting'])) {
-            $this->var['setting'] =C::t('setting')->fetch_all();
+            $this->var['setting'] = array();
         }
         if($ismobile=helper_browser::ismobile()) define('IN_MOBILE',$ismobile);
         define('VERHASH',isset($this->var['setting']['verhash'])?$this->var['setting']['verhash']:random(3));

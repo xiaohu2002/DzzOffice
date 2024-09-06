@@ -83,8 +83,6 @@ if (!submitcheck('settingsubmit')) {
 		$setting['welcomemsgtitle'] = cutstr(trim(dhtmlspecialchars($setting['welcomemsgtitle'])), 75);
 	} elseif ($operation == 'notification') {
 		$navtitle = lang('Notification Settings').' - '.lang('appname');
-	} elseif ($operation == 'watermark') {
-		$navtitle = '水印设置 - '.lang('appname');
 	} elseif ($operation == 'qywechat') {
 		$navtitle = lang('weinxin_company').' - '.lang('appname');
 	} elseif ($operation == 'denlu') {
@@ -202,8 +200,6 @@ if (!submitcheck('settingsubmit')) {
 		$settingnew['notification'] = intval($settingnew['notification']);
 	} elseif ($operation == 'cachethread') {
 		$settingnew['onlinehold'] = intval($settingnew['onlinehold']) > 0 ? intval($settingnew['onlinehold']) : 15;
-	} elseif ($operation == 'watermark') {
-		$settingnew['watermark'] = intval($settingnew['watermark']);
 	} elseif ($operation == 'denlu') {
 		$settingnew['numberoflogins'] = intval($settingnew['numberoflogins']);
 		$settingnew['forbiddentime'] = intval($settingnew['forbiddentime']);
