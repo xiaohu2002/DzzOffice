@@ -366,6 +366,9 @@ class io_dzz extends io_api
     public function setFileContent($rid, $fileContent, $force = false, $nocover = true)
     {
         global $_G;
+        if (strpos($rid, 'preview_') === 0) {
+            $rid = preg_replace('/^preview_/', '', $rid);
+        }
         if (!$icoarr = C::t('resources')->fetch_by_rid($rid)) {
             return array('error' => lang('file_not_exist'));
         }
