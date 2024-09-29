@@ -41,7 +41,7 @@
 <div class="center-vh overflow-auto">
 <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
   <div class="text-center mb-3">
-  	<img alt="light year admin" src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->">
+  	<img alt="light year admin" src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&original=1&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->">
 		<h1><!--{if $_G[setting][loginset][title]}-->$_G[setting][loginset][title]<!--{else}-->$_G[setting][sitename]<!--{/if}--></h1>
 		<!--{if $_G[setting][loginset][subtitle]}--><p>$_G[setting][loginset][subtitle]</p><!--{/if}-->
   </div>

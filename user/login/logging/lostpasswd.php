@@ -35,7 +35,7 @@ elseif(isset($_GET['lostpwsubmit'])) {
     $idstring = random(6);
     $sitename=$_G['setting']['sitename'];
     if(!$_G['setting']['bbclosed']){
-		$sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+		$sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&original=1&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
 	}else{
 		$sitelogo = 'static/image/common/logo.png'; 
 	}

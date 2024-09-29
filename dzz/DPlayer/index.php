@@ -10,25 +10,22 @@ if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 if($_GET['path']){
-	$path=dzzdecode($_GET['path']);
+	if (!$path = dzzdecode($_GET['path'])) {
+    showmessage('parameter_error');
+  }
   $meta=IO::getMeta($path);
+  if(!$meta) showmessage(lang('file_not_exist'));
+  //判断有无查看权限
+  if(!perm_check::checkperm('read', $meta)) showmessage(lang('no_privilege'),dreferer());
   if($meta['name']){
     $navtitle=$meta['name'];
     $navtitle=str_replace(strrchr($navtitle, "."),"",$navtitle); 
   }else{
     $navtitle='视频';
   }
-  $patharr=explode(':',$path);
-  if($patharr[0]=='ftp'){
-    $src=$_G['siteurl'].DZZSCRIPT.'?mod=io&op=getStream&path='.rawurldecode($_GET['path']).'&n=play.'.$_GET['ext'];
-  }else{
-    $src=IO::getFileUri($path);
-    $src=str_replace('-internal.aliyuncs.com','.aliyuncs.com',$src);
-  }
+  $src=$_G['siteurl'].'index.php?mod=io&op=getStream&path='.$_GET['path'].'&filename='.$meta['name'];
 }elseif($_GET['url']){
     $src=$_GET['url'];
   }
-
 include template('index');
-
 ?>

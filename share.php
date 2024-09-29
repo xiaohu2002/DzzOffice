@@ -77,8 +77,9 @@ if($_GET['a']=='down'){
 			}, $url);
 			//添加path参数；
 			if(strpos($url,'?')!==false  && strpos($url,'path=')===false){
-				$shareLink=dzzdecode($icoarr['icoid']);
-				$url.='&path='.$icoarr['icoid'].'&shareLink='.dzzencode($shareLink.$shareLink);
+				//$path = dzzdecode($icoarr['icoid']);
+				$path = $path ? $path : $_GET['s'];
+				$url.='&path=' . dzzencode('preview_' . $path);
 			}
 			$url = $_G['siteurl'].$url;
 			@header("Location: $url");
@@ -147,7 +148,8 @@ if($_GET['a']=='down'){
 			}, $url);
 			//添加path参数；
 			if(strpos($url,'?')!==false  && strpos($url,'path=')===false){
-				$url.='&path='.$icoarr['icoid'];
+				$path = $path ? $path : $_GET['s'];
+				$url.='&path=' . dzzencode('preview_' . $path);
 			}
 			$url = $_G['siteurl'].$url;
 			@header("Location: $url");

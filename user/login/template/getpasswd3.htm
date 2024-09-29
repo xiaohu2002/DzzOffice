@@ -25,7 +25,7 @@
 <div class="flex-box login-box">
   <div class="login-left p-5">
 		<div class="text-center mb-3 d-sm-none">
-			<img src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" alt="logo" />
+			<img src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&original=1&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" alt="logo" />
 		</div>
 		<h2 class="text-center">{lang getpassword}</h2>
 		<form class="signin-form needs-validation" method="post" autocomplete="off" id="lostpwform_$loginhash" role="form" onsubmit="return validate(this);" action="user.php?mod=login&op=logging&action=getpasswd&uid=$uid&id=$hashid">

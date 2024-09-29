@@ -45,9 +45,9 @@ try{
 <!--{/if}-->
 <script type="text/javascript">
     // 全局错误处理
-    $(document).ready(function() {
+    jQuery(document).ready(function() {
         // 设置jQuery全局的Ajax错误处理
-        $.ajaxSetup({
+        jQuery.ajaxSetup({
             error: function(xhr, textStatus, errorThrown) {
                 var errorMsg = "Ajax Error: " + textStatus + ", " + errorThrown;
                 showmessage(errorMsg, 'error', 3000, 1);
