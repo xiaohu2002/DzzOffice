@@ -182,7 +182,7 @@ EOT;
 		//判断是否对此用户有管理权限
 		$uperm = false;
 		if ($_G['adminid'] != 1) {
-			if ($orgids_uid = C::t('orginization_user') -> fetch_orgids_by_uid($uid)) {
+			if ($orgids_uid = C::t('organization_user') -> fetch_orgids_by_uid($uid)) {
 				foreach ($orgids_uid as $orgid) {
 					if (C::t('organization_admin') -> ismoderator_by_uid_orgid($orgid, $_G['uid'])) {
 						$uperm = true;
