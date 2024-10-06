@@ -19,7 +19,7 @@ if(!$url=(IO::getStream($path))){
 	@header('Status: 403 Not Found');
 	exit(lang('attachment_nonexistence'));
 }
-$filename=rtrim($_GET['n'],'.dzz');
+$filename = trim($_GET['n'], '.dzz') ?: $_GET['filename'];
 $ext=strtolower(substr(strrchr($filename, '.'), 1, 10));
 if(!$ext) $ext=strtolower(substr(strrchr(preg_replace("/\.dzz$/i",'',preg_replace("/\?.*/i",'',$url)), '.'), 1, 10));
 if($ext=='dzz' || ($ext && in_array($ext,$_G['setting']['unRunExts']))){//如果是本地文件,并且是阻止运行的后缀名时;
@@ -27,11 +27,11 @@ if($ext=='dzz' || ($ext && in_array($ext,$_G['setting']['unRunExts']))){//如果
 }else{
 	$mime=dzz_mime::get_type($ext);
 }
+@header('Content-Disposition: inline; filename="' . $filename . '"');
 @header('cache-control:public'); 
 @header('Content-Type: '.$mime);
 @ob_end_clean();if(getglobal('gzipcompress')) @ob_start('ob_gzhandler');
 @readfile($url);
 @flush(); @ob_flush();
 exit();
-
 ?>
