@@ -63,17 +63,6 @@ class perm_check{
                 }else{ //继承上级，查找上级
                     if($folder['pfid']>0 && $folder['pfid']!=$folder['fid']){ //有上级目录
                         return self::getPerm($folder['pfid'],$bz,$i);
-                    }elseif (shareLink($_GET['shareLink'],$_GET['path'])){
-                        return perm_binPerm::getGroupPower('read');
-                    }elseif($folder = C::t('folder')->fetch_home_by_uid($_G['uid'])){//查看当前用户的个人网盘fid
-                        if($folder['fid']){
-                            if(!($folder['fid']==$fid)){//判断当前用户的个人网盘fid是否等于当前用户访问的fid
-                                $fids = get_all_chilrdenfid_by_pfid($folder['fid']);
-                                if (!(in_array($fid,$fids))){
-                                    return false;
-                                }
-                            }  
-                        } 
                     }else{   //其他的情况使用
                     	return self::getuserPerm();
                     }
@@ -178,6 +167,10 @@ class perm_check{
         if($_G['uid']<1){ //游客没有权限
             return false;
         }
+        if($_G['adminid']==1) return true; //网站管理员 有权限;
+        if (!$arr['gid'] && $arr['uid'] !== $_G['uid']) {//我的网盘文件只限于当前用户
+            return false;
+        }
         if(($bz && $bz!='dzz') || ($arr['bz'] && $arr['bz']!='dzz')){
             return self::checkperm_Container($arr['pfid'],$action,$bz?$bz:$arr['bz']);
         }else{
@@ -195,8 +188,6 @@ class perm_check{
                 //首先判断目录的超级权限；
                 if(!perm_FolderSPerm::isPower($folder['fsperm'],$action)) return false;
             }
-            if($_G['adminid']==1) return true; //网站管理员 有权限;
-           
             return self::checkperm_Container($arr['pfid'],$action,$bz);
         }
     }
