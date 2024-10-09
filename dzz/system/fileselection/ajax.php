@@ -96,7 +96,7 @@ if ($operation == 'upload') {//上传图片文件
 
             //是图片时处理
             if ($isimage) {
-                if (!perm_check::checkperm($fid, 'upload')) {
+                if (!perm_check::checkperm_Container($fid, 'upload')) {
                     $arr['error'] = lang('target_not_accept_image');
                 }
                 if ($data = io_dzz::linktoimage($link, $fid)) {
@@ -110,7 +110,7 @@ if ($operation == 'upload') {//上传图片文件
             } else {
                 //试图作为视频处理
                 if ($data = io_dzz::linktovideo($link, $fid)) {
-                    if (!perm_check::checkperm($fid, 'upload')) {
+                    if (!perm_check::checkperm_Container($fid, 'upload')) {
                         $arr['error'] = lang('target_not_accept_video');
                     } else {
                         if ($data['error']) $arr['error'] = $data['error'];
@@ -121,7 +121,7 @@ if ($operation == 'upload') {//上传图片文件
                     }
                 }
                 //作为网址处理
-                if (!perm_check::checkperm($fid, 'upload')) {
+                if (!perm_check::checkperm_Container($fid, 'upload')) {
                     $arr['error'] = lang('target_not_accept_link');
                 } else {
                     if ($data = io_dzz::linktourl($link, $fid)) {
