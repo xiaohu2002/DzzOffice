@@ -25,8 +25,9 @@ $(document).off('tap.openfile').on('tap.openfile', '.filelist', function () {
 			});
 			pb.open(index);
 		}else if(type=='download'){
-				var path=obj.data('dpath');
-				if(obj.data('url')) downfile(path);
+            var path=obj.data('dpath');
+            var href = DZZSCRIPT + '?mod=io&op=download&checkperm=false'+ '&path=' + path;
+            if(obj.data('url')) downfile(href);
 		} else {
 			
 			if (is_wxwork) {
@@ -199,4 +200,3 @@ $(document).off('tap.down').on('tap.down', '.downfile', function () {
     href = href + '&path=' + rids;
     downfile(href);
 })
-

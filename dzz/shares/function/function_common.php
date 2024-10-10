@@ -40,24 +40,31 @@ function checkShare($share){
 }
 //获取文件的打开方式
 function getOpenUrl($icoarr,$share){
-	static $extall=array();
 	$ext=$icoarr['ext'];
 	$dpath=$icoarr['dpath'];//(array('path'=>$icoarr['rid'],'perm'=>$share['perm']));
+	$canedit=0;
+	if($share['perm'] & 64){
+		$canedit=1;
+	}
+	$candownload=0;
+	if($share['perm'] & 256){
+		$candownload=1;
+	}
 	$extall=C::t('app_open')->fetch_all_ext();
     $exts=array();
-	$extarr=array();
+    $bzarr=explode(':',$icoarr['rbz']?$icoarr['rbz']:$icoarr['bz']);
+    $bz=($bzarr[0]) ? $bzarr[0]:'dzz';
     foreach($extall as $value){
-		if(!isset($exts[$value['ext']]) || $value['isdefault']) $exts[$value['ext']]=$value;
-	}
+        if(!isset($exts[$value['ext']]) || $value['isdefault']) $exts[$value['ext']]=$value;
+    }
+
 	if(isset($exts[$bz.':'.$ext])){
 		$data=$exts[$bz.':'.$ext];
 	}elseif($exts[$ext]){
 		$data=$exts[$ext];
 	}elseif($exts[$icoarr['type']]){
 		$data=$exts[$icoarr['type']];
-	}else {
-		$data=array();
-	}
+	}else $data=array();
 	if($data){
 		$url=$data['url'];
 		if($icoarr['type']=='image' || strpos($url,'dzzjs:OpenPicWin')!==false){//dzzjs形式时
@@ -78,7 +85,7 @@ function getOpenUrl($icoarr,$share){
 			}, $url);
 			//添加path参数；
 			if(strpos($url,'?')!==false  && strpos($url,'path=')===false){
-				$url.='&path='.$dpath;
+				$url.='&path=' . dzzencode('preview_' . $icoarr['rid']);
 			}
 			//$url = $_G['siteurl'].$url;
 			return array('type'=>'attach','url'=>$url,'canedit'=>$data['canedit']);
@@ -86,7 +93,11 @@ function getOpenUrl($icoarr,$share){
 		
 	}else{//没有可用的打开方式，转入下载；
 		$sid=dzzencode($share['id'],'',0,0);
-		return array('type'=>'download','url'=>'index.php?mod=shares&op=download&operation=download&sid='.$sid.'&filename='.$icoarr['name'].'&path='.$dpath);
+		if($candownload){
+			return array('type'=>'download','url'=>'index.php?mod=shares&op=download&operation=download&sid='.$sid.'&filename='.$icoarr['name'].'&path='.$dpath);
+		}else{
+			return array('type'=>'download','url'=>'index.php?mod=shares&op=download&operation=download&sid='.$sid.'&filename='.$icoarr['name'].'&path='.$dpath);
+		}
 		//IO::download($path,$_GET['filename']);
 	}
 }
