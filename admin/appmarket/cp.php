@@ -240,7 +240,7 @@ elseif ($do == 'uninstall') {//卸载应用
 	}
 	$app['extra'] = unserialize($app['extra']);
 	$finish = FALSE;
-	$request_uri = MOD_NAME;
+	$request_uri = MOD_URL;
 	$refer = $_GET['refer']; 
 	$appinfo=$app;
 	$msg='';
