@@ -11,7 +11,7 @@ if(!defined('IN_DZZ')) {
 }
 $verify = C::t('user_verify')->fetch($_G['uid']);
 $about=array();
-$identify=$_GET['modname'];
+$identify = filter_var($_GET['modname'], FILTER_SANITIZE_STRING);
 $appConfig=DZZ_ROOT.'./dzz/'.$identify.'/config/config.php';
 if($identify && file_exists($appConfig)){
 	$config=include($appConfig);
