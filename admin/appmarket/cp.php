@@ -213,7 +213,7 @@ elseif ($do == 'install') {//安装应用
     if(empty($apparray['app']['app_path'])) $apparray['app']['app_path']=$dir;
 	$filename = $apparray['app']['extra']['installfile'];
 
-	$request_uri = MOD_NAME;
+	$request_uri = MOD_URL;
 	if (!empty($filename) && preg_match('/^[\w\.]+$/', $filename)) {
 		$filename = DZZ_ROOT . './'.$dir.'/' . $appname . '/' . $filename;
 		if (file_exists($filename)) {
