@@ -1642,19 +1642,17 @@ function getexpiration()
     return mktime(0, 0, 0, $date['mon'], $date['mday'], $date['year']) + 86400;
 }
 
-function return_bytes($val)
-{
-    $val = trim($val);
-    $last = strtolower($val{strlen($val) - 1});
-    switch ($last) {
-        case 'g':
-            $val *= 1024;
-        case 'm':
-            $val *= 1024;
-        case 'k':
-            $val *= 1024;
-    }
-    return $val;
+function return_bytes($val) {
+	$last = strtolower($val[strlen($val)-1]);
+	if (!is_numeric($val)) {
+		$val = substr(trim($val), 0, -1);
+	}
+	switch($last) {
+		case 'g': $val *= 1024;
+		case 'm': $val *= 1024;
+		case 'k': $val *= 1024;
+	}
+	return $val;
 }
 
 
