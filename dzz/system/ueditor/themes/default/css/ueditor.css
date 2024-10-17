@@ -739,6 +739,9 @@ div.edui-box {
 .edui-default  .edui-for-kityminder .edui-icon {
     background-image: url(../images/kityminder.png);
 }
+.edui-default  .edui-for-drafts .edui-icon {
+    background-image: url(../images/drafts.png);
+}
 .edui-default .edui-for-print .edui-icon:before {
     content: "\e67a";
 }

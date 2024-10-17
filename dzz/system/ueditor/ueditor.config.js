@@ -145,6 +145,7 @@
                 "|",
                 "contentimport",
                 "help",                // 帮助
+                "drafts",
             ]
         ]
 

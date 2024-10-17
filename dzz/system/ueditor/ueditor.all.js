@@ -19014,141 +19014,135 @@ UE.plugin.register("wordimage", function () {
 
 
 // plugins/autosave.js
-UE.plugin.register("autosave", function () {
-    var me = this, saveKey = null;
+UE.plugin.register("autosave", function (){
 
-    function save(editor) {
+    var me = this,
+        //无限循环保护
+        lastSaveTime = new Date(),
+        //最小保存间隔时间
+        MIN_TIME = 20,
+        //auto save key
+        saveKey = null;
+
+    function save ( editor ) {
+
         var saveData;
 
-        if (!editor.hasContents()) {
-            //这里不能调用命令来删除， 会造成事件死循环
-            saveKey && me.removePreferences(saveKey);
+        if ( new Date() - lastSaveTime < MIN_TIME ) {
             return;
         }
 
-        editor._autoSaveTimer = null;
+        if ( !editor.hasContents() ) {
+            //这里不能调用命令来删除， 会造成事件死循环
+            saveKey && me.removePreferences( saveKey );
+            return;
+        }
 
+        lastSaveTime = new Date();
+
+        editor._saveFlag = null;
+		if(!me.body) return;
         saveData = me.body.innerHTML;
 
-        if (
-            editor.fireEvent("beforeautosave", {
-                content: saveData
-            }) === false
-        ) {
+        if ( editor.fireEvent( "beforeautosave", {
+            content: saveData
+        } ) === false ) {
             return;
         }
 
-        // console.log('autosave', saveKey, saveData);
-        me.setPreferences(saveKey, saveData);
+        me.setPreferences( saveKey, saveData );
 
-        editor.fireEvent("afterautosave", {
+        editor.fireEvent( "afterautosave", {
             content: saveData
-        });
+        } );
+
     }
 
     return {
         defaultOptions: {
-            autoSaveEnable: true,
-            autoSaveRestore: false,
-            autoSaveKey: null,
+            //默认间隔时间
+            saveInterval: 5000
         },
-        bindEvents: {
-            ready: function () {
-                saveKey = me.getOpt('autoSaveKey');
-                if (!saveKey) {
-                    var _suffix = "_DraftsData", key = null;
+        bindEvents:{
+            'ready':function(){
 
-                    if (me.key) {
-                        key = me.key + _suffix;
-                    } else {
-                        key = (me.container.parentNode.id || "ue-common") + _suffix;
-                    }
-                    saveKey = (location.protocol + location.host + location.pathname).replace(
-                        /[.:\/]/g,
-                        "_"
-                    ) + key;
+                var _suffix = "-drafts-data",
+                    key = null;
+
+                if ( me.key ) {
+                    key = me.key + _suffix;
+                } else {
+                    key = ( me.container.parentNode.id || 'ue-common' ) + _suffix;
                 }
-                if (me.getOpt('autoSaveRestore')) {
-                    var data = me.getPreferences(saveKey);
-                    // console.log('saveKey', saveKey, data);
-                    if (data) {
-                        me.body.innerHTML = data;
-                        me.fireEvent('showmessage', {
-                            type: 'info',
-                            content: me.getLang('autosave').autoRestoreTip
-                        })
-                    }
-                }
-                // console.log('saveKey', saveKey);
+
+                //页面地址+编辑器ID 保持唯一
+                saveKey = ( location.protocol + location.host + location.pathname ).replace( /[.:\/]/g, '_' ) + key;
+
             },
-            beforesubmit: function () {
-                if (!me.getOpt("autoSaveEnable") || !saveKey) {
-                    return;
-                }
-                me.execCommand('clear_auto_save_content');
-            },
-            contentchange: function () {
-                if (!me.isReady) {
-                    return;
-                }
-                if (!me.getOpt("autoSaveEnable") || !saveKey) {
+
+            'contentchange': function () {
+
+                if ( !saveKey ) {
                     return;
                 }
 
-                if (me._autoSaveTimer) {
-                    window.clearTimeout(me._autoSaveTimer);
+                if ( me._saveFlag ) {
+                    window.clearTimeout( me._saveFlag );
                 }
 
-                me._autoSaveTimer = window.setTimeout(function () {
+                if ( me.options.saveInterval > 0 ) {
+
+                    me._saveFlag = window.setTimeout( function () {
+
+                        save( me );
+
+                    }, me.options.saveInterval );
+
+                } else {
+
                     save(me);
-                }, 1000);
+
+                }
+
+
             }
         },
-        commands: {
-            clear_auto_save_content: {
-                execCommand: function (cmd, name) {
-                    if (saveKey && me.getPreferences(saveKey)) {
-                        me.removePreferences(saveKey);
+        commands:{
+            'clearlocaldata':{
+                execCommand:function (cmd, name) {
+                    if ( saveKey && me.getPreferences( saveKey ) ) {
+                        me.removePreferences( saveKey )
                     }
                 },
                 notNeedUndo: true,
-                ignoreContentChange: true
+                ignoreContentChange:true
             },
 
-            set_auto_save_content: {
-                execCommand: function (cmd, name) {
-                    save(me);
+            'getlocaldata':{
+                execCommand:function (cmd, name) {
+                    return saveKey ? me.getPreferences( saveKey ) || '' : '';
                 },
                 notNeedUndo: true,
-                ignoreContentChange: true
+                ignoreContentChange:true
             },
 
-            get_auto_save_content: {
-                execCommand: function (cmd, name) {
-                    return me.getPreferences(saveKey) || "";
-                },
-                notNeedUndo: true,
-                ignoreContentChange: true
-            },
-
-            auto_save_restore: {
-                execCommand: function (cmd, name) {
-                    if (saveKey) {
-                        me.body.innerHTML =
-                            me.getPreferences(saveKey) || "<p>" + domUtils.fillHtml + "</p>";
+            'drafts':{
+                execCommand:function (cmd, name) {
+                    if ( saveKey ) {
+                        me.body.innerHTML = me.getPreferences( saveKey ) || '<p>'+domUtils.fillHtml+'</p>';
                         me.focus(true);
                     }
                 },
                 queryCommandState: function () {
-                    return saveKey ? (me.getPreferences(saveKey) === null ? -1 : 0) : -1;
+                    return saveKey ? ( me.getPreferences( saveKey ) === null ? -1 : 0 ) : -1;
                 },
                 notNeedUndo: true,
-                ignoreContentChange: true
+                ignoreContentChange:true
             }
         }
-    };
-});
+    }
 
+});
 
 // plugins/formula.js
 UE.plugin.register("formula", function () {
@@ -34691,6 +34685,7 @@ UE.ui = baidu.editor.ui = {};
         "splittocells",
         "mergecells",
         "deletetable",
+        "drafts"
     ];
 
     for (var i = 0, ci; (ci = btnCmds[i++]);) {
