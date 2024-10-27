@@ -21,7 +21,7 @@
 <div class="center-vh overflow-auto">
 <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->" id="lostpw_container_$loginhash" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="text-center mb-3">
-		<img alt="light year admin" src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&original=1&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" style="max-height: 60px;">
+		<img alt="light year admin" src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" style="max-height: 60px;">
 		<h1>{lang getpassword}</h1>
   </div>
 	<!--{if !empty($_GET['inajax'])}--><button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button><!--{/if}-->

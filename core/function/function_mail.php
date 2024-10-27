@@ -25,7 +25,7 @@ function sendmail($toemail, $subject, $message, $from = '') {
   $sitename=$_G['setting']['sitename'];
   $sitecopyright=replacesitevar($_G['setting']['sitecopyright']);
   if(!$_G['setting']['bbclosed']){
-		$sitelogo=$_G['setting']['sitelogo']?$_G['siteurl'].'index.php?mod=io&op=thumbnail&size=small&original=1&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):$_G['siteurl'].'static/image/common/logo.png';
+		$sitelogo=$_G['setting']['sitelogo']?$_G['siteurl'].'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):$_G['siteurl'].'static/image/common/logo.png';
 	}else{
 		$sitelogo=$_G['siteurl'].'static/image/common/logo.png';
 	}

@@ -24,7 +24,7 @@ if($_GET['a']=='down'){
 	$ext=$icoarr['ext'];//strtolower(substr(strrchr($filename, '.'), 1, 10));
 	if(!$ext) $ext=preg_replace("/\?.+/i",'',strtolower(substr(strrchr(rtrim($url,'.dzz'), '.'), 1, 10)));
 	if(in_array($ext,$imageexts)){
-		$url=$_G['siteurl'].'index.php?mod=io&op=thumbnail&original=1&path='.$_GET['s'];
+		$url=$_G['siteurl'].'index.php?mod=io&op=thumbnail&path='.$_GET['s'];
 		@header("Location: $url");
 		exit();
 	}elseif($ext=='mp3'){

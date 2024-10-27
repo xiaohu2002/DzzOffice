@@ -31,7 +31,7 @@ class table_vote_item extends dzz_table
 		foreach(DB::fetch_all("select * from %t where $sql order by disp",$param) as $value){
 			if($value['type'] && $value['aid']){
 				 $value['img']=(DZZSCRIPT?DZZSCRIPT:'index.php').'?mod=io&op=thumbnail&width=240&height=160&path='.dzzencode('attach::'.$value['aid']);
-				  $value['url']=(DZZSCRIPT?DZZSCRIPT:'index.php').'?mod=io&op=thumbnail&width=240&height=160&original=1&path='.dzzencode('attach::'.$value['aid']);
+				  $value['url']=(DZZSCRIPT?DZZSCRIPT:'index.php').'?mod=io&op=thumbnail&width=240&height=160&path='.dzzencode('attach::'.$value['aid']);
 			}
 			$data['type_'.$value['type']][]=$value;
 		}

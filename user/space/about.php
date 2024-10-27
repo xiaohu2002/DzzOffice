@@ -18,7 +18,7 @@ if($identify && file_exists($appConfig)){
 	if(isset($config['about'])){
 		$about=$config['about'];
 		if(!$_G['setting']['bbclosed']){
-			$about['sitelogo']=$_G['setting']['sitelogo']?\IO::getFileUri('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+			$about['sitelogo']=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
 		}else{
 			$about['sitelogo']='static/image/common/logo.png'; 
 		}
@@ -36,7 +36,7 @@ if(empty($appinfo['appname'])){
 	$about['version']='V'.CORE_VERSION;//版本信息，留空不显示
 	//中间大图
 	if(!$_G['setting']['bbclosed']){
-		$about['logo']=$_G['setting']['sitelogo']?\IO::getFileUri('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+		$about['logo']=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
 	}else{
 		$about['logo']='static/image/common/logo.png'; 
 	}

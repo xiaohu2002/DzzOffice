@@ -1,1 +1,502 @@
-function feed_publish(e,t,a){var i,d="";for(var s in d+='<div id="comment_'+e.cid+'" class="card" feed-id="'+e.cid+'" style="display:none"><div class="card-body">',d+='\t<div class="left_ifed"> <a href="user.php?uid='+e.authorid+'" title="'+e.author+'" hidefocus="true">'+e.avatar+"</a> </div>",d+='\t<div class="right_ifed">',d+=' \t<div class="main_fed">',d+='  \t\t <p class="text-muted"> <a href="user.php?uid='+e.authorid+'" title="'+e.author+'" hidefocus="true" class="appuser_sfed">'+e.author+"</a> "+__lang.reply+"</p>",d+='  \t\t<div class="card master_mfed"><span class="card-body">'+e.message+"</span></div>",d+='\t   <div class="attachment_fed">',e.attachs){var c=e.attachs[s];d+='\t\t <div class="item_afed">',"image"==c.type?(d+='\t\t <div class="pic_fed  clearfix">',d+='\t\t   <div class="img_pfed"> <a class="min_ipfed" hidefocus="true" href="javascript:;"><img src="'+c.img+'" data-original="'+c.img+'&original=1" alt="'+c.title+'" class=""></a> </div>',d+="\t\t </div>",d+='\t\t<div class="file_fed imgfile_fed clearfix"> '+c.title+'<span class="kb_nffed">('+c.filesize+")</span>",d+='\t\t\t<p class="down_ffed">',c.downloads>0?d+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+c.qid+"')\">"+__lang.download+"("+c.downloads+__lang.degree+")</a>":d+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+c.qid+"')\">"+__lang.download+"</a>",d+='\t\t        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+c.qid+"')\">"+__lang.js_saved_my_documents+"</a> ",d+="\t        </p>",d+="\t     </div>"):"video"==c.type?(d+='\t<div class="file_fed file_fed_'+c.type+' clearfix">',d+='          <div class="ico_ffed " style="margin-right:20px"><a href="javascript:;" onclick="feed_attach_preview(\''+c.qid+'\')"><img src="'+c.img+'" alt="'+c.title+'" class="videoclass50_50" ></a></div>',d+='          <p class="name_ffed">'+c.title+"</p>",d+='           <p class="down_ffed">',c.downloads>0?d+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+c.qid+"')\">"+__lang.download+"("+c.downloads+__lang.degree+")</a>":d+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+c.qid+"')\">"+__lang.download+"</a>",d+='\t\t        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+c.qid+"')\">"+__lang.js_saved_my_documents+"</a> ",d+="\t        </p>",d+="\t     </div>"):"dzzdoc"==c.type||"link"==c.type?(d+='\t<div class="file_fed file_fed_'+c.type+' clearfix">',d+='          <div class="ico_ffed "><a href="javascript:;" onclick="feed_attach_preview(\''+c.qid+'\')"><img src="'+c.img+'" alt="'+c.title+'" style="height:50px;"></a></div>',d+='          <p class="name_ffed">'+c.title+"</p>",d+='           <p class="down_ffed">',d+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+c.qid+"')\">"+__lang.preview+"</a>",d+="\t</div>"):(d+='\t<div class="file_fed file_fed_'+c.type+' clearfix">',d+='          <div class="ico_ffed "><a href="javascript:;" onclick="feed_attach_preview(\''+c.qid+'\')"><img src="'+c.img+'" alt="'+c.title+'" style="height:50px;"></a></div>',d+='          <p class="name_ffed">'+c.title+"</p>",d+='           <p class="down_ffed">',c.preview>0&&(d+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+c.qid+"')\">"+__lang.preview+"</a>"),c.downloads>0?d+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+c.qid+"')\">"+__lang.download+"("+c.downloads+__lang.degree+")</a>":d+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+c.qid+"')\">"+__lang.download+"</a>",d+='\t\t        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+c.qid+"')\">"+__lang.js_saved_my_documents+"</a> ",d+="\t        </p>",d+="\t     </div>"),d+="\t</div>"}(d+="\t</div>",d+='   \t\t<p class="text-muted clearfix">',d+='     \t\t\t<div class="btn_amfed">',d+="      \t \t\t<ul>",d+='        \t \t\t\t<li class="more_bamfed"><a hidefocus="true" href="javascript:void(0);" onclick="feed_delete(\''+e.cid+"','comment_"+e.cid+"')\">"+__lang.delete+"</a></li>",d+='         \t\t\t\t<li class="reply_bamfed"><a hidefocus="true" href="javascript:void(0);" onclick="getReplyForm(\''+e.cid+"','0','"+e.allowattach+"','"+e.allowat+"','"+e.allowsmiley+"');\">"+__lang.reply+"</a></li>",d+="      \t \t\t</ul>",d+="     \t\t\t</div>",d+="  \t\t</p>",d+=" \t\t</div>",d+='\t\t<div id="comment_reply_'+e.cid+'" class="comment_ifed" ></div>',d+="\t</div>",d+="</div></div>",a&&jQuery("#"+a).length)?(i=jQuery("#"+a+" > .card:first")).length>0?i.before(d):jQuery("#"+a).html(d):(i=jQuery("#comment_container > .card:first")).length>0?i.before(d):jQuery("#comment_container").html(d);jQuery("#comment_"+e.cid).slideDown(500),jQuery("#message_"+t).removeClass("writelock").removeClass("writein").val(""),jQuery("#publish_submit_"+t).removeAttr("disabled"),jQuery("#message_"+t).val(jQuery("#message_"+t).attr("tip")),jQuery("#message_"+t).css({height:25}),jQuery("#attachmentViewBox_"+t).empty(),jQuery("#comment_"+e.cid+" img[data-original]").dzzthumb();try{callback_by_comment("comment_"+e.cid,"add")}catch(e){}}function feed_reply(e){var t="";for(var a in t+='<div id="comment_'+e.cid+'" class="cmt_fed">',t+='   <div class="item_cfed">',t+='     <div class="left_icfed"> <a href="user.php?uid='+e.authorid+'" title="" hidefocus="true"> '+e.avatar+" </a> </div>",t+='     <p class="text-muted">',t+='     <a href="user.php?uid='+e.authorid+'" title="" class="avatar_mcfed" hidefocus="true">'+e.author+"</a> "+__lang.reply+" "+e.dateline+'</p><div class="card master_cfed">',e.rpost&&(t+='<span class="amal_fed">对</span>  <a href="user.php?uid='+e.rpost.authorid+'" title="" class="avatar_mcfed" hidefocus="true" target="_blank">'+e.rpost.author+"</a>"),t+='          <span class="card-body">'+e.message+"</span> ",t+="\t\t</div>",t+='\t   <div class="attachment_fed">',e.attachs){var i=e.attachs[a];t+='\t\t <div class="item_afed">',"image"==i.type?(t+='\t\t <div class="pic_fed clearfix">',t+='\t\t   <div class="img_pfed"> <a class="min_ipfed" hidefocus="true" href="javascript:;"><img src="'+i.img+'" data-original="'+i.img+'&original=1" alt="'+i.title+'" class=""></a> </div>',t+="\t\t </div>",t+='\t\t<div class="file_fed imgfile_fed clearfix"> '+i.title+'<span class="kb_nffed">('+i.filesize+")</span>",t+='\t\t\t<p class="down_ffed">',i.downloads>0?t+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+i.qid+"')\">"+__lang.download+"("+i.downloads+__lang.degree+")</a>":t+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+i.qid+"')\">"+__lang.download+"</a>",t+='\t\t        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+i.qid+"')\">"+__lang.js_saved_my_documents+"</a> ",t+="\t        </p>",t+="\t     </div>"):"video"==i.type?(t+='\t<div class="file_fed file_fed_'+i.type+' clearfix">',t+='          <div class="ico_ffed " style="margin-right:20px"><a href="javascript:;" onclick="feed_attach_preview(\''+i.qid+'\')"><img src="'+i.img+'" alt="'+i.title+'" class="videoclass50_50" ></a></div>',t+='          <p class="name_ffed">'+i.title+"</p>",t+='           <p class="down_ffed">',t+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+i.qid+"')\">"+__lang.preview+"</a>",t+="\t        </p>",t+="\t     </div>"):"dzzdoc"==i.type||"link"==i.type?(t+='\t<div class="file_fed file_fed_'+i.type+' clearfix">',t+='          <div class="ico_ffed "><a href="javascript:;" onclick="feed_attach_preview(\''+i.qid+'\')"><img src="'+i.img+'" alt="'+i.title+'" style="height:50px;"></a></div>',t+='          <p class="name_ffed">'+i.title+"</p>",t+='           <p class="down_ffed">',t+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+i.qid+"')\">"+__lang.preview+"</a>",t+="\t</div>"):(t+='\t<div class="file_fed file_fed_'+i.type+' clearfix">',t+='          <div class="ico_ffed "><a href="javascript:;" onclick="feed_attach_preview(\''+i.qid+'\')"><img src="'+i.img+'" alt="'+i.title+'" style="height:50px;"></a></div>',t+='          <p class="name_ffed">'+i.title+"</p>",t+='           <p class="down_ffed">',i.preview>0&&(t+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+i.qid+"')\">"+__lang.preview+"</a>"),i.downloads>0?t+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+i.qid+"')\">"+__lang.download+"("+i.downloads+__lang.degree+")</a>":t+='\t \t\t\t<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+i.qid+"')\">"+__lang.download+"</a>",t+='\t\t        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+i.qid+"')\">"+__lang.js_saved_my_documents+"</a> ",t+="\t        </p>",t+="\t     </div>"),t+="\t</div>"}if(t+="\t</div>",t+='      <div class="action_cfed clearfix">',t+='         <div class="btn_acfed">',t+="           <ul>",e.haveperm>0&&(t+='             <li class="more_bacfed"><a hidefocus="true" href="javascript:void(0);" onclick="feed_delete(\''+e.cid+"','comment_"+e.cid+"','"+e.pcid+"')\">"+__lang.delete+"</a></li>"),t+='             <li class="reply_bacfed"><a hidefocus="true" href="javascript:void(0);" onclick="getReplyForm(\''+e.pcid+"','"+e.cid+"','"+e.allowattach+"','"+e.allowat+"','"+e.allowsmiley+"');\">"+__lang.reply+"</a></li>",t+="           </ul>",t+="         </div>",t+="       </div>",t+="     </div>",t+="   </div>",t+=" </div>",document.getElementById("reply_list_"+e.pcid))jQuery("#reply_list_"+e.pcid).find(".cmt_fed:first").before(t);else{var d="";d+=' <div class="comment_fed" style="display: block;">',d+='    <div class="corner_lfed"><span></span></div>',d+="  </div> ",d+=' <div id="reply_list_'+e.pcid+'" class="list_cfed">'+t+"</div>",jQuery("#comment_reply_"+e.pcid).html(d)}jQuery("#comment_"+e.cid).on("mouseenter",function(){jQuery(this).addClass("hover_cmt_fed")}).on("mouseleave",function(){jQuery(this).removeClass("hover_cmt_fed")});var s=parseInt(jQuery("#comment_reply_"+e.pcid+" .txt_cfed .num_cfed").html());s>0&&jQuery("#comment_reply_"+e.pcid+" .txt_cfed .num_cfed").html(s+1),jQuery("#message_"+e.pcid).val(""),jQuery("#pulish_submit_"+e.pcid).removeAttr("disabled"),jQuery("#reply_publish_"+e.pcid).slideUp(500),jQuery("#attachmentViewBox_"+e.pcid).empty(),jQuery("#comment_"+e.cid+" img[data-original]").dzzthumb()}function getReplyForm(e,t,a,i,d){if(jQuery("#comment_container .card .publishsharewrap").hide(),document.getElementById("reply_publish_"+e)){s=jQuery("#reply_who_"+e);t>0?(s.find(".toname_wcpsw").html(jQuery("#comment_"+t+" .avatar_mcfed").html()),s.show(),jQuery("#reply_pid_"+e).val(t)):(s.hide(),jQuery("#reply_pid_"+e).val("0")),jQuery("#reply_publish_"+e).find(".publishsharewrap").show().end().slideDown(500),jQuery("#comment_"+e+' textarea[name="message"]').val("").focus(),jQuery("#message_"+e).css("height",25)}else{var s=jQuery('<div id="reply_publish_'+e+'"></div>').appendTo("#comment_"+e);ajaxget(DZZSCRIPT+"?mod=comment&op=ajax&do=getReplyForm&cid="+e+"&allowattach="+a+"&allowat="+i+"&allowsmiley="+d,"reply_publish_"+e,"reply_publish_"+e,"","",function(){var a=jQuery("#reply_who_"+e);t>0?(a.find(".toname_wcpsw").html(jQuery("#comment_"+t+" .avatar_mcfed").html()),a.show(),jQuery("#reply_pid_"+e).val(t)):(a.hide(),jQuery("#reply_pid_"+e).val("0")),jQuery("#comment_"+e+' textarea[name="message"]').val("").focus(),jQuery("#message_"+e).css("height",25)})}}function feed_edit(e,t,a,i){showWindow("publish_edit_"+e,DZZSCRIPT+"?mod=comment&op=ajax&do=edit&cid="+e+"&allowattach="+t+"&allowat="+a+"&allowsmiley="+i)}function feed_edit_finish(e,t,a,i){jQuery.get(DZZSCRIPT+"?mod=comment&op=ajax&do=getcommentbycid&cid="+e+"&allowattach="+t+"&allowat="+a+"&allowsmiley="+i,function(t){jQuery("#comment_"+e).replaceWith(t)})}function feed_delete(e,t,a){var i="";i=a?__lang.sure_want_delete_comment:__lang.sure_want_delete_all_comment,confirm(i)&&jQuery.getJSON(DZZSCRIPT+"?mod=comment&op=ajax&do=delete&cid="+e,function(e){jQuery("#"+t).slideUp(500,function(){if(jQuery(this).remove(),a){var e=parseInt(jQuery("#comment_reply_"+a+" .txt_cfed .num_cfed").html());e>0&&jQuery("#comment_reply_"+a+" .txt_cfed .num_cfed").html(e-1)}});try{callback_by_comment(t,"delete")}catch(e){}})}function feed_addAttach(e,t,a){var i="";i+=' <div  class="attachment_previewer">',i+='     <div class="attachmentviewbox">',i+='         <div class="view_attvb clearfix">',e.isimage?i+='           <div class="ico_vattvb "><a href="'+e.img+'" target="_blank"><img alt="'+e.filename+'" src="'+e.img+'" class="img_50_50"></a></div>':i+='           <div class="ico_vattvb "><img class="img_50_50" alt="'+e.filename+'" src="'+e.img+'"></div>',i+='  \t\t  <div class="ico_vattvb_right">',i+='            <div class="ico_name">'+e.filename+"</div>",i+='            <a href="javascript:void(0);" title="" class="del_fattvb" onClick="removeAttach(jQuery(this).parent().parent().parent().parent(),\''+a+"');\" >"+__lang.del_adjunct+"</a>",i+='            <input type="hidden" name="attach[aid][]" value="'+e.aid+'" />',i+='            <input type="hidden" name="attach[title][]" value="'+e.filename+'" />',i+='            <input type="hidden" name="attach[type][]" value="attach" />',i+='            <input type="hidden" name="attach[img][]" value="" />',i+='            <input type="hidden" name="attach[url][]" value="" />',i+="          </div>",i+="          </div>",i+="      </div>",i+=" </div>",t.replaceWith(i),check_attach_share_tid(a)}function feed_downAttach(e){var t=DZZSCRIPT+"?mod=comment&op=down&qid="+e;BROWSER.ie?window.open(t):(window.frames.hidefram||jQuery('<iframe id="hideframe" name="hideframe" src="about:blank" frameborder="0" marginheight="0" marginwidth="0" width="0" height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>').appendTo("body"),window.frames.hideframe.location=t)}function feed_attach_saveto(e){var t=DZZSCRIPT+"?mod=comment&op=saveto&qid="+e;showWindow("saveto","index.php?mod=system&op=filewindow&type=2","get","0",function(e,a){jQuery.post(t,{fid:e},function(e){e.error?showmessage(e.error,"danger",3e3,1):showmessage(__lang.savetosuccess+a.relativepath+e.filename,"success",3e3,1)},"json")})}function feed_attach_preview(e){var t=DZZSCRIPT+"?mod=comment&op=preview&qid="+e;top._config?(window.frames.hidefram||jQuery('<iframe id="hideframe" name="hideframe" src="about:blank" frameborder="0" marginheight="0" marginwidth="0" width="0" height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>').appendTo("body"),window.frames.hideframe.location=t):window.open(t)}function feed_attach_del(e){DZZSCRIPT}function check_attach_share_tid(e){e||(e="0");var t=jQuery("#attachmentViewBox_"+e).find(".attachment_previewer").length,a=jQuery("#message_"+e).val(),i=/^__lang.share_the(\d+)__lang.js_a_file/gi;return t<1?""!=a&&jQuery("#message_"+e).val(a.replace(i,"")):""==a||a==jQuery("#message_"+e).attr("tip")?jQuery("#message_"+e).val(__lang.share_the+t+__lang.js_a_file):jQuery("#message_"+e).val(a.replace(i,__lang.share_the+t+__lang.js_a_file)),check_publish_enable(e),jQuery("#message_"+e).focus().caret("pos",document.getElementById("message_"+e).value.length),t}function removeAttach(e,t){e.slideUp(500,function(){jQuery(this).remove(),check_attach_share_tid(t)})}function uploadfrom_desktop(e){e||(e="0");try{var t={attach:[__lang.typename_attach,["ATTACH","IMAGE","DOCUMENT","VIDEO","LINK","DZZDOC"],""],image:[__lang.typename_image+"(*.jpg,*.jpeg,*.png,*.gif)",["IMAGE","JPG","JPEG","PNG","GIF"],""]},a=JSON.stringify(t);a=(a=(a=a.replace(/\"/g,"&quot;")).replace(/\(/g,"|")).replace(/\)/g,"$"),a=encodeURIComponent(a),showWindow("openfile","index.php?mod=system&op=filewindow&handlekey=svaefile&mulitype=1&exts="+a+"&callback=opencallback","get","0",function(t){var a=t;for(var i in a){var d=a[i],s="";s+=' <div id="attachment_previewer_ico_'+d.icoid+'" class="attachment_previewer">',s+='     <div class="attachmentviewbox">',s+='         <div class="view_attvb clearfix">',s+='           <div class="ico_vattvb "><img alt="'+d.name+'" src="'+d.img+'" class="img_50_50"></div>',s+='  \t\t  <div class="ico_vattvb_right">',s+='            <div class="ico_name">'+d.name+"</div>",s+='            <a href="javascript:void(0);" title="" class="del_fattvb" onClick="removeAttach(jQuery(this).parent().parent().parent().parent(),\''+e+"');\" >"+__lang.del_adjunct+"</a>","image"==d.type||"attach"==d.type||"document"==d.type?(s+='            <input type="hidden" name="attach[aid][]" value="'+d.aid+'" />',s+='            <input type="hidden" name="attach[img][]" value="" />',s+='            <input type="hidden" name="attach[type][]" value="attach" />',s+='            <input type="hidden" name="attach[url][]" value="" />'):(s+='            <input type="hidden" name="attach[aid][]" value="0" />',s+='            <input type="hidden" name="attach[type][]" value="'+d.type+'" />',s+='            <input type="hidden" name="attach[img][]" value="'+d.img+'" />',s+='            <input type="hidden" name="attach[url][]" value="'+d.url+'" />'),s+='            <input type="hidden" name="attach[title][]" value="'+d.name+'" />',s+='            <input type="hidden" name="attach[ext][]" value="'+(d.ext?d.ext:"")+'" />',s+="          </div>",s+="        </div>",s+="      </div>",s+=" </div>",jQuery("#attachmentViewBox_"+e).append(s),check_attach_share_tid(e)}})}catch(e){}}function check_publish_enable(e){e||(e="0");var t=document.getElementById("message_"+e).value.replace(/[\r\n]/i,""),a=mb_strlen(t);a>1e3&&(a=1e3-a),document.getElementById("num_input_"+e).innerHTML=a,a>0&&a<1e3?(jQuery("#publish_submit_"+e).removeAttr("disabled","true"),jQuery("#message_"+e).addClass("writein")):(jQuery("#publish_submit_"+e).attr("disabled","true"),jQuery("#message_"+e).removeClass("writein"))}!function(e){e.fn.TextAreaExpander=function(t,a){BROWSER.ie||BROWSER.opera;function i(e){var t=(e=e.target||e).value.length,a=e.offsetWidth;if(t!=e.valLength||a!=e.boxWidth){var i=Math.max(e.expandMin,Math.min(e.scrollHeight,e.expandMax));e.style.overflow=e.scrollHeight>i?"auto":"hidden",e.style.height=i+"px",e.valLength=t,e.boxWidth=a}return!0}return this.each(function(){if("textarea"==this.nodeName.toLowerCase()){var d=this.className.match(/expand(\d+)\-*(\d+)*/i);this.expandMin=t||(d?parseInt("0"+d[1],10):0),this.expandMax=a||(d?parseInt("0"+d[2],10):99999),i(this),this.Initialized||(this.Initialized=!0,e(this).bind("keyup",i))}}),this}}(jQuery);
+
+function feed_publish(arr,tid,targetid){
+	
+    var html=''
+        html+='<div id="comment_'+arr['cid']+'" class="card" feed-id="'+arr['cid']+'" style="display:none"><div class="card-body">';
+          html+='	<div class="left_ifed"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true">'+arr['avatar']+'</a> </div>';
+          html+='	<div class="right_ifed">';
+        html+=' 	<div class="main_fed">';
+        html+='  		 <p class="text-muted"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" class="appuser_sfed">'+arr['author']+'</a> '+__lang.reply+'</p>';
+        html+='  		<div class="card master_mfed"><span class="card-body">'+arr['message']+'</span></div>';
+        html+='	   <div class="attachment_fed">';
+    for(var i in arr['attachs']){
+        var attach=arr['attachs'][i];
+        html+='		 <div class="item_afed">';
+        if(attach.type=='image'){
+         html+='		 <div class="pic_fed  clearfix">';
+         html+='		   <div class="img_pfed"> <a class="min_ipfed" hidefocus="true" href="javascript:;"><img src="'+attach['img']+'" data-original="'+attach['img']+'" alt="'+attach['title']+'" class=""></a> </div>';
+         html+='		 </div>';
+         html+='		<div class="file_fed imgfile_fed clearfix"> '+attach['title']+'<span class="kb_nffed">('+attach['filesize']+')</span>';
+         html+='			<p class="down_ffed">';
+         if(attach.downloads>0){
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
+         }else{
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
+         }
+           html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+         html+='	        </p>';
+         html+='	     </div>';
+        }else if(attach.type=='video'){
+          html+='	<div class="file_fed file_fed_'+attach.type+' clearfix">';
+          html+='          <div class="ico_ffed " style="margin-right:20px"><a href="javascript:;" onclick="feed_attach_preview(\''+attach['qid']+'\')"><img src="'+attach['img']+'" alt="'+attach['title']+'" class="videoclass50_50" ></a></div>';
+          html+='          <p class="name_ffed">'+attach['title']+'</p>';
+         html+='           <p class="down_ffed">';
+         
+         if(attach.downloads>0){
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
+         }else{
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
+         }
+            html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+         html+='	        </p>';
+         html+='	     </div>';
+    }else if(attach.type=='dzzdoc' || attach.type=='link'){
+          html+='	<div class="file_fed file_fed_'+attach.type+' clearfix">';
+          html+='          <div class="ico_ffed "><a href="javascript:;" onclick="feed_attach_preview(\''+attach['qid']+'\')"><img src="'+attach['img']+'" alt="'+attach['title']+'" style="height:50px;"></a></div>';
+          html+='          <p class="name_ffed">'+attach['title']+'</p>';
+          html+='           <p class="down_ffed">';
+          html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
+          html+='	</div>';
+    }else{
+          html+='	<div class="file_fed file_fed_'+attach.type+' clearfix">';
+          html+='          <div class="ico_ffed "><a href="javascript:;" onclick="feed_attach_preview(\''+attach['qid']+'\')"><img src="'+attach['img']+'" alt="'+attach['title']+'" style="height:50px;"></a></div>';
+          html+='          <p class="name_ffed">'+attach['title']+'</p>';
+         html+='           <p class="down_ffed">';
+         if(attach.preview>0){
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
+         }
+         if(attach.downloads>0){
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
+         }else{
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
+         }
+                html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+             html+='	        </p>';
+             html+='	     </div>';
+     }
+            html+='	</div>';
+             
+    }
+        html+='	</div>';
+       html+='   		<p class="text-muted clearfix">';
+       html+='     			<div class="btn_amfed">';
+       html+='      	 		<ul>';
+       html+='        	 			<li class="more_bamfed"><a hidefocus="true" href="javascript:void(0);" onclick="feed_delete(\''+arr['cid']+'\',\'comment_'+arr['cid']+'\')">'+__lang.delete+'</a></li>';
+       html+='         				<li class="reply_bamfed"><a hidefocus="true" href="javascript:void(0);" onclick="getReplyForm(\''+arr['cid']+'\',\'0\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\');">'+__lang.reply+'</a></li>';
+       html+='      	 		</ul>';
+       html+='     			</div>';
+       html+='  		</p>';
+       html+=' 		</div>';
+       html+='		<div id="comment_reply_'+arr['cid']+'" class="comment_ifed" ></div>';
+       html+='	</div>';
+    
+       html+='</div></div>';
+       if(targetid && jQuery('#'+targetid).length){
+            var el=jQuery('#'+targetid+' > .card:first'); 
+             if(el.length>0) el.before(html);
+               else jQuery('#'+targetid).html(html);
+       }else{
+            var el=jQuery('#comment_container > .card:first');
+            if(el.length>0) el.before(html);
+              else jQuery('#comment_container').html(html);
+       }
+     
+       jQuery('#comment_'+arr['cid']).slideDown(500);
+       jQuery('#message_'+tid).removeClass('writelock').removeClass('writein').val('');
+       jQuery('#publish_submit_'+tid).removeAttr('disabled');
+       jQuery('#message_'+tid).val(jQuery('#message_'+tid).attr('tip'));
+        jQuery('#message_'+tid).css({'height':25});
+        jQuery('#attachmentViewBox_'+tid).empty();
+        //location.hash='#comment_'+arr['cid'];
+        jQuery('#comment_'+arr['cid']+' img[data-original]').dzzthumb();
+        try{
+            callback_by_comment('comment_'+arr['cid'],'add');
+        }catch(e){}
+        
+    }
+    
+    function feed_reply(arr){
+        
+     var html='';
+         html+='<div id="comment_'+arr['cid']+'" class="cmt_fed">';
+         html+='   <div class="item_cfed">';
+         html+='     <div class="left_icfed"> <a href="user.php?uid='+arr['authorid']+'" title="" hidefocus="true"> '+arr['avatar']+' </a> </div>';
+         html+='     <p class="text-muted">';
+         html+='     <a href="user.php?uid='+arr['authorid']+'" title="" class="avatar_mcfed" hidefocus="true">'+arr['author']+'</a>'+' '+__lang.reply+' '+arr['dateline']+'</p><div class="card master_cfed">';
+         if(arr['rpost']){
+            html+='<span class="amal_fed">对</span>  <a href="user.php?uid='+arr['rpost']['authorid']+'" title="" class="avatar_mcfed" hidefocus="true" target="_blank">'+arr['rpost']['author']+'</a>'; 
+         }
+         html+='          <span class="card-body">'+arr['message']+'</span> ';
+         html+='		</div>';
+        html+='	   <div class="attachment_fed">';
+        for(var i in arr['attachs']){
+            var attach=arr['attachs'][i];
+        html+='		 <div class="item_afed">';
+        if(attach.type=='image'){
+         html+='		 <div class="pic_fed clearfix">';
+         html+='		   <div class="img_pfed"> <a class="min_ipfed" hidefocus="true" href="javascript:;"><img src="'+attach['img']+'" data-original="'+attach['img']+'" alt="'+attach['title']+'" class=""></a> </div>';
+         html+='		 </div>';
+         html+='		<div class="file_fed imgfile_fed clearfix"> '+attach['title']+'<span class="kb_nffed">('+attach['filesize']+')</span>';
+         html+='			<p class="down_ffed">';
+         if(attach.downloads>0){
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
+         }else{
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
+         }
+            html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+         html+='	        </p>';
+         html+='	     </div>';
+    }else if(attach.type=='video'){
+          html+='	<div class="file_fed file_fed_'+attach.type+' clearfix">';
+          html+='          <div class="ico_ffed " style="margin-right:20px"><a href="javascript:;" onclick="feed_attach_preview(\''+attach['qid']+'\')"><img src="'+attach['img']+'" alt="'+attach['title']+'" class="videoclass50_50" ></a></div>';
+          html+='          <p class="name_ffed">'+attach['title']+'</p>';
+          html+='           <p class="down_ffed">';
+          html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
+            // html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+         html+='	        </p>';
+         html+='	     </div>';
+    }else if(attach.type=='dzzdoc' || attach.type=='link'){
+          html+='	<div class="file_fed file_fed_'+attach.type+' clearfix">';
+          html+='          <div class="ico_ffed "><a href="javascript:;" onclick="feed_attach_preview(\''+attach['qid']+'\')"><img src="'+attach['img']+'" alt="'+attach['title']+'" style="height:50px;"></a></div>';
+          html+='          <p class="name_ffed">'+attach['title']+'</p>';
+          html+='           <p class="down_ffed">';
+          html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
+          html+='	</div>';
+    }else{
+          html+='	<div class="file_fed file_fed_'+attach.type+' clearfix">';
+          html+='          <div class="ico_ffed "><a href="javascript:;" onclick="feed_attach_preview(\''+attach['qid']+'\')"><img src="'+attach['img']+'" alt="'+attach['title']+'" style="height:50px;"></a></div>';
+          html+='          <p class="name_ffed">'+attach['title']+'</p>';
+         html+='           <p class="down_ffed">';
+         if(attach.preview>0){
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
+         }
+         if(attach.downloads>0){
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'('+attach['downloads']+__lang.degree+')</a>';
+         }else{
+             html+='	 			<a href="javascript:;" title="" hidefocus="true" class="btn_dffed"  onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download+'</a>'; 
+         }
+                html+='		        <a href="javascript:void(0);" title="" hidefocus="true" class="save_dffed"  onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
+             html+='	        </p>';
+             html+='	     </div>';
+         }
+            html+='	</div>';
+             
+    }
+         html+='	</div>';
+         html+='      <div class="action_cfed clearfix">';
+         html+='         <div class="btn_acfed">';
+         html+='           <ul>';
+         if(arr['haveperm']>0){
+        // html+='             <li class="more_bacfed"><a hidefocus="true" href="javascript:void(0);" onclick="feed_edit(\''+arr['cid']+'\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\')">'+__lang.edit+'</a></li>';
+         html+='             <li class="more_bacfed"><a hidefocus="true" href="javascript:void(0);" onclick="feed_delete(\''+arr['cid']+'\',\'comment_'+arr['cid']+'\',\''+arr['pcid']+'\')">'+__lang.delete+'</a></li>';
+         }
+         html+='             <li class="reply_bacfed"><a hidefocus="true" href="javascript:void(0);" onclick="getReplyForm(\''+arr['pcid']+'\',\''+arr['cid']+'\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\');">'+__lang.reply+'</a></li>';
+         html+='           </ul>';
+         html+='         </div>';
+         html+='       </div>';
+         html+='     </div>';
+         html+='   </div>';
+         html+=' </div>';
+       if(!document.getElementById('reply_list_'+arr['pcid'])){
+          var html1='';
+          html1+=' <div class="comment_fed" style="display: block;">';
+          html1+='    <div class="corner_lfed"><span></span></div>';
+          html1+='  </div> ';
+          html1+=' <div id="reply_list_'+arr['pcid']+'" class="list_cfed">'+html+'</div>';
+          jQuery('#comment_reply_'+arr['pcid']).html(html1);
+       }else{
+           jQuery('#reply_list_'+arr['pcid']).find('.cmt_fed:first').before(html);
+       }
+       jQuery('#comment_'+arr['cid'])
+            .on('mouseenter',function(){
+                jQuery(this).addClass('hover_cmt_fed');
+            })
+            .on('mouseleave',function(){
+                jQuery(this).removeClass('hover_cmt_fed');
+            });
+       var replysum=parseInt(jQuery('#comment_reply_'+arr['pcid']+' .txt_cfed .num_cfed').html());
+       if(replysum>0) jQuery('#comment_reply_'+arr['pcid']+' .txt_cfed .num_cfed').html(replysum+1);
+       jQuery('#message_'+arr['pcid']).val('');
+       jQuery('#pulish_submit_'+arr['pcid']).removeAttr('disabled');
+       jQuery('#reply_publish_'+arr['pcid']).slideUp(500);
+       jQuery('#attachmentViewBox_'+arr['pcid']).empty();
+      //location.hash=('#comment_'+arr['pcid']);
+        jQuery('#comment_'+arr['cid']+' img[data-original]').dzzthumb();
+     
+    }
+    function getReplyForm(tid,pid,allowattach,allowat,allowsmiley){
+        jQuery('#comment_container .card .publishsharewrap').hide();
+        if(!document.getElementById('reply_publish_'+tid)){
+            var el = jQuery('<div id="reply_publish_'+tid+'"></div>').appendTo('#comment_'+tid);
+            ajaxget(DZZSCRIPT+'?mod=comment&op=ajax&do=getReplyForm&cid='+tid+'&allowattach='+allowattach+'&allowat='+allowat+'&allowsmiley='+allowsmiley,'reply_publish_'+tid,'reply_publish_'+tid,'','',function(){
+                 var el=jQuery('#reply_who_'+tid);
+                 if(pid>0){
+                     el.find('.toname_wcpsw').html(jQuery('#comment_'+pid+' .avatar_mcfed').html());
+                     el.show();
+                     jQuery('#reply_pid_'+tid).val(pid);
+                }else{
+                    el.hide(); 
+                    jQuery('#reply_pid_'+tid).val('0');
+                }
+                jQuery('#comment_'+tid+' textarea[name="message"]').val('').focus();
+                jQuery('#message_'+tid).css('height',25);
+            });
+        }else{ 
+            var el=jQuery('#reply_who_'+tid);
+            if(pid>0){
+                     el.find('.toname_wcpsw').html(jQuery('#comment_'+pid+' .avatar_mcfed').html());
+                     el.show();
+                     jQuery('#reply_pid_'+tid).val(pid);
+            }else{
+                    el.hide(); 
+                    jQuery('#reply_pid_'+tid).val('0');
+                }
+            jQuery('#reply_publish_'+tid).find('.publishsharewrap').show().end().slideDown(500);
+            jQuery('#comment_'+tid+' textarea[name="message"]').val('').focus();
+            jQuery('#message_'+tid).css('height',25);
+        }
+        
+    }
+    
+    function feed_edit(cid,allowattach,allowat,allowsmiley){
+        showWindow('publish_edit_'+cid,DZZSCRIPT+'?mod=comment&op=ajax&do=edit&cid='+cid+'&allowattach='+allowattach+'&allowat='+allowat+'&allowsmiley='+allowsmiley);
+    }
+    function feed_edit_finish(cid,allowattach,allowat,allowsmiley){
+        jQuery.get(DZZSCRIPT+'?mod=comment&op=ajax&do=getcommentbycid&cid='+cid+'&allowattach='+allowattach+'&allowat='+allowat+'&allowsmiley='+allowsmiley,function(html){
+            jQuery('#comment_'+cid).replaceWith(html);
+            
+        });
+    }
+    function feed_delete(cid,domid,tid){
+        var msg='';
+        if(tid){
+            msg=__lang.sure_want_delete_comment;
+        }else{
+            msg=__lang.sure_want_delete_all_comment;
+        }
+        if(confirm(msg)){
+            jQuery.getJSON(DZZSCRIPT+'?mod=comment&op=ajax&do=delete&cid='+cid,function(json){
+                jQuery('#'+domid).slideUp(500,function(){
+                    jQuery(this).remove();
+                    if(tid ){
+                         var replysum=parseInt(jQuery('#comment_reply_'+tid+' .txt_cfed .num_cfed').html());
+                         if(replysum>0) jQuery('#comment_reply_'+tid+' .txt_cfed .num_cfed').html(replysum-1);
+                    }
+                });
+                try{
+                    callback_by_comment(domid,'delete');
+                }catch(e){}
+            });
+        }
+    }
+    function feed_addAttach(arr,el,tid){
+        var html='';
+        html+=' <div  class="attachment_previewer">';
+        html+='     <div class="attachmentviewbox">';
+        html+='         <div class="view_attvb clearfix">';
+        if(arr['isimage']){
+        html+='           <div class="ico_vattvb "><a href="'+arr['img']+'" target="_blank"><img alt="'+arr['filename']+'" src="'+arr['img']+'" class="img_50_50"></a></div>';
+        }else{
+        html+='           <div class="ico_vattvb "><img class="img_50_50" alt="'+arr['filename']+'" src="'+arr['img']+'"></div>';
+        }
+          html+='  		  <div class="ico_vattvb_right">';
+        html+='            <div class="ico_name">'+arr['filename']+'</div>';
+        html+='            <a href="javascript:void(0);" title="" class="del_fattvb" onClick="removeAttach(jQuery(this).parent().parent().parent().parent(),\''+tid+'\');" >'+__lang.del_adjunct+'</a>';
+        //if(arr['aid
+        html+='            <input type="hidden" name="attach[aid][]" value="'+arr['aid']+'" />';
+        html+='            <input type="hidden" name="attach[title][]" value="'+arr['filename']+'" />';
+        html+='            <input type="hidden" name="attach[type][]" value="attach" />';
+        html+='            <input type="hidden" name="attach[img][]" value="" />';
+        html+='            <input type="hidden" name="attach[url][]" value="" />';
+        html+='          </div>';
+        html+='          </div>';
+        html+='      </div>';
+        html+=' </div>';
+        
+        el.replaceWith(html);
+        check_attach_share_tid(tid);
+        //document.getElementById('attachmentViewBox_0').innerHTML+=html;
+        
+        //jQuery('#attachmentViewBox_0').html(html);
+    }
+    function feed_downAttach(qid){
+        var url=DZZSCRIPT+'?mod=comment&op=down&qid='+qid;
+        if(BROWSER.ie){
+                window.open(url);
+            }else{
+                if(!window.frames['hidefram']) jQuery('<iframe id="hideframe" name="hideframe" src="about:blank" frameborder="0" marginheight="0" marginwidth="0" width="0" height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>').appendTo('body');
+                window.frames['hideframe'].location=url;
+            }
+    }
+    function feed_attach_saveto(qid){
+        var url=DZZSCRIPT+'?mod=comment&op=saveto&qid='+qid;
+        showWindow('saveto','index.php?mod=system&op=filewindow&type=2','get','0',function(fid,data){
+            jQuery.post(url,{fid:fid},function(json){
+                if(json.error){
+                    showmessage(json.error,'danger',3000,1);
+                }else{
+                    showmessage(__lang.savetosuccess+data.relativepath+json.filename,'success',3000,1);
+                }
+            },'json');
+        });
+        
+        
+    }
+    function feed_attach_preview(qid){
+        var url=DZZSCRIPT+'?mod=comment&op=preview&qid='+qid;
+        if(!top._config) window.open(url);
+        else{
+            if(!window.frames['hidefram']) jQuery('<iframe id="hideframe" name="hideframe" src="about:blank" frameborder="0" marginheight="0" marginwidth="0" width="0" height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>').appendTo('body');
+            window.frames['hideframe'].location=url;
+        }
+    }
+    function feed_attach_del(qid){
+        var url=DZZSCRIPT+'?mod=comment&op=delete&qid='+qid;
+        
+    }
+    
+    function check_attach_share_tid(tid){
+        if(!tid) tid='0';
+        var sum=jQuery('#attachmentViewBox_'+tid).find('.attachment_previewer').length; 
+        var val=jQuery('#message_'+tid).val();
+        var reg=/^__lang.share_the(\d+)__lang.js_a_file/ig;
+        if(sum<1){
+            if(val!='') jQuery('#message_'+tid).val(val.replace(reg,''));
+        }else{
+            if(val=='' || val==jQuery('#message_'+tid).attr('tip')){
+                jQuery('#message_'+tid).val(__lang.share_the+sum+__lang.js_a_file);
+            }else{
+                jQuery('#message_'+tid).val(val.replace(reg,__lang.share_the+sum+__lang.js_a_file));
+            }
+        }
+        check_publish_enable(tid);
+        jQuery('#message_'+tid).focus().caret('pos',document.getElementById('message_'+tid).value.length);
+        return sum;
+    }
+    function removeAttach(el,tid){
+        el.slideUp(500,function(){jQuery(this).remove();check_attach_share_tid(tid);});
+            
+    }
+    
+    //从桌面选择文件
+    function uploadfrom_desktop(tid){
+        if(!tid) tid='0';
+        try{
+            var openexts = {
+                  attach:[__lang.typename_attach,["ATTACH","IMAGE","DOCUMENT","VIDEO","LINK","DZZDOC"],""],
+                  image:[__lang.typename_image+"(*.jpg,*.jpeg,*.png,*.gif)",["IMAGE","JPG","JPEG","PNG","GIF"],""]
+            };
+            var exts=JSON.stringify(openexts);
+             exts = exts.replace(/\"/g,'&quot;');
+            exts = exts.replace(/\(/g,'|');
+            exts = exts.replace(/\)/g,'$');
+            exts = encodeURIComponent(exts);
+             showWindow('openfile', 'index.php?mod=system&op=filewindow&handlekey=svaefile&mulitype=1&exts='+exts+'&callback=opencallback', 'get', '0',function(data){//只打开本地盘
+            var datas=data;
+            
+            
+            for(var i in datas){
+                var arr=datas[i];
+                var html='';
+                    html+=' <div id="attachment_previewer_ico_'+arr['icoid']+'" class="attachment_previewer">';
+                    html+='     <div class="attachmentviewbox">';
+                    html+='         <div class="view_attvb clearfix">';
+                    html+='           <div class="ico_vattvb "><img alt="'+arr['name']+'" src="'+arr['img']+'" class="img_50_50"></div>';
+                      html+='  		  <div class="ico_vattvb_right">';
+                    html+='            <div class="ico_name">'+arr['name']+'</div>';
+                    html+='            <a href="javascript:void(0);" title="" class="del_fattvb" onClick="removeAttach(jQuery(this).parent().parent().parent().parent(),\''+tid+'\');" >'+__lang.del_adjunct+'</a>';
+                    if(arr['type']=='image' || arr['type']=='attach' || arr['type']=='document'){
+                    html+='            <input type="hidden" name="attach[aid][]" value="'+arr['aid']+'" />';
+                    html+='            <input type="hidden" name="attach[img][]" value="" />';
+                    html+='            <input type="hidden" name="attach[type][]" value="attach" />';
+                    html+='            <input type="hidden" name="attach[url][]" value="" />';
+                    }else{
+                    html+='            <input type="hidden" name="attach[aid][]" value="0" />';
+                    html+='            <input type="hidden" name="attach[type][]" value="'+arr['type']+'" />';
+                    html+='            <input type="hidden" name="attach[img][]" value="'+arr['img']+'" />';
+                    html+='            <input type="hidden" name="attach[url][]" value="'+arr['url']+'" />';
+                    
+                    }
+                    html+='            <input type="hidden" name="attach[title][]" value="'+arr['name']+'" />';
+                    html+='            <input type="hidden" name="attach[ext][]" value="'+(arr['ext']?arr['ext']:'')+'" />';
+                    
+                    html+='          </div>';
+                    html+='        </div>';
+                    html+='      </div>';
+                    html+=' </div>';
+                    jQuery('#attachmentViewBox_'+tid).append(html);
+                    check_attach_share_tid(tid);
+            }
+        }); 
+        }catch(e){
+            
+        }
+    }
+    
+    function check_publish_enable(tid){
+        //统计字数
+        if(!tid) tid='0';
+        var str=document.getElementById('message_'+tid).value.replace(/[\r\n]/i,'');
+        var length=mb_strlen(str);
+        if(length>1000){
+            length=1000-length;
+        }
+        document.getElementById('num_input_'+tid).innerHTML=length;
+        if(length>0 && length<1000){
+            
+            jQuery('#publish_submit_'+tid).removeAttr('disabled','true');
+            jQuery('#message_'+tid).addClass('writein');
+        }else{
+            jQuery('#publish_submit_'+tid).attr('disabled','true');
+            jQuery('#message_'+tid).removeClass('writein');
+        }
+    }
+    
+    
+    
+    
+    
+    (function($) {
+     
+        // jQuery plugin definition
+        $.fn.TextAreaExpander = function(minHeight, maxHeight) {
+     
+            var hCheck = !(BROWSER.ie || BROWSER.opera);
+     
+            // resize a textarea
+            function ResizeTextarea(e) {
+     
+                // event or initialize element?S
+                e = e.target || e;
+     
+                // find content length and box width
+                var vlen = e.value.length, ewidth = e.offsetWidth;
+                if (vlen != e.valLength || ewidth != e.boxWidth) {
+     
+                    //if (hCheck && (vlen < e.valLength || ewidth != e.boxWidth)) e.style.height = ewidth+"px";
+                    var h = Math.max(e.expandMin, Math.min(e.scrollHeight, e.expandMax));
+                     
+                    e.style.overflow = (e.scrollHeight > h ? "auto" : "hidden");
+                    e.style.height = h + "px";
+                    e.valLength = vlen;
+                    e.boxWidth = ewidth;
+                }
+     
+                return true;
+            };
+     
+            // initialize
+            this.each(function() {
+     
+                // is a textarea?
+                if (this.nodeName.toLowerCase() != "textarea") return;
+                // set height restrictions
+                var p = this.className.match(/expand(\d+)\-*(\d+)*/i);
+                this.expandMin = minHeight || (p ? parseInt('0'+p[1], 10) : 0);
+                this.expandMax = maxHeight || (p ? parseInt('0'+p[2], 10) : 99999);
+     
+                // initial resize
+                ResizeTextarea(this);
+     
+                // zero vertical padding and add events
+                if (!this.Initialized) {
+                    this.Initialized = true;
+                    //$(this).css("padding-top", 0).css("padding-bottom", 0);
+                    $(this).bind("keyup", ResizeTextarea);
+                }
+            });
+     
+            return this;
+        };
+     
+    })(jQuery);

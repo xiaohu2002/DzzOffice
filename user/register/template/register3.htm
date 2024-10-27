@@ -55,7 +55,7 @@
     <div class="flex-box login-box">
         <div class="login-left p-5">
           <div class="text-center mb-3 d-sm-none">
-            <img src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&original=1&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" alt="logo" />
+            <img src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" alt="logo" />
           </div>
           <h2 class="text-center">{lang register_welcome_tip}</h2>
           <form class="signin-form needs-validation"  action="{MOD_URL}" method="POST" name="registerform" id="registerform" role="form" enctype="multipart/form-data" onsubmit="check_submit(this);return false">

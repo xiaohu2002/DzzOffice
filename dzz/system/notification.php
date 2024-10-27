@@ -46,7 +46,7 @@ if($filter=='new'){//列出所有新通知
         $searchappid[] = $v['from_id'];
     }
     if(!$_G['setting']['bbclosed']){
-		$sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&original=1&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
+		$sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
 	}else{
 		$sitelogo = 'static/image/common/logo.png'; 
 	}

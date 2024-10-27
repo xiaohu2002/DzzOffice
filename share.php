@@ -44,7 +44,7 @@ if($_GET['a']=='down'){
     $ext=$icoarr['ext'];//strtolower(substr(strrchr($filename, '.'), 1, 10));
     if(!$ext) $ext=preg_replace("/\?.+/i",'',strtolower(substr(strrchr(rtrim($url,'.dzz'), '.'), 1, 10)));
 	if(in_array($ext,$imageexts)){
-		$url=$_G['siteurl'].'index.php?mod=io&op=thumbnail&original=1&path='.$icoarr['icoid'];
+		$url=$_G['siteurl'].'index.php?mod=io&op=thumbnail&path='.$icoarr['icoid'];
 		@header("Location: $url");
 		exit();
 	}
@@ -116,7 +116,7 @@ if($_GET['a']=='down'){
     $ext=$icoarr['ext'];//strtolower(substr(strrchr($filename, '.'), 1, 10));
     if(!$ext) $ext=preg_replace("/\?.+/i",'',strtolower(substr(strrchr(rtrim($url,'.dzz'), '.'), 1, 10)));
 	if(in_array($ext,$imageexts)){
-		$url=$_G['siteurl'].'index.php?mod=io&op=thumbnail&original=1&path='.$icoarr['icoid'];
+		$url=$_G['siteurl'].'index.php?mod=io&op=thumbnail&path='.$icoarr['icoid'];
 		@header("Location: $url");
 		exit();
 	}

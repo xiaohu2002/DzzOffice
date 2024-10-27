@@ -30,7 +30,7 @@ if($_GET['do']=='imageUpload'){
      * 返回数据，调用父页面的ue_callback回调
      */
     if($type == "ajax"){
-		echo DZZSCRIPT.'?mod=io&op=thumbnail&width=700&height=500&path='.dzzencode('attach::'.$info[0]['aid'] ).'&original=1&attach='.rawurlencode('attach::'.$info[0]['aid']);
+		echo DZZSCRIPT.'?mod=io&op=thumbnail&width=700&height=500&path='.dzzencode('attach::'.$info[0]['aid'] ).'&attach='.rawurlencode('attach::'.$info[0]['aid']);
 	}elseif($type=='attach'){
 		$info[0]['url']=DZZSCRIPT.'?mod=io&op=getStream&path='.dzzencode('attach::'.$info[0]['aid']).'&attach='.rawurlencode('attach::'.$info[0]['aid']);
 		echo json_encode($info[0]);
@@ -39,7 +39,7 @@ if($_GET['do']=='imageUpload'){
 		foreach($info as $value){
 			$value['state']='SUCCESS';
 			if(in_array($value['filetype'],array('jpg','jpeg','png','gif','bmp'))){
-			   $value['url']= DZZSCRIPT.'?mod=io&op=thumbnail&width=700&height=500&path='.dzzencode('attach::'.$value['aid'] ).'&original=1';
+			   $value['url']= DZZSCRIPT.'?mod=io&op=thumbnail&width=700&height=500&path='.dzzencode('attach::'.$value['aid'] );
 			   $str.= '<img class="attach-item image" path="'.rawurlencode('attach::'.$value['aid']).'" src="'.$value['url'].'" _src="'.$value['url'].'" />';
 		   }else{
 			   $value['url']= DZZSCRIPT.'?mod=io&op=download&path='.dzzencode('attach::'.$value['aid']).'&filename='.urlencode($value['filename']);

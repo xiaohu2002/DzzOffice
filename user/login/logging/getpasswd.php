@@ -12,7 +12,6 @@ if(!defined('IN_DZZ')) {
 }
 
 define('NOROBOT', TRUE);
-global $_G;
 if($_G['setting']['bbclosed']) {
 	dheader("Location: user.php?mod=login");
 }

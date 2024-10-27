@@ -327,10 +327,10 @@ EOT;
 	$list=array();
 	foreach($sheetData as $key=> $value){
 		if($key<=1) continue;
-        if(!$temp['username']){
+		$temp=array();
+		if(!$temp['username']){
 			continue;
 		}
-		$temp=array();
 		foreach($value as $col =>$val){
 			if(trim($val)=='') continue;
 			if($h[$col]=='orgname'){
