@@ -90,43 +90,42 @@ if($do == 'editpass'){
         }
     }
 
-}
-elseif($do == 'login'){
+}elseif($do == 'login'){
 	function get_log_files($logdir = '', $action = 'action') {
-	$dir = opendir($logdir);
-	$files = array();
-	while($entry = readdir($dir)) {
-		$files[] = $entry;
-	}
-	closedir($dir);
-
-	if($files) {
-		sort($files);
-		$logfile = $action;
-		$logfiles = array();
-		$ym = '';
-		foreach($files as $file) {
-			if(strpos($file, $logfile) !== FALSE) {
-				if(substr($file, 0, 6) != $ym) {
-					$ym = substr($file, 0, 6);
-				}
-				$logfiles[$ym][] = $file;
-			}
+		$dir = opendir($logdir);
+		$files = array();
+		while($entry = readdir($dir)) {
+			$files[] = $entry;
 		}
-		if($logfiles) {
-			$lfs = array();
-			foreach($logfiles as $ym => $lf) {
-				$lastlogfile = $lf[0];
-				unset($lf[0]);
-				$lf[] = $lastlogfile;
-				$lfs = array_merge($lfs, $lf);
+		closedir($dir);
+
+		if($files) {
+			sort($files);
+			$logfile = $action;
+			$logfiles = array();
+			$ym = '';
+			foreach($files as $file) {
+				if(strpos($file, $logfile) !== FALSE) {
+					if(substr($file, 0, 6) != $ym) {
+						$ym = substr($file, 0, 6);
+					}
+					$logfiles[$ym][] = $file;
+				}
 			}
-			return $lfs;
+			if($logfiles) {
+				$lfs = array();
+				foreach($logfiles as $ym => $lf) {
+					$lastlogfile = $lf[0];
+					unset($lf[0]);
+					$lf[] = $lastlogfile;
+					$lfs = array_merge($lfs, $lf);
+				}
+				return $lfs;
+			}
+			return array();
 		}
 		return array();
 	}
-	return array();
-}
 	!isset($_GET['page']) && $_GET['page']=1;
 	$lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
 	$checklpp = array();
@@ -134,19 +133,18 @@ elseif($do == 'login'){
 	$keyword = "uid=".$_G['uid'];
 	$extrainput = '';
 	$operation = "loginlog"; 
-  $page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
-  $start = ($page - 1) * $lpp;
-  $gets = array(
-    'mod' => MOD_NAME,
+	$page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
+	$start = ($page - 1) * $lpp;
+	$gets = array(
+		'mod' => MOD_NAME,
 		'op' => $_GET['op'],
 		'do' => $_GET['do']
-  );
-  $theurl = BASESCRIPT . "?" . url_implode($gets);
+  	);
+  	$theurl = BASESCRIPT . "?" . url_implode($gets);
 	$logdir = DZZ_ROOT.'./data/log/';
 	$logfiles = get_log_files($logdir, $operation);
 	 
 	if($logfiles) $logfiles=array_reverse($logfiles);
-	//error_reporting(E_ALL);
 	$firstlogs = file( $logdir.$logfiles[0] ) ; 
 	$firstlogsnum = count($firstlogs);
 	$countlogfile=count($logfiles);
@@ -235,9 +233,8 @@ elseif($do == 'login'){
 		
 		$list[$k]=$log;
 	}
-$multi = multi($count, $lpp, $page, $theurl,'pull-right');
-}
-elseif($do == 'changeemail'){
+	$multi = multi($count, $lpp, $page, $theurl,'pull-right');
+}elseif($do == 'changeemail'){
 
     $emailchange = $member['emailstatus'];
 

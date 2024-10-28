@@ -130,7 +130,7 @@
                 <!--{/if}--> 
                 <span node-type="name-text" data-href="$value[shareurl]" class="name-text enabled">$value[name]</span>
               </td>
-              <td><!--{if $value[type]=='folder'}--><!--{else}--><div>$value[fsize]</div><!--{/if}--></td>
+              <td><!--{if $value[type] !=='folder'}--><div>$value[fsize]</div><!--{/if}--></td>
               <td><div>$value[ftype]</div></td>
               <td><div>$value[relpath]</div></td>
               <!--{if $_G[adminid]}-->
@@ -141,28 +141,20 @@
                 <div>
                   <a node-type="btn-item" data-key="download" class="btn btn-outline-info" title="下载" href="javascript:void(0);"><i class="dzz dzz-download"></i></a>
                   <a class="btn btn-outline-info" href="{MOD_URL}&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" data-bs-toggle="tooltip" title="{lang delete}" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="dzz dzz-delete"></i></a>
-                  <!--{if $_G[adminid]}--><!--{if $value[type]=='folder'}--><!--{else}-->
-                  <a class="btn btn-outline-info" href="javascript:;" onclick="togglecplog('{$key}')" data-bs-toggle="tooltip" title="更多信息"><i class="dzz dzz-description"></i></a>
-                  <!--{/if}--><!--{/if}-->
+                  <!--{if $_G[adminid]}-->
+                  <a class="btn btn-outline-info" href="javascript:;" onclick="togglecplog('{$key}')" data-bs-toggle="tooltip" title="更多信息"><i class="dzz dzz-description"></i></a><!--{/if}-->
                 </div>
               </td>
-            <!--{if $value[type]=='folder'}--><!--{else}-->
-            <tr id="cplog_{$key}" style="display:none">
-              <td colspan="8">
-                <!--{if $_G[adminid]}-->
-              <!--{if $value[type]=='folder'}--><!--{else}-->
-                  文件位置：<!--{eval echo IO::getStream($value[path])}-->
-                <br/>
-                  直链地址：<a href="<!--{eval echo IO::getFileUri($value[path])}-->"><!--{eval echo IO::getFileUri($value[path])}--></a>
-                <br/>
-                  引用：$value[copys]
-                <br/>
+              <!--{if $_G[adminid]}-->
+              <tr id="cplog_{$key}" style="display:none">
+                <td colspan="8">
+                <!--{if $value[type]!=='folder'}-->
+                <!--{eval $zldz=IO::getFileUri($value[path])}-->直链地址：<a href="$zldz">$zldz</a><br/>引用：$value[copys]<br/>
+                <!--{/if}-->
                 是否在回收站：<!--{if $value[isdelete]}-->是<!--{else}-->否<!--{/if}-->
-              <!--{/if}-->
-              <!--{/if}--></td>
+              </td>
             </tr>
             <!--{/if}-->
-            </tr>
             <!--{/loop}--> 
           </tbody>
         </table>

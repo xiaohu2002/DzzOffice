@@ -164,7 +164,7 @@ INSERT INTO `dzz_setting` VALUES('attachurl', 'data/attachment');
 INSERT INTO `dzz_setting` VALUES('jspath', 'static/js/');
 INSERT INTO `dzz_setting` VALUES('seccodestatus', '5');
 INSERT INTO `dzz_setting` VALUES('oltimespan', '15');
-INSERT INTO `dzz_setting` VALUES('sitecopyright', 'Copyright ©2012-2024 DzzOffice  All Rights Reserved');
+INSERT INTO `dzz_setting` VALUES('sitecopyright', 'Copyright ©2012-{years} DzzOffice  All Rights Reserved');
 INSERT INTO `dzz_setting` VALUES('imgdir', 'static/image/common');
 INSERT INTO `dzz_setting` VALUES('avatarmethod', '1');
 INSERT INTO `dzz_setting` VALUES('reglinkname', '立即注册');

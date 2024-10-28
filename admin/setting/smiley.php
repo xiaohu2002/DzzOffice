@@ -9,8 +9,8 @@
 if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 	exit('Access Denied');
 }
-$navtitle = lang('expression_class').' - '.lang('appname');
 include libfile('function/cache');
+$navtitle = lang('expression_class').' - '.lang('appname');
 $imgextarray = array('jpg', 'gif', 'png');
 $operation = trim($_GET['operation']);
 $id = intval($_GET['id']);

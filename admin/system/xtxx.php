@@ -12,15 +12,15 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 $op = $_GET['op'];
 $do=$_GET['do'];
 if($do == 'phpinfo'){
-	echo phpinfo();
-}else{
-  require_once './core/function/function_misc.php';
-  require_once './user/function/function_user.php';
-  $navtitle = lang('xtxx') . ' - ' . lang('appname');
-  $about['version']='V'.CORE_VERSION;//版本信息
-  $about['xhversion']='V'.CORE_XHVERSION;//版本信息
-  $about['XHFIXBUG']=CORE_XHRELEASE;//更新日期
-  function shuchu(){
+	exit(phpinfo());
+}
+require_once './core/function/function_misc.php';
+require_once './user/function/function_user.php';
+$navtitle = lang('xtxx') . ' - ' . lang('appname');
+$about['version']='V'.CORE_VERSION;//版本信息
+$about['xhversion']='V'.CORE_XHVERSION;//版本信息
+$about['XHFIXBUG']=CORE_XHRELEASE;//更新日期
+function shuchu(){
   define('ROOT_PATH', dirname(__FILE__));
   $lang=array (
     'php_version_too_low' => 'php版本太低啦，请先升级php到5.3以上，建议使用php5.4及以上',
@@ -45,13 +45,13 @@ if($do == 'phpinfo'){
     '附件上传' => array('r' => '不限制', 'b' => '50M'),
     'GD 库' => array('r' => '1.0', 'b' => '2.0'),
     '磁盘空间' => array('r' => '50M', 'b' => '10G以上'),
-		'MySQL数据库持续连接' => array('r' => '', 'b' => ''),
-		'域名' => array('r' => '', 'b' => ''),
-		'服务器端口' => array('r' => '不限制', 'b' => '不限制'),
-		'运行环境' => array('r' => '不限制', 'b' => '不限制'),
-		'网站根目录' => array('r' => '', 'b' => ''),
-		'PHP 平台版本' => array('r' => '32位', 'b' => '64位'),
-		'执行时间限制' => array('r' => '不限制', 'b' => '不限制'),
+	'MySQL数据库持续连接' => array('r' => '不限制', 'b' => '不限制'),
+	'域名' => array('r' => '不限制', 'b' =>'不限制'),
+	'服务器端口' => array('r' => '不限制', 'b' => '不限制'),
+	'运行环境' => array('r' => '不限制', 'b' => '不限制'),
+	'网站根目录' => array('r' => '不限制', 'b' => '不限制'),
+	'PHP 平台版本' => array('r' => '32位', 'b' => '64位'),
+	'执行时间限制' => array('r' => '不限制', 'b' => '不限制'),
   );
   foreach($env_items as $key => $item) {
     if($key == 'PHP 版本') {
@@ -295,13 +295,11 @@ $operation=trim($_GET['operation']);
 		
 	return $data;
 }
-	if($operation=='getdata'){
-		 $data=getData($time,$starttime,$endtime,$type);
-		 include template('xtxx_ajax');
-	}else{
+if($operation=='getdata'){
 		$data=getData($time,$starttime,$endtime,$type);
-	}
-
-  include template('xtxx');
+		include template('xtxx_ajax');
+}else{
+	$data=getData($time,$starttime,$endtime,$type);
 }
+include template('xtxx');
 ?>

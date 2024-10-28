@@ -27,14 +27,14 @@ if (empty($_G['uid']) && !in_array($do, $guests)) {
 }
 }
 if (submitcheck('replysubmit')) {
-	$os= get_os();
-	foreach ($_G['browser'] as $key => $value) {
-		$outputer= $key;
-	}
 	$message = censor($_GET['message']);
 
 	if (empty($message)) {
 		showmessage('please_enter_comment', MOD_URL, array());
+	}
+	$os= get_os();
+	foreach ($_G['browser'] as $key => $value) {
+		$outputer= $key;
 	}
 	//处理@
 	$at_users = array();

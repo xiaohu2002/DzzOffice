@@ -48,27 +48,25 @@
           <input type="password" class="form-control" id="password2" name="password2" autocomplete="off" placeholder="{lang register_repassword_tips}">
 					<span id="chk_password2" class="help-msg"></span> 
         </div>
-				<!--{loop $_G['cache']['fields_register'] $field}-->
-        <!--{if $htmls[$field['fieldid']]}-->
-        <div class="mb-3 has-feedback">
-          <!--{if $field['required']}--><span class="mdi mdi-asterisk" aria-hidden="true"></span><!--{/if}-->
-          $htmls[$field['fieldid']]
-          <i id="tip_$field['fieldid']" class="help-msg"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></i><kbd id="chk_$field['fieldid']" class="help-msg"></kbd>
-        </div>
-        <!--{/if}-->
-        <!--{/loop}-->
-				<!--{/if}-->
-				<!--{if $seccodecheck}-->
-				<!--{template common/seccheck}--> 
-				<!--{/if}-->
-				<!--{if $bbrules}-->
-				<div class="mb-3">
-					<div class="form-check">
-						<input type="checkbox" class="form-check-input" name="agreebbrule" value="$bbrulehash" id="agreebbrule" checked="checked" />
-						<label for="agreebbrule">{lang agree}<a class="ml20 pull-left" href="javascript:;" onclick="showWindow('bbrule','{MOD_URL}&op=ajax&do=bbrule')">{lang rulemessage}</a></label>
-					</div>
-				</div>
-				<!--{/if}-->
+		<!--{loop $_G['cache']['fields_register'] $field}-->
+		<!--{if $htmls[$field['fieldid']]}-->
+		<div class="mb-3 has-feedback">
+			<!--{if $field['required']}--><span class="mdi mdi-asterisk" aria-hidden="true"></span><!--{/if}-->$htmls[$field['fieldid']]
+			<span id="tip_$field['fieldid']" class="help-block"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></span><kbd id="chk_$field['fieldid']" class="p_chk"></kbd>
+		<!--{/if}-->
+		<!--{/loop}-->
+		<!--{/if}-->
+		<!--{if $seccodecheck}-->
+		<!--{template common/seccheck}--> 
+		<!--{/if}-->
+		<!--{if $bbrules}-->
+		<div class="mb-3">
+			<div class="form-check">
+				<input type="checkbox" class="form-check-input" name="agreebbrule" value="$bbrulehash" id="agreebbrule" checked="checked" />
+				<label for="agreebbrule">{lang agree}<a class="ml20 pull-left" href="javascript:;" onclick="showWindow('bbrule','{MOD_URL}&op=ajax&do=bbrule')">{lang rulemessage}</a></label>
+			</div>
+		</div>
+		<!--{/if}-->
         <div class="mb-3 d-grid">
           <button class="btn btn-primary" name="loginsubmit" value="true"><!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}-->$_G[setting][reglinkname]<!--{/if}--></button>
         </div>

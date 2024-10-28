@@ -87,10 +87,8 @@
 						<!--{loop $_G['cache']['fields_register'] $field}-->
             <!--{if $htmls[$field['fieldid']]}-->
             <div class="mb-3 has-feedback">
-              <!--{if $field['required']}--><span class="mdi mdi-asterisk" aria-hidden="true"></span><!--{/if}-->
-              $htmls[$field['fieldid']]
-              <i id="tip_$field['fieldid']" class="help-msg"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></i><kbd id="chk_$field['fieldid']" class="help-msg"></kbd>
-            </div>
+              <!--{if $field['required']}--><span class="mdi mdi-asterisk" aria-hidden="true"></span><!--{/if}-->$htmls[$field['fieldid']]
+              <span id="tip_$field['fieldid']" class="help-block"><!--{if $field['description']}--><!--{echo dhtmlspecialchars($field[description])}--><!--{/if}--></span><kbd id="chk_$field['fieldid']" class="p_chk"></kbd>
             <!--{/if}-->
             <!--{/loop}-->
             <!--{/if}-->

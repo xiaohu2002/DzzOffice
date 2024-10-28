@@ -11,10 +11,10 @@ if(!defined('IN_DZZ')) {
 }
 
 if(!defined('CORE_VERSION')) {
-	define('CORE_VERSION', '2.02');
-	define('CORE_RELEASE', '20180909');
-	define('CORE_FIXBUG' , '20000000');
-	define('CORE_XHVERSION', '1.90.2');
+	define('CORE_VERSION', '2.1');
+	define('CORE_RELEASE', '20241028');
+	define('CORE_FIXBUG' , '21000000');
+	define('CORE_XHVERSION', '1.90.3');
 	define('CORE_XHRELEASE', '20241011');
-	define('CORE_XHFIXBUG' , '20241027');
+	define('CORE_XHFIXBUG' , '20241028');
 }

@@ -3570,14 +3570,6 @@ function dzz_userconfig_init()
      return $result[0];
 
  }
- 
- function shareLink($shareLink,$path){
-    $path=dzzdecode($path);
-    $pathh=dzzencode($path.$path);
-    if ($pathh==$shareLink){
-        return true;
-    }
-}
 
 //取得所有子级目录
 function get_all_chilrdenfid_by_pfid($pfid)

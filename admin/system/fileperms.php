@@ -10,8 +10,7 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 	exit('Access Denied');
 }
 include_once libfile('function/admin');
-$oparr = array('updatecache', 'database', /*'security','patch','update',*/
-'cron', 'log','fileperms');
+$oparr = array('updatecache', 'database','cron', 'log','fileperms');
 $leftmenu = array();
 $op = $_GET['op'];
 foreach ($oparr as $key => $value) {

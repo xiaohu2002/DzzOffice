@@ -1,5 +1,4 @@
 <?php
-//error_reporting(E_ALL);
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 } 
@@ -17,7 +16,6 @@ if(file_exists (DZZ_ROOT.'./admin/language/'.$checkLanguage.'/'.'lang.php')){
 }
  
 if($type=="list"){
-	//Hook::listen('adminlogin'); 
 	!isset($_GET['page']) && $_GET['page']=1;
 	$lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
 	$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
@@ -27,7 +25,7 @@ if($type=="list"){
 	$systemlog_setting = unserialize($_G["setting"]["systemlog_setting"]); 
 	$operationarr = array_keys($systemlog_setting);  
 	$operation = in_array($_GET['operation'], $operationarr) ? $_GET['operation'] : "cplog"; 
-	$navtitle=$systemlog_setting[$operation]["title"].' - '.lang('appname');//lang('nav_logs_'.$operation).' - '.lang('admin_navtitle');
+	$navtitle=$systemlog_setting[$operation]["title"].' - '.lang('appname');
   	$page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
 	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
   	$start = ($page - 1) * $lpp;
