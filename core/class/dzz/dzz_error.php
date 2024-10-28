@@ -178,10 +178,29 @@ class dzz_error
 		ob_end_clean();
 		$gzip = getglobal('gzipcompress');
 		ob_start($gzip ? 'ob_gzhandler' : null);
-
+		//发送通知
+		$cur_url = $_SERVER['REQUEST_URI'];
+		foreach (C::t('user')->fetch_all_by_adminid(1) as $value) {
+		  if ($value['uid'] != $_G['uid']) {
+			  //发送通知
+			  $notevars = array(
+				  'from_id' => '0',
+				  'from_idtype' => 'app',
+				  'url' => $cur_url,
+				  'author' => getglobal('username'),
+				  'authorid' => getglobal('uid'),
+				  'dataline' => dgmdate(TIMESTAMP),
+				  'title' => '系统错误提醒',
+				  'errormsg'=> '考虑到系统的稳定性'
+			  );
+			  $action = 'Error';
+			  $type = 'Error_' . $value['uid'];
+	  
+			  dzz_notification::notification_add($value['uid'], $type, $action, $notevars);
+		  }
+		}
 		$host = $_SERVER['HTTP_HOST'];
 		$title = $type == 'db' ? 'Database' : 'System';
-		dzz_error::write_error_log($errormsg);
 		echo <<<EOT
 <html>
 <head>
@@ -271,27 +290,6 @@ EOT;
 </body>
 </html>
 EOT;
-  //发送通知
-  $cur_url = $_SERVER['REQUEST_URI'];
-  foreach (C::t('user')->fetch_all_by_adminid(1) as $value) {
-    if ($value['uid'] != $_G['uid']) {
-        //发送通知
-        $notevars = array(
-            'from_id' => '0',
-            'from_idtype' => 'app',
-            'url' => $cur_url,
-            'author' => getglobal('username'),
-            'authorid' => getglobal('uid'),
-            'dataline' => dgmdate(TIMESTAMP),
-            'title' => '系统错误提醒',
-            'errormsg'=> '考虑到系统的稳定性'
-        );
-        $action = 'Error';
-        $type = 'Error_' . $value['uid'];
-
-        dzz_notification::notification_add($value['uid'], $type, $action, $notevars);
-    }
-  }
 		$exit && exit();
 
 	}
@@ -301,11 +299,30 @@ EOT;
 
 		ob_end_clean();
 		ob_start();
+		//发送通知
+		$cur_url = $_SERVER['REQUEST_URI'];
+		foreach (C::t('user')->fetch_all_by_adminid(1) as $value) {
+			if ($value['uid'] != $_G['uid']) {
+				//发送通知
+				$notevars = array(
+					'from_id' => '0',
+					'from_idtype' => 'app',
+					'url' => $cur_url,
+					'author' => getglobal('username'),
+					'authorid' => getglobal('uid'),
+					'dataline' => dgmdate(TIMESTAMP),
+					'title' => '系统错误提醒',
+					'errormsg'=> '考虑到系统的稳定性'
+				);
+				$action = 'Error';
+				$type = 'Error_' . $value['uid'];
 
+				dzz_notification::notification_add($value['uid'], $type, $action, $notevars);
+			}
+		}
 		$host = $_SERVER['HTTP_HOST'];
 		$phpmsg = trim($phpmsg);
 		$title = 'Mobile '.($type == 'db' ? 'Database' : 'System');
-		dzz_error::write_error_log($errormsg);
 		echo <<<EOT
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
