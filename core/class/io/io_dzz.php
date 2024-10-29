@@ -154,7 +154,7 @@ class io_dzz extends io_api
                 if ($icoarr['type'] == 'video' || $icoarr['type'] == 'dzzdoc' || $icoarr['type'] == 'link') {
                     return $icoarr['url'];
                 }
-                return $_G['siteurl'] . $_G['setting']['attachurl'] . $icoarr['attachment'];
+                return $_G['setting']['attachdir'] . $icoarr['attachment'];
             } else {
                 return IO::getStream($bz . '/' . $icoarr['attachment'], $fop);
             }
@@ -176,7 +176,7 @@ class io_dzz extends io_api
                     return $icoarr['url'];
                 }
 				
-                return $_G['siteurl'] . $_G['setting']['attachurl'] . $icoarr['attachment'];
+                return $_G['setting']['attachdir'] . $icoarr['attachment'];
             } else {
                 return IO::getStream($bz . '/' . $icoarr['attachment'], $fop);
             }
