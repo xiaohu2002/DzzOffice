@@ -27,7 +27,7 @@ class perm_binPerm
         $this->powerarr = $this->getPowerArr();
     }
 
-    function getPowerArr()
+    public static function getPowerArr()
     {
         return array(
             'flag' => 1,        //标志位为1表示权限设置,否则表示未设置，继承上级；
@@ -54,7 +54,7 @@ class perm_binPerm
         );
     }
 
-    function getPowerTitle()
+    public static function getPowerTitle()
     {
         return array(
             'flag'  => lang('flag_purview_setting'),
@@ -80,7 +80,7 @@ class perm_binPerm
         );
     }
     //获取权限对应图标
-    function getPowerIcos(){
+    public static function getPowerIcos(){
         return array(
             'flag'  => '',
             'read1' => 'dzz dzz-visibility',
@@ -105,12 +105,12 @@ class perm_binPerm
         );
     }
 
-    function getMyPower()
+    public static function getMyPower()
     {//获取用户桌面默认的权限
         return self::getSumByAction(array('read1', 'read2', 'delete1', 'edit1', 'download1', 'download2', 'copy1', 'copy2', 'upload', 'newtype', 'folder', 'link', 'dzzdoc', 'video', 'shortcut', 'share'));
     }
 
-    function groupPowerPack()
+    public static function groupPowerPack()
     {
         $data = array('read' => array('title' => lang('read_only'), 'flag' => 'read', 'permitem' => array('read1', 'read2'), 'tip' => lang('read_only_state')),
             'only-download' => array('title' => lang('upload_only'), 'flag' => 'only-download', 'permitem' => array('read1', 'read2', 'download1', 'download2', 'copy1', 'copy2'), 'tip' => lang('upload_only_state')),
@@ -126,39 +126,39 @@ class perm_binPerm
         return $data;
     }
 
-    function addPower($action)
+    public static function addPower($action)
     {
 
         //利用逻辑或添加权限
         if (isset($this->powerarr[$action])) return $this->power = $this->power | intval($this->powerarr[$action]);
     }
 
-    function mergePower($perm)
+    public static function mergePower($perm)
     { //合成权限，使用于系统权限和用户权限合成
         return $this->power = intval($this->power & intval($perm));
     }
 
-    function delPower($action)
+    public static function delPower($action)
     {
         //删除权限，先将预删除的权限取反，再进行与操作
         if (isset($this->powerarr[$action])) return $this->power = $this->power & ~intval($this->powerarr[$action]);
     }
 
-    function isPower($action)
+    public function isPower($action)
     {
         //权限比较时，进行与操作，得到0的话，表示没有权限
         if (!$this->powerarr[$action]) return 0;
         return $this->power & intval($this->powerarr[$action]);
     }
 
-    function returnPower()
+    public static function returnPower()
     {
         //为了减少存贮位数，返回也可以转化为十六进制
         return $this->power;
     }
 
 
-    function havePower($action, $perm)
+    public static function havePower($action, $perm)
     {
         //权限比较时，进行与操作，得到0的话，表示没有权限
         $perm = intval($perm);
@@ -168,7 +168,7 @@ class perm_binPerm
         return $perm & intval($powerarr[$action]);
     }
 
-    function getSumByAction($action = array())
+    public static function getSumByAction($action = array())
     { //$action==all 时返回所有的值相加
         $i = 0;
         $powerarr = self::getPowerArr();
@@ -189,13 +189,13 @@ class perm_binPerm
         return $i;
     }
 
-    function getGroupPower($type)
+    public static function getGroupPower($type)
     { //权限包
         $data = self::groupPowerPack();
         return $data[$type]['power'];
     }
 
-    function getGroupTitleByPower($power)
+    public static function getGroupTitleByPower($power)
     {
         $data = self::groupPowerPack();
         foreach ($data as $key => $value) {

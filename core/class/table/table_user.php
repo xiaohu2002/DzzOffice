@@ -9,6 +9,7 @@
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
+
 class table_user extends dzz_table
 {
 	public function __construct() {
@@ -39,7 +40,6 @@ class table_user extends dzz_table
         $setarr=array(
             'username'=>addslashes($userArr['username']),
             'email'=>isset($userArr['email']) ? $userArr['email']:'' ,
-			'phone'=>isset($userArr['phone']) ? $userArr['phone']:'' ,
             'salt'=>$salt,
             'password'=>md5(md5($userArr['password']).$salt),
             'regdate'=>TIMESTAMP,
@@ -83,13 +83,13 @@ class table_user extends dzz_table
 		if(self::checkfounder($user)){//创始人不能删除
 			return false;
 		}
+			  
 		if(parent::delete($uid)){
 			C::t('user_field')->delete($uid);
 			C::t('user_profile')->delete($uid);
 			C::t('user_status')->delete($uid);
 			C::t('user_setting')->delete_by_uid($uid);
 			C::t('organization_user')->delete_by_uid($uid,0);
-			DB::delete('user_qqconnect',"uid='{$uid}'"); //删除QQ登陆
 			
 			//删除用户文件
 			if($homefid=DB::result_first("select fid from %t where uid=%d and flag='home' ",array('folder',$uid))){
@@ -104,7 +104,7 @@ class table_user extends dzz_table
 	public function  checkfounder($user) {
 
 		$founders = str_replace(' ', '', getglobal('config/admincp/founder'));
-		if(!$user['uid'] || $user['groupid'] != 1 || $user['adminid'] != 1 ) {
+		if(!$user['uid'] || $user['groupid'] != 1 || $user['adminid'] != 1) {
 			return false;
 		} elseif(empty($founders)) {
 			return false;
@@ -411,22 +411,22 @@ class table_user extends dzz_table
 
 	
 
-	public function insert($uid, $ip, $groupid, $extdata, $adminid = 0) {
+	public function insert($uid, $return_insert_id = false, $replace = false, $silent = false, $adminid = 0) {
 		if(($uid = dintval($uid))) {
-			$profile = isset($extdata['profile']) ? $extdata['profile'] : array();
+			$profile = isset($silent['profile']) ? $silent['profile'] : array();
 			//$profile['uid'] = $uid;
 			$base = array(
 				'uid' => $uid,
 				'adminid' => intval($adminid),
-				'groupid' => intval($groupid),
+				'groupid' => intval($replace),
 				'regdate' => TIMESTAMP,
-				'emailstatus' => intval($extdata['emailstatus']),
+				'emailstatus' => intval($silent['emailstatus']),
 				
 			);
 			$status = array(
 				'uid' => $uid,
-				'regip' => (string)$ip,
-				'lastip' => (string)$ip,
+				'regip' => (string)$return_insert_id,
+				'lastip' => (string)$return_insert_id,
 				'lastvisit' => TIMESTAMP,
 				'lastactivity' => TIMESTAMP,
 				'lastsendmail' => 0

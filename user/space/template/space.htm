@@ -33,7 +33,7 @@
 				<!--{/if}-->
 				<!--{if $_G['adminid']}-->
         <div class="callout callout-warning">邮箱状态:<strong><code><!--{if $users[emailstatus]}-->已验证<!--{else}-->未验证<!--{/if}--></code></strong></div>
-				<div class="callout callout-warning"><!--{if $users[regip]}-->{lang registration_time}<!--{else}-->{lang add_time}<!--{/if}-->:<strong><code><!--{eval echo dgmdate($users[regdate])}--></code></strong></div>
+				<div class="callout callout-warning"><!--{if $users[regip]}-->{lang registration_time}<!--{else}-->{lang add_time}<!--{/if}-->:<strong><code><!--{eval echo dgmdate($users['regdate'])}--></code></strong></div>
 				<!--{if $users[regip]}--><div class="callout callout-warning">{lang register} IP:<strong><code>$users[regip]</code></strong></div><!--{/if}-->
 				<!--{if $userstatus['lastip']}--><div class="callout callout-warning">上次登录 IP:<strong><code>$userstatus['lastip']</code></strong></div><!--{/if}-->
 				<!--{if $userstatus['lastactivity']}--><div class="callout callout-warning">上次登录时间:<strong><code><!--{eval echo dgmdate($userstatus['lastactivity'])}--></code></strong></div><!--{/if}-->

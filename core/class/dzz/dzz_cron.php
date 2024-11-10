@@ -35,6 +35,9 @@ class dzz_cron
 				if(!@include $cronfile) {
 					return false;
 				}
+			}else{
+				$data = array('available' => '0');
+				C::t('cron')->update($cron['cronid'], $data);
 			}
 		}
 		self::nextcron();

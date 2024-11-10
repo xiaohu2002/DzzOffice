@@ -19,6 +19,9 @@ if(!$url=(IO::getStream($path))){
 	@header('Status: 403 Not Found');
 	exit(lang('attachment_nonexistence'));
 }
+if (is_array($url) && isset($url['error'])) {
+    exit($url['error']);
+}
 $filename = trim($_GET['n'], '.dzz') ?: $_GET['filename'];
 $ext=strtolower(substr(strrchr($filename, '.'), 1, 10));
 if(!$ext) $ext=strtolower(substr(strrchr(preg_replace("/\.dzz$/i",'',preg_replace("/\?.*/i",'',$url)), '.'), 1, 10));

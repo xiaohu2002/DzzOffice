@@ -42,10 +42,10 @@ class dzz_error
 	}
 
 	public static function debug_backtrace() {
-		$skipfunc[] = 'error->debug_backtrace';
-		$skipfunc[] = 'error->db_error';
-		$skipfunc[] = 'error->template_error';
-		$skipfunc[] = 'error->system_error';
+		$skipfunc[] = 'dzz_error->debug_backtrace';
+		$skipfunc[] = 'dzz_error->db_error';
+		$skipfunc[] = 'dzz_error->template_error';
+		$skipfunc[] = 'dzz_error->system_error';
 		$skipfunc[] = 'db_mysql->halt';
 		$skipfunc[] = 'db_mysql->query';
 		$skipfunc[] = 'DB::_execute';
@@ -61,11 +61,10 @@ class dzz_error
 			if(in_array($func, $skipfunc)) {
 				break;
 			}
-			$error[line] = sprintf('%04d', $error['line']);
+			$error['line'] = sprintf('%04d', $error['line']);
 
-			$show .= "<li>[Line: $error[line]]".$file."($func)</li>";
-			$log .= !empty($log) ? ' -> ' : '';$file.':'.$error['line'];
-			$log .= $file.':'.$error['line'];
+			$show .= "<li>[Line: {$error['line']}]".$file."($func)</li>";
+			$log .= (!empty($log) ? ' -> ' : '').$file.'#'.$func.':'.$error['line'];
 		}
 		return array($show, $log);
 	}
@@ -74,7 +73,6 @@ class dzz_error
 		global $_G;
 
 		list($showtrace, $logtrace) = dzz_error::debug_backtrace();
-
 		$title = lang('db_'.$message);
 		$title_msg = lang('db_error_message');
 		$title_sql = lang('db_query_sql');
@@ -90,9 +88,6 @@ class dzz_error
 		$msg .= $dberrno ? '<li>['.$dberrno.'] '.$dberror.'</li>' : '';
 		$msg .= $sql ? '<li>[Query] '.$sql.'</li>' : '';
 
-		dzz_error::show_error('db', $msg, $showtrace, false);
-		unset($msg, $phperror);
-
 		$errormsg = '<b>'.$title.'</b>';
 		$errormsg .= "[$dberrno]<br /><b>ERR:</b> $dberror<br />";
 		if($sql) {
@@ -102,6 +97,7 @@ class dzz_error
 		$errormsg .= '<b>PHP:</b> '.$logtrace;
 
 		dzz_error::write_error_log($errormsg);
+		dzz_error::show_error('db', $msg, $showtrace, false);
 		exit();
 
 	}
@@ -130,6 +126,7 @@ class dzz_error
 		krsort($trace);
 
 		$trace[] = array('file'=>$exception->getFile(), 'line'=>$exception->getLine(), 'function'=> 'break');
+		$logmsg = '';
 		$phpmsg = array();
 		foreach ($trace as $error) {
 			if(!empty($error['function'])) {
@@ -150,7 +147,12 @@ class dzz_error
 							$fun .= (defined('DZZ_DEBUG') && DZZ_DEBUG) ? $arg : '%d';
 						} elseif(is_float($arg)) {
 							$fun .= (defined('DZZ_DEBUG') && DZZ_DEBUG) ? $arg : '%f';
-						} else {
+						} elseif(is_resource($arg)) {
+							$fun .= (defined('DZZ_DEBUG') && DZZ_DEBUG) ? 'Resource' : '%f';
+						} elseif(is_object($arg)) {
+							$fun .= (defined('DZZ_DEBUG') && DZZ_DEBUG) ? 'Object' : '%f';
+						}  else {
+							$arg = (string)$arg;
 							$fun .= (defined('DZZ_DEBUG') && DZZ_DEBUG) ? '\''.dhtmlspecialchars(substr(self::clear($arg), 0, 10)).(strlen($arg) > 10 ? ' ...' : '').'\'' : '%s';
 						}
 						$mark = ', ';
@@ -165,8 +167,15 @@ class dzz_error
 			    'line' => $error['line'],
 			    'function' => $error['function'],
 			);
+			$file = str_replace(array(DZZ_ROOT, '\\'), array('', '/'), $error['file']);
+			$func = isset($error['class']) ? $error['class'] : '';
+			$func .= isset($error['type']) ? $error['type'] : '';
+			$func .= isset($error['function']) ? $error['function'] : '';
+			$line = sprintf('%04d', $error['line']);
+			$logmsg .= (!empty($logmsg) ? ' -> ' : '').$file.'#'.$func.':'.$line;
 		}
-
+		$messagesave = '<b>'.$errormsg.'</b><br><b>PHP:</b>'.$logmsg;
+		self::write_error_log($messagesave);
 		self::show_error($type, $errormsg, $phpmsg);
 		exit();
 
@@ -174,24 +183,27 @@ class dzz_error
 
 	public static function show_error($type, $errormsg, $phpmsg = '', $typemsg = '') {
 		global $_G;
-
 		ob_end_clean();
 		$gzip = getglobal('gzipcompress');
 		ob_start($gzip ? 'ob_gzhandler' : null);
-		$cur_url = $_SERVER['REQUEST_URI'];
+		header("HTTP/1.1 503 Service Temporarily Unavailable");
+		header("Status: 503 Service Temporarily Unavailable");
+		header("Retry-After: 3600");
 		$host = $_SERVER['HTTP_HOST'];
 		$title = $type == 'db' ? 'Database' : 'System';
 		echo <<<EOT
+<!DOCTYPE html>
 <html>
 <head>
 	<title>$host - $title Error</title>
-	<meta http-equiv="Content-Type" content="text/html; charset={$_G['config']['output']['charset']}" />
-	<meta name="ROBOTS" content="NOINDEX,NOFOLLOW,NOARCHIVE" />
+	<meta charset="{$_G['config']['output']['charset']}" />
+	<meta name="renderer" content="webkit" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<style type="text/css">
 	<!--
 	body { background-color: white; color: black; font: 9pt/11pt verdana, arial, sans-serif;}
-	#container {max-width: 1024px;margin: auto;}
-	#message   { width: 1024px; color: black; }
+	#container { max-width: 1024px; margin: auto; }
+	#message   { max-width: 1024px; color: black; }
 
 	.red  {color: red;}
 	a:link     { font: 9pt/11pt verdana, arial, sans-serif; color: red; }
@@ -200,10 +212,11 @@ class dzz_error
 	.bg1{ background-color: #FFFFCC;}
 	.bg2{ background-color: #EEEEEE;}
 	.table {background: #AAAAAA; font: 11pt Menlo,Consolas,"Lucida Console"}
+	.table tbody{word-break: break-all;}
 	.info {
 	    background: none repeat scroll 0 0 #F3F3F3;
 	    border: 0px solid #aaaaaa;
-	    border-radius: 10px;
+	    border-radius: 10px 10px 10px 10px;
 	    color: #000000;
 	    font-size: 11pt;
 	    line-height: 160%;
@@ -213,11 +226,12 @@ class dzz_error
 
 	.help {
 	    background: #F3F3F3;
-	    border-radius: 10px;
+	    border-radius: 10px 10px 10px 10px;
+	    font: 12px verdana, arial, sans-serif;
 	    text-align: center;
 	    line-height: 160%;
 	    padding: 1em;
-		margin-bottom: 1rem;
+		margin: 1em 0;
 	}
 
 	.sql {
@@ -236,16 +250,24 @@ class dzz_error
 <body>
 <div id="container">
 <h1>Dzz! $title Error</h1>
-<div class='info'>$errormsg</div>
 
 
 EOT;
+if (defined('CORE_VERSION')) {
+	$VERSION = CORE_VERSION;
+} else {
+	$VERSION = 'Unknown';
+}
+echo '<p>Time: ' . date('Y-m-d H:i:s O') .' IP: ' . getglobal('clientip') . ' version: ' . $VERSION . '</p>';
+if(!empty($errormsg)) {
+	echo '<div class="info">'.$errormsg.'</div>';
+}
 		if(!empty($phpmsg)) {
 			echo '<div class="info">';
 			echo '<p><strong>PHP Debug</strong></p>';
-			echo '<table cellpadding="5" cellspacing="1" width="100%" class="table table-hover">';
-			echo '<tr class="bg2"><td>No.</td><td>File</td><td>Line</td><td>Code</td></tr>';
+			echo '<table cellpadding="5" cellspacing="1" width="100%" class="table">';
 			if(is_array($phpmsg)) {
+				echo '<tr class="bg2"><td>No.</td><td>File</td><td>Line</td><td>Code</td></tr>';
 				foreach($phpmsg as $k => $msg) {
 					$k++;
 					echo '<tr class="bg1">';
@@ -263,15 +285,15 @@ EOT;
 		echo '<div class="help">'.lang('suggestion_user').'</div>';
 		echo '<div class="help">'.lang('suggestion').'</div>';
 		$helplink = '';
+		
+
 		$endmsg = lang('error_end_message', array('host'=>$host));
 		echo <<<EOT
-<div class="help">$endmsg. $helplink</div>
+<div class="help">$endmsg  $helplink</div>
 </div>
 </body>
 </html>
 EOT;
-		$exit && exit();
-
 	}
 
 	public static function mobile_show_error($type, $errormsg, $phpmsg) {
@@ -279,7 +301,6 @@ EOT;
 
 		ob_end_clean();
 		ob_start();
-		$cur_url = $_SERVER['REQUEST_URI'];
 		$host = $_SERVER['HTTP_HOST'];
 		$phpmsg = trim($phpmsg);
 		$title = 'Mobile '.($type == 'db' ? 'Database' : 'System');
@@ -298,7 +319,7 @@ EOT;
 	#message   { color: black; background-color: #FFFFCC; }
 	#bodytitle { font: 11pt/13pt verdana, arial, sans-serif; height: 20px; vertical-align: top; }
 	.bodytext  { font: 8pt/11pt verdana, arial, sans-serif; }
-	.help  { font: 12px verdana, arial, sans-serif; color: red;}
+	.help  { font: 12px verdana, arial, sans-serif; color: red;margin: 1em 0;}
 	.red  {color: red;}
 	a:link     { font: 8pt/11pt verdana, arial, sans-serif; color: red; }
 	a:visited  { font: 8pt/11pt verdana, arial, sans-serif; color: #4e4e4e; }
@@ -314,7 +335,7 @@ EOT;
 
 		echo <<<EOT
 <tr><td><hr size="1"/></td></tr>
-<tr><td class="bodytext">错误信息: </td></tr>
+<tr><td class="bodytext">Error messages: </td></tr>
 <tr>
 	<td class="bodytext" id="message">
 		<ul> $errormsg</ul>
@@ -341,7 +362,6 @@ EOT;
 </body>
 </html>
 EOT;
-		$exit && exit();
 	}
 
 	public static function clear($message) {

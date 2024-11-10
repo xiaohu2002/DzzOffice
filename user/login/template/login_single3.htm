@@ -1,5 +1,5 @@
 <!--{template common/header_common}-->
-<!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css?{VERHASH}"><!--{/if}-->
+<!--{if $_G['setting']['loginset']['lwaveanimation']}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css?{VERHASH}"><!--{/if}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css?{VERHASH}">
 <!--{template common/beijing}-->
 <style>
@@ -34,14 +34,14 @@
 			max-width: 50%;
       text-align: center;
 	}
-	<!--{if $_G[setting][loginset][kbcolor]}-->
+	<!--{if $_G['setting']['loginset']['kbcolor']}-->
 	.card{
-		background-color:$_G[setting][loginset][kbcolor];
+		background-color:$_G['setting']['loginset']['kbcolor'];
 	}
 	<!--{/if}-->
-  <!--{if $_G[setting][loginset][transparency]}-->
+	<!--{if $_G['setting']['loginset']['transparency']}-->
 	.form-control{
-		background-color:$_G[setting][loginset][transparency];
+		background-color:$_G'[setting']['loginset']['transparency'];
 	}
 	<!--{/if}-->
 </style>
@@ -51,7 +51,7 @@
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <div class="center-vh p-2 overflow-auto">
-	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
+	<div class="card<!--{if $_G['setting']['loginset']['lwaveanimation']}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box">
       <div class="login-left p-5">
         <div class="text-center mb-3 d-sm-none">

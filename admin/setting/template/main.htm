@@ -213,17 +213,17 @@
           <label class="col-sm-2">{lang thumbnail_size}</label>
           <div class="col-sm-10">
             <span class="badge rounded-pill bg-primary" style="display:inline-block;padding:10px 15px;margin-right:10px;">{lang large_size}</span>
-            <input name="settingnew[thumbsize][small][width]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang width}" value="{eval echo $setting[thumbsize][small][width]?$setting[thumbsize][small][width]:'256'}"/>
+            <input name="settingnew[thumbsize][small][width]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang width}" value="{eval echo $setting['thumbsize']['small']['width']?$setting['thumbsize']['small']['width']:'256'}"/>
             <span style="display:inline-block;padding:6px 3px">X</span>
-            <input name="settingnew[thumbsize][small][height]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang height}" value="{eval echo $setting[thumbsize][small][height]?$setting[thumbsize][small][height]:'256'}"/>
+            <input name="settingnew[thumbsize][small][height]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang height}" value="{eval echo $setting['thumbsize']['small']['height']?$setting['thumbsize']['small']['height']:'256'}"/>
             <span class="badge rounded-pill bg-success" style="display:inline-block;padding:10px 15px;margin-right:10px;">{lang chinese_size}</span>
-            <input name="settingnew[thumbsize][middle][width]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang width}" value="{eval echo $setting[thumbsize][middle][width]?$setting[thumbsize][middle][width]:'800'}"/>
+            <input name="settingnew[thumbsize][middle][width]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang width}" value="{eval echo $setting['thumbsize']['middle']['width']?$setting['thumbsize']['middle']['width']:'800'}"/>
             <span style="display:inline-block;padding:6px 3px">X</span>
-            <input name="settingnew[thumbsize][middle][height]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang height}" value="{eval echo $setting[thumbsize][middle][height]?$setting[thumbsize][middle][height]:'600'}"/>
+            <input name="settingnew[thumbsize][middle][height]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang height}" value="{eval echo $setting['thumbsize']['middle']['height']?$setting['thumbsize']['middle']['height']:'600'}"/>
             <span class="badge rounded-pill bg-danger" style="display:inline-block;padding:10px 15px;margin-right:10px;">{lang max_size}</span>
-            <input name="settingnew[thumbsize][large][width]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang width}" value="{eval echo $setting[thumbsize][large][width]?$setting[thumbsize][large][width]:'1440'}"/>
+            <input name="settingnew[thumbsize][large][width]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang width}" value="{eval echo $setting['thumbsize']['large']['width']?$setting['thumbsize']['large']['width']:'1440'}"/>
             <span style="display:inline-block;padding:6px 3px">X</span>
-            <input name="settingnew[thumbsize][large][height]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang height}" value="{eval echo $setting[thumbsize][large][height]?$setting[thumbsize][large][height]:'900'}"/>
+            <input name="settingnew[thumbsize][large][height]" class="form-control" style="display:inline-block;float:none;width:60px" placeholder="{lang height}" value="{eval echo $setting['thumbsize']['large']['height']?$setting['thumbsize']['large']['height']:'900'}"/>
             <ul class="help-block">
               {lang setting_main_thumbnail_size}
             </ul>
@@ -1404,11 +1404,11 @@
             <label class="col-sm-2">{lang rabdom_size}</label>
             <div class="col-sm-10">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="seccodedasize1" <!--{if $setting[seccodedata][size]>0}-->checked<!--{/if}--> value="1" name="settingnew[seccodedata][size]">
+                <input class="form-check-input" type="radio" id="seccodedasize1" <!--{if $setting['seccodedata']['size']>0}-->checked<!--{/if}--> value="1" name="settingnew[seccodedata][size]">
                 <label class="form-check-label" for="seccodedasize1">{lang yes}</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="seccodedasize2" <!--{if $setting[seccodedata][size]<1}-->checked<!--{/if}--> value="0" name="settingnew[seccodedata][size]">
+                <input class="form-check-input" type="radio" id="seccodedasize2" <!--{if $setting['seccodedata']['size']<1}-->checked<!--{/if}--> value="0" name="settingnew[seccodedata][size]">
                 <label class="form-check-label" for="seccodedasize2">{lang no}</label>
               </div>
               <ul class="help-block">

@@ -24,7 +24,7 @@
                     </a>
                 </div>
             </div>
-                <!--{/if}-->
+            <!--{/if}-->
             <div class="select-toperate select-toperate-right">
                 <div class="btn-group pull-right" role="group">
                     <a type="button" class="btn btn-group-list" onclick="viewSwitch(this,'.module-list-view')"><i class="dzz dzz-view-list" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="{lang change_list}"></i></a>
@@ -159,7 +159,7 @@
                                 <!-- 其他列 -->
                                 <div class="col size" data-size="$value[size]"><!--{if $value[type]=='folder' }--><!--{else}-->$value[fsize]<!--{/if}--></div>
                                 <div class="col type" data-type="$value[ftype]">$value[ftype]</div>
-                                <div class="col dateline" data-dateline="$value[dateline]">
+                                <div class="col dateline" data-dateline="$value['dateline']">
                                     $value[fdateline]
                                 </div>
                             </div>
@@ -181,7 +181,7 @@
 </div>
 <script type="text/javascript">
     var share = [];
-    var uid = '{$_G[uid]}';
+    var uid = '{$_G['uid']}';
     $(function () {
         $('[data-bs-toggle="tooltip"]').tooltip();
         share = [];

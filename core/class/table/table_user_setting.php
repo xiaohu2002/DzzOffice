@@ -15,7 +15,7 @@ class table_user_setting extends dzz_table
 
     }
 
-    public function insert($skeyarr,$uid = 0){//插入用户设置
+    public function insert($skeyarr, $uid = 0,$replace = false, $silent = false) {//插入用户设置
         if(!$uid)$uid = getglobal('uid');
         $cachkeys=array();
         foreach($skeyarr as $key=>$value){
@@ -31,7 +31,7 @@ class table_user_setting extends dzz_table
 		$this->clear_cache($uid);
         return true;
     }
-    public function update($skeyarr,$uid = 0){//更新用户设置
+    public function update($skeyarr,$uid = 0,$unbuffered = false, $low_priority = false){//更新用户设置
         if(!$uid) $uid = getglobal('uid');
 		$cachkeys=array();
         foreach($skeyarr as $key=>$value){
@@ -51,6 +51,7 @@ class table_user_setting extends dzz_table
             if(!$uid)$uid = getglobal('uid');
             if(!DB::update($this->_table,array('svalue'=>$val),array('uid'=>$uid,'skey'=>$skey))){
 				 $setarr=array('uid'=>$uid,
+					'uid'=>$uid,
 					'skey'=>$skey,
 					'svalue'=>$val
 				);

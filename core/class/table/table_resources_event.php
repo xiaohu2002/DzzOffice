@@ -76,6 +76,7 @@ class table_resources_event extends dzz_table
         $starttime = strtotime($time);
         $endtime = $starttime + 3600 * 24;
         $events = array();
+        include_once libfile('function/use');
         foreach (DB::fetch_all("select * from %t where gid = %d and dateline > %d and dateline < %d order by dateline desc", array($this->_table, $gid, $starttime, $endtime)) as $v) {
             $v['body_data'] = unserialize($v['body_data']);
             $v['body_data']['msg'] = self::emoji_decode($v['body_data']['msg']);
@@ -108,6 +109,7 @@ class table_resources_event extends dzz_table
             return DB::result_first("select count(*) from %t where pfid = %d and rid = '' and `type`= %d", $params);
         }
         $events = array();
+        include_once libfile('function/use');
         foreach (DB::fetch_all("select * from %t where pfid = %d and rid = '' and `type`= %d order by dateline desc $limitsql", $params) as $v) {
             $v['body_data'] = unserialize($v['body_data']);
             $v['body_data']['msg'] = self::emoji_decode($v['body_data']['msg']);
@@ -138,6 +140,7 @@ class table_resources_event extends dzz_table
         }
         $uid = array();
         $events = array();
+        include_once libfile('function/use');
         foreach (DB::fetch_all("select * from %t where rid = %s and `type`= %d order by dateline desc $limitsql", $params) as $v) {
             $v['body_data'] = unserialize($v['body_data']);
             $v['body_data']['msg'] = self::emoji_decode($v['body_data']['msg']);
@@ -182,6 +185,7 @@ class table_resources_event extends dzz_table
         $limitsql = $limit ? DB::limit($start, $limit) : '';
         $events = array();
         $uids = array();
+        include_once libfile('function/use');
         foreach (DB::fetch_all("select * from %t $wheresql order by dateline desc $limitsql", $params) as $v) {
             $v['body_data'] = unserialize($v['body_data']);
             $v['body_data']['msg'] = self::emoji_decode($v['body_data']['msg']);
@@ -365,12 +369,14 @@ class table_resources_event extends dzz_table
             foreach ($condition as $k => $v) {
                 if (!is_array($v)) {
                     $connect = 'and';
-                    $wheresql .= $connect . ' e.' . $k . " = '" . $v . "' ";
+                    $wheresql .= $connect . ' e.' . $k . " = %s ";
+                    $params[] = $v;
                 } else {
                     $relative = isset($v[1]) ? $v[1] : '=';
                     $connect = isset($v[2]) ? $v[2] : 'and';
                     if ($relative == 'in') {
-                        $wheresql .= $connect . "  e." . $k . " " . $relative . " (" . $v[0] . ") ";
+                        $wheresql .= $connect . "  e." . $k . " in (%n) ";
+                        $params[]=$v[0];
                     } elseif ($relative == 'nowhere') {
                         continue;
                     } elseif ($relative == 'stringsql') {
@@ -379,7 +385,8 @@ class table_resources_event extends dzz_table
                         $wheresql .= $connect . " e." . $k . " like %s ";
                         $params[] = '%' . $v[0] . '%';
                     } else {
-                        $wheresql .= $connect . ' e.' . $k . ' ' . $relative . ' ' . $v[0] . ' ';
+                        $wheresql .= $connect . ' e.' . $k . ' = %s ';
+                        $params[]=$v[0] ;
                     }
 
                 }

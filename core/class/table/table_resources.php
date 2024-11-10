@@ -532,39 +532,6 @@ class table_resources extends dzz_table
         return $folderinfo;
     }
 
-    //查詢文件夹下文件信息
-    /*public function fetch_folderinfo_by_pfid($fid)
-    {
-        global $_G;
-        if ($fid) {
-            if ($folder = C::t('folder')->fetch($fid)) {
-                $where1 = array();
-                if ($folder['gid'] > 0) {
-                    $folder['perm'] = perm_check::getPerm($folder['fid']);
-                    if ($folder['perm'] > 0) {
-                        if (perm_binPerm::havePower('read2', $folder['perm'])) {
-                            $where1[] = "1";
-                        } elseif (perm_binPerm::havePower('read1', $folder['perm'])) {
-                            $where1[] = "uid='{$_G[uid]}'";
-                        }
-
-                    }
-                    $where1 = array_filter($where1);
-                    if (!empty($where1)) $temp[] = "(" . implode(' OR ', $where1) . ")";
-                    else $temp[] = "0";
-                } else {
-                    $temp[] = " uid='{$_G[uid]}'";
-                }
-                $where[] = '(' . implode(' and ', $temp) . ')';
-                unset($temp);
-            }
-            $wheresql = "";
-            if ($where) $wheresql .= implode(' AND ', $where);
-
-            return DB::fetch_all("select * from %t where pfid = %d and isdelete = 0  and $wheresql", array($this->_table, $fid));
-        }
-    }*/
-
     public function fetch_all_by_pfid($pfid, $conditions = array(), $limit = 0, $orderby = '', $order = '', $start = 0, $count = false)
     {
         global $_G;
@@ -618,7 +585,7 @@ class table_resources extends dzz_table
                             if (perm_binPerm::havePower('read2', $folder['perm'])) {
                                 $where1[] = "1";
                             } elseif (perm_binPerm::havePower('read1', $folder['perm'])) {
-                                $where1[] = "uid='{$_G[uid]}'";
+                                $where1[] = "uid='{$_G['uid']}'";
                             }
 
                         }
@@ -626,7 +593,7 @@ class table_resources extends dzz_table
                         if (!empty($where1)) $temp[] = "(" . implode(' OR ', $where1) . ")";
                         else $temp[] = "0";
                     } else {
-                        $temp[] = " uid='{$_G[uid]}'";
+                        $temp[] = " uid='{$_G['uid']}'";
                     }
                 }
                 $arr[] = '(' . implode(' and ', $temp) . ')';
@@ -644,14 +611,14 @@ class table_resources extends dzz_table
                         if (perm_binPerm::havePower('read2', $folder['perm'])) {
                             $where1[] = "1 = 1";
                         } elseif (perm_binPerm::havePower('read1', $folder['perm'])) {
-                            $where1[] = "uid='{$_G[uid]}'";
+                            $where1[] = "uid='{$_G['uid']}'";
                         }
                     }
                     $where1 = array_filter($where1);
                     if ($where1) $temp[] = "(" . implode(' OR ', $where1) . ")";
                     else $temp[] = "0";
                 } else {
-                    $temp[] = " uid='{$_G[uid]}'";
+                    $temp[] = " uid='{$_G['uid']}'";
                 }
             }
             $where[] = '(' . implode(' and ', $temp) . ')';

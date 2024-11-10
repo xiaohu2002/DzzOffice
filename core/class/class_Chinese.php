@@ -20,7 +20,7 @@ class Chinese {
 		'GBtoBIG5_table'   	=> 'gb-big5.table',
 	);
 
-	function Chinese($SourceLang, $TargetLang, $ForceTable = FALSE) {
+	public function __construct($SourceLang, $TargetLang, $ForceTable = FALSE) {
 		$this->config['SourceLang'] = $this->_lang($SourceLang);
 		$this->config['TargetLang'] = $this->_lang($TargetLang);
 
@@ -63,6 +63,9 @@ class Chinese {
 			$this->table = CODETABLE_DIR.$this->config['GBtoUnicode_table'];
 		} elseif($this->config['SourceLang'] == 'BIG5' || $this->config['TargetLang'] == 'BIG5') {
 			$this->table = CODETABLE_DIR.$this->config['BIG5toUnicode_table'];
+		}
+		if(!$this->table) {
+			return;
 		}
 		$fp = fopen($this->table, 'rb');
 		$tabletmp = fread($fp, filesize($this->table));

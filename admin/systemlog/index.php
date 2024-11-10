@@ -39,10 +39,9 @@ if($type=="list"){
 	$theurl = BASESCRIPT . "?" . url_implode($gets);
 	$logdir = DZZ_ROOT.'./data/log/';
 	$logfiles = get_log_files($logdir, $operation);
-	 
-	if($logfiles) $logfiles=array_reverse($logfiles);
-	//error_reporting(E_ALL);
-	$firstlogs = file( $logdir.$logfiles[0] ) ; 
+	if ($logfiles) {
+		$logfiles=array_reverse($logfiles);
+		$firstlogs = file( $logdir.$logfiles[0] ) ; 
 	$firstlogsnum = count($firstlogs);
 	$countlogfile=count($logfiles);
 	$count = ($countlogfile-1)*4000+$firstlogsnum;
@@ -132,6 +131,7 @@ if($type=="list"){
 		$list[$k]=$log;
 	}
 	$multipage = multi($count, $lpp, $page, $theurl,'pull-right'); 
+	}
 	include template('list');
 }
 

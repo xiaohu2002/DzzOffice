@@ -8,13 +8,14 @@ use \IO as IO;
 
 class Route{
 
-    public static function dzzRoute(&$params,$extra=null,&$break)
+    public static function dzzRoute(&$params,$extra=null,&$break = null)
     {
 
-        global $_G,$_config,$_GET;
-        //判断是否开启pathinfo，默认不开启，测试时将其设为1
+        global $_G,$_config;
+        define('MOD_PATH',CURSCRIPT.'/'.CURMODULE);
+        define('MOD_NAME',CURMODULE);
         $mod = !empty($params[MOULD]) ? $params[MOULD]:$_config['default_mod'];
-
+        define('MOD_URL',BASESCRIPT.'?mod='.$mod);
         $op  = !empty($params[DIVIDE]) ? $params[DIVIDE]:$_config['default_op'];
         if(empty($mod)){
 
@@ -28,9 +29,8 @@ class Route{
            $return =  require DZZ_ROOT.'./'.CURSCRIPT.'/'.$op.EXT;
 
         }else{
-
             if(strpos(strtolower($mod),':')!==false){
-                define('CURMODULE',str_replace(':', '/', $mod));
+
                 $patharr=explode(':',$mod);
 
                 foreach($patharr as $path){
@@ -51,7 +51,7 @@ class Route{
                 }
 
             }else{
-                define('CURMODULE',$mod);
+
                 if(!preg_match("/^\w+$/i",$mod) && $mod !== '') showmessage('undefined_action');
 
                 if(!preg_match("/^\w+$/i",$op)) showmessage('undefined_action');
@@ -68,12 +68,9 @@ class Route{
             }
 
             //模块常量
-            define('MOD_PATH',CURSCRIPT.'/'.CURMODULE);
-            define('MOD_NAME',CURMODULE);
+            
             define('MOD_DIR',dirname($modfile));
-            define('MOD_URL',BASESCRIPT.'?mod='.$mod);
             define('OP_NAME',$op);
-            define('MOD_URLOP',MOD_URL.'&op='.$op);
            // $break = true;
 			Hook::listen('mod_run');
             return DZZ_ROOT.$modfile;

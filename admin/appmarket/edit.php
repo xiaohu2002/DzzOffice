@@ -13,10 +13,10 @@ include_once DZZ_ROOT . './data/extdata/exts.php';
 require_once libfile('function/user', '', 'user');
 $grouptitle = array('0' => lang('all'), '-1' => lang('visitors_visible'), '1' => lang('members_available'), '2' => lang('section_administrators_available'), '3' => lang('system_administrators_available'));
 $navtitle=lang('编辑应用').' - '.lang('appname');
-$do = trim($_GET['do']);
+$do = isset($_GET['do']) ? $_GET['do'] : '';
 $appid = intval($_GET['appid']);
 $refer = dreferer();
-$op = $_GET['op'];
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 if (submitcheck('appsubmit')) {
 	$appurl = addslashes(trim($_GET['appurl']));
 	$appadminurl = addslashes(trim($_GET['appadminurl']));

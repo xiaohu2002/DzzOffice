@@ -13,7 +13,7 @@ require_once libfile('function/mail');
 $navtitle = lang('user_import').' - '.lang('appname');
 if($_G['adminid']!=1) showmessage('orguser_import_user',dreferer());
 require_once libfile('function/organization');
-$do=trim($_GET['do']);
+$do = isset($_GET['do']) ? $_GET['do'] : '';
 if($do=='importing'){
 	//判断邮箱是否存在
 	require_once libfile('function/user','','user');

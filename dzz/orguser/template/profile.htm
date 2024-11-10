@@ -2,7 +2,7 @@
 	<ul class="nav nav-pills">
 		<strong class="pull-left">$space[username]</strong>
 		<li class="nav-item">
-			<a class="nav-link" href="{MOD_URL}&op=edituser&uid=$uid#user_{$user[uid]}_" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang basic_message}</a>
+			<a class="nav-link" href="{MOD_URL}&op=edituser&uid=$uid#user_{$user['uid']}_" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang basic_message}</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link active" href="{MOD_URL}&op=edituser&do=profile&uid=$uid" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang details_information}</a>
@@ -33,8 +33,8 @@
     </form>
   </div>
 <script type="text/javascript" reload="1">
-	currentHash = 'user_{$space[uid]}_profile';
-	location.hash = '#user_{$space[uid]}_profile';
+	currentHash = 'user_{$space['uid']}_profile';
+	location.hash = '#user_{$space['uid']}_profile';
   jQuery(document).ready(function (e) {
     jQuery('select').lyearSelect();
   });

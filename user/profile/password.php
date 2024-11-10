@@ -251,7 +251,7 @@ if($do == 'editpass'){
 
         $type = $_GET['returnType'];
 
-        $confirmurl = C::t('shorturl')->getShortUrl("{$_G[siteurl]}user.php?mod=profile&op=password&do=changeemail&uid={$_G[uid]}&id=$idstring&email={$bindemail}");
+        $confirmurl = C::t('shorturl')->getShortUrl("{$_G[siteurl]}user.php?mod=profile&op=password&do=changeemail&uid={$_G['uid']}&id=$idstring&email={$bindemail}");
         $sitename=$_G['setting']['sitename'];
         $email_bind_message = <<<EOT
       <p style="font-size:14px;color:#333; line-height:24px; margin:0;">尊敬的用户$member[username],您好！</p>

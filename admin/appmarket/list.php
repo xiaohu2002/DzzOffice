@@ -15,7 +15,7 @@ $do = empty($_GET['do']) ? 'available' : trim($_GET['do']);
 $refer = urlencode(MOD_URL . '&op=list&do=' . $do);
 $grouptitle = array('0' => lang('all'), '-1' => lang('visitors_visible'), '1' => lang('members_available'), '2' => lang('section_administrators_available'), '3' => lang('system_administrators_available'));
 $list = array();
-$op=$_GET['op'];
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 if ($do == 'available') {
 	$list = array();
 	foreach (DB::fetch_all("SELECT * FROM ".DB::table('app_market')." WHERE  available<1") as $value) {

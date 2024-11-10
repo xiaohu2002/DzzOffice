@@ -14,7 +14,7 @@ $navtitle = lang('expression_class').' - '.lang('appname');
 $imgextarray = array('jpg', 'gif', 'png');
 $operation = trim($_GET['operation']);
 $id = intval($_GET['id']);
-$op = $_GET['op']?$_GET['op']:' ';
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 if (!$operation) {
 	if (!submitcheck('smileysubmit')) {
 		$dirfilter = $list = array();

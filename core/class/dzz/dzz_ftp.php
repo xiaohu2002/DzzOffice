@@ -22,7 +22,7 @@ class dzz_ftp
 	var $connectid;
 	var $_error;
 	var $systype='';
-	function &instance($config = array()) {
+	public static function &instance($config = array()) {
 		static $object;
 		if(empty($object)) {
 			$object = new dzz_ftp($config);

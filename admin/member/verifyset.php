@@ -11,11 +11,11 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 	exit('Access Denied');
 }
 $navtitle = lang('members_verify').' - '.lang('appname');
-$op=$_GET['op'];
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 if ($_G['adminid'] != 1)
 	showmessage('no_privilege');
 include_once  libfile('function/cache');
-$do = $_GET['do'] ? $_GET['do'] : '';
+$do = isset($_GET['do']) ? $_GET['do'] : '';
 
 if ($do == 'edit') {
 	$vid = $_GET['vid'] < 8 ? intval($_GET['vid']) : 0;

@@ -89,11 +89,7 @@ class dzz_app extends dzz_base{
     private function _init_env() {
 
         error_reporting(E_ERROR);
-        /*if(PHP_VERSION < '5.3.0') {
-            set_magic_quotes_runtime(0);
-        }*/
 
-        define('MAGIC_QUOTES_GPC', function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc());
         define('ICONV_ENABLE', function_exists('iconv'));
         define('MB_ENABLE', function_exists('mb_convert_encoding'));
         define('EXT_OBGZIP', function_exists('ob_gzhandler'));
@@ -118,6 +114,13 @@ class dzz_app extends dzz_base{
 
         define('IS_ROBOT', checkrobot());
 
+        if(!defined('APPTYPEID')) {
+			define('APPTYPEID', 0);
+		}
+
+		if(!defined('CURSCRIPT')) {
+			define('CURSCRIPT', null);
+		}
 
         global $_G;
         $_G = array(
@@ -137,13 +140,10 @@ class dzz_app extends dzz_base{
             'authkey' => '',
             'timenow' => array(),
 
-
             'PHP_SELF' => '',
             'siteurl' => '',
-            'localurl' => '',
             'siteroot' => '',
             'siteport' => '',
-
 
             'config' => array(),
             'setting' => array(),
@@ -168,16 +168,12 @@ class dzz_app extends dzz_base{
         } elseif(defined('IN_ARCHIVER')) {
             $sitepath = preg_replace("/\/archiver/i", '', $sitepath);
         }
-        $_G['isHTTPS'] = $this->is_HTTPS();//($_SERVER['HTTPS'] && strtolower($_SERVER['HTTPS']) != 'off') ? true : false;
-        $_G['siteurl'] = dhtmlspecialchars('http'.($_G['isHTTPS'] ? 's' : '').'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
-        if(strpos($_SERVER['HTTP_HOST'],'127.')!==false && strpos($_SERVER['HTTP_HOST'],'localhost')!==false){
-			$_G['localurl']=dhtmlspecialchars('http'.($_G['isHTTPS'] ? 's' : '').'://127.0.0.1'.$sitepath.'/');
-		}else{
-			$_G['localurl']=$_G['siteurl'];
-		}
+        $_G['isHTTPS'] = $this->is_HTTPS();
+		$_G['scheme'] = 'http'.($_G['isHTTPS'] ? 's' : '');
+		$_G['siteurl'] = dhtmlspecialchars($_G['scheme'].'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
         $url = parse_url($_G['siteurl']);
         $_G['siteroot'] = isset($url['path']) ? $url['path'] : '';
-        $_G['siteport'] = (empty($_SERVER['SERVER_PORT']) || $_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] == '443' || $_SERVER['HTTP_X_FORWARDED_PORT'] == '443')? '' : ':'.$_SERVER['SERVER_PORT'];
+        $_G['siteport'] = empty($_SERVER['SERVER_PORT']) || $_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] == '443' ? '' : ':'.$_SERVER['SERVER_PORT'];
         
         if(defined('SUB_DIR')) {
             $_G['siteurl'] = str_replace(SUB_DIR, '/', $_G['siteurl']);
@@ -186,20 +182,6 @@ class dzz_app extends dzz_base{
         $_G['browser']=helper_browser::getbrowser();
         $_G['platform']=helper_browser::getplatform();
         $this->var = & $_G;
-    }
-    private function is_HTTPS(){
-        if($_SERVER['HTTPS'] === 1){  //Apache
-            return TRUE;
-        }elseif($_SERVER['HTTPS'] === 'on'){ //IIS
-            return TRUE;
-        }elseif($_SERVER['SERVER_PORT'] == 443){ //其他
-            return TRUE;
-        }elseif($_SERVER['REQUEST_SCHEME'] == 'https'){ //其他
-            return TRUE;
-		 }elseif(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'){ //其他
-            return TRUE;
-        }
-        return FALSE;
     }
     private function _get_script_url() {
         if(!isset($this->var['PHP_SELF'])){
@@ -214,7 +196,7 @@ class dzz_app extends dzz_base{
                 $this->var['PHP_SELF'] = substr($_SERVER['SCRIPT_NAME'],0,$pos).'/'.$scriptName;
             } else if(isset($_SERVER['DOCUMENT_ROOT']) && strpos($_SERVER['SCRIPT_FILENAME'],$_SERVER['DOCUMENT_ROOT']) === 0) {
                 $this->var['PHP_SELF'] = str_replace('\\','/',str_replace($_SERVER['DOCUMENT_ROOT'],'',$_SERVER['SCRIPT_FILENAME']));
-                $this->var['PHP_SELF'][0] != '/' && ($this->var['PHP_SELF'] = '/'.$this->var['PHP_SELF']);
+                $this->var['PHP_SELF'][0] != '/' && $this->var['PHP_SELF'] = '/'.$this->var['PHP_SELF'];
             } else {
                 system_error('request_tainting');
             }
@@ -225,12 +207,6 @@ class dzz_app extends dzz_base{
     private function _init_input() {
         if (isset($_GET['GLOBALS']) ||isset($_POST['GLOBALS']) ||  isset($_COOKIE['GLOBALS']) || isset($_FILES['GLOBALS'])) {
             system_error('request_tainting');
-        }
-
-        if(MAGIC_QUOTES_GPC) {
-            $_GET = dstripslashes($_GET);
-            $_POST = dstripslashes($_POST);
-            $_COOKIE = dstripslashes($_COOKIE);
         }
 
         $prelength = strlen($this->config['cookie']['cookiepre']);
@@ -287,7 +263,7 @@ class dzz_app extends dzz_base{
         Hook::listen("config_read",$_GET);
         if(empty($_config)) {
             if(!file_exists(DZZ_ROOT.'./data/install.lock')) {
-                header('location: install');
+                header('location: install/');
                 exit;
             } else {
                 system_error('config_notfound');
@@ -362,9 +338,6 @@ class dzz_app extends dzz_base{
         if($this->config['output']['forceheader']) {
             @header('Content-Type: text/html; charset='.CHARSET);
         }
-		if($this->config['localurl']){
-			 setglobal('localurl', $this->config['localurl']);
-		}
 
     }
 
@@ -381,7 +354,7 @@ class dzz_app extends dzz_base{
         if($_SERVER['REQUEST_METHOD'] == 'GET' ) {
             $temp = $_SERVER['REQUEST_URI'];
         } elseif(empty ($_GET['formhash'])) {
-            $temp = $_SERVER['REQUEST_URI'].file_get_contents('php://input');
+            $temp = $_SERVER['REQUEST_URI'].http_build_query($_POST);
         } else {
             $temp = '';
         }
@@ -398,33 +371,54 @@ class dzz_app extends dzz_base{
         return true;
     }
 
-    private function validate_ip($ip) {
-		return filter_var($ip, FILTER_VALIDATE_IP) !== false;
+    private function is_HTTPS() {
+		// PHP 标准服务器变量
+		if(isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') {
+			return true;
+		}
+		// X-Forwarded-Proto 事实标准头部, 用于反代透传 HTTPS 状态
+		if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https') {
+			return true;
+		}
+		// 阿里云全站加速私有 HTTPS 状态头部
+		if(isset($_SERVER['HTTP_X_CLIENT_SCHEME']) && strtolower($_SERVER['HTTP_X_CLIENT_SCHEME']) == 'https') {
+			return true;
+		}
+		// 西部数码建站助手私有 HTTPS 状态头部
+		if(isset($_SERVER['HTTP_FROM_HTTPS']) && strtolower($_SERVER['HTTP_FROM_HTTPS']) != 'off') {
+			return true;
+		}
+		// 服务器端口号兜底判断
+		if(isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) {
+			return true;
+		}
+		return false;
 	}
+
     private function _get_client_ip() {
 		$ip = $_SERVER['REMOTE_ADDR'];
-        if (isset($_SERVER['HTTP_CLIENT_IP']) && $this->validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ",") > 0) {
-                $exp = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR']);
-                $ip = $this->validate_ip(trim($exp[0])) ? $exp[0] : $ip;
-            } else {
-                $ip = $this->validate_ip($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $ip;
-            }
-        }
+			if (isset($_SERVER['HTTP_CLIENT_IP']) && ip::validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
+				$ip = $_SERVER['HTTP_CLIENT_IP'];
+			} elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+				if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ",") > 0) {
+					$exp = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR']);
+					$ip = ip::validate_ip(trim($exp[0])) ? $exp[0] : $ip;
+				} else {
+					$ip = ip::validate_ip($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $ip;
+				}
+			}
 		return $ip;
 	}
 
     private function _init_db() {
-        if($this->init_db) {
-            $driver = function_exists('mysqli_connect') ? 'db_driver_mysqli' : 'db_driver_mysql';
-            if(getglobal('config/db/slave')) {
-                $driver = function_exists('mysqli_connect') ? 'db_driver_mysqli_slave' : 'db_driver_mysql_slave';
-            }
-            DB::init($driver, $this->config['db']);
-        }
-    }
+		if($this->init_db) {
+			$driver = 'db_driver_mysqli';
+			if(getglobal('config/db/slave')) {
+				$driver = 'db_driver_mysqli_slave';
+			}
+			DB::init($driver, $this->config['db']);
+		}
+	}
 
     private function _init_session() {
 
@@ -436,7 +430,7 @@ class dzz_app extends dzz_base{
             $this->var['sid'] = $this->session->sid;
             $this->var['session'] = $this->session->var;
 
-            if(!empty($this->var['sid']) && $this->var['sid'] != $this->var['cookie']['sid']) {
+            if(isset($this->var['sid']) && $this->var['sid'] !== $this->var['cookie']['sid']) {
                 dsetcookie('sid', $this->var['sid'], 86400);
             }
 
@@ -495,8 +489,20 @@ class dzz_app extends dzz_base{
         }
         setglobal('groupid', getglobal('groupid', 'member'));
         !empty($this->cachelist) && loadcache($this->cachelist);
-        if($this->var['member'] && $this->var['group']['radminid'] == 0 && $this->var['member']['adminid'] > 0 && $this->var['member']['groupid'] != $this->var['member']['adminid'] && !empty($this->var['cache']['admingroup_'.$this->var['member']['adminid']])) {
-            $this->var['group'] = array_merge($this->var['group'], $this->var['cache']['admingroup_'.$this->var['member']['adminid']]);
+        if (
+            isset($this->var['member']) &&
+            is_array($this->var['member']) &&
+            isset($this->var['group']) &&
+            is_array($this->var['group']) &&
+            $this->var['group']['radminid'] == 0 &&
+            isset($this->var['member']['adminid']) &&
+            $this->var['member']['adminid'] > 0 &&
+            isset($this->var['member']['groupid']) &&
+            $this->var['member']['groupid'] != $this->var['member']['adminid'] &&
+            isset($this->var['cache']['admingroup_' . $this->var['member']['adminid']]) &&
+            is_array($this->var['cache']['admingroup_' . $this->var['member']['adminid']])
+        ) {
+            $this->var['group'] = array_merge($this->var['group'], $this->var['cache']['admingroup_' . $this->var['member']['adminid']]);
         }
 
 
@@ -643,7 +649,7 @@ class dzz_app extends dzz_base{
 
         $lastact = TIMESTAMP."\t".dhtmlspecialchars(basename($this->var['PHP_SELF']))."\t".dhtmlspecialchars($this->var['mod']);
         dsetcookie('lastact', $lastact, 86400);
-        setglobal('currenturl_encode', base64_encode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
+        setglobal('currenturl_encode', base64_encode($this->var['scheme'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
     }
 
     private function _init_setting() {

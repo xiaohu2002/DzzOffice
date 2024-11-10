@@ -2,10 +2,10 @@
 	<ul class="nav nav-pills">
 		<strong class="pull-left">$user[username]</strong>
 		<li class="nav-item">
-			<a class="nav-link active" href="{MOD_URL}&op=edituser&uid=$user[uid]#user_{$user[uid]}_" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang basic_message}</a>
+			<a class="nav-link active" href="{MOD_URL}&op=edituser&uid=$user['uid']#user_{$user['uid']}_" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang basic_message}</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="{MOD_URL}&op=edituser&do=profile&uid=$user[uid]#user_{$user[uid]}_profile" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang details_information}</a>
+			<a class="nav-link" href="{MOD_URL}&op=edituser&do=profile&uid=$user['uid']#user_{$user['uid']}_profile" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang details_information}</a>
 		</li>
 	</ul>
 </div>
@@ -41,7 +41,7 @@
     <div class="row mb-3">
       <label for="regdate" class="col-sm-2">{lang registration_time}</label>
       <div class="col-sm-10">
-        <p style="margin: 0"><strong><code><!--{eval echo dgmdate($user[regdate])}--></code></strong></p>
+        <p style="margin: 0"><strong><code><!--{eval echo dgmdate($user['regdate'])}--></code></strong></p>
       </div>
     </div>
     <div class="row mb-3">
@@ -54,7 +54,7 @@
     <div class="row mb-3">
       <label for="regdate" class="col-sm-2">{lang add_time}</label>
       <div class="col-sm-10">
-        <p style="margin: 0"><strong><code><!--{eval echo dgmdate($user[regdate])}--></code></strong></p>
+        <p style="margin: 0"><strong><code><!--{eval echo dgmdate($user['regdate'])}--></code></strong></p>
       </div>
     </div>
     <!--{/if}-->
@@ -227,12 +227,12 @@
   </form>
   </div>
 <script type="text/javascript" reload="1">
-	location.hash = '#user_{$user[uid]}';
+	location.hash = '#user_{$user['uid']}';
 
 	var orgsel_html = jQuery('#nav').html();
 	var lastusername = '{$user[username]}',
 		lastpassword = '',
-		lastemail = '{eval echo strtolower($user[email])}',
+		lastemail = '{eval echo strtolower($user['email'])}',
 		lastinvitecode = '',
 		stmp = new Array(),
 		modifypwd = true;

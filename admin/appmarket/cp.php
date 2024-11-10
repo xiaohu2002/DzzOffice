@@ -10,8 +10,8 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 	exit('Access Denied');
 }
 require_once  libfile('function/admin');
-$do = trim($_GET['do']);
-$op=$_GET['op'];
+$do = isset($_GET['do']) ? $_GET['do'] : '';
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 $navtitle=lang('appname');
 if ($do == 'export') {//应用导出
 	$appid = intval($_GET['appid']);
@@ -82,7 +82,7 @@ elseif ($do == 'import') {//导入应用
 				showmessage(lang('list_cp_Application_directory_exist',array('app_path'=>$app['app_path'],'identifier'=>$app['identifier'])));
 			}
 			$extra = $apparray['app']['extra'];
-			$filename = $extra['installfile']; 
+			$filename = isset($extra['installfile']) ? $extra['installfile'] : '';
 			if (!empty($filename) && preg_match('/^[\w\.]+$/', $filename)) {
 				$filename = DZZ_ROOT . './'.$apparray['app']['app_path'].'/' . $apparray['app']['identifier'] . '/' . $filename; 
 				if (file_exists($filename)) {

@@ -59,14 +59,14 @@
 				<td>
 					<a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer"  class="appicon view-detail" title="$value[name]"><img src="$value[coverimg]" style="margin:0;float: left;" /></a>
 					<a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer" target="_blank" class="view-detail" title="$value[name]">$value[name]</a>
-					<div class="appdesc help-block" title="$value['appdesc']">{eval echo $value[desc_short]?$value[desc_short]:lang('none');}</div>
+					<div class="appdesc help-block" title="$value['appdesc']">{eval echo $value['desc_short']?$value['desc_short']:lang('none');}</div>
 					<div id="progess_{$value[mid]}">
 						<span id="upgrade_progess_{$value[mid]}" class="progress-bar progress-bar-striped progress-bar-animated upgrade_progess"></span> 
 					</div>
 				</td>
 				<td>$value[version]</td>
 				<td><div class="appdesc help-block">{$value['classid_name']}</div></td>
-				<td>{eval echo formatsize($value[packagesize]);}</td>
+				<td>{eval echo formatsize($value['packagesize']);}</td>
 				<td>
 					<!--{if $value[price]>0}-->
 					<button class="btn btn-outline-secondary"  onclick="showBuyInfo(this,'$value[mid]')" data-href="$cloudurl?mod=dzzmarket&op=ajax&do=getBuyInfo&mid=$value[mid]" title="{lang buy_contract}">{lang buy}</button>

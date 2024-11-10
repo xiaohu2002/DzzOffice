@@ -10,7 +10,7 @@
     <link href="static/jquery_weui/css/jquery-weui.min.css" rel="stylesheet">
     <link href="static/dzzicon/icon.css" rel="stylesheet">
     <link href="{MOD_PATH}/css/mobile/mobile_member.css" rel="stylesheet">
-    <script type="text/javascript">var DZZSCRIPT = '{DZZSCRIPT}', LANG = '{$_G[language]}', STATICURL = 'static/', IMGDIR = '{$_G[setting][imgdir]}', VERHASH = '{VERHASH}', charset = '{CHARSET}', dzz_uid = '$_G[uid]', cookiepre = '{$_G[config][cookie][cookiepre]}', cookiedomain = '{$_G[config][cookie][cookiedomain]}', cookiepath = '{$_G[config][cookie][cookiepath]}', attackevasive = '{$_G[config][security][attackevasive]}', disallowfloat = '{$_G[setting][disallowfloat]}', REPORTURL = '$_G[currenturl_encode]', SITEURL = '$_G[siteurl]', JSPATH = '$_G[setting][jspath]', MOD_PATH = '{MOD_PATH}', APP_URL = '{MOD_URL}', MOD_URL = '{MOD_URL}';</script>
+    <script type="text/javascript">var DZZSCRIPT = '{DZZSCRIPT}', LANG = '{$_G[language]}', STATICURL = 'static/', IMGDIR = '{$_G[setting][imgdir]}', VERHASH = '{VERHASH}', charset = '{CHARSET}', dzz_uid = '$_G['uid']', cookiepre = '{$_G[config][cookie][cookiepre]}', cookiedomain = '{$_G[config][cookie][cookiedomain]}', cookiepath = '{$_G[config][cookie][cookiepath]}', attackevasive = '{$_G[config][security][attackevasive]}', disallowfloat = '{$_G[setting]['disallowfloat']}', REPORTURL = '$_G[currenturl_encode]', SITEURL = '$_G[siteurl]', JSPATH = '$_G[setting][jspath]', MOD_PATH = '{MOD_PATH}', APP_URL = '{MOD_URL}', MOD_URL = '{MOD_URL}';</script>
     <script type="text/javascript" reload="1">
 
     </script>
@@ -53,7 +53,7 @@
             <ul class="weui-member-select-scroller" id="seluser">
                 <!--{loop $selects $key $value}-->
                 <li id="seluser_sl_$key" class="right-classa-depart avatar avatar-xs" data-val="$key"> {eval echo
-                    avatar_block($value[uid]);}<i class="ti-close dzz dzz-close ti-opacity"></i></li>
+                    avatar_block($value['uid']);}<i class="ti-close dzz dzz-close ti-opacity"></i></li>
                 <!--{/loop}-->
             </ul>
         </div>

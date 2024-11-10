@@ -3,7 +3,6 @@
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
-
 class GifMerge {
 	var $ver			= '1.1';
 	var $dly			= 50;
@@ -37,7 +36,7 @@ class GifMerge {
 	var $global_out			= array();
 	var $logical_screen_descriptor	= array();
 
-	function GifMerge($images, $t1, $t2, $t3, $loop, $dl, $xpos, $ypos, $model) {
+	function __construct($images, $t1, $t2, $t3, $loop, $dl, $xpos, $ypos, $model) {
 		if($model) {
 			$this->mod = $model;
 		}
@@ -286,7 +285,7 @@ class GifMerge {
 
 	function arrcmp($b, $s, $l) {
 		for($i = 0; $i < $l; $i++) {
-			if($s{$i} != $b{$i}) {
+			if($s[$i] != $b[$i]) {
 				return false;
 			}
 		}

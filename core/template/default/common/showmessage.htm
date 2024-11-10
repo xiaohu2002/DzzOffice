@@ -39,14 +39,14 @@
 <!--{else}-->
 <!--{template common/header_ajax}-->
 <!--{/if}-->
-<!--{if $param[msgtype] == 1 || $param[msgtype] == 2 && !$_G[inajax]}-->
+<!--{if $param['msgtype'] == 1 || $param['msgtype'] == 2 && !$_G['inajax']}-->
   <div id="ct" class="text-center" style="display: flex;align-items: center;justify-content: center;min-height: -webkit-fill-available;margin: 0;text-align: center;">
 			<div id="messagetext">
         <img src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->">
 				<h4>$show_message</h4>
 				<!--{if !$_G['setting']['bbclosed']|| !$_G['adminid'] ==0}-->
 				<!--{if $url_forward}-->
-        <!--{if !$param[redirectmsg]}-->
+        <!--{if !$param['redirectmsg']}-->
           <button class="btn btn-primary" onclick="location.href='$url_forward';return false;" >立即跳转（<span class="num">3</span>s）</button>
           <!--{else}-->
           <button class="btn btn-primary" onclick="location.href='$url_forward';return false;">{lang return_to_the_naxt_level}（<span class="num">3</span>s）</button>
@@ -64,7 +64,7 @@
 				<!--{/if}-->
 				<!--{/if}-->
 			</div>
-			<!--{if $param[login]}-->
+			<!--{if $param['login']}-->
 				
 			<!--{/if}-->
 		<script type="text/javascript">
@@ -82,7 +82,7 @@
 				});
 		</script>
   </div>
-  <!--{elseif $param[msgtype] == 2}-->
+  <!--{elseif $param['msgtype'] == 2}-->
   <div class="modal-header">
     <h4 class="modal-title">{lang board_message}</h4>
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -96,7 +96,7 @@
     <!--{elseif $param['locationtime']}-->
     <span class="btn btn-primary text-muted">$param['locationtime'] {lang message_locationtime}</span>
     <!--{/if}-->
-    <!--{if $param[login]}-->
+    <!--{if $param['login']}-->
     <button type="button" class="btn btn-info" onclick="hideWindow('$_GET['handlekey']');showWindow('login', 'user.php?mod=login&action=login');"><strong>{lang login}</strong></button>
     <!--{if !$_G['setting']['bbclosed']}-->
     <button type="button" class="btn btn-info" onclick="hideWindow('$_GET['handlekey']');window.open('user.php?mod=rigister');"><em>$_G['setting']['reglinkname']</em></button>

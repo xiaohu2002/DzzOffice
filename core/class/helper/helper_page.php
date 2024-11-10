@@ -12,6 +12,7 @@ class helper_page {
 		$ajaxtarget = !empty($_GET['ajaxtarget']) ? " ajaxtarget=\"".dhtmlspecialchars($_GET['ajaxtarget'])."\" " : '';
 
 		$a_name = '';
+		$mpurl = str_replace(array("'", '"', "\\"), array('%27', '%22', '%5c'), $mpurl);
 		if(strpos($mpurl, '#') !== FALSE) {
 			$a_strs = explode('#', $mpurl);
 			$mpurl = $a_strs[0];
@@ -27,8 +28,6 @@ class helper_page {
 
 			$shownum = $showkbd = TRUE;
 			$showpagejump = TRUE;
-//			$lang['prev'] = '&lsaquo;&lsaquo;';
-//			$lang['next'] = '&rsaquo;&rsaquo;';
 			$shownum = true;
 			$showkbd = FALSE;
 	
@@ -54,7 +53,11 @@ class helper_page {
 			$offset = floor($page * 0.5);
 
 			$realpages = @ceil($num / $perpage);
+			if ($realpages === null) {
+				$realpages = 1;
+			}
 			$curpage = $curpage > $realpages ? $realpages : $curpage;
+			$curpage = isset($curpage) ? $curpage : 1;
 			$pages = $maxpages && $maxpages < $realpages ? $maxpages : $realpages;
 
 			if($page > $pages) {

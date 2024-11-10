@@ -1,5 +1,5 @@
 <!--{template common/header_common}-->
-<!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css?{VERHASH}"><!--{/if}-->
+<!--{if $_G['setting']['loginset']['lwaveanimation']}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css?{VERHASH}"><!--{/if}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css?{VERHASH}">
 <!--[if lt IE 9]>
   <script src="static/js/jquery.placeholder.js" type="text/javascript"></script>
@@ -25,21 +25,21 @@
     text-align: center;
     pointer-events: none;
 }
-	<!--{if $_G[setting][loginset][kbcolor]}-->
+	<!--{if $_G['setting']['loginset']['kbcolor']}-->
 	.card{
-		background-color:$_G[setting][loginset][kbcolor];
+		background-color:$_G['setting']['loginset']['kbcolor'];
 	}
 	<!--{/if}-->
-	<!--{if $_G[setting][loginset][transparency]}-->
+	<!--{if $_G['setting']['loginset']['transparency']}-->
 	.form-control{
-		background-color:$_G[setting][loginset][transparency];
+		background-color:$_G'[setting']['loginset']['transparency'];
 	}
 	<!--{/if}-->
 </style>
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <div class="center-vh overflow-auto">
-<div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
+<div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G['setting']['loginset']['lwaveanimation']}--> wave wave-animate-slow<!--{/if}-->">
   <div class="text-center mb-3">
 		<img alt="light year admin" src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" style="max-height: 60px;">
 		<h1>{lang getpassword}</h1>

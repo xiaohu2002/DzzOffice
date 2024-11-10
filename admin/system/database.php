@@ -27,7 +27,7 @@ if (!is_dir('./data/' . $backupdir)) {
 	mkdir('./data/' . $backupdir, 0777);
 }
 $operation = $_GET['operation'] ? $_GET['operation'] : 'export';
-$op = $_GET['op'];
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 if ($operation == 'export') {
 
 	$navtitle = lang('database_export') . ' - ' . lang('appname');

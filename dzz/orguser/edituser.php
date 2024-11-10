@@ -15,7 +15,7 @@ require_once libfile('function/organization');
 if (!$_G['cache']['usergroups'])
 	loadcache('usergroups');
 
-$do = trim($_GET['do']);
+	$do = isset($_GET['do']) ? $_GET['do'] : '';
 $uid = intval($_GET['uid']);
 if (!$uid)
 	$do = 'add';

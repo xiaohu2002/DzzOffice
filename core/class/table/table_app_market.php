@@ -22,7 +22,7 @@ class table_app_market extends dzz_table
 
 		parent::__construct();
 	}
-	public function update($appid,$setarr){
+	public function update($appid,$setarr, $unbuffered = false, $low_priority = false){
 		if(($ret=parent::update($appid,$setarr)) && isset($setarr['available'])){
 			//如果是启用或关闭时，更新钩子表的status字段
 			C::t('hooks')->update_by_appid($appid,array('status'=>intval($setarr['available'])));

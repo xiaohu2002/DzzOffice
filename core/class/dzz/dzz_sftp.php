@@ -24,7 +24,7 @@ class dzz_sftp
 	var $systype='';
 	var $root='';
 	var $sftp=NULL;
-	function &instance($config = array()) {
+	public static function &instance($config = array()) {
 		static $object;
 		if(empty($object)) {
 			$object = new dzz_sftp($config);

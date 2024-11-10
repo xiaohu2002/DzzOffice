@@ -9,8 +9,8 @@
 if(!defined('IN_DZZ')) {
     exit('Access Denied');
 }
-require libfile('function/code');
 Hook::listen('check_login');
+require libfile('function/code');
 $filter=trim($_GET['filter']);
 if($filter=='new'){//列出所有新通知
     $list=array();
@@ -40,16 +40,12 @@ if($filter=='new'){//列出所有新通知
         'op' =>'notification',
         'filter'=>'all'
     );
+    $sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
     //获取通知包含类型
     $searchappid = array();
     foreach(DB::fetch_all("select distinct(from_id) from %t where uid = %d",array('notification',$_G['uid'])) as $v){
         $searchappid[] = $v['from_id'];
     }
-    if(!$_G['setting']['bbclosed']){
-		$sitelogo=$_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';
-	}else{
-		$sitelogo = 'static/image/common/logo.png'; 
-	}
     $searchcats = array();
     if(in_array(0,$searchappid)){
         $systemindex = array_search(0,$searchappid);
@@ -64,12 +60,12 @@ if($filter=='new'){//列出所有新通知
     //如果接收到搜索条件按条件搜索
     //通知类型
     if(!is_string($fromid)){
-      $gets['appid'] = $fromid;
-      $appid = $fromid -1;
-      $searchsql .= " and n.from_id = {$appid}";
-      $navtitle=$searchcats[$fromid]['appname'].' - '.lang('panel_notice_title');
-			$img=$searchcats[$fromid]['appico'];
-			$tongzhileixing=$searchcats[$fromid]['appname'];
+        $gets['appid'] = $fromid;
+        $appid = $fromid -1;
+        $searchsql .= " and n.from_id = {$appid}";
+        $navtitle=$searchcats[$fromid]['appname'].' - '.lang('panel_notice_title');
+        $img=$searchcats[$fromid]['appico'];
+        $tongzhileixing=$searchcats[$fromid]['appname'];
     }else{
       $tongzhileixing='全部通知';
       $navtitle='全部通知'.' - '.lang('panel_notice_title');

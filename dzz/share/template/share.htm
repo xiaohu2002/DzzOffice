@@ -104,12 +104,12 @@
 							<!--{if $value[password]}--><span class="ico-private-share" title="{lang private_share}"></span><!--{/if}-->
 							</div>
 							<!-- 其他列 -->
-							<div class="col dateline" data-dateline="$value[dateline]">$value[fdateline]</div>
+							<div class="col dateline" data-dateline="$value['dateline']">$value[fdateline]</div>
 							<div class="col count" data-count="$value[count]">$value[count]{lang degree}</div>
 							<div class="col type" data-type="$value[ftype]">$value[ftype]</div>
 							<!--{if $_G[adminid]==1}-->
 							<div class="col username" data-type="$value[username]">
-								<a href="user.php?uid=$value[uid]">$value[username]</a>
+								<a href="user.php?uid=$value['uid']">$value[username]</a>
 							</div>
 							<!--{/if}-->
 							<!-- 复制 -->
@@ -119,9 +119,7 @@
 								{lang link}：
 								<a href="$value[sharelink]" target="_dzz">$value[sharelink]</a>
 								<!--{if $value[password]}-->&nbsp;{lang extract_password}：$value[password]<!--{/if}-->
-								&nbsp;<button class="btn btn-primary js_copy" data-clipboard-text="{eval echo $value[password]?(分享名称.':'.$value[title].'
-									'.分享链接.':'.$value[sharelink].'
-									'.提取码.':'.$value[password]):$value[sharelink];}" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>复制<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
+								&nbsp;<button class="btn btn-primary js_copy" data-clipboard-text="{eval echo $value['password']?('分享名称:'.$value['title'].' 分享链接:'.$value['sharelink'].' 提取码:'.$value['password']):$value['sharelink'];}" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>复制<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
 								<!--{if $value[password]}-->
 								<button class="btn btn-primary js_copy" data-clipboard-text="$value[password]" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>提取码<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
 								<!--{/if}-->

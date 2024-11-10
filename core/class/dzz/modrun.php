@@ -48,7 +48,6 @@ class Modrun{
 
    //加载文件
    private static function loadFile($files = null){
-    global $_config,$_G;
 
        if(is_array($files)){
 

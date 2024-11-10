@@ -327,6 +327,7 @@ class io_dzz extends io_api
         if (!$fileurls) {
             $fileurls = array('fileurl' => self::getFileUri($path), 'filedir' => self::getStream($path));
         }
+        
         //非图片类文件的时候，直接获取文件后缀对应的图片
         if (!$imginfo = @getimagesize($fileurls['filedir'])) {
             $imgurl = geticonfromext($data['ext'], $data['type']);
@@ -962,7 +963,7 @@ class io_dzz extends io_api
                 $top[$k] = $v;
             }
         }
-        if ($topfid = DB::result_first("select fid from " . DB::table('folder') . " where uid='{$_G[uid]}' and fname = '{$top[fname]}' and flag='{$top[flag]}' ")) {
+        if ($topfid = DB::result_first("select fid from " . DB::table('folder') . " where uid='{$_G['uid']}' and fname = '{$top['fname']}' and flag='{$top['flag']}' ")) {
             C::t('folder')->update($topfid, $top);
         } else {
             $appid = $params['appid'] ? $params['appid'] : 0;
@@ -1178,7 +1179,6 @@ class io_dzz extends io_api
     {
         global $_G, $documentexts, $space, $docexts;
         if (!perm_check::checkperm_Container($fid, 'upload')) {
-
             return array('error' => lang('no_privilege'));
         }
         $gid = DB::result_first("select gid from %t where fid=%d", array('folder', $fid));
@@ -1260,6 +1260,7 @@ class io_dzz extends io_api
                     'title' => $attach['filename'],
                     'desc' => '',
                     'aid' => $attach['aid'],
+
                 );
 
                 if (C::t('resources_attr')->insert_attr($icoarr['rid'], $icoarr['vid'], $sourcedata)) {
@@ -1313,6 +1314,7 @@ class io_dzz extends io_api
                     'title' => $attach['filename'],
                     'desc' => '',
                     'aid' => $attach['aid'],
+
                 );
                 C::t('attachment')->update($attach['aid'], array('copys' => $attach['copys'] + 1));
                 if (C::t('resources_attr')->insert_attr($icoarr['rid'], $icoarr['vid'], $sourcedata)) {

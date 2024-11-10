@@ -282,7 +282,7 @@ class seccode {
 				$font[$i]['data'] = getimagesize($this->imcodefile);
 				$font[$i]['width'] = $font[$i]['data'][0] + mt_rand(0, 6) - 4;
 				$font[$i]['height'] = $font[$i]['data'][1] + mt_rand(0, 6) - 4;
-				$font[$i]['width'] += mt_rand(0, $this->width / 5 - $font[$i]['width']);
+				$font[$i]['width'] += mt_rand(0, max(0, $this->width / 5 - $font[$i]['width']));
 				$widthtotal += $font[$i]['width'];
 			} else {
 				$font[$i]['file'] = '';
@@ -299,7 +299,7 @@ class seccode {
 					$font[$i]['width'] = mt_rand($font[$i]['width'] - $this->width / 20, $font[$i]['width'] + $this->width / 20);
 					$font[$i]['height'] = mt_rand($font[$i]['height'] - $this->width / 20, $font[$i]['height'] + $this->width / 20);
 				}
-				$y = mt_rand(0, $this->height - $font[$i]['height']);
+				$y = mt_rand(0, max(0, $this->height - $font[$i]['height']));
 				if($this->shadow) {
 					$this->imcodeshadow = $this->imcode;
 					imagecolorset($this->imcodeshadow, 0, 0, 0, 0);

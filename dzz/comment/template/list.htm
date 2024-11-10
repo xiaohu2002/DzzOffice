@@ -61,7 +61,7 @@
               <th class="lie">内容</th>
               <th class="lie">IP地址</th>
               <th class="lie">设备信息</th>
-              <th node-type="title-col" data-key="dateline" class="lie col">发布时间<span class="asc $_GET[dateline]" style="visibility: <!--{if $_GET[dateline]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </th>
+              <th node-type="title-col" data-key="dateline" class="lie col">发布时间<span class="asc $_GET['dateline']" style="visibility: <!--{if $_GET['dateline']}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </th>
               <!--{if $_G['adminid']}--><th node-type="title-col" data-key="author" class="lie col">发布人<span class="asc $_GET[author]" style="visibility: <!--{if $_GET[author]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th><!--{/if}-->
 			  <th class="lie">操作</th>
             </tr>
@@ -80,7 +80,7 @@
               <td node-type="name" class="name" title="$value[name]" data-size="$value[name]"><div class="overflow-auto">$value[message]</div></td>
               <td><div>$value[ip]</div></td>
               <td><div>$value[xtllq]</div></td>
-              <td><div>{eval echo dgmdate($value[dateline])}</div></td>
+              <td><div>{eval echo dgmdate($value['dateline'])}</div></td>
               <!--{if $_G['adminid']}--><td><div>$value[author]</div></td><!--{/if}-->
               <td>
                 <div>

@@ -42,7 +42,7 @@
               <!--{if $value[bz]=='dzz'}-->
               <input type="hidden" name="available[{$value[bz]}]" value="2"  />
               <!--{else}--> 
-              <input type="checkbox" class="form-check-input" name="available[{$value[bz]}]" value="{eval echo ($value[available]?$value[available]:1)}" <!--{if $value[available]>0}-->checked<!--{/if}--> <!--{if $value[warning]}-->disabled<!--{/if}--> > <span class="text-danger" style="padding-left:3px">$value[warning]</span> 
+              <input type="checkbox" class="form-check-input" name="available[{$value[bz]}]" value="{eval echo ($value['available']?$value['available']:1)}" <!--{if $value[available]>0}-->checked<!--{/if}--> <!--{if $value[warning]}-->disabled<!--{/if}--> > <span class="text-danger" style="padding-left:3px">$value[warning]</span> 
               <!--{/if}-->
             </td>
             <td width="140"><a class="btn btn-outline-primary" href="{MOD_URL}&op=edit&bz=$value[bz]">{lang set}</a> 

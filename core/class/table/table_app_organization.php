@@ -19,7 +19,7 @@ class table_app_organization extends dzz_table
 		$this->_pk    = '';
 		parent::__construct();
 	}
-	public function insert($appid, $orgid) {
+	public function insert($appid, $orgid = false, $replace = false, $silent = false) {
 		return DB::insert($this->_table, array("orgid"=>$orgid,'appid'=>$appid,'dateline'=>TIMESTAMP),1,1);
 	}
 	public function replace_orgids_by_appid($appid,$orgids){

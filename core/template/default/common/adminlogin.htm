@@ -1,5 +1,42 @@
-<!--{template common/header_common}-->
-<!--{if $_G[setting][loginset][lwaveanimation]}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css?{VERHASH}"><!--{/if}-->
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title><!--{if !empty($navtitle)}-->$navtitle - <!--{/if}-->$_G[setting][sitename]</title>
+    <meta name="keywords" content="{if !empty($_G['setting']['metakeywords'])}{echo htmlspecialchars($_G['setting']['metakeywords'])}{/if}" />
+    <meta name="description" content="{if !empty($_G['setting']['metadescription'])}{echo htmlspecialchars($_G['setting']['metadescription'])} {/if}" />
+    <meta name="generator" content="$_G['setting']['sitename']" />
+    <meta name="author" content="$_G['setting']['sitename']" />
+    <meta name="copyright" content="<!--{eval echo replacesitevar($_G['setting']['sitecopyright'])}-->" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="renderer" content="webkit">
+    <base href="{$_G['siteurl']}" />
+    <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.min.css?{VERHASH}" rel="preload">
+    <link rel="stylesheet" type="text/css" href="static/css/style.min.css?{VERHASH}" rel="preload">
+		<link rel="stylesheet" type="text/css" href="static/dzzicon/icon.css?{VERHASH}" rel="preload">
+    <script type="text/javascript" src="static/jquery/jquery.min.js?{VERHASH}"></script>
+    <script type="text/javascript" src="static/js/common.js?{VERHASH}"></script>
+    {eval
+      $hex_color=$_config['ztys']?$_config['ztys']:'#0d6efd';
+      sscanf($hex_color, "#%2x%2x%2x", $red, $green, $blue);
+      $hex_colorr=$red.', '.$green.', '.$blue;
+      }
+      <style type="text/css">
+        :root {
+          --bs-primary:$hex_color;
+          --bs-primary-hover:$hex_colorr;
+          --bs-primary-rgb:$hex_colorr;
+        }
+      </style>
+  </head>
+  <body id="nv_dzz" class="$bodyClass">
+    <div id="append_parent" style="z-index:99999;"></div>
+		<div id="ajaxwaitid" style="z-index:99999;"></div>
+<!--{if $_G['setting']['loginset']['lwaveanimation']}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css?{VERHASH}"><!--{/if}-->
 <link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css?{VERHASH}">
 <style>
 	.signin-form .has-feedback {
@@ -39,14 +76,14 @@
     line-height: 96px;
     font-size: 46px;
   }
-	<!--{if $_G[setting][loginset][kbcolor]}-->
+	<!--{if $_G['setting']['loginset']['kbcolor']}-->
 	.card{
-		background-color:$_G[setting][loginset][kbcolor];
+		background-color:$_G['setting']['loginset']['kbcolor'];
 	}
 	<!--{/if}-->
-  <!--{if $_G[setting][loginset][transparency]}-->
+  <!--{if $_G['setting']['loginset']['transparency']}-->
 	.form-control{
-		background-color:$_G[setting][loginset][transparency];
+		background-color:$_G['setting']['loginset']['transparency'];
 	}
 	<!--{/if}-->
 </style>
@@ -56,14 +93,14 @@
 <script type="text/javascript" src="static/js/md5.js"></script>
 <!--{template common/beijing}-->
 <!--{eval $loginhash = 'L'.random(4);}-->
-<!--{if $_G['setting'][loginset][template] == 2}-->
+<!--{if $_G['setting']['loginset']['template'] == 2}-->
 <div class="row vh-100 overflow-auto" style="position: absolute;width: 100%;">
   <div class="col-md-6 col-lg-7 col-xl-8 d-none d-md-block">
     <div class="d-flex vh-100">
       <div class="p-5 align-self-end">
-         <!--{if $_G[setting][loginset][subtitle]}--><h1>$_G[setting][loginset][subtitle]</h1><!--{/if}-->
+         <!--{if $_G['setting']['loginset']['subtitle']}--><h1>$_G'[setting']['loginset']['subtitle']</h1><!--{/if}-->
         <br><br><br>
-        <!--{if $_G[setting][metadescription]}--><p class="text-white">$_G[setting][metadescription]</p><!--{/if}-->
+        <!--{if $_G['setting']['metadescription']}--><p class="text-white">$_G['setting']['metadescription']</p><!--{/if}-->
       </div>
     </div>
   </div>
@@ -86,7 +123,7 @@
         </div>
 				<div class="mb-3 text-center">
           <span>访问首页？</span>
-          <a href="$_G[siteurl]">{lang Home page}</a>
+          <a href="$_G['siteurl']">{lang Home page}</a>
         </div>
 				
       </form>
@@ -94,14 +131,14 @@
     </div>
   </div>
 </div>
-<!--{elseif $_G['setting'][loginset][template] == 3}-->
+<!--{elseif $_G['setting']['loginset']['template'] == 3}-->
 <div class="center-vh overflow-auto">
-	<div class="card<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->">
+	<div class="card<!--{if $_G['setting']['loginset']['lwaveanimation']}--> wave wave-animate-slow<!--{/if}-->">
     <div class="flex-box login-box">
 
         <div class="login-left p-5">
           <h2 class="text-center">$maintitle</h2>
-          <!--{if $_G[uid]}-->
+          <!--{if $_G['uid']}-->
           <div class="text-center mb-3">
             $avastar
           </div>
@@ -115,7 +152,7 @@
             </div>
             <div class="mb-3 d-grid">
               <button class="btn btn-round btn-primary" name="loginsubmit" value="true" type="submit">{lang login}</button>
-              <a href="$_G[siteurl]" class="btn btn-round btn-danger">首页</a>
+              <a href="$_G['siteurl']" class="btn btn-round btn-danger">首页</a>
             </div>
           </form>
           <p class="text-center mt-3"><!--{template common/copyright}--></p>
@@ -130,7 +167,7 @@
 </div>
 <!--{else}-->
 <div class="center-vh overflow-auto">
-  <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G[setting][loginset][lwaveanimation]}--> wave wave-animate-slow<!--{/if}-->" id="register_form">
+  <div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G['setting']['loginset']['lwaveanimation']}--> wave wave-animate-slow<!--{/if}-->" id="register_form">
     <div class="text-center mb-3">
       $avastar
       <h1>$maintitle</h1>
@@ -140,11 +177,11 @@
        $loginuser
       <div class="mb-3 has-feedback" id="admin_password_Container">
 				<span class="mdi mdi-lock" aria-hidden="true"></span>
-        <input type="password" class="form-control" name="admin_password"  id="admin_password" autofocus value="" autocomplete="off" placeholder="$lang1[password]" required/>
+        <input type="password" class="form-control" name="admin_password"  id="admin_password" autofocus value="" autocomplete="off" placeholder="$lang1['password']" required/>
       </div>
       <div class="mb-3 d-grid">
         <button class="btn btn-round btn-primary" name="loginsubmit" value="true" type="submit">{lang login}</button>
-        <a href="$_G[siteurl]" class="btn btn-round btn-danger">首页</a>
+        <a href="$_G['siteurl']" class="btn btn-round btn-danger">首页</a>
       </div>
     </form>    
     <p class="text-center mb-0 text-dark"><!--{template common/copyright}--></p>

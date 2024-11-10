@@ -114,20 +114,20 @@ class helper_browser
             return false;//return 'WindowsWechat';pc微信客户端打开pc版
         }
         elseif (preg_match("/macintosh/i", $agent) && preg_match("/MicroMessenger/i", $agent)) {
-            return false;//苹果电脑系统pc端
-       }
-       elseif (preg_match("/MicroMessenger/i", $agent)) {
-           return 'wechat';
-       }
-       elseif (preg_match("/iphone/i", $agent) && preg_match("/mac os/i", $agent)) {
-           return 'iPhone';
-       } elseif (preg_match("/ipod/i", $agent) && preg_match("/mac os/i", $agent)) {
-           return 'iPod';
-       } elseif (preg_match("/ipad/i", $agent) && preg_match("/mac os/i", $agent)) {
-           return 'iPad';
-       } elseif (preg_match("/linux/i", $agent) && preg_match("/Android/i", $agent)) {
-           return 'Android';
-       }
+             return false;//苹果电脑系统pc端
+        }
+        elseif (preg_match("/MicroMessenger/i", $agent)) {
+            return 'wechat';
+        }
+        elseif (preg_match("/iphone/i", $agent) && preg_match("/mac os/i", $agent)) {
+            return 'iPhone';
+        } elseif (preg_match("/ipod/i", $agent) && preg_match("/mac os/i", $agent)) {
+            return 'iPod';
+        } elseif (preg_match("/ipad/i", $agent) && preg_match("/mac os/i", $agent)) {
+            return 'iPad';
+        } elseif (preg_match("/linux/i", $agent) && preg_match("/Android/i", $agent)) {
+            return 'Android';
+        }
         return false;
     }
 
@@ -137,18 +137,18 @@ class helper_browser
     static function getplatform()
     {
         $agent = strtolower($_SERVER['HTTP_USER_AGENT']);
-        $os = array();;
+        $os = array();
 
         if (preg_match("/win/i", $agent) && preg_match('/nt 5.1/', $agent)) {
             $os = array('Windows' => 'XP');
-        } elseif (preg_match('win', $agent) && preg_match('/nt 5.0/', $agent)) {
+        } elseif (preg_match('/win/i', $agent) && preg_match('/nt 5.0/', $agent)) {
             $os = array('Windows' => '2000');
-        } elseif (preg_match('win', $agent) && preg_match("/nt 5.2/i", $agent)) {
+        } elseif (preg_match('/win/i', $agent) && preg_match("/nt 5.2/i", $agent)) {
             $os = array('Windows' => '2003');
         } elseif (preg_match("/win/i", $agent) && preg_match("/nt 6.0/i", $agent)) {
             $os = array('Windows' => '2008');
         } elseif (preg_match("/win/i", $agent) && preg_match("/6.0/i", $agent)) {
-            $os = array('Windows' => 'vasta');
+            $os = array('Windows' => 'vista');
         } elseif (preg_match("/win/i", $agent) && preg_match("/6.1/i", $agent)) {
             $os = array('Windows' => '7');
         } elseif (preg_match("/win/i", $agent) && preg_match("/6.2/i", $agent)) {
@@ -157,7 +157,7 @@ class helper_browser
             $os = array('Windows' => '8.1');
         } elseif (preg_match("/win/i", $agent) && preg_match("/nt 10/i", $agent)) {
             $os = array('Windows' => '10');
-        }elseif (preg_match("/win/i", $agent) && preg_match("/nt/i", $agent)) {
+        } elseif (preg_match("/win/i", $agent) && preg_match("/nt/i", $agent)) {
             $os = array('Windows' => 'nt');
         } elseif (preg_match("/ipad/i", $agent) && preg_match('/mac os/i', $agent)) {
             $os = array('iPad' => true);

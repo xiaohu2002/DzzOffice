@@ -24,7 +24,7 @@ class dzz_admincp
 	var $sessionlife = 1800;
 	var $sessionlimit = 0;
 
-	function &instance() {
+	public static function &instance() {
 		static $object;
 		if(empty($object)) {
 			$object = new dzz_admincp();
@@ -48,9 +48,7 @@ class dzz_admincp
 		$this->sessionlimit = TIMESTAMP - $this->sessionlife;
 
 		$this->check_cpaccess(); 
-		if(  $_GET['mod']!="systemlog"){ 
-			$this->writecplog();
-		}
+		$this->writecplog();
 		
 	}
 
@@ -198,9 +196,9 @@ class dzz_admincp
 			return false;
 		} elseif(empty($founders)) {
 			return true;
-		} elseif(strexists(",$founders,", ",$user[uid],")) {
+		} elseif(strexists(",$founders,", ",{$user['uid']},")) {
 			return true;
-		} elseif(!is_numeric($user['nickname']) && strexists(",$founders,", ",$user[nickname],")) {
+		} elseif(!is_numeric($user['username']) && strexists(",$founders,", ",{$user['username']},")) {
 			return true;
 		} else {
 			return FALSE;
@@ -216,7 +214,7 @@ class dzz_admincp
 	}
 
 	function admincpfile($action) {
-		return './admin/login/login.php';
+		return DZZ_ROOT.'./admin/login/login.php';
 	}
 }
 ?>

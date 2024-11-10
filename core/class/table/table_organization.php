@@ -58,7 +58,7 @@ class table_organization extends dzz_table
 		return array();
 	}
 	//插入数据
-	public function insert($arr){
+	public function insert($arr, $return_insert_id = false, $replace = false, $silent = false){
 		if($orgid=parent::insert($arr,1)){
 			if(intval($arr['aid'])){//如果有头像图片，增加copys
 				C::t('attachment')->add_by_aid(intval($arr['aid']));
@@ -160,6 +160,7 @@ class table_organization extends dzz_table
         if (self::fetch_all_by_forgid($org['orgid'], true) || ($org['fid'] && DB::result_first("select count(*) from %t where pfid = %d and isdelete < 1", array('resources', $org['fid'])))) {
             return array('error' => lang('remove_error_check_the_content'));
         }
+		
         //删除对应目录
         if ($org['fid']) {
             C::t('folder')->delete_by_fid($org['fid'],true);
@@ -171,7 +172,7 @@ class table_organization extends dzz_table
         //删除对应管理员
         C::t('organization_admin')->delete_by_orgid($orgid);
         if (parent::delete($orgid)) {
-            self::sequenceByForgid($org['forgid']);
+			self::sequenceByForgid($org['forgid']);
             if (intval($org['aid']) != 0) {
                 C::t('attachment')->addcopy_by_aid($org['aid'], -1);
             }
@@ -467,12 +468,13 @@ class table_organization extends dzz_table
             $eventdata = array('groupname' => $setarr['orgname'], 'uid' => getglobal('uid'), 'username' => getglobal('username'));
             C::t('resources_event')->addevent_by_pfid($fid, 'create_group', 'create', $eventdata, $setarr['orgid']);
             self::setPathkeyByOrgid($setarr['orgid']);
-            if($setarr['type']=='0'){
+			if($setarr['type']=='0'){
 				//更新disp
 				foreach(DB::fetch_all("select orgid,disp from %t where forgid=%d and type='0' and disp>=%d and orgid!=%d",array($this->_table,$setarr['forgid'],intval($setarr['disp']),$setarr['orgid'] )) as $value){
 					parent::update($value['orgid'],array('disp'=>$value['disp']+1));
 				}
 			}
+			
             return $setarr['orgid'];
         }
         return false;
@@ -1086,8 +1088,8 @@ class table_organization extends dzz_table
 		}
 		return array_unique($orgids);
 	}
-
-    //删除文件夹时，更新群组信息；$force=true时，删除群组；
+	
+	//删除文件夹时，更新群组信息；$force=true时，删除群组；
 	public function delete_by_fid($fid,$force=true){
 		if(empty($fid)) return false;
 		foreach(DB::fetch_all("select orgid from %t where fid=%d",array($this->_table,$fid)) as $value){
@@ -1098,4 +1100,5 @@ class table_organization extends dzz_table
 		}
 		return true;
 	}
+
 }

@@ -97,10 +97,10 @@
           <label class="col-sm-2" for="$key"><!--{if $org[forgid]>0}-->{lang space_use_department}<!--{else}-->{lang space_use_org}<!--{/if}--></label>
           <div class="col-sm-10">
             <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: {eval echo round(100*($org[usesize]/($org[maxspacesize]?$org[maxspacesize]*1024*1024:($org[usesize]+1024*1024*1024))))}%;" aria-valuenow="{eval echo round(100*($org[usesize]/($org[maxspacesize]?$org[maxspacesize]*1024*1024:($org[usesize]+1024*1024*1024))))}" aria-valuemin="0" aria-valuemax="100">{eval echo formatsize($org[usesize])}/{eval if($org[maxallotspacesize] == -1) echo formatsize($org[usesize]);else echo ($org[maxallotspacesize] == 0)?lang('no_limit'):formatsize($org[maxallotspacesize])}
+              <div class="progress-bar" role="progressbar" style="width: {eval echo round(100*($org['usesize']/($org['maxspacesize']?$org['maxspacesize']*1024*1024:($org['usesize']+1024*1024*1024))))}%;" aria-valuenow="{eval echo round(100*($org['usesize']/($org['maxspacesize']?$org['maxspacesize']*1024*1024:($org['usesize']+1024*1024*1024))))}" aria-valuemin="0" aria-valuemax="100">{eval echo formatsize($org['usesize'])}/{eval if($org['maxallotspacesize'] == -1) echo formatsize($org['usesize']);else echo ($org['maxallotspacesize'] == 0)?lang('no_limit'):formatsize($org['maxallotspacesize'])}
               </div>
             </div>
-            <div class="progress-cover"> {eval echo formatsize($org[usesize])}/{eval  if($org[maxallotspacesize] == -1) echo formatsize($org[usesize]);else echo ($org[maxallotspacesize] == 0)?lang('no_limit'):formatsize($org[maxallotspacesize])}</div>
+            <div class="progress-cover"> {eval echo formatsize($org['usesize'])}/{eval  if($org['maxallotspacesize'] == -1) echo formatsize($org['usesize']);else echo ($org['maxallotspacesize'] == 0)?lang('no_limit'):formatsize($org['maxallotspacesize'])}</div>
             <ul class="help-block">
               {lang space_use_org_tips}
             </ul>
@@ -151,14 +151,14 @@
             </li>
             <!--{/if}-->
             <!--{loop $moderators $value}-->
-            <li class="user-item pull-left" uid="$value[uid]">
+            <li class="user-item pull-left" uid="$value['uid']">
               <!--{if $pmoderator}-->
               <div class="delete" onclick="moderator_del('$value[id]','$orgid',this);"><i style="color:#d2322d;font-size:16px" class="glyphicon glyphicon-remove-sign">&nbsp;</i></div>
               <!--{/if}-->
               <div class="avatar-cover"></div>
               <div class="user-item-avatar">
                 <div class="avatar-face">
-                  {eval echo avatar_block($value[uid]);}
+                  {eval echo avatar_block($value['uid']);}
                 </div>
               </div>
               <p class="text-center" style="height:20px;margin:5px 0;line-height:25px;overflow:hidden;"> $value[username]</p>

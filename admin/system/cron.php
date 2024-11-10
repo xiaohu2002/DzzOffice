@@ -12,7 +12,7 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 include_once libfile('function/cache');
 
 //error_reporting(E_ALL);
-$op = $_GET['op'];
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 $navtitle = lang('cron') . ' - ' . lang('appname');
 if (empty($_GET['edit']) && empty($_GET['run'])) {
 
@@ -31,7 +31,7 @@ if (empty($_GET['edit']) && empty($_GET['run'])) {
 			} else {
 				$cron['time'] = lang('per_hour');
 			}
-			$cron['time'] .= $cron['hour'] >= 0 && $cron['hour'] < 24 ? sprintf('%02d', $cron[hour]) . lang('timeliness') : '';
+			$cron['time'] .= $cron['hour'] >= 0 && $cron['hour'] < 24 ? sprintf('%02d', $cron['hour']) . lang('timeliness') : '';
 			if (!in_array($cron['minute'], array(-1, ''))) {
 				foreach ($cron['minute'] = explode("\t", $cron['minute']) as $k => $v) {
 					$cron['minute'][$k] = sprintf('%02d', $v);

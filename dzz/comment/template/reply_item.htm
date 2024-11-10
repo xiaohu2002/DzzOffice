@@ -2,14 +2,14 @@
 	<a name="comment_anchor_$value1[cid]"></a>
 	<div class="item_cfed">
 		<div class="left_icfed">
-			<a href="user.php?uid=$value1[authorid]" title="" hidefocus="true"> {eval echo avatar_block($value1[authorid]);} </a>
+			<a href="user.php?uid=$value1[authorid]" title="" hidefocus="true"> {eval echo avatar_block($value1['authorid']);} </a>
 		</div>
 		<p class="text-muted">
 		<a href="user.php?uid=$value1[authorid]" title="" class="avatar_mcfed" hidefocus="true">$value1[author]</a>
 			<!--{if $value1['rpost']}-->
 			<span class="amal_fed">对</span>
 			<a href="user.php?uid=$value1[rpost][authorid]" title="" class="avatar_mcfed" hidefocus="true" target="_blank">$value1[rpost][author]</a>
-			<!--{/if}-->{lang reply} $value[dateline]
+			<!--{/if}-->{lang reply} $value['dateline']
 		</p>
 			<div class="card master_cfed">
 				<span class="card-body">$value1[message]</span>
@@ -88,7 +88,7 @@
 							<a hidefocus="true" href="javascript:void(0);" onclick="feed_edit('$value1[cid]','$_GET[allowattach]','$_GET[allowat]','$_GET[allowsmiley]')">{lang edit}</a>
 						</li>
 						<!--{/if}-->
-						<!--{if $_G['uid']==$value1[authorid] || $_G[adminid]==1}-->
+						<!--{if $_G['uid']==$value1['authorid'] || $_G[adminid]==1}-->
 						<!--{if $_G['uid']>0}-->
 						<li class="more_bacfed">
 							<a hidefocus="true" href="javascript:void(0);" onclick="feed_delete('$value1[cid]','comment_$value1[cid]','$value1[pcid]')">{lang delete}</a>

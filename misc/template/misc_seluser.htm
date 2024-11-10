@@ -143,15 +143,15 @@ overflow-y:hidden;
          </h5>
     	 <ul id="seluser_selected" class="user-list seluser-selected">
         	<!--{loop $userlist $value}-->
-            	<li username="$value[username]" uid="$value[uid]">
+            	<li username="$value[username]" uid="$value['uid']">
                  <!--{if $value[ismoderator]}-->
                  <a href="javascript:;"   class="setmoderator glyphicon glyphicon-user"  title="{lang cancel_administrator}"><i class="glyphicon-ismoderator glyphicon  glyphicon-user "></i></a>
                  <!--{else}-->
                  <a href="javascript:;"   class="setmoderator glyphicon"  title="{lang set_administrator}"><i class="glyphicon glyphicon-ismoderator"></i></a>
                   <!--{/if}-->
-                  <img src="avatar.php?uid=$value[uid]">
+                  <img src="avatar.php?uid=$value['uid']">
                   <span>$value[username]</span>
-                 <a class="pull-right remove" href="javascript:;" onclick="deleteMember(this,'$value[uid]');" title="{lang delete}"><i class="glyphicon glyphicon-remove"></i></a>
+                 <a class="pull-right remove" href="javascript:;" onclick="deleteMember(this,'$value['uid']');" title="{lang delete}"><i class="glyphicon glyphicon-remove"></i></a>
                 </li>
             <!--{/loop}-->
         </ul>

@@ -85,6 +85,9 @@ class dzz_database {
 
 	public static function fetch_first($sql, $arg = array(), $silent = false) {
 		$res = self::query($sql, $arg, $silent, false);
+		if($res === 0){
+			return array();
+		}
 		$ret = self::$db->fetch_array($res);
 		self::$db->free_result($res);
 		return $ret ? $ret : array();
@@ -170,7 +173,7 @@ class dzz_database {
 	public static function quote($str, $noarray = false) {
 
 		if (is_string($str))
-			return '\'' . addcslashes($str, "\n\r\\'\"\032") . '\'';
+		return '\'' . self::$db->escape_string($str) . '\'';
 
 		if (is_int($str) or is_float($str))
 			return '\'' . $str . '\'';
@@ -248,6 +251,7 @@ class dzz_database {
 			case '|':
 			case '&':
 			case '^':
+			case '&~':
 				return $field . '=' . $field . $glue . self::quote($val);
 				break;
 			case '>':
@@ -363,7 +367,7 @@ class dzz_database_safecheck {
 	private static function _do_query_safe($sql) {
 		$sql = str_replace(array('\\\\', '\\\'', '\\"', '\'\''), '', $sql);
 		$mark = $clean = '';
-		if (strpos($sql, '/') === false && strpos($sql, '#') === false && strpos($sql, '-- ') === false && strpos($sql, '@') === false && strpos($sql, '`') === false) {
+		if (strpos($sql, '/') === false && strpos($sql, '#') === false && strpos($sql, '-- ') === false && strpos($sql, '@') === false && strpos($sql, '`') === false && strpos($sql, '"') === false) {
 			$clean = preg_replace("/'(.+?)'/s", '', $sql);
 		} else {
 			$len = strlen($sql);

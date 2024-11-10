@@ -11,7 +11,7 @@ if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 include libfile('function/code');
-$do = trim($_GET['do']);
+$do = isset($_GET['do']) ? $_GET['do'] : '';
 $guests = array('getcomment', 'getThread', 'getNewThreads', 'getReply', 'getReplys', 'getUserToJson');
 if ($_G['news']['youkepinglun']) {
 if (empty($_G['uid']) && !in_array($do, $guests)) {

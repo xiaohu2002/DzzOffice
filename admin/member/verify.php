@@ -16,7 +16,7 @@ loadcache('profilesetting');
 $vid = intval($_GET['vid']);
 $anchor = in_array($_GET['anchor'], array('authstr', 'refusal', 'pass', 'add')) ? $_GET['anchor'] : 'authstr';
 $current = array($anchor => 1);
-$op=$_GET['op'];
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 //判断管理权限
 if ($vid) {
 	if ($vid == 1) {

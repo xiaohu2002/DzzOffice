@@ -9,8 +9,8 @@
 if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 	exit('Access Denied');
 }
-$op = $_GET['op'];
-$do=$_GET['do'];
+$op = isset($_GET['op']) ? $_GET['op'] : '';
+$do = isset($_GET['do']) ? $_GET['do'] : '';
 if($do == 'phpinfo'){
 	exit(phpinfo());
 }

@@ -11,7 +11,7 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 }
 $navtitle=lang('open_way').' - '.lang('appname');
 $op='extopen';
-$do=$_GET['do'];
+$do = isset($_GET['do']) ? $_GET['do'] : '';
 
 if ( $do =="setdefault" ) {
 	$extid = intval( $_GET["extid"] );

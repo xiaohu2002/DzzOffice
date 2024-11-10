@@ -262,21 +262,17 @@ function setglobal($key, $value, $group = null)
     return true;
 }
 
-function getglobal($key, $group = null)
-{
-    global $_G;
-    if (isset($_config[$key])) {
-        return $_config[$key];
-    }
-    $key = explode('/', $group === null ? $key : $group . '/' . $key);
-    $v = &$_G;
-    foreach ($key as $k) {
-        if (!isset($v[$k])) {
-            return null;
-        }
-        $v = &$v[$k];
-    }
-    return $v;
+function getglobal($key, $group = null) {
+	global $_G;
+	$key = explode('/', $group === null ? $key : $group.'/'.$key);
+	$v = &$_G;
+	foreach ($key as $k) {
+		if (!isset($v[$k])) {
+			return null;
+		}
+		$v = &$v[$k];
+	}
+	return $v;
 }
 
 function getgpc($k, $type = 'GP')
@@ -353,7 +349,7 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0, $ckey_
     $cryptkey = $keya . md5($keya . $keyc);
     $key_length = strlen($cryptkey);
 
-    $string = $operation == 'DECODE' ? base64_decode(substr(str_replace(array('_', '-'), array('/', '+'), $string), $ckey_length)) : sprintf('%010d', $expiry ? $expiry + time() : 0) . substr(md5($string . $keyb), 0, 16) . $string;
+    $string = $operation == 'DECODE' ? base64_decode(substr($string, $ckey_length)) : sprintf('%010d', $expiry ? $expiry + time() : 0).substr(md5($string.$keyb), 0, 16).$string;
     $string_length = strlen($string);
 
     $result = '';
@@ -381,13 +377,13 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0, $ckey_
     }
 
     if ($operation == 'DECODE') {
-        if ((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) === substr(md5(substr($result, 26) . $keyb), 0, 16)) {
-            return substr($result, 26);
-        } else {
-            return '';
-        }
+        if(((int)substr($result, 0, 10) == 0 || (int)substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) === substr(md5(substr($result, 26).$keyb), 0, 16)) {
+			return substr($result, 26);
+		} else {
+			return '';
+		}
     } else {
-        return $keyc . str_replace(array('/', '+'), array('_', '-'), str_replace('=', '', base64_encode($result)));
+        return $keyc.str_replace('=', '', base64_encode($result));
     }
 }
 function urlsafe_b64encode($string) {
@@ -648,7 +644,7 @@ function random($length, $numeric = 0)
     }
     $max = strlen($seed) - 1;
     for ($i = 0; $i < $length; $i++) {
-        $hash .= $seed{mt_rand(0, $max)};
+        $hash .= $seed[mt_rand(0, $max)];
     }
     return $hash;
 }
@@ -700,17 +696,20 @@ function avatar_block($uid=0,$headercolors=array(),$class="img-avatar"){
 	if($user['avatarstatus']){//用户已经上传头像
 		return '<img src="avatar.php?uid='.$user['uid'].'" class="img-avatar" title="'.$user['username'].'">';
 	}else{//没有上传头像，使用背景+首字母
-		if($uid){
-			if($headercolors[$uid]) $headerColor=$headercolors[$uid];
-			else $headerColor = C::t('user_setting')->fetch_by_skey('headerColor',$user['uid']);
-			if(empty($headerColor)){//没有设置时，创建头像背景色，并且入库
-				$colorkey = rand(1,15);
-    			$headerColor = $colors[$colorkey];
-				C::t('user_setting')->insert_by_skey('headerColor',$headerColor,$user['uid']);
-			}
-		}else{//游客默认使用第一个值；
-			$headerColor = $colors[0];
-		}
+        if ($uid) {
+            if (isset($headercolors[$uid])) {
+                $headerColor = $headercolors[$uid];
+            } else {
+                $headerColor = C::t('user_setting')->fetch_by_skey('headerColor', $user['uid']);
+                if (empty($headerColor)) { // 没有设置时，创建头像背景色，并且入库
+                    $colorkey = rand(0, 14); // 确保随机数在有效范围内
+                    $headerColor = $colors[$colorkey];
+                    C::t('user_setting')->insert_by_skey('headerColor', $headerColor, $user['uid']);
+                }
+            }
+        } else { // 游客默认使用第一个值
+            $headerColor = $colors[0];
+        }
 		return '<span class="'.$class.'" style="background:'.$headerColor.'" title="'.$user['username'].'">'. new_strsubstr(ucfirst($user['username']),1,'').'</span>';
 	}
 }
@@ -883,12 +882,14 @@ function lang($langvar = null, $vars = array(), $default = null, $curpath = '')
         preg_match_all('/\{_G\/(.+?)\}/', $return, $gvar);
         foreach ($gvar[0] as $k => $v) {
 
-            $searchs[] = $v;
+            $searchs[] = (string)$v;
             $replaces[] = getglobal($gvar[1][$k]);
         }
     }
 
-    $return = str_replace($searchs, $replaces, $return);
+    if($searchs || $replaces) {
+		$return = str_replace($searchs, $replaces, $return);
+	}
     return $return;
 }
 
@@ -1232,7 +1233,7 @@ function output()
     } else {
         define('DZZ_OUTPUTED', 1);
     }
-    if ($_G['config']['rewritestatus']) {
+    if (isset($_G['setting']['rewritestatus'])) {
         $content = ob_get_contents();
         $content = output_replace($content);
         ob_end_clean();
@@ -1248,7 +1249,7 @@ function output()
 function outputurl( $url="" )
 {
     global $_G;
-    if ($_G['config']['rewritestatus']) {
+    if (isset($_G['setting']['rewritestatus'])) {
         $url = output_replace($url);
     }
     return $url;
@@ -1347,23 +1348,21 @@ function debug($var = null, $vardump = false)
     exit();
 }
 
-function debuginfo()
-{
-    global $_G;
-    if (getglobal('config/debug')) {
-        $db = &DB::object();
-        $_G['debuginfo'] = array(
-            'time' => number_format((microtime(true) - $_G['starttime']), 6),
-            'queries' => $db->querynum,
-            'memory' => ucwords(C::memory()->type)
-        );
-        if ($db->slaveid) {
-            $_G['debuginfo']['queries'] = 'Total ' . $db->querynum . ', Slave ' . $db->slavequery;
-        }
-        return TRUE;
-    } else {
-        return FALSE;
-    }
+function debuginfo() {
+	global $_G;
+	if(getglobal('config/debug')) {
+		$_G['debuginfo'] = array(
+		    'time' => number_format((microtime(true) - $_G['starttime']), 6),
+		    'queries' => DB::object()->querynum,
+		    'memory' => ucwords(C::memory()->type)
+		    );
+		if(DB::object()->slaveid) {
+			$_G['debuginfo']['queries'] = 'Total '.DB::object()->querynum.', Slave '.DB::object()->slavequery;
+		}
+		return TRUE;
+	} else {
+		return FALSE;
+	}
 }
 
 function check_seccode($value, $idhash)
@@ -1421,7 +1420,7 @@ function space_merge(&$values, $tablename, $isarchive = false)
 
                 if ($tablename == 'field') {
                     $_G['setting']['privacy'] = empty($_G['setting']['privacy']) ? array() : (is_array($_G['setting']['privacy']) ? $_G['setting']['privacy'] : dunserialize($_G['setting']['privacy']));
-                    $_G[$var]['privacy'] = empty($_G[$var]['privacy']) ? array() : is_array($_G[$var]['privacy']) ? $_G[$var]['privacy'] : dunserialize($_G[$var]['privacy']);
+                    $_G[$var]['privacy'] = empty($_G[$var]['privacy']) ? array() : (is_array($_G[$var]['privacy']) ? $_G[$var]['privacy'] : dunserialize($_G[$var]['privacy']));
                 } elseif ($tablename == 'profile') {
                     if ($_G[$var]['department']) {
                         $_G[$var]['department_tree'] = C::t('organization')->getPathByOrgid(intval($_G[$var]['department']));
@@ -1455,14 +1454,19 @@ function dmkdir($dir, $mode = 0777, $makeindex = TRUE)
     }
     return true;
 }
+function durlencode($url) {
+	static $fix = array('%21', '%2A','%3B', '%3A', '%40', '%26', '%3D', '%2B', '%24', '%2C', '%2F', '%3F', '%25', '%23', '%5B', '%5D');
+	static $replacements = array('!', '*', ';', ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
+	return str_replace($fix, $replacements, urlencode($url));
+}
 
 function dreferer($default = '')
 {
     global $_G;
 
     $default = '';
-    $_G['referer'] = !empty($_GET['referer']) ? $_GET['referer'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
-    $_G['referer'] = substr($_G['referer'], -1) == '?' ? substr($_G['referer'], 0, -1) : $_G['referer'];
+    $_G['referer'] = !empty($_GET['referer']) ? $_GET['referer'] : $_SERVER['HTTP_REFERER'];
+	$_G['referer'] = substr($_G['referer'], -1) == '?' ? substr($_G['referer'], 0, -1) : $_G['referer'];
 
     if (strpos($_G['referer'], 'user.php?mod=login&op=logging&action=login')) {
         $_G['referer'] = $default;
@@ -1471,17 +1475,20 @@ function dreferer($default = '')
     $_G['referer'] = str_replace('&amp;', '&', $_G['referer']);
     $reurl = parse_url($_G['referer']);
 
-    if ($reurl['port']) $reurl['host'] .= ':' . $reurl['port'];
-    if (!empty($reurl['host']) && !in_array($reurl['host'], array($_SERVER['HTTP_HOST'], 'www.' . $_SERVER['HTTP_HOST'])) && !in_array($_SERVER['HTTP_HOST'], array($reurl['host'], 'www.' . $reurl['host']))) {
+    $hostwithport = $reurl['host'] . (isset($reurl['port']) ? ':' . $reurl['port'] : '');
+
+	if(!$reurl || (isset($reurl['scheme']) && !in_array(strtolower($reurl['scheme']), array('http', 'https')))) {
+		$_G['referer'] = '';
+	}
+    if (!empty($hostwithport) && !in_array($hostwithport, array($_SERVER['HTTP_HOST'], 'www.' . $_SERVER['HTTP_HOST'])) && !in_array($_SERVER['HTTP_HOST'], array($hostwithport, 'www.' . $hostwithport))) {
         $_G['referer'] = 'index.php';
 
-    } elseif (empty($reurl['host'])) {
+    } elseif (empty($hostwithport)) {
         $_G['referer'] = $_G['siteurl'] . './' . $_G['referer'];
     }
-
-    return strip_tags($_G['referer']);
+    $_G['referer'] = durlencode($_G['referer']);
+	return $_G['referer'];
 }
-
 
 function diconv($str, $in_charset, $out_charset = CHARSET, $ForceTable = FALSE)
 {
@@ -1672,7 +1679,7 @@ function getimgthumbname($fileStr, $extend = '.thumb.jpg', $holdOldExt = true)
 function dintval($int, $allowarray = false)
 {
     $ret = intval($int);
-    if ($int == $ret || !$allowarray && is_array($int)) return $ret;
+    if($int == '' || $int == $ret || !$allowarray && is_array($int)) return $ret;
     if ($allowarray && is_array($int)) {
         foreach ($int as &$v) {
             $v = dintval($v, true);
@@ -1706,13 +1713,15 @@ function strhash($string, $operation = 'DECODE', $key = '')
 
     return base64_encode(gzcompress($string . $vkey));
 }
-
-function dunserialize($data)
-{
-    if (($ret = unserialize($data)) === false) {
-        $ret = unserialize(stripslashes($data));
-    }
-    return $ret;
+function dunserialize($data) {
+	// 由于 Redis 驱动侧以序列化保存 array, 取出数据时会自动反序列化（导致反序列化了非Redis驱动序列化的数据），因此存在参数入参为 array 的情况.
+	// 考虑到 PHP 8 增强了类型体系, 此类数据直接送 unserialize 会导致 Fatal Error, 需要通过代码层面对此情况进行规避.
+	if(is_array($data)) {
+		$ret = $data;
+	} elseif(($ret = unserialize($data)) === false) {
+		$ret = unserialize(stripslashes($data));
+	}
+	return $ret;
 }
 
 function browserversion($type)
@@ -2239,11 +2248,13 @@ function dzzlang($file, $langvar = null, $vars = array(), $default = null)
     if (is_string($return) && strpos($return, '{_G/') !== false) {
         preg_match_all('/\{_G\/(.+?)\}/', $return, $gvar);
         foreach ($gvar[0] as $k => $v) {
-            $searchs[] = $v;
+            $searchs[] = (string)$v;
             $replaces[] = getglobal($gvar[1][$k]);
         }
     }
-    $return = str_replace($searchs, $replaces, $return);
+    if($searchs || $replaces) {
+		$return = str_replace($searchs, $replaces, $return);
+	}
     return $return;
 }
 
@@ -2726,7 +2737,7 @@ function delete_icoid_from_container($icoid, $pfid)
     global $_G;
     $typefid = C::t('folder')->fetch_typefid_by_uid($_G['uid']);
     if ($pfid == $typefid['dock']) {
-        $docklist = DB::result_first("select docklist from " . DB::table('user_field') . " where uid='{$_G[uid]}'");
+        $docklist = DB::result_first("select docklist from " . DB::table('user_field') . " where uid='{$_G['uid']}'");
         $docklist = $docklist ? explode(',', $docklist) : array();
         foreach ($docklist as $key => $value) {
             if ($value == $icoid) {
@@ -2736,7 +2747,7 @@ function delete_icoid_from_container($icoid, $pfid)
         C::t('user_field')->update($_G['uid'], array('docklist' => implode(',', $docklist)));
     } elseif ($pfid == $typefid['desktop']) {
 
-        $icos = DB::result_first("select screenlist from " . DB::table('user_field') . " where uid='{$_G[uid]}'");
+        $icos = DB::result_first("select screenlist from " . DB::table('user_field') . " where uid='{$_G['uid']}'");
         $icos = $icos ? explode(',', $icos) : array();
         foreach ($icos as $key => $value) {
             if ($value == $icoid) {
@@ -3463,12 +3474,12 @@ function dzz_userconfig_init()
         if ($app['position'] == 1) {
             continue;
         } elseif ($app['position'] == 2) { //桌面
-            $fid = DB::result_first("select fid from " . DB::table('folder') . " where uid='{$_G[uid]}' and flag='desktop'");
+            $fid = DB::result_first("select fid from " . DB::table('folder') . " where uid='{$_G['uid']}' and flag='desktop'");
         } else { //dock条
-            $fid = DB::result_first("select fid from " . DB::table('folder') . " where uid='{$_G[uid]}' and flag='dock'");
+            $fid = DB::result_first("select fid from " . DB::table('folder') . " where uid='{$_G['uid']}' and flag='dock'");
         }
         if (!$fid) continue;
-        if ($rid = DB::result_first("select rid from " . DB::table('resources') . " where uid='{$_G[uid]}' and oid='{$appid}' and type='app'")) {
+        if ($rid = DB::result_first("select rid from " . DB::table('resources') . " where uid='{$_G['uid']}' and oid='{$appid}' and type='app'")) {
             C::t('resources')->update_by_rid($rid, array('pfid' => $fid, 'isdelete' => 0));
             if ($app['position'] == 2) $userconfig['screenlist'][] = $rid;
             else $userconfig['docklist'][] = $rid;
@@ -3571,7 +3582,7 @@ function dzz_userconfig_init()
 
  }
 
-//取得所有子级目录
+ //取得所有子级目录
 function get_all_chilrdenfid_by_pfid($pfid)
 {
 	static $fids = array();

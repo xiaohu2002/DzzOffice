@@ -8,18 +8,18 @@
             <div class="card notification-list-item clearfix">
               <div class="card-body">
                 <div class="member member-no-menu">
-                  <a class="member-avatar" href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value[authorid]);}</a>
+                  <a class="member-avatar" href="user.php?uid=$value[authorid]" title="$value[author]" hidefocus="true">{eval echo avatar_block($value['authorid']);}</a>
                 </div>
                 <div class="details">
 									<!--{if $value[title]}-->
-                  <p class="note u-title" >$value[title]</p>
+                  <p class="note u-title">$value[title]</p>
                   <!--{/if}-->
                   <!--{if $value[note]}-->
                   <p class="note u-bottom" >$value[note]</p>
                   <!--{else}-->
                   <p class="note u-bottom" >无内容</p>
                   <!--{/if}-->
-                  <p class="dateline u-bottom text-muted">$value[dateline]</p>
+                  <p class="dateline u-bottom text-muted">$value['dateline']</p>
                 </div>
               </div>
             </div>

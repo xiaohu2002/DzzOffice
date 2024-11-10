@@ -24,7 +24,7 @@ class table_resources_attr extends dzz_table
 		}
 		return $ret;
 	}
-	public function update($id,$setarr){
+	public function update($id,$setarr, $unbuffered = false, $low_priority = false){
 		if(!$data=parent::fetch($id)) return false;
 		if($ret=parent::update($id,$setarr)){
 			if($setarr['skey']=='icon'){
@@ -36,7 +36,7 @@ class table_resources_attr extends dzz_table
 		}
 		return $ret;
 	}
-	public function insert($setarr){
+	public function insert($setarr, $return_insert_id = false, $replace = false, $silent = false){
 		if($id=DB::result_first("select id from %t where rid=%s and skey=%s and vid=%d",array($this->_table,$setarr['rid'],$setarr['skey'],intval($setarr['vid'])))){
 			if($setarr['skey']=='icon'){
 				$o=parent::fetch($id);
@@ -61,16 +61,11 @@ class table_resources_attr extends dzz_table
             return $returndata;
         }
         $returndata = array();
-        foreach(DB::fetch_all("select * from %t where rid = %s and (vid = %d or vid='0') order by vid",array($this->_table,$rid,$vid)) as $val ){
+        foreach(DB::fetch_all("select * from %t where rid = %s and vid = %d",array($this->_table,$rid,$vid)) as $val ){
 			if($val['skey']=='icon'){
-
-				if($img=C::t('attachment')->getThumbByAid($val['sval'],0,0,1)){
-                    $val['sval']=$img;
-                    $val['skey']='img';
-                }
-
+				$val['sval']=C::t('attachment')->getThumbByAid($val['sval'],0,0,1);
+				$val['skey']='img';
 			}
-            
             $returndata[$val['skey']] = $val['sval'];
         }
         $this->store_cache($cachekey,$returndata);
@@ -118,7 +113,7 @@ class table_resources_attr extends dzz_table
     }
     public function update_vid_by_rvid($rid,$oldvid,$vid){
        $i=0;
-	   foreach(DB::fetch_all("select * from %t where rid=%s and vid = %d",array($this->_table,$rid,$oldvid)) as $value){
+	   foreach(DB::fetch_all("select id from %t where rid=%s and vid = %d",array($this->_table,$rid,$oldvid)) as $value){
 			if(self::update($value['id'],array('vid'=>$vid))){
 				$i++;
 			}

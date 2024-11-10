@@ -13,10 +13,10 @@
 			 <input type="hidden" id="eventkey" />
             <!--{if $type=='click'}-->
                <div class="form-group">
-               <!--{if $menu_select[click]}-->
+               <!--{if $menu_select['click']}-->
                      <select class="form-control" id="js_select_click" onchange="eventkey_select_change(this)">
                         <option value="" data-url="" >{lang please_choose}</option>
-                        <!--{loop $menu_select[click] $key $value}-->
+                        <!--{loop $menu_select['click'] $key $value}-->
                         <option value="$key" >$value</option>
                         <!--{/loop}-->
                         <option value="keys" >{lang custom}KEY</option>

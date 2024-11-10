@@ -187,12 +187,7 @@ function dshowmessage($message, $url_forward = '', $values = array(), $extrapara
 	if(!$extra && $param['timeout']) {
 		$extra .= 'setTimeout("window.location.href =\''.$url_forward_js.'\';", '.$refreshtime.');';
 	}
-	if(!$_G['setting']['bbclosed']|| !$_G['adminid'] ==0) {
-		$show_message .= $extra ? '<script type="text/javascript" reload="1">'.$extra.$st.'</script>' : '';
-	}
-	else {
-		$show_message .= $extra ? '' : '';
-	}
+	$show_message .= $extra ? '<script type="text/javascript" reload="1">'.$extra.$st.'</script>' : '';
 	$show_message .= $param['extrajs'] ? $param['extrajs'] : '';
 	//print_r($param);exit($show_message);
 	include template('common/showmessage');

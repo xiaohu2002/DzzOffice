@@ -62,7 +62,7 @@
 			</div>
 		<div class="col-sm-3">
 			<label class="visually-hidden" for="uid">UID：</label>
-			<input type="text" class="form-control" id="uid" name="uid" value="$_GET[uid]"  placeholder="UID">
+			<input type="text" class="form-control" id="uid" name="uid" value="$_GET['uid']"  placeholder="UID">
 		</div>
 		<!--{if $anchor!='pass'}-->
 		<div class="col-sm-6">
@@ -119,7 +119,7 @@
 				<!--{loop $list  $value}-->
 				<tr id="mod_{$value[vid]}_row" verifyid="{$value[vid]}" class="hover">
 					<td width="90" align="center">$value[username]</td>
-					<td width="120">$value[dateline]</td>
+					<td width="120">$value['dateline']</td>
 					<td>$value[fieldstr]</td>
 				</tr>
 				<!--{/loop}-->
@@ -141,7 +141,7 @@
 					<th>{lang members_verify_info}</th>
 				</thead>
 				<!--{loop $list  $value}-->
-				<tr id="mod_{$value[uid]}_row" verifyid="{$value[uid]}" class="hover">
+				<tr id="mod_{$value['uid']}_row" verifyid="{$value['uid']}" class="hover">
 					<td width="80">$value[opstr]</td>
 					<td width="90" align="center">$value[username]</td>
 					<td>$value[fieldstr]</td>

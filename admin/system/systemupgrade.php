@@ -16,7 +16,7 @@ include_once libfile('function/admin');
 include_once libfile('function/cache');
 $dzz_upgrade = new dzz_upgrade();
 $step = intval($_GET['step']);
-$op = $_GET['op'];
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 $step = $step ? $step : 1;
 $operation = $_GET['operation'] ? trim($_GET['operation']) : 'check';
 

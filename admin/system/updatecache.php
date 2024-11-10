@@ -13,7 +13,7 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 $oparr = array('updatecache', 'database', /*'security','patch','update',*/
 'cron', 'log');
 $leftmenu = array();
-$op = $_GET['op'];
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 foreach ($oparr as $key => $value) {
 	$leftmenu[$value] = array('title' => lang($value), 'active' => '');
 	if ($value == $op)

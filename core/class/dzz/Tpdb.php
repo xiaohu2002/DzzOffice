@@ -733,7 +733,7 @@ class Tpdb {
      * @param array $options 表达式
      * @return false | integer
      */
-    public function update($data,$options) {
+    public function update($data,$options, $unbuffered = false, $low_priority = false) {
         $this->model  =   $options['model'];
         $sql   = 'UPDATE '
             .$this->parseTable($options['table'])

@@ -77,20 +77,21 @@ class db_driver_mysqli
 	}
 
 	function _dbconnect($dbhost, $dbuser, $dbpw, $dbcharset, $dbname, $pconnect,$port='3306',$unix_socket='', $halt = true) {
+		mysqli_report(MYSQLI_REPORT_OFF);
+		if (intval($pconnect) === 1) $dbhost = 'p:' . $dbhost; // 前面加p:，表示persistent connection
 		$link = new mysqli();
-		if(!$link->real_connect($dbhost, $dbuser, $dbpw, $dbname, $port, $unix_socket)) {
+		if(!$link->real_connect($dbhost, $dbuser, $dbpw, $dbname, $port, $unix_socket, MYSQLI_CLIENT_COMPRESS)) {
 			$halt && $this->halt('notconnect', $this->errno());
 		} else {
 			$this->curlink = $link;
-			if($this->version() > '4.1') {
-				$link->set_charset($dbcharset ? $dbcharset : $this->config[1]['dbcharset']);
-				$serverset = $this->version() > '5.0.1' ? 'sql_mode=\'\'' : '';
-				$serverset && $link->query("SET $serverset");
-			}
+			$link->options(MYSQLI_OPT_LOCAL_INFILE, false);
+			$link->set_charset($dbcharset ? $dbcharset : $this->config[1]['dbcharset']);
+			$serverset = 'sql_mode=\'\',';
+			$serverset .= 'character_set_client=binary';
+			$serverset && $link->query("SET $serverset");
 		}
 		return $link;
 	}
-
 	function table_name($tablename) {
 		if(!empty($this->map) && !empty($this->map[$tablename])) {
 			$id = $this->map[$tablename];
@@ -139,7 +140,7 @@ class db_driver_mysqli
 		if(!($query = $this->curlink->query($sql, $resultmode))) {
 			if(in_array($this->errno(), array(2006, 2013)) && substr($silent, 0, 5) != 'RETRY') {
 				$this->connect();
-				return $this->curlink->query($sql, 'RETRY'.$silent);
+				return $this->query($sql, 'RETRY'.$silent);
 			}
 			if(!$silent) {
 				$this->halt($this->error(), $this->errno(), $sql);
@@ -159,11 +160,11 @@ class db_driver_mysqli
 	}
 
 	function error() {
-		return (($this->curlink) ? $this->curlink->error : mysqli_error());
+		return $this->curlink->error;
 	}
 
 	function errno() {
-		return intval(($this->curlink) ? $this->curlink->errno : mysqli_errno());
+		return $this->curlink->errno;
 	}
 
 	function result($query, $row = 0) {

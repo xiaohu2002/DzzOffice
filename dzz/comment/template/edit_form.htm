@@ -2,7 +2,7 @@
    <h4 class="modal-title" id="return_$_GET[handlekey]">{lang edit}</h4>
 	 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
  </div>
-  <form id="form_edit_{$cid}" name="form_edit_{$cid}" class="form-horizontal" action="{MOD_URL}&op=ajax&do=edit" method="post"  onsubmit="ajaxpost('form_edit_{$cid}','return_publish_edit_{$cid}','return_publish_edit_{$cid}');return false">
+  <form id="form_edit_{$cid}" name="form_edit_{$cid}" class="form-horizontal" action="{MOD_URL}&op=ajax&do=edit" method="post"  onsubmit="ajaxpost('form_edit_{$cid}','return_publish_edit_{$cid}','return_publish_edit_{$cid}');return false;">
     <input type="hidden" name="formhash" value="{FORMHASH}" />
     <input type="hidden" name="editsubmit" value="true" />
     <input type="hidden" name="handlekey" value="publish_edit_{$cid}" />
@@ -98,7 +98,7 @@ function errorhandle_{$_GET[handlekey]}(url, message, values) {
 	hideWindow('{$_GET[handlekey]}');
 }
 <!--{if $_GET[allowattach]>=2}-->
-	var attachextensions='{eval echo implode('|',$space[attachextensions]);}';
+	var attachextensions='{eval echo implode('|',$space['attachextensions']);}';
 	if(attachextensions=='') attachextensions="\.*$";
 	else attachextensions="(\.|\/)("+(attachextensions)+")$";
     jQuery('#fileupload_edit_{$cid}').fileupload({
