@@ -50,7 +50,7 @@ class dzz_app extends dzz_base{
         return $object;
     }
 
-    public function __construct($params) {
+    public function __construct($params=array()) {
         foreach($params as $k=>$v){
             $this->$k = $v;
         }
@@ -77,11 +77,21 @@ class dzz_app extends dzz_base{
     public function init() {
 
         if(!$this->initated) {
-            $this->_init_setting();
-            $this->_init_user();
-            $this->_init_session();
-            $this->_init_cron();
-            $this->_init_misc();
+            if($this->init_setting){
+				$this->_init_setting();	
+			} 
+			if($this->init_user){
+				 $this->_init_user();	
+			} 
+           if($this->init_session){
+				 $this->_init_session();	
+			} 
+			if($this->init_cron){
+				 $this->_init_cron();	
+			} 
+           if($this->init_misc){
+				 $this->_init_misc();	
+			} 
         }
         $this->initated = true;
     }
@@ -89,7 +99,7 @@ class dzz_app extends dzz_base{
     private function _init_env() {
 
         error_reporting(E_ERROR);
-
+        define('MAGIC_QUOTES_GPC', function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc());
         define('ICONV_ENABLE', function_exists('iconv'));
         define('MB_ENABLE', function_exists('mb_convert_encoding'));
         define('EXT_OBGZIP', function_exists('ob_gzhandler'));
@@ -113,14 +123,6 @@ class dzz_app extends dzz_base{
         }
 
         define('IS_ROBOT', checkrobot());
-
-        if(!defined('APPTYPEID')) {
-			define('APPTYPEID', 0);
-		}
-
-		if(!defined('CURSCRIPT')) {
-			define('CURSCRIPT', null);
-		}
 
         global $_G;
         $_G = array(
@@ -207,6 +209,11 @@ class dzz_app extends dzz_base{
     private function _init_input() {
         if (isset($_GET['GLOBALS']) ||isset($_POST['GLOBALS']) ||  isset($_COOKIE['GLOBALS']) || isset($_FILES['GLOBALS'])) {
             system_error('request_tainting');
+        }
+        if(MAGIC_QUOTES_GPC) {
+            $_GET = dstripslashes($_GET);
+            $_POST = dstripslashes($_POST);
+            $_COOKIE = dstripslashes($_COOKIE);
         }
 
         $prelength = strlen($this->config['cookie']['cookiepre']);
@@ -489,20 +496,8 @@ class dzz_app extends dzz_base{
         }
         setglobal('groupid', getglobal('groupid', 'member'));
         !empty($this->cachelist) && loadcache($this->cachelist);
-        if (
-            isset($this->var['member']) &&
-            is_array($this->var['member']) &&
-            isset($this->var['group']) &&
-            is_array($this->var['group']) &&
-            $this->var['group']['radminid'] == 0 &&
-            isset($this->var['member']['adminid']) &&
-            $this->var['member']['adminid'] > 0 &&
-            isset($this->var['member']['groupid']) &&
-            $this->var['member']['groupid'] != $this->var['member']['adminid'] &&
-            isset($this->var['cache']['admingroup_' . $this->var['member']['adminid']]) &&
-            is_array($this->var['cache']['admingroup_' . $this->var['member']['adminid']])
-        ) {
-            $this->var['group'] = array_merge($this->var['group'], $this->var['cache']['admingroup_' . $this->var['member']['adminid']]);
+        if($this->var['member'] && $this->var['group']['radminid'] == 0 && $this->var['member']['adminid'] > 0 && $this->var['member']['groupid'] != $this->var['member']['adminid'] && !empty($this->var['cache']['admingroup_'.$this->var['member']['adminid']])) {
+            $this->var['group'] = array_merge($this->var['group'], $this->var['cache']['admingroup_'.$this->var['member']['adminid']]);
         }
 
 
@@ -653,6 +648,7 @@ class dzz_app extends dzz_base{
     }
 
     private function _init_setting() {
+        global $_G;
         if($this->init_setting) {
             if(empty($this->var['setting'])) {
                 $this->cachelist[] = 'setting';
@@ -665,7 +661,7 @@ class dzz_app extends dzz_base{
         !empty($this->cachelist) && loadcache($this->cachelist);
 
         if(!is_array($this->var['setting'])) {
-            $this->var['setting'] = array();
+            $this->var['setting'] =C::t('setting')->fetch_all();
         }
         if($ismobile=helper_browser::ismobile()) define('IN_MOBILE',$ismobile);
         define('VERHASH',isset($this->var['setting']['verhash'])?$this->var['setting']['verhash']:random(3));
