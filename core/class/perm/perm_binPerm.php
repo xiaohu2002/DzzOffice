@@ -133,7 +133,7 @@ class perm_binPerm
         if (isset($this->powerarr[$action])) return $this->power = $this->power | intval($this->powerarr[$action]);
     }
 
-    public static function mergePower($perm)
+    public function mergePower($perm)
     { //合成权限，使用于系统权限和用户权限合成
         return $this->power = intval($this->power & intval($perm));
     }

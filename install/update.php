@@ -6,6 +6,9 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
+define('CURSCRIPT', 'dzz');
+define('DZZSCRIPT', basename(__FILE__));
+define('BASESCRIPT', basename(__FILE__));
 require '../core/coreBase.php';
 @set_time_limit(0);
 $cachelist = array();
