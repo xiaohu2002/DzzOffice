@@ -125,11 +125,11 @@ if (!submitcheck('settingsubmit')) {
 	} elseif ($operation == 'mail') {
 		$navtitle = lang('mail').' - '.lang('appname');
 		$setting['mail'] = dunserialize($setting['mail']);
-		$passwordmask = $setting['mail']['auth_password'] ? $setting['mail']['auth_password']{0} . '********' . substr($setting['mail']['auth_password'], -2) : '';
+		$passwordmask = $setting['mail']['auth_password'] ? $setting['mail']['auth_password'][0] . '********' . substr($setting['mail']['auth_password'], -2) : '';
 		$smtps = array();
 		foreach ($setting['mail']['smtp'] as $id => $smtp) {
 			$smtp['authcheck'] = $smtp['auth'] ? 'checked' : '';
-			$smtp['auth_password'] = $smtp['auth_password'] ? $smtp['auth_password']{0} . '********' . substr($smtp['auth_password'], -2) : '';
+			$smtp['auth_password'] = $smtp['auth_password'] ? $smtp['auth_password'][0] . '********' . substr($smtp['auth_password'], -2) : '';
 			$smtps[$id] = $smtp;
 		}
 	} elseif ($operation == 'censor') {
@@ -182,7 +182,7 @@ if (!submitcheck('settingsubmit')) {
 		$settingnew['mail']['smtp'] = array();
 		foreach ($oldsmtp as $id => $value) {
 			if ((empty($deletesmtp) || !in_array($id, $deletesmtp)) && !empty($value['server']) && !empty($value['port'])) {
-				$passwordmask = $setting['mail']['smtp'][$id]['auth_password'] ? $setting['mail']['smtp'][$id]['auth_password']{0} . '********' . substr($setting['mail']['smtp'][$id]['auth_password'], -2) : '';
+				$passwordmask = $setting['mail']['smtp'][$id]['auth_password'] ? $setting['mail']['smtp'][$id]['auth_password'][0] . '********' . substr($setting['mail']['smtp'][$id]['auth_password'], -2) : '';
 				$value['auth_password'] = $value['auth_password'] == $passwordmask ? $setting['mail']['smtp'][$id]['auth_password'] : $value['auth_password'];
 				$settingnew['mail']['smtp'][] = $value;
 			}
