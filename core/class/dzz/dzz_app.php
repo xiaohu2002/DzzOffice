@@ -594,7 +594,7 @@ class dzz_app extends dzz_base{
                 }
                 if ($uid) {
                     $config = array();
-                    if(!$config=C::t('user_field')->fetch($uid)){
+                    if(!$config=C::t('user_field')->fetch($uid) || !$config['applist']){
                         $config= dzz_userconfig_init();
                     }
                     if ($config && isset($config['applist'])) {
