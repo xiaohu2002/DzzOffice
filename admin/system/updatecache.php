@@ -9,7 +9,7 @@
 if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 	exit('Access Denied');
 }
-
+error_reporting(E_ERROR);
 $oparr = array('updatecache', 'database', /*'security','patch','update',*/
 'cron', 'log');
 $leftmenu = array();

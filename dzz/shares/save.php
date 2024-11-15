@@ -10,9 +10,6 @@ if (!defined('IN_DZZ')) {
 }
 global $_G;
 Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
-if($_G['setting']['allowshare'] && !$_G['setting']['ballowshare']){
-	showmessage('no_privilege');
-}
 $uid = $_G['uid'];
 $dzzrids = isset($_GET['dzzrids']) ? trim($_GET['dzzrids']) :'';
 if(!$dzzrids){

@@ -381,7 +381,7 @@ elseif($operation == 'cross' || $operation == 'patch'){
             } 
             $importtxt = @implode('', file($importfile)); 
             $apparray = getimportdata('Dzz! app');
-            $filename = $apparray['app']['extra']['installfile']; 
+            $filename = isset($apparray['app']['extra']['installfile']) ? $apparray['app']['extra']['installfile'] : '';
             if (!empty($filename) && preg_match('/^[\w\.]+$/', $filename)) {
                 $filename = DZZ_ROOT . './'.$dir.'/' . $appname . '/' . $filename;
                 if (file_exists($filename)) {

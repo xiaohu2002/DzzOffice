@@ -1,5 +1,5 @@
 <div class="hide breadcrumb-data">
-	<li class="breadcrumb-item active" data-href="{MOD_URL}&op=ajax&path=$morepath" aria-current="page">$foldername</li>
+	<li class="breadcrumb-item active" data-href="{MOD_URL}&op=ajax&path=$morepath&sid=$_GET['sid']" aria-current="page">$foldername</li>
 </div>
 <div class="module-list">
 	<!--{loop $list $value}-->
@@ -10,7 +10,7 @@
 				<!--{/if}-->
 				<span node-type="name-text"  data-href="$value[shareurl]" class="enabled">$value[name]</span>
 			</div>
-			<!--{if $share[xiazai]==0}-->
+			<!--{if $candownload}-->
 			<div class="btns">
 				<a node-type="btn-item" data-key="download" class="dzz dzz-download" href="javascript:void(0);"></a>
 			</div>
@@ -23,7 +23,7 @@
 	</div>
 	<!--{/loop}-->
 	<!--{if $nextpage}-->
-	<div class="more text-center clearfix" onclick="getMore(this,'{MOD_URL}&op=ajax&morepath=$morepath&page=$nextpage&rander=list&marker=$marker')" style="padding-top: 10px;padding-bottom: 10px;">{lang upload_more}</div>
+	<div class="more text-center clearfix" onclick="getMore(this,'{MOD_URL}&op=ajax&sid=$_GET['sid']&morepath=$morepath&page=$nextpage&rander=list&marker=$marker')" style="padding-top: 10px;padding-bottom: 10px;">{lang upload_more}</div>
 	<!--{/if}-->
 </div>
 <div class="module-grid">
@@ -62,7 +62,7 @@
 	</div>
 	<!--{/loop}-->
 	<!--{if $nextpage}-->
-	<div class="more text-center pull-left" onclick="getMore(this,'{MOD_URL}&op=ajax&morepath=$morepath&page=$nextpage&rander=grid&marker=$marker')">
+	<div class="more text-center pull-left" onclick="getMore(this,'{MOD_URL}&op=ajax&sid=$_GET['sid']&morepath=$morepath&page=$nextpage&rander=grid&marker=$marker')">
 		<table width="150" height="120" style="table-layout:fixed;">
 			<tbody>
 				<tr>

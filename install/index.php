@@ -56,7 +56,7 @@ if(file_exists($lockfile) && $method != 'ext_info') {
 timezone_set();
 
 if(in_array($method, array('ext_info'))) {
-	$isHTTPS = is_https();
+	$isHTTPS = is_HTTPS();
 	$PHP_SELF = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
 	$bbserver = 'http'.($isHTTPS ? 's' : '').'://'.$_SERVER['HTTP_HOST'];
 }
@@ -130,7 +130,6 @@ if($method == 'show_license') {
 	} else {
 		$submit = false;
 	}
-
 
 	if($submit && !VIEW_OFF && $_SERVER['REQUEST_METHOD'] == 'POST') {
 		$forceinstall = isset($_POST['dbinfo']['forceinstall']) ? $_POST['dbinfo']['forceinstall'] : '';

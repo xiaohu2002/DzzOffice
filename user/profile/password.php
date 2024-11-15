@@ -202,7 +202,7 @@ if($do == 'editpass'){
 	$jj=0;
 	if( $last_secondlog ){
 		for($i=$last_secondlog["start"];$i<$last_secondlog["end"];$i++){
-			if( ($jj)>= ($lpp-$onecountget)  ){//$last_secondlog["start"] ){ 
+			if( ($jj)>= ($lpp-$onecountget)  ){
 				break;
 			}
 			$jj++;

@@ -41,8 +41,7 @@ if(empty($random)) {
 header('Location: '.SITEURL.'/'.$avatar_url);
 exit;
 
-function get_avatar($uid, $size = 'middle', $type = '')
-{
+function get_avatar($uid, $size = 'middle', $type = '') {
 	$size = in_array($size, array('big', 'middle', 'small')) ? $size : 'middle';
 	$uid = abs(intval($uid));
 	$uid = sprintf("%09d", $uid);
@@ -53,4 +52,4 @@ function get_avatar($uid, $size = 'middle', $type = '')
 	return $dir1.'/'.$dir2.'/'.$dir3.'/'.substr($uid, -2).$typeadd."_avatar_$size.jpg";
 }
 
-
+?>

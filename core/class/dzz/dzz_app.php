@@ -3,8 +3,6 @@ if(!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 class dzz_app extends dzz_base{
-
-
     var $mem = null;
 
     var $session = null;
@@ -75,7 +73,6 @@ class dzz_app extends dzz_base{
     }
 
     public function init() {
-
         if(!$this->initated) {
             if($this->init_setting){
 				$this->_init_setting();	
@@ -97,7 +94,6 @@ class dzz_app extends dzz_base{
     }
 
     private function _init_env() {
-
         error_reporting(E_ERROR);
         define('MAGIC_QUOTES_GPC', function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc());
         define('ICONV_ENABLE', function_exists('iconv'));
@@ -111,10 +107,12 @@ class dzz_app extends dzz_base{
                 $GLOBALS[$key] = null; unset($GLOBALS[$key]);
             }
         }
+		if(!defined('CURSCRIPT')) {
+			define('CURSCRIPT', 'dzz');
+		}
         if(!defined('DZZ_CORE_FUNCTION') && !@include(DZZ_ROOT.'./core/function/function_core.php')) {
             exit('function_core.php is missing');
         }
-
         if(function_exists('ini_get')) {
             $memorylimit = @ini_get('memory_limit');
             if($memorylimit && return_bytes($memorylimit) < 33554432 && function_exists('ini_set')) {
@@ -158,8 +156,6 @@ class dzz_app extends dzz_base{
             'lang' => array(),
 
             'rssauth' => '',
-
-
         );
         $_G['PHP_SELF'] = dhtmlspecialchars($this->_get_script_url());
         $_G['basescript'] = CURSCRIPT.'php';
@@ -172,11 +168,10 @@ class dzz_app extends dzz_base{
         }
         $_G['isHTTPS'] = $this->is_HTTPS();
 		$_G['scheme'] = 'http'.($_G['isHTTPS'] ? 's' : '');
-		$_G['siteurl'] = dhtmlspecialchars($_G['scheme'].'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
+        $_G['siteurl'] = dhtmlspecialchars($_G['scheme'].'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
         $url = parse_url($_G['siteurl']);
         $_G['siteroot'] = isset($url['path']) ? $url['path'] : '';
         $_G['siteport'] = empty($_SERVER['SERVER_PORT']) || $_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] == '443' ? '' : ':'.$_SERVER['SERVER_PORT'];
-        
         if(defined('SUB_DIR')) {
             $_G['siteurl'] = str_replace(SUB_DIR, '/', $_G['siteurl']);
             $_G['siteroot'] = str_replace(SUB_DIR, '/', $_G['siteroot']);
@@ -215,15 +210,12 @@ class dzz_app extends dzz_base{
             $_POST = dstripslashes($_POST);
             $_COOKIE = dstripslashes($_COOKIE);
         }
-
         $prelength = strlen($this->config['cookie']['cookiepre']);
         foreach($_COOKIE as $key => $val) {
             if(substr($key, 0, $prelength) == $this->config['cookie']['cookiepre']) {
                 $this->var['cookie'][substr($key, $prelength)] = $val;
             }
         }
-
-
         if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
             $_GET = array_merge($_GET, $_POST);
         }
@@ -401,7 +393,6 @@ class dzz_app extends dzz_base{
 		}
 		return false;
 	}
-
     private function _get_client_ip() {
 		$ip = $_SERVER['REMOTE_ADDR'];
 			if (isset($_SERVER['HTTP_CLIENT_IP']) && ip::validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
@@ -438,8 +429,8 @@ class dzz_app extends dzz_base{
             $this->var['session'] = $this->session->var;
 
             if(isset($this->var['sid']) && $this->var['sid'] !== $this->var['cookie']['sid']) {
-                dsetcookie('sid', $this->var['sid'], 86400);
-            }
+				dsetcookie('sid', $this->var['sid'], 86400);
+			}
 
             if($this->session->isnew) {
                 if(ipbanned($this->var['clientip'])) {
@@ -510,13 +501,17 @@ class dzz_app extends dzz_base{
 
         setglobal('uid', getglobal('uid', 'member'));
         //设置语言；
-			$langlist=$this->var['config']['output']['language_list'];
-        if($language=getcookie('language')){
-				}else if($this->var['member']['language']){
-					$language=$this->var['member']['language'];
+        if(!empty($this->var['member']['language'])){
+            $language=$this->var['member']['language'];
+        }else{
+            $language=checkLanguage();
         }
-			if(!isset($langlist[$language])){
-				$language=checkLanguage();
+        if(!is_file(DZZ_ROOT.'./dzz/language/'.$language.'/lang.php')){
+            $language = getglobal('config/output/language');
+        }elseif(!is_file(DZZ_ROOT.'./user/language/'.$language.'/lang.php')){
+            $language = getglobal('config/output/language');
+        }elseif(!is_file(DZZ_ROOT.'./admin/language/'.$language.'/lang.php')){
+            $language = getglobal('config/output/language');
         }
         setglobal('language',$language);
         setglobal('username', getglobal('username', 'member'));
@@ -585,22 +580,6 @@ class dzz_app extends dzz_base{
 
             }
         }
-        if ($this->var['member']['adminid']){
-        }elseif(in_array(CURSCRIPT, array('admin', 'user', 'api')) || defined('ALLOWGUEST') && ALLOWGUEST) {
-        }elseif($_GET['mod']=='system') {
-        }else{
-        if ($this->var['member']['uid']){
-            foreach($this->var['setting']['verify'] as $key=>$value){
-            $verify = C::t('user_verify')->fetch($this->var['member']['uid']);
-            if($value['available'] && $key==1){
-            if($verify['verify1']==1){
-                }else {
-                    dheader("Location: user.php?mod=profile&vid=1");
-                }
-                }
-            }
-        }
-        }
         
         if (!$this->var['member']['adminid'] && $appidxu = C::t('app_market')->fetch_by_identifier(CURMODULE)) {
             if (!$appidxu['available']) {
@@ -631,7 +610,7 @@ class dzz_app extends dzz_base{
                 } elseif ($appidxu['group'] == -1) {
                     // 游客可以使用，跳过
                 } else {
-                    Hook::listen('check_login');
+                    dheader("Location: user.php?mod=login");
                 }
             }
         }

@@ -17,6 +17,7 @@ function uc_user_login($username, $password, $isuid, $checkques = '', $questioni
     $hookdata = array($username, $password, $isuid, $checkques, $questionid,$answer, $ip);
     \Hook::listen('applogin', $hookdata);
     list($username, $password, $isuid, $checkques, $questionid, $answer, $ip) = $hookdata;
+
     if ($isuid == 1) {
         $user = C::t('user')->fetch_by_uid($username);
     } elseif ($isuid == 2) {
@@ -385,7 +386,7 @@ function user_register($userArr, $addorg = 1)
 
 }
 
-function uc_user_register($username, $password, $email,$nickname,$questionid = '',$answer = '',$regip = '',$addorg = 1)
+function uc_user_register($username, $password, $email, $nickname, $questionid = '', $answer = '', $regip = '', $addorg = 1)
 {
 
 
@@ -401,11 +402,12 @@ function uc_user_register($username, $password, $email,$nickname,$questionid = '
 
     $uid = uc_add_user($username, $password, $email, $nickname, 0, $questionid, $answer, $regip);
     //加入默认机构
-    if ($addorg && is_array($uid) && getglobal('setting/defaultdepartment') && DB::fetch_first("select orgid from %t where orgid=%d ",array('organization',getglobal('setting/defaultdepartment')))) {
+    if ($addorg && is_array($uid) && getglobal('setting/defaultdepartment') && DB::fetch_first("select orgid from %t where orgid=%d ", array('organization', getglobal('setting/defaultdepartment')))) {
         C::t('organization_user')->insert_by_orgid(getglobal('setting/defaultdepartment'), $uid['uid']);
     }
     return $uid;
 }
+
 function uc_add_user($username, $password, $email, $nickname = '', $uid = 0, $questionid = '', $answer = '', $regip = '')
 {
     global $_G;
@@ -419,10 +421,7 @@ function uc_add_user($username, $password, $email, $nickname = '', $uid = 0, $qu
         'email' => $email,
         'regdate' => TIMESTAMP,
     );
-    Hook::listen('uc_add_user',$setarr);
-	if($setarr['error']){
-		return $setarr;
-	}
+
     $setarr['uid'] = DB::insert('user', $setarr, 1);
     return $setarr;
 }

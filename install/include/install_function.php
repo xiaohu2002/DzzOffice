@@ -545,7 +545,7 @@ function get_onlineip() {
 	return $onlineip;
 }
 
-function is_https() {
+function is_HTTPS() {
 	if(isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') {
 		return true;
 	}

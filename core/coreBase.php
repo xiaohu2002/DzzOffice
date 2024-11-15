@@ -23,7 +23,6 @@ global $_G,$_config;
 $_config = array();
 require DZZ_ROOT.'core/core_version.php';
 require DZZ_ROOT.'core/class/class_core.php';
-
 set_exception_handler(array('core', 'handleException'));
 
 $_config = array_merge($_config,core::loadConfig(DZZ_ROOT.CONFIG_NAME.BS.'config_default'.EXT));
@@ -37,7 +36,6 @@ if(!$install){
 $_config = array_merge($_config,$install);
 
 $_config = array_merge($_config,core::loadConfig(DZZ_ROOT.CONFIG_NAME.BS.'config_frame'.EXT));
-
 
 if(DZZ_CORE_DEBUG) {
     set_error_handler(array('core', 'handleError'));
@@ -63,10 +61,6 @@ if( function_exists('mysqli_connect') ){
     class Tpsql extends \core\dzz\Tpsql{}
 }
 
-//class HookRead extends \core\dzz\HookRead{}
-
 class IO extends dzz_io {}
 
 require DZZ_ROOT.'core/function/function_misc.php';
-
-

@@ -161,13 +161,40 @@ class perm_check{
     //$arr=array('uid','gid','desktop');其中这几项必须
     public static function checkperm($action,$arr,$bz=''){ //检查某个图标是否有权限;
         global $_G;
+        if($_G['uid'] && $_G['adminid']==1) return true; //网站管理员 有权限;
+        if ($arr['sid']) {
+            $share = C::t('shares')->fetch($arr['sid']);
+            if ($share) {
+                if ($share['perm']) {
+                    $perms = array_flip(explode(',', $share['perm'])); // 将权限字符串转换为数组
+                    if ($action == 'read') {
+                        if (isset($perms[3]) && !$_G['uid']) { // 3 表示仅登录访问
+                            return false; // 未登录，返回 false
+                        } elseif (isset($perms[2])) { // 2 表示禁用预览权限
+                            return false; // 预览权限被禁用，返回 false
+                        } else {
+                            return true; // 其他情况，默认允许访问
+                        }
+                    } elseif ($action == 'edit' && $_G['uid'] && isset($perms[4])) {
+                        return true; // 编辑权限
+                    } elseif ($action == 'download' && isset($perms[1])) {
+                        return false; // 下载权限被禁用
+                    }
+                } else {
+                    if ($action == 'download' || $action == 'read') {
+                        return true; // 默认允许下载和阅读
+                    }
+                }
+            } else {
+                return false; // 资源不存在
+            }
+        }
         if ($arr['preview'] && ($action=='read') || $action=='copy' || $action=='download') {
             return true;
         }
         if($_G['uid']<1){ //游客没有权限
             return false;
         }
-        if($_G['adminid']==1) return true; //网站管理员 有权限;
         if (!$arr['gid'] && $arr['uid'] !== $_G['uid']) {//我的网盘文件只限于当前用户
             return false;
         }
@@ -209,7 +236,6 @@ class perm_check{
 					if($_G['uid']==$folder['uid']) $action.='1';
 					else $action.='2';
 				}
-			
                 if(!perm_FolderSPerm::isPower($folder['fsperm'],$action)) return false;
                 //默认目录只有管理员有权限改变排列
                 //if($action=='admin' && $_G['adminid']!=1 && $folder['flag']!='folder') return false;

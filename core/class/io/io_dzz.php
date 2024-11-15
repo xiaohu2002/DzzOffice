@@ -130,6 +130,13 @@ class io_dzz extends io_api
         if (strpos($path, 'preview_') === 0) {
             $path = preg_replace('/^preview_/', '', $path);
         }
+        // 检查是否以 'sid:' 开头并以 '_' 结尾
+        if (preg_match('/^sid:([^\_]+)_/', $icoid, $matches)) {
+            // 提取 sid 后面的值
+            $sid = $matches[1];
+            // 去掉 sid 及其值
+            $icoid = preg_replace('/^sid:[^\_]+_/', '', $icoid);
+        }
         if (strpos($path, 'attach::') === 0) {
             $attach = C::t('attachment')->fetch(intval(str_replace('attach::', '', $path)));
 			Hook::listen('io_dzz_getstream_attach',$attach);//挂载点
@@ -192,6 +199,11 @@ class io_dzz extends io_api
         global $_G;
         if (strpos($path, 'preview_') === 0) {
             $path = preg_replace('/^preview_/', '', $path);
+        }
+        // 检查是否以 'sid:' 开头并以 '_' 结尾
+        if (preg_match('/^sid:([^\_]+)_/', $path, $matches)) {
+            // 去掉 sid 及其值
+            $path = preg_replace('/^sid:[^\_]+_/', '', $path);
         }
         if (strpos($path, 'attach::') === 0) {
             $attach = C::t('attachment')->fetch(intval(str_replace('attach::', '', $path)));
@@ -327,6 +339,10 @@ class io_dzz extends io_api
         if (!$fileurls) {
             $fileurls = array('fileurl' => self::getFileUri($path), 'filedir' => self::getStream($path));
         }
+        // 检查 filedir 是否为有效文件路径
+        if (!is_string($fileurls['filedir']) || !file_exists($fileurls['filedir'])) {
+            $fileurls['filedir'] = 'dzz/images/default/icodefault.png';
+        }
         
         //非图片类文件的时候，直接获取文件后缀对应的图片
         if (!$imginfo = @getimagesize($fileurls['filedir'])) {
@@ -375,7 +391,14 @@ class io_dzz extends io_api
         if (strpos($rid, 'preview_') === 0) {
             $rid = preg_replace('/^preview_/', '', $rid);
         }
-        if (!$icoarr = C::t('resources')->fetch_by_rid($rid)) {
+       // 检查是否以 'sid:' 开头并以 '_' 结尾
+       if (preg_match('/^sid:([^\_]+)_/', $rid, $matches)) {
+            // 提取 sid 后面的值
+            $sid = $matches[1];
+            // 去掉 sid 及其值
+            $rid = preg_replace('/^sid:[^\_]+_/', '', $rid);
+        }
+        if (!$icoarr = C::t('resources')->fetch_by_rid($rid,'',$preview,$sid)) {
             return array('error' => lang('file_not_exist'));
         }
         if ($icoarr['type'] != 'document' && $icoarr['type'] != 'attach' && $icoarr['type'] != 'image') {
@@ -484,9 +507,17 @@ class io_dzz extends io_api
     //获取icosdata
     public function getMeta($icoid)
     {
+
         if (strpos($icoid, 'preview_') === 0) {
             $icoid = preg_replace('/^preview_/', '', $icoid);
             $preview = true;
+        }
+        // 检查是否以 'sid:' 开头并以 '_' 结尾
+        if (preg_match('/^sid:([^\_]+)_/', $icoid, $matches)) {
+            // 提取 sid 后面的值
+            $sid = $matches[1];
+            // 去掉 sid 及其值
+            $icoid = preg_replace('/^sid:[^\_]+_/', '', $icoid);
         }
         if (strpos($icoid, 'dzz::') === 0) {
             $attachment = preg_replace('/^dzz::/i', '', $icoid);
@@ -551,9 +582,9 @@ class io_dzz extends io_api
             if (!$rid = DB::result_first("select rid from %t where pfid = %d and name = %s", array('resources', $pfid, $filename))) {
                 return false;
             }
-            return C::t('resources')->fetch_by_rid($rid,'',$preview);
+            return C::t('resources')->fetch_by_rid($rid,'',$preview,$sid);
         } elseif (preg_match('/\w{32}/i', $icoid)) {
-            return C::t('resources')->fetch_by_rid($icoid,'',$preview);
+            return C::t('resources')->fetch_by_rid($icoid,'',$preview,$sid);
         } else {
             return false;//C::t('resources')->fetch_by_icoid($icoid);
         }
@@ -671,6 +702,11 @@ class io_dzz extends io_api
         $attachexists = FALSE;
         if (strpos($path, 'preview_') === 0) {
             $path = preg_replace('/^preview_/', '', $path);
+        }
+        // 检查是否以 'sid:' 开头并以 '_' 结尾
+        if (preg_match('/^sid:([^\_]+)_/', $path, $matches)) {
+            // 去掉 sid 及其值
+            $path = preg_replace('/^sid:[^\_]+_/', '', $path);
         }
         if (strpos($path, 'attach::') === 0) {
             $attachment = C::t('attachment')->fetch(intval(str_replace('attach::', '', $path)));
@@ -790,6 +826,11 @@ class io_dzz extends io_api
         if (strpos($path, 'preview_') === 0) {
             $path = preg_replace('/^preview_/', '', $path);
         }
+        // 检查是否以 'sid:' 开头并以 '_' 结尾
+        if (preg_match('/^sid:([^\_]+)_/', $path, $matches)) {
+            // 去掉 sid 及其值
+            $path = preg_replace('/^sid:[^\_]+_/', '', $path);
+        }
         if (strpos($path, 'dzz::') === 0) {
             if (strpos($path, './') !== false) return false;
             @unlink($_G['setting']['attachdir'] . preg_replace('/^dzz::/i', '', $path));
@@ -889,7 +930,7 @@ class io_dzz extends io_api
     }
 
     //过滤文件名称
-    public function name_filter($name)
+    public static function name_filter($name)
     {
         return str_replace(array('/', '\\', ':', '*', '?', '<', '>', '|', '"', "\n"), '', $name);
     }
@@ -2104,6 +2145,13 @@ class io_dzz extends io_api
                 $rid = preg_replace('/^preview_/', '', $rid);
                 $preview = true;
             }
+            // 检查是否以 'sid:' 开头并以 '_' 结尾
+            if (preg_match('/^sid:([^\_]+)_/', $rid, $matches)) {
+                // 提取 sid 后面的值
+                $sid = $matches[1];
+                // 去掉 sid 及其值
+                $rid = preg_replace('/^sid:[^\_]+_/', '', $rid);
+            }
             $data = C::t('resources')->fetch_by_rid($rid);
 			
             if (is_numeric($pfid)) {//如果目标位置也是本地
@@ -2121,7 +2169,7 @@ class io_dzz extends io_api
                     $data['success'] = true;
                     $data['moved'] = true;
                 } else {
-                    $re = self::FileCopy($rid, $pfid, true,$force,$preview);
+                    $re = self::FileCopy($rid, $pfid, true,$force,$preview,$sid);
                     $data['newdata'] = $re['icoarr'];
                     $data['success'] = true;
                 }
@@ -2605,13 +2653,13 @@ class io_dzz extends io_api
     }
 
     //本地文件复制到本地其它区域
-    public function FileCopy($rid, $pfid, $first = true,$force=false,$preview = false)
+    public function FileCopy($rid, $pfid, $first = true,$force=false,$preview = false,$sid = false)
     {
         global $_G, $_GET;
         if (!$tfolder = DB::fetch_first("select * from " . DB::table('folder') . " where fid='{$pfid}'")) {
             return array('error' => lang('target_location_not_exist'));
         }
-        if ($icoarr = C::t('resources')->fetch_by_rid($rid,'',$preview)) {
+        if ($icoarr = C::t('resources')->fetch_by_rid($rid,'',$preview,$sid)) {
 
             unset($icoarr['rid']);
             //判断当前文件有没有拷贝权限；
@@ -2663,7 +2711,7 @@ class io_dzz extends io_api
                         //复制源文件夹数据到目标目录同名文件夹
                         foreach (C::t('resources')->fetch_by_pfid($icoarr['oid']) as $value) {
                             try {
-                                self::FileCopy($value['rid'], $currentfid, false,$preview);
+                                self::FileCopy($value['rid'], $currentfid, false,$preview,$sid);
                             } catch (Exception $e) {
                             }
                         }
@@ -2675,7 +2723,7 @@ class io_dzz extends io_api
                         if ($data = self::createFolderByPath($icoarr['name'], $pfid)) {//根据文件夹名字和当前文件夹路径创建文件夹
                             foreach (C::t('resources')->fetch_by_pfid($folder['fid']) as $value) {//查询原文件夹中文件
                                 try {
-                                    self::FileCopy($value['rid'], $data['pfid'], false,$preview);//复制原文件夹中文件到新文件夹
+                                    self::FileCopy($value['rid'], $data['pfid'], false,$sid,$sid);//复制原文件夹中文件到新文件夹
                                 } catch (Exception $e) {
                                 }
                             }
@@ -2848,6 +2896,11 @@ class io_dzz extends io_api
         $filename = self::name_filter($filename);
         if (strpos($path, 'preview_') === 0) {
             $path = preg_replace('/^preview_/', '', $path);
+        }
+        // 检查是否以 'sid:' 开头并以 '_' 结尾
+        if (preg_match('/^sid:([^\_]+)_/', $path, $matches)) {
+            // 去掉 sid 及其值
+            $path = preg_replace('/^sid:[^\_]+_/', '', $path);
         }
         if (strpos($path, 'dzz::') === false && strpos($path, 'TMP::') === false) {
             $gid = DB::result_first("select gid from %t where fid=%d", array('folder', $path));

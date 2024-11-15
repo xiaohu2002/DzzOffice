@@ -10,9 +10,6 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 global $_G;
-if($_G['setting']['allowshare'] && !$_G['setting']['ballowshare']){
-	showmessage('no_privilege');
-}
 $osid = $_GET['sid'];
 $morepath = $osid;
 $sid = dzzdecode($osid);
@@ -38,6 +35,19 @@ if ($do == 'adddowns') {
 
     if ($share['status'] == -3) {
         showmessage('share_file_deleted');
+    }
+    $canview = 1;
+    $candownload = 1;
+    if ($share['perm']) {
+        $perms = array_flip(explode(',', $share['perm'])); // 将权限字符串转换为数组
+        if (isset($perms[3]) && !$_G['uid']) { // 3 表示仅登录访问
+            Hook::listen('check_login');
+        } elseif (isset($perms[2])) { // 2 表示禁用预览权限
+            $canview = 0;
+        }
+        if (isset($perms[1])) {
+            $candownload = 0; // 下载权限被禁用
+        }
     }
     if ($share['password'] && (dzzdecode($share['password']) != authcode($_G['cookie']['pass_' . $sid]))) {
         if (submitcheck('passwordsubmit')) {
@@ -97,7 +107,7 @@ if ($do == 'adddowns') {
             $shareuser['headerColor'] = $userinfo['svalue'];
         }
         $shareuser['username'] = $userinfo['username'];
-        $shareuser['firstword'] = strtoupper(new_strsubstr($shareuser[username],1,''));
+        $shareuser['firstword'] = strtoupper(new_strsubstr($shareuser['username'],1,''));
     }
     //增加浏览次数
     C::t('shares')->add_views_by_id($sid);
@@ -151,14 +161,9 @@ if ($do == 'adddowns') {
 			$fileinfo['contaions']= C::t('resources')->get_contains_by_fid($fileinfo['oid']);
             $fileinfo['filenum'] = $fileinfo['contaions']['contain'][0];
             $fileinfo['foldernum'] = $fileinfo['contaions']['contain'][1];
-        }else{
-			$opendata=getOpenUrl($fileinfo,$share);
-				$fileinfo['type']=$opendata['type'];
-				$fileinfo['url']=$opendata['url'];
-		}
+        }
         if ($fileinfo['type'] == 'image') {
             $fileinfo['img'] = DZZSCRIPT . '?mod=io&op=thumbnail&width=45&height=45&path=' . dzzencode('attach::' . $fileinfo['aid']);
-            $fileinfo['imgpath'] = DZZSCRIPT . '?mod=io&op=thumbnail&path=' . dzzencode('attach::' . $fileinfo['aid']);
         }
 		
         $list[] = $fileinfo;

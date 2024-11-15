@@ -3,17 +3,13 @@
 	    <li class="nav-item"><a <!--{if OP_NAME=='index' && !$vid}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}">{lang basic_information}</a></li>
 	    <li class="nav-item"><a <!--{if OP_NAME=='avatar'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=avatar">{lang Modify_the_picture}</a></li>
 	    <li class="nav-item"><a <!--{if OP_NAME=='password'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=password">{lang Safety management}</a></li>
-      <!--{loop $_G[setting][verify] $key $value}-->
+		<li class="nav-item"><a href="user.php" target="_blank">{lang Personal data display}</a></li>
+		<!--{loop $_G[setting][verify] $key $value}-->
 	  	<!--{if $value[available] && (empty($value[groupid]) || ($value[groupid] && in_array($_G[groupid],$value[groupid])))}-->
-		  <li class="nav-item">
+		<li class="nav-item">
 	       <a <!--{if MOD_NAME=='profile' && $vid==$key}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&vid=$key">$value[title]</a>
-     </li>
-	   <!--{/if}-->
-	   <!--{/loop}-->
-     <!--{if $kai && $verify[verify1]==1 || $_G['adminid'] || $kai==0}--><!--{else}-->
-     <script type="text/javascript">showDialog('<!--{if $verify[verify1]==-1}-->您提交的实名认证审核失败，请重新提交认证<!--{elseif $verify['uid']}-->您的实名认证信息已提交，请耐心等待审核<!--{else}-->请先完成实名认证<!--{/if}-->',"right",'系统提示')</script>
-     <!--{/if}-->
-      
-	 <li class="nav-item"><a href="user.php" target="_blank">{lang Personal data display}</a></li>
+		</li>
+	<!--{/if}-->
+	<!--{/loop}-->
 	</ul>
 </div>

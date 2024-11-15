@@ -2,7 +2,6 @@
 if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
-
 if (!function_exists('sys_get_temp_dir')) {
     function sys_get_temp_dir()
     {
@@ -618,7 +617,6 @@ function dstrpos($string, $arr, $returnvalue = false)
     }
     return false;
 }
-
 function isemail($email)
 {
     return strlen($email) > 6 && strlen($email) <= 32 && preg_match("/^([A-Za-z0-9\-_.+]+)@([A-Za-z0-9\-]+[.][A-Za-z0-9\-.]+)$/", $email);
@@ -627,6 +625,7 @@ function isphone($phone)
 {
     return preg_match("/^1[3456789]\d{9,10}$/", $phone);
 }
+
 function quescrypt($questionid, $answer)
 {
     return $questionid > 0 && $answer != '' ? substr(md5($answer . md5($questionid)), 16, 8) : '';
@@ -802,8 +801,6 @@ function checkLanguage()
     $langList = $_G['config']['output']['language_list'];
     $langSet = '';
 
-    if($_G['cookie']['language']) $langSet=$_G['cookie']['language'];
-	else{
     if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {// 自动侦测浏览器语言
         preg_match('/^([a-z\d\-]+)/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $matches);
         $langSet = strtolower($matches[1]);
@@ -815,7 +812,6 @@ function checkLanguage()
             $langSet = $matches[1];
         }
     }
-  }
     if (!in_array($langSet, array_keys($langList))) { // 非法语言参数
         $langSet = $_G['config']['output']['language'];
     }
@@ -1662,7 +1658,6 @@ function return_bytes($val) {
 	return $val;
 }
 
-
 function getimgthumbname($fileStr, $extend = '.thumb.jpg', $holdOldExt = true)
 {
     if (empty($fileStr)) {
@@ -1713,6 +1708,7 @@ function strhash($string, $operation = 'DECODE', $key = '')
 
     return base64_encode(gzcompress($string . $vkey));
 }
+
 function dunserialize($data) {
 	// 由于 Redis 驱动侧以序列化保存 array, 取出数据时会自动反序列化（导致反序列化了非Redis驱动序列化的数据），因此存在参数入参为 array 的情况.
 	// 考虑到 PHP 8 增强了类型体系, 此类数据直接送 unserialize 会导致 Fatal Error, 需要通过代码层面对此情况进行规避.
@@ -1855,7 +1851,6 @@ function get_os($agent = '')
     }
     return $os;
 }
-
 
 function array_sort($arr, $keys, $type = 'asc')
 { //二维数组排序；

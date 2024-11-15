@@ -6,7 +6,6 @@
  * Time: 18:53
  */
 if (!defined('IN_DZZ')) {
-
     exit('Access Denied');
 }
 global $_G;
@@ -18,10 +17,10 @@ if($_G['uid']>0){
             'groupid' => $_G['groupid'],
             'syn' =>  0
         );
-	if(!$_G['setting']['bbclosed']){
-		$loginmessage =  'login_succeed';
+	if($_G['setting']['bbclosed']){
+		$loginmessage =  $_G['setting']['closedreason'];
 	}else{
-        $loginmessage =  $_G['setting']['closedreason'];
+        $loginmessage =  'login_succeed';
 	}
         $location = dreferer();//待修改
         
@@ -160,7 +159,7 @@ if(!isset($_GET['loginsubmit'])) {//是否提交
     } else {//登录失败记录日志 
         //写入日志
         $password = preg_replace("/^(.{".round(strlen($_GET['password']) / 4)."})(.+?)(.{".round(strlen($_GET['password']) / 6)."})$/s", "\\1***\\3", $_GET['password']);
-				$errorlog = ($result['ucresult']['email'] ? $result['ucresult']['email'] : $_GET['email'])."尝试登录失败,尝试密码:".$password;
+        $errorlog = ($result['ucresult']['email'] ? $result['ucresult']['email'] : $_GET['email'])."尝试登录失败,尝试密码:".$password;
         writelog('loginlog', $errorlog);
 
         loginfailed($_GET['email']);//更新登录失败记录

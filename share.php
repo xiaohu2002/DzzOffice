@@ -9,14 +9,15 @@
 
 define('APPTYPEID', 200);
 define('DZZSCRIPT', 'index.php');
+define('CURSCRIPT', 'dzz');
 require './core/coreBase.php';
 $dzz = C::app();
 $dzz->init();
-if($_G['setting']['allowshare'] && !$_G['setting']['ballowshare']){
-	showmessage('no_privilege');
-}
 if(!$path=dzzdecode(trim($_GET['s']))){
 	exit('Access Denied');
+}
+if (isset($_GET['sid'])) {
+    $sid = dzzdecode(trim($_GET['sid']));
 }
 if($_GET['a']=='down'){
 	IO::download($path,$_GET['filename']);
@@ -82,9 +83,12 @@ if($_GET['a']=='down'){
 			}, $url);
 			//添加path参数；
 			if(strpos($url,'?')!==false  && strpos($url,'path=')===false){
-				//$path = dzzdecode($icoarr['icoid']);
-				$path = $path ? $path : $_GET['s'];
-				$url.='&path=' . dzzencode('preview_' . $path);
+				if ($sid) {
+					$pre .= 'sid:'.$sid.'_';
+				} else {
+					$pre = 'preview_';
+				}
+				$url.='&path=' . dzzencode($pre . $path);
 			}
 			$url = $_G['siteurl'].$url;
 			@header("Location: $url");
@@ -92,84 +96,15 @@ if($_GET['a']=='down'){
 		}
 		
 	}else{//没有可用的打开方式，转入下载；
-		$path=dzzencode('preview_' . $path);
+		$path=dzzencode($path);
 		IO::download($path);
 		exit();
 	}
 	
-}elseif($_GET['a']=='noview'){
-    $vid = isset($_GET['vid']) ? intval($_GET['vid']):0;
-    if($vid){
-        if(!$icoarr = C::t('resources_version')->fetch_version_by_rid_vid($path,$vid)){
-            showmessage(lang('attachment_nonexistence'));
-        }else{
-            $path = dzzdecode($icoarr['icoid']);
-        }
-    }else{
-        if(!$icoarr=IO::getMeta($path)){
-            showmessage(lang('attachment_nonexistence'));
-        }
-        $icoarr['icoid'] = $_GET['s'];
-    }
-    $imageexts=array('jpg','jpeg','png','gif'); //图片使用；
-    $filename=$icoarr['name'];//rtrim($_GET['n'],'.dzz');
-    $ext=$icoarr['ext'];//strtolower(substr(strrchr($filename, '.'), 1, 10));
-    if(!$ext) $ext=preg_replace("/\?.+/i",'',strtolower(substr(strrchr(rtrim($url,'.dzz'), '.'), 1, 10)));
-	if(in_array($ext,$imageexts)){
-		$url=$_G['siteurl'].'index.php?mod=io&op=thumbnail&path='.$icoarr['icoid'];
-		@header("Location: $url");
-		exit();
-	}
-    $extall=C::t('app_open')->fetch_all_ext();
-    $exts=array();
-    $bzarr=explode(':',$icoarr['rbz']?$icoarr['rbz']:$icoarr['bz']);
-    $bz=($bzarr[0]) ? $bzarr[0]:'dzz';
-    foreach($extall as $value){
-        if(!isset($exts[$value['ext']]) || $value['isdefault']) $exts[$value['ext']]=$value;
-    }
-
-	if(isset($exts[$bz.':'.$ext])){
-		$data=$exts[$bz.':'.$ext];
-	}elseif($exts[$ext]){
-		$data=$exts[$ext];
-	}elseif($exts[$icoarr['type']]){
-		$data=$exts[$icoarr['type']];
-	}else $data=array();
-	if($data){
-		$url=$data['url'];
-		if(strpos($url,'dzzjs:')!==false){//dzzjs形式时
-			@header("Location: $icoarr[url]");
-			 exit();
-		}else{
-			//替换参数
-			$url=preg_replace_callback("/{(\w+)}/i", function($matches) use($icoarr){
-				$key=$matches[1];
-				if($key=='path'){
-					return $icoarr['icoid'];
-				}else if($key=='icoid'){
-					return 'preview_'.random(5);
-				}else{
-					return urlencode($icoarr[$key]);
-				}
-			}, $url);
-			//添加path参数；
-			if(strpos($url,'?')!==false  && strpos($url,'path=')===false){
-				$path = $path ? $path : $_GET['s'];
-				$url.='&path=' . dzzencode('preview_' . $path);
-			}
-			$url = $_G['siteurl'].$url;
-			@header("Location: $url");
-			exit();
-		}
-	}
 }
-if($_GET['a']=='noview'){
-	showmessage('禁止下载');
-}else{
-  //获取文件流地址
-  if(!$url=(IO::getStream($path))){
-    exit(lang('failed_get_file'));
-  }
+//获取文件流地址
+if(!$url=(IO::getStream($path))){
+	exit(lang('failed_get_file'));
 }
 if(is_array($url)) exit($url['error']);
 

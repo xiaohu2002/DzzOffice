@@ -1,5 +1,6 @@
 <?php
 require __DIR__.'/coreBase.php';
+// error_reporting(E_ALL);
 $dzz = C::app();
 $dzz->init();
 

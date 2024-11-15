@@ -20,23 +20,25 @@ class FileDownload{ // class start
   * @param boolean $reload 是否开启断点续传 
   */
   public function download($file, $name='',$file_size=0,$dateline=0, $reload=false){ 
-      if($name==''){ 
-        $name = basename($file); 
-      } 
+    if (is_array($file) && isset($file['error'])) {
+			topshowmessage(lang('file_not_exist1'));
+		}
+    if($name==''){ 
+      $name = basename($file); 
+    } 
 	  if(!$dateline){
 		  $dataline=TIMESTAMP;
 	  }
      if(!$fp = fopen($file, 'rb')){
 		 topshowmessage(lang('file_not_exist1'));
 	 }
-   $charset = CHARSET;
 	 $db = DB::object();
 	 $db->close();
 	 @ob_end_clean();
 	 if(getglobal('gzipcompress')) @ob_start('ob_gzhandler');
 	  if(!$file_size)   $file_size = filesize($file);
       $ranges = $this->getRange($file_size);
-
+      $charset = CHARSET;
       header('cache-control:public');
       header('Date: '.gmdate('D, d M Y H:i:s', $dateline).' GMT');
       header('Last-Modified: '.gmdate('D, d M Y H:i:s', $dateline).' GMT');
@@ -50,7 +52,6 @@ class FileDownload{ // class start
       } else{
           $attachment = 'attachment; filename='.$name;
       }
-      //header('content-disposition:attachment; filename='.$name);
       header('content-disposition:'.$attachment);
       if($reload && $ranges!=null){ // 使用续传
         header('HTTP/1.1 206 Partial Content'); 

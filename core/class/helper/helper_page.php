@@ -10,7 +10,6 @@ class helper_page {
 	public static function multi($num, $perpage, $curpage, $mpurl,$classname='', $maxpages = 0, $page = 5, $autogoto = FALSE, $simple = FALSE, $jsfunc = FALSE) {
 		global $_G;
 		$ajaxtarget = !empty($_GET['ajaxtarget']) ? " ajaxtarget=\"".dhtmlspecialchars($_GET['ajaxtarget'])."\" " : '';
-
 		$a_name = '';
 		$mpurl = str_replace(array("'", '"', "\\"), array('%27', '%22', '%5c'), $mpurl);
 		if(strpos($mpurl, '#') !== FALSE) {
@@ -26,11 +25,11 @@ class helper_page {
 			$pagevar = 'page=';
 		}
 
-			$shownum = $showkbd = TRUE;
-			$showpagejump = TRUE;
-			$shownum = true;
-			$showkbd = FALSE;
-	
+		$shownum = $showkbd = TRUE;
+		$showpagejump = TRUE;
+		$shownum = true;
+		$showkbd = FALSE;
+
 		if(defined('IN_MOBILE') && !defined('TPL_DEFAULT')) {
 			$dot = '..';
 			$page = intval($page) < 10 && intval($page) > 0 ? $page : 4 ;

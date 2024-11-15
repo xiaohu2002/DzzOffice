@@ -54,7 +54,7 @@
             <div class="row mb-3">
               <label class="col-sm-2">{lang file_type}</label>
               <div class="col-sm-10">
-                <textarea type="textarea" id="exts" class="form-control" name="router[router][exts]" row="6" cols="6">{eval echo implode(',',$router[router][exts])}</textarea>
+                <textarea type="textarea" id="exts" class="form-control" name="router[router][exts]" row="6" cols="6">{eval echo implode(',',$router['router']['exts'])}</textarea>
                 <a href="javascript:;" onclick="setExts('jpg,jpeg,png,gif')">{lang photograph_class}</a> 
                 &nbsp;&nbsp; <a href="javascript:;" onclick="setExts('doc,docx,rtf,odt,htm,html,txt')">word{lang type_attach}</a> 
                 &nbsp;&nbsp; <a href="javascript:;" onclick="setExts('xls,xlsx,ods,sxc,csv,tsv')">excel{lang type_attach}</a> 

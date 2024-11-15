@@ -10,7 +10,6 @@ require '../core/coreBase.php';
 @set_time_limit(0);
 $cachelist = array();
 $dzz = C::app();
-
 $dzz->cachelist = $cachelist;
 $dzz->init_cron = false;
 $dzz->init_setting = true;
@@ -484,7 +483,7 @@ if($_GET['step'] == 'start') {
 			}
 		}
 		$perm_inherit=perm_check::getPerm1($arr['fid']);
-		DB::update('folder',array('perm_inherit'=>$perm_inherit),"fid='{$arr[fid]}'");
+		DB::update('folder',array('perm_inherit'=>$perm_inherit),"fid='{$arr['fid']}'");
 		$i++;
 		$msg='继承权限修复';
 		$next=$theurl.'?step=data&dp=3&i='.$i;
@@ -744,11 +743,11 @@ function show_header() {
 	<div style="width:90%;margin:0 auto;">
 	<table id="menu">
 	<tr>
-	<td{$nowarr[start]}>升级开始</td>
-	<td{$nowarr[sql]}>数据库结构添加与更新</td>
-	<td{$nowarr[data]}>数据更新</td>
-	<td{$nowarr[delete]}>数据库结构删除</td>
-	<td{$nowarr[cache]}>升级完成</td>
+	<td{$nowarr['start']}>升级开始</td>
+	<td{$nowarr['sql']}>数据库结构添加与更新</td>
+	<td{$nowarr['data']}>数据更新</td>
+	<td{$nowarr['delete']}>数据库结构删除</td>
+	<td{$nowarr['cache']}>升级完成</td>
 	</tr>
 	</table>
 	<br>

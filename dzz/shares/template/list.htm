@@ -16,7 +16,7 @@
                     <span>{lang user_select_selected}<span class="ex-number"></span>{lang nape}</span>
                 </div>
             </div>
-            <!--{if !$share[xiazai]}-->
+            <!--{if $candownload}-->
             <div class="select-toperate select-toperate-center  toolButtons">
                 <div class="btns">
                     <a node-type="btn-item" href="javascript:void(0);" onclick="downfileselect();return false;" class="shares-topbtns">
@@ -75,12 +75,8 @@
                                                     <tbody>
                                                     <tr>
                                                         <td align="center" valign="middle">
-                                                            <img title="$value[name]"
-                                                                 class="<!--{if $value['type']=='video'}-->videoclass100_100<!--{elseif $value[type]=='image'}-->imageclass<!--{else}-->radius<!--{/if}-->"
-                                                                 src="$value[img]" title="$value[name]"
-                                                            <!--{if $value[type]=='image' }-->
-                                                            data-original="$value[url]" data-dpath="$value[dpath]"
-                                                            <!--{/if}-->/>
+                                                            <img title="$value[name]" class="<!--{if $value['type']=='video'}-->videoclass100_100<!--{elseif $value[type]=='image'}-->imageclass<!--{else}-->radius<!--{/if}-->" src="$value[img]" title="$value[name]"
+                                                            <!--{if $value[type]=='image' }--> data-original="$value[url]" data-dpath="$value[dpath]" <!--{/if}-->/>
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -102,7 +98,7 @@
                             </div>
                             <!--{/loop}-->
                             <!--{if $nextpage}-->
-                            <div class="more text-center pull-left" onclick="getMore(this,'{MOD_URL}&op=ajax&morepath=$morepath&page=$nextpage&rander=grid&marker=$marker')">
+                            <div class="more text-center pull-left" onclick="getMore(this,'{MOD_URL}&op=ajax&sid=$osid&morepath=$morepath&page=$nextpage&rander=grid&marker=$marker')">
                                 <table width="150" height="120" style="table-layout:fixed;">
                                     <tbody>
                                     <tr>
@@ -144,13 +140,12 @@
                                 <div class="col c1 name" data-name="$value[name]">
                                     <div node-type="name" class="name" title="$value[name]">
                                         <!--{if $value[img]}--><img class="icon" title="$value[name]" src="$value[img]"
-                                        <!--{if $value[type]=='image' }--> data-original="$value[url]"
-                                        data-dpath="$value[dpath]"
+                                        <!--{if $value[type]=='image' }--> data-original="$value[url]" data-dpath="$value[dpath]"
                                         <!--{/if}-->/>
                                         <!--{/if}-->
                                         <span node-type="name-text" data-href="$value[shareurl]" class="enabled">$value[name]</span>
                                     </div>
-                                    <!--{if !$share[xiazai]}-->
+                                    <!--{if $candownload}-->
                                     <div class="btns">
                                         <a node-type="btn-item" data-key="download" class="dzz dzz-download" href="javascript:void(0);"></a>
                                     </div>
@@ -165,7 +160,7 @@
                             </div>
                             <!--{/loop}-->
                             <!--{if $nextpage}-->
-                            <div class="more text-center clearfix" onclick="getMore(this,'{MOD_URL}&op=ajax&morepath=$morepath&page=$nextpage&rander=list&marker=$marker')" style="padding-top: 10px;padding-bottom: 10px;">{lang upload_more}
+                            <div class="more text-center clearfix" onclick="getMore(this,'{MOD_URL}&op=ajax&sid=$osid&morepath=$morepath&page=$nextpage&rander=list&marker=$marker')" style="padding-top: 10px;padding-bottom: 10px;">{lang upload_more}
                             </div>
                             <!--{/if}-->
                         </div>
@@ -181,6 +176,7 @@
 </div>
 <script type="text/javascript">
     var share = [];
+    var sid = '{$_G['sid']}';
     var uid = '{$_G['uid']}';
     $(function () {
         $('[data-bs-toggle="tooltip"]').tooltip();
@@ -292,17 +288,17 @@
                     containpath = item.data('dpath');
                     currentfolder = 1;
                 }
-                list_sub(item.parent(), '{MOD_URL}&op=ajax', {
+                list_sub(item.parent(), '{MOD_URL}&op=ajax&sid=$osid', {
                     path: containpath,
                     rander: rander,
                     currentfolder: currentfolder
                 });
                 return false;
             } else {
-							<!--{if !$share[yulan]}-->
-							if (type == 'image' && item.find('img[data-original]').trigger('click.dzzthumb')) {
+                if (type == 'image' && item.find('img[data-original]').trigger('click.dzzthumb')) {
                 } else {
-                    var preurl = 'share.php?a=<!--{if !$share[xiazai]}-->view<!--{else}-->noview<!--{/if}-->&s=' + item.data('dpath');
+                    <!--{if $canview}-->
+                    var preurl = 'share.php?a=view&sid=$osid$&s=' + item.data('dpath');
                     if (top._config) {
                         top.OpenWindow('url', preurl, item.find('img').attr('title'), null, {
                             img: item.find('img').attr('src'),
@@ -311,13 +307,13 @@
                     } else {
                         window.open(preurl, jQuery(this).html());
                     }
+                    <!--{else}-->
+                    var msg ='禁止预览';
+                    var mode = 'confirm';
+                    var title = '系统提示';
+                    showDialog(msg,mode,title);
+                    <!--{/if}-->
                 }
-							<!--{else}-->
-							var msg ='禁止预览';
-							var mode = 'confirm';
-							var title = '系统提示';
-              showDialog(msg,mode,title);
-							<!--{/if}-->
             }
             return false;
         });
@@ -328,12 +324,12 @@
             el.siblings().find('.asc').css('visibility', 'hidden');
             item_sort(el.data('key'), el.find('.asc').hasClass('desc') ? 'desc' : 'asc');
         });
-			<!--{if !$share[xiazai]}-->
+        <!--{if $candownload}-->
         jQuery(document).on('click', 'a[data-key=download]', function () {
             share_download(this);
             return false;
         });
-			<!--{/if}-->
+        <!--{/if}-->
         jQuery('img[data-original]').dzzthumb();
 			
     });
@@ -368,7 +364,7 @@
         jQuery(frage).appendTo(jQuery('.list .list-wrapper').empty());
         page.appendTo('.list .list-wrapper');
     }
-			<!--{if !$share[xiazai]}-->
+    <!--{if $candownload}-->
     function share_download(obj) {
         var li = jQuery(obj).closest('.item');
         jQuery.post('{MOD_URL}&do=adddowns', {'sid':'$_GET[sid]'},function (data) {
@@ -397,7 +393,41 @@
         }, 'json');
         return false;
     }
-			<!--{/if}-->
+    //下载选中项
+    function downfileselect() {
+        var sharids = share;
+        jQuery.post('{MOD_URL}&do=adddowns',{'sid':'$_GET[sid]'}, function (data) {
+            if (data['success']) {
+                var url = DZZSCRIPT + '?mod=io&op=download&checkperm=false&path=' + share;
+                if (BROWSER.ie) {
+                    window.open(url);
+                } else {
+                    window.frames['hideframe'].location = url;
+                }
+            }
+        }, 'json');
+        return false;
+    }
+    function downAll(obj) {
+        //var rids = $(obj).data('allrids');
+        //var ridarr = rids.split(',');
+        var rids = [];
+        jQuery('div[data-value="true"]').each(function () {
+            rids.push(jQuery(this).data('dpath'));
+        });
+        jQuery.post('{MOD_URL}&do=adddowns',{'sid':'$_GET[sid]'}, function (data) {
+            if (data['success']) {
+                var url = DZZSCRIPT + '?mod=io&op=download&checkperm=false&path=' + rids;
+                if (BROWSER.ie) {
+                    window.open(url);
+                } else {
+                    window.frames['hideframe'].location = url;
+                }
+            }
+        }, 'json');
+        return false;
+    }
+    <!--{/if}-->
     //列表和缩略图的切换
     function viewSwitch(obj, tclass) {
         if (share.length > 0) {
@@ -444,23 +474,6 @@
         jQuery(tclass).show();
 
     }
-<!--{if !$share[xiazai]}-->
-    //下载选中项
-    function downfileselect() {
-        var sharids = share;
-        jQuery.post('{MOD_URL}&do=adddowns',{'sid':'$_GET[sid]'}, function (data) {
-            if (data['success']) {
-                var url = DZZSCRIPT + '?mod=io&op=download&checkperm=false&path=' + share;
-                if (BROWSER.ie) {
-                    window.open(url);
-                } else {
-                    window.frames['hideframe'].location = url;
-                }
-            }
-        }, 'json');
-        return false;
-    }
-<!--{/if}-->
     //缩略图好列表选中操作
     jQuery(document).off('click.sharesclick').on('click.sharesclick', '.Icoblock', function (e) {
         if (_hotkey.ctrl > 0) {
@@ -509,40 +522,6 @@
         }
         jQuery('.ex-number').html(share.length);
     }
-	<!--{if !$share[xiazai]}-->
-    function downAll(obj) {
-        //var rids = $(obj).data('allrids');
-        //var ridarr = rids.split(',');
-        var rids = [];
-        jQuery('div[data-value="true"]').each(function () {
-            rids.push(jQuery(this).data('dpath'));
-        });
-        jQuery.post('{MOD_URL}&do=adddowns',{'sid':'$_GET[sid]'}, function (data) {
-            if (data['success']) {
-                var url = DZZSCRIPT + '?mod=io&op=download&checkperm=false&path=' + rids;
-                if (BROWSER.ie) {
-                    window.open(url);
-                } else {
-                    window.frames['hideframe'].location = url;
-                }
-            }
-        }, 'json');
-        return false;
-    }
-<!--{/if}-->
-    /* function savefile(){
-     if(uid == 0){
-     location.href='$_G[siteurl]user.php?mod=login';
-     return false;
-     }
-     jQuery.post('{MOD_URL}&do=adddowns&sid={$_GET[sid]}', function(data) {
-     if(data['success']) {
-     var userhref = 'index.php?mod=system&op=selposition&handlekey=seldir&allowcreate=1&callback=save_file';
-     showWindow('seldir',userhref,'get','0');
-     }
-     }, 'json');
-     return false;
-     }*/
     $(document).off('click.sharesave').on('click.sharesave', '.share_save', function () {
         if (uid == 0) {
             location.href = '$_G[siteurl]user.php?mod=login';

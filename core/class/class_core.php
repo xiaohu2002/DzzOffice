@@ -2,6 +2,7 @@
 if(!defined('IN_DZZ')) {
     exit('Access Denied');
 }
+
 class core
 {
 	private static $_tables;

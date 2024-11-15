@@ -133,7 +133,7 @@ class table_resources extends dzz_table
             $extrasql = ' and isdelete < 1 ';
         }
         //获取当前文件下所有下级rid
-        foreach (DB::fetch_all("select rid,pfid,oid,uid,sperm from %t where (oid in(%n) or pfid in(%n)) and rid != %s $extrasql", array($this->_table, $fids, $fids, $icoarr['rid'])) as $v) {
+        foreach (DB::fetch_all("select rid,pfid,oid,uid,gid,sperm from %t where (oid in(%n) or pfid in(%n)) and rid != %s $extrasql", array($this->_table, $fids, $fids, $icoarr['rid'])) as $v) {
             $rids[] = $v['rid'];
             $resources[] = $v;
         }
@@ -160,7 +160,8 @@ class table_resources extends dzz_table
             if (count($resources)) {
                 foreach ($resources as $v) {
                     if (!perm_check::checkperm($action, $v)) {
-                        return array('error' => lang('has_no_privilege_file'));
+                        $arr = self::fetch_by_rid($v['rid']);
+                        return array('error' => lang('has_no_privilege_file').' '.$arr['name']);
                     }
                 }
             }
@@ -375,7 +376,7 @@ class table_resources extends dzz_table
         return $resourcedata;
     }
 
-    public function fetch_by_rid($rid, $force_from_db = false,$preview = false)
+    public function fetch_by_rid($rid, $force_from_db = false,$preview = false,$sid = false)
     { //返回一条数据同时加载资源表数据
         global $_G;
         $cachekey = 'resourcesdata_' . $rid;
@@ -426,6 +427,7 @@ class table_resources extends dzz_table
         $data['path'] = $data['rid'];
         $data['bz'] = '';
         $data['preview'] = $preview;
+        $data['sid'] = $sid;
         $data['collect'] = C::t('resources_collect')->fetch_by_rid($rid);
         if ($data['remote'] > 1) $data['rbz'] = io_remote::getBzByRemoteid($data['remote']);
 

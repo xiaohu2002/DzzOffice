@@ -47,9 +47,8 @@ class dzz_admincp
 
 		$this->sessionlimit = TIMESTAMP - $this->sessionlife;
 
-		$this->check_cpaccess(); 
+		$this->check_cpaccess();
 		$this->writecplog();
-		
 	}
 
 	function writecplog() {

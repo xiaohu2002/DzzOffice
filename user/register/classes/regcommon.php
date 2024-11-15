@@ -13,7 +13,6 @@ class Regcommon{
 
         //执行注册
         $result = C::t('user')->user_register($params);
-			
         //获取注册状态
         if(is_array($result)){
             $uid = $result['uid'];

@@ -139,11 +139,6 @@ if(BROWSER.firefox && window.HTMLElement) {
 		return true;
 	});
 }
-jQuery('.js-popbox').each(function(){
-	if(jQuery(this).hasClass('disabled')) return;
-	jQuery(this).popbox();
-	jQuery("[data-bs-toggle='tooltip']").tooltip();
-});
 //判断当前窗口是否激活，当窗口激活时不使用桌面通知
 var CurrentActive;
 if ("onfocusin" in document){//for IE 
