@@ -43,6 +43,9 @@
 				</script>
 				<!--{elseif $step==3}-->
 				<h2 class="text-primary ml20 text-center">{lang update_cache_succeed}</h2>
+                <script type="text/javascript">
+					window.setTimeout(function() { location.href = '{MOD_URL}&op=updatecache'; }, 5000);
+				</script>
 				<!--{/if}-->
 			</div>
 			<div class="alert alert-warning">
