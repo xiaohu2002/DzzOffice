@@ -151,8 +151,9 @@ if ($do == 'adddowns') {
     $wheresql = " where rid in(%n) and isdelete < 1";
     $list = array();
     $allrids = '';
+    $ismobile = helper_browser::ismobile();
     $count = DB::result_first("select count(*) from %t $wheresql $ordersql $limitsql", $params);
-//获取分享数据
+    //获取分享数据
     foreach (DB::fetch_all("select rid from %t $wheresql $ordersql $limitsql", $params) as $v) {
         $fileinfo = getfileinfo($v['rid']);
         if ($fileinfo['type'] == 'folder' && $fileinfo['oid']) {
@@ -161,6 +162,12 @@ if ($do == 'adddowns') {
 			$fileinfo['contaions']= C::t('resources')->get_contains_by_fid($fileinfo['oid']);
             $fileinfo['filenum'] = $fileinfo['contaions']['contain'][0];
             $fileinfo['foldernum'] = $fileinfo['contaions']['contain'][1];
+        } else {
+            if ($ismobile) {
+                $opendata=getOpenUrl($fileinfo,$share);
+				$fileinfo['type']=$opendata['type'];
+				$fileinfo['url']=$opendata['url'];
+            }
         }
         if ($fileinfo['type'] == 'image') {
             $fileinfo['img'] = DZZSCRIPT . '?mod=io&op=thumbnail&width=45&height=45&path=' . dzzencode('attach::' . $fileinfo['aid']);
@@ -180,7 +187,6 @@ if ($do == 'adddowns') {
     } else {
         $nextpage = 0;
     }
-    $ismobile = helper_browser::ismobile();
     if ($ismobile) {
         include template('mobile/list');
     } else {

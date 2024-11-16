@@ -255,7 +255,7 @@ EOF;
 			'<img src="../static/image/common/arw_r.gif" /><a href="'.$debugfile.'?k='.$akey.'&'.$phpinfok.'" target="_blank">phpinfo()</a>'.
 			'<img src="../static/image/common/arw_r.gif" /><a href="'.$debugfile.'?k='.$akey.'&'.$mysqlplek.'" target="_blank">MySQL 进程列表</a>'.
 			'<img src="../static/image/common/arw_r.gif" /><a href="'.$debugfile.'?k='.$akey.'&'.$viewcachek.'" target="_blank">查看缓存</a>'.
-			'<img src="../static/image/common/arw_r.gif" /><a href="../misc.php?mod=initsys&formhash='.formhash().'" target="_debug_initframe" onclick="parent.$(\'_debug_initframe\').onload = function () {parent.location.href=parent.location.href;}">更新缓存</a>' : '').
+			'<img src="../static/image/common/arw_r.gif" /><a href="../misc.php?mod=syscache" target="_debug_initframe" onclick="parent.$(\'_debug_initframe\').onload = function () {parent.location.href=parent.location.href;}">更新缓存</a>' : '').
 			'<img src="../static/image/common/arw_r.gif" /><a href="../install/update.php" target="_blank">执行 update.php</a>'.
 		'</table>'.
 		'</div>'.

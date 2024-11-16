@@ -57,7 +57,7 @@ foreach ($list as $cid => $value) {
 			}
 		}
 		if(!sendmail($value['email'], $subject, $message)) {
-			runlog('sendmail', "$value[email]  发送失败");
+			runlog('sendmail', "$value[email] sendmail failed.");
 		}
 	}
 }
