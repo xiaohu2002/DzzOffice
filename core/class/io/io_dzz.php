@@ -131,11 +131,11 @@ class io_dzz extends io_api
             $path = preg_replace('/^preview_/', '', $path);
         }
         // 检查是否以 'sid:' 开头并以 '_' 结尾
-        if (preg_match('/^sid:([^\_]+)_/', $icoid, $matches)) {
+        if (preg_match('/^sid:([^\_]+)_/', $path, $matches)) {
             // 提取 sid 后面的值
             $sid = $matches[1];
             // 去掉 sid 及其值
-            $icoid = preg_replace('/^sid:[^\_]+_/', '', $icoid);
+            $path = preg_replace('/^sid:[^\_]+_/', '', $path);
         }
         if (strpos($path, 'attach::') === 0) {
             $attach = C::t('attachment')->fetch(intval(str_replace('attach::', '', $path)));
