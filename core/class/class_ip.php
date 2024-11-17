@@ -2,7 +2,6 @@
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
-
 class ip {
 
 	function __construct() {
@@ -229,29 +228,15 @@ class ip {
 		if (!(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_RES_RANGE) !== false)) {
 			return '- Reserved';
 		}
-		if (array_key_exists('ipdb', $_G['config']) && array_key_exists('setting', $_G['config']['ipdb'])) {
-			$s = $_G['config']['ipdb']['setting'];
-			if (!empty($s['fullstack'])) {
-				$c = 'ip_'.$s['fullstack'];
-			} else if (!empty($s['ipv4']) && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false) {
-				$c = 'ip_'.$s['ipv4'];
-			} else if (!empty($s['ipv6']) && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false) {
-				$c = 'ip_'.$s['ipv6'];
-			} else if (!empty($s['default'])) {
-				$c = 'ip_'.$s['default'];
-			} else {
-				$c = 'ip_tiny';
-			}
+		if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false) {
+			$c = 'ip_tiny';
+		} else if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false) {
+			$c = 'ip_v6wry';
 		} else {
 			$c = 'ip_tiny';
 		}
 		$ipobject = $c::getInstance();
 		return $ipobject === NULL ? '- Error' : $ipobject->convert($ip);
 	}
-
-	public static function checkaccess($ip, $accesslist) {
-		return preg_match("/^(".str_replace(array("\r\n", ' '), array('|', ''), preg_quote($accesslist, '/')).")/", $ip);
-	}
-
 }
 ?>
