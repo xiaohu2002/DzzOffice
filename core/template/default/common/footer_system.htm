@@ -18,24 +18,21 @@ try{
 <!--{if $_G['setting']['statcode']}-->
 	$_G['setting']['statcode']
 <!--{/if}-->
+<!--{if $_G['setting']['addEventListener']}-->
 <script type="text/javascript">
     // 全局错误处理
-    jQuery(document).ready(function() {
+    $(document).ready(function() {
         // 设置jQuery全局的Ajax错误处理
-        jQuery.ajaxSetup({
+        $.ajaxSetup({
             error: function(xhr, textStatus, errorThrown) {
                 var errorMsg = "Ajax Error: " + textStatus + ", " + errorThrown;
                 showmessage(errorMsg, 'error', 3000, 1);
             }
         });
-
-        <!--{if $_G['setting']['addEventListener']}-->
         window.addEventListener('error', function(event) {
             handleErrors(event);
         }, true);
-        <!--{/if}-->
     });
-    <!--{if $_G['setting']['addEventListener']}-->
     function handleErrors(event) {
         try {
             // 检查是否存在错误对象
@@ -50,8 +47,8 @@ try{
             console.error("Failed to report or show error:", error);
         }
     }
-    <!--{/if}-->
 </script>
+<!--{/if}-->
 <script type="text/javascript" src="static/js/popper.min.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/js/main.min.js?{VERHASH}"></script>
