@@ -3576,14 +3576,3 @@ function dzz_userconfig_init()
      return $result[0];
 
  }
-
- //取得所有子级目录
-function get_all_chilrdenfid_by_pfid($pfid)
-{
-	static $fids = array();
-    foreach(C::t('folder')->fetch_fid_by_pfid($pfid) as $v){
-        $fids[] = $v['fid'];
-        get_all_chilrdenfid_by_pfid($v['fid']);
-    }
-    return $fids;
-}
