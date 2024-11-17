@@ -1906,8 +1906,8 @@ function mobileplayer()
 //target='dzz'时在桌面打开
 jQuery(document).ready(function(e) {
 	jQuery('.js-popbox').each(function(){
-			jQuery(this).popbox();
-		});
+		jQuery(this).popbox();
+	});
     jQuery(document).on('click','a',function(){
 		var href=this.href,id='',name=jQuery(this).attr('title')?jQuery(this).attr('title'):strip_tags(this.innerHTML);
 		

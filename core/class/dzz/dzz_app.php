@@ -580,40 +580,6 @@ class dzz_app extends dzz_base{
 
             }
         }
-        
-        if (!$this->var['member']['adminid'] && $appidxu = C::t('app_market')->fetch_by_identifier(CURMODULE)) {
-            if (!$appidxu['available']) {
-                showmessage(lang('该应用已关闭，请联系管理员。'));
-            } elseif ($appidxu['group'] == 0) {
-                // 全员使用跳过
-            } else {
-                if ($this->var['member']['uid']) {
-                    $uid = $this->var['member']['uid'];
-                } elseif ($_GET['uidtoken']) {
-                    $uid = intval(dzzdecode($_GET['uidtoken']));
-                }
-                if ($uid) {
-                    $config = array();
-                    if(!$config=C::t('user_field')->fetch($uid) || !$config['applist']){
-                        $config= dzz_userconfig_init();
-                    }
-                    if ($config && isset($config['applist'])) {
-                        $applist = explode(',', $config['applist']);
-                        if (in_array($appidxu['appid'], $applist, true)) {
-                            // 用户配置中包含该应用，有权限
-                        } else {
-                            showmessage(lang('您无权限使用该应用，请联系管理员。'));
-                        }
-                    } else {
-                        showmessage(lang('您无权限使用该应用，请联系管理员。'));
-                    }
-                } elseif ($appidxu['group'] == -1) {
-                    // 游客可以使用，跳过
-                } else {
-                    dheader("Location: user.php?mod=login");
-                }
-            }
-        }
 
         if(isset($this->var['setting']['nocacheheaders']) && $this->var['setting']['nocacheheaders']) {
             @header("Expires: -1");

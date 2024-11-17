@@ -465,6 +465,7 @@ if($_GET['step'] == 'start') {
 		$next=$theurl.'?step=data&dp=2&i='.$i;
 		show_msg("[ $i / $count_i ] ".$msg, $next);
 	}elseif($_GET['dp']==3){ //更新继承权限和路径
+		
 		$i = empty($_GET['i'])?0:intval($_GET['i']);
 		
 		$count_i = DB::result_first("select COUNT(*) from %t",array('folder'));
