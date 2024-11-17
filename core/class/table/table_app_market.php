@@ -191,8 +191,8 @@ class table_app_market extends dzz_table
 	public function fetch_appid($mod){
 		$sql='';
 		$param=array($this->_table);
-			$sql=" identifier = %s";
-			$param[]=$mod;
+		$sql=" identifier = %s";
+		$param[]=$mod;
 		return DB::result_first("select appid from %t where $sql ",$param);
 	}
 	public function fetch_by_identifier($identifier,$app_path='dzz'){

@@ -125,6 +125,7 @@ elseif(isset($_GET[\''.$mysqlplek.'\'])) {
 	if(!empty($_GET[\'Id\'])) {
 		$query = DB::query("KILL ".floatval($_GET[\'Id\']), \'SILENT\');
 	}
+	$i = 0;
 	$query = DB::query("SHOW FULL PROCESSLIST");
 	echo \'<style>table { font-size:12px; }</style>\';
 	echo \'<table style="border-bottom:none">\';
