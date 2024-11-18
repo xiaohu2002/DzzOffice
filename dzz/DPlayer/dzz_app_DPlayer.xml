@@ -17,7 +17,7 @@
 			<item id="isshow"><![CDATA[0]]></item>
 			<item id="hideInMarket"><![CDATA[0]]></item>
 			<item id="feature"><![CDATA[]]></item>
-			<item id="fileext"><![CDATA[mp3,mp4,flv,webm,ogv,ogg,wav,m3u8]]></item>
+			<item id="fileext"><![CDATA[mp3,mp4,m4v,flv,mov,webm,ogv,ogg,wav,m3u8,f4v,webmv,mkv,magne]]></item>
 			<item id="group"><![CDATA[0]]></item>
 			<item id="position"><![CDATA[1]]></item>
 			<item id="system"><![CDATA[0]]></item>
