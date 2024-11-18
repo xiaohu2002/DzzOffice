@@ -1,0 +1,117 @@
+<div class="middlecenter  scroll-100 scroll-srcollbars" style="z-index: 100;">
+<div class="middle-padding-left middle-recycle height-100 " id="selectBoardPosition">
+	<!--选择项开始-->
+    <div class="middletopMenu recyleadmin-top clearfix ">
+			<div class="recyle-option-all clearfix">	              
+        <div class="recyle-option-dropdown">
+					<div class="dropdown">
+					  <button class="dropdown-toggle form-control"  type="button"  data-bs-toggle="dropdown"style="text-align:left;">
+					  	<span id="search_data_text">{lang all}</span>
+					  </button>
+					  <ul class="dropdown-menu" id="position_menulist">
+              <li><a href="javascript:;" data-val="">{lang all}</a></li>
+              <!--{if $homearr}-->
+              <li><a href="javascript:;" data-val="f_$homearr[fid]">$homearr['name']</a></li>
+              <!--{/if}-->
+              <!--{loop $manageorg $v}-->
+              <li><a href="javascript:;" data-val="g_$v[orgid]">$v['orgname']</a></li>
+              <!--{/loop}-->
+					  </ul>
+					</div>
+				</div>
+				<div class="recyle-date groupmanage-time">
+					<div class="input-group" data-provide="datepicker">
+            <span class="input-group-text">从</span>
+            <input type="text" id="selectTime01" class="selectTime form-control" placeholder="{lang start_time}" data-provide="datepicker"/>
+            <span class="input-group-text">至</span>
+            <input type="text" class="selectTime form-control" id="selectTime02" placeholder="{lang finish_time}" data-provide="datepicker"/>
+          </div>
+				</div>
+				<script type="text/javascript" src="static/js/main.min.js" ></script>
+      </div>      
+    </div>	
+    <!--选择项结束-->
+    <!--文件列表开始-->
+    <div id="filemanage-recycle-list"></div>
+    <!--文件列表结束-->
+  </div>
+</div>
+
+<!--右侧菜单结束-->
+
+<!--头部信息框-->
+<div class="navtopheader">
+</div>
+<div id="template_middleicon" style="display:none">
+<!--{template template_file_middleicon}-->
+</div>
+<div id="template_detaillist"  style="display:none">
+<!--{template template_file_detaillist_recycle}-->
+</div>
+<div id="template_toolButton" style="display:none">
+<!--{template template_file_toolButton}-->
+</div>
+<div id="template_file" style="display:none">
+<!--{template template_file_navtopfile}-->
+</div>
+<div id="template_nofile_notice" style="display:none">
+	<!--{template noFilePage-recycle}-->
+</div>
+<script type="text/javascript">
+    $(document).ready(function(e) {
+        var hash=location.hash;
+        _filemanage.getData(_explorer.appUrl+'&op=recycle&do=filelist&sid=recycle-list');
+    });
+   // var recycleids = [];//定义全局变量
+   var searchrecyclejson = {'after':0,'before':0,'gid':0,'fid':0,'asc':0,'disp':0,'page':0};
+
+
+	//时间筛选项值发生变化时
+	$('#selectTime01').change(function(){
+		searchrecyclejson.after = $(this).val();
+		searchRecycledata();
+	})
+    $('#selectTime02').change(function(){
+        searchrecyclejson.before = $(this).val();
+        searchRecycledata();
+    })
+	//位置筛选项发生改变时
+	$(document).off('click.recycleposition').on('click.recycleposition','#position_menulist li',function(){
+		var val = $('a',this).data('val');
+        var text = $(this).text();
+        $('#search_data_text').text(text);
+		var pregf = /^f_\d+/;
+		var pregg = /^g_\d+/;
+		if(pregf.test(val)){
+			searchrecyclejson.fid = val.replace(/f_/,'');
+			searchrecyclejson.gid = 0;
+		}else if(pregg.test(val)){
+			searchrecyclejson.gid = val.replace(/g_/,'');
+			searchrecyclejson.fid = 0;
+		}else{
+			searchrecyclejson.gid = 0;
+			searchrecyclejson.fid = 0;
+		}
+		searchRecycledata();
+	})
+	//执行筛选
+	function searchRecycledata(){
+        var filemanage=_filemanage.cons['recycle-list'];
+        filemanage.gid=(searchrecyclejson.gid > 0) ? searchrecyclejson.gid:'';
+
+        filemanage.fids=(searchrecyclejson.fid > 0) ?searchrecyclejson.fid:'';
+        filemanage.after=(searchrecyclejson.after > 0) ? searchrecyclejson.after:'';
+        filemanage.before=(searchrecyclejson.before > 0) ? searchrecyclejson.before:'';
+        _filemanage.cons['recycle-list'].pageClick();
+	}
+    function finally_delete(obj,id){
+        $.post(MOD_URL+'&op=operation_file&do=deletefinally',{'id':id},function(data){
+            if(data['success']){
+                $(obj).closest('.liste').remove();
+            }else if(data['error']){
+
+            }
+        },'json')
+    }
+</script>
+<script type="text/javascript" src="static/js/main.min.js" ></script>

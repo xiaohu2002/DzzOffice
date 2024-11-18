@@ -264,168 +264,82 @@ if($_GET['step'] == 'start') {
 		 C::t('setting')->update('fileVersionNumber', '50');
 		}
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','default_mod'))){
-     C::t('setting')->update('default_mod', 'index');
+			C::t('setting')->update('default_mod', 'index');
 		}
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','forbiddentime'))){
 		 C::t('setting')->update('forbiddentime', '900');
 		}
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','numberoflogins'))){
-     C::t('setting')->update('numberoflogins', '5');
+			C::t('setting')->update('numberoflogins', '5');
 		}
 		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','notification'))){
 		 C::t('setting')->update('notification', '60');
 		}
-		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=appmanagement'))){
-			DB::delete('app_market', array('appurl' => '{dzzscript}?mod=appmanagement'));
-			C::t('app_market')->insert(array('appname'=>'管理',
-		 								  'appico'=>'appico/201712/21/184312rthhhg9oujti9tuu.png',
-		 								  'appurl'=>'{adminscript}?mod=appmanagement',
-										  'appdesc'=>'管理员应用集合，方便管理员管理各个管理应用',
-										  'dateline'=>TIMESTAMP,
-										  'disp'=>1,
-											'mid'=>1,
-										  'vendor'=>'乐云网络',
-										  'group'=>3,
-											'haveflash'=>0,
-											'isshow'=>1,
-											'hideInMarket'=>0,
-										  'system'=>2,
-										  'notdelete'=>1,
-										  'position'=>1,
-											'open'=>1,
-										  'app_path'=>'admin',
-										  'identifier'=>'appmanagement',
-										  'version'=>'2.0',
-											'check_upgrade_time'=>'20171115',
-										  'available'=>1),0,1);
+		$appurl = "{dzzscript}?mod=appmanagement";
+		$appid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
+		if ($appid) {
+			C::t('app_market')->update($appid, array('appurl' => "{adminscript}?mod=appmanagement", 'group' => 3));
 		}
 		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=DPlayer'))){
 			C::t('app_market')->insert(array('appname'=>'DPlayer',
-		 								  'appico'=>'appico/202308/19/205443f8ucb4pueqebbrvp.png',
-		 								  'appurl'=>'{dzzscript}?mod=DPlayer',
-										  'appdesc'=>'DPlayer，支持MP3,mp4,flv,wav等格式',
-										  'dateline'=>TIMESTAMP,
-										  'disp'=>0,
-											'mid'=>0,
-										  'vendor'=>'小胡',
-										  'group'=>0,
-											'haveflash'=>0,
-											'isshow'=>0,
-											'hideInMarket'=>0,
-										  'system'=>2,
-										  'notdelete'=>1,
-										  'position'=>1,
-											'open'=>1,
-										  'app_path'=>'dzz',
-										  'identifier'=>'DPlayer',
-										  'version'=>'1.2',
-											'check_upgrade_time'=>'20230819',
-										  'available'=>1),0,1);
+			'appico'=>'appico/202308/19/205443f8ucb4pueqebbrvp.png',
+			'appurl'=>'{dzzscript}?mod=DPlayer',
+			'appdesc'=>'DPlayer，支持MP3,mp4,flv,wav等格式',
+			'dateline'=>TIMESTAMP,
+			'disp'=>0,
+			'mid'=>0,
+			'vendor'=>'小胡',
+			'group'=>0,
+			'haveflash'=>0,
+			'isshow'=>0,
+			'hideInMarket'=>0,
+			'system'=>2,
+			'notdelete'=>1,
+			'position'=>1,
+			'open'=>1,
+			'app_path'=>'dzz',
+			'identifier'=>'DPlayer',
+			'version'=>'1.2',
+			'available'=>1),0,1);
 		}
-		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=filemanage'))){
-		C::t('app_market')->insert(array('appname'=>'文件管理',
-		 								  'appico'=>'appico/201712/21/175535t47bad99b7sssdwq.png',
-		 								  'appurl'=>'{dzzscript}?mod=filemanage',
-										  'appdesc'=>'管理和查看系统所有文件',
-										  'dateline'=>TIMESTAMP,
-										  'disp'=>6,
-											'mid'=>6,
-										  'vendor'=>'乐云网络',
-											'haveflash'=>0,
-											'isshow'=>1,
-											'hideInMarket'=>0,
-										  'group'=>1,
-											'position'=>1,
-										  'system'=>2,
-										  'notdelete'=>1,
-											'open'=>1,
-											'nodup'=>0,
-											'identifier'=>'filemanage',
-										  'app_path'=>'dzz',
-											'available'=>1,
-										  'version'=>'2.0',
-											'check_upgrade_time'=>'20180206'),0,1);
+		//添加网盘应用
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=explorer'))){
+			C::t('app_market')->insert(array('appname'=>'网盘',
+											  'appico'=>'appico/202411/02/170040bgapsjg4pt4nuee4.png',
+											  'appurl'=>'{dzzscript}?mod=explorer',
+											 'appdesc'=>'企业、团队文件集中管理。主要体现的功能是支持企业部门的组织架构建立共享目录，也支持组的方式灵活建立共享目录。支持文件标签，多版本，评论，详细的目录权限等协作功能',
+											 'dateline'=>TIMESTAMP,
+											 'disp'=>14,
+											 'vendor'=>'乐云网络',
+											 'group'=>1,
+											 'system'=>0,
+											 'notdelete'=>1,
+											 'position'=>1,
+											 'app_path'=>'dzz',
+											 'identifier'=>'explorer',
+											 'version'=>'2.04',
+											 'available'=>1),0,1);
+		   }
+		//修改应用
+		$appurl = "{adminscript}?mod=filemanage";
+		$appid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
+		if ($appid) {
+			C::t('app_market')->update($appid, array('appurl' => "{dzzscript}?mod=filemanage", 'group' => 1,'open'=>1,'app_path'=>'dzz','position'=>1));
 		}
-		if(DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=filemanage'))){
-			DB::delete('app_market', array('appurl' => '{adminscript}?mod=filemanage'));
+		$appurl = "{adminscript}?mod=orguser";
+		$appid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
+		if ($appid) {
+			C::t('app_market')->update($appid, array('appurl' => "{dzzscript}?mod=orguser", 'group' => 1,'open'=>1,'app_path'=>'dzz','position'=>1));
 		}
-		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=orguser'))){
-		C::t('app_market')->insert(array('appname'=>'机构用户',
-		 								  'appico'=>'appico/201712/21/131016is1wjww2uwvljllw.png',
-		 								  'appurl'=>'{dzzscript}?mod=orguser',
-										  'appdesc'=>'',
-										  'dateline'=>TIMESTAMP,
-										  'disp'=>2,
-											'mid'=>2,
-										  'vendor'=>'乐云网络',
-											'haveflash'=>0,
-											'isshow'=>1,
-											'hideInMarket'=>0,
-										  'group'=>1,
-											'position'=>1,
-										  'system'=>2,
-										  'notdelete'=>1,
-											'open'=>1,
-											'nodup'=>0,
-											'identifier'=>'orguser',
-										  'app_path'=>'dzz',
-											'available'=>1,
-										  'version'=>'2.0',
-											'check_upgrade_time'=>'20220204'),0,1);
+		$appurl = "{adminscript}?mod=share";
+		$appid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
+		if ($appid) {
+			C::t('app_market')->update($appid, array('appurl' => "{dzzscript}?mod=share", 'group' => 1,'open'=>1,'app_path'=>'dzz','position'=>1));
 		}
-		if(DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=orguser'))){
-			DB::delete('app_market', array('appurl' => '{adminscript}?mod=orguser'));
-		}
-		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=share'))){
-		C::t('app_market')->insert(array('appname'=>'分享管理',
-		 								  'appico'=>'appico/201712/21/165535t47bad99b7qqqdwq.png',
-		 								  'appurl'=>'{dzzscript}?mod=share',
-										  'appdesc'=>'管理和查阅所有分享',
-										  'dateline'=>TIMESTAMP,
-										  'disp'=>7,
-											'mid'=>7,
-										  'vendor'=>'乐云网络',
-											'haveflash'=>0,
-											'isshow'=>1,
-											'hideInMarket'=>0,
-										  'group'=>1,
-											'position'=>1,
-										  'system'=>2,
-										  'notdelete'=>1,
-											'open'=>1,
-											'nodup'=>0,
-											'identifier'=>'share',
-										  'app_path'=>'dzz',
-											'available'=>1,
-										  'version'=>'2.0',
-											'check_upgrade_time'=>'20180206'),0,1);
-		}
-		if(DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=share'))){
-			DB::delete('app_market', array('appurl' => '{adminscript}?mod=share'));
-		}
-		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=comment'))){
-		C::t('app_market')->insert(array('appname'=>'评论',
-		 								  'appico'=>'appico/201712/21/128754pb0s666i6sjws1jc.png',
-		 								  'appurl'=>'{dzzscript}?mod=comment',
-										  'appdesc'=>'Dzz 系统评论组件，结合在其他应用使用，如新闻。其他开发者也可以为自己的应用调用这个通用评论插件',
-										  'dateline'=>TIMESTAMP,
-										  'disp'=>12,
-											'mid'=>12,
-										  'vendor'=>'乐云网络',
-											'haveflash'=>0,
-											'isshow'=>1,
-											'hideInMarket'=>0,
-										  'group'=>1,
-											'position'=>1,
-										  'system'=>2,
-										  'notdelete'=>1,
-											'open'=>1,
-											'nodup'=>0,
-											'identifier'=>'comment',
-										  'app_path'=>'dzz',
-											'available'=>1,
-										  'version'=>'2.0',
-											'check_upgrade_time'=>'20171115'),0,1);
+		$appurl = "{dzzscript}?mod=comment";
+		$appid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
+		if ($appid) {
+			C::t('app_market')->update($appid, array('group' => 1,'open'=>1,'position'=>1));
 		}
 		//处理更新之后群组开关问题
 		DB::update('organization',array('manageon'=>1,'available'=>1,'syatemon'=>1),"1");

@@ -1,0 +1,98 @@
+<div class="dynconMenu" id="dynconMenu">
+  <ul class="lyear-timeline lyear-timeline-left just-now" id="just-now"></ul>
+  <ul class="lyear-timeline lyear-timeline-left toadyTime">
+      <!--{template template_dynamic_list}-->
+  </ul>
+</div>
+
+<script type="text/javascript" reload="1">
+    //滚动条滚动，头部加阴影
+    $('.right-messagetable').scroll(function () {
+        if ($(this).scrollTop() > 0) {
+            $('.briefMenu').css({'box-shadow': '0px 0px 10px 0px rgba(0,0,0,0.15)'});
+        } else {
+            $('.briefMenu').css({'box-shadow': 'none'});
+        }
+    })
+
+
+    jQuery(document).ready(function (e) {
+        jcLoader().load({
+            type: 'js',
+            ids: 'js_textareaexplander',
+            url: 'static/js/jquery.textareaexplander.js?{VERHASH}'
+        }, function () {
+            jQuery('#leave_message').TextAreaExpander(37, 300);
+        });
+        jcLoader().load({
+            type: 'js',
+            ids: 'js_smilies',
+            url: 'static/js/smilies.js?{VERHASH}'
+        }, function () {
+            smilies_show('leave_message_sml_div', '{$_G[setting][smcols]}', 'leave_message');
+        });
+        _explorer.Scroll();
+        jQuery('#leave_message').off("input.commet propertychange.comment").on("input.comment propertychange.comment", function (e) {
+            var el = jQuery(this);
+            var msg = el.val();
+            var disbutton = el.closest('.comment-area').find('button');
+            if (msg.length <= 0) {
+                disbutton.addClass("disabled");
+                disbutton.css({'color': 'rgba(55,121,255,0.3)'});
+            } else {
+                disbutton.removeClass("disabled");
+                disbutton.css({'color': 'rgba(55,121,255,1)'});
+            }
+        });
+        jQuery('#leave_message').focus(function () {
+            var el = jQuery(this);
+            var msg = el.val();
+            var disbutton = el.closest('.comment-area').find('button');
+            if (msg.length <= 0) {
+                disbutton.addClass("disabled");
+                disbutton.css({'color': 'rgba(55,121,255,0.3)'});
+            } else {
+                disbutton.removeClass("disabled");
+                disbutton.css({'color': 'rgba(55,121,255,1)'});
+            }
+        })
+
+    });
+
+    function comment_file(form) {
+
+        if ($('#leave_message').val().length < 1) {
+            $('#leave_message').focus();
+            return false;
+        }
+        $.post(form.action, jQuery(form).serialize(), function (data) {
+            if (data['success']) {
+                if (data['return']['headerColor']) {
+                    var usericon = ' <span  class="img-avatar" style="margin-top:8px; background:' + data['return']['headerColor'] + '">' +
+                        ' <span title="$eventval[username]" >' + data['return']['userfirst'] + '</span> </span>';
+                } else {
+
+                    var usericon = '<img src="avatar.php?uid=' + data['return']['uid'] + '" class="avatar" style="width: 25px;height: 25px;">';
+                }
+                var html = '';
+                html += '<li class="lyear-timeline-item text-muted">';
+                html += '<div class="lyear-timeline-item-dot"><span><a href="user.php?uid=' + data['return']['uid'] + '">';
+                html += usericon;
+                html += '</a></span></div>';
+                html += '<div class="lyear-timeline-item-content">'
+                html += '<p class="mb-1"><strong>' + data['return']['username'] + '</strong></p>';
+                html += '<p class="mb-0">' + data['return']['msg'];
+                html += '<span class="delete-comment dzz dzz-delete" data-commentid="' + data['return']['commentid'] + '"></span>';
+                html += '</p>';
+                html += '<p><time class="mb-3">' + data['return']['dateline'] + '</time></p>';
+                html += '</div>';
+                html += '</li>';
+                $('#just-now').prepend(html);
+                $('.scroll-y').animate({scrollTop: '0px'}, 200);
+                var Now = $('#just-now').children();
+            }
+            $('#leave_message').val('').trigger('input');
+        }, 'json');
+        return false;
+    }
+</script>
