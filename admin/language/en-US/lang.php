@@ -944,7 +944,6 @@ $lang = array
   'nav_logs_system' => 'system record ',
   'nav_logs_extended' => 'extended record ',
   'logs' => 'run record ',
-  'logs_lpp' => 'per page ',
   'logs_passwd' => 'Password error record ',
   'logs_passwd_username' => 'Try username',
   'logs_passwd_password' => 'Try password',

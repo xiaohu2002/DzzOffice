@@ -1267,6 +1267,7 @@ Important!
 	'no_relevant_content'=>' no relevant_content yet ',
 	'degree_exhaust '=> 'times exhausted',
 	'short'=>'short',
+	'logs_lpp' => 'per page ',
 );
 
 ?>

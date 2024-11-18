@@ -973,7 +973,6 @@ $lang = array
 	'nav_logs_system' => '系统记录',
 	'nav_logs_extended' => '扩展记录',
 	'logs' => '运行记录',
-	'logs_lpp' => '每页显示',
 	'logs_passwd' => '密码错误记录',
 	'logs_passwd_username' => '尝试用户名',
 	'logs_passwd_password' => '尝试密码',

@@ -106,7 +106,7 @@ while($value=DB::fetch($query)){
 	
 	}elseif($value['type']=='ftp'){
 		
-		foreach(DB::fetch_all("select id,bz,cloudname,dateline from ".DB::table($value['dname'])." where bz='{$value[bz]}' and uid='{$_G['uid']}'") as $value1){
+		foreach(DB::fetch_all("select id,bz,cloudname,dateline from ".DB::table($value['dname'])." where bz='{$value['bz']}' and uid='{$_G['uid']}'") as $value1){
 			$value1['bz']=$value['bz'];
 			$value1['icoid']=md5($value['bz'].':'.$value1['id'].':');
 			$value1['img']='dzz/images/default/system/'.$value['bz'].'.png';
@@ -136,7 +136,7 @@ while($value=DB::fetch($query)){
 		}
 	}elseif($value['type']=='disk'){
 		
-		foreach(DB::fetch_all("select id,bz,cloudname,dateline from ".DB::table($value['dname'])." where bz='{$value[bz]}' and uid='{$_G['uid']}'") as $value1){
+		foreach(DB::fetch_all("select id,bz,cloudname,dateline from ".DB::table($value['dname'])." where bz='{$value['bz']}' and uid='{$_G['uid']}'") as $value1){
 			$value1['bz']=$value['bz'];
 			$value1['icoid']=md5($value['bz'].':'.$value1['id'].':');
 			$value1['img']='dzz/images/default/system/'.$value['bz'].'.png';

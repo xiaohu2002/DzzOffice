@@ -60,7 +60,7 @@ if ($_GET['do'] == 'delete') {
     }
 
   } else {
-  $lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
+	$lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
 	$checklpp = array();
 	$checklpp[$lpp] = 'selected="selected"';
 	$pfid = isset($_GET['pfid']) ? intval($_GET['pfid']) : '';

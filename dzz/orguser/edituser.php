@@ -123,7 +123,7 @@ if ($do == 'add') {
 			}
 		}
 		//插入用户状态表
-		$status = array('uid' => $uid, 'regip' => '', 'lastip' => '', 'lastvisit' => '', 'lastactivity' => '', 'lastsendmail' => 0);
+		$status = array('uid' => $uid, 'regip' => '', 'lastip' => '', 'lastvisit' => TIMESTAMP, 'lastactivity' => TIMESTAMP, 'lastsendmail' => 0);
 		C::t('user_status') -> insert($status, false, true);
 		//处理管理员
 		C::t('user') -> setAdministror($uid, intval($_GET['groupid']));

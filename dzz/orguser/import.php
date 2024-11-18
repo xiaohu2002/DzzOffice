@@ -225,8 +225,8 @@ EOT;
 			'uid' => $uid,
 			'regip' => '',
 			'lastip' => '',
-			'lastvisit' => '',
-			'lastactivity' => '',
+			'lastvisit' => TIMESTAMP,
+			'lastactivity' => TIMESTAMP,
 			'lastsendmail' => 0
 		);
 		C::t('user_status')->insert($status, false, true);

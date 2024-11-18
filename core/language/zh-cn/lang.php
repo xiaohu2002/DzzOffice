@@ -1296,6 +1296,7 @@ $_G[siteurl]',
 	'no_relevant_content' => '没有相关的内容…',
 	'degree_exhaust'=>'次数用尽',
 	'short'=>'短链接',
+	'logs_lpp' => '每页显示',
 );
 
 ?>
