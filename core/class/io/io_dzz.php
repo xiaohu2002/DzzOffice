@@ -507,7 +507,6 @@ class io_dzz extends io_api
     //获取icosdata
     public function getMeta($icoid)
     {
-
         if (strpos($icoid, 'preview_') === 0) {
             $icoid = preg_replace('/^preview_/', '', $icoid);
             $preview = true;
@@ -951,7 +950,7 @@ class io_dzz extends io_api
     }
 
     //获取不重复的文件名称
-    public function getFileName($name, $pfid)
+    public static function getFileName($name, $pfid)
     {
         static $i = 0;
         $name = self::name_filter($name);
@@ -1920,7 +1919,7 @@ class io_dzz extends io_api
         }
     }
 
-    public function linktovideo($link, $pfid)
+    public static function linktovideo($link, $pfid)
     {
         global $_G;
         @set_time_limit(60);
@@ -2030,7 +2029,7 @@ class io_dzz extends io_api
         }
     }
 
-    public function linktourl($link, $pfid)
+    public static function linktourl($link, $pfid)
     {
         global $_G;
         $fid = $pfid;

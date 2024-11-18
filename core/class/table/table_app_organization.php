@@ -75,7 +75,7 @@ class table_app_organization extends dzz_table
 			$paichu_appids[]=$value['appid'];
 		}
 		
-		return $paichu_appids;	
+		return $paichu_appids;
 	}
 	public function fetch_orgids_by_appid($appid){
 		$orgids=array();
