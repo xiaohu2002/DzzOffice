@@ -1,25 +1,9 @@
 <!--{template common/header_simple_start}-->
 <style>
-p {
-	min-height: 25px;
-	min-width: 50px;
-	margin:5px 0;
-}
-p input.form-control{
-	box-shadow:none;
-	height:25px;
-	width:90%;
-	
-}
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
 	text-overflow: ellipsis;
+	white-space:nowrap;
 }
-p input.form-control:focus{
-	box-shadow:none;
-}
-	.table>thead>tr>th{
-		min-width: 130px
-	}	
 </style>
 <script type="text/javascript">
 	var selorg={};
@@ -84,8 +68,8 @@ p input.form-control:focus{
 			<ul class="help-block" style="line-height:1.8em">
 				{lang import_list_text}
 			</ul>
-      <div style="padding:0;">
-        <table class="table table-hover" style="border-bottom:1px solid #DDD;table-layout:fixed">
+      <div class="table-responsive" style="padding:0;">
+        <table class="table table-hover" style="border-bottom:1px solid #DDD;">
           <thead>
             <tr> 
               <!--{loop $h $key $value}-->
@@ -101,10 +85,10 @@ p input.form-control:focus{
             <!--{loop $h $key1 $value1}--> 
             <!--{if is_array($value[$value1])}-->
             <td class="editable" key="$value1"><!--{loop $value[$value1] $value2}-->
-              <p>$value2</p>
+              <p class="form-control">$value2</p>
               <!--{/loop}--></td>
             <!--{else}-->
-            <td class="editable" key="$value1"><p>$value[$value1]</p></td>
+            <td class="editable" key="$value1"><p class="form-control">$value[$value1]</p></td>
             <!--{/if}--> 
             <!--{/loop}-->
             <td><button type="button" id="button_item_$i" class="btn btn-outline-secondary" onclick="item_import('item_$i',this);" data-loading-text="{lang in_import}">{lang import_nbsp}</button>
