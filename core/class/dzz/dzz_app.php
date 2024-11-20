@@ -369,30 +369,28 @@ class dzz_app extends dzz_base{
 
         return true;
     }
-
     private function is_HTTPS() {
-		// PHP 标准服务器变量
-		if(isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') {
-			return true;
-		}
-		// X-Forwarded-Proto 事实标准头部, 用于反代透传 HTTPS 状态
-		if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https') {
-			return true;
-		}
-		// 阿里云全站加速私有 HTTPS 状态头部
-		if(isset($_SERVER['HTTP_X_CLIENT_SCHEME']) && strtolower($_SERVER['HTTP_X_CLIENT_SCHEME']) == 'https') {
-			return true;
-		}
-		// 西部数码建站助手私有 HTTPS 状态头部
-		if(isset($_SERVER['HTTP_FROM_HTTPS']) && strtolower($_SERVER['HTTP_FROM_HTTPS']) != 'off') {
-			return true;
-		}
-		// 服务器端口号兜底判断
-		if(isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) {
-			return true;
-		}
-		return false;
-	}
+        $checks = [
+            'HTTPS' => ['filter' => FILTER_VALIDATE_BOOLEAN],
+            'SERVER_PORT' => ['filter' => FILTER_VALIDATE_INT, 'value' => 443],
+            'REQUEST_SCHEME' => ['filter' => FILTER_SANITIZE_STRING, 'value' => 'https'],
+            'HTTP_X_SCHEME' => ['filter' => FILTER_SANITIZE_STRING, 'value' => 'https'],
+            'HTTP_FROM_HTTPS' => ['filter' => FILTER_SANITIZE_STRING, 'value' => 'https'],
+            'HTTP_X_CLIENT_SCHEME' => ['filter' => FILTER_SANITIZE_STRING, 'value' => 'https'],
+            'HTTP_X_FORWARDED_PROXY' => ['filter' => FILTER_SANITIZE_STRING, 'value' => 'https']
+        ];
+    
+        foreach ($checks as $key => $check) {
+            if (isset($_SERVER[$key])) {
+                $value = filter_var($_SERVER[$key], $check['filter']);
+                if (!isset($check['value']) || $value === $check['value']) {
+                    return TRUE;
+                }
+            }
+        }
+    
+        return FALSE;
+    }
     private function _get_client_ip() {
 		$ip = $_SERVER['REMOTE_ADDR'];
 			if (isset($_SERVER['HTTP_CLIENT_IP']) && ip::validate_ip($_SERVER['HTTP_CLIENT_IP'])) {

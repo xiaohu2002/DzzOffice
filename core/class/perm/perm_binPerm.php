@@ -21,7 +21,7 @@ class perm_binPerm
     //共享文件夹权限表；
 
 
-    function __construct($power)
+    public function __construct($power)
     {
         $this->power = intval($power);
         $this->powerarr = $this->getPowerArr();
