@@ -51,7 +51,7 @@ if( $list ){
 } 
 include template('cloudappmarket');
 exit;
-function curlcloudappmarket( $url="",$post_data="",  $token="" ){ 
+function curlcloudappmarket( $url="",$post_data="",  $token="" ){
     $curl = curl_init(); 
     curl_setopt($curl, CURLOPT_URL, $url); 
     curl_setopt($curl, CURLOPT_HEADER, 0); 

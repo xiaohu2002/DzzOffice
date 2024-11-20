@@ -197,6 +197,22 @@
           </div>
         </div>
         <div class="row mb-3">
+          <label class="col-sm-2">系统首页登录访问</label>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="indexlogin1" name="settingnew[indexlogin]" <!--{if $setting['indexlogin']}-->checked="checked"<!--{/if}--> value="1">
+              <label class="form-check-label" for="indexlogin1">{lang yes}</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="indexlogin2" name="settingnew[indexlogin]" <!--{if !$setting['indexlogin']}-->checked="checked"<!--{/if}--> value="0">
+              <label class="form-check-label" for="indexlogin2">{lang  no}</label>
+            </div>
+            <ul class="help-block" >
+              内置的首页是否需要登录才能访问。
+            </ul>
+          </div>
+        </div>
+        <div class="row mb-3">
           <label class="col-sm-2">{lang user_default_join_department}</label>
           <div class="col-sm-10">
             <div class="dropdown">

@@ -12,6 +12,9 @@
 if (!defined('IN_DZZ')) {//所有的php文件必须加上此句，防止被外部调用
 	exit('Access Denied');
 }
+if($_G['setting']['indexlogin']) {
+	Hook::listen('check_login');
+}
 if($_GET['do']=='saveIndex'){
 	$appids=implode(',',$_GET['appids']);
 	C::t('user_setting')->update_by_skey('index_simple_appids',$appids);
