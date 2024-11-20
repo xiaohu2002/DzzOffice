@@ -254,7 +254,7 @@ if (defined('CORE_VERSION')) {
 } else {
 	$VERSION = 'Unknown';
 }
-echo '<p>Time: ' . date('Y-m-d H:i:s O') .' IP: ' . getglobal('clientip') . ' version: ' . $VERSION . ' PHP：'.PHP_VERSION.'</p>';
+echo '<p>Time: ' . date('Y-m-d H:i:s O') .' IP: ' . getglobal('clientip') . ' version: ' . $VERSION . '</p>';
 if(!empty($errormsg)) {
 	echo '<div class="info">'.$errormsg.'</div>';
 }

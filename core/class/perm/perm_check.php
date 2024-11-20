@@ -9,7 +9,7 @@
 
 class perm_check{
 
-    public static function getuserPerm(){
+    function getuserPerm(){
         global $_G;
         $perm= DB::result_first("select perm from %t where uid=%d",array('user_field',$_G['uid']));
         $groupperm=$_G['group']['perm'];
@@ -21,7 +21,7 @@ class perm_check{
         return $perm;
     }
 	
-    public static function getPerm($fid, $bz='',$i=0){
+    function getPerm($fid, $bz='',$i=0){
         global $_G;
 		if(isset($_G['gperm'])) return intval($_G['gperm']);//可以通过这个参数直接使用此权限值不去查询权限
 		
@@ -73,7 +73,7 @@ class perm_check{
         }
     }
 
-    public static function getPerm1($fid, $bz='',$i=0,$newperm = 0){
+    function getPerm1($fid, $bz='',$i=0,$newperm = 0){
         global $_G;
 
         $i++;
@@ -115,7 +115,7 @@ class perm_check{
         }
     }
 
-    public static function userPerm($fid,$action){ //判断容器有没有指定的权限
+    function userPerm($fid,$action){ //判断容器有没有指定的权限
         global $_G;
         if($_G['adminid']==1){ //是管理员
             return true;
@@ -135,7 +135,7 @@ class perm_check{
         }
         return true;*/
     }
-    public static function groupPerm($fid,$action,$gid){ //判断容器有没有指定的权限
+    function groupPerm($fid,$action,$gid){ //判断容器有没有指定的权限
         global $_G;
 		
         $ismoderator=C::t('organization_admin')->chk_memberperm($gid,$_G['uid']);
@@ -159,7 +159,7 @@ class perm_check{
     }
 
     //$arr=array('uid','gid','desktop');其中这几项必须
-    public static function checkperm($action,$arr,$bz=''){ //检查某个图标是否有权限;
+    function checkperm($action,$arr,$bz=''){ //检查某个图标是否有权限;
         global $_G;
         if($_G['uid'] && $_G['adminid']==1) return true; //网站管理员 有权限;
         if ($arr['sid']) {
@@ -218,7 +218,7 @@ class perm_check{
             return self::checkperm_Container($arr['pfid'],$action,$bz);
         }
     }
-    public static function checkperm_Container($pfid,$action='',$bz=''){ //检查容器是否有权限操作;
+    function checkperm_Container($pfid,$action='',$bz=''){ //检查容器是否有权限操作;
         global $_G;
         if($_G['uid']<1){ //游客没有权限
             return false;

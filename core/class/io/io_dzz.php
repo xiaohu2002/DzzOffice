@@ -929,7 +929,7 @@ class io_dzz extends io_api
     }
 
     //过滤文件名称
-    public static function name_filter($name)
+    public function name_filter($name)
     {
         return str_replace(array('/', '\\', ':', '*', '?', '<', '>', '|', '"', "\n"), '', $name);
     }
@@ -950,7 +950,7 @@ class io_dzz extends io_api
     }
 
     //获取不重复的文件名称
-    public static function getFileName($name, $pfid)
+    public function getFileName($name, $pfid)
     {
         static $i = 0;
         $name = self::name_filter($name);
@@ -1919,7 +1919,7 @@ class io_dzz extends io_api
         }
     }
 
-    public static function linktovideo($link, $pfid)
+    public function linktovideo($link, $pfid)
     {
         global $_G;
         @set_time_limit(60);
@@ -2029,7 +2029,7 @@ class io_dzz extends io_api
         }
     }
 
-    public static function linktourl($link, $pfid)
+    public function linktourl($link, $pfid)
     {
         global $_G;
         $fid = $pfid;

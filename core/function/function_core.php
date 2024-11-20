@@ -261,17 +261,21 @@ function setglobal($key, $value, $group = null)
     return true;
 }
 
-function getglobal($key, $group = null) {
-	global $_G;
-	$key = explode('/', $group === null ? $key : $group.'/'.$key);
-	$v = &$_G;
-	foreach ($key as $k) {
-		if (!isset($v[$k])) {
-			return null;
-		}
-		$v = &$v[$k];
-	}
-	return $v;
+function getglobal($key, $group = null)
+{
+    global $_G;
+    if (isset($_config[$key])) {
+        return $_config[$key];
+    }
+    $key = explode('/', $group === null ? $key : $group . '/' . $key);
+    $v = &$_G;
+    foreach ($key as $k) {
+        if (!isset($v[$k])) {
+            return null;
+        }
+        $v = &$v[$k];
+    }
+    return $v;
 }
 
 function getgpc($k, $type = 'GP')
