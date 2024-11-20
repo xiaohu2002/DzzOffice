@@ -123,7 +123,7 @@ class dzz_session_close {
 		return 0;
 	}
 
-	public function fetch_all_by_fid($fid, $limit=0) {
+	public function fetch_all_by_fid($fid, $limit) {
 		return array();
 	}
 

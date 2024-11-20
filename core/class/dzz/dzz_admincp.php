@@ -24,7 +24,7 @@ class dzz_admincp
 	var $sessionlife = 1800;
 	var $sessionlimit = 0;
 
-	public static function &instance() {
+	function &instance() {
 		static $object;
 		if(empty($object)) {
 			$object = new dzz_admincp();
@@ -48,7 +48,9 @@ class dzz_admincp
 		$this->sessionlimit = TIMESTAMP - $this->sessionlife;
 
 		$this->check_cpaccess();
-		$this->writecplog();
+		if($_GET['mod']!="systemlog"){ 
+			$this->writecplog();
+		}
 	}
 
 	function writecplog() {
@@ -213,7 +215,7 @@ class dzz_admincp
 	}
 
 	function admincpfile($action) {
-		return DZZ_ROOT.'./admin/login/login.php';
+		return './admin/login/login.php';
 	}
 }
 ?>

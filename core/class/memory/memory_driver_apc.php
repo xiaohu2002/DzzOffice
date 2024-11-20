@@ -6,8 +6,6 @@ if(!defined('IN_DZZ')) {
 
 class memory_driver_apc
 {
-	public $cacheName = 'APC';
-	public $enable;
 
 	public function init($config) {
 

@@ -171,7 +171,7 @@ class core
 		if($class[0] === '#') {
 			list(, $module, $class) = explode('#', $class);
 		}
-		$class = ($class);
+		$class = strtolower($class);
         $namespaceArr = explode('\\',$class);
         $namesapce = $namespaceArr[0].'\\';
         if(array_key_exists($namesapce,self::$prefixDirsPsr4)){

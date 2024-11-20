@@ -4,12 +4,11 @@ if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 
-
-class db_driver_mysqli
+class db_driver_mysql
 {
 	var $tablepre;
 	var $version = '';
-	var $drivertype = 'mysqli';
+	var $drivertype = 'mysql';
 	var $querynum = 0;
 	var $slaveid = 0;
 	var $curlink;
@@ -33,12 +32,12 @@ class db_driver_mysqli
 				if(isset($this->map['attachment']) && $i <= 10) {
 					$this->map['attachment_'.($i-1)] = $this->map['attachment'];
 				}
-				if(isset($this->map['user'])) {
-					$this->map['user_status']  =
-					$this->map['user_profile']  =
-					$this->map['user_field']  =
-					$this->map['user'];
-				}
+			}
+			if(isset($this->map['user'])) {
+				$this->map['user_status']  =
+				$this->map['user_profile']  =
+				$this->map['user_field']  =
+				$this->map['user'];
 			}
 		}
 	}
@@ -52,41 +51,42 @@ class db_driver_mysqli
 		if(empty($this->config) || empty($this->config[$serverid])) {
 			$this->halt('config_db_not_found');
 		}
-		//兼容支持域名直接带有端口的情况
-		if(strpos($this->config[$serverid]['dbhost'],':')!==false){
+		if(!empty($this->config[$serverid]['unix_socket'])){//使用socket连接；
+			$this->config[$serverid]['dbhost']=$this->config[$serverid]['unix_socket'];
+		}elseif($this->config[$serverid]['port']){
 			list($dbhost,$port)=explode(':',$this->config[$serverid]['dbhost']);
-			if($port && empty($this->config[$serverid]['port'])) $this->config[$serverid]['port']=$port;
-			if($dbhost) $this->config[$serverid]['dbhost']=$dbhost;
-		}elseif(strpos($this->config[$serverid]['dbhost'],'.sock')!==false){//地址直接是socket地址
-			$this->config[$serverid]['unix_socket']=$this->config[$serverid]['dbhost'];
-			$this->config[$serverid]['dbhost']='localhost';
+			$this->config[$serverid]['dbhost']=$dbhost.':'.$this->config[$serverid]['port'];
 		}
-		if(empty($this->config[$serverid]['port'])) $this->config[$serverid]['port']='3306';
-		
 		$this->link[$serverid] = $this->_dbconnect(
 			$this->config[$serverid]['dbhost'],
 			$this->config[$serverid]['dbuser'],
 			$this->config[$serverid]['dbpw'],
 			$this->config[$serverid]['dbcharset'],
 			$this->config[$serverid]['dbname'],
-			$this->config[$serverid]['pconnect'],
-			$this->config[$serverid]['port'],
-			$this->config[$serverid]['unix_socket']
-		);
+			$this->config[$serverid]['pconnect']
+			);
 		$this->curlink = $this->link[$serverid];
+
 	}
 
-	function _dbconnect($dbhost, $dbuser, $dbpw, $dbcharset, $dbname, $pconnect,$port='3306',$unix_socket='', $halt = true) {
-		$link = new mysqli();
-		if(!$link->real_connect($dbhost, $dbuser, $dbpw, $dbname, $port, $unix_socket)) {
+	function _dbconnect($dbhost, $dbuser, $dbpw, $dbcharset, $dbname, $pconnect, $halt = true) {
+
+		if($pconnect) {
+			$link = @mysql_pconnect($dbhost, $dbuser, $dbpw);
+		} else {
+			$link = @mysql_connect($dbhost, $dbuser, $dbpw, 1);
+		}
+		if(!$link) {
 			$halt && $this->halt('notconnect', $this->errno());
 		} else {
 			$this->curlink = $link;
 			if($this->version() > '4.1') {
-				$link->set_charset($dbcharset ? $dbcharset : $this->config[1]['dbcharset']);
-				$serverset = $this->version() > '5.0.1' ? 'sql_mode=\'\'' : '';
-				$serverset && $link->query("SET $serverset");
+				$dbcharset = $dbcharset ? $dbcharset : $this->config[1]['dbcharset'];
+				$serverset = $dbcharset ? 'character_set_connection='.$dbcharset.', character_set_results='.$dbcharset.', character_set_client=binary' : '';
+				$serverset .= $this->version() > '5.0.1' ? ((empty($serverset) ? '' : ',').'sql_mode=\'\'') : '';
+				$serverset && mysql_query("SET $serverset", $link);
 			}
+			$dbname && @mysql_select_db($dbname, $link);
 		}
 		return $link;
 	}
@@ -105,12 +105,12 @@ class db_driver_mysqli
 	}
 
 	function select_db($dbname) {
-		return $this->curlink->select_db($dbname);
+		return mysql_select_db($dbname, $this->curlink);
 	}
 
-	function fetch_array($query, $result_type = MYSQLI_ASSOC) {
-		if($result_type == 'MYSQL_ASSOC') $result_type = MYSQLI_ASSOC;
-		return $query ? $query->fetch_array($result_type) : null;
+	function fetch_array($query, $result_type = MYSQL_ASSOC) {
+		if($result_type == 'MYSQL_ASSOC') $result_type = MYSQL_ASSOC;
+		return mysql_fetch_array($query, $result_type);
 	}
 
 	function fetch_first($sql) {
@@ -134,12 +134,12 @@ class db_driver_mysqli
 			$unbuffered = false;
 		}
 
-		$resultmode = $unbuffered ? MYSQLI_USE_RESULT : MYSQLI_STORE_RESULT;
+		$func = $unbuffered ? 'mysql_unbuffered_query' : 'mysql_query';
 
-		if(!($query = $this->curlink->query($sql, $resultmode))) {
+		if(!($query = $func($sql, $this->curlink))) {
 			if(in_array($this->errno(), array(2006, 2013)) && substr($silent, 0, 5) != 'RETRY') {
 				$this->connect();
-				return $this->curlink->query($sql, 'RETRY'.$silent);
+				return $this->query($sql, 'RETRY'.$silent);
 			}
 			if(!$silent) {
 				$this->halt($this->error(), $this->errno(), $sql);
@@ -155,65 +155,61 @@ class db_driver_mysqli
 	}
 
 	function affected_rows() {
-		return $this->curlink->affected_rows;
+		return mysql_affected_rows($this->curlink);
 	}
 
 	function error() {
-		return (($this->curlink) ? $this->curlink->error : mysqli_error());
+		return (($this->curlink) ? mysql_error($this->curlink) : mysql_error());
 	}
 
 	function errno() {
-		return intval(($this->curlink) ? $this->curlink->errno : mysqli_errno());
+		return intval(($this->curlink) ? mysql_errno($this->curlink) : mysql_errno());
 	}
 
 	function result($query, $row = 0) {
-		if(!$query || $query->num_rows == 0) {
-			return null;
-		}
-		$query->data_seek($row);
-		$assocs = $query->fetch_row();
-		return $assocs[0];
+		$query = @mysql_result($query, $row);
+		return $query;
 	}
 
 	function num_rows($query) {
-		$query = $query ? $query->num_rows : 0;
+		$query = mysql_num_rows($query);
 		return $query;
 	}
 
 	function num_fields($query) {
-		return $query ? $query->field_count : null;
+		return mysql_num_fields($query);
 	}
 
 	function free_result($query) {
-		return $query ? $query->free() : false;
+		return mysql_free_result($query);
 	}
 
 	function insert_id() {
-		return ($id = $this->curlink->insert_id) >= 0 ? $id : $this->result($this->query("SELECT last_insert_id()"), 0);
+		return ($id = mysql_insert_id($this->curlink)) >= 0 ? $id : $this->result($this->query("SELECT last_insert_id()"), 0);
 	}
 
 	function fetch_row($query) {
-		$query = $query ? $query->fetch_row() : null;
+		$query = mysql_fetch_row($query);
 		return $query;
 	}
 
 	function fetch_fields($query) {
-		return $query ? $query->fetch_field() : null;
+		return mysql_fetch_field($query);
 	}
 
 	function version() {
 		if(empty($this->version)) {
-			$this->version = $this->curlink->server_info;
+			$this->version = mysql_get_server_info($this->curlink);
 		}
 		return $this->version;
 	}
 
 	function escape_string($str) {
-		return $this->curlink->escape_string($str);
+		return mysql_escape_string($str);
 	}
 
 	function close() {
-		return $this->curlink->close();
+		return mysql_close($this->curlink);
 	}
 
 	function halt($message = '', $code = 0, $sql = '') {

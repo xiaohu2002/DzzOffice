@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 define('IN_DZZ', true);
 define('EXT','.php');//文件后缀
 define('BS',DIRECTORY_SEPARATOR);//系统目录分割符
@@ -55,7 +56,7 @@ class DB extends dzz_database {}
 
 class Tpdb extends \core\dzz\Tpdb{}
 
-if( function_exists('mysqli_connect') ){
+if(function_exists('mysqli_connect')){
     class Tpsqli extends \core\dzz\Tpsqli{}
 }else{
     class Tpsql extends \core\dzz\Tpsql{}

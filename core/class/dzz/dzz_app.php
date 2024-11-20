@@ -48,7 +48,7 @@ class dzz_app extends dzz_base{
         return $object;
     }
 
-    public function __construct($params=array()) {
+    public function __construct($params) {
         foreach($params as $k=>$v){
             $this->$k = $v;
         }
@@ -73,22 +73,13 @@ class dzz_app extends dzz_base{
     }
 
     public function init() {
+
         if(!$this->initated) {
-            if($this->init_setting){
-				$this->_init_setting();	
-			} 
-			if($this->init_user){
-				 $this->_init_user();	
-			} 
-           if($this->init_session){
-				 $this->_init_session();	
-			} 
-			if($this->init_cron){
-				 $this->_init_cron();	
-			} 
-           if($this->init_misc){
-				 $this->_init_misc();	
-			} 
+            $this->_init_setting();
+            $this->_init_user();
+            $this->_init_session();
+            $this->_init_cron();
+            $this->_init_misc();
         }
         $this->initated = true;
     }
@@ -193,7 +184,7 @@ class dzz_app extends dzz_base{
                 $this->var['PHP_SELF'] = substr($_SERVER['SCRIPT_NAME'],0,$pos).'/'.$scriptName;
             } else if(isset($_SERVER['DOCUMENT_ROOT']) && strpos($_SERVER['SCRIPT_FILENAME'],$_SERVER['DOCUMENT_ROOT']) === 0) {
                 $this->var['PHP_SELF'] = str_replace('\\','/',str_replace($_SERVER['DOCUMENT_ROOT'],'',$_SERVER['SCRIPT_FILENAME']));
-                $this->var['PHP_SELF'][0] != '/' && $this->var['PHP_SELF'] = '/'.$this->var['PHP_SELF'];
+                $this->var['PHP_SELF'][0] != '/' && ($this->var['PHP_SELF'] = '/'.$this->var['PHP_SELF']);
             } else {
                 system_error('request_tainting');
             }
@@ -262,7 +253,7 @@ class dzz_app extends dzz_base{
         Hook::listen("config_read",$_GET);
         if(empty($_config)) {
             if(!file_exists(DZZ_ROOT.'./data/install.lock')) {
-                header('location: install/');
+                header('location: install');
                 exit;
             } else {
                 system_error('config_notfound');
@@ -353,7 +344,7 @@ class dzz_app extends dzz_base{
         if($_SERVER['REQUEST_METHOD'] == 'GET' ) {
             $temp = $_SERVER['REQUEST_URI'];
         } elseif(empty ($_GET['formhash'])) {
-            $temp = $_SERVER['REQUEST_URI'].http_build_query($_POST);
+            $temp = $_SERVER['REQUEST_URI'].file_get_contents('php://input');
         } else {
             $temp = '';
         }
@@ -407,14 +398,14 @@ class dzz_app extends dzz_base{
 	}
 
     private function _init_db() {
-		if($this->init_db) {
-			$driver = 'db_driver_mysqli';
-			if(getglobal('config/db/slave')) {
-				$driver = 'db_driver_mysqli_slave';
-			}
-			DB::init($driver, $this->config['db']);
-		}
-	}
+        if($this->init_db) {
+            $driver = function_exists('mysqli_connect') ? 'db_driver_mysqli' : 'db_driver_mysql';
+            if(getglobal('config/db/slave')) {
+                $driver = function_exists('mysqli_connect') ? 'db_driver_mysqli_slave' : 'db_driver_mysql_slave';
+            }
+            DB::init($driver, $this->config['db']);
+        }
+    }
 
     private function _init_session() {
 
@@ -426,9 +417,9 @@ class dzz_app extends dzz_base{
             $this->var['sid'] = $this->session->sid;
             $this->var['session'] = $this->session->var;
 
-            if(isset($this->var['sid']) && $this->var['sid'] !== $this->var['cookie']['sid']) {
-				dsetcookie('sid', $this->var['sid'], 86400);
-			}
+            if(!empty($this->var['sid']) && $this->var['sid'] != $this->var['cookie']['sid']) {
+                dsetcookie('sid', $this->var['sid'], 86400);
+            }
 
             if($this->session->isnew) {
                 if(ipbanned($this->var['clientip'])) {
@@ -442,9 +433,7 @@ class dzz_app extends dzz_base{
             }
 
             if($this->var['uid'] && !$sessionclose && ($this->session->isnew || ($this->session->get('lastactivity') + 600) < TIMESTAMP)) {
-                Hook::listen("core_session",$this->session);
                 $this->session->set('lastactivity', TIMESTAMP);
-                $this->session->update();
                 if($this->session->isnew) {
                     if($this->var['member']['lastip'] && $this->var['member']['lastvisit']) {
                         dsetcookie('lip', $this->var['member']['lastip'].','.$this->var['member']['lastvisit']);

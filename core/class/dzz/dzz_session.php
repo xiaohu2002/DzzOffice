@@ -16,9 +16,11 @@ class dzz_session {
 	private $old =  array('sid' =>  '', 'ip' =>  '', 'uid' =>  0);
 
 	private $table;
+
 	public function __construct($sid = '', $ip = '', $uid = 0) {
 		$this->old = array('sid' =>  $sid, 'ip' =>  $ip, 'uid' =>  $uid);
 		$this->var = $this->newguest;
+
 		$this->table = C::t('session');
 
 		if(!empty($ip)) {
@@ -65,6 +67,7 @@ class dzz_session {
 	}
 
 	public function delete() {
+
 		return $this->table->delete_by_session($this->var, getglobal('setting/onlinehold'), 60);
 
 	}
@@ -128,7 +131,6 @@ class dzz_session {
 		static $updated = false;
 		if(!$updated) {
 			global $_G;
-			$ulastactivity = 0;
 			if($_G['uid']) {
 				if($_G['cookie']['ulastactivity']) {
 					$ulastactivity = authcode($_G['cookie']['ulastactivity'], 'DECODE');
@@ -137,10 +139,9 @@ class dzz_session {
 					dsetcookie('ulastactivity', authcode($ulastactivity, 'ENCODE'), 31536000);
 				}
 			}
-			$ulastactivity = (int)$ulastactivity;
-			$oltimespan = (int)$_G['setting']['oltimespan'];
-			$lastolupdate = (int)C::app()->session->var['lastolupdate'];
-			if($_G['uid'] && $oltimespan && (int)TIMESTAMP - ($lastolupdate ? $lastolupdate : $ulastactivity) > $oltimespan * 60) {
+			$oltimespan = $_G['setting']['oltimespan'];
+			$lastolupdate = C::app()->session->var['lastolupdate'];
+			if($_G['uid'] && $oltimespan && TIMESTAMP - ($lastolupdate ? $lastolupdate : $ulastactivity) > $oltimespan * 60) {
 				$isinsert = false;
 				if(C::app()->session->isnew) {
 					$oldata = C::t('onlinetime')->fetch($_G['uid']);

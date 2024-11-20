@@ -2,8 +2,7 @@
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
-
-class db_driver_mysqli_slave extends db_driver_mysqli
+class db_driver_mysql_slave extends db_driver_mysql
 {
 
 	public $slaveid = null;

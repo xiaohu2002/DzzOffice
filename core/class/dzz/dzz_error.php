@@ -38,10 +38,10 @@ class dzz_error
 	}
 
 	public static function debug_backtrace() {
-		$skipfunc[] = 'dzz_error->debug_backtrace';
-		$skipfunc[] = 'dzz_error->db_error';
-		$skipfunc[] = 'dzz_error->template_error';
-		$skipfunc[] = 'dzz_error->system_error';
+		$skipfunc[] = 'error->debug_backtrace';
+		$skipfunc[] = 'error->db_error';
+		$skipfunc[] = 'error->template_error';
+		$skipfunc[] = 'error->system_error';
 		$skipfunc[] = 'db_mysql->halt';
 		$skipfunc[] = 'db_mysql->query';
 		$skipfunc[] = 'DB::_execute';
@@ -83,6 +83,8 @@ class dzz_error
 		$msg = '<li>[Type] '.$title.'</li>';
 		$msg .= $dberrno ? '<li>['.$dberrno.'] '.$dberror.'</li>' : '';
 		$msg .= $sql ? '<li>[Query] '.$sql.'</li>' : '';
+		dzz_error::show_error('db', $msg, $showtrace, false);
+		unset($msg, $phperror);
 
 		$errormsg = '<b>'.$title.'</b>';
 		$errormsg .= "[$dberrno]<br /><b>ERR:</b> $dberror<br />";
@@ -93,7 +95,6 @@ class dzz_error
 		$errormsg .= '<b>PHP:</b> '.$logtrace;
 
 		dzz_error::write_error_log($errormsg);
-		dzz_error::show_error('db', $msg, $showtrace, false);
 		exit();
 
 	}

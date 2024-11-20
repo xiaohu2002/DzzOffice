@@ -20,7 +20,7 @@ class Chinese {
 		'GBtoBIG5_table'   	=> 'gb-big5.table',
 	);
 
-	public function __construct($SourceLang, $TargetLang, $ForceTable = FALSE) {
+	function __construct($SourceLang, $TargetLang, $ForceTable = FALSE) {
 		$this->config['SourceLang'] = $this->_lang($SourceLang);
 		$this->config['TargetLang'] = $this->_lang($TargetLang);
 
