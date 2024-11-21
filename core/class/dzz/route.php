@@ -8,14 +8,12 @@ use \IO as IO;
 
 class Route{
 
-    public static function dzzRoute(&$params,$extra=null,&$break = null)
+    public static function dzzRoute(&$params,$extra=null,&$break)
     {
 
         global $_G,$_config;
-        define('MOD_PATH',CURSCRIPT.'/'.CURMODULE);
-        define('MOD_NAME',CURMODULE);
         $mod = !empty($params[MOULD]) ? $params[MOULD]:$_config['default_mod'];
-        define('MOD_URL',BASESCRIPT.'?mod='.$mod);
+
         $op  = !empty($params[DIVIDE]) ? $params[DIVIDE]:$_config['default_op'];
         if(empty($mod)){
 
@@ -29,6 +27,7 @@ class Route{
            $return =  require DZZ_ROOT.'./'.CURSCRIPT.'/'.$op.EXT;
 
         }else{
+
             if(strpos(strtolower($mod),':')!==false){
 
                 $patharr=explode(':',$mod);
@@ -68,8 +67,10 @@ class Route{
             }
 
             //模块常量
-            
+            define('MOD_PATH',CURSCRIPT.'/'.CURMODULE);
+            define('MOD_NAME',CURMODULE);
             define('MOD_DIR',dirname($modfile));
+            define('MOD_URL',BASESCRIPT.'?mod='.$mod);
             define('OP_NAME',$op);
            // $break = true;
 			Hook::listen('mod_run');

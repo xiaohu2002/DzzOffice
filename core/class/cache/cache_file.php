@@ -25,14 +25,12 @@ class ultrax_cache {
 		$cache_file = $this->get_cache_file_path($key);
 		dmkdir(dirname($cache_file));
 		$cachedata = "\$data = ".arrayeval($data).";\n";
-		$cachedata_save = "<?php\n//DZZ! cache file, DO NOT modify me!".
-		"\n//Created: ".date("M j, Y, G:i").
-		"\n//Identify: ".md5($cache_file.$cachedata.$_G['config']['security']['authkey'])."\n\nif(!defined('IN_DZZ')) {\n\texit('Access Denied');\n}\n\n$cachedata?>";
-		$fp = fopen($cache_file, 'cb');
-		if(!($fp && flock($fp, LOCK_EX) && ftruncate($fp, 0) && fwrite($fp, $cachedata_save) && fflush($fp) && flock($fp, LOCK_UN) && fclose($fp))) {
-			flock($fp, LOCK_UN);
+		if($fp = @fopen($cache_file, 'wb')) {
+			fwrite($fp, "<?php\n//Dzz! cache file, DO NOT modify me!".
+				"\n//Created: ".date("M j, Y, G:i").
+				"\n//Identify: ".md5($cache_file.$cachedata.$_G['config']['security']['authkey'])."\n\nif(!defined('IN_DZZ')) {\n\texit('Access Denied');\n}\n\n$cachedata?>");
 			fclose($fp);
-			unlink($cache_file);
+		} else {
 			exit('Can not write to cache files, please check directory ./data/ and ./data/ultraxcache/ .');
 		}
 		return true;
@@ -47,7 +45,7 @@ class ultrax_cache {
 	}
 
 	function _get_cache($key) {
-		static $data = array();
+		static $data = null;
 		if(!isset($data[$key])) {
 			include $this->get_cache_file_path($key);
 		}
@@ -67,7 +65,7 @@ class ultrax_cache {
 	}
 
 	function get_cache_file_path($key) {
-		static $cache_path = array();
+		static $cache_path = null;
 		if(!isset($cache_path[$key])) {
 			$dir = hexdec($key[0].$key[1].$key[2]) % 1000;
 			$cache_path[$key] = $this->conf['path'].'/'.$dir.'/'.$key.'.php';

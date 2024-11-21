@@ -164,15 +164,7 @@ class dzz_error
 			    'line' => $error['line'],
 			    'function' => $error['function'],
 			);
-			$file = str_replace(array(DZZ_ROOT, '\\'), array('', '/'), $error['file']);
-			$func = isset($error['class']) ? $error['class'] : '';
-			$func .= isset($error['type']) ? $error['type'] : '';
-			$func .= isset($error['function']) ? $error['function'] : '';
-			$line = sprintf('%04d', $error['line']);
-			$logmsg .= (!empty($logmsg) ? ' -> ' : '').$file.'#'.$func.':'.$line;
 		}
-		$messagesave = '<b>'.$errormsg.'</b><br><b>PHP:</b>'.$logmsg;
-		self::write_error_log($messagesave);
 		self::show_error($type, $errormsg, $phpmsg);
 		exit();
 
@@ -183,9 +175,6 @@ class dzz_error
 		ob_end_clean();
 		$gzip = getglobal('gzipcompress');
 		ob_start($gzip ? 'ob_gzhandler' : null);
-		header("HTTP/1.1 503 Service Temporarily Unavailable");
-		header("Status: 503 Service Temporarily Unavailable");
-		header("Retry-After: 3600");
 		$host = $_SERVER['HTTP_HOST'];
 		$title = $type == 'db' ? 'Database' : 'System';
 		echo <<<EOT

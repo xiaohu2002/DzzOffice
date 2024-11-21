@@ -11,13 +11,13 @@ class ultrax_cache {
 	}
 
 	function get_cache($key) {
-		static $data = array();
+		static $data = null;
 		if(!isset($data[$key])) {
 			$cache = C::t('cache')->fetch($key);
 			if(!$cache) {
 				return false;
 			}
-			$data[$key] = dunserialize($cache['cachevalue']);
+			$data[$key] = unserialize($cache['cachevalue']);
 			if($cache['life'] && ($cache['dateline'] < time() - $data[$key]['life'])) {
 				return false;
 			}

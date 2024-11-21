@@ -125,7 +125,7 @@ class Hook
      * @param mixed     $extra 额外参数
      * @return mixed
      */
-    public static function exec($class, $tag = '', &$params = null,$extra = null,&$break = null)
+    public static function exec($class, $tag = '', &$params = null,$extra = null,&$break)
     {
         if(strpos($class,'|') !== false){//判断是否规定了作用域，并判断作用域确定是否执行钩子
             $rangArr = explode('|',$class);
