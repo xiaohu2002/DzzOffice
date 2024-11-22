@@ -1,5 +1,5 @@
 # DzzOffice 小胡版
-## DzzOffice 官方网站：https://dzzoffice.com
+## DzzOffice 官方网站：https://www.dzzoffice.com
 ## DzzOffice 小胡团队：https://gitee.com/xiaohu2024
 ## DzzOffice 介绍
 DzzOffice是一款开源的办公套件，旨在为企业和团队提供类似于“Google企业应用套件”和“微软Office365”的协同办公平台。它由多款开源办公应用组成，用户可根据需求选择和安装，实现高度灵活和可定制。
