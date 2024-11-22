@@ -40,7 +40,7 @@ if($_GET['a']=='down'){
 		@header('Location: '.$icoarr['url']);
 		exit();
 	}
-    $imageexts=array('jpg','jpeg','png','gif'); //图片使用；
+    $imageexts=array('jpg','jpeg','png','gif','webp'); //图片使用；
     $filename=$icoarr['name'];//rtrim($_GET['n'],'.dzz');
     $ext=$icoarr['ext'];//strtolower(substr(strrchr($filename, '.'), 1, 10));
     if(!$ext) $ext=preg_replace("/\?.+/i",'',strtolower(substr(strrchr(rtrim($url,'.dzz'), '.'), 1, 10)));

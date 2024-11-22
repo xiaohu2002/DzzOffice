@@ -198,6 +198,8 @@ if (!submitcheck('settingsubmit')) {
 		}
 	} elseif ($operation == 'notification') {
 		$settingnew['notification'] = intval($settingnew['notification']);
+	} elseif ($operation == 'cachethread') {
+		$settingnew['onlinehold'] = intval($settingnew['onlinehold']) > 0 ? intval($settingnew['onlinehold']) : 15;
 	} elseif ($operation == 'denlu') {
 		$settingnew['numberoflogins'] = intval($settingnew['numberoflogins']);
 		$settingnew['forbiddentime'] = intval($settingnew['forbiddentime']);

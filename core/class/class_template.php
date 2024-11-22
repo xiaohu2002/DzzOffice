@@ -403,7 +403,7 @@ class template {
 		if(isset($langvar[$var])) {
 			return $langvar[$var];
 		} else {
-			return '!'.$var.'!';
+			return $var;
 		}
 	}
 //	模版lang替换

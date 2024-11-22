@@ -352,7 +352,7 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0, $ckey_
     $cryptkey = $keya . md5($keya . $keyc);
     $key_length = strlen($cryptkey);
 
-    $string = $operation == 'DECODE' ? base64_decode(substr($string, $ckey_length)) : sprintf('%010d', $expiry ? $expiry + time() : 0).substr(md5($string.$keyb), 0, 16).$string;
+    $string = $operation == 'DECODE' ? base64_decode(substr(str_replace(array('_', '-'), array('/', '+'), $string), $ckey_length)) : sprintf('%010d', $expiry ? $expiry + time() : 0) . substr(md5($string . $keyb), 0, 16) . $string;
     $string_length = strlen($string);
 
     $result = '';
@@ -380,13 +380,13 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0, $ckey_
     }
 
     if ($operation == 'DECODE') {
-        if(((int)substr($result, 0, 10) == 0 || (int)substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) === substr(md5(substr($result, 26).$keyb), 0, 16)) {
-			return substr($result, 26);
-		} else {
-			return '';
-		}
+        if ((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) === substr(md5(substr($result, 26) . $keyb), 0, 16)) {
+            return substr($result, 26);
+        } else {
+            return '';
+        }
     } else {
-        return $keyc.str_replace('=', '', base64_encode($result));
+        return $keyc . str_replace(array('/', '+'), array('_', '-'), str_replace('=', '', base64_encode($result)));
     }
 }
 function urlsafe_b64encode($string) {
@@ -1348,21 +1348,23 @@ function debug($var = null, $vardump = false)
     exit();
 }
 
-function debuginfo() {
-	global $_G;
-	if(getglobal('config/debug')) {
-		$_G['debuginfo'] = array(
-		    'time' => number_format((microtime(true) - $_G['starttime']), 6),
-		    'queries' => DB::object()->querynum,
-		    'memory' => ucwords(C::memory()->type)
-		    );
-		if(DB::object()->slaveid) {
-			$_G['debuginfo']['queries'] = 'Total '.DB::object()->querynum.', Slave '.DB::object()->slavequery;
-		}
-		return TRUE;
-	} else {
-		return FALSE;
-	}
+function debuginfo()
+{
+    global $_G;
+    if (getglobal('config/debug')) {
+        $db = &DB::object();
+        $_G['debuginfo'] = array(
+            'time' => number_format((microtime(true) - $_G['starttime']), 6),
+            'queries' => $db->querynum,
+            'memory' => ucwords(C::memory()->type)
+        );
+        if ($db->slaveid) {
+            $_G['debuginfo']['queries'] = 'Total ' . $db->querynum . ', Slave ' . $db->slavequery;
+        }
+        return TRUE;
+    } else {
+        return FALSE;
+    }
 }
 
 function check_seccode($value, $idhash)
@@ -1678,7 +1680,7 @@ function getimgthumbname($fileStr, $extend = '.thumb.jpg', $holdOldExt = true)
 function dintval($int, $allowarray = false)
 {
     $ret = intval($int);
-    if($int == '' || $int == $ret || !$allowarray && is_array($int)) return $ret;
+    if ($int == $ret || !$allowarray && is_array($int)) return $ret;
     if ($allowarray && is_array($int)) {
         foreach ($int as &$v) {
             $v = dintval($v, true);
@@ -1713,15 +1715,12 @@ function strhash($string, $operation = 'DECODE', $key = '')
     return base64_encode(gzcompress($string . $vkey));
 }
 
-function dunserialize($data) {
-	// 由于 Redis 驱动侧以序列化保存 array, 取出数据时会自动反序列化（导致反序列化了非Redis驱动序列化的数据），因此存在参数入参为 array 的情况.
-	// 考虑到 PHP 8 增强了类型体系, 此类数据直接送 unserialize 会导致 Fatal Error, 需要通过代码层面对此情况进行规避.
-	if(is_array($data)) {
-		$ret = $data;
-	} elseif(($ret = unserialize($data)) === false) {
-		$ret = unserialize(stripslashes($data));
-	}
-	return $ret;
+function dunserialize($data)
+{
+    if (($ret = unserialize($data)) === false) {
+        $ret = unserialize(stripslashes($data));
+    }
+    return $ret;
 }
 
 function browserversion($type)
@@ -1772,7 +1771,7 @@ $textexts = array('DZZDOC', 'HTM', 'HTML', 'SHTM', 'SHTML', 'HTA', 'HTC', 'XHTML
 $unRunExts = array('htm', 'html', 'js', 'php', 'jsp', 'asp', 'aspx', 'xml', 'htc', 'shtml', 'shtm', 'vbs'); //需要阻止运行的后缀名；
 $docexts = array('DOC', 'DOCX', 'XLS', 'XLSX', 'PPT', 'PPTX', 'ODT', 'ODS', 'ODG', 'RTF', 'ET', 'DPX', 'WPS');
 //echo strtolower(implode(',',$docexts));
-$imageexts = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP');
+$imageexts = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP','WEBP');
 $videoexts =
 $idtype2type = array(
     'picid' => 'image',

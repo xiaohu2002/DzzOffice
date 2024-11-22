@@ -5,11 +5,6 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-jQuery('.js-popbox').each(function(){
-	if(jQuery(this).hasClass('disabled')) return;
-	jQuery(this).popbox();
-	jQuery("[data-bs-toggle='tooltip']").tooltip();
-});
 function popbox() {
 	$(".popbox")
 		.css({

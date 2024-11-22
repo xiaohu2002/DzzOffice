@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL);
 define('IN_DZZ', true);
 define('EXT','.php');//文件后缀
 define('BS',DIRECTORY_SEPARATOR);//系统目录分割符
