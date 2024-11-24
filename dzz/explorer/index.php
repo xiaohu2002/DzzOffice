@@ -2,7 +2,6 @@
 if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
-$navtitle=lang('网盘');
 $uid = $_G['uid'];
 $space = dzzgetspace($uid);
 $space['self']=intval($space['self']);

@@ -1,69 +1,64 @@
-<!--{template common/header_simple_start}-->
+<!--{template lyear/header_simple_start}-->
 <script src="admin/scripts/admin.js?{VERHASH}"></script>
-<!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
-<style type="text/css">
-
-/*结束*/
-</style>
-<div class="bs-container clearfix">
-  <div class="bs-left-container  clearfix"> 
-    <!--{template left}--> 
-  </div>
-  <div class="left-drager">
-    <div class="left-drager-op">
-      <div class="left-drager-sub"></div>
-    </div>
-  </div>
-  <div class="bs-main-container  clearfix">
-    <div class="main-header clearfix"> 
-      <!--{template right_header}--> 
-    </div>
-    <div class="main-content clearfix">
-      <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=router" method="post">
-        <input type="hidden" name="routersubmit" value="true" />
-        <input type="hidden" name="formhash" value="{FORMHASH}" />
-        <table class="table table-hover">
-          <thead>
-          <th width="20">&nbsp;</th>
-            <th width="80">{lang priority}</th>
-            <th width="150">{lang name}</th>
-            <th width="100">{lang use_storage}</th>
-            <th>{lang routing_rule}</th>
-            <th width="60">{lang enable}</th>
-            <th width="60">{lang edit}</th>
-              </thead>
-            <!--{loop $list $value}-->
-          <tr>
-            <td width="20"><input type="checkbox"  class="form-check-input" name="delete[]" value="$value[routerid]" style="width:20px;" /></td>
-            <td width="80"><input type="text" class="form-control" name="priority[{$value[routerid]}]" value="$value[priority]" style="width:45px;" /></td>
-            <td width="150"><input type="text" class="form-control" name="name[{$value[routerid]}]" value="$value[name]" /></td>
-            <td width="100">$value[position] 
-              <!--{if $value[bz_available]<1}--> 
-              <span class="text-danger">{lang router_routing_failure}</span> 
-              <!--{/if}--></td>
-            <td style="word-break:break-all">$value[drouter]</td>
-            <td width="60"><input type="checkbox"  class="form-check-input" name="available[{$value[routerid]}]" value="1" <!--{if $value[available]>0}-->checked<!--{/if}-->></td>
-            <td width="60"><a href="{MOD_URL}&op=routeredit&routerid=$value[routerid]" class="glyphicon glyphicon-edit " title="{lang edit}">&nbsp;</a></td>
-          </tr>
-          <!--{/loop}-->
-          <thead>
-          <td valign="middle" colspan="7"><input type="checkbox"  class="form-check-input" name="chkall" id="chkall" onclick="checkAll('prefix', this.form, 'delete')">
-              &nbsp;{lang del}&nbsp;&nbsp;&nbsp;
-              <input type="submit" class="btn btn-primary" value="{lang save_set}" />
+<!--{template lyear/header_simple_end}-->
+<main class="bs-main-container">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+              <!--{template right_header}--> 
+            </div>
+            <div class="card-body">
               <a href="{MOD_URL}&op=routeredit" title="{lang add_routing}" class="btn btn-outline-primary">{lang add_routing}</a>
-              
-              </td>
-              </thead>
-        </table>
-      </form>
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>{lang board_message}</strong>{lang router_board_message_text}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=router" method="post">
+                <input type="hidden" name="routersubmit" value="true" />
+                <input type="hidden" name="formhash" value="{FORMHASH}" />
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle">
+                    <thead>
+                    <th width="20">&nbsp;</th>
+                      <th width="80">{lang priority}</th>
+                      <th width="150">{lang name}</th>
+                      <th width="100">{lang use_storage}</th>
+                      <th>{lang routing_rule}</th>
+                      <th width="60">{lang enable}</th>
+                      <th width="60">{lang edit}</th>
+                        </thead>
+                      <!--{loop $list $value}-->
+                    <tr>
+                      <td width="20"><input type="checkbox"  class="form-check-input" name="delete[]" value="$value[routerid]" style="width:20px;" /></td>
+                      <td width="80"><input type="text" class="form-control" name="priority[{$value[routerid]}]" value="$value[priority]" style="width:45px;" /></td>
+                      <td width="150"><input type="text" class="form-control" name="name[{$value[routerid]}]" value="$value[name]" /></td>
+                      <td width="100">$value[position] 
+                        <!--{if $value[bz_available]<1}--> 
+                        <span class="text-danger">{lang router_routing_failure}</span> 
+                        <!--{/if}--></td>
+                      <td style="word-break:break-all">$value[drouter]</td>
+                      <td width="60"><input type="checkbox"  class="form-check-input" name="available[{$value[routerid]}]" value="1" <!--{if $value[available]>0}-->checked<!--{/if}-->></td>
+                      <td width="60"><a href="{MOD_URL}&op=routeredit&routerid=$value[routerid]" class="dcolor lead mdi mdi-pencil" title="{lang edit}">&nbsp;</a></td>
+                    </tr>
+                    <!--{/loop}-->
+                  </table>
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input type="checkbox"  class="form-check-input" name="chkall" id="chkall" onclick="checkAll('prefix', this.form, 'delete')">
+                    <label class="form-check-label" for="chkall">
+                      {lang del}
+                    </label>
+                  </div>
+                </div>
+                <dl class="mb-3 d-grid">
+                  <input type="submit" class="btn btn-primary" value="{lang submit}" />
+                </dl>
+              </form>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{lang board_message}</strong>{lang router_board_message_text}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+          </div>
       </div>
-    </div>
   </div>
-</div>
+</main>
 <script type="text/javascript">
 
 	function checkspace(obj, routerid) {
@@ -87,4 +82,4 @@
 		});
 	}
 </script>
-<!--{template common/footer_simple}-->
+<!--{template lyear/footer_simple}-->

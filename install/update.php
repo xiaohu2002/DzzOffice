@@ -53,7 +53,7 @@ if(file_exists($lockfile) && !$_GET['from']) {
 	show_msg('请您先手工删除 ./data/update.lock 文件，再次运行本文件进行升级。');
 }
 
-$sqlfile = 'data/install.sql';
+$sqlfile = DZZ_ROOT.'./install/data/install.sql';
 
 if(!file_exists($sqlfile)) {
 	show_msg('SQL文件 '.$sqlfile.' 不存在');
@@ -101,7 +101,7 @@ if($_GET['step'] == 'start') {
 		show_msg('您的站点未关闭，正在关闭，请稍后...', $theurl.'?step=start', 5000);
 	}
 		show_msg('说明：<br>本升级程序会参照最新的SQL文件，对数据库进行同步升级。<br>
-			请确保您已将最新版文件覆盖至本地文件。<br>升级会还原部分默认设置。<br><br>
+			请确保当前目录下 ./data/install.sql 文件为最新版本。<br><br>
 			<a href="'.$theurl.'?step=prepare'.($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '').'">准备完毕，升级开始</a>');
 	
 } elseif ($_GET['step'] == 'waitingdb') {
@@ -257,50 +257,49 @@ if($_GET['step'] == 'start') {
 
 } elseif ($_GET['step'] == 'data') {
 	if(!$_GET['dp']){
-		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','fileVersion'))){
+		
+		
+		//新增两个配置项
 		 C::t('setting')->update('fileVersion', '1');
-		}
-		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','fileVersionNumber'))){
 		 C::t('setting')->update('fileVersionNumber', '50');
+		
+		//添加云设置和管理应用
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=cloud'))){
+			
+		 C::t('app_market')->insert(array('appname'=>'云设置和管理',
+		 								  'appico'=>'appico/201712/21/171106u1dk40digrrr79ed.png',
+		 								  'appurl'=>'{adminscript}?mod=cloud',
+										  'appdesc'=>'设置和管理第三方云盘、云存储等',
+										  'dateline'=>TIMESTAMP,
+										  'disp'=>5,
+										  'vendor'=>'乐云网络',
+										  'group'=>3,
+										  'system'=>2,
+										  'notdelete'=>1,
+										  'position'=>0,
+										  'app_path'=>'admin',
+										  'identifier'=>'cloud',
+										  'version'=>'2.0',
+										  'available'=>1),0,1);
 		}
-		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','default_mod'))){
-			C::t('setting')->update('default_mod', 'index');
-		}
-		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','forbiddentime'))){
-		 C::t('setting')->update('forbiddentime', '900');
-		}
-		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','numberoflogins'))){
-			C::t('setting')->update('numberoflogins', '5');
-		}
-		if(!DB::result_first("select COUNT(*) from %t where skey=%s",array('setting','notification'))){
-		 C::t('setting')->update('notification', '60');
-		}
-		$appurl = "{dzzscript}?mod=appmanagement";
-		$appid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
-		if ($appid) {
-			C::t('app_market')->update($appid, array('appurl' => "{adminscript}?mod=appmanagement", 'group' => 3));
-		}
-		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=DPlayer'))){
-			C::t('app_market')->insert(array('appname'=>'DPlayer',
-			'appico'=>'appico/202308/19/205443f8ucb4pueqebbrvp.png',
-			'appurl'=>'{dzzscript}?mod=DPlayer',
-			'appdesc'=>'DPlayer，支持MP3,mp4,flv,wav等格式',
-			'dateline'=>TIMESTAMP,
-			'disp'=>0,
-			'mid'=>0,
-			'vendor'=>'小胡',
-			'group'=>0,
-			'haveflash'=>0,
-			'isshow'=>0,
-			'hideInMarket'=>0,
-			'system'=>2,
-			'notdelete'=>1,
-			'position'=>1,
-			'open'=>1,
-			'app_path'=>'dzz',
-			'identifier'=>'DPlayer',
-			'version'=>'1.2',
-			'available'=>1),0,1);
+		//添加用户资料管理应用
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{adminscript}?mod=member'))){
+			
+		 C::t('app_market')->insert(array('appname'=>'用户资料管理',
+		 								  'appico'=>'appico/201712/21/103805dczcm89b0gi8i9gc.png',
+		 								  'appurl'=>'{adminscript}?mod=member',
+										  'appdesc'=>'用户资料项配置，资料审核，认证等',
+										  'dateline'=>TIMESTAMP,
+										  'disp'=>10,
+										  'vendor'=>'乐云网络',
+										  'group'=>3,
+										  'system'=>2,
+										  'notdelete'=>1,
+										  'position'=>0,
+										  'app_path'=>'admin',
+										  'identifier'=>'member',
+										  'version'=>'2.0',
+										  'available'=>1),0,1);
 		}
 		//添加网盘应用
 		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=explorer'))){
@@ -379,12 +378,10 @@ if($_GET['step'] == 'start') {
 		$next=$theurl.'?step=data&dp=2&i='.$i;
 		show_msg("[ $i / $count_i ] ".$msg, $next);
 	}elseif($_GET['dp']==3){ //更新继承权限和路径
-		
 		$i = empty($_GET['i'])?0:intval($_GET['i']);
 		
 		$count_i = DB::result_first("select COUNT(*) from %t",array('folder'));
 		if($i>=$count_i) {
-
 			show_msg('开始修复回收站...', $theurl.'?step=data&dp=4');
 		}
 		$arr=DB::fetch_first("select fid from %t order by fid limit $i,1",array('folder'));
@@ -654,7 +651,7 @@ function show_header() {
 	</head>
 	<body>
 	<div class="bodydiv">
-	<h1>DzzOffice 小胡版 数据库升级工具</h1>
+	<h1>DzzOffice 数据库升级工具</h1>
 	<div style="width:90%;margin:0 auto;">
 	<table id="menu">
 	<tr>

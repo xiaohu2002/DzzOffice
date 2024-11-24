@@ -1,9 +1,9 @@
-<div class="main-header clearfix">
-  <ul class="nav nav-pills">
+<div class="card-header">
+  <ul class="nav nav-stacked nav-pills">
     <li class="nav-item"><a class="nav-link active" href="{MOD_URL}&op=edituser&do=add&orgid=$orgid" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang add_user}</a> </li>
   </ul>
 </div>
-<div class="main-content">
+<div class="card-body">
     <div id="return_adduser" style="display:none"></div>
     <form id="accountform" name="accountform" class="lyear-search-right" action="{MOD_URL}&op=edituser" method="post" onsubmit="account_submit();return false">
       <input type="hidden" name="accountadd" value="true" />
@@ -15,41 +15,41 @@
         <div class="col-sm-10">
           <input type="text" class="form-control" id="email" name="email" autocomplete="off" value="$user[email]" onblur="checkemail(this.id);">
           <p id="emailmore" style="height:1px;margin:0;">&nbsp;</p>
-          <span id="chk_email" class="help-block">
+          <span id="chk_email" class="form-text">
             <span id="suc_email"></span><kbd class="help-msg"></kbd> 
           </span>
-          <small class="help-block">{lang adduser_login_email_text}</small>
+          <small class="form-text">{lang adduser_login_email_text}</small>
         </div>
       </div>
       <div class="row mb-3">
         <label for="username" class="col-sm-2">{lang username}</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="username" name="username" placeholder="{lang login_username_placeholder}" autocomplete="off" value="$user[username]" onblur="checknick(this.id);">
-          <span id="chk_username" class="help-block">
+          <span id="chk_username" class="form-text">
             <span id="suc_username"></span><kbd class="help-msg"></kbd> 
           </span>
-          <small class="help-block">{lang login_username_tips}</small>
+          <small class="form-text">{lang login_username_tips}</small>
         </div>
       </div>
       <div class="row mb-3">
         <label for="phone" class="col-sm-2">{lang phone_number}</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" placeholder="{lang weixin_phone_number}" id="phone" name="phone" autocomplete="off" value="$user[phone]">
-          <small id="chk_phone" class="help-block">{lang adduser_phone_number_text}</small>
+          <small id="chk_phone" class="form-text">{lang adduser_phone_number_text}</small>
         </div>
       </div>
       <div class="row mb-3">
         <label for="weixinid" class="col-sm-2">{lang weixin}</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" placeholder="{lang user_weixin}" id="weixinid" name="weixinid" autocomplete="off" value="$user[weixinid]">
-          <small id="chk_weixinid" class="help-block">{lang edituser_weixin_text}</small>
+          <small id="chk_weixinid" class="form-text">{lang edituser_weixin_text}</small>
         </div>
       </div>
       <div class="row mb-3">
         <label for="password" class="col-sm-2">{lang user_login_password}</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" name="password" autocomplete="off" id="password" placeholder="{lang register_password_tips}">
-          <span id="chk_password" class="help-block">
+          <span id="chk_password" class="form-text">
             <span id="suc_password"></span>
           <kbd id="chk_password" class="help-msg"></kbd>
           </span>
@@ -59,7 +59,7 @@
         <label for="password2" class="col-sm-2">{lang new_password_confirm}</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="password2" name="password2" autocomplete="off" placeholder="{lang register_repassword_tips}">
-          <span id="chk_password2" class="help-block">
+          <span id="chk_password2" class="form-text">
             <span id="suc_password2"></span>
           <kbd id="chk_password2" class="help-msg"></kbd>
           </span>
@@ -75,7 +75,7 @@
         <label class="col-sm-2" for="status">{lang disable_user}</label>
         <div class="col-sm-10">
           <input type="checkbox" class="form-check-input" name="status" id="status" <!--{if $_G['adminid']!=1 || !$perm}-->disabled="disabled"<!--{/if}--> value="1" <!--{if $user[status]}-->checked<!--{/if}-->>
-          <small class="help-block">{lang adduser_disable_user_text}</small>
+          <small class="form-text">{lang adduser_disable_user_text}</small>
         </div>
       </div>
       <div class="row mb-3">
@@ -88,16 +88,16 @@
             <!--{/if}-->
             <!--{/loop}-->
           </select>
-          <small class="help-block">{lang adduser_usergroup_text}</small>
+          <small class="form-text">{lang adduser_usergroup_text}</small>
         </div>
       </div>
       <div class="row mb-3">
-        <label for="depart" class="col-sm-2">{lang department_position}&nbsp;[&nbsp;<a href="javascript:;" class="glyphicon glyphicon-plus" onclick="addorgsel()" title="{lang add_a_item}"></a>&nbsp;]</label>
+        <label for="depart" class="col-sm-2">{lang department_position}&nbsp;[&nbsp;<a href="javascript:;" class="mdi mdi-plus" onclick="addorgsel()" title="{lang add_a_item}"></a>&nbsp;]</label>
         <div class="col-sm-10">
           <div class="input-group mb-3">
             <div id="selorg_container">
             <!--{if $org}-->
-            <ul class="btn-group">
+            <ul class="input-group mb-3">
               <li class="dropdown org">
                 <input id="sel_orgid_{$org[orgid]}" type="hidden" name="orgids[]" value="$org[orgid]" onchange="selDepart(this)" />
                 <button type="button" id="orgid_{$org[orgid]}_Menu" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">$org[depart]  </button>
@@ -121,7 +121,7 @@
               </li>
               <!--{if $value['ismoderator']}-->
               <li>
-                <a href="javascript:;" onclick="delDepart(this)" ttitle="{lang delete}"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="javascript:;" onclick="delDepart(this)" ttitle="{lang delete}"><i class="mdi mdi-delete lead dcolor"></i></a>
               </li>
               <!--{/if}-->
             </ul>
@@ -140,7 +140,7 @@
               <ul aria-labelledby="drop-job" role="menu" class="dropdown-menu"></ul>
             </li>
             <li>
-              <a href="javascript:;" onclick="delDepart(this)" ttitle="{lang delete}"><i class="glyphicon glyphicon-remove"></i></a>
+              <a href="javascript:;" onclick="delDepart(this)" ttitle="{lang delete}"><i class="mdi mdi-delete lead dcolor"></i></a>
             </li>
             </ul>
             </div>
@@ -153,7 +153,7 @@
           <div class="input-group mb-3">
             <div id="selorg_container" class="col-sm-10">
               <div id="upjob">
-              <ul class="btn-group">
+              <ul class="input-group mb-3">
                 <li class="dropdown org">
                   <input id="sel_uporgid" type="hidden" name="uporgid" value="0" onchange="selDepart(this)" />
                   <button type="button" id="uporgid_Menu" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">{lang please_select_a_organization_or_department}</button>
@@ -180,15 +180,12 @@
         <input type="checkbox" class="form-check-input" name="sendmail" id="sendmail" value="1" checked="checked">
         <label class="form-check-label" for="sendmail">{lang send_password_user_mailbox}</label>
       </div>
-      <dl>
+      <dl class="mb-3 d-grid">
         <input type="button" class="btn btn-primary" value="{lang confirm_add}" onclick="account_submit()">
       </dl>
   </form>
 </div>
 <script type="text/javascript" reload="1">
-	jQuery(document).ready(function (e) {
-    jQuery('select').lyearSelect();
-  });
 	var orgsel_html = jQuery('#nav').html();
 	var lastusername = '',
 		lastpassword = '',

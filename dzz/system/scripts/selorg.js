@@ -1,1 +1,54 @@
-﻿var selorg={add:function(e,a){var r="",t=/^dzz(.+?)/;for(var n in a)if(!jQuery("#"+e+"_sl_"+a[n].orgid).length){r+='<button id="'+e+"_sl_"+a[n].orgid+'" type="button" class="btn btn-outline-secondary btn-sorg" data-val="'+a[n].orgid+'">',a[n].icon&&(t.test(a[n].icon)?r+='<span class="'+a[n].icon+'"></span>':r+='<img src="'+a[n].icon+'">');var s=a[n].path.match(/<span.+?>.+?<\/span>/i);r+=s?s+a[n].path.replace(/<span.+?>.+?<\/span>/i,""):a[n].path,r+='<a href="javascript:;" class="ibtn dzz dzz-close"  title="'+__lang.delete+'" onclick="selorg.remove(\''+e+"',this);\"></a>"}jQuery("#"+e).append(r),selorg.set(e)},del:function(e,a){for(var r in a)jQuery("#"+e+"_sl_"+a[r]).remove();selorg.set(e)},set:function(e){var a=[];jQuery("#"+e+" button").each(function(){a.push(jQuery(this).data("val"))}),jQuery("#sel_"+e).val(a.join(","))},remove:function(e,a){var r=jQuery(a).parent().data("val");jQuery(a).parent().remove(),selorg.set(e);try{window.frames[e+"_iframe"].selectorg_remove(r)}catch(e){}}};
+﻿var selorg={};
+
+//添加
+selorg.add=function(ctrlid,vals){
+	var html='';
+	var pregmatch = /^dzz(.+?)/;
+	for(var i in vals){
+		if(jQuery('#'+ctrlid+'_sl_'+vals[i].orgid).length){
+		 	continue;	
+		}
+		html+='<button id="'+ctrlid+'_sl_'+vals[i].orgid+'" type="button" class="btn btn-simple btn-sorg" data-val="'+vals[i].orgid+'">';
+		
+		if(vals[i].icon){
+			if(pregmatch.test(vals[i].icon)){
+				html+='<span class="'+vals[i].icon+'"></span>';
+			}else{
+				html+='<img src="'+vals[i].icon+'">';
+			}
+		}
+		var iconFirstWord=vals[i].path.match(/<span.+?>.+?<\/span>/i);
+		if(iconFirstWord){
+			html+=iconFirstWord+vals[i].path.replace(/<span.+?>.+?<\/span>/i,'');
+		}else{
+			html+=vals[i].path;
+		}
+		html+='<a href="javascript:;" class="ibtn dzz dzz-close mdi mdi-close"  title="'+__lang.delete+'" onclick="selorg.remove(\''+ctrlid+'\',this);"></a>';
+	}
+	jQuery('#'+ctrlid).append(html);
+	selorg.set(ctrlid);
+};
+
+//删除
+selorg.del=function(ctrlid,vals){
+	for(var i in vals){
+		jQuery('#'+ctrlid+'_sl_'+vals[i]).remove();
+	}
+	 selorg.set(ctrlid);
+};
+
+//设置输入框的值
+selorg.set=function(ctrlid){
+	var val=[];
+	jQuery('#'+ctrlid+' button').each(function() {
+        val.push(jQuery(this).data('val'));
+    });
+	jQuery('#sel_'+ctrlid).val(val.join(','));
+};
+//y移除，并且取消机构树中的选择
+ selorg.remove=function(ctrlid,obj){
+	var unsel_val=jQuery(obj).parent().data('val');
+	jQuery(obj).parent().remove();
+	selorg.set(ctrlid);
+	try{window.frames[ctrlid+'_iframe'].selectorg_remove(unsel_val);}catch(e){}
+};

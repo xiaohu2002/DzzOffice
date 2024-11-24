@@ -7,7 +7,7 @@
 			<div class="topNav">
 				<div class="topNav-item topNav-left">
 					<div class="address-wrapper">
-						<div class="goback"> <a href="javascript:history.back();" ><span class="dzz dzz-nav-back "></span><span>{lang goback}</span><span class="dzz dzz-vline dzz-address-vline" ></span></a> </div>
+						<div class="goback"> <a href="javascript:history.back();" ><span class="dzz dzz-nav-back "></span><span>返回</span><span class="dzz dzz-vline dzz-address-vline" ></span></a> </div>
 						<div class="address-container">
 							<div class="address-left-arrow">《</div>
 							<div class="address-right-arrow">》</div>
@@ -79,7 +79,7 @@
 				'<p class="emptyPage-text">'+contenterrormsg+'</p> ' +
 				'</div>';
             jQuery('#filemanage-f-'+fid).html(noticeinfo);
-            if('{$group[available]}' == 0 || '{$group[diron]}' == 0){
+            if('{$group['available']}' == 0 || '{$group[diron]}' == 0){
                 jQuery('.new-buildMenu').hide();
 			}
 			_filemanage && _filemanage.setInfoPanel();

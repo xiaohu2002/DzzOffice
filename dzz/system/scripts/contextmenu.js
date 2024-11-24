@@ -5,4 +5,453 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-_contextmenu={},_contextmenu.zIndex=9999999,_contextmenu.right_ico=function(e,n){var t=(e=e||window.event).srcElement?e.srcElement:e.target;if(/input|textarea/i.test(t.tagName))return!0;var i=e.clientX,o=e.clientY;t=_explorer.sourcedata.icos[n];if(document.getElementById("right_contextmenu"))r=jQuery(document.getElementById("right_contextmenu"));else var r=jQuery('<div id="right_contextmenu" class="menu"></div>').appendTo(document.body);n+="",m=(m=(m=(m=document.getElementById("right_ico").innerHTML).replace(/\{XX\}/g,i)).replace(/\{YY\}/g,o)).replace(/\{rid\}/g,n),m=1==_selectfile.selectall.icos.length&&"folder"==t.type?m.replace(/\{fid\}/g,t.fid):m.replace(/\{fid\}/g,t.pfid),r.html(m),("shortcut"==t.type||"storage"==t.type||"pan"==t.type||_explorer.myuid<1)&&r.find(".shortcut").remove(),2==_explorer.type&&r.find(".download,.cut,.copy,.delete").remove(),_explorer.Permission("copy",t)||r.find(".copy").remove(),(!_explorer.Permission("upload",t)||_explorer.cut.icos.length<1||_selectfile.fid<1)&&r.find(".paste").remove(),_explorer.Permission("share",t)||r.find(".share").remove(),_explorer.Permission("rename",t)||r.find(".rename").remove(),_explorer.Permission("download",t)||(r.find(".download").remove(),r.find(".downpackage").remove()),_explorer.Permission("chmod",t)||r.find(".chmod").remove(),_explorer.Permission("delete",t)||(r.find(".cut").remove(),r.find(".delete").remove()),t.notdelete>0&&"app"==t.type&&(r.find(".delete").remove(),r.find(".cut").remove(),r.find(".copy").remove());var l=0;if(_selectfile.selectall.icos.length>1&&jQuery.inArray(n,_selectfile.selectall.icos)>-1){1==t.isdelete?r.find(".menu-item:not(.recover,.finallydelete)").remove():r.find(".menu-item:not(.delete,.cut,.copy,.restore,.downpackage,.property,.collect,.paste,.share,.cancleshare)").remove();for(var d=1,s=0;s<_selectfile.selectall.icos.length;s++){var c=_explorer.sourcedata.icos[_selectfile.selectall.icos[s]];if(c.collect&&(l+=1),!_explorer.Permission("download",c)){d=0;break}}d||r.find(".downpackage").remove(),r.find(".download").remove(),l==_selectfile.selectall.icos.length&&r.find(".collect .menu-text").html("取消收藏")}else t.collect&&r.find(".collect .menu-text").html("取消收藏"),r.find(".downpackage").remove();if(1==t.isdelete?r.find(".menu-item:not(.recover,.finallydelete)").remove():(r.find(".finallydelete").remove(),r.find(".recover").remove()),-1!=_selectfile.winid.indexOf("collect")&&(r.find(".cut").remove(),r.find(".copy").remove(),r.find(".paste").remove()),-1!=_selectfile.winid.indexOf("share")?r.find(".menu-item:not(.cancleshare,.editshare)").remove():r.find(".cancleshare,.editshare").remove(),-1==_selectfile.winid.indexOf("collect")&&-1==_selectfile.winid.indexOf("recent")&&-1==_selectfile.winid.indexOf("search")||r.find(".cut,.delete,.rename").remove(),r.find(".menu-item").length){var u=getExtOpen("shortcut"==t.type?t.tdata:t);if(!0===u)r.find(".openwith").remove();else if(!1===u)r.find(".openwith").remove(),r.find(".open").remove();else if(1==u.length)r.find(".openwith").remove();else if(u.length>1){var m='<span class="menu-icon icon-openwith" ></span><span class="menu-text">'+__lang.method_open+'</span><span class="menu-rightarrow"></span>';m+='<div class=" menu " style="display:none">';for(s=0;s<u.length;s++)m+='<div class="menu-item" onClick="_selectfile.Open(\''+n+"','"+u[s].extid+"');jQuery('#right_contextmenu').hide();jQuery('#shadow').hide();return false;\">",u[s].icon&&(m+='<span class="menu-icon" style="background:none"><img width="100%" height="100%" src='+u[s].icon+"></span>"),m+='<span class="menu-text">'+u[s].name+"</span>",m+="</div>";m+="</div>",r.find(".openwith").html(m)}else r.find(".openwith").remove();r.find(".menu-sep").each(function(){jQuery(this).next().first().hasClass("menu-item")&&jQuery(this).prev().first().hasClass("menu-item")||jQuery(this).remove()});var a=document.documentElement.clientWidth,p=document.documentElement.clientHeight;r.css({"z-index":_contextmenu.zIndex+1}),r.show(),r.find(">div").each(function(){var e=jQuery(this),n=e.find(".menu");if(n.length){var t=e.find(".menu-shadow");e.on("mouseover",function(){_contextmenu.ppp&&_contextmenu.ppp.hide(),_contextmenu.kkk&&_contextmenu.kkk.hide(),_contextmenu.last&&_contextmenu.last.removeClass("menu-active"),_contextmenu.kkk=t,_contextmenu.last=e,_contextmenu.ppp=n,e.addClass("menu-active");var l=e.find(".menu"),d=r.width()-1;return suby=0,i+2*r.width()>a&&(d=d-l.width()-r.width()-6),o+e.position().top+l.height()>p&&(suby=suby-l.height()+e.height()-5),l.css({left:d,top:suby,"z-index":_contextmenu.zIndex+2,display:"block"}),t.css({display:"block",zIndex:_contextmenu.zIndex+1,left:d,top:suby,width:l.outerWidth(),height:l.outerHeight()}),n.find(".menu-item").on("mouseover",function(){jQuery(this).addClass("menu-active")}),n.find(".menu-item").on("mouseout",function(){return jQuery(this).removeClass("menu-active"),!1}),!1}),e.on("mouseout",function(){return e.removeClass("menu-active"),t.hide(),n.hide(),!1})}else e.on("mouseover",function(){return _contextmenu.last&&_contextmenu.last.removeClass("menu-active"),_contextmenu.ppp&&_contextmenu.ppp.hide(),_contextmenu.kkk&&_contextmenu.kkk.hide(),jQuery(this).addClass("menu-active"),!1}),e.on("mouseout",function(){jQuery(this).removeClass("menu-active")})}),i+r.width()>a&&(i-=r.width()),o+r.height()>p&&(o-=r.height()),r.css({left:i,top:o}),jQuery(document).on("mousedown.right_contextmenu",function(e){var n=(e=e||window.event).srcElement?e.srcElement:e.target;jQuery(n).closest("#right_contextmenu").length<1&&(r.hide(),r.empty(),jQuery(document).off(".right_contextmenu"),_contextmenu.kkk=null,_contextmenu.ppp=null,_contextmenu.last=null)})}else r.hide()},_contextmenu.right_body=function(e,n){var t=(e=e||window.event).srcElement?e.srcElement:e.target;if(/input|textarea/i.test(t.tagName))return!0;var i=e.clientX,o=e.clientY,r=document.getElementById("right_body").innerHTML;if(r=(r=r.replace(/\{fid\}/g,n)).replace(/\{filemanageid\}/g,_selectfile.winid),document.getElementById("right_contextmenu"))l=jQuery(document.getElementById("right_contextmenu"));else var l=jQuery('<div id="right_contextmenu" class="menu"></div>').appendTo(document.body);l.html(r);var d=_selectfile.cons[_selectfile.winid];if(l.find("span.menu-icon-iconview[view="+d.view+"]").removeClass("dzz-check-box-outline-blank").addClass("dzz-check-box"),l.find(".menu-icon-disp").each(function(){jQuery(this).attr("disp")==d.disp?(jQuery(this).removeClass("dzz-check-box-outline-blank").addClass("dzz-check-box"),jQuery(this).next().find(".caret").removeClass("asc").removeClass("desc").addClass(d.asc>0?"asc":"desc")):(jQuery(this).addClass("dzz-check-box-outline-blank").removeClass("dzz-check-box"),jQuery(this).next().find(".caret").removeClass("asc").removeClass("desc"))}),n?(l.find(".recoverall").remove(),l.find(".deleteall").remove()):(l.find(".property").remove(),l.find(".paste").remove(),"recycle-list"!=_selectfile.winid?(l.find(".recoverall").remove(),l.find(".deleteall").remove()):(l.find(".sort .disp2").remove(),l.find(".sort .disp3").remove())),_explorer.Permission_Container("folder",n)||l.find(".newfolder").remove(),_explorer.Permission_Container("link",n)||l.find(".newlink").remove(),_explorer.Permission_Container("dzzdoc",n)||l.find(".newdzzdoc").remove(),_explorer.Permission_Container("upload",n)||l.find(".newdzzdoc").remove(),_explorer.Permission_Container("newtype",n)||(l.find(".newtext").remove(),l.find(".newdoc").remove(),l.find(".newexcel").remove(),l.find(".newpowerpoint").remove()),l.find(".create .menu-item").length<1&&l.find(".create").remove(),_explorer.cut.icos.length<1&&l.find(".paste").remove(),_explorer.Permission_Container("upload",n)?BROWSER.ie?(jQuery('<input id="right_uploadfile_'+n+'" name="files[]" tabIndex="-1" style="position: absolute;outline:none; filter: alpha(opacity=0); PADDING-BOTTOM: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font-family: Arial; font-size: 180px;height:30px;width:200px;top: 0px; cursor: pointer; right: 0px; padding-top: 0px; opacity: 0;direction:ltr;background-image:none" type="file" multiple="multiple" >').appendTo(l.find(".upload")),fileupload(jQuery("#right_uploadfile_"+n)),jQuery('<input id="right_uploadfolder_'+n+'" name="files[]" tabIndex="-1" style="position: absolute;outline:none; filter: alpha(opacity=0); PADDING-BOTTOM: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font-family: Arial; font-size: 180px;height:30px;width:200px;top: 0px; cursor: pointer; right: 0px; padding-top: 0px; opacity: 0;direction:ltr;background-image:none" type="file" multiple="multiple" >').appendTo(l.find(".uploadfolder")),fileupload(jQuery("#right_uploadfolder_"+n))):(console.log(l.find(".upload")),l.find(".upload").get(0).onclick=function(){jQuery(".js-upload-file input").trigger("click"),console.log(jQuery(".js-upload-file input")),console.log("aaaa"),l.hide()},l.find(".uploadfolder").get(0).onclick=function(){jQuery(".js-upload-folder input").trigger("click"),l.hide()}):(l.find(".upload").remove(),l.find(".uploadfolder").remove()),l.find(".create .menu>.menu-item").length<1&&l.find(".create").remove(),"share-list"==_selectfile.winid&&l.find(".menu-item").remove(),l.find(".menu-item").length<1)l.hide();else{l.find(".menu-sep").each(function(){jQuery(this).next().first().hasClass("menu-item")&&jQuery(this).prev().first().hasClass("menu-item")||jQuery(this).remove()});var s=document.documentElement.clientWidth,c=document.documentElement.clientHeight;l.css({"z-index":_contextmenu.zIndex+1}),l.show(),l.find(">div").each(function(){var e=jQuery(this),n=e.find(".menu");if(n.length){var t=e.find(".menu-shadow");e.on("mouseover",function(){_contextmenu.ppp&&_contextmenu.ppp.hide(),_contextmenu.kkk&&_contextmenu.kkk.hide(),_contextmenu.last&&_contextmenu.last.removeClass("menu-active"),_contextmenu.kkk=t,_contextmenu.last=e,_contextmenu.ppp=n,e.addClass("menu-active");var r=e.find(".menu"),d=l.width()-1;return suby=-5,i+2*l.width()>s&&(d=d-r.width()-l.width()-6),o+e.position().top+r.height()>c&&(suby=suby-r.height()+e.height()),console.log(r),r.css({left:d,top:suby,"z-index":_contextmenu.zIndex+2,display:"block"}),t.css({display:"block",zIndex:_contextmenu.zIndex+1,left:d,top:suby,width:r.outerWidth(),height:r.outerHeight()}),n.find(".menu-item").on("mouseover",function(){jQuery(this).addClass("menu-active")}),n.find(".menu-item").on("mouseout",function(){return jQuery(this).removeClass("menu-active"),!1}),!1}),e.on("mouseout",function(){return e.removeClass("menu-active"),t.hide(),n.hide(),!1})}else e.on("mouseover",function(){return _contextmenu.last&&_contextmenu.last.removeClass("menu-active"),_contextmenu.ppp&&_contextmenu.ppp.hide(),_contextmenu.kkk&&_contextmenu.kkk.hide(),jQuery(this).addClass("menu-active"),!1}),e.on("mouseout",function(){jQuery(this).removeClass("menu-active")})}),i+l.width()>s&&(i-=l.width()),o+l.height()>c&&(o-=l.height()),o<0&&(o=0),l.css({left:i,top:o}),jQuery("#shadow").css({display:"block",zIndex:_contextmenu.zIndex,left:i,top:o,width:l.outerWidth(),height:l.outerHeight()}),jQuery(document).on("mousedown.right_contextmenu",function(e){var n=(e=e||window.event).srcElement?e.srcElement:e.target;jQuery(n).closest("#right_contextmenu").length<1&&(l.hide(),jQuery("#shadow").hide(),jQuery(document).off(".right_contextmenu"),_contextmenu.kkk=null,_contextmenu.ppp=null,_contextmenu.last=null)})}};
+_contextmenu = {}//定义一个空对象
+_contextmenu.zIndex = 9999999;//设置堆叠顺序
+_contextmenu.right_ico = function (e, rid) {
+    e = e ? e : window.event;
+    var obj = e.srcElement ? e.srcElement : e.target;
+    if (/input|textarea/i.test(obj.tagName)) {
+        return true;
+    }
+    var x = e.clientX;
+    var y = e.clientY;
+    var obj = _explorer.sourcedata.icos[rid];
+    if (!document.getElementById('right_contextmenu')) {
+        var el = jQuery('<div id="right_contextmenu" class="menu"></div>').appendTo(document.body);
+    } else {
+        var el = jQuery(document.getElementById('right_contextmenu'));
+    }
+    //如果是系统桌面，且用户不是管理员则不出现右键菜单
+    rid = rid + '';
+    var html = document.getElementById('right_ico').innerHTML;
+    html = html.replace(/\{XX\}/g, x);
+    html = html.replace(/\{YY\}/g, y);
+    html = html.replace(/\{rid\}/g, rid);
+    if (_selectfile.selectall.icos.length == 1 && obj.type == 'folder') {//单选中目录时，粘贴到此目录内部
+        html = html.replace(/\{fid\}/g, obj.fid);
+    } else {
+        html = html.replace(/\{fid\}/g, obj.pfid);
+    }
+    el.html(html);
+    if (obj.type == 'shortcut' || obj.type == 'storage' || obj.type == 'pan' || _explorer.myuid < 1) {
+        el.find('.shortcut').remove();
+    }
+    //如果是选择位置则只保留新建文件夹菜单
+    if(_explorer.type == 2){
+        el.find('.download,.cut,.copy,.delete').remove();
+    }
+    //判断copy
+    if (!_explorer.Permission('copy', obj)) {
+        el.find('.copy').remove();
+    }
+    //判断粘贴
+    if (!_explorer.Permission('upload', obj) || _explorer.cut.icos.length < 1 || _selectfile.fid < 1) {
+        el.find('.paste').remove();
+    }
+
+    //分享权限
+    if (!_explorer.Permission('share', obj)) {
+        el.find('.share').remove();
+    }
+
+    //重命名权限
+    if (!_explorer.Permission('rename', obj)) {
+        el.find('.rename').remove();
+    }
+
+    //下载权限
+    if (!_explorer.Permission('download', obj)) {
+        el.find('.download').remove();
+        el.find('.downpackage').remove();
+    }
+    //ftp的chmod权限
+    if (!_explorer.Permission('chmod', obj)) {
+        el.find('.chmod').remove();
+    }
+    //删除权限
+    if (!_explorer.Permission('delete', obj)) {
+        el.find('.cut').remove();
+        el.find('.delete').remove();
+    }
+    //不允许删除的情况
+    if (obj.notdelete > 0 && obj.type == 'app') {
+        el.find('.delete').remove();
+        el.find('.cut').remove();
+        el.find('.copy').remove();
+    }
+
+
+    //多选时的情况
+    var collects = 0;
+    if (_selectfile.selectall.icos.length > 1 && jQuery.inArray(rid, _selectfile.selectall.icos) > -1) {
+        if(obj.isdelete == 1){
+            el.find('.menu-item:not(.recover,.finallydelete)').remove();
+        }else{
+            el.find('.menu-item:not(.delete,.cut,.copy,.restore,.downpackage,.property,.collect,.paste,.share,.cancleshare)').remove();
+        }
+        var pd = 1;
+        for (var i = 0; i < _selectfile.selectall.icos.length; i++) {
+            var ico = _explorer.sourcedata.icos[_selectfile.selectall.icos[i]];
+            if (ico.collect) collects += 1;
+            if (!_explorer.Permission('download', ico)) {
+                pd = 0;
+                break;
+            }
+        }
+        if (!pd) {
+            el.find('.downpackage').remove();
+        }
+        el.find('.download').remove();
+        if (collects == _selectfile.selectall.icos.length) {//区别是已收藏时，菜单显示取消收藏
+            el.find('.collect .menu-text').html('取消收藏');
+        }
+    } else {
+        if (obj.collect) el.find('.collect .menu-text').html('取消收藏');
+        el.find('.downpackage').remove();
+    }
+
+
+    if (obj.isdelete == 1) {
+        el.find('.menu-item:not(.recover,.finallydelete)').remove();
+    } else {
+        el.find('.finallydelete').remove();
+        el.find('.recover').remove();
+    }
+    if(_selectfile.winid.indexOf('collect') != -1){
+        el.find('.cut').remove();
+        el.find('.copy').remove();
+        el.find('.paste').remove();
+    }
+    //分享处理
+    if(_selectfile.winid.indexOf('share') != -1){
+        el.find('.menu-item:not(.cancleshare,.editshare)').remove();
+    }else{
+        el.find('.cancleshare,.editshare').remove();
+    }
+    //如果在收藏,搜索和最近使用页面去掉删去和剪切和重命名
+    if(_selectfile.winid.indexOf('collect') != -1 || _selectfile.winid.indexOf('recent') != -1 || _selectfile.winid.indexOf('search') != -1){
+        el.find('.cut,.delete,.rename').remove();
+    }
+    if (!el.find('.menu-item').length) {
+        el.hide();
+        return;
+    }
+    //判断打开方式
+
+    var subdata = getExtOpen(obj.type == 'shortcut' ? obj.tdata : obj);
+    if (subdata === true) {
+        el.find('.openwith').remove();
+    } else if (subdata === false) {
+        el.find('.openwith').remove();
+        el.find('.open').remove();
+    } else if (subdata.length == 1) {
+        el.find('.openwith').remove();
+    } else if (subdata.length > 1) {
+        var html = '<span class="menu-icon icon-openwith" ></span><span class="menu-text">' + __lang.method_open + '</span><span class="menu-rightarrow"></span>';
+
+        html += '<div class=" menu " style="display:none">';
+        for (var i = 0; i < subdata.length; i++) {
+            html += '<div class="menu-item" onClick="_selectfile.Open(\'' + rid + '\',\'' + subdata[i].extid + '\');jQuery(\'#right_contextmenu\').hide();jQuery(\'#shadow\').hide();return false;">';
+            if (subdata[i].icon) {
+                html += '<span class="menu-icon" style="background:none"><img width="100%" height="100%" src=' + subdata[i].icon + '></span>';
+            }
+            html += '<span class="menu-text">' + subdata[i].name + '</span>';
+            html += '</div>';
+        }
+        html += '</div>';
+        el.find('.openwith').html(html);
+    } else {
+        el.find('.openwith').remove();
+    }
+
+
+    //去除多余的分割线
+    el.find('.menu-sep').each(function () {
+        if (!jQuery(this).next().first().hasClass('menu-item') || !jQuery(this).prev().first().hasClass('menu-item')) jQuery(this).remove();
+    });
+
+    var Max_x = document.documentElement.clientWidth;
+    var Max_y = document.documentElement.clientHeight;
+    el.css({'z-index': _contextmenu.zIndex + 1});
+    el.show();
+
+    el.find('>div').each(function () {
+        var item = jQuery(this);
+        var subitem = item.find('.menu');
+        if (subitem.length) {
+            var shadow = item.find('.menu-shadow');
+            item.on('mouseover', function () {
+                if (_contextmenu.ppp) _contextmenu.ppp.hide();
+                if (_contextmenu.kkk) _contextmenu.kkk.hide();
+                if (_contextmenu.last) _contextmenu.last.removeClass('menu-active');
+                _contextmenu.kkk = shadow;
+                _contextmenu.last = item;
+                _contextmenu.ppp = subitem;
+                item.addClass('menu-active');
+                var temp = item.find('.menu');
+                var subx = el.width() - 1;
+                suby = 0;
+                if (x + el.width() * 2 > Max_x) subx = subx - temp.width() - el.width() - 6;
+                if (y + item.position().top + temp.height() > Max_y) suby = suby - temp.height() + item.height() - 5;
+                temp.css({left: subx, top: suby, 'z-index': _contextmenu.zIndex + 2, display: 'block'});
+                shadow.css({
+                    display: "block",
+                    zIndex: _contextmenu.zIndex + 1,
+                    left: subx,
+                    top: suby,
+                    width: temp.outerWidth(),
+                    height: temp.outerHeight()
+                });
+                subitem.find('.menu-item').on('mouseover', function () {
+                    jQuery(this).addClass('menu-active');
+                });
+                subitem.find('.menu-item').on('mouseout', function () {
+                    jQuery(this).removeClass('menu-active');
+                    return false;
+                });
+
+                return false;
+            });
+            item.on('mouseout', function () {
+                item.removeClass('menu-active');
+                shadow.hide();
+                subitem.hide();//alert('dddddd');
+                return false;
+            });
+
+        } else {
+            item.on('mouseover', function () {
+                if (_contextmenu.last) _contextmenu.last.removeClass('menu-active');
+                if (_contextmenu.ppp) _contextmenu.ppp.hide();
+                if (_contextmenu.kkk) _contextmenu.kkk.hide();
+                jQuery(this).addClass('menu-active');
+                return false;
+            });
+            item.on('mouseout', function () {
+                jQuery(this).removeClass('menu-active');
+            });
+        }
+    });
+    //alert(el.width()+'===='+el.height());
+    if (x + el.width() > Max_x) x = x - el.width();
+    if (y + el.height() > Max_y) y = y - el.height();
+    el.css({left: x, top: y});
+
+    jQuery(document).on('mousedown.right_contextmenu', function (e) {
+        e = e ? e : window.event;
+        var obj = e.srcElement ? e.srcElement : e.target;
+        if (jQuery(obj).closest('#right_contextmenu').length < 1) {
+            el.hide();
+            el.empty();
+            jQuery(document).off('.right_contextmenu');
+            _contextmenu.kkk = null;
+            _contextmenu.ppp = null;
+            _contextmenu.last = null;
+        }
+    });
+};
+_contextmenu.right_body = function (e, fid) {
+    e = e ? e : window.event;
+    var obj = e.srcElement ? e.srcElement : e.target;
+    if (/input|textarea/i.test(obj.tagName)) {
+        return true;
+    }
+    var x = e.clientX;
+    var y = e.clientY;
+    var html = document.getElementById('right_body').innerHTML;
+    html = html.replace(/\{fid\}/g, fid);
+    html = html.replace(/\{filemanageid\}/g, _selectfile.winid);
+    if (!document.getElementById('right_contextmenu')) {
+        var el = jQuery('<div id="right_contextmenu" class="menu"></div>').appendTo(document.body);
+    } else {
+        var el = jQuery(document.getElementById('right_contextmenu'));
+    }
+    el.html(html);
+    var filemanage = _selectfile.cons[_selectfile.winid];
+    //设置当前容器的相关菜单选项的图标
+    el.find('span.menu-icon-iconview[view=' + filemanage.view + ']').removeClass('dzz-check-box-outline-blank').addClass('dzz-check-box');
+    //el.find('span.menu-icon-disp[disp='+filemanage.disp+']').removeClass('dzz-check-box-outline-blank').addClass('dzz-check-box');
+    //设置排序
+    el.find('.menu-icon-disp').each(function () {
+        if (jQuery(this).attr('disp') == filemanage.disp) {
+            jQuery(this).removeClass('dzz-check-box-outline-blank').addClass('dzz-check-box');
+            jQuery(this).next().find('.caret').removeClass('asc').removeClass('desc').addClass(filemanage.asc > 0 ? 'asc' : 'desc');
+        } else {
+            jQuery(this).addClass('dzz-check-box-outline-blank').removeClass('dzz-check-box');
+            jQuery(this).next().find('.caret').removeClass('asc').removeClass('desc');
+        }
+    });
+    if (!fid) {
+        el.find('.property').remove();
+        el.find('.paste').remove();
+       if(_selectfile.winid != 'recycle-list'){
+           el.find('.recoverall').remove();
+           el.find('.deleteall').remove();
+       }else{
+           el.find('.sort .disp2').remove();
+           el.find('.sort .disp3').remove();
+       }
+    }else{
+        el.find('.recoverall').remove();
+        el.find('.deleteall').remove();
+    }
+    if (!_explorer.Permission_Container('folder', fid)) {
+        el.find('.newfolder').remove();
+    }
+    if (!_explorer.Permission_Container('link', fid)) {
+        el.find('.newlink').remove();
+    }
+    if (!_explorer.Permission_Container('dzzdoc', fid)) {
+        el.find('.newdzzdoc').remove();
+    }
+    if (!_explorer.Permission_Container('upload', fid)) {
+        el.find('.newdzzdoc').remove();
+    }
+    if (!_explorer.Permission_Container('newtype', fid)) {
+        el.find('.newtext').remove();
+        el.find('.newdoc').remove();
+        el.find('.newexcel').remove();
+        el.find('.newpowerpoint').remove();
+    }
+    if (el.find('.create .menu-item').length < 1) {
+        el.find('.create').remove();
+    }
+    if (_explorer.cut.icos.length < 1) el.find('.paste').remove();
+
+    if (_explorer.Permission_Container('upload', fid)) {
+
+        if (BROWSER.ie) {
+            jQuery('<input id="right_uploadfile_' + fid + '" name="files[]" tabIndex="-1" style="position: absolute;outline:none; filter: alpha(opacity=0); PADDING-BOTTOM: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font-family: Arial; font-size: 180px;height:30px;width:200px;top: 0px; cursor: pointer; right: 0px; padding-top: 0px; opacity: 0;direction:ltr;background-image:none" type="file" multiple="multiple" >').appendTo(el.find('.upload'));
+            fileupload(jQuery('#right_uploadfile_' + fid));
+
+            jQuery('<input id="right_uploadfolder_' + fid + '" name="files[]" tabIndex="-1" style="position: absolute;outline:none; filter: alpha(opacity=0); PADDING-BOTTOM: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font-family: Arial; font-size: 180px;height:30px;width:200px;top: 0px; cursor: pointer; right: 0px; padding-top: 0px; opacity: 0;direction:ltr;background-image:none" type="file" multiple="multiple" >').appendTo(el.find('.uploadfolder'));
+            fileupload(jQuery('#right_uploadfolder_' + fid));
+
+        } else {
+            console.log(el.find('.upload'));
+            el.find('.upload').get(0).onclick = function () {
+                jQuery('.js-upload-file input').trigger('click');
+                console.log(jQuery('.js-upload-file input'));
+                console.log('aaaa');
+                el.hide();
+            }
+            el.find('.uploadfolder').get(0).onclick = function () {
+                jQuery('.js-upload-folder input').trigger('click');
+                el.hide();
+            }
+        }
+    } else {
+        el.find('.upload').remove();
+        el.find('.uploadfolder').remove();
+    }
+    //设置默认桌面
+
+    //检测新建和上传是否都没有
+    if (el.find('.create .menu>.menu-item').length < 1) {
+        el.find('.create').remove();
+    }
+    if(_selectfile.winid == 'share-list'){
+        el.find('.menu-item').remove();
+    }
+    if (el.find('.menu-item').length < 1) {
+        el.hide();
+        return;
+    }
+    el.find('.menu-sep').each(function () {
+        if (!jQuery(this).next().first().hasClass('menu-item') || !jQuery(this).prev().first().hasClass('menu-item')) jQuery(this).remove();
+    });
+
+    var Max_x = document.documentElement.clientWidth;
+    var Max_y = document.documentElement.clientHeight;
+    el.css({'z-index': _contextmenu.zIndex + 1});
+    el.show();
+
+    el.find('>div').each(function () {
+        var item = jQuery(this);
+        var subitem = item.find('.menu');
+        if (subitem.length) {
+            var shadow = item.find('.menu-shadow');
+            item.on('mouseover', function () {
+                if (_contextmenu.ppp) _contextmenu.ppp.hide();
+                if (_contextmenu.kkk) _contextmenu.kkk.hide();
+                if (_contextmenu.last) _contextmenu.last.removeClass('menu-active');
+                _contextmenu.kkk = shadow;
+                _contextmenu.last = item;
+                _contextmenu.ppp = subitem;
+                item.addClass('menu-active');
+                var temp = item.find('.menu');
+                var subx = el.width() - 1;
+                suby = -5;
+                if (x + el.width() * 2 > Max_x) subx = subx - temp.width() - el.width() - 6;
+                if (y + item.position().top + temp.height() > Max_y) suby = suby - temp.height() + item.height();
+                console.log(temp);
+                temp.css({left: subx, top: suby, 'z-index': _contextmenu.zIndex + 2, display: 'block'});
+                shadow.css({
+                    display: "block",
+                    zIndex: _contextmenu.zIndex + 1,
+                    left: subx,
+                    top: suby,
+                    width: temp.outerWidth(),
+                    height: temp.outerHeight()
+                });
+                subitem.find('.menu-item').on('mouseover', function () {
+                    jQuery(this).addClass('menu-active');
+
+                });
+                subitem.find('.menu-item').on('mouseout', function () {
+                    jQuery(this).removeClass('menu-active');
+                    return false;
+
+                });
+
+                return false;
+            });
+            item.on('mouseout', function () {
+                item.removeClass('menu-active');
+                shadow.hide();
+                subitem.hide();//alert('dddddd');
+                return false;
+            });
+
+        } else {
+            item.on('mouseover', function () {
+                if (_contextmenu.last) _contextmenu.last.removeClass('menu-active');
+                if (_contextmenu.ppp) _contextmenu.ppp.hide();
+                if (_contextmenu.kkk) _contextmenu.kkk.hide();
+                jQuery(this).addClass('menu-active');
+                return false;
+            });
+            item.on('mouseout', function () {
+                jQuery(this).removeClass('menu-active');
+            });
+        }
+    });
+    if (x + el.width() > Max_x) x = x - el.width();
+    if (y + el.height() > Max_y) y = y - el.height();
+    if (y < 0) y = 0;
+    el.css({left: x, top: y});
+
+    jQuery('#shadow').css({
+        display: "block",
+        zIndex: _contextmenu.zIndex,
+        left: x,
+        top: y,
+        width: el.outerWidth(),
+        height: el.outerHeight()
+    });
+
+    jQuery(document).on('mousedown.right_contextmenu', function (e) {
+        //var obj = event.srcElement ? event.srcElement : event.target;
+        e = e ? e : window.event;
+        var obj = e.srcElement ? e.srcElement : e.target;
+        if (jQuery(obj).closest('#right_contextmenu').length < 1) {
+            el.hide();
+            jQuery('#shadow').hide();
+            jQuery(document).off('.right_contextmenu');
+            _contextmenu.kkk = null;
+            _contextmenu.ppp = null;
+            _contextmenu.last = null;
+        }
+    });
+};
+

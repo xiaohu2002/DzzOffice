@@ -78,7 +78,6 @@ if ($operation == 'check_install' ) {//根据appid检查app应用是否需要更
        }
     }
     //end处理检查是否已有该目录
-    
     if( $appinfo || $isinstall){
         $return["status"]=0;
         if($appinfo){
@@ -381,7 +380,7 @@ elseif($operation == 'cross' || $operation == 'patch'){
             } 
             $importtxt = @implode('', file($importfile)); 
             $apparray = getimportdata('Dzz! app');
-            $filename = isset($apparray['app']['extra']['installfile']) ? $apparray['app']['extra']['installfile'] : '';
+            $filename = isset($apparray['app']['extra']['installfile']) ? $apparray['app']['extra']['installfile'] : ''; 
             if (!empty($filename) && preg_match('/^[\w\.]+$/', $filename)) {
                 $filename = DZZ_ROOT . './'.$dir.'/' . $appname . '/' . $filename;
                 if (file_exists($filename)) {
@@ -400,6 +399,7 @@ elseif($operation == 'cross' || $operation == 'patch'){
                     $apparray['app']['identifier']=$baseinfo['new_identifier'];
                     $apparray['app']['appurl']= str_replace("mod=".$baseinfo['identifier'],"mod=".$baseinfo['new_identifier'],$apparray['app']['appurl']);
                     $apparray['app']['appadminurl']= str_replace("mod=".$baseinfo['identifier'],"mod=".$baseinfo['new_identifier'],$apparray['app']['appadminurl']);
+                    $apparray['app']['noticeurl']= str_replace("mod=".$baseinfo['identifier'],"mod=".$baseinfo['new_identifier'],$apparray['app']['noticeurl']);
                     $apparray['app']['identifier']=  $baseinfo['new_identifier'];
                 }
                 

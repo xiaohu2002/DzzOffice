@@ -19144,6 +19144,7 @@ UE.plugin.register("autosave", function (){
 
 });
 
+
 // plugins/formula.js
 UE.plugin.register("formula", function () {
     var me = this, images = [];

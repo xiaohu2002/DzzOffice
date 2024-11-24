@@ -19,7 +19,7 @@ if($_G['uid']) {
 	}
 	showmessage('login_succeed', $url_forward ? $url_forward : './', array('username' => $_G['member']['username'], 'usergroup' => $_G['group']['grouptitle'], 'uid' => $_G['uid']), array());
 } elseif($setting['bbclosed']) {
-	dheader("Location: user.php?mod=login");
+	showmessage(lang('site_closed_please_admin'));
 } elseif(!$setting['regclosed']) {	
 	if($_GET['action'] == 'activation' || $_GET['activationauth']) {
 		if(!$setting['ucactivation'] && !$setting['closedallowactivation']) {
@@ -34,52 +34,43 @@ $seccodecheck = $setting['seccodestatus'] & 1;
 
 //判断是否提交
 if(!submitcheck('regsubmit', 0, $seccodecheck)) {
+
     //应用注册页挂载点
     Hook::listen('appregister');
-		$bbrules = $setting['bbrules'];
-		
-		$regname =$setting['regname'];
-		
-		$bbrulehash = $bbrules ? substr(md5(FORMHASH), 0, 8) : '';
-		$auth = $_GET['auth'];
+    $bbrules = $setting['bbrules'];
+    
+    $regname =$setting['regname'];
+    
+    $bbrulehash = $bbrules ? substr(md5(FORMHASH), 0, 8) : '';
+    $auth = $_GET['auth'];
 
-		$username = isset($_GET['username']) ? dhtmlspecialchars($_GET['username']) : '';
-		if($seccodecheck) {
-			$seccode = random(6, 1);
-		}
+    $username = isset($_GET['username']) ? dhtmlspecialchars($_GET['username']) : '';
     $allowitems = array();
-		foreach ($_G['cache']['profilesetting'] as $key => $value) {
-			if ($value['available'] > 0)
-				$allowitems[] = $key;
-		}
+    foreach ($_G['cache']['profilesetting'] as $key => $value) {
+        if ($value['available'] > 0)
+            $allowitems[] = $key;
+    }
     $htmls = $settings = array();
     foreach($_G['cache']['fields_register'] as $field) {
-      $fieldid = $field['fieldid'];
-      $html = profile_setting($fieldid, array(), false, false, true);
-      if($html) {
+        $fieldid = $field['fieldid'];
+        $html = profile_setting($fieldid, array(), false, false, true);
+        if($html) {
         $settings[$fieldid] = $_G['cache']['profilesetting'][$fieldid];
         $htmls[$fieldid] = $html;
-      }
+        }
     }
-		$navtitle = $setting['reglinkname'];
-		$dreferer = dreferer();
-    if ($setting['loginset']['template'] == 2){
-			include template('register2');
-		}elseif ($setting['loginset']['template'] == 3){
-      include template('register3');
-		}else{
-      include template('register');
-		}
-		exit();
-    //QQ登陆相关
-    @session_start();
-    $qqopenid = $_SESSION['openid'] ? $_SESSION['openid'] :'';
-    $qquinfo = $_SESSION['uinfo'] ? $_SESSION['uinfo'] :'';
-    include template($this->template);
+    if($seccodecheck) {
+        $seccode = random(6, 1);
+    }
+    $navtitle = $setting['reglinkname'];
+
+    $dreferer = dreferer();
+    include template('register');
+    exit();
 }else{
 	
     Hook::listen('check_val',$_GET);//用户数据验证钩子,用户注册资料信息提交验证
-    $result=$_GET;
+	$result=$_GET;
     Hook::listen('register_common',$result);//用户注册钩子
     $type = isset($_GET['returnType']) ? $_GET['returnType']:'';
    
@@ -97,25 +88,25 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
     //插入用户状态表
     DB::insert('user_status',$status,1); 
     $setarr = array();
-		foreach ($_GET as $key => $value) {
-			$field = $_G['cache']['profilesetting'][$key];
-			if (empty($field)) {
-				continue;
-			} elseif (profile_check($key, $value, $space)) {
-				$setarr[$key] = dhtmlspecialchars(trim($value));
-			}
-		}
-		if (isset($_POST['birthmonth']) && ($space['birthmonth'] != $_POST['birthmonth'] || $space['birthday'] != $_POST['birthday'])) {
-			$setarr['constellation'] = get_constellation($_POST['birthmonth'], $_POST['birthday']);
-		}
-		if (isset($_POST['birthyear']) && $space['birthyear'] != $_POST['birthyear']) {
-			$setarr['zodiac'] = get_zodiac($_POST['birthyear']);
-		}
+    foreach ($_GET as $key => $value) {
+        $field = $_G['cache']['profilesetting'][$key];
+        if (empty($field)) {
+            continue;
+        } elseif (profile_check($key, $value, $space)) {
+            $setarr[$key] = dhtmlspecialchars(trim($value));
+        }
+    }
+    if (isset($_POST['birthmonth']) && ($space['birthmonth'] != $_POST['birthmonth'] || $space['birthday'] != $_POST['birthday'])) {
+        $setarr['constellation'] = get_constellation($_POST['birthmonth'], $_POST['birthday']);
+    }
+    if (isset($_POST['birthyear']) && $space['birthyear'] != $_POST['birthyear']) {
+        $setarr['zodiac'] = get_zodiac($_POST['birthyear']);
+    }
 
-		if ($setarr) {
-			$setarr['uid'] = $result['uid'];
-			C::t('user_profile') -> insert($setarr);
-		}
+    if ($setarr) {
+        $setarr['uid'] = $result['uid'];
+        C::t('user_profile') -> insert($setarr);
+    }
     //新用户登录
     setloginstatus(array(
         'uid' => $result['uid'],
@@ -123,23 +114,7 @@ if(!submitcheck('regsubmit', 0, $seccodecheck)) {
         'password' => $result['password'],
         'groupid' => $result['groupid'],
     ), 0);
-	if($_G['setting']['welcomemsgtitle'] || $_G['setting']['welcomemsgtxt']){
-		$notevars=array(
-      'from_id' => '0',
-      'from_idtype' => 'app',
-      'url' => '',
-      'author' => getglobal('username'),
-      'authorid' => getglobal('uid'),
-      'dataline' => dgmdate(TIMESTAMP),
-      'title'=> $_G['setting']['welcomemsgtitle'],
-      'comment'=>replacesitevar($_G['setting']['welcomemsgtxt']),
-    );
 
-    $action = 'registers';
-    $type = 'registers_' . $result['uid'];
-
-    dzz_notification::notification_add($result['uid'], $type, $action, $notevars);
-	}
     //设置显示提示文字
     $param = daddslashes(array('sitename' => $setting['sitename'], 'username' => $result['username'], 'usergroup' => $_G['cache']['usergroups'][$result['groupid']]['grouptitle'], 'uid' => $result['uid']));
 

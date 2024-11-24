@@ -1,1 +1,122 @@
-jQuery.fn.colorPicker=function(e){var t=jQuery.extend({id:"jquery-color-picker",speed:500,colors:["FFFFFF","E26F50","EE8C0C","FDE163","91CE31","3497DB","82939E","B2C0D1",""],input:"",changeBG:!0},e),r=function(e){return.212671*e.substr(0,2)+.71516*e.substr(2,2)+.072169*e.substr(4,2)<.5?"ffffff":"000000"},n=jQuery("#"+t.id);return n.length||(n=jQuery('<div id="'+t.id+'"></div>').appendTo(document.body).hide(),jQuery(document.body).click(function(e){jQuery(e.target).is("#"+t.id)||jQuery(e.target).parents("#"+t.id).length||n.fadeOut(t.speed)})),this.each(function(){var e=jQuery(this),o=t.input.length?t.input:jQuery('<input type="hidden" name="'+e.attr("name")+'" value="'+e.attr("val")+'" size="6" />').insertAfter(e),c="";for(var u in t.colors)c+='<li><a href="#" title="#'+(""==t.colors[u]?"重置颜色":t.colors[u])+'" rel="'+t.colors[u]+'" style="background: #'+t.colors[u]+"; colour: "+r(t.colors[u])+';">'+(""==t.colors[u]?"重置颜色":"#"+t.colors[u])+"</a></li>";o.change(function(){t.changeBG&&e.css({background:o.val(),color:"#"+r(o.val())})}),o.change(),e.click(function(){var r=e.offset(),u=t.title?"<h2>"+t.title+"</h2>":"",i=document.documentElement.clientWidth,l=r.left;return r.left>i/2&&(l=r.left+e.outerWidth(!0)-n.outerWidth(!0)),n.html(u+"<ul>"+c+"</ul>").css({position:"absolute",left:l+"px",top:r.top+"px"}).fadeIn(t.speed),jQuery("a",n).click(function(){var r=jQuery(this).attr("rel");return""==r?(o.val(""),t.changBG&&e.css({background:""}),o.attr("title","")):(o.val("#"+r),o.attr("title","#"+r),t.changBG&&e.css({background:"#"+r})),o.change(),n.fadeOut(t.speed),!1}),!1})})};
+/*
+ * input: 隐藏的输入框
+ * colors: 颜色块数组
+ *
+ */
+jQuery.fn.colorPicker = function (conf) {
+	// Config for plug
+	var config = jQuery.extend({
+		id:			'jquery-color-picker',	// id of colour-picker container
+		speed:		500,					// Speed of dialogue-animation
+		colors:['FFFFFF','E26F50','EE8C0C','FDE163','91CE31','3497DB','82939E','B2C0D1',''],
+		input: '',
+		changeBG:true
+	}, conf);
+
+	// Inverts a hex-colour
+	var hexInvert = function (hex) {
+		var r = hex.substr(0, 2);
+		var g = hex.substr(2, 2);
+		var b = hex.substr(4, 2);
+
+		return 0.212671 * r + 0.715160 * g + 0.072169 * b < 0.5 ? 'ffffff' : '000000'
+	};
+
+	// Add the colour-picker dialogue if not added
+	var colorPicker = jQuery('#' + config.id);
+
+	if (!colorPicker.length) {
+		colorPicker = jQuery('<div id="' + config.id + '"></div>').appendTo(document.body).hide();
+
+		// Remove the colour-picker if you click outside it (on body)
+		jQuery(document.body).click(function(event) {
+			if (!(jQuery(event.target).is('#' + config.id) || jQuery(event.target).parents('#' + config.id).length)) {
+				colorPicker.fadeOut(config.speed);
+			}
+		});
+	}
+
+	// For every select passed to the plug-in
+	return this.each(function () {
+		// Insert icon and input
+		/*var select	= jQuery(this);
+		var icon	= jQuery('<a href="#"><img src="' + config.ico + '" alt="' + config.openTxt + '" /></a>').insertAfter(select);*/
+		var icon=jQuery(this);
+		var input	= config.input.length?config.input:jQuery('<input type="hidden" name="' + icon.attr('name') + '" value="' + icon.attr('val') + '" size="6" />').insertAfter(icon);
+		var loc		= '';
+		
+		// Build a list of colours based on the colours in the select
+		
+		for(var i in config.colors){
+			loc += '<li><a href="#" title="#' 
+					+ (config.colors[i]==''?'重置颜色': config.colors[i])
+					+ '" rel="' 
+					+ config.colors[i] 
+					+ '" style="background: #' 
+					+ config.colors[i] 
+					+ '; colour: ' 
+					+ hexInvert(config.colors[i]) 
+					+ ';">' 
+					+(config.colors[i]==''?'重置颜色': '#'+config.colors[i] )
+					+ '</a></li>';
+		}
+		// Remove select
+		//select.remove();
+
+		// If user wants to, change the input's BG to reflect the newly selected colour
+		
+			input.change(function () {
+				if(config.changeBG) {
+					icon.css({background: input.val(), color: '#' + hexInvert(input.val())});
+				}
+			});
+
+			input.change();
+		
+		
+		// When you click the icon
+		icon.click(function () {
+			// Show the colour-picker next to the icon and fill it with the colours in the select that used to be there
+			var iconPos	= icon.offset();
+			var heading	= config.title ? '<h2>' + config.title + '</h2>' : '';
+			var clientWidth=document.documentElement.clientWidth;
+			var left=iconPos.left;
+			if(iconPos.left>clientWidth/2){
+				left=iconPos.left+icon.outerWidth(true)-colorPicker.outerWidth(true);
+			}
+			colorPicker.html(heading + '<ul>' + loc + '</ul>').css({
+				position: 'absolute', 
+				left: left + 'px', 
+				top: iconPos.top + 'px'
+			}).fadeIn(config.speed);
+
+			// When you click a colour in the colour-picker
+			jQuery('a', colorPicker).click(function () {
+				// The hex is stored in the link's rel-attribute
+				var hex = jQuery(this).attr('rel');
+				 
+				
+				// If user wants to, change the input's BG to reflect the newly selected colour
+				if(hex==''){
+					input.val('');
+					if(config.changBG) icon.css({background: ''});
+					input.attr('title','');
+				}else{
+					input.val('#'+hex);
+					input.attr('title','#'+hex);
+					if(config.changBG) icon.css({background: '#' + hex});
+				}
+					
+				// Trigger change-event on input
+				input.change();
+
+				// Hide the colour-picker and return false
+				colorPicker.fadeOut(config.speed);
+
+				return false;
+			});
+
+			return false;
+		});
+	});
+};

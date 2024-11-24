@@ -3,7 +3,7 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 global $_G;
-Hook::listen('check_login');
+Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 $uid = $_G['uid'];
 include libfile('function/filerouterule');
 $do = isset($_GET['do']) ? trim($_GET['do']):'';
@@ -42,6 +42,7 @@ $gets = array(
 );
 $urldefined= '&'. url_implode($gets);
 $allowvisit = array('file','listtree','explorerfile','json','ajax','dzzcp','save');
+//如果是移动端
 $ismobile = helper_browser::ismobile();
 if($ismobile){
     require MOD_PATH.'/mobilefileselection.php';

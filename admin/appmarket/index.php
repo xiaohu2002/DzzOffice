@@ -33,7 +33,7 @@ $tagid = intval($_GET['tagid']);
 $group = intval($_GET['group']);
 $page = empty($_GET['page']) ? 1 : intval($_GET['page']);
 $perpage = 20;
-$gets = array('mod' => MOD_NAME, 'keyword' => $keyword, 'tagid' => $tagid, 'group' => $group);
+$gets = array('mod' => 'appmarket', 'keyword' => $keyword, 'tagid' => $tagid, 'group' => $group);
 $theurl = BASESCRIPT . "?" . url_implode($gets);
 $refer = urlencode($theurl . '&page=' . $page);
 
@@ -57,8 +57,9 @@ if ($group) {
 }
 if ($count = DB::result_first("SELECT COUNT(*) FROM %t WHERE ".$string,$param)) {
 	$apps = DB::fetch_all("SELECT * FROM %t WHERE ".$string." $order limit $start,$perpage",$param);
-	$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
+	$multi = multi($count, $perpage, $page, $theurl, 'justify-content-end');
 }
+
 $list = array();
 $grouptitle = array('0' => lang('all'), '-1' => lang('visitors_visible'), '1' => lang('members_available'), '2' => lang('section_administrators_available'), '3' => lang('system_administrators_available'));
 foreach ($apps as $value) {

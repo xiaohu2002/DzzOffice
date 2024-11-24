@@ -3,6 +3,7 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 global $_G;
+Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 $uid = $_G['uid'];
 $do = isset($_GET['do']) ? trim($_GET['do']):'';
 if($do == 'removefile'){//移除文件到回收站

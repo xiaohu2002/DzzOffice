@@ -1,6 +1,6 @@
-<div class="main-header clearfix">
-	<ul class="nav nav-pills">
-		<strong class="pull-left">$space[username]</strong>
+<div class="card-header">
+  <strong class="float-start lead">$space[username]</strong>
+	<ul class="nav nav-stacked nav-pills">
 		<li class="nav-item">
 			<a class="nav-link" href="{MOD_URL}&op=edituser&uid=$uid#user_{$user['uid']}_" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang basic_message}</a>
 		</li>
@@ -10,7 +10,7 @@
 
 	</ul>
 </div>
-	<div class="main-content">
+<div class="card-body">
     <div id="return_edituserprofile"></div>
     <form id="accountform" name="accountform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=edituser&do=profile" method="post" onsubmit="account_submit();return false">
       <input type="hidden" name="profilesubmit" value="true" />
@@ -27,7 +27,7 @@
        </div>
       <!--{/if}-->
       <!--{/loop}-->
-      <dl>
+      <dl class="mb-3 d-grid">
         <input type="submit" class="btn btn-primary" value="{lang save_changes}">
       </dl>
     </form>
@@ -35,9 +35,6 @@
 <script type="text/javascript" reload="1">
 	currentHash = 'user_{$space['uid']}_profile';
 	location.hash = '#user_{$space['uid']}_profile';
-  jQuery(document).ready(function (e) {
-    jQuery('select').lyearSelect();
-  });
 	function account_submit() {
 		ajaxpost('accountform', 'ajaxwaitid', 'return_edituserprofile');
 		return false;

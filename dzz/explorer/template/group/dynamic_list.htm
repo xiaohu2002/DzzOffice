@@ -4,16 +4,17 @@
     <td class="member_item_td" valign="middle" width="20%" style="position: relative;">
         <span>{eval echo dgmdate($val['dateline'],'Y-m-d H:i:s');}</span>
     </td>
-    <td class="member_item_td" valign="middle" width="10%">
-        <span>$val[username]</span>
-    </td>
-    <td class="member_item_td  member_header_color" valign="middle" width="10%">
-        <span onclick="search_do(this)" data-val="$val[do]">$val[do_lang]</span>
+    <td class="member_item_td" valign="middle" width="20%">
+        <span>$val['username']</span>
     </td>
     <td class="member_item_td  member_header_color" valign="middle" width="20%">
-			<span onclick="search_obj(this)" data-val="$val[do_obj]"><!--{if $val[do_obj]}-->$val[do_obj]<!--{/if}--></span>
+        <span onclick="search_do(this)" data-val="$val['do']">$val[do_lang]</span>
     </td>
-    <td class="member_item_td" valign="middle" width="40%">
+    <td class="member_item_td  member_header_color" valign="middle" width="20%">
+                            <span onclick="search_obj(this)" data-val="$val[do_obj]"><!--{if $val[do_obj]}-->$val[do_obj]
+                                <!--{/if}--></span>
+    </td>
+    <td class="member_item_td" valign="middle" width="20%">
         <span>$val[details]</span>
     </td>
 </tr>
@@ -28,9 +29,9 @@
 <!--{/if}-->
 <tr>
     <td style="border: none;">
-      <!--{if $next}-->
-      <a href="javascript:;" class="btn_button_more btn btn-outline-primary btn-block"
-         onclick="loading(this,'{$next}');">{lang upload_more}</a>
-      <!--{/if}-->
+        <!--{if $next}-->
+        <a href="javascript:;" class="btn_button_more btn btn-link btn-block"
+           onclick="loading(this,'{$next}');">{lang upload_more}</a>
+        <!--{/if}-->
     </td>
 </tr>

@@ -151,7 +151,7 @@ if ($_GET['do'] == 'delete') {
 			$data = DB::fetch_all("SELECT rid FROM " . DB::table('resources') . " WHERE uid =$uid and $sql $order $limitsql", $param);
 		}
 	}
-  $multi = multi($count, $lpp, $page, $theurl,'pull-right');
+  $multi = multi($count, $lpp, $page, $theurl,'justify-content-end');
   $list = array();
   foreach ($data as $value) {
       if (!$sourcedata = C::t('resources')->fetch_by_rid($value['rid'])) {

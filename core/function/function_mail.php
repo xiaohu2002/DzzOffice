@@ -22,82 +22,18 @@ function sendmail($toemail, $subject, $message, $from = '') {
 			$_G['setting']['mail']['auth_password'] = $smtp['auth_password'];
 		}
 	}
-  $sitename=$_G['setting']['sitename'];
-  $sitecopyright=replacesitevar($_G['setting']['sitecopyright']);
-  if(!$_G['setting']['bbclosed']){
-		$sitelogo=$_G['setting']['sitelogo']?$_G['siteurl'].'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):$_G['siteurl'].'static/image/common/logo.png';
-	}else{
-		$sitelogo=$_G['siteurl'].'static/image/common/logo.png';
-	}
-	$message = <<<EOT
+	$message = preg_replace("/href\=\"(?!(http|https)\:\/\/)(.+?)\"/i", 'href="'.$_G['siteurl'].'\\1"', $message);
+
+$message = <<<EOT
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=$_G[charset]">
-    <title>$subject</title>
-  </head>
-  <body>
-    <div style="box-sizing:border-box;text-align:center;min-width:320px;border:1px solid #ebeef5; background-color:#f2f6fc; border-radius:.5rem;margin:auto; padding:20px 0 30px; font-family:'helvetica neue',PingFangSC-Light,arial,'hiragino sans gb','microsoft yahei ui','microsoft yahei',simsun,sans-serif">
-        <table style="width:100%;font-weight:300;margin-bottom:10px;border-collapse:collapse">
-          <tbody>
-            <tr style="font-weight:300">
-              <td style="width:3%;"></td>
-              <td>
-                <h2 style="display: flex;align-content: center;align-items: center;flex-wrap: wrap;justify-content: center;">
-                  <a href="$_G[siteurl]" rel="noopener" target="_blank" style="text-decoration:none;display: flex;align-content: center;align-items: center;flex-wrap: wrap;justify-content: center;">
-                    <img border="0" src="$sitelogo">
-					$sitename
-                  </a>
-                </h2>
-                <p style="height:2px;background-color: #00a4ff;border: 0;font-size:0;padding:0;width:100%;margin-top:20px;"></p>
-                <div style="background-color:#fff; padding:23px 0 20px;border-radius:0 0 .5rem .5rem;box-shadow: 0px 1px 1px 0px rgba(122, 55, 55, 0.2);text-align:left;">
-                  <table style="width:100%;font-weight:300;margin-bottom:10px;border-collapse:collapse;text-align:left;">
-                    <tbody>
-                      <tr style="font-weight:300">
-                        <td style="width:3.2%;max-width:30px;"></td><td style="text-align:left;"><h1 style="font-weight:bold;font-size:20px; line-height:36px; margin:0 0 16px;">$subject</h1>
-                        $message
-                        <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;"><br>
-                          </span></p>
-                        <dl style="font-size: 14px; color: rgb(51, 51, 51); line-height: 18px;"></dl>
-                        <dl style="font-size: 14px; color: rgb(51, 51, 51); line-height: 18px;">
-                          <dd style="margin: 0px 0px 6px; padding: 0px; font-size: 12px; line-height: 22px;">
-                            <p style="font-size: 14px; line-height: 26px; word-wrap: break-word; word-break: break-all; margin-top: 32px;"><span style="color: rgb(0, 0, 0);">此致 <br>
-                              </span>
-                              <strong><span style="color: rgb(0, 0, 0);">$sitename 团队</span></strong>
-                            </p>
-                          </dd>
-                        </dl>
-                        </td>
-                        <td style="width:3.2%;max-width:30px;"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div style="text-align:center; font-size:12px; line-height:18px; color:#999">
-                  <table style="width:100%;font-weight:300;margin-bottom:10px;border-collapse:collapse">
-                      <tbody>
-                          <tr style="font-weight:300">
-                              <td style="width:3.2%;max-width:30px;"></td>
-                              <td>
-                                  <p style="text-align:center; margin:20px auto 14px auto;font-size:12px;color:#999;">此为系统邮件，请勿回复</p>
-																	<p style="margin:auto;font-size:12px;color:#999;text-align:center;line-height:22px;">
-                                  $sitename <a href="$_G[siteurl]" target="_blank">$_G[siteurl]</a>
-                                  </p>
-                                  <p style="margin:auto;font-size:12px;color:#999;text-align:center;line-height:22px;">$sitecopyright
-                                    <br>
-                                  </p>
-                            </td>
-                            <td style="width:3.2%;max-width:30px;"></td>
-                        </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </td>
-              <td style="width:3%;max-width:30px;"></td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-  </body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=$_G[charset]">
+<title>$subject</title>
+</head>
+<body>
+$subject<br />
+$message
+</body>
 </html>
 EOT;
 

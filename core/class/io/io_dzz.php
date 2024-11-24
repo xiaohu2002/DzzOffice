@@ -1227,7 +1227,7 @@ class io_dzz extends io_api
 
         $path = C::t('resources_path')->fetch_pathby_pfid($fid);
 
-        $imgexts = array('jpg', 'jpeg', 'gif', 'png', 'bmp','webp');
+        $imgexts = array('jpg', 'jpeg', 'gif', 'png', 'bmp');
         //图片文件时
         if (in_array(strtolower($attach['filetype']), $imgexts)) {
             $icoarr = array(

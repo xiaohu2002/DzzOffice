@@ -3,6 +3,7 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 include libfile('function/organization');
+Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 global $_G;
 $uid = $_G['uid'];
 if($_G['adminid'] != 1){
@@ -18,11 +19,11 @@ if($do == 'updatesetting'){//更新设置
 		'explorer_memoryorgusers' => $setting['explorer_memoryorgusers'],
 		'explorer_organizationOn' => (isset($setting['explorer_organizationOn']) && $setting['explorer_organizationOn'] == 'on' )?1:0,//isset($setting['organizationOn'])?$setting['organizationOn']:'',
 		'explorer_groupOn' =>  (isset($setting['explorer_groupOn']) && $setting['explorer_groupOn'] == 'on' )?1:0,//isset($setting['groupOn'])?$setting['groupOn']:'',
-    'explorer_groupcreate'=>(isset($setting['explorer_groupcreate']) && $setting['explorer_groupcreate'] == 'on' )?1:0,
-    'explorer_mermorygroupsetting' => $setting['explorer_mermorygroupsetting'],
-    'explorer_memorygroupusers' => $setting['explorer_memorygroupusers'],
-    'explorer_catcreate'=>(isset($setting['explorer_catcreate']) && $setting['explorer_catcreate'] == 'on' )?1:0,
-    'explorer_finallydelete'=>(isset($setting['explorer_finallydelete']))?$setting['explorer_finallydelete']:-1
+        'explorer_groupcreate'=>(isset($setting['explorer_groupcreate']) && $setting['explorer_groupcreate'] == 'on' )?1:0,
+        'explorer_mermorygroupsetting' => $setting['explorer_mermorygroupsetting'],
+        'explorer_memorygroupusers' => $setting['explorer_memorygroupusers'],
+        'explorer_catcreate'=>(isset($setting['explorer_catcreate']) && $setting['explorer_catcreate'] == 'on' )?1:0,
+        'explorer_finallydelete'=>(isset($setting['explorer_finallydelete']))?$setting['explorer_finallydelete']:-1
 	);
     if(C::t('setting')->update_batch($setarr)){
         updatecache('setting');

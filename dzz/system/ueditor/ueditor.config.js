@@ -677,14 +677,32 @@
 })();
 UEDITOR_CONFIG.mode = {
     mini: [
-        ['emotion','bold', 'italic', 'underline', 'strikethrough', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify','insertorderedlist', 'insertunorderedlist','|','simpleupload','dzzfile'
+        ['emotion','bold', 'italic', 'underline', 'strikethrough', '|',
+                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
+                'insertorderedlist', 'insertunorderedlist','|','simpleupload','dzzfile'
         ]
     ],
-    xiaohuxiugai: [["fullscreen","source","|","undo","redo",'drafts',"|","bold","italic","underline","fontborder","strikethrough","superscript","subscript","removeformat","formatmatch","autotypeset","blockquote","pasteplain","|","forecolor","backcolor","insertorderedlist","insertunorderedlist","selectall","cleardoc","|","rowspacingtop","rowspacingbottom","lineheight","|","customstyle","paragraph","fontfamily","fontsize","|","directionalityltr","directionalityrtl","indent","|","justifyleft", "justifycenter","justifyright","justifyjustify","|","touppercase","tolowercase","|","link","unlink","anchor","|","imagenone","imageleft","imagecenter","imageright","|","simpleupload","insertimage","emotion","scrawl","insertvideo","attachment",'map',"insertframe","insertcode","pagebreak","template","background","formula","|","horizontal","date","time","spechars","wordimage","|","inserttable","deletetable","insertparagraphbeforetable","insertrow","deleterow","insertcol","deletecol","mergecells","mergeright","mergedown","splittocells","splittorows","splittocols","|","print","preview","searchreplace","|",'dzzfile',"kityminder","contentimport","help",
+	mini_exam: [
+        ['bold', 'italic', 'underline', 'strikethrough','superscript', 'subscript','removeformat', '|',
+                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
+                'insertorderedlist', 'insertunorderedlist','|','spechars','inserttable', 'scrawl','wordimage','kityformula','|','simpleupload','dzzfile'
+        ]
+    ],
+	mini_shou: [
+        ['bold', 'italic', 'underline', 'strikethrough','superscript', 'subscript','removeformat', '|',
+                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
+                'insertorderedlist', 'insertunorderedlist','|','spechars','inserttable', 'scrawl','wordimage','kityformula','|','simpleupload','attachment'
+        ]
+    ],
+    simple: [
+        ["fullscreen","source","|","undo","redo",'drafts',"|","bold","italic","underline","fontborder","strikethrough","superscript","subscript","removeformat","formatmatch","autotypeset","blockquote","pasteplain","|","forecolor","backcolor","insertorderedlist","insertunorderedlist","selectall","cleardoc","|","rowspacingtop","rowspacingbottom","lineheight","|","customstyle","paragraph","fontfamily","fontsize","|","directionalityltr","directionalityrtl","indent","|","justifyleft", "justifycenter","justifyright","justifyjustify","|","touppercase","tolowercase","|","link","unlink","anchor","|","imagenone","imageleft","imagecenter","imageright","|","simpleupload","insertimage","emotion","scrawl","insertvideo","attachment",'map',"insertframe","insertcode","pagebreak","template","background","formula","|","horizontal","date","time","spechars","wordimage","|","inserttable","deletetable","insertparagraphbeforetable","insertrow","deleterow","insertcol","deletecol","mergecells","mergeright","mergedown","splittocells","splittorows","splittocols","|","print","preview","searchreplace","|",'dzzfile',"kityminder","contentimport","help",
+        ]
+    ],
+	simple_source: [
+        ["fullscreen","source","|","undo","redo",'drafts',"|","bold","italic","underline","fontborder","strikethrough","superscript","subscript","removeformat","formatmatch","autotypeset","blockquote","pasteplain","|","forecolor","backcolor","insertorderedlist","insertunorderedlist","selectall","cleardoc","|","rowspacingtop","rowspacingbottom","lineheight","|","customstyle","paragraph","fontfamily","fontsize","|","directionalityltr","directionalityrtl","indent","|","justifyleft", "justifycenter","justifyright","justifyjustify","|","touppercase","tolowercase","|","link","unlink","anchor","|","imagenone","imageleft","imagecenter","imageright","|","simpleupload","insertimage","emotion","scrawl","insertvideo","attachment",'map',"insertframe","insertcode","pagebreak","template","background","formula","|","horizontal","date","time","spechars","wordimage","|","inserttable","deletetable","insertparagraphbeforetable","insertrow","deleterow","insertcol","deletecol","mergecells","mergeright","mergedown","splittocells","splittorows","splittocols","|","print","preview","searchreplace","|",'dzzfile',"kityminder","contentimport","help",
         ]
     ],
     full:[[
-"fullscreen","source","|","undo","redo",'drafts',"|","bold","italic","underline","fontborder","strikethrough","superscript","subscript","removeformat","formatmatch","autotypeset","blockquote","pasteplain","|","forecolor","backcolor","insertorderedlist","insertunorderedlist","selectall","cleardoc","|","rowspacingtop","rowspacingbottom","lineheight","|","customstyle","paragraph","fontfamily","fontsize","|","directionalityltr","directionalityrtl","indent","|","justifyleft", "justifycenter","justifyright","justifyjustify","|","touppercase","tolowercase","|","link","unlink","anchor","|","imagenone","imageleft","imagecenter","imageright","|","simpleupload","insertimage","emotion","scrawl","insertvideo","attachment",'map',"insertframe","insertcode","pagebreak","template","background","formula","|","horizontal","date","time","spechars","wordimage","|","inserttable","deletetable","insertparagraphbeforetable","insertrow","deleterow","insertcol","deletecol","mergecells","mergeright","mergedown","splittocells","splittorows","splittocols","|","print","preview","searchreplace","|",'dzzfile',"kityminder","contentimport","help",
+            "fullscreen","source","|","undo","redo",'drafts',"|","bold","italic","underline","fontborder","strikethrough","superscript","subscript","removeformat","formatmatch","autotypeset","blockquote","pasteplain","|","forecolor","backcolor","insertorderedlist","insertunorderedlist","selectall","cleardoc","|","rowspacingtop","rowspacingbottom","lineheight","|","customstyle","paragraph","fontfamily","fontsize","|","directionalityltr","directionalityrtl","indent","|","justifyleft", "justifycenter","justifyright","justifyjustify","|","touppercase","tolowercase","|","link","unlink","anchor","|","imagenone","imageleft","imagecenter","imageright","|","simpleupload","insertimage","emotion","scrawl","insertvideo","attachment",'map',"insertframe","insertcode","pagebreak","template","background","formula","|","horizontal","date","time","spechars","wordimage","|","inserttable","deletetable","insertparagraphbeforetable","insertrow","deleterow","insertcol","deletecol","mergecells","mergeright","mergedown","splittocells","splittorows","splittocols","|","print","preview","searchreplace","|",'dzzfile',"kityminder","contentimport","help",
         ]],
-	
 };

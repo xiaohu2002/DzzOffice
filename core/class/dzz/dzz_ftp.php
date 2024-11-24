@@ -34,11 +34,11 @@ class dzz_ftp
 		$this->config = !$config ? getglobal('setting/ftp') : $config;
 		$this->enabled = false;
 		if(empty($this->config['on']) || empty($this->config['host'])) {
-			return $this->set_error(FTP_ERR_CONFIG_OFF);
+			$this->set_error(FTP_ERR_CONFIG_OFF);
 		} else {
 			$this->func = /*$this->config['ssl'] &&*/ function_exists('ssh2_connect') ? 'ssh2_connect' : 'ftp_connect';
 			if($this->func == 'ftp_connect' && !function_exists('ftp_connect')) {
-				return $this->set_error(FTP_ERR_SERVER_DISABLED);
+				$this->set_error(FTP_ERR_SERVER_DISABLED);
 			} else {
 				$this->config['host'] = dzz_ftp::clear($this->config['host']);
 				$this->config['port'] = intval($this->config['port']);
@@ -66,11 +66,11 @@ class dzz_ftp
 			if($this->ftp_mkdir($dirname)) {
 				$this->ftp_chmod($dirname);
 				if(!$this->ftp_chdir($dirname)) {
-					return $this->set_error(FTP_ERR_CHDIR);
+					$this->set_error(FTP_ERR_CHDIR);
 				}
 				//$this->ftp_put('index.htm', getglobal('setting/attachdir').'/index.htm', FTP_BINARY);
 			} else {
-				return $this->set_error(FTP_ERR_MKDIR);
+				$this->set_error(FTP_ERR_MKDIR);
 			}
 		}
 
@@ -80,11 +80,9 @@ class dzz_ftp
 				
 				$res = $this->ftp_fput($filename, $fp, $mode , $startpos);
 				@fclose($fp);
-				if (!$res) {
-					return $this->set_error(FTP_ERR_TARGET_WRITE);
-				}
+				!$res && $this->set_error(FTP_ERR_TARGET_WRITE);
 			} else {
-				return $this->set_error(FTP_ERR_SOURCE_READ);
+				$this->set_error(FTP_ERR_SOURCE_READ);
 			}
 		}
 
@@ -119,17 +117,17 @@ class dzz_ftp
 					if($this->ftp_chdir($ftppath)) {
 						$res =  $this->connectid;
 					} else {
-						return $this->set_error(FTP_ERR_CHDIR);
+						$this->set_error(FTP_ERR_CHDIR);
 					}
 				}else{
-					return $res =  $this->connectid;
+					$res =  $this->connectid;
 				}
 			} else {
-				return $this->set_error(FTP_ERR_USER_NO_LOGGIN);
+				$this->set_error(FTP_ERR_USER_NO_LOGGIN);
 			}
 			
 		} else {
-			return $this->set_error(FTP_ERR_CONNECT_TO_SERVER);
+			$this->set_error(FTP_ERR_CONNECT_TO_SERVER);
 		}
 		if($res > 0) {
 			$this->set_error();

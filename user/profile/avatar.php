@@ -9,9 +9,9 @@
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
-$verify = C::t('user_verify')->fetch($_G['uid']);//验证信息
+
 Hook::listen('check_login');
-$navtitle=lang('Modify_the_picture').' - '.lang('myCountCenter');
+
 if(submitcheck('avatarsubmit')) {
 
 	if($_GET['imagedata'])	$success=upbase64($_GET['imagedata'],$_G['uid']);
@@ -19,7 +19,7 @@ if(submitcheck('avatarsubmit')) {
 	if($success) exit(json_encode(array('msg'=>'success')));
 	else exit(json_encode(array('error'=>'头像保存错误，请稍候重试')));
 
-	showmessage('do_success', MOD_URL.'&op=avatar');
+	showmessage('do_success', 'user.php?mod=profile&op=avatar');
 
 }elseif($_GET['do']=='imageupload'){
 

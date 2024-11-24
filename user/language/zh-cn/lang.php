@@ -1,22 +1,14 @@
 <?php
-
-/**
- *      [Discuz!] (C)2001-2099 Comsenz Inc.
- *      This is NOT a freeware, use is subject to license terms
- *
- *      $Id: lang_template.php 29881 2012-05-02 07:19:30Z liulanbo $
- *
- *      This file is automatically generate
- */
-
+if(!defined('IN_DZZ')) {
+	exit('Access Denied');
+}
 $lang=array (
 	
   'username' => '用户名',
-	'Last_login_time' => '上次登录时间',
   'login_guest' => '没有帐号？<a href="user.php?mod={$_G[setting][regname]}">{$_G[setting][reglinkname]}</a>',
   'faq' => '帮助',
   'Modify_the_picture' => '修改头像',
-  'Safety management' => '安全管理',
+  'password_and_security' => '密码与安全',
   'password_edit' => '修改密码',
   'current_my_space' => '当前我的头像',
   'setting_avatar_message' => '如果您还没有设置自己的头像，系统会显示为默认头像，您需要自己上传一张新照片来作为自己的个人头像 ',
@@ -77,7 +69,9 @@ $lang=array (
   'qq_log_close' => 'QQ登录功能已关闭！',
   'qq_login' => 'QQ登录！',
   'user_stopped_please_admin' => '此用户已停用，请联系管理员',
-  'site_closed_please_admin' => '站点关闭中，请联系管理员<br>原因:'.$_G['setting']['closedreason'].'',
+  'site_closed_please_admin' => '站点关闭中，请联系管理员',
+  'congratulations' => '恭喜您',
+  'login_success' => '登录成功！',
   'password_error' => '密码不正确！',
   'username_or_password_error' => '用户名或密码不正确！',
   'password_not_match' => '两次密码不匹配！',
@@ -86,6 +80,7 @@ $lang=array (
   'user_password_not_correct' => '用户密码不正确，请重试',
   'space_usage' => '空间使用',
   'category_department' => '所属部门',
+  'registration_time' => '注册时间',
   'usergroup' => '用户组',
   'not_join_agency_department' => '未加入机构或部门',
   'unallocated_space' => '未分配空间',
@@ -98,7 +93,7 @@ $lang=array (
   'other_login' => '其他登录',
   'qq_login' => 'QQ登录',
   'automatic_login_within_thirtydays' => '30天内自动登录',
-  'email_username' => '邮箱、用户名或手机号',
+  'email_username' => '邮箱或用户名',
   'binding_for_account' => '绑定已有账号',
   'register_new_account_bound' => '注册新账号并绑定',
   'register_new_account' => '注册新账号',
@@ -184,8 +179,6 @@ $lang=array (
         <p>邮件可能会进入推广邮件或垃圾邮件中，请注意查收。</p>',
    'sending_wait'=>'发送中，请稍后...',
 	'myCountCenter'=>'个人中心',
-	'register_welcome_tip'=>'欢迎注册',
-	'registers'=>'{comment}',
-	'registers_title'=>'{title}',
+	'register_welcome_tip'=>'欢迎注册'
 
 );

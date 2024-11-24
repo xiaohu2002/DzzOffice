@@ -17,82 +17,123 @@
           onsubmit="return submitsetting(this);">
 	            <div class="function-con">
 	                <div class="form-groups clearfix">
-	                    <label class="col-sm-2 col-xs-2 app-label">{lang start_person_dir}</label>
+	                    <label class="col-sm-2 col-xs-2 control-label app-label">{lang start_person_dir}</label>
 	                    <div class="col-sm-9 col-xs-9">
-	                        <input type="checkbox" class="form-check-input js-switch" id="usermemory" name="setting[explorer_usermemoryOn]" <!--{if $setting['explorer_usermemoryOn']==1 || !isset($setting['explorer_organizationOn'])}-->checked<!--{/if}--> />
+	                        <input type="checkbox" class="js-switch" id="usermemory"
+	                               name="setting[explorer_usermemoryOn]"
+	                        <!--{if $setting['explorer_usermemoryOn']==1 || !isset($setting['explorer_organizationOn'])}-->
+	                        checked
+	                        <!--{/if}--> />
 	                        <div id="memoryinfo"
 	                        <!--{if isset($setting['explorer_organizationOn']) && $setting['explorer_usermemoryOn'] == 0}-->
 	                        class="hide"<!--{/if}--> >
 	                        <div class="function-radio clearfix">
-	                            <div class="radio-default">
-	                                <input type="radio" class="form-check-input" value="all" id="allsetting" name="setting[explorer_mermoryusersetting]" <!--{if !isset($setting['explorer_mermoryusersetting']) || $setting['explorer_mermoryusersetting'] == 'all'}-->checked<!--{/if}--> >
-	                                <label class="ladelTxt lbook-label" for="allsetting"><span>{lang all_personnel}</span></label>
+	                            <div class="radio-custom radio-default">
+	                                <input type="radio" value="all" id="allsetting"
+	                                       name="setting[explorer_mermoryusersetting]"
+	                                <!--{if !isset($setting['explorer_mermoryusersetting']) || $setting['explorer_mermoryusersetting'] == 'all'}-->
+	                                checked<!--{/if}--> >
+	                                <label class="ladelTxt lbook-label"
+	                                       for="allsetting"><span>{lang all_personnel}</span></label>
 	                            </div>
 	                            <p class="lbook">{lang organizational_structure_generate_personal_storage}</p>
 	                        </div>
 	                        <div class="function-radio clearfix">
-	                            <div class="radio-default">
-	                                <input type="radio" class="form-check-input" id="inputRadiosUnchecked" name="setting[explorer_mermoryusersetting]" value="appoint" <!--{if $setting['explorer_mermoryusersetting']=='appoint'}-->checked<!--{/if}--> >
-	                                <label class="ladelTxt lbook-label" for="inputRadiosUnchecked"><span>{lang designated_personnel_or_department_personnel}</span></label>
+	                            <div class="radio-custom radio-default">
+	                                <input type="radio" id="inputRadiosUnchecked"
+	                                       name="setting[explorer_mermoryusersetting]" value="appoint"
+	                                <!--{if $setting['explorer_mermoryusersetting']=='appoint'}-->checked
+	                                <!--{/if}--> >
+	                                <label class="ladelTxt lbook-label" for="inputRadiosUnchecked"><span>{lang
+	                                            designated_personnel_or_department_personnel}</span></label>
 	                            </div>
+	
 	                        </div>
 	                        <p class="lbook">{lang storage_designated_personnel_or_department_personnel}</p>
 	                    </div>
-	                    <div class="selectorguser"<!--{if $setting['explorer_mermoryusersetting']!='appoint'}--> style="display:none"<!--{/if}-->>
+	
+	                    <div class="selectorguser"
+	                    <!--{if $setting['explorer_mermoryusersetting']!='appoint'}-->
+	                    style="display:none"<!--{/if}-->>
 	                    <div class="clearfix">
 	                        <div id="orgids">
-														<!--{loop $sel_org $value}-->
-                            <button id="orgids_sl_$value[orgid]" type="button" class="btn btn-outline-secondary btn-sorg" data-val="$value['orgid']">
-                            {eval echo avatar_group($value['orgid'],null,'iconFirstWord');}
-                            $value[orgname] <a href="javascript:;" class="ibtn dzz dzz-close"  title="{lang delete}" onclick="selorg.remove('orgids',this);"></a>
-                            </button>
-                            <!--{/loop}--> 
-                            <!--{loop $sel_user $value1}-->
-                            <button id="orgids_sl_uid_$value1['uid']" data-val="uid_$value1['uid']" type="button" class="btn btn-outline-secondary btn-sorg">
-                            {eval echo avatar_block($value1['uid'],null,'iconFirstWord');} $value1[username] <a href="javascript:;" class="ibtn dzz dzz-close" title="{lang delete}" onclick="selorg.remove('orgids',this);"></a>
-                            </button>
-                            <!--{/loop}--> 
+	                            <!--{loop $sel_org $value}-->
+	                            <button id="orgids_sl_$value[orgid]" type="button"
+	                                    class="btn btn-simple btn-sorg" data-val="$value['orgid']">
+									{eval echo avatar_group($value['orgid'],null,'iconFirstWord');}
+	                                $value[orgname] <a href="javascript:;"
+	                                                   class="ibtn mdi mdi-close-circle "
+	                                                   title="{lang delete}"
+	                                                   onclick="selorg.remove('orgids',this);"></a>
+	                            </button>
+	                            <!--{/loop}-->
+	                            <!--{loop $sel_user $value1}-->
+	                            <button id="orgids_sl_uid_$value1['uid']" data-val="uid_$value1['uid']"
+	                                    type="button" class="btn btn-simple btn-sorg">
+									{eval echo avatar_block($value1['uid'],array($value1['uid']=>$value1['headerColor']),'iconFirstWord');} $value1['username'] <a
+	                                    href="javascript:;" class="ibtn mdi mdi-close-circle "
+
+	                                    title="{lang delete}" onclick="selorg.remove('orgids',this);"></a>
+	                            </button>
+	                            <!--{/loop}-->
 	                        </div>
-	                        <input id="sel_orgids" name="setting[explorer_memoryorgusers]" type="hidden" value="$setting['explorer_memoryorgusers']"/>
+	
+	                        <input id="sel_orgids" name="setting[explorer_memoryorgusers]" type="hidden"
+	                               value="$setting['explorer_memoryorgusers']"/>
 	                    </div>
 	                    <div class="dropdown">
-	                        <a href="javascript:;" class="dropdown-toggle btn btn-primary" id="orgids_Menu" data-bs-toggle="dropdown">{lang select_departments_or_users}</a>
-	                        <div id="orgids_dropdown_menu" class="dropdown-menu org-sel-box" role="menu" aria-labelledby="orgids_Menu">
-	                            <iframe name="orgids_iframe" class="org-sel-box-iframe" src="{DZZSCRIPT}?mod=system&op=orgtree&ctrlid=orgids&multiple=1" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true"></iframe>
+	                        <a href="javascript:;" class="dropdown-toggle btn btn-default-outline" id="orgids_Menu"
+	                           data-toggle="dropdown">{lang select_departments_or_users}<span
+	                                class="caret"></span></a>
+	                        <div id="orgids_dropdown_menu" class="dropdown-menu org-sel-box" role="menu"
+	                             aria-labelledby="orgids_Menu">
+	                            <iframe name="orgids_iframe" class="org-sel-box-iframe"
+	                                    src="{DZZSCRIPT}?mod=system&op=orgtree&ctrlid=orgids&multiple=1"
+	                                    frameborder="0" marginheight="0" marginwidth="0" width="100%"
+	                                    height="100%" allowtransparency="true"></iframe>
 	                        </div>
 	                    </div>
 	                </div>
+	
 	            </div>
 	        </div>
 					<div class="form-groups clearfix">
-            <label class="col-sm-2 col-xs-2 app-label">{lang allow_use_org}</label>
-            <div class="col-sm-9 col-xs-9">
-              <input type="checkbox" class="form-check-input js-switch" name="setting[explorer_organizationOn]" <!--{if (isset($setting['explorer_organizationOn']) && $setting['explorer_organizationOn']) || !isset($setting['explorer_organizationOn'])}-->checked<!--{/if}--> />
-            </div>
+					<label class="col-sm-2 col-xs-2 control-label app-label">{lang allow_use_org}</label>
+					<div class="col-sm-9 col-xs-9">
+					<input type="checkbox" class="js-switch" name="setting[explorer_organizationOn]"
+					<!--{if (isset($setting['explorer_organizationOn']) && $setting['explorer_organizationOn']) || !isset($setting['explorer_organizationOn'])}-->
+					checked<!--{/if}--> />
 					</div>
-					<div class="form-groups clearfix">
-            <label class="col-sm-2 col-xs-2 app-label">{lang allow_use_group}</label>
-            <div class="col-sm-9 col-xs-9">
-							<input type="checkbox" class="form-check-input js-switch" name="setting[explorer_groupOn]" <!--{if (isset($setting['explorer_groupOn']) && $setting['explorer_groupOn']) || !isset($setting['explorer_groupOn'])}-->checked <!--{/if}--> />
-            </div>
+					
 					</div>
+	
 					<div class="form-groups clearfix">
-					    <label class="col-sm-2 col-xs-2 app-label">{lang allow_create_group}</label>
+					<label class="col-sm-2 col-xs-2 control-label app-label">{lang allow_use_group}</label>
+					<div class="col-sm-9 col-xs-9"><input type="checkbox" class="js-switch"
+					                              name="setting[explorer_groupOn]"
+					<!--{if (isset($setting['explorer_groupOn']) && $setting['explorer_groupOn']) || !isset($setting['explorer_groupOn'])}-->
+					checked <!--{/if}--> />
+					</div>
+					
+					</div>
+	
+					<div class="form-groups clearfix">
+					    <label class="col-sm-2 col-xs-2 control-label app-label">{lang allow_create_group}</label>
 					    <div class="col-sm-9 col-xs-9">
-					        <input type="checkbox" class="form-check-input js-switch" name="setting[explorer_groupcreate]" id="usercreatememory"
+					        <input type="checkbox" class="js-switch" name="setting[explorer_groupcreate]" id="usercreatememory"
 					        <!--{if (isset($setting['explorer_groupcreate']) && $setting['explorer_groupcreate']) || !isset($setting['explorer_groupcreate'])}-->checked <!--{/if}--> />
 					
-					    <div id="memorycreateinfo" <!--{if isset($setting['explorer_groupcreate']) && $setting['explorer_groupcreate'] == 0}-->class="hide"<!--{/if}--> >
+					    <div  id="memorycreateinfo" <!--{if isset($setting['explorer_groupcreate']) && $setting['explorer_groupcreate'] == 0}-->class="hide"<!--{/if}--> >
 					    <div class="function-radio clearfix">
-					        <div class="radio-default">
-					            <input type="radio" value="all" class="form-check-input" name="setting[explorer_mermorygroupsetting]"<!--{if !isset($setting['explorer_mermorygroupsetting']) || $setting['explorer_mermorygroupsetting'] == 'all'}-->checked<!--{/if}--> >
+					        <div class="radio-custom radio-default">
+					            <input type="radio" value="all" name="setting[explorer_mermorygroupsetting]"<!--{if !isset($setting['explorer_mermorygroupsetting']) || $setting['explorer_mermorygroupsetting'] == 'all'}-->checked<!--{/if}--> >
 					            <label class="ladelTxt lbook-label" for="allsetting"><span>{lang all_personnel}</span></label>
 					        </div>
 					        <p class="lbook">{lang allow_allcreate_group}。</p>
 					    </div>
 					    <div class="function-radio clearfix">
-					        <div class="radio-default">
-					            <input type="radio" name="setting[explorer_mermorygroupsetting]" class="form-check-input" value="appoint"<!--{if $setting['explorer_mermorygroupsetting']=='appoint'}-->checked<!--{/if}--> >
+					        <div class="radio-custom radio-default">
+					            <input type="radio" name="setting[explorer_mermorygroupsetting]" value="appoint"<!--{if $setting['explorer_mermorygroupsetting']=='appoint'}-->checked<!--{/if}--> >
 					            <label class="ladelTxt lbook-label" for="inputRadiosUnchecked"><span>{lang designated_personnel_or_department_personnel}</span></label>
 					        </div>
 					        <p class="lbook">{lang allow_appointcreate_group}</p>
@@ -102,24 +143,29 @@
 					    <div class="clearfix">
 					        <div id="groupcreateids">
 					            <!--{loop $sel_org1 $value}-->
-					            <button id="groupcreateids_sl_$value[orgid]" type="button" class="btn btn-outline-secondary btn-sorg" data-val="$value['orgid']">
+					            <button id="groupcreateids_sl_$value[orgid]" type="button" class="btn btn-simple btn-sorg" data-val="$value['orgid']">
 									{eval echo avatar_group($value['orgid'],null,'iconFirstWord');}
-					                $value[orgname] <a href="javascript:;" class="ibtn dzz dzz-close" title="{lang delete}" onclick="selorg.remove('groupcreateids',this);"></a>
+					                $value[orgname] <a href="javascript:;" class="ibtn mdi mdi-close-circle " title="{lang delete}" onclick="selorg.remove('groupcreateids',this);"></a>
 					            </button>
 					            <!--{/loop}-->
 					            <!--{loop $sel_user1 $value1}-->
-					            <button id="groupcreateids_sl_uid_$value1['uid']" data-val="uid_$value1['uid']" type="button" class="btn btn-outline-secondary btn-sorg">
-									{eval echo avatar_block($value1['uid'],array($value1['uid']=>$value1['headerColor']),'iconFirstWord');}$value1[username] <a href="javascript:;" class="ibtn dzz dzz-close"  title="{lang delete}" onclick="selorg.remove('groupcreateids',this);"></a>
+					            <button id="groupcreateids_sl_uid_$value1['uid']" data-val="uid_$value1['uid']" type="button" class="btn btn-simple btn-sorg">
+									{eval echo avatar_block($value1['uid'],array($value1['uid']=>$value1['headerColor']),'iconFirstWord');}$value1['username'] <a href="javascript:;" class="ibtn mdi mdi-close-circle "  title="{lang delete}" onclick="selorg.remove('groupcreateids',this);"></a>
 					            </button>
 					            <!--{/loop}-->
 					        </div>
 					
-					        <input id="sel_groupcreateids" name="setting[explorer_memorygroupusers]" type="hidden" value="$setting['explorer_memorygroupusers']"/>
+					        <input id="sel_groupcreateids" name="setting[explorer_memorygroupusers]" type="hidden"
+					               value="$setting['explorer_memorygroupusers']"/>
 					    </div>
 					    <div class="dropdown">
-					        <a href="javascript:;" class="dropdown-toggle btn btn-primary" id="groupcreateids_Menu" data-bs-toggle="dropdown">{lang select_departments_or_users}</a>
+					        <a href="javascript:;" class="dropdown-toggle btn btn-default-outline" id="groupcreateids_Menu" data-toggle="dropdown">{lang select_departments_or_users}
+					            <span class="caret"></span></a>
 					        <div  class="dropdown-menu org-sel-box" role="menu" aria-labelledby="groupcreateids_Menu">
-					            <iframe name="groupcreateids_iframe" class="org-sel-box-iframe" src="{DZZSCRIPT}?mod=system&op=orgtree&ctrlid=groupcreateids&multiple=1" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true"></iframe>
+					            <iframe name="groupcreateids_iframe" class="org-sel-box-iframe"
+					                    src="{DZZSCRIPT}?mod=system&op=orgtree&ctrlid=groupcreateids&multiple=1"
+					                    frameborder="0" marginheight="0" marginwidth="0" width="100%"
+					                    height="100%" allowtransparency="true"></iframe>
 					        </div>
 					    </div>
 					</div>
@@ -127,14 +173,14 @@
 					</div>
 	
 					<div class="form-groups clearfix" >
-					    <label class="col-sm-2 col-xs-2 app-label">{lang allow_create_cat}</label>
+					    <label class="col-sm-2 col-xs-2 control-label app-label">{lang allow_create_cat}</label>
 					    <div class="col-sm-9 col-xs-9">
-					        <input type="checkbox" class="form-check-input js-switch" name="setting[explorer_catcreate]" id="catcreatememory"
+					        <input type="checkbox" class="js-switch" name="setting[explorer_catcreate]" id="catcreatememory"
 					        <!--{if (isset($setting['explorer_catcreate']) && $setting['explorer_catcreate']) || !isset($setting['explorer_catcreate'])}-->checked <!--{/if}--> />
 					    </div>
 					</div>
 					<div class="form-groups clearfix" style="padding-bottom: 0rem;">
-					    <label class="col-sm-2 col-xs-2 app-label">{lang finally_delete_setting}</label>
+					    <label class="col-sm-2 col-xs-2 control-label app-label">{lang finally_delete_setting}</label>
 					    <div class="col-sm-9 col-xs-9" >
 					        <input type="text" class="form-control" name="setting[explorer_finallydelete]" style="max-width: 14.28rem;"  onblur="checks()" id="textnumber"
 								   <!--{if isset($setting['explorer_finallydelete'])}-->
@@ -157,7 +203,7 @@
 	<div class="function-button">
 	    <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-offset-2 col-sm-10 col-md-10 col-lg-10 col-xs-10">
 	        <input type="submit" value="{lang affirm}" class="btn btn-primary"/>
-	        <button class="btn btn-outline-secondary">{lang cancel}</button>
+	        <button class="btn btn-default-outline">{lang cancel}</button>
 	        <!--确认</input>-->
 	    </div>
 	</div>
@@ -167,6 +213,13 @@
 
 <script type="text/javascript" reload="1">
 var recylenum = true;
+    //开关样式
+    $.getScript('{MOD_PATH}/js/switchery.min.js', function () {
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        elems.forEach(function (html) {
+            var switchery = new Switchery(html);
+        });
+    });
 //input框只能输入数字
 function checks(){
 	var value=jQuery('#textnumber').val();

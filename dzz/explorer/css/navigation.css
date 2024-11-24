@@ -10,6 +10,7 @@
 
 /*右侧开始*/
 #middleconMenu{
+	background-color: #fff;
 	margin-left: 255px;
 	position: relative;
 }
@@ -33,13 +34,17 @@
 	height:57px;
 }
 .middlecenter .middlecenter-body{
-	margin-top:40px;
+
+	margin-top:57px;
+	/*height:100%*/
 }
+
 .middlebottomMenu{
 	position:relative;
 }
 .padding-left-1{
-	padding: var(--radius);
+	padding-left: 1.78rem;
+	padding-right: 1.78rem;
 }
 .recyleadmin-top{
 	padding-left: 1.78rem;
@@ -51,6 +56,8 @@
 }
 .icosContainer{
 	height:100%;
+	padding-left: 1.78rem;
+	padding-right: 1.78rem;
 	
 }
 /*右侧结束*/
@@ -121,7 +128,7 @@
 }
 .address-wrapper .goback{
 	position:absolute;
-	width:78px;
+	width:70px;
 	height:100%;
 	left:0;
 	top:0;
@@ -131,6 +138,9 @@
 .address-wrapper .goback a{
 	display:block;
 	text-align: left;
+}
+.address-wrapper .goback a span{
+	color:#666666;
 }
 .address-wrapper .goback a .dzz-address-vline{
 	padding-left: 5px;
@@ -193,7 +203,7 @@
     /*border: 1px solid transparent;*/
     position: relative;
     line-height: 34px;
-    margin: 11px 15px 11px 70px;
+    margin: 11px 15px 11px 60px;
     position: relative;
 	overflow:hidden;
 	height:35px;
@@ -265,9 +275,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: var(--radius);
+    border-radius: 0;
 	z-index:11;
 }
+/*.address-wrapper .address-container:hover{
+	border: 1px solid #e7e7e7;
+}*/
 .group-tabul{
 	overflow: hidden;
 	float: right;
@@ -281,6 +294,13 @@
 	width: 80px;
 	line-height: 54px;
 	text-align: center;
+}
+
+.middle-groupshink .group-tabul li a{
+	color: #666;
+	width: 80px;
+	text-decoration: none;
+	display: inline-block;
 }
 .middle-groupshink .group-tabul li.active{
 	background-color: inherit;
@@ -304,25 +324,50 @@ color: #3779ff;
 	width: 100%;
 }
 .collectionbutton{
-  position: relative;
-  float: right;
-  padding: 9px 10px;
-  margin-top: 12px;
-  margin-right: 15px;
-  margin-left: 15px;
-  background-color: transparent;
-  background-image: none;
-  border: 1px solid #ddd;
-  border-radius:  var(--radius);	
-  display: none;
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 12px;
+    margin-right: 15px;
+    margin-left: 15px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;	
+    display: none;
 }
 /*多个导航样式结束*/
 /*名称样式开始*/
+.input-black .input-label{
+	left: auto;
+	color: #666666;
+}
+.modal .modal-header, .modal-open .modal .modal-body{
+	overflow: hidden;
+}
 .modal-body.group-top{
 	padding-top: 20px!important;
 }
+.input-black.input-float.active .input-label{
+	  color: rgba(76, 137, 251, 1);
+}
 #name_error{
 	display: block;
+}
+.input-black{
+	margin-bottom: 30px;
+}
+.input-black.input-float.focus .input-label{
+	color: rgba(76, 137, 251, 1);
+}
+div.tagsinput{
+	height: auto!important;
+	padding: 1px 0 0 0px!important;
+}
+@media only screen and (min-width:768px ) {
+	/*.form-horizontal .control-label{
+		padding-top: 0px;
+	}*/
 }
 
 /*名称样式结束*/
@@ -343,6 +388,7 @@ color: #3779ff;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     background-color: #f7f9fa;
+    height: auto;
 }
 .left-drager {
     position: absolute;
@@ -371,12 +417,12 @@ color: #3779ff;
 
 .leftMenu .leconMenu p {
 	cursor:pointer;
-	margin: 3px;
 }
 .leftMenu .leconMenu .positionMenu{
 	margin-top: 30px;
 }
 .leconMenu h6{
+	color: rgba(136, 144, 160, 1);
 	font-size: 12px;
 	padding-left: 27px;
 	/*white-space: nowrap;*/
@@ -426,6 +472,7 @@ color: #3779ff;
 	float: right;
 	margin-right: 11px;
 	margin-top: -2px;
+	color: rgba(78,85,99,0.65);
     padding-top: 0;
     font-size: 17px;
     
@@ -457,7 +504,7 @@ color: #3779ff;
 	padding:5px 15px;
 	overflow:auto;
 	border: 1px solid #ddd;	
-	border-radius:  var(--radius);
+	border-radius: 4px;
 	position: relative;
 }
 .folder-list .folder-user{
@@ -492,11 +539,11 @@ color: #3779ff;
 .leconMenu p{
 	height: 40px;
 	line-height: 40px;
+	color:#6c7580;
 	white-space: nowrap;
 }
 .leconMenu p:hover{
 	background-color: #e6e8eb;
-	border-radius:  var(--radius);
 }
 .leconMenu p span{
 	font-size: 22px;
@@ -504,6 +551,7 @@ color: #3779ff;
 	margin-right: 10px;
 	line-height: 1;
 	margin-top: -1px;
+	color: rgba(78,85,99,1);
 }
 .leconMenu p:active{
 	background-color: rgba(219, 230, 250, 1);
@@ -512,7 +560,6 @@ color: #3779ff;
 	background-color: rgba(219, 230, 250, 1);
 	color:rgba(76, 137, 251, 1);
 	font-weight: bold;
-	border-radius:  var(--radius);
 }
 .leconMenu .actives span{
 	color:rgba(76, 137, 251, 1);
@@ -523,18 +570,21 @@ color: #3779ff;
 /*左侧结束*/
 /*jstree开始*/
 .positionMenu .jstree-wholerow-ul{
+	/*z-index:10;*/
 	padding-left: 17px;
 	width: 100%;
 }
 .positionMenu .jstree-default .jstree-anchor{
 	line-height: 42px;
 	height: 40px;
+	color: #6c7580;
 }
 
 
 
 .positionMenu .jstree-default .jstree-icon:empty{
-  font-size: 22px;
+    font-size: 22px;
+    color: rgba(78,85,99,1);
 }
 .positionMenu .jstree-default .jstree-icon{
 	width: 24px;
@@ -550,16 +600,14 @@ color: #3779ff;
 	
 }
 .positionMenu .jstree-default .jstree-wholerow-hovered{
-	border-radius:  var(--radius);
+	background: #e6e8eb;
 }
 
 .positionMenu .jstree-default .jstree-wholerow-clicked + .jstree-ocl{
 	color:rgba(76, 137, 251, 1);
-	border-radius:  var(--radius);
 }
 .positionMenu .jstree-default .jstree-wholerow-clicked{
-	background: rgba(219, 230, 250, 1);  
-	border-radius:  var(--radius);
+	background: rgba(219, 230, 250, 1);   
 }
 
 .positionMenu .jstree-default .jstree-clicked{
@@ -613,6 +661,16 @@ color: #3779ff;
 	right: 0px;
 	width: auto;
 }
+.iconFirstWord{
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	display: inline-block;
+	line-height: 24px;
+    text-align: center;
+    margin-right: 2px;
+    color: #FFFFFF;
+}
 /*jstree结束*/
 /*右键开始*/
 @-webkit-keyframes fadeMenu{
@@ -634,7 +692,7 @@ color: #3779ff;
 	}
 }
 .menu{
-	border-radius:  var(--radius);
+	border-radius: 2px;
 	box-shadow: 0px 4px 13px 0px rgba(62,62,62,0.28);
 	background: #fff;
 	width: 190px;
@@ -670,17 +728,23 @@ color: #3779ff;
 .menu-icon.dzz{
 	background-image: none;
 }
-.menu-text, .file-text{
+.dropdown-menu .file-text{
+	padding-left: 1.3rem;
+}
+.menu-text,.file-text{
 	left: 45px;
-    height: 36px;
 	height: 36px;
 	width: 140px;
-	position: absolute;
+	color: #666666;
 }
 .menu-sep{
 	margin: 5px 0px;
 	background: none;
 	border-top: 1px solid #EEEEEE;
+}
+.menu-rightarrow{
+	top: 15px;
+	/*background:url(dzz/explorer/img/menu_rightarrow.png) no-repeat;*/
 }
 /*右键结束*/
 
@@ -689,10 +753,7 @@ color: #3779ff;
 /*选中头部操作开始*/
 .header-toggle{
 	flex: 1 0 auto;
-	padding-left: .5rem;
-	display: flex;
-	align-content: center;
-  align-items: center;
+	padding-left: 2.42rem;
 }
 .navtopheader{
 	position: fixed;
@@ -700,20 +761,16 @@ color: #3779ff;
 	left: 0;
 	width: 100%;
 	height:64px;
-	z-index: 2201;
+	z-index: 101;
 	display: none;
 }
 .navtoperate{
 	background-color:#FFFFFF;
-	box-shadow: 0 2px 12px 0 rgb(0 0 0 / 50%);
-	border-radius:  var(--radius);
-  margin: 5px;
+	box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15);
 }
 .select-toperate{
 	display: -webkit-flex;
 	display: flex;
-	margin: 5px;
-	padding: 5px;
 }
 .select-toperate-left{
 	-webkit-flex: 1 0 auto;
@@ -745,9 +802,11 @@ color: #3779ff;
 	-webkit-box-pack: end;
 }
 .selectall-box{
+   padding-left:2.14rem;
     width: auto;
+    color:#666;
     display: inline-block;
-	margin: 5px;
+    line-height: 64px;
 }
 .selectall-box .dzz-backing-out{
 	font-size: 24px;
@@ -762,21 +821,22 @@ color: #3779ff;
 }
 .tooltip-inner{
 	background-color: #333;
-	border-radius: var(--radius);
+	border-radius: 2px;
 }
 /*提示框样式结束*/
 /*空白页面样式开始*/
 .emptyPage{
 	text-align: center;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-    -moz-transform: translate(-50%,-50%);
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+	-moz-transform: translate(-50%,-50%);
 }
 .emptyPage .emptyPage-text{
 	font-size: 16px;
+	color: #AAAAAA;
 	cursor: default;
 }
 /*空白页面样式结束*/
@@ -784,8 +844,19 @@ color: #3779ff;
 .form-control[readonly]{
 	cursor:default;
 }
+.edit-labeltags div.tagsinput span.tag,.modal-body div.tagsinput span.tag{
+	background: #eceef1;
+	color:#4e5563;
+	border: 1px solid #eceef1;
+}
+.edit-labeltags div.tagsinput span.tag a,.modal-body div.tagsinput span.tag a{
+	color:#4e5563;
+}
 .activity-handler .dzz-submit-send:hover{
 	color: #689cfe;
+}
+.modal-body div.tagsinput input{
+	padding: 3px 0px;
 }
 .ui-widget-content{
 	background: #FFFFFF;
@@ -796,7 +867,6 @@ color: #3779ff;
 }
 .ui-datepicker{
 	box-shadow: 0px 4px 14px #ccc;
-	border-radius:  var(--radius);
 	}
 .ui-datepicker td span,.ui-datepicker td a{
 	text-align: center;
@@ -805,6 +875,9 @@ color: #3779ff;
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
 	background:#3779ff;
 	color: #FFFFFF;
+}
+.ul.popbox-menu li>a:hover{
+	color:#666666 ;
 }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{
 	background-color:#3779ff;

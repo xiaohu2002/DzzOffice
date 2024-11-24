@@ -11,8 +11,9 @@ if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 include_once libfile('function/organization');
+$ismobile=helper_browser::ismobile();
 $ids =isset($_GET['ids'])?rawurldecode($_GET['ids']):'';
-$navtitle='人员管理';
+$template = isset($_GET['template']) ? $_GET['template'] : '';
 $zero=$_GET['zero']?urldecode($_GET['zero']):lang('no_institution_users');//无机构用户名称
 $nouser=intval($_GET['nouser']);//不显示用户
 $stype=intval($_GET['stype']); //0:可以选择机构和用户；1：仅选择机构和部门：2：仅选择用户
@@ -101,11 +102,16 @@ if($uids){
 }
 $openarr_length=count($open)?'1':'';
 $openarr=json_encode($open);
-$ismobile = helper_browser::ismobile();
-if($ismobile){
-	include template('mobile_selectuser');
-	dexit();
-}else{
-	include template('selorguser');
+if ($template == '1') {
+    include template('lyear_selorguser');
 	exit();
+} else {
+	$ismobile = helper_browser::ismobile();
+    if($ismobile){
+		include template('mobile_selectuser');
+		dexit();
+	}else{
+		include template('selorguser');
+		exit();
+	}
 }

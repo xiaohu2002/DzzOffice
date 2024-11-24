@@ -381,7 +381,6 @@ function show_license() {
 	show_header();
 	$title = lang('step_env_check_title');
 	$version='DzzOffice'.CORE_VERSION.' &nbsp;&nbsp;   '.INSTALL_LANG.' '.CORE_RELEASE;
-	$xhversion='小胡 版本'.CORE_XHVERSION.' &nbsp;&nbsp;   '.CORE_XHRELEASE;
 	$release = CORE_RELEASE;
 	$install_lang = lang(INSTALL_LANG);
 	echo <<<EOT
@@ -394,11 +393,9 @@ function show_license() {
 				<div class="spacer"></div>
 				<h4 style="font-size:20px;">$install_lang</h4>
 				<h4>$version</h4>
-				<h4>$xhversion</h4>
 				<div class="spacer"></div>
-			<div ><a href="?step=1" class="button_start" style="color: #fff;"><span>$title</span></a></div>
+			<div ><a href="?step=1" class="button_start"><span>$title</span></a></div>
 			<div class="spacer"></div>
-			<div style="font-size: large;line-height: 30px;">小胡二次开发  <a href="https://gitee.com/xh2002">https://gitee.com/xh2002</a><br>在使用过程中如有问题请及时反馈到gitee上,我也在官方2群中，可以@我</div>
 		</td></tr>
 		</table>
 	
@@ -526,6 +523,7 @@ function redirect($url) {
 	exit();
 
 }
+
 function validate_ip($ip) {
 	return filter_var($ip, FILTER_VALIDATE_IP) !== false;
 }
@@ -544,7 +542,6 @@ function get_onlineip() {
 	}
 	return $onlineip;
 }
-
 function is_HTTPS() {
 	if(isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off') {
 		return true;

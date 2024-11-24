@@ -1,56 +1,73 @@
 <!--{template common/header_simple_start}-->
+<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
 <style>
-  .avatar,.card-title{
-    text-align: center;
-  }
-	.callout:hover{
-		background-color: var(--bs-light-hover);
-    border-top-width: 0px;
-    border-right-width: 0px;
-    border-bottom-width: 0px;
-		border-left-color: var(--bs-info);
-	}
-	.card{
-		box-shadow: none;
-    -webkit-box-shadow: none;
-	}
+body{
+	
+}
+.userspace{
+	position: relative;
+	height:auto;
+	border:none;
+	padding:0;
+	border-bottom:1px solid #DDD;
+}
+.userspace .avatar{
+	position:absolute;
+
+	left:8px;
+	top:15px;
+}
+
+.userspace .userinfo{
+	padding:20px 10px 15px 70px;
+	line-height:40px;
+	overflow:hidden;
+}
+.userspace .userinfo a{
+	padding-right:20px;
+	font-size:24px;
+	
+}
+span.label{
+	white-space:normal;display:inline-block;
+	margin:0 10px 10px 0;
+	line-height:1.4;
+}
+	
+
 </style>
 <!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
-<div class="bs-container clearfix">
- <div class="bs-main-container  clearfix"> 
-   <div class="main-content">
-		<div class="text-center">{eval echo avatar_block($uid);}</div>
-		<div class="card-body">
-			<h5 class="card-title">$space['username']</h5>
-			<div class="row mb-3">
-				<!--{if $uid==$_G['uid']}--><a href="user.php?mod=profile" class="btn btn-outline-primary">{lang edit_data}</a><!--{/if}--><!--{if $_G['adminid']}--><a href="index.php?mod=orguser#user_$uid" class="btn btn-outline-primary">编辑用户</a><!--{/if}-->
-			</div>
-			<div class="card card-shadowed mb-3">
-				<div class="callout callout-danger">邮箱:<strong><code>$space['email']</code></strong></div>
-				<!--{if $space['phone']}-->
-				<div class="callout callout-success">系统中的手机号:<strong><code>$space['phone']</code></strong></div>
-				<!--{/if}-->
-				<!--{if $_G['adminid']}-->
-        <div class="callout callout-warning">邮箱状态:<strong><code><!--{if $users[emailstatus]}-->已验证<!--{else}-->未验证<!--{/if}--></code></strong></div>
-				<div class="callout callout-warning"><!--{if $users[regip]}-->{lang registration_time}<!--{else}-->{lang add_time}<!--{/if}-->:<strong><code><!--{eval echo dgmdate($users['regdate'])}--></code></strong></div>
-				<!--{if $users[regip]}--><div class="callout callout-warning">{lang register} IP:<strong><code>$users[regip]</code></strong></div><!--{/if}-->
-				<!--{if $userstatus['lastip']}--><div class="callout callout-warning">上次登录 IP:<strong><code>$userstatus['lastip']</code></strong></div><!--{/if}-->
-				<!--{if $userstatus['lastactivity']}--><div class="callout callout-warning">上次登录时间:<strong><code><!--{eval echo dgmdate($userstatus['lastactivity'])}--></code></strong></div><!--{/if}-->
-				<!--{/if}-->
-				<!--{if $userstatus['lastactivity']}--><div class="callout callout-warning">最近访问时间:<strong><code><!--{eval echo dgmdate($userstatus['lastvisit'])}--></code></strong></div><!--{/if}-->
-			</div>
-			<div class="card card-hover-shadow mb-3">
-				<header class="card-header">
-					<div class="card-title">更多信息</div>
-				</header>
-				<!--{loop $profiles $key $value}-->
-				<div class="callout">$value[title]：<strong><code>$value[value]</code></strong></div>
-				<!--{/loop}-->
-
-			</div>
-		</div>
+<div class="container" style="height:100%;">
+ <div class=" userspace">
+  		<div class="avatar">{eval echo avatar_block($uid);}</div>
+        <div class="userinfo clearfix">
+            <a  href="javascript:" class="username "><strong>$space['username']</strong></a>
+           <!--{if $uid==$_G['uid']}--> <a  href="user.php?mod=profile">{lang edit_data}</a><!--{/if}-->
+          
+        </div>
+      
   </div>
- </div>
+  <div class="main-content clearfix" style="padding:20px;border-top:1px solid #FFF">
+   <div class="form-horizontal">
+   		<!--<div class="form-group clearfix">
+        	<label class="control-label col-sm-2"><img class=" img-circle" src="avatar.php?uid=$uid&size=small" /></label>
+            <div class="col-sm-10">
+            	<table width="100%" height="55">
+                <tr><td><strong>$space['username']</strong></td></tr>
+          		 <!--{if $uid==$_G['uid']}-->  <tr><td><a  href="user.php?mod=profile">{lang edit_data}</a></td></tr><!--{/if}-->
+                 </table>
+            </div>
+        </div>-->
+    <!--{loop $profiles $key $value}-->
+        <div class="form-group clearfix">
+        	<label class="control-label col-sm-2" style="max-width:120px">$value[title]:</label>
+            <div class="col-sm-10">
+            	<p class="form-control-static">$value[value]</p>
+            </div>
+        </div>
+	<!--{/loop}-->
+  </div>
+  </div>
 </div>
+<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>	
 <!--{template common/footer_simple}-->

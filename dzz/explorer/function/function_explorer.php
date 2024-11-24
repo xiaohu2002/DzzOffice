@@ -49,22 +49,16 @@ function dzz_explorer_searchcat_info_init(){
     global $_G;
     //创建资源管理器用户默认搜索类型
     $searchcat = array(
-      array(
-          'catname'=>'图片',
-          'uid' => $_G['uid'],
-          'ext'=>'.jpg,.png,.gif,jpeg,.bmp',
-          'default'=>'1'
-      ),
-      array(
-          'catname'=>'文档',
-          'uid' => $_G['uid'],
-          'ext'=>'.doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf,.dzzdoc,.txt',
-
-      ),
-			array(
-            'catname'=>'视频',
+        array(
+            'catname'=>'图片',
             'uid' => $_G['uid'],
-            'ext'=>'.mp4,.mov,.flv,.m3u8',
+            'ext'=>'.jpg,.png,.gif,jpeg,.bmp',
+            'default'=>'1'
+        ),
+        array(
+            'catname'=>'文档',
+            'uid' => $_G['uid'],
+            'ext'=>'.doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf,.dzzdoc,.txt',
 
         ),
     );

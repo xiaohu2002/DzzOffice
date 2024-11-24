@@ -1,65 +1,55 @@
-<!--{template common/header_simple_start}-->
-<!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
-<style type="text/css">
-
-/*结束*/
-</style>
-<div class="bs-container clearfix">
-  <div class="bs-left-container  clearfix"> 
-    <!--{template left}--> 
-  </div>
-  <div class="left-drager">
-  </div>
-  <div class="bs-main-container  clearfix">
-    <div class="main-header clearfix"> 
-      <!--{template right_header}--> 
-  	<!--<div  class="button_add_content">
-		<a href="{MOD_URL}&op=spaceadd" title="{lang add_storage_location}" id="button_add">+</a>				
-	</div>	-->
-    </div>
-    <div class="main-content clearfix" >
-      <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=space" method="post" >
-        <input type="hidden" name="cloudsubmit" value="true" />
-        <input type="hidden" name="formhash" value="{FORMHASH}" />
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th width="30">{lang sort}</th>
-              <th width="150">{lang storage_location}</th>
-              <th width="50">{lang default}</th>
-              <th>{lang used_surplus}</th>
-              <th width="50">&nbsp;</th>
-            </tr>
-          </thead>
-          <!--{loop $list $value}-->
-          <tr>
-            <td width="40"><input type="text" class="form-control" name="disp[{$value[remoteid]}]" value="$value[disp]" style="width:45px;" /></td>
-            <td width="150"><input type="text" class="form-control"   name="name[{$value[remoteid]}]" value="$value[name]"  /></td>
-            <td><input type="radio" class="form-check-input" name="isdefault" value="$value[remoteid]" <!--{if $value[isdefault]>0}-->checked<!--{/if}--> ></td>
-            <td><div id="spaceinfo_{$value[remoteid]}"> <span class="spacesize" style="padding:0 5px">$value[fusesize]&nbsp;/&nbsp;$value[ftotalsize]</span> <span class="spacecheck" style="padding:0 5px"><a href="javascript:;" title="{lang to_obtain}" onclick="checkspace(this,'$value[remoteid]')"><i class="glyphicon glyphicon-refresh"></i></a></span> 
-                <!--{if $value[available]<1}--> 
-                <span class="text-danger">{lang space_storage_failure}</span> 
-                <!--{/if}--> 
-              </div></td>
-            <td><a id="delete_{$value[remoteid]}" <!--{if $value[bz]=='dzz' || $value[usesize]>0}-->style="display:none"<!--{/if}-->class="text-danger" href="{MOD_URL}&op=space&do=delete&remoteid=$value[remoteid]" onclick="if(confirm('{lang space_del_storage}')){return true;}else{return false}" >{lang delete}</a></td>
-          </tr>
-          <!--{/loop}-->
-          <thead>
-          
-            <th valign="middle" colspan="7"><input type="submit" class="btn btn-primary" value="{lang save_set}" /> <a href="{MOD_URL}&op=spaceadd" title="{lang add_storage_location}" class="btn btn-outline-primary">{lang add_storage_location}</a>
+<!--{template lyear/header_simple_start}-->
+<!--{template lyear/header_simple_end}-->
+<main class="bs-main-container">
+	<div class="container-fluid">
+		<div class="card">
+      <div class="card-header">
+        <!--{template right_header}--> 
+      </div>
+      <div class="card-body">
+        <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=space" method="post" >
+          <input type="hidden" name="cloudsubmit" value="true" />
+          <input type="hidden" name="formhash" value="{FORMHASH}" />
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead>
+                <tr>
+                  <th width="30">{lang sort}</th>
+                  <th width="150">{lang storage_location}</th>
+                  <th width="50">{lang default}</th>
+                  <th>{lang used_surplus}</th>
+                  <th width="50">&nbsp;</th>
+                </tr>
               </thead>
-        </table>
-      </form>
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>{lang board_message}</strong> {lang space_board_message_text}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              <!--{loop $list $value}-->
+              <tr>
+                <td width="40"><input type="text" class="form-control" name="disp[{$value[remoteid]}]" value="$value[disp]" style="width:45px;" /></td>
+                <td width="150"><input type="text" class="form-control"   name="name[{$value[remoteid]}]" value="$value[name]"  /></td>
+                <td><input type="radio" class="form-check-input" name="isdefault" value="$value[remoteid]" <!--{if $value[isdefault]>0}-->checked<!--{/if}--> ></td>
+                <td><div id="spaceinfo_{$value[remoteid]}"> <span class="spacesize" style="padding:0 5px">$value[fusesize]&nbsp;/&nbsp;$value[ftotalsize]</span> <span class="spacecheck" style="padding:0 5px"><a href="javascript:;" title="{lang to_obtain}" onclick="checkspace(this,'$value[remoteid]')"><i class="glyphicon glyphicon-refresh"></i></a></span> 
+                    <!--{if $value[available]<1}--> 
+                    <span class="text-danger">{lang space_storage_failure}</span> 
+                    <!--{/if}--> 
+                  </div></td>
+                <td><a id="delete_{$value[remoteid]}" <!--{if $value[bz]=='dzz' || $value[usesize]>0}-->style="display:none"<!--{/if}-->class="text-danger" href="{MOD_URL}&op=space&do=delete&remoteid=$value[remoteid]" onclick="if(confirm('{lang space_del_storage}')){return true;}else{return false}" >{lang delete}</a></td>
+              </tr>
+              <!--{/loop}-->
+              <thead>
+              
+                <th valign="middle" colspan="7"><input type="submit" class="btn btn-primary" value="{lang save_set}" /> <a href="{MOD_URL}&op=spaceadd" title="{lang add_storage_location}" class="btn btn-outline-primary">{lang add_storage_location}</a>
+                  </thead>
+            </table>
+          </div>
+        </form>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>{lang board_message}</strong> {lang space_board_message_text}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</main> 
 <script type="text/javascript">
-
  function checkspace(obj,remoteid){
 	 jQuery(obj).html('<img src="admin/images/loadding.gif">');
 	 jQuery.getJSON('{MOD_URL}&op=space&do=checkspace&remoteid='+remoteid,function(json){
@@ -81,4 +71,4 @@
 	 });
  }
 </script>
-<!--{template common/footer_simple}--> 
+<!--{template lyear/footer_simple}--> 

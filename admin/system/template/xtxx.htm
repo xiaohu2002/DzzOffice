@@ -1,378 +1,45 @@
-<!--{template common/header_simple_start}-->
-<link href="static/js/datepicker/datepicker.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/js/imgReady.js?{VERHASH}"></script>
-<script src="static/js/echarts-plain.js?{VERHASH}"></script> 
-<!--{template common/header_simple_end}-->
+<!--{template lyear/header_simple_start}-->
+<!--{template lyear/header_simple_end}-->
 <style>
-.rangedate{
-	font-weight:bold;
-	font-size:16px;
-	padding:10px 0;
-	border-top:1px solid #FFF;
-}
-<!--{if $time=='month'}-->
-
-<!--{elseif $time=='week'}-->
-.rangedate input{
-	width:225px;
-}
-<!--{elseif $time=='day'}-->
-.rangedate input{
-	width:120px;
-}
-<!--{/if}-->
-.rangedate input:focus，.rangedate input:active{
-	box-shadow:none;
-}.rangedate input{
-	width:120px;
-}
-	table {
-    border-collapse: collapse;
-    width: 100%;
-  }
+	.list-group-item.active {
+		color: #fff;
+		background: #0d6efd;
+	}
 	th {
-    text-align:center;
-    color: #76a9ff;
-    line-height: 34px;
-    padding: 3px 5px;
-  }
+		text-align:center;
+		color: #76a9ff;
+		line-height: 34px;
+		padding: 3px 5px;
+	}
 	tr {
 		text-align:center;
-	}
-	.bei{
-		color: #fff;
-		border-radius: 50%;
-		padding: 2px;
-		background-color: #52c41a;
-	}
-  .beii{
-		color: #fff;
-		border-radius: 50%;
-		padding: 2px;
-		background-color: #f5222d;
 	}
 	.ext span:first-child{
 		display: inline-block;
     	width: 55%;
 	}
-	.ext{
+	.label{
 		padding: 2px;
-	}
-	.extt{
-		padding: 2px;
-    	float: left;
-	}
-	.beijing{
-		background-color: #f2f2f2;
-		border-radius: var(--radius);
-		display: inline-block;
-		font-weight: bold;
-		padding: var(--radius);
-		font-size: 1em;
-	}
-	.dagai{
-		display: flex
-	}
-	.dagai dl{
-		margin: var(--radius);
-	}
-	.extt .card {
-		background-color: rgba(var(--bs-black-rgb),.175);
+		margin: 2px;
 	}
 </style>
-<!--{template common/commer_header}-->
-<div class="bs-container clearfix">
-	<div class="bs-left-container  clearfix">
-		<!--{template left}-->
-	</div>
-	<div class="left-drager">
-	</div>
-	<div class="bs-main-container  clearfix">
-		<div class="main-content">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="card bg-primary text-white">
-					  <div class="card-body">
-						<h2 class="title">用户信息</h2>
-						<table class="tb">
-						<tbody>
-							<tr>
-							<th class="padleft">当前在线数</th>
-							<th class="padleft">总用户数</th>
-							<th class="padleft">停用人数</th>
-							</tr>
-							<tr>
-							<td class="padleft">$zaixianrenshu</td>
-							<td class="padleft">$yonghurenshu</td>
-							<td class="w pdleft1">$tingyongrenshu</td>
-							</tr>
-						</tbody>
-						</table>
-					  </div>
-					</div>
-				  </div>
-				  <div class="col-md-4">
-					<div class="card bg-primary text-white">
-					  <div class="card-body">
-						<h2 class="title">文件信息</h2>
-						<table class="tb">
-						<tbody>
-							<tr>
-							<th class="padleft">文件个数</th>
-							<th class="padleft">空间使用</th>
-							</tr>
-							<tr>
-							<td class="padleft">$wenjiangeshu</td>
-							<td class="padleft">$kongjianshiyong</td>
-							</tr>
-						</tbody>
-						</table>
-					  </div>
-					</div>
-				  </div>
-				  <div class="col-md-4">
-					<div class="card bg-primary text-white">
-					  <div class="card-body">
-						<h2 class="title">版本信息</h2>
-							<table class="tb">
-							<tbody>
-								<tr>
-								<th class="padleft">官方版本</th>
-								<th class="padleft">小胡版本</th>
-								<th class="padleft">小胡版更新日期</th>
-								</tr>
-								<tr>
-								<td class="padleft">$about[version]</td>
-								<td class="padleft">$about[xhversion]</td>
-								<td class="w pdleft1">$about[XHFIXBUG]</td>
-								</tr>
-							</tbody>
-							</table>
-					  </div>
-					</div>
-				  </div>
-				</div>
-				<div class="col-md-12">
-					<div class="card bg-primary text-white">
-					  <div class="card-body">
-						<!--{eval echo shuchu();}-->
-					  </div>
-					</div>
-				  </div>
-				  <div class="col-md-12">
-					<div class="card bg-primary text-white">
-					  <div class="card-body">
-						<h3>PHP扩展信息<a href="{MOD_URL}&op=xtxx&do=phpinfo" target="_blank" style="position: relative;">PHP详情</a></h3>
-							<div class="container">
-											<!--{eval echo kuozhan();}-->
-											</div>
-										<div>已加载的扩展:</div>
-							<div class="container">
+<main class="bs-main-container">
+	<div class="container-fluid">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="list-group">
+						<div class="list-group-item active">PHP扩展信息<a href="{MOD_URL}&op=xtxx&do=phpinfo" target="_blank" class="btn btn-outline-success btn-small">PHP详情</a></div>
+						<div class="list-group-item">
+							<!--{eval echo kuozhan();}-->
+						</div>
+						<div class="list-group-item">已加载的扩展
 							$extensions
 						</div>
-					  </div>
 					</div>
-				  </div>
-			<dl>	
-			<div class="main-header clearfix">
-      <ul class="nav nav-pills " style="padding:4px 10px 0 10px">
-        <li class="nav-item"><a <!--{if $time=='all'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=xtxx&time=all&type=$type" >{lang overview}</a></li>
-        <li class="nav-item"><a <!--{if $time=='month'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=xtxx&time=month&type=$type" >{lang MonthyChart}</a></li>
-        <li class="nav-item"><a <!--{if $time=='week'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=xtxx&time=week&type=$type" >{lang contour}</a></li>
-        <li class="nav-item"><a <!--{if $time=='day'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=xtxx&time=day&type=$type" >{lang date_line}</a></li>
-      </ul>
-    </div>
-<div class="rangedate text-center" > 
-    <!--{if $time!='all'}--> 
-    	<a class="btn btn-primary" href="javascript:;" onclick="next_prev('prev','start')"><i class="glyphicon glyphicon-chevron-left"></i></a> 
-          <input type="text" class="form-control" style="display:inline-block" id="datepicker_start" value="$starttime">
-         <a class="btn btn-primary" href="javascript:;" onclick="next_prev('next','start')"><i class="glyphicon glyphicon-chevron-right"></i></a>  
-         
-          &nbsp;——&nbsp;
-          <a class="btn btn-primary" href="javascript:;" onclick="next_prev('prev','end')"><i class="glyphicon glyphicon-chevron-left"></i></a> 
-          <input style="display:inline-block" class="form-control" type="text" id="datepicker_end" value="$endtime">
-          <a class="btn btn-primary" href="javascript:;" onclick="next_prev('next','end')"><i class="glyphicon glyphicon-chevron-right"></i></a>
-	<script type="text/javascript" src="static/js/main.min.js"></script>
-       <!--{/if}-->
-    </div>
-<div id="charts" class="chart-container" style="padding:15px;"> 
-  </div>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
-</dl>
-<script type="text/javascript">
-var tbid='{$tbid}';
-var url='{MOD_URL}&op=xtxx';
-var time='{$time}';
-
-
-jQuery('.left-drager').leftDrager_layout();  
-var getdateTimer=0;
-function getdatebytime(){
-	var start=jQuery('#datepicker_start').val();
-	var end=jQuery('#datepicker_end').val();
-	//console.log('odate==='+odate+'===='+dateText);
-	if(getdateTimer) window.clearTimeout(getdateTimer);
-	getdateTimer=window.setTimeout(function(){ajaxget(url+'&operation=getdata&type={$type}&time=$time&starttime='+start+'&endtime='+end,'charts','charts');},500);
-}
-function redirect(val){
-	window.location.href=url+'&time={$time}&date=$date&type='+val;
-}
-function next_prev(flag,ider){
-	var dateText='';
-	
-	var end=jQuery('#datepicker_'+ider).val();
-	if(end==''){
-		var t=new Date();
-	}else{
-		var t=new Date(end);
-	}
-	
-	if(time=='month'){
-		var cmonth=t.getMonth();
-		var date=t.getDate();
-		var month_l=t;
-		month_l.setDate(1);
-		if(flag=='next'){
-			month_l.setMonth(cmonth+1);
-		}else{
-			month_l.setMonth(cmonth-1);
-		}
-		jQuery('#datepicker_'+ider).val(month_l.format('yyyy-MM'));
-		getdatebytime();
-	}else if(time=='week'){
-		//console.log(odate);
-		    var week_l=t;
-			var cday=week_l.getDay();
-			var date=week_l.getDate();
-			
-			if(flag=='next'){
-				week_l.setDate(date-cday+1+7);
-			}else{
-				week_l.setDate(date-cday+1-7);
-			}
-			var week_l_stamp=week_l.format('yyyy-MM-dd');
-			//console.log('week_l=='+week_l_stamp);
-			date=week_l.getDate();
-			//console.log(date);
-			week_l.setDate(date+6);
-			var week_u_stamp=week_l.format('yyyy-MM-dd');
-			
-			if(ider=='end'){
-				jQuery('#datepicker_'+ider).val(week_u_stamp);
-			}else{
-				jQuery('#datepicker_'+ider).val(week_l_stamp);
-			}
-			
-			getdatebytime();
-	}else if(time=='day'){
-		var today=t;
-		var date=today.getDate();
-		if(flag=='next'){
-			today.setDate(date+1);
-		}else{
-			today.setDate(date-1);
-		}
-		
-		jQuery('#datepicker_'+ider).val(today.format('yyyy-MM-dd'));
-		
-		getdatebytime();
-	}
-	
-}
-
-jQuery(document).ready(function(e) {
-	getdatebytime();
-	jQuery('#datepicker_start').datepicker({
-			showWeek:true
-			,selectWeek:true
-			,onChangeMonthYear:function(year,month,inst){
-				if(time=='month'){
-					//
-					jQuery('#datepicker_start').val(year+'-'+month);
-					getdatebytime();
-				}
-			},onSelect:function(dateText,inst){
-				if(time=='month'){
-					jQuery('#datepicker_start').val(inst.selectedYear+'-'+(inst.selectedMonth+1));
-				}else if(time=='week'){
-					var t=new Date((inst.selectedYear)+'-'+(inst.selectedMonth+1)+'-'+(inst.selectedDay));
-						var cday=t.getDay();
-						var date=t.getDate();
-						var week_l=t;
-						week_l.setDate(date-cday+1);
-						week_l_stamp=week_l.format('yyyy-MM-dd');
-						var week_u=t;
-						week_u.setDate(date+(7-cday));
-						week_u_stamp=week_u.format('yyyy-MM-dd');
-						jQuery('#datepicker_start').val(week_l_stamp);
-					getdatebytime();
-				}else if(time=='day'){
-					jQuery('#datepicker_start').val(new Date((inst.selectedYear)+'-'+(inst.selectedMonth+1)+'-'+(inst.selectedDay)).format('yyyy-MM-dd'));
-					getdatebytime();
-				}
-				
-			}
-		}
-	);
-	jQuery('#datepicker_end').datepicker({
-			showWeek:true
-			,selectWeek:true
-			,onChangeMonthYear:function(year,month,inst){
-				if(time=='month'){
-					jQuery('#datepicker_end').val(year+'-'+month);
-					getdatebytime();
-				}
-			},onSelect:function(dateText,inst){
-				if(time=='month'){
-					jQuery('#datepicker_end').val(inst.selectedYear+'-'+(inst.selectedMonth+1));
-				}else if(time=='week'){
-					
-					var t=new Date((inst.selectedYear)+'-'+(inst.selectedMonth+1)+'-'+(inst.selectedDay));
-						var cday=t.getDay();
-						var date=t.getDate();
-						var week_l=t;
-						week_l.setDate(date-cday+1);
-						week_l_stamp=week_l.format('yyyy-MM-dd');
-						var week_u=t;
-						week_u.setDate(date+(7-cday));
-						week_u_stamp=week_u.format('yyyy-MM-dd');
-						jQuery('#datepicker_end').val(week_u_stamp);
-						getdatebytime();
-				}else if(time=='day'){
-					jQuery('#datepicker_end').val(new Date((inst.selectedYear)+'-'+(inst.selectedMonth+1)+'-'+(inst.selectedDay)).format('yyyy-MM-dd'));
-					getdatebytime();
-				}
-			}
-		}
-	);
-
-	
-});
- Date.prototype.format = function(format) {
-       var date = {
-              "M+": this.getMonth() + 1,
-              "d+": this.getDate(),
-              "h+": this.getHours(),
-              "m+": this.getMinutes(),
-              "s+": this.getSeconds(),
-              "q+": Math.floor((this.getMonth() + 3) / 3),
-              "S+": this.getMilliseconds()
-       };
-       if (/(y+)/i.test(format)) {
-              format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
-       }
-       for (var k in date) {
-              if (new RegExp("(" + k + ")").test(format)) {
-                     format = format.replace(RegExp.$1, RegExp.$1.length == 1
-                            ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
-              }
-       }
-       return format;
-}
-</script>
-<script  type="text/javascript" src="static/js/datepicker/jquery.ui.core.js?{VERHASH}"></script> 
-<script  type="text/javascript" src="static/js/datepicker/jquery.ui.datepicker.js?{VERHASH}"></script> 
-<script type="text/javascript" src="static/js/datepicker/jquery.datepicker-{$_G['language']}.js?{VERHASH}"></script>
-<!--{template common/footer_simple}-->
+</main>
+<!--{template lyear/footer_simple}-->

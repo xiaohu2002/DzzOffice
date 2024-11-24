@@ -137,11 +137,6 @@ class Client extends GuzzleClient {
         return $this->signature->createPresignedUrl($request, $expires);
     }
 
-    public function getthumwaterUrl($method, $args=array(), $expires = null){
-        $command = $this->getCommand($method, $args);
-        $request = $this->commandToRequestTransformer($command);
-        return $this->createPresignedUrl($request, $expires);
-    }
     public function getPresignetUrl($method, $args, $expires = null) {
         $command = $this->getCommand($method, $args);
         $request = $this->commandToRequestTransformer($command);

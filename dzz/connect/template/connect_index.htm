@@ -1,8 +1,8 @@
 <!--{template common/header_simple_start}-->
-<link href="{MOD_PATH}/images/menu/default/style.css?{VERHASH}" rel="stylesheet" media="all">
+<link href="static/css/common.css?{VERHASH}" rel="stylesheet" media="all">
+<link href="dzz/styles/menu/default/style.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="dzz/connect/images/connect.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="{MOD_PATH}/scripts/_common.js?{VERHASH}"></script>
-<script type="text/javascript" src="{MOD_PATH}/scripts/_config.min.js?{VERHASH}"></script>
+<script type="text/javascript" src="dzz/scripts/_common.js?{VERHASH}"></script>
 <style>
 	#menu.nav-pills li a {
 		padding: 5px 10px;
@@ -10,14 +10,7 @@
 		border-radius: 3px;
 	}
 </style>
-<script type="text/javascript" src="{MOD_PATH}/scripts/dzz_min.js?{VERHASH}"></script>
-<script type="text/javascript" >  
-try{
-	var api=_api.init();
-}catch(e){}
-</script>
-<script type="text/javascript">var DZZSCRIPT='{DZZSCRIPT}',LANG='{$_G[language]}', STATICURL = 'static/', IMGDIR = '{$_G[setting][imgdir]}', VERHASH = '{VERHASH}', charset = '{CHARSET}', dzz_uid = '$_G['uid']', cookiepre = '{$_G[config][cookie][cookiepre]}', cookiedomain = '{$_G[config][cookie][cookiedomain]}', cookiepath = '{$_G[config][cookie][cookiepath]}',attackevasive = '{$_G[config][security][attackevasive]}', disallowfloat = '{$_G[setting]['disallowfloat']}',  REPORTURL = '$_G[currenturl_encode]', SITEURL = '$_G[siteurl]', JSPATH = '$_G[setting][jspath]';</script>
-<script src="{MOD_PATH}/scripts/_fun.js?{VERHASH}" type="text/javascript"></script>
+
 <!--{template common/header_simple_end}-->
 <div class="container" style="height:100%">
 	<div class="main-header2 clearfix">
@@ -70,36 +63,6 @@ try{
 		parent._config.sourcedata.folder[i] = jsonfolder[i];
 	}
 	var ajaxurl = '{DZZSCRIPT}?mod=connect&op=ajax';
-</script>
-<script type="text/javascript">
-try{
-	jQuery(document).on('mousedown',function(){
-		try{if(top!=window) top.dfire('mousedown');}catch(e){}
-	});
-	if ("onfocusin" in document){//for IE 
-		document.onfocusin = function() {
-			top.CurrentActive = true;
-		};
-		document.onfocusout = function() {
-			top.CurrentActive = false;
-		};
-	} else {
-		window.onfocus = function() {
-			top.CurrentActive = true;
-		}
-		window.onblur = function() {
-			top.CurrentActive = false;
-		}
-	}
-	
-	jQuery(document).ready(function(e) {
-        try{api.showLoading('hide');}catch(e){}
-    });
-	window.onbeforeunload=function(){
-		try{if(!BROWSER.ie || BROWSER.ie>10) return api.showLoading('show');}catch(e){}
-		if(typeof beforeunload =='function') return beforeunload();
-	}
-}catch(e){}
 </script>
 <script type="text/javascript" src="dzz/connect/scripts/mycloud.js?{VERHASH}"></script>
 <!--{template common/footer_simple}-->

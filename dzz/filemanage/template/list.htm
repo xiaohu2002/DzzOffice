@@ -1,15 +1,9 @@
-<!--{template common/header_simple_start}-->
-<link href="dzz/images/folder/folder.css?{VERHASH}" rel="stylesheet" media="all">
+<!--{template lyear/header_simple_start}-->
+<link href="{MOD_PATH}/images/folder.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="static/dzzthumb/jquery.dzzthumb.css?{VERHASH}" rel="stylesheet" media="all">
+<link href="dzz/styles/icoblock/default/style.css?{VERHASH}" rel="stylesheet" media="all">
 <script type="text/javascript" src="static/dzzthumb/jquery.dzzthumb.js?{VERHASH}"></script>
-<link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.css?{VERHASH}">
-<style type="text/css">
-	.lie{
-		min-width: 120px
-	}
-</style>
-<!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
+<!--{template lyear/header_simple_end}-->
 <script type="text/javascript">
 	var selorg={};
 	selorg.add=function(ctrlid,vals){
@@ -19,171 +13,164 @@
 		//jQuery('#orgid_{$org[orgid]}_Menu').dropdown('toggle');
 	}
 </script>
-<div class="bs-container clearfix">
-	<div class="bs-left-container  clearfix">
-		<!--{template left}-->
+<main class="bs-main-container">
+	<div class="container-fluid">
+		<div class="card">
+			<!--{if !$list}-->
+			<div class="card-body">
+				<div style="text-align: center;">
+					<img src="static/image/common/no_list.png" /><br>
+					<span class="no-result-title">{lang no_relevant_content}</span>
+				</div>
+			</div>
+			<!--{else}-->
+			<div class="card-header clearfix">
+				<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+					<ol class="breadcrumb">
+					<li class="breadcrumb-item" data-href="{MOD_URL}"><a href="{MOD_URL}">{lang all_typename_attach}</a></li>
+					<!--{if !empty($foldername)}-->
+					{eval $i=0;}
+				{loop $foldername $v}
+				{eval $i++;}
+				<!--{if $i==count($foldername)}-->
+					<li class="breadcrumb-item active" data-fid="$v[fid]" aria-current="page">$v[fname]</li>
+					<!--{else}-->
+					<li class="breadcrumb-item" data-fid="$v[fid]"><a href="{MOD_URL}&pfid=$v[fid]">$v[fname]</a></li>
+					<!--{/if}-->
+					{/loop} 
+					<!--{/if}--> 
+					</ol>
+				</nav>
+				<form name="search" class="form-horizontal" action="{MOD_URL}" method="get">
+					<input type="hidden" name="mod" value="filemanage" />
+					<ul class="nav nav-pills">
+					<li>
+						<select class="form-select" name="pfid">
+						<option value="" selected="selected">{lang file_position}</option>
+						<option value="-1" &lt;!&ndash;{if $pfid==-1}&ndash;&gt;selected="selected"&lt;!&ndash;{/if}&ndash;&gt;>{lang in_recycle}
+						</option>
+						</select>
+					</li>
+					<!--{if !isset($pfid) || $pfid <= 0}-->
+					<li class="dropdown org">
+						<input id="sel_orgid_{$org[orgid]}" type="hidden" name="orgid"  value="$org[orgid]" onchange="selDepart(this)" />
+						<button type="button" id="orgid_{$org[orgid]}_Menu" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"> $org[depart]  </button>
+						<div id="orgid_$orgid_dropdown_menu" class="dropdown-menu org-sel-box" role="menu" aria-labelledby="orgid_{$org[orgid]}_Menu">
+						<iframe name="orgid_{$org[orgid]}_iframe" class="org-sel-box-iframe" src="index.php?mod=system&op=orgtree&ctrlid=orgid_{$org[orgid]}&nouser=1&range=0&stype=1&zero={eval echo urlencode('{lang unselect_a_organization_or_department}');}" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true" ></iframe>
+						</div>
+					</li>
+					<!--{/if}-->
+					<li class="float-start">
+						<input type="hidden" name="pfid" id="pfid" value="$pfid"/>
+						<button  class="btn btn-primary " type="submit">{lang search}</button>
+					</li>
+					<li class="float-start btn-secetlt" style="display: none;">
+						<button  class="btn btn-danger " type="submit" value="{lang delete}" onclick="delete_file();">{lang delete}</button>
+					</li>
+					<li class="float-start btn-secetlt" style="display: none;">
+						<button  class="btn btn-primary col sharepame-selected" disabled>({lang checkednum})</button>
+					</li>
+					</ul>
+				</form>
+			</div>
+			<div class="card-body">
+				<form id="appform" name="appform" class="form-horizontal " action="{MOD_URL}" method="post" >
+					<input type="hidden" name="delsubmit" value="true" />
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+					<input type="hidden" name="lpp" value="$lpp">
+					<input type="hidden" name="refer" value="$refer" />
+					<input type="hidden" name="keyword" value="$keyword" /> 
+					<div class="table-responsive">
+						<table class="table table-hover">
+						<thead node-type="title" class="title">
+							<tr class="item clearfix">
+							<th>
+								<div class="col-sm-10">
+								<div class="form-check">
+									<input class="form-check-input" name="del[]" type="checkbox" id="chkall"><label></label>
+								</div>
+								</div>
+							</th>
+							<th node-type="title-col" data-key="name" class="lie col">{lang filename}<span node-type="order-status" class="asc $_GET[name]" style="visibility: <!--{if $_GET[name]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></span></th>
+							<th node-type="title-col" data-key="size" class="lie col">{lang file_size}<span node-type="order-status" class="asc $_GET[size]" style="visibility:<!--{if $_GET[size]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
+							<th node-type="title-col" data-key="ftype" class="lie col">{lang file_type}<span node-type="order-status" class="asc $_GET[ftype]" style="visibility: <!--{if $_GET[ftype]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
+							<th class="lie">{lang file_location}</th>
+							<!--{if $_G[adminid]}-->
+							<th node-type="title-col" data-key="username" class="lie col">{lang possessor}<span node-type="order-status" class="asc $_GET[username]" style="visibility: <!--{if $_GET[username]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
+							<!--{/if}-->
+							<th node-type="title-col" data-key="dateline" class="lie col">{lang add_time} <span node-type="order-status" class="asc $_GET['dateline']" style="visibility: <!--{if $_GET['dateline']}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
+							<th class="lie">操作</th>
+							</tr>
+						</thead>
+						<tbody node-type="list" class="list list-share">
+							<!--{loop $list $key $value}-->
+							<tr node-type="item" data-dpath="$value[dpath]" data-rid="$value[rid]" <!--{if $value[type] == 'folder' && $value[oid]}--> data-containpath="$value[oid]"<!--{/if}--> data-type="$value[type]" class="item shareblock clearfix">
+							<td data-name="$value[name]" class="col">
+								<div class="col-sm-10">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input"  name="del[]" value="$value[rid]" data-rid="$value[rid]">
+								</div>
+								</div>
+							</td>
+							<td node-type="name" class="name" title="$value[name]" data-size="$value[name]">
+								<!--{if $value[img]}--><img class="icon" title="$value[name]" src="$value[img]" <!--{if $value[type]=='image' }--> data-original="$value[url]" data-dpath="$value[dpath]" 
+								<!--{/if}-->/> 
+								<!--{/if}--> 
+								<span node-type="name-text" data-href="$value[shareurl]" class="name-text enabled">$value[name]</span>
+							</td>
+							<td><!--{if $value[type] !=='folder'}--><div>$value[fsize]</div><!--{/if}--></td>
+							<td><div>$value[ftype]</div></td>
+							<td><div>$value[relpath]</div></td>
+							<!--{if $_G[adminid]}-->
+							<td><div>$value[username]</div></td>
+							<!--{/if}-->
+							<td><div>$value[fdateline]</div></td>
+							<td>
+								<div>
+								<a node-type="btn-item" data-key="download" class="btn btn-outline-info" title="下载" href="javascript:void(0);"><i class="mdi mdi-download "></i></a>
+								<a class="btn btn-outline-info" href="{MOD_URL}&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" data-bs-toggle="tooltip" title="{lang delete}" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="mdi mdi-delete"></i></a>
+								<!--{if $_G[adminid]}-->
+								<a class="btn btn-outline-info" href="javascript:;" onclick="togglecplog('{$key}')" data-bs-toggle="tooltip" title="更多信息"><i class="mdi mdi-order-bool-descending"></i></a><!--{/if}-->
+								</div>
+							</td>
+							<!--{if $_G[adminid]}-->
+							<tr id="cplog_{$key}" style="display:none">
+								<td colspan="8">
+								<!--{if $value[type]!=='folder'}-->
+								<!--{eval $zldz=IO::getFileUri($value['path'])}-->直链地址：<a href="$zldz">$zldz</a><br/>引用：$value[copys]<br/>
+								<!--{/if}-->
+								是否在回收站：<!--{if $value[isdelete]}-->是<!--{else}-->否<!--{/if}-->
+							</td>
+							</tr>
+							<!--{/if}-->
+							<!--{/loop}--> 
+						</tbody>
+						</table>
+					</div>
+					<div class="float-start">
+					<div class="input-group mb-3">
+						<span class="input-group-text">每页显示</span>
+						<select class="form-select" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
+						<option value="10" $checklpp[10]> 10 </option>
+						<option value="20" $checklpp[20]> 20 </option>
+						<option value="40" $checklpp[40]> 40 </option>
+						<option value="100" $checklpp[100]> 100 </option>
+						<option value="200" $checklpp[200]> 200 </option>
+						</select>
+						<span class="input-group-text">条记录</span>
+					</div>
+					</div>
+					$multi
+				</form>
+			</div>
+			<!--{/if}-->
+		</div>
 	</div>
-	<div class="left-drager">
-    <div class="left-drager-op">
-      <div class="left-drager-sub"></div>
-    </div>
-  </div>
-  <div class="bs-main-container">
-		<!--{if !$list}-->
-    <div style="text-align: center;">
-      <img src="static/image/common/no_list.png" /><br>
-      <span class="no-result-title">{lang no_relevant_content}</span>
-    </div>
-		<!--{else}-->
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item" data-href="{MOD_URL}"><a href="{MOD_URL}">{lang all_typename_attach}</a></li>
-          <!--{if !empty($foldername)}-->
-        {eval $i=0;}
-       {loop $foldername $v}
-       {eval $i++;}
-       <!--{if $i==count($foldername)}-->
-          <li class="breadcrumb-item active" data-fid="$v[fid]" aria-current="page">$v[fname]</li>
-          <!--{else}-->
-        <li class="breadcrumb-item" data-fid="$v[fid]"><a href="{MOD_URL}&pfid=$v[fid]">$v[fname]</a></li>
-        <!--{/if}-->
-        {/loop} 
-        <!--{/if}--> 
-        </ol>
-      </nav>
-    <div class="main-header clearfix">
-      <form name="search" class="form-horizontal" action="{MOD_URL}" method="get">
-        <input type="hidden" name="mod" value="filemanage" />
-        <ul class="nav nav-pills">
-          <li>
-            <select class="form-select" name="pfid">
-              <option value="" selected="selected">{lang file_position}</option>
-              <option value="-1" &lt;!&ndash;{if $pfid==-1}&ndash;&gt;selected="selected"&lt;!&ndash;{/if}&ndash;&gt;>{lang in_recycle}
-              </option>
-            </select>
-          </li>
-          <!--{if !isset($pfid) || $pfid <= 0}-->
-          <li class="dropdown org">
-            <input id="sel_orgid_{$org[orgid]}" type="hidden" name="orgid"  value="$org[orgid]" onchange="selDepart(this)" />
-            <button type="button" id="orgid_{$org[orgid]}_Menu" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"> $org[depart]  </button>
-            <div id="orgid_$orgid_dropdown_menu" class="dropdown-menu org-sel-box" role="menu" aria-labelledby="orgid_{$org[orgid]}_Menu">
-              <iframe name="orgid_{$org[orgid]}_iframe" class="org-sel-box-iframe" src="index.php?mod=system&op=orgtree&ctrlid=orgid_{$org[orgid]}&nouser=1&range=0&stype=1&zero={eval echo urlencode('{lang unselect_a_organization_or_department}');}" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true" ></iframe>
-            </div>
-          </li>
-          <!--{/if}-->
-          <li class="pull-left">
-            <input type="hidden" name="pfid" id="pfid" value="$pfid"/>
-            <button  class="btn btn-primary " type="submit">{lang search}</button>
-          </li>
-          <li class="pull-left btn-secetlt" style="display: none;">
-            <button  class="btn btn-danger " type="submit" value="{lang delete}" onclick="delete_file();">{lang delete}</button>
-          </li>
-					<li class="pull-left btn-secetlt" style="display: none;">
-            <button  class="btn btn-primary col sharepame-selected" disabled>({lang checkednum})</button>
-          </li>
-        </ul>
-      </form>
-    </div>
-    <div class="main-content clearfix">
-      <form id="appform" name="appform" class="form-horizontal " action="{MOD_URL}" method="post" >
-        <input type="hidden" name="delsubmit" value="true" />
-        <input type="hidden" name="formhash" value="{FORMHASH}" />
-        <input type="hidden" name="lpp" value="$lpp">
-        <input type="hidden" name="refer" value="$refer" />
-        <input type="hidden" name="keyword" value="$keyword" /> 
-        <table class="table table-hover">
-          <thead node-type="title" class="title">
-            <tr class="item clearfix">
-              <th>
-                <div class="col-sm-10">
-                  <div class="form-check">
-                    <input class="form-check-input" name="del[]" type="checkbox" id="chkall"><label></label>
-                  </div>
-                </div>
-              </th>
-              <th node-type="title-col" data-key="name" class="lie col">{lang filename}<span node-type="order-status" class="asc $_GET[name]" style="visibility: <!--{if $_GET[name]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></span></th>
-              <th node-type="title-col" data-key="size" class="lie col">{lang file_size}<span node-type="order-status" class="asc $_GET[size]" style="visibility:<!--{if $_GET[size]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-              <th node-type="title-col" data-key="ftype" class="lie col">{lang file_type}<span node-type="order-status" class="asc $_GET[ftype]" style="visibility: <!--{if $_GET[ftype]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-              <th class="lie">{lang file_location}</th>
-              <!--{if $_G[adminid]}-->
-              <th node-type="title-col" data-key="username" class="lie col">{lang possessor}<span node-type="order-status" class="asc $_GET[username]" style="visibility: <!--{if $_GET[username]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-              <!--{/if}-->
-              <th node-type="title-col" data-key="dateline" class="lie col">{lang add_time} <span node-type="order-status" class="asc $_GET['dateline']" style="visibility: <!--{if $_GET['dateline']}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-              <th class="lie">操作</th>
-            </tr>
-          </thead>
-          <tbody node-type="list" class="list list-share">
-            <!--{loop $list $key $value}-->
-            <tr node-type="item" data-dpath="$value[dpath]" data-rid="$value[rid]" <!--{if $value[type] == 'folder' && $value[oid]}--> data-containpath="$value[oid]"<!--{/if}--> data-type="$value[type]" class="item shareblock clearfix">
-              <td data-name="$value[name]" class="col">
-                <div class="col-sm-10">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input"  name="del[]" value="$value[rid]" data-rid="$value[rid]">
-                  </div>
-                </div>
-              </td>
-              <td node-type="name" class="name" title="$value[name]" data-size="$value[name]">
-                <!--{if $value[img]}--><img class="icon" title="$value[name]" src="$value[img]" <!--{if $value[type]=='image' }--> data-original="$value[url]" data-dpath="$value[dpath]" 
-                <!--{/if}-->/> 
-                <!--{/if}--> 
-                <span node-type="name-text" data-href="$value[shareurl]" class="name-text enabled">$value[name]</span>
-              </td>
-              <td><!--{if $value[type] !=='folder'}--><div>$value[fsize]</div><!--{/if}--></td>
-              <td><div>$value[ftype]</div></td>
-              <td><div>$value[relpath]</div></td>
-              <!--{if $_G[adminid]}-->
-              <td><div>$value[username]</div></td>
-              <!--{/if}-->
-              <td><div>$value[fdateline]</div></td>
-              <td>
-                <div>
-                  <a node-type="btn-item" data-key="download" class="btn btn-outline-info" title="下载" href="javascript:void(0);"><i class="dzz dzz-download"></i></a>
-                  <a class="btn btn-outline-info" href="{MOD_URL}&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" data-bs-toggle="tooltip" title="{lang delete}" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="dzz dzz-delete"></i></a>
-                  <!--{if $_G[adminid]}-->
-                  <a class="btn btn-outline-info" href="javascript:;" onclick="togglecplog('{$key}')" data-bs-toggle="tooltip" title="更多信息"><i class="dzz dzz-description"></i></a><!--{/if}-->
-                </div>
-              </td>
-              <!--{if $_G[adminid]}-->
-              <tr id="cplog_{$key}" style="display:none">
-                <td colspan="8">
-                <!--{if $value[type]!=='folder'}-->
-                <!--{eval $zldz=IO::getFileUri($value['path'])}-->直链地址：<a href="$zldz">$zldz</a><br/>引用：$value[copys]<br/>
-                <!--{/if}-->
-                是否在回收站：<!--{if $value[isdelete]}-->是<!--{else}-->否<!--{/if}-->
-              </td>
-            </tr>
-            <!--{/if}-->
-            <!--{/loop}--> 
-          </tbody>
-        </table>
-        <div class="pull-left">
-          <div class="input-group mb-3">
-            <span class="input-group-text">每页显示</span>
-            <select class="form-select" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
-              <option value="10" $checklpp[10]> 10 </option>
-              <option value="20" $checklpp[20]> 20 </option>
-              <option value="40" $checklpp[40]> 40 </option>
-              <option value="100" $checklpp[100]> 100 </option>
-              <option value="200" $checklpp[200]> 200 </option>
-            </select>
-            <span class="input-group-text">条记录</span>
-          </div>
-        </div>
-        $multi
-      </form>
-    </div>
-  </div>
-	<!--{/if}-->
-  </div>
-</div>
-
+</main>
 <iframe id="hideframe" name="hideframe" src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" width="0" height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>
 <script type="text/javascript">
 var theurl='$theurl';
 	jQuery(document).ready(function(e) {
-    jQuery('select').lyearSelect({
-      width:70,
-    });
 		jQuery('.title .item .col[node-type=title-col][data-key=dateline],.title .item .col[node-type=title-col][data-key=name],.title .item .col[node-type=title-col][data-key=size],.title .item .col[node-type=title-col][data-key=username],.title .item .col[node-type=title-col][data-key=ftype],.title .item .col[node-type=title-col][data-key=ftype]').on('click', function() {
 			var el = jQuery(this);
 			el.find('.asc').css('visibility', 'visible').toggleClass('desc');
@@ -330,5 +317,4 @@ function togglecplog(k) {
 }
 <!--{/if}-->
 </script>
-<script type="text/javascript" src="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.js?{VERHASH}"></script>
-<!--{template common/footer_simple}-->
+<!--{template lyear/footer_simple}-->

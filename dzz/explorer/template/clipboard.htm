@@ -1,18 +1,18 @@
 <!--{loop $return $val}-->
-<!--{if $val[type] == 'folder'}-->
+<!--{if $val['type'] == 'folder'}-->
 <li class="liste typefolder" data-href="{MOD_URL}&op=home"
     data-hash="uid{$uid}_file|$val[oid]" data-args="uid_{$uid}-do_file-fid_$val[oid]" data-fid="$val[newdata][fid]" id="$val[newdata][rid]" data-rid="$val[newdata][rid]">
     <!--{else}-->
-<li class="liste typefile"  <!--{if $val[type] == 'link'}-->data-href="$val[newdata][url]" <!--{else}-->data-href="{eval echo dzzencode($val[newdata][path]);}"<!--{/if}-->
-data-rid="$val[newdata][rid]" data-ext="$val[newdata][ext]" data-type="$val[newdata][type]"data-name="$val[newdata][name]" id="$val[newdata][rid]">
+<li class="liste typefile"  <!--{if $val['type'] == 'link'}-->data-href="$val[newdata][url]" <!--{else}-->data-href="{eval echo dzzencode($val[newdata]['path']);}"<!--{/if}-->
+data-rid="$val[newdata][rid]" data-ext="$val[newdata][ext]" data-type="$val[newdata]['type']"data-name="$val[newdata][name]" id="$val[newdata][rid]">
 <!--{/if}-->
-<div class="checkbox-custom">
-    <input type="checkbox" class="form-check-input listecheck"/>
+<div class="checkbox-custom checkbox-primary">
+    <input type="checkbox" class=" listecheck"/>
     <label></label>
 </div>
 <div class="fileitemMenu">
     <div class="imgMenu">
-        <img src="{$_G[siteurl]}$val[img]" style="width: 40px;height: 45px;">
+        <img src="{$_G['siteurl']}$val[img]" style="width: 40px;height: 45px;">
     </div>
     <div class="itemMenu">
         <div class="firstMenu clearfix">
@@ -33,9 +33,9 @@ data-rid="$val[newdata][rid]" data-ext="$val[newdata][ext]" data-type="$val[newd
             </ul>
         </div>
         <div class="dateMenu">
-            <p class="upMwnu">{eval echo dgmdate($val['newdata']['dateline'],'Y-m-d');}
-                <span class="timeMenu">{eval echo dgmdate($val['newdata']['dateline'],'H:i');}</span>
-                <i class="dimenMenu">-{eval echo formatsize($val['newdata']['size']);}</i>
+            <p class="upMwnu">{eval echo dgmdate($val[newdata]['dateline'],'Y-m-d');}
+                <span class="timeMenu">{eval echo dgmdate($val[newdata]['dateline'],'H:i');}</span>
+                <i class="dimenMenu">-{eval echo formatsize($val[newdata]['size']);}</i>
                 <b class="recentMenu"><span class="glyphicon glyphicon-envelope"></span>45</b>
             </p>
         </div>

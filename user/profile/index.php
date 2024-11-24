@@ -17,6 +17,7 @@ $verify = C::t('user_verify')->fetch($_G['uid']);//验证信息
 $space = C::t('user_profile')->get_userprofile_by_uid($uid);//用户资料信息
 $userstatus = C::t('user_status')->fetch($uid);//用户状态
 $users = getuserbyuid($uid);
+//$qqlogin = DB::fetch_first("select openid,unbind from %t where uid=%d", array('user_qqconnect', $uid));
 
 //读取缓存
 loadcache('profilesetting');
@@ -63,7 +64,12 @@ if (submitcheck('profilesubmit')) {
 			if ($value >= -12 && $value <= 12 || $value == 9999) {
                 C::t('user')->update($_G['uid'], array('timeoffset' => intval($value)));
             }
-		} elseif ($key == 'site') {
+		} elseif ($key == 'language') {
+			$langList = $_G['config']['output']['language_list'];
+            if (isset($langList[$value])) {
+                C::t('user')->update($_G['uid'], array('language' => ($value)));
+            }
+        } elseif ($key == 'site') {
             if (!in_array(strtolower(substr($value, 0, 6)), array('http:/', 'https:', 'ftp://', 'rtsp:/', 'mms://')) && !preg_match('/^static\//', $value) && !preg_match('/^data\//', $value)) {
                 $value = 'http://' . $value;
             }
@@ -295,6 +301,7 @@ if (submitcheck('profilesubmit')) {
             }
         }
     }
+    $langList = $_G['config']['output']['language_list'];
     include template('profile');
 }
 

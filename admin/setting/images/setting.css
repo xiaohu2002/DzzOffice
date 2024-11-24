@@ -1,1 +1,15 @@
-ul{margin:0;}.properties-explain{padding-left:20px;padding-top:10px;overflow:hidden;}.properties-explain li{width:145px;float:left;background-repeat:no-repeat;height:30px;line-height:25px;}.properties-explain li span{font-size:20px;padding-right:5px;vertical-align:middle;color:var(--bs-primary);margin-top:-1px;}.proper-iconshow{margin-left:200px;overflow:hidden;}.perm-ok{padding-right:5px;}.perm-ok-color{color:#7cb342;}.select-p{padding-top:20px;clear:both;}.select-p .select-perm{padding-bottom:20px;padding-left:15px;}.select-properties li{position:relative;margin-bottom:15px;height:30px;}.nav.nav-pills li span{font-size:20px;color:var(--bs-primary);}.proper-bottom{position:relative;display:inline-block;padding-right:20px;}.proper-set{color:#2196f3;display:none;}.properties-list:hover .proper-set{display:inline-block;}.proper-edit{display:inline-block;width:30px;height:23px;background-repeat:no-repeat;vertical-align:middle;}.proper-delete{font-size:20px;vertical-align:middle;color:var(--bs-primary);cursor:pointer;}.proper-delete:hover{color:#2196f3;cursor:pointer;}.select-properties .checkbox-custom{font-size:16px;margin-top:0px;}.proper-bottom .proper-span{font-size:12px;}.checkbox-custom label,.label{font-size:14px;}
+
+.perm-ok{
+	padding-right: 5px;
+}
+.proper-bottom{
+	position: relative;
+	display: inline-block;
+	padding-right: 20px;
+}
+.proper-set{
+	display: none;
+}
+.properties-list:hover .proper-set{
+	display:inline-block;
+}

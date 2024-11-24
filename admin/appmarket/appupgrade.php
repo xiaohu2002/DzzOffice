@@ -21,7 +21,7 @@ $tagid = intval($_GET['tagid']);
 $group = intval($_GET['group']);
 $page = empty($_GET['page']) ? 1 : intval($_GET['page']);
 $perpage = 20;
-$gets = array('mod' => MOD_NAME, 'keyword' => $keyword, 'tagid' => $tagid, 'group' => $group);
+$gets = array('mod' => 'appmarket', 'keyword' => $keyword, 'tagid' => $tagid, 'group' => $group);
 $theurl = BASESCRIPT . "?" . url_implode($gets);
 $refer = urlencode($theurl . '&page=' . $page);
 
@@ -31,13 +31,13 @@ $apps = array();
 if ($keyword) {
 	if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('app_market') . " WHERE upgrade_version!='' and available>0 and  appname like '%$keyword%' or vendor like '%$keyword%'")) {
 		$apps = DB::fetch_all("SELECT * FROM " . DB::table('app_market') . " WHERE  upgrade_version!='' and available>0 and appname like '%$keyword%' or vendor like '%$keyword%' $order limit $start,$perpage");
-		$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
+		$multi = multi($count, $perpage, $page, $theurl, 'justify-content-end');
 	}
 } elseif ($tagid) {
 	$appids = C::t('app_relative') -> fetch_appids_by_tagid($tagid);
 	if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('app_market') . " WHERE  upgrade_version!='' and available>0 and appid IN (" . dimplode($appids) . ") $sql")) {
 		$apps = DB::fetch_all("SELECT * FROM " . DB::table('app_market') . " WHERE  upgrade_version!='' and available>0 and appid IN (" . dimplode($appids) . ") $sql $order limit $start,$perpage");
-		$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
+		$multi = multi($count, $perpage, $page, $theurl, 'justify-content-end');
 	}
 } else {
 	$sql = " and upgrade_version!='' and available>0";

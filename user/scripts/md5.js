@@ -5,4 +5,150 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-var hexcase=0,chrsz=8;function hex_md5(d){return binl2hex(core_md5(str2binl(d),d.length*chrsz))}function core_md5(d,m){d[m>>5]|=128<<m%32,d[14+(m+64>>>9<<4)]=m;for(var _=1732584193,r=-271733879,f=-1732584194,n=271733878,h=0;h<d.length;h+=16){var g=_,i=r,e=f,a=n;r=md5_ii(r=md5_ii(r=md5_ii(r=md5_ii(r=md5_hh(r=md5_hh(r=md5_hh(r=md5_hh(r=md5_gg(r=md5_gg(r=md5_gg(r=md5_gg(r=md5_ff(r=md5_ff(r=md5_ff(r=md5_ff(r,f=md5_ff(f,n=md5_ff(n,_=md5_ff(_,r,f,n,d[h+0],7,-680876936),r,f,d[h+1],12,-389564586),_,r,d[h+2],17,606105819),n,_,d[h+3],22,-1044525330),f=md5_ff(f,n=md5_ff(n,_=md5_ff(_,r,f,n,d[h+4],7,-176418897),r,f,d[h+5],12,1200080426),_,r,d[h+6],17,-1473231341),n,_,d[h+7],22,-45705983),f=md5_ff(f,n=md5_ff(n,_=md5_ff(_,r,f,n,d[h+8],7,1770035416),r,f,d[h+9],12,-1958414417),_,r,d[h+10],17,-42063),n,_,d[h+11],22,-1990404162),f=md5_ff(f,n=md5_ff(n,_=md5_ff(_,r,f,n,d[h+12],7,1804603682),r,f,d[h+13],12,-40341101),_,r,d[h+14],17,-1502002290),n,_,d[h+15],22,1236535329),f=md5_gg(f,n=md5_gg(n,_=md5_gg(_,r,f,n,d[h+1],5,-165796510),r,f,d[h+6],9,-1069501632),_,r,d[h+11],14,643717713),n,_,d[h+0],20,-373897302),f=md5_gg(f,n=md5_gg(n,_=md5_gg(_,r,f,n,d[h+5],5,-701558691),r,f,d[h+10],9,38016083),_,r,d[h+15],14,-660478335),n,_,d[h+4],20,-405537848),f=md5_gg(f,n=md5_gg(n,_=md5_gg(_,r,f,n,d[h+9],5,568446438),r,f,d[h+14],9,-1019803690),_,r,d[h+3],14,-187363961),n,_,d[h+8],20,1163531501),f=md5_gg(f,n=md5_gg(n,_=md5_gg(_,r,f,n,d[h+13],5,-1444681467),r,f,d[h+2],9,-51403784),_,r,d[h+7],14,1735328473),n,_,d[h+12],20,-1926607734),f=md5_hh(f,n=md5_hh(n,_=md5_hh(_,r,f,n,d[h+5],4,-378558),r,f,d[h+8],11,-2022574463),_,r,d[h+11],16,1839030562),n,_,d[h+14],23,-35309556),f=md5_hh(f,n=md5_hh(n,_=md5_hh(_,r,f,n,d[h+1],4,-1530992060),r,f,d[h+4],11,1272893353),_,r,d[h+7],16,-155497632),n,_,d[h+10],23,-1094730640),f=md5_hh(f,n=md5_hh(n,_=md5_hh(_,r,f,n,d[h+13],4,681279174),r,f,d[h+0],11,-358537222),_,r,d[h+3],16,-722521979),n,_,d[h+6],23,76029189),f=md5_hh(f,n=md5_hh(n,_=md5_hh(_,r,f,n,d[h+9],4,-640364487),r,f,d[h+12],11,-421815835),_,r,d[h+15],16,530742520),n,_,d[h+2],23,-995338651),f=md5_ii(f,n=md5_ii(n,_=md5_ii(_,r,f,n,d[h+0],6,-198630844),r,f,d[h+7],10,1126891415),_,r,d[h+14],15,-1416354905),n,_,d[h+5],21,-57434055),f=md5_ii(f,n=md5_ii(n,_=md5_ii(_,r,f,n,d[h+12],6,1700485571),r,f,d[h+3],10,-1894986606),_,r,d[h+10],15,-1051523),n,_,d[h+1],21,-2054922799),f=md5_ii(f,n=md5_ii(n,_=md5_ii(_,r,f,n,d[h+8],6,1873313359),r,f,d[h+15],10,-30611744),_,r,d[h+6],15,-1560198380),n,_,d[h+13],21,1309151649),f=md5_ii(f,n=md5_ii(n,_=md5_ii(_,r,f,n,d[h+4],6,-145523070),r,f,d[h+11],10,-1120210379),_,r,d[h+2],15,718787259),n,_,d[h+9],21,-343485551),_=safe_add(_,g),r=safe_add(r,i),f=safe_add(f,e),n=safe_add(n,a)}return Array(_,r,f,n)}function md5_cmn(d,m,_,r,f,n){return safe_add(bit_rol(safe_add(safe_add(m,d),safe_add(r,n)),f),_)}function md5_ff(d,m,_,r,f,n,h){return md5_cmn(m&_|~m&r,d,m,f,n,h)}function md5_gg(d,m,_,r,f,n,h){return md5_cmn(m&r|_&~r,d,m,f,n,h)}function md5_hh(d,m,_,r,f,n,h){return md5_cmn(m^_^r,d,m,f,n,h)}function md5_ii(d,m,_,r,f,n,h){return md5_cmn(_^(m|~r),d,m,f,n,h)}function safe_add(d,m){var _=(65535&d)+(65535&m);return(d>>16)+(m>>16)+(_>>16)<<16|65535&_}function bit_rol(d,m){return d<<m|d>>>32-m}function str2binl(d){for(var m=Array(),_=(1<<chrsz)-1,r=0;r<d.length*chrsz;r+=chrsz)m[r>>5]|=(d.charCodeAt(r/chrsz)&_)<<r%32;return m}function binl2hex(d){for(var m=hexcase?"0123456789ABCDEF":"0123456789abcdef",_="",r=0;r<4*d.length;r++)_+=m.charAt(d[r>>2]>>r%4*8+4&15)+m.charAt(d[r>>2]>>r%4*8&15);return _}var pwmd5log=new Array;function pwmd5(){if($(pwmd5.arguments[0])&&""!=$(pwmd5.arguments[0]).value){numargs=pwmd5.arguments.length;for(var d=0;d<numargs;d++)pwmd5log[pwmd5.arguments[d]]&&32==$(pwmd5.arguments[d]).value.length||(pwmd5log[pwmd5.arguments[d]]=$(pwmd5.arguments[d]).value=hex_md5($(pwmd5.arguments[d]).value))}}
+
+var hexcase = 0;
+var chrsz   = 8;
+function hex_md5(s){
+	return binl2hex(core_md5(str2binl(s), s.length * chrsz));
+}
+function core_md5(x, len) {
+	x[len >> 5] |= 0x80 << ((len) % 32);
+	x[(((len + 64) >>> 9) << 4) + 14] = len;
+
+	var a =  1732584193;
+	var b = -271733879;
+	var c = -1732584194;
+	var d =  271733878;
+
+	for(var i = 0; i < x.length; i += 16) {
+		var olda = a;
+		var oldb = b;
+		var oldc = c;
+		var oldd = d;
+
+		a = md5_ff(a, b, c, d, x[i+ 0], 7 , -680876936);
+		d = md5_ff(d, a, b, c, x[i+ 1], 12, -389564586);
+		c = md5_ff(c, d, a, b, x[i+ 2], 17,  606105819);
+		b = md5_ff(b, c, d, a, x[i+ 3], 22, -1044525330);
+		a = md5_ff(a, b, c, d, x[i+ 4], 7 , -176418897);
+		d = md5_ff(d, a, b, c, x[i+ 5], 12,  1200080426);
+		c = md5_ff(c, d, a, b, x[i+ 6], 17, -1473231341);
+		b = md5_ff(b, c, d, a, x[i+ 7], 22, -45705983);
+		a = md5_ff(a, b, c, d, x[i+ 8], 7 ,  1770035416);
+		d = md5_ff(d, a, b, c, x[i+ 9], 12, -1958414417);
+		c = md5_ff(c, d, a, b, x[i+10], 17, -42063);
+		b = md5_ff(b, c, d, a, x[i+11], 22, -1990404162);
+		a = md5_ff(a, b, c, d, x[i+12], 7 ,  1804603682);
+		d = md5_ff(d, a, b, c, x[i+13], 12, -40341101);
+		c = md5_ff(c, d, a, b, x[i+14], 17, -1502002290);
+		b = md5_ff(b, c, d, a, x[i+15], 22,  1236535329);
+
+		a = md5_gg(a, b, c, d, x[i+ 1], 5 , -165796510);
+		d = md5_gg(d, a, b, c, x[i+ 6], 9 , -1069501632);
+		c = md5_gg(c, d, a, b, x[i+11], 14,  643717713);
+		b = md5_gg(b, c, d, a, x[i+ 0], 20, -373897302);
+		a = md5_gg(a, b, c, d, x[i+ 5], 5 , -701558691);
+		d = md5_gg(d, a, b, c, x[i+10], 9 ,  38016083);
+		c = md5_gg(c, d, a, b, x[i+15], 14, -660478335);
+		b = md5_gg(b, c, d, a, x[i+ 4], 20, -405537848);
+		a = md5_gg(a, b, c, d, x[i+ 9], 5 ,  568446438);
+		d = md5_gg(d, a, b, c, x[i+14], 9 , -1019803690);
+		c = md5_gg(c, d, a, b, x[i+ 3], 14, -187363961);
+		b = md5_gg(b, c, d, a, x[i+ 8], 20,  1163531501);
+		a = md5_gg(a, b, c, d, x[i+13], 5 , -1444681467);
+		d = md5_gg(d, a, b, c, x[i+ 2], 9 , -51403784);
+		c = md5_gg(c, d, a, b, x[i+ 7], 14,  1735328473);
+		b = md5_gg(b, c, d, a, x[i+12], 20, -1926607734);
+
+		a = md5_hh(a, b, c, d, x[i+ 5], 4 , -378558);
+		d = md5_hh(d, a, b, c, x[i+ 8], 11, -2022574463);
+		c = md5_hh(c, d, a, b, x[i+11], 16,  1839030562);
+		b = md5_hh(b, c, d, a, x[i+14], 23, -35309556);
+		a = md5_hh(a, b, c, d, x[i+ 1], 4 , -1530992060);
+		d = md5_hh(d, a, b, c, x[i+ 4], 11,  1272893353);
+		c = md5_hh(c, d, a, b, x[i+ 7], 16, -155497632);
+		b = md5_hh(b, c, d, a, x[i+10], 23, -1094730640);
+		a = md5_hh(a, b, c, d, x[i+13], 4 ,  681279174);
+		d = md5_hh(d, a, b, c, x[i+ 0], 11, -358537222);
+		c = md5_hh(c, d, a, b, x[i+ 3], 16, -722521979);
+		b = md5_hh(b, c, d, a, x[i+ 6], 23,  76029189);
+		a = md5_hh(a, b, c, d, x[i+ 9], 4 , -640364487);
+		d = md5_hh(d, a, b, c, x[i+12], 11, -421815835);
+		c = md5_hh(c, d, a, b, x[i+15], 16,  530742520);
+		b = md5_hh(b, c, d, a, x[i+ 2], 23, -995338651);
+
+		a = md5_ii(a, b, c, d, x[i+ 0], 6 , -198630844);
+		d = md5_ii(d, a, b, c, x[i+ 7], 10,  1126891415);
+		c = md5_ii(c, d, a, b, x[i+14], 15, -1416354905);
+		b = md5_ii(b, c, d, a, x[i+ 5], 21, -57434055);
+		a = md5_ii(a, b, c, d, x[i+12], 6 ,  1700485571);
+		d = md5_ii(d, a, b, c, x[i+ 3], 10, -1894986606);
+		c = md5_ii(c, d, a, b, x[i+10], 15, -1051523);
+		b = md5_ii(b, c, d, a, x[i+ 1], 21, -2054922799);
+		a = md5_ii(a, b, c, d, x[i+ 8], 6 ,  1873313359);
+		d = md5_ii(d, a, b, c, x[i+15], 10, -30611744);
+		c = md5_ii(c, d, a, b, x[i+ 6], 15, -1560198380);
+		b = md5_ii(b, c, d, a, x[i+13], 21,  1309151649);
+		a = md5_ii(a, b, c, d, x[i+ 4], 6 , -145523070);
+		d = md5_ii(d, a, b, c, x[i+11], 10, -1120210379);
+		c = md5_ii(c, d, a, b, x[i+ 2], 15,  718787259);
+		b = md5_ii(b, c, d, a, x[i+ 9], 21, -343485551);
+
+		a = safe_add(a, olda);
+		b = safe_add(b, oldb);
+		c = safe_add(c, oldc);
+		d = safe_add(d, oldd);
+	}
+	return Array(a, b, c, d);
+}
+function md5_cmn(q, a, b, x, s, t) {
+	return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s),b);
+}
+function md5_ff(a, b, c, d, x, s, t) {
+	return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
+}
+function md5_gg(a, b, c, d, x, s, t) {
+	return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
+}
+function md5_hh(a, b, c, d, x, s, t) {
+	return md5_cmn(b ^ c ^ d, a, b, x, s, t);
+}
+function md5_ii(a, b, c, d, x, s, t) {
+	return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
+}
+function safe_add(x, y) {
+	var lsw = (x & 0xFFFF) + (y & 0xFFFF);
+	var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+	return (msw << 16) | (lsw & 0xFFFF);
+}
+function bit_rol(num, cnt) {
+	return (num << cnt) | (num >>> (32 - cnt));
+}
+function str2binl(str) {
+	var bin = Array();
+	var mask = (1 << chrsz) - 1;
+	for(var i = 0; i < str.length * chrsz; i += chrsz) {
+		bin[i>>5] |= (str.charCodeAt(i / chrsz) & mask) << (i%32);
+	}
+	return bin;
+}
+function binl2hex(binarray) {
+	var hex_tab = hexcase ? "0123456789ABCDEF" : "0123456789abcdef";
+	var str = "";
+	for(var i = 0; i < binarray.length * 4; i++) {
+		str += hex_tab.charAt((binarray[i>>2] >> ((i%4)*8+4)) & 0xF) + hex_tab.charAt((binarray[i>>2] >> ((i%4)*8  )) & 0xF);
+	}
+	return str;
+}
+var pwmd5log = new Array();
+function pwmd5() {
+	if(!$(pwmd5.arguments[0]) || $(pwmd5.arguments[0]).value == '') {
+		return;
+	}
+	numargs = pwmd5.arguments.length;
+	for(var i = 0; i < numargs; i++) {
+		if(!pwmd5log[pwmd5.arguments[i]] || $(pwmd5.arguments[i]).value.length != 32) {
+			pwmd5log[pwmd5.arguments[i]] = $(pwmd5.arguments[i]).value = hex_md5($(pwmd5.arguments[i]).value);
+		}
+	}
+}

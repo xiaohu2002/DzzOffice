@@ -1,11 +1,10 @@
-<!--{if $_GET[op] != 'mobilefileselection'}-->
 <div class="input-search">
-    <form name="search" action="{MOD_URL}" method="get" class="search_top">
-        <input type="hidden" name="mod" value="{MOD_NAME}" />
+    <form name="search" action="{BASESCRIPT}" method="get" class="search_top">
+        <input type="hidden" name="mod" value="system" />
         <input type="hidden" name="op" value="notification" />
         <input type="hidden" name="do" value="" />
 
-        <i class="input-search-icon glyphicon glyphicon-search" aria-hidden="true" onclick="this.form.submit()"></i>
+        <i class="input-search-icon mdi mdi-magnify" aria-hidden="true" onclick="this.form.submit()"></i>
 
         <input id="searchval" class="form-control search form-search" name="keyword" placeholder="{lang search_title}" type="text" value="$keyword" placeholder=""/>
         <span aria-hidden="true" id="emptysearchcondition" class="header-closebutton">×</span>
@@ -32,4 +31,3 @@
         return false;
     });
 </script>
-<!--{/if}-->

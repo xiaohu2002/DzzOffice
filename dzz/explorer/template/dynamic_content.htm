@@ -1,113 +1,133 @@
 <div class="padding-left-1 scroll-y">
-  <div class="middletopMenu recycle-top clearfix">               
-    <div class="form-control-group clearfix">
-      <div class="group-input">
-        <select class="js-example-basic-multiple js-states" id="id_label_multiple" multiple="multiple">
-          {loop $users $v}
-          <option value="$v['uid']">$v['username']</option>
-          {/loop}
-        </select>
-      </div>
-    </div>
-   <div class="group-time form-control-group">
-      <div class="group-time-animate">
-          <input type="text"  class="form-control selectDate" id="selectDate"  data-provide="datepicker" placeholder="{lang create_time}">					                             
-      </div>
-      <label>{lang reach}</label>
-      <div class="group-time-animate">
-          <input type="text" id="selectDate1"  class="form-control selectDate"  data-provide="datepicker" placeholder="{lang create_time}">	
-      </div>
-    </div>
-  </div>
-  <div class="group-tableword"><em class="scree-term">{lang additional_screening_conditions}：</em></div>
-  <!--文件列表开始-->
-  <div class="group-filemember " id="group-filemember">
-      <div class="group-filemember-header">
-          <table class="table" width="100%" border="0">
-              <thead>
-              <tr>
-                  <th class="member_header_0" width="20%">
-                      <div class="member_header_td_div">
-                          <span class="member_header_title">{lang time}</span>
-                          <a class="detail_header_icon" data-val="0"><span class="dzz dzz-expand-more"></span></a>
-                      </div>
-                  </th>
-                  <th class="member_header_1" width="10%">
-                      <div class="member_header_td_div">
-                          <span class="member_header_type">{lang operator}</span>
-                          <a class="detail_header_icon" data-val="1"><span class="dzz dzz-expand-more"></span></a>
-                      </div>
-                  </th>
-                  <th class="member_header_2" width="10%">
-                      <div class="member_header_td_div">
-                          <span class="member_header_type">{lang operation}</span>
-                          <a class="detail_header_icon" data-val="2"><span class="dzz dzz-expand-more"></span></a>
-                      </div>
-                  </th>
-                  <th class="member_header_2" width="20%">
-                      <div class="member_header_td_div">
-                          <span class="member_header_type">{lang object}</span>
-                          <a class="detail_header_icon" data-val="3"><span class="dzz dzz-expand-more"></span></a>
-                      </div>
-                  </th>
-                  <th class="member_header_2" width="40%">
-                      <div class="member_header_td_div">
-                          <span class="member_header_type">{lang details}</span>
-                          <a class="detail_header_icon" data-val="4"><span class="dzz dzz-expand-more"></span></a>
-                      </div>
-                  </th>
-              </tr>
-              </thead>
-          </table>
-      </div>
-      <div class="recent-con">
-          <table class="table" width="100%" border="0">
-              <tbody id="event_list">
-              <!--{if $events}-->
-              <!--{loop $events $val}-->
-              <tr id="" class="member_tr Icoblock" data-uid="$val['uid']">
-                  <td class="member_item_td" valign="middle" width="20%" style="position: relative;">
-                      <span>{eval echo dgmdate($val['dateline'],'Y-m-d H:i:s');}</span>
-                  </td>
-                  <td class="member_item_td" valign="middle" width="10%">
-                      <span>$val[username]</span>
-                  </td>
-                  <td  class="member_item_td  member_header_color" valign="middle" width="10%">
-                      <span onclick="search_do(this)" data-val="$val[do]">$val[do_lang]</span>
-                  </td>
-                  <td class="member_item_td  member_header_color" valign="middle" width="20%">
-                      <span onclick="search_obj(this)" data-val="$val[do_obj]"><!--{if $val[do_obj]}-->$val[do_obj]
-                          <!--{/if}--></span>
-                  </td>
-                  <td class="member_item_td" valign="middle" width="40%">
-                      <span>$val[details]</span>
-                  </td>
-              </tr>
-              <!--{/loop}-->
-              <!--{/if}-->
-              <!--{if $eventnumbers == 0}-->
-              <tr class="emptyshare">
-                  <td colspan="6" style="border: none;">
-                      <!--{template noFilePage-dynamic}-->
-                  </td>
-              </tr>
-              <!--{/if}-->
-              <tr>
-                  <td style="border: none;">
-                  <!--{if $next}-->
-                  <a href="javascript:;" class="btn_button_more btn btn-outline-primary"
-                         onclick="loading(this,'{$next}');">{lang upload_more}</a>
-                  <!--{/if}-->
-                  </td>
-              </tr>
-              </tbody>
-          </table>
+        <div class="middletopMenu recycle-top clearfix">               
+                <div class="form-control-group clearfix">
+                    <div class="group-input">
+                        <select class="js-example-basic-multiple js-states" id="id_label_multiple"
+                                multiple="multiple">
+                            {loop $users $v}
+                            <option value="$v['uid']">$v['username']</option>
+                            {/loop}
+                        </select>
+                    </div>
+                </div>
+				 <div class="group-time form-control-group">
+                    <div class="group-time-animate input-black input-float">
+    					<div class="input-animate">
+					    	<input type="text"  class="form-control selectDate" id="selectDate"  placeholder="{lang create_time}">	
+					    </div>						                             
+                   </div>
+                    <label>{lang reach}</label>
+                    <div class="group-time-animate input-black input-float">
+                    	<div class="input-animate">
+					    	<input type="text" id="selectDate1"  class="form-control selectDate"  placeholder="{lang create_time}">	
+					    </div>
+                    </div>
+                </div>
 
-      </div>
+        </div>
+        <div class="group-tableword"><em class="scree-term">{lang additional_screening_conditions}：</em></div>
+        <!--文件列表开始-->
+        <div class="group-filemember " id="group-filemember">
+            <div class="group-filemember-header">
+                <table class="table" width="100%" border="0">
+                    <thead>
+                    <tr>
+                        <th class="member_header_0" width="20%">
+                            <div class="member_header_td_div">
+                                <span class="member_header_title">{lang time}</span>
+                                <a class="detail_header_icon" data-val="0"><span
+                                        class="dzz dzz-expand-more"></span></a>
+                            </div>
+                        </th>
+                        <th class="member_header_1" width="20%">
+                            <div class="member_header_td_div">
+                                <span class="member_header_type">{lang operator}</span>
+                                <a class="detail_header_icon" data-val="1"><span
+                                        class="dzz dzz-expand-more"></span></a>
+                            </div>
+                        </th>
+                        <th class="member_header_2" width="20%">
+                            <div class="member_header_td_div">
+                                <span class="member_header_type">{lang operation}</span>
+                                <a class="detail_header_icon" data-val="2"><span
+                                        class="dzz dzz-expand-more"></span></a>
+                            </div>
+                        </th>
+                        <th class="member_header_2" width="20%">
+                            <div class="member_header_td_div">
+                                <span class="member_header_type">{lang object}</span>
+                                <a class="detail_header_icon" data-val="3"><span
+                                        class="dzz dzz-expand-more"></span></a>
+                            </div>
+                        </th>
+                        <th class="member_header_2" width="20%">
+                            <div class="member_header_td_div">
+                                <span class="member_header_type">{lang details}</span>
+                                <a class="detail_header_icon" data-val="4"><span
+                                        class="dzz dzz-expand-more"></span></a>
+                            </div>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="recent-con">
+                <table class="table" width="100%" border="0">
+                    <tbody id="event_list">
+                    <!--{if $events}-->
+                    <!--{loop $events $val}-->
+                    <tr id="" class="member_tr Icoblock" data-uid="$val['uid']">
+                        <td class="member_item_td" valign="middle" width="20%" style="position: relative;">
+                            <span>{eval echo dgmdate($val['dateline'],'Y-m-d H:i:s');}</span>
+                        </td>
+                        <td class="member_item_td" valign="middle" width="20%">
+                            <span>$val['username']</span>
+                        </td>
+                        <td class="member_item_td  member_header_color" valign="middle" width="20%">
+                            <span onclick="search_do(this)" data-val="$val['do']">$val[do_lang]</span>
+                        </td>
+                        <td class="member_item_td  member_header_color" valign="middle" width="20%">
+                            <span onclick="search_obj(this)" data-val="$val[do_obj]"><!--{if $val[do_obj]}-->$val[do_obj]
+                                <!--{/if}--></span>
+                        </td>
+                        <td class="member_item_td" valign="middle" width="20%">
+                            <span>$val[details]</span>
+                        </td>
+                    </tr>
+                    <!--{/loop}-->
+                    <!--{/if}-->
+                    <!--{if $eventnumbers == 0}-->
+                    <tr class="emptyshare">
+                        <td colspan="6" style="border: none;">
+                            <!--{template noFilePage-dynamic}-->
+                        </td>
+                    </tr>
+                    <!--{/if}-->
+                    <tr>
+                        <td style="border: none;">
+                        <!--{if $next}-->
+                        <a href="javascript:;" class="btn_button_more btn btn-link btn-block"
+                               onclick="loading(this,'{$next}');">{lang upload_more}</a>
+                        <!--{/if}-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <!--文件列表结束-->
+
     </div>
-    <!--文件列表结束-->
-  </div>
+
+
 <script type="text/javascript">
+    jQuery(document).ready(function (e) {
+        $('.input-black').each(function() {			
+			InputAnimate.init($(this));			
+		});
+    });
 
     //自动加载内容
     jQuery('.scroll-y').scroll(function (e) {
@@ -152,8 +172,20 @@
         executedynamisc_search();
 
     })
-    $("#selectDate,#selectDate1").datepicker( //添加日期选择功能
-    );
+
+    $("#selectDate,#selectDate1").datepicker({ //添加日期选择功能
+        numberOfMonths: 1, //显示几个月
+        showButtonPanel: false, //是否显示按钮面板
+        dateFormat: 'yy-mm-dd', //日期格式
+        clearText: "{lang clear}", //清除日期的按钮名称
+        closeText: "{lang close}", //关闭选择框的按钮名称
+        yearSuffix: '{lang year}', //年的后缀
+        showMonthAfterYear: true, //是否把月放在年的后面
+        constrainInput: true,
+        maxDate: new Date(),
+        setDate: 'date',
+
+    });
     function search_do(obj) {
         var doval = $(obj).data('val');
         var dotext = $(obj).html();
@@ -166,7 +198,7 @@
             if($('.group-tableword .docondition').length > 0){
                 $('.group-tableword .docondition').remove();
             }
-            $('.group-tableword').append('<span class="label  label-text docondition">{lang operation}：' + dotext + '<i class="dzz dzz-close group-closeicon" onclick="empty_do(this)" data-val="' + doval + '"></i></span>');
+            $('.group-tableword').append('<span class="label  label-text docondition">{lang operation}：' + dotext + '<i class="mdi mdi-close-circle  group-closeicon" onclick="empty_do(this)" data-val="' + doval + '"></i></span>');
         })
     }
     function search_obj(obj) {
@@ -181,7 +213,7 @@
             if($('.group-tableword .objcondition').length > 0){
                 $('.group-tableword .objcondition').remove();
             }
-            $('.group-tableword').append('<span class="label label-text objcondition">' + objtext + '<i class="dzz dzz-close group-closeicon" onclick="empty_do(this)" data-val="' + doval + '"></i></span>');
+            $('.group-tableword').append('<span class="label label-text objcondition">' + objtext + '<i class="mdi mdi-close-circle  group-closeicon" onclick="empty_do(this)" data-val="' + doval + '"></i></span>');
         })
     }
     function empty_do(obj) {

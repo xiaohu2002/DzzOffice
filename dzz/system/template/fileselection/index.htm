@@ -1,24 +1,19 @@
 <!--{template common/header_simple_start}-->
 <link href="static/jstree/themes/default/style.min.css?{VERHASH}" rel="stylesheet" media="all">
+<link rel="stylesheet" href="static/perfect-scrollbar/css/perfect-scrollbar.css?{VERHASH}">
+<link rel="stylesheet" href="static/css/common.css">
 <link href="dzz/system/css/selfilewindow.css?{VERHASH}" rel="stylesheet" media="all">
 <link rel="stylesheet" href="{MOD_PATH}/css/rightmenu/style.css"/>
 <link href="dzz/system/css/rightmenu.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="dzz/system/css/select-file.css?{VERHASH}" rel="stylesheet" media="all">
-<style>
-html, body{
-	background: transparent;
-	background-color:transparent;
-}
-</style>
+<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
 <script type="text/javascript">
     var ctrlid = '$ctrlid';
+    var ismobile = '$ismobile' ? 1 : 0;
     var range = '{$range}';
     var urldefined = '{$urldefined}';
 </script>
 <!--{template common/header_simple_end}-->
-<!--头部开始-->
-<!--头部结束-->
-<!--内容区开始-->
 <!--{template fileselection/listcontent}-->
 <!--底部-->
 <div id="contextmenu" style="display: none;">
@@ -27,10 +22,10 @@ html, body{
 <iframe id="hideframe" name="hideframe" src="about:blank" frameborder="0" marginheight="0" marginwidth="0" width="0"
         height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>
 <div class="modal-footer">
-<button type="button" class="btn btn-primary" onclick="submitdata()">{lang confirms}</button>
-<button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close"
-        onclick="hide_window()">{lang cancel}
-</button>
+    <button type="button" class="btn btn-primary" onclick="submitdata()">{lang confirms}</button>
+    <button type="button" class="btn btn-default-outline cancel" data-dismiss="modal" aria-label="Close"
+            onclick="hide_window()">{lang cancel}
+    </button>
 </div>
 </body>
 </html>
@@ -76,10 +71,10 @@ html, body{
 									parent.showWindow_callback(data,'$token');
 								} 
 							}catch(e){}	
-							if (parent.$callback) {
-								try{parent.$callback (data, '$token');}catch(e){}
+							if (parent.{$callback}) {
+								try{parent.{$callback}(data, '$token');}catch(e){}
 							} else {
-							   try{ opened.$callback (data, '$token');}catch(e){}
+							   try{ opened.{$callback}(data, '$token');}catch(e){}
 							}
                             hide_window();
                         }
@@ -99,15 +94,15 @@ html, body{
                     } else {
 						try{
 							if(typeof parent.showWindow_callback == 'function'){
-								parent.showWindow_callback (data,'$token');
+								parent.showWindow_callback(data,'$token');
 							}else if(typeof opened.showWindow_callback == 'function'){
-								parent.showWindow_callback (data,'$token');
+								parent.showWindow_callback(data,'$token');
 							} 
 						}catch(e){}	
-                        if (parent.$callback) {
-                            try{parent.$callback (data, '$token');}catch(e){}
+                        if (parent.{$callback}) {
+                            try{parent.{$callback}(data, '$token');}catch(e){}
                         } else {
-                           try{ opened.$callback (data, '$token');}catch(e){}
+                           try{ opened.{$callback}(data, '$token');}catch(e){}
                         }
                         hide_window();
                     }
@@ -140,10 +135,10 @@ html, body{
 					} 
 				}catch(e){}	
               
-                if (parent.$callback) {
-                   try{ parent.$callback (fid, data);}catch(e){}
+                if (parent.{$callback}) {
+                   try{ parent.{$callback}(fid, data);}catch(e){}
                 } else {
-                    try{ opened.$callback (fid, data);}catch(e){}
+                    try{ opened.{$callback}(fid, data);}catch(e){}
                 }
                 hide_window();
 
@@ -194,6 +189,8 @@ html, body{
 <script type="text/javascript" src="dzz/system/scripts/_hotkey.js?{VERHASH}"></script>
 <script type="text/javascript" src="dzz/system/scripts/_select.js?{VERHASH}"></script>
 <script type="text/javascript" src="dzz/system/scripts/contextmenu.js?{VERHASH}"></script>
+<script type="text/javascript" src="static/perfect-scrollbar/js/perfect-scrollbar.min.js?{VERHASH}"></script>
+<script type="text/javascript" src="static/js/input_field.js?{VERHASH}"></script>
 <!-- The basic File Upload plugin -->
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script type="text/javascript" src="static/jquery_file_upload/jquery.ui.widget.js?{VERHASH}"></script>
@@ -202,6 +199,7 @@ html, body{
 <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload-process.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload-validate.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/js/perfect-scrollbar.min.js?{VERHASH}"></script>
+<script type="text/javascript" src="static/perfect-scrollbar/js/perfect-scrollbar.min.js?{VERHASH}"></script>
+
 <!-- The basic File Upload plugin -->
-<!--{template common/footer_system}--> 
+<script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js"></script>

@@ -3,7 +3,7 @@
 	<item id="Title"><![CDATA[Dzz! app]]></item>
 	<item id="Version"><![CDATA[2.0]]></item>
 	<item id="Time"><![CDATA[2020-12-26 20:25]]></item>
-	<item id="From"><![CDATA[ (http://www.dzzoffice.com/)]]></item>
+	<item id="From"><![CDATA[乐云网络 (http://www.dzzoffice.com/)]]></item>
 	<item id="Data">
 		<item id="app">
 			<item id="appname"><![CDATA[网盘]]></item>
@@ -372,10 +372,12 @@ gInxqxpwkXzyUE9c0IfjVyOwF9hbW8ex0dJeo44ASdgSLsAJWIH++7VEUc9Q9gEdtXVEz4Q2ub0K
 			<item id="appdesc"><![CDATA[企业、团队文件集中管理。主要体现的功能是支持企业部门的组织架构建立共享目录，也支持组的方式灵活建立共享目录。支持文件标签，多版本，评论，详细的目录权限等协作功能]]></item>
 			<item id="appurl"><![CDATA[{dzzscript}?mod=explorer]]></item>
 			<item id="appadminurl"><![CDATA[]]></item>
+			<item id="noticeurl"><![CDATA[]]></item>
 			<item id="disp"><![CDATA[0]]></item>
-			<item id="vendor"><![CDATA[小胡（gitee.com/xiaohu2024)]]></item>
+			<item id="vendor"><![CDATA[乐云网络]]></item>
 			<item id="haveflash"><![CDATA[0]]></item>
 			<item id="isshow"><![CDATA[1]]></item>
+			<item id="havetask"><![CDATA[1]]></item>
 			<item id="hideInMarket"><![CDATA[0]]></item>
 			<item id="feature"><![CDATA[]]></item>
 			<item id="fileext"><![CDATA[]]></item>
@@ -383,16 +385,17 @@ gInxqxpwkXzyUE9c0IfjVyOwF9hbW8ex0dJeo44ASdgSLsAJWIH++7VEUc9Q9gEdtXVEz4Q2ub0K
 			<item id="position"><![CDATA[1]]></item>
 			<item id="system"><![CDATA[0]]></item>
 			<item id="notdelete"><![CDATA[1]]></item>
-			<item id="open"><![CDATA[1]]></item>
+			<item id="open"><![CDATA[0]]></item>
 			<item id="nodup"><![CDATA[0]]></item>
 			<item id="identifier"><![CDATA[explorer]]></item>
 			<item id="app_path"><![CDATA[dzz]]></item>
-			<item id="version"><![CDATA[2.84]]></item>
+			<item id="version"><![CDATA[2.04]]></item>
 			<item id="extra">
 				<item id="installfile"><![CDATA[install.php]]></item>
 				<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
 			</item>
-			<item id="mid"><![CDATA[0]]></item>
+			<item id="mid"><![CDATA[27]]></item>
 		</item>
+		<item id="version"><![CDATA[2.0]]></item>
 	</item>
 </root>

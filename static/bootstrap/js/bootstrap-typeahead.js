@@ -1,1 +1,591 @@
-﻿!function(t){"use strict";var e=function(e,i){this.$element=t(e),this.options=t.extend(!0,{},t.fn.typeahead.defaults,i),this.$menu=t(this.options.menu).appendTo(this.$element.parent()),this.shown=!1,this.eventSupported=this.options.eventSupported||this.eventSupported,this.grepper=this.options.grepper||this.grepper,this.highlighter=this.options.highlighter||this.highlighter,this.lookup=this.options.lookup||this.lookup,this.matcher=this.options.matcher||this.matcher,this.render=this.options.render||this.render,this.select=this.options.select||this.select,this.sorter=this.options.sorter||this.sorter,this.source=this.options.source||this.source,this.inputval=this.options.taginput||null;var s=this.options.ajax;this.ajax="string"==typeof s?t.extend({},t.fn.typeahead.defaults.ajax,{url:s}):t.extend({},t.fn.typeahead.defaults.ajax,s),this.ajax.url||(this.ajax=null),this.listen()};e.prototype={constructor:e,eventSupported:function(t){var e=t in this.$element;return e||(this.$element.setAttribute(t,"return;"),e="function"==typeof this.$element[t]),e},ajaxer:function(){var e=this,i=e.$element.val();if(i===e.query){this.ajax.preProcess&&(data=this.ajax.preProcess(this.ajax.data));var s=this.grepper(this.ajax.data);return s&&s.length?this.render(s.slice(0,this.options.items)).show():this.shown?this.hide():this}return e.query=i,e.ajax.timerId&&(clearTimeout(e.ajax.timerId),e.ajax.timerId=null),i.length<e.ajax.triggerLength?(e.ajax.xhr&&(e.ajax.xhr.abort(),e.ajax.xhr=null,e.ajaxToggleLoadClass(!1)),e.shown?e.hide():e):(e.ajax.timerId=setTimeout(function(){t.proxy(e.ajaxExecute(i),e)},e.ajax.timeout),e)},ajaxExecute:function(e){this.ajaxToggleLoadClass(!0),this.ajax.xhr&&this.ajax.xhr.abort();var i=this.ajax.preDispatch?this.ajax.preDispatch(e):{query:e},s="post"===this.ajax.method?t.post:t.get;this.ajax.xhr=s(this.ajax.url,i,t.proxy(this.ajaxLookup,this),"json"),this.ajax.timerId=null},ajaxLookup:function(t){var e;if(this.ajaxToggleLoadClass(!1),this.ajax.xhr)return this.ajax.preProcess&&(t=this.ajax.preProcess(t)),this.ajax.data=t,(e=this.grepper(this.ajax.data))&&e.length?(this.ajax.xhr=null,this.render(e.slice(0,this.options.items)).show()):this.shown?this.hide():this},ajaxToggleLoadClass:function(t){this.ajax.loadingClass&&this.$element.toggleClass(this.ajax.loadingClass,t)},lookup:function(t){var e;if(!this.ajax)return this.query=this.$element.val(),this.query,(e=this.grepper(this.source))&&e.length?this.render(e.slice(0,this.options.items)).show():this.shown?this.hide():this;this.ajaxer()},grepper:function(e){var i,s=this;return e&&e.length&&!e[0].hasOwnProperty(s.options.display)?null:(i=t.grep(e,function(t){return s.matcher(t[s.options.display],t)}),this.sorter(i))},matcher:function(e){if(this.inputval){var i=this.inputval.val().split(",");if(t.inArray(e,i)>-1)return 0}return~e.toLowerCase().indexOf(this.query.toLowerCase())},sorter:function(t){for(var e,i=[],s=[],a=[];e=t.shift();)e[this.options.display].toLowerCase().indexOf(this.query.toLowerCase())?~e[this.options.display].indexOf(this.query)?s.push(e):a.push(e):i.push(e);return i.concat(s,a)},show:function(){var e=t.extend({},this.$element.position(),{height:this.$element[0].offsetHeight});return this.$menu.css({top:e.top+e.height,left:e.left}),this.$menu.show(),this.shown=!0,this},hide:function(){return this.$menu.hide(),this.shown=!1,this},highlighter:function(t){var e=this.query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g,"\\$&");return t.replace(new RegExp("("+e+")","ig"),function(t,e){return"<strong>"+e+"</strong>"})},render:function(e){var i=this;return(e=t(e).map(function(e,s){return(e=t(i.options.item).attr("data-value",s[i.options.val])).find("a").html(i.highlighter(s[i.options.display],s)),e[0]})).first().addClass("active"),this.$menu.html(e),this},select:function(){var t=this.$menu.find(".active");return this.$element.val(t.text()).trigger("change"),this.options.itemSelected(t,t.attr("data-value"),t.text()),this.hide()},next:function(e){var i=this.$menu.find(".active").removeClass("active").next();i.length||(i=t(this.$menu.find("li")[0])),i.addClass("active")},prev:function(t){var e=this.$menu.find(".active").removeClass("active").prev();e.length||(e=this.$menu.find("li").last()),e.addClass("active")},listen:function(){this.$element.on("blur",t.proxy(this.blur,this)).on("keyup",t.proxy(this.keyup,this)).on("click",t.proxy(this.lookup,this)),this.eventSupported("keydown")?this.$element.on("keydown",t.proxy(this.keypress,this)):this.$element.on("keypress",t.proxy(this.keypress,this)),this.$menu.on("click",t.proxy(this.click,this)).end().on("mouseenter","li",t.proxy(this.mouseenter,this))},keyup:function(t){switch(t.stopPropagation(),t.preventDefault(),t.keyCode){case 40:case 38:break;case 9:case 13:if(!this.shown)return;this.select();break;case 27:this.hide();break;default:this.lookup()}},keypress:function(t){if(t.stopPropagation(),this.shown)switch(t.keyCode){case 9:case 13:case 27:t.preventDefault();break;case 38:t.preventDefault(),this.prev();break;case 40:t.preventDefault(),this.next()}},blur:function(t){var e=this;t.stopPropagation(),t.preventDefault(),setTimeout(function(){e.$menu.is(":focus")||e.hide()},150)},click:function(t){t.stopPropagation(),t.preventDefault(),this.select()},mouseenter:function(e){this.$menu.find(".active").removeClass("active"),t(e.currentTarget).addClass("active")}},t.fn.typeahead=function(i){return this.each(function(){var s=t(this),a=s.data("typeahead"),n="object"==typeof i&&i;a||s.data("typeahead",a=new e(this,n)),"string"==typeof i&&a[i]()})},t.fn.typeahead.defaults={source:[],items:8,menu:'<ul class="typeahead dropdown-menu"></ul>',item:'<li><a href="#"></a></li>',display:"name",val:"id",itemSelected:function(t,e,i){},ajax:{url:null,timeout:300,method:"post",triggerLength:3,loadingClass:null,displayField:null,preDispatch:null,preProcess:null}},t.fn.typeahead.Constructor=e,t(function(){t("body").on("focus.typeahead.data-api",'[data-provide="typeahead"]',function(e){var i=t(this);i.data("typeahead")||(e.preventDefault(),i.typeahead(i.data()))})})}(window.jQuery);
+﻿//  ----------------------------------------------------------------------------
+//
+//  bootstrap-typeahead.js  
+//
+//  Twitter Bootstrap Typeahead Plugin
+//  v1.2.2
+//  https://github.com/tcrosen/twitter-bootstrap-typeahead
+//
+//
+//  Author
+//  ----------
+//  Terry Rosen
+//  tcrosen@gmail.com | @rerrify | github.com/tcrosen/
+//
+//
+//  Description
+//  ----------
+//  Custom implementation of Twitter's Bootstrap Typeahead Plugin
+//  http://twitter.github.com/bootstrap/javascript.html#typeahead
+//
+//
+//  Requirements
+//  ----------
+//  jQuery 1.7+
+//  Twitter Bootstrap 2.0+
+//
+//  ----------------------------------------------------------------------------
+
+!
+function ($) {
+
+    "use strict";
+
+    //------------------------------------------------------------------
+    //
+    //  Constructor
+    //
+    var Typeahead = function (element, options) {
+        this.$element = $(element);
+		
+        this.options = $.extend(true, {}, $.fn.typeahead.defaults, options);
+        this.$menu = $(this.options.menu).appendTo(this.$element.parent());
+        this.shown = false;
+
+        // Method overrides    
+        this.eventSupported = this.options.eventSupported || this.eventSupported;
+        this.grepper = this.options.grepper || this.grepper;
+        this.highlighter = this.options.highlighter || this.highlighter;
+        this.lookup = this.options.lookup || this.lookup;
+        this.matcher = this.options.matcher || this.matcher;
+        this.render = this.options.render || this.render;
+        this.select = this.options.select || this.select;
+        this.sorter = this.options.sorter || this.sorter;
+        this.source = this.options.source || this.source;        
+        this.inputval=this.options.taginput || null;
+       // if (!this.source.length) {
+            var ajax = this.options.ajax;
+
+            if (typeof ajax === 'string') {
+                this.ajax = $.extend({}, $.fn.typeahead.defaults.ajax, { url: ajax });
+            } else {
+                this.ajax = $.extend({}, $.fn.typeahead.defaults.ajax, ajax);
+            }
+
+            if (!this.ajax.url) {
+                this.ajax = null;
+            }
+       // }
+
+        this.listen();        
+    }
+
+    Typeahead.prototype = {
+
+        constructor: Typeahead,
+
+        //=============================================================================================================
+        //
+        //  Utils
+        //
+        //=============================================================================================================
+
+        //------------------------------------------------------------------
+        //
+        //  Check if an event is supported by the browser eg. 'keypress'
+        //  * This was included to handle the "exhaustive deprecation" of jQuery.browser in jQuery 1.8
+        //
+        eventSupported: function(eventName) {         
+            var isSupported = (eventName in this.$element);
+
+            if (!isSupported) {
+              this.$element.setAttribute(eventName, 'return;');
+              isSupported = typeof this.$element[eventName] === 'function';
+            }
+
+            return isSupported;
+        },
+
+        //=============================================================================================================
+        //
+        //  AJAX
+        //
+        //=============================================================================================================
+
+        //------------------------------------------------------------------
+        //
+        //  Handle AJAX source 
+        //
+        ajaxer: function () { 
+            var that = this,
+                query = that.$element.val();
+            if (query === that.query) {
+				 if (this.ajax.preProcess) {
+					data = this.ajax.preProcess(this.ajax.data);
+				}
+	
+				// Save for selection retreival
+				var items = this.grepper(this.ajax.data);
+				if (!items || !items.length) {
+					return this.shown ? this.hide() : this;
+				}
+				return this.render(items.slice(0, this.options.items)).show();
+            }
+    
+            // Query changed
+            that.query = query;
+
+            // Cancel last timer if set
+            if (that.ajax.timerId) {
+                clearTimeout(that.ajax.timerId);
+                that.ajax.timerId = null;
+            }
+            
+            if ( query.length < that.ajax.triggerLength) {
+                // Cancel the ajax callback if in progress
+                if (that.ajax.xhr) {
+                    that.ajax.xhr.abort();
+                    that.ajax.xhr = null;
+                    that.ajaxToggleLoadClass(false);
+                }
+
+                return that.shown ? that.hide() : that;
+            }
+                    
+            // Query is good to send, set a timer
+            that.ajax.timerId = setTimeout(function() {
+                $.proxy(that.ajaxExecute(query), that)
+            }, that.ajax.timeout);
+                    
+            return that;
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Execute an AJAX request
+        //
+        ajaxExecute: function(query) {
+            this.ajaxToggleLoadClass(true);
+            
+            // Cancel last call if already in progress
+            if (this.ajax.xhr) this.ajax.xhr.abort();
+            
+            var params = this.ajax.preDispatch ? this.ajax.preDispatch(query) : { query : query };
+            var jAjax = (this.ajax.method === "post") ? $.post : $.get;
+            this.ajax.xhr = jAjax(this.ajax.url, params, $.proxy(this.ajaxLookup, this),'json');
+            this.ajax.timerId = null;
+        },
+    
+        //------------------------------------------------------------------
+        //
+        //  Perform a lookup in the AJAX results
+        //
+        ajaxLookup: function (data) { 
+            var items;
+            
+            this.ajaxToggleLoadClass(false);
+
+            if (!this.ajax.xhr) return;
+            
+            if (this.ajax.preProcess) {
+                data = this.ajax.preProcess(data);
+            }
+
+            // Save for selection retreival
+            this.ajax.data = data;
+            items = this.grepper(this.ajax.data);
+            if (!items || !items.length) {
+                return this.shown ? this.hide() : this;
+            }
+
+            this.ajax.xhr = null;
+
+            return this.render(items.slice(0, this.options.items)).show();
+        },
+        
+        //------------------------------------------------------------------
+        //
+        //  Toggle the loading class
+        //
+        ajaxToggleLoadClass: function (enable) {
+            if (!this.ajax.loadingClass) return;
+            this.$element.toggleClass(this.ajax.loadingClass, enable);
+        },
+
+        //=============================================================================================================
+        //
+        //  Data manipulation
+        //
+        //=============================================================================================================
+
+        //------------------------------------------------------------------
+        //
+        //  Search source
+        //
+        lookup: function (event) {
+            var that = this,
+                items;
+
+            if (that.ajax) {
+                that.ajaxer();
+            }
+            else {
+                that.query = that.$element.val();
+
+                if (!that.query) {
+                   // return that.shown ? that.hide() : that;
+                }
+               
+                items = that.grepper(that.source);
+               
+                if (!items || !items.length) {
+                    return that.shown ? that.hide() : that;
+                }
+
+                return that.render(items.slice(0, that.options.items)).show();
+            }
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Filters relevent results 
+        //
+        grepper: function(data) {
+            var that = this,
+                items;
+            if (data && data.length && !data[0].hasOwnProperty(that.options.display)) {                
+                return null;
+            } 
+
+            items = $.grep(data, function (item) {
+                return that.matcher(item[that.options.display], item);
+            });
+
+            return this.sorter(items);                
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Looks for a match in the source
+        //
+        matcher: function (item) {
+			if(this.inputval){
+				var vals=this.inputval.val().split(',');
+				if($.inArray(item,vals)>-1) return 0;
+			}
+            return ~item.toLowerCase().indexOf(this.query.toLowerCase());
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Sorts the results
+        //
+        sorter: function (items) {
+            var that = this,
+                beginswith = [],
+                caseSensitive = [],
+                caseInsensitive = [],
+                item;
+
+            while (item = items.shift()) {
+                if (!item[that.options.display].toLowerCase().indexOf(this.query.toLowerCase())) {
+                    beginswith.push(item);
+                }
+                else if (~item[that.options.display].indexOf(this.query)) {
+                    caseSensitive.push(item);
+                }
+                else {
+                    caseInsensitive.push(item);
+                }
+            }
+
+            return beginswith.concat(caseSensitive, caseInsensitive);
+        },       
+
+        //=============================================================================================================
+        //
+        //  DOM manipulation
+        //
+        //=============================================================================================================
+
+        //------------------------------------------------------------------
+        //
+        //  Shows the results list
+        //
+        show: function () {
+            var pos = $.extend({}, this.$element.position(), {
+                height: this.$element[0].offsetHeight
+            });
+
+            this.$menu.css({
+                top: pos.top + pos.height,
+                left: pos.left
+            });
+
+            this.$menu.show();
+            this.shown = true;
+
+            return this;
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Hides the results list
+        //
+        hide: function () {
+            this.$menu.hide();
+            this.shown = false;
+            return this;
+        },
+        
+        //------------------------------------------------------------------
+        //
+        //  Highlights the match(es) within the results
+        //
+        highlighter: function (item) {
+            var query = this.query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
+            return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+                return '<strong>' + match + '</strong>';
+            });
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Renders the results list
+        //
+        render: function (items) {
+            var that = this;
+				
+            items = $(items).map(function (i, item) {
+                i = $(that.options.item).attr('data-value', item[that.options.val]);
+                i.find('a').html(that.highlighter(item[that.options.display], item));
+                return i[0];
+            });
+
+            items.first().addClass('active');
+            this.$menu.html(items);
+            return this;
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Item is selected
+        //
+        select: function () {
+            var $selectedItem = this.$menu.find('.active');
+            this.$element.val($selectedItem.text()).trigger('change');
+            this.options.itemSelected($selectedItem, $selectedItem.attr('data-value'), $selectedItem.text());
+            return this.hide();
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Selects the next result
+        //
+        next: function (event) {
+            var active = this.$menu.find('.active').removeClass('active');
+            var next = active.next();
+
+            if (!next.length) {
+                next = $(this.$menu.find('li')[0]);
+            }
+
+            next.addClass('active');
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Selects the previous result
+        //
+        prev: function (event) {
+            var active = this.$menu.find('.active').removeClass('active');
+            var prev = active.prev();
+
+            if (!prev.length) {
+                prev = this.$menu.find('li').last();
+            }
+
+            prev.addClass('active');
+        },
+
+        //=============================================================================================================
+        //
+        //  Events
+        //
+        //=============================================================================================================
+
+        //------------------------------------------------------------------
+        //
+        //  Listens for user events
+        //
+        listen: function () {
+			
+            this.$element.on('blur', $.proxy(this.blur, this))
+                         .on('keyup', $.proxy(this.keyup, this))
+						 .on('click', $.proxy(this.lookup, this));
+
+    		if (this.eventSupported('keydown')) {
+				this.$element.on('keydown', $.proxy(this.keypress, this));
+			} else {
+				this.$element.on('keypress', $.proxy(this.keypress, this));
+			}
+
+            this.$menu.on('click', $.proxy(this.click, this))
+                      .end().on('mouseenter', 'li', $.proxy(this.mouseenter, this));
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Handles a key being raised up
+        //
+        keyup: function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            switch (e.keyCode) {
+                case 40:
+                    // down arrow
+                case 38:
+                    // up arrow
+                    break;
+                case 9:
+                    // tab
+                case 13:
+                    // enter
+                    if (!this.shown) {
+                        return;
+                    }
+                    this.select();
+                    break;
+                case 27:
+                    // escape
+                    this.hide();
+                    break;
+                default:
+                    this.lookup();
+            }
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Handles a key being pressed
+        //
+        keypress: function (e) {
+            e.stopPropagation();
+            if (!this.shown) {
+                return;
+            }
+            switch (e.keyCode) {
+                case 9:
+                    // tab
+                case 13:
+                    // enter
+                case 27:
+                    // escape
+                    e.preventDefault();
+                    break;
+                case 38:
+                    // up arrow
+                    e.preventDefault();
+                    this.prev();
+                    break;
+                case 40:
+                    // down arrow
+                    e.preventDefault();
+                    this.next();
+                    break;
+            }
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Handles cursor exiting the textbox
+        //
+        blur: function (e) {
+            var that = this;
+            e.stopPropagation();
+            e.preventDefault();
+            setTimeout(function () {
+                if (!that.$menu.is(':focus')) {
+                  that.hide();
+                }
+            }, 150)
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Handles clicking on the results list
+        //
+        click: function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            this.select();
+        },
+
+        //------------------------------------------------------------------
+        //
+        //  Handles the mouse entering the results list
+        //
+        mouseenter: function (e) {
+            this.$menu.find('.active').removeClass('active');
+            $(e.currentTarget).addClass('active');
+        }
+    }
+
+    //------------------------------------------------------------------
+    //
+    //  Plugin definition
+    //
+    $.fn.typeahead = function (option) {
+        return this.each(function () {
+            var $this = $(this),
+                data = $this.data('typeahead'),
+                options = typeof option === 'object' && option;
+
+            if (!data) {
+                $this.data('typeahead', (data = new Typeahead(this, options)));
+            }
+
+            if (typeof option === 'string') {
+                data[option]();
+            }
+        });
+    }
+
+    //------------------------------------------------------------------
+    //
+    //  Defaults
+    //
+    $.fn.typeahead.defaults = {
+        source: [],
+        items: 8,
+        menu: '<ul class="typeahead dropdown-menu"></ul>',
+        item: '<li><a class="dropdown-item" href="#"></a></li>',
+        display: 'name',
+        val: 'id',
+        itemSelected: function (el,val,text) {},
+        ajax: {
+            url: null,
+            timeout: 300,
+            method: 'post',
+            triggerLength: 3,
+            loadingClass: null,
+            displayField: null,
+            preDispatch: null,
+            preProcess: null
+        }
+    }
+
+    $.fn.typeahead.Constructor = Typeahead;
+
+    //------------------------------------------------------------------
+    //
+    //  DOM-ready call for the Data API (no-JS implementation)
+    //    
+    //  Note: As of Bootstrap v2.0 this feature may be disabled using $('body').off('.data-api')    
+    //  More info here: https://github.com/twitter/bootstrap/tree/master/js
+    //
+    $(function () {
+        $('body').on('focus.typeahead.data-api', '[data-provide="typeahead"]', function (e) {
+            var $this = $(this);
+			
+            if ($this.data('typeahead')) {
+                return;
+            }
+
+            e.preventDefault();
+            $this.typeahead($this.data());
+        })
+    });
+
+} (window.jQuery);

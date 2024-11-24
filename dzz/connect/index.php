@@ -72,7 +72,7 @@ while($value=DB::fetch($query)){
 				);
 		}
 	}elseif($value['type']=='storage'){
-		foreach(DB::fetch_all("select id,access_id,bz,cloudname,dateline,bucket from ".DB::table($value['dname'])." where bz='{$value[bz]}' and uid='{$_G['uid']}'") as $value1){
+		foreach(DB::fetch_all("select id,access_id,bz,cloudname,dateline,bucket from ".DB::table($value['dname'])." where bz='{$value['bz']}' and uid='{$_G['uid']}'") as $value1){
 			$value1['access_id']=authcode($value1['access_id'],'DECODE',$value1['bz'])?authcode($value1['access_id'],'DECODE',$value1['bz']):$value1['access_id'];
 			if(!$value1['cloudname']) $value1['cloudname']=$value['name'].':'.($value1['bucket']?$value1['bucket']:cutstr($value1['access_id'], 4, $dot = ''));
 			$value1['bz']=$value['bz'];

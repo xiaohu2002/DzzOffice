@@ -25,9 +25,9 @@ $(document).off('tap.openfile').on('tap.openfile', '.filelist', function () {
 			});
 			pb.open(index);
 		}else if(type=='download'){
-            var path=obj.data('dpath');
-            var href = DZZSCRIPT + '?mod=io&op=download&checkperm=false'+ '&path=' + path;
-            if(obj.data('url')) downfile(href);
+				var path=obj.data('dpath');
+                var href = DZZSCRIPT + '?mod=io&op=download&checkperm=false'+ '&path=' + path;
+				if(obj.data('url')) downfile(href);
 		} else {
 			
 			if (is_wxwork) {
@@ -48,7 +48,7 @@ $(document).off('tap.openfolder').on('tap.openfolder', '.folderlist', function (
         select_file(obj);
         return false;
     } else {
-        $.post(MOD_URL + '&op=ajax', {path: dhpath, currentfolder: 0,sid:sid}, function (data) {
+        $.post(MOD_URL + '&op=ajax', {path: dhpath, currentfolder: 0}, function (data) {
             $('#dataContainer').html(data);
             $('#filelist').html($('#dataContainer').find('.module-list').html());
             $($('#dataContainer').find('.breadcrumb-data:first').html()).insertAfter($('.breadcrumb li').last());
@@ -118,7 +118,7 @@ $(document.body).infinite().on("infinite", function () {
     loading = true;
 	var nextpage=$('#nextpage');
     if (nextpage.length) {
-        $.post(DZZSCRIPT + '?mod=shares&op=ajax'+sid, {'morepath': nextpage.data('morepath'), 'page': nextpage.data('nextpage')}, function (data) {
+        $.post(DZZSCRIPT + '?mod=shares&op=ajax', {'morepath': nextpage.data('morepath'), 'page': nextpage.data('nextpage')}, function (data) {
 			loading = false;
             $('#dataContainer').html(data);
             $('#filelist #nextpage').replaceWith($('#dataContainer').find('.module-list').html());
@@ -133,7 +133,7 @@ function nextPageLoad(){
     loading = true;
 	var nextpage=$('#nextpage');
     if (nextpage.length) {
-        $.post(DZZSCRIPT + '?mod=shares&op=ajax'+sid, {'morepath': nextpage.data('morepath'), 'page': nextpage.data('nextpage')}, function (data) {
+        $.post(DZZSCRIPT + '?mod=shares&op=ajax', {'morepath': nextpage.data('morepath'), 'page': nextpage.data('nextpage')}, function (data) {
 			loading = false;
             $('#dataContainer').html(data);
             $('#filelist #nextpage').replaceWith($('#dataContainer').find('.module-list').html());
@@ -200,3 +200,4 @@ $(document).off('tap.down').on('tap.down', '.downfile', function () {
     href = href + '&path=' + rids;
     downfile(href);
 })
+

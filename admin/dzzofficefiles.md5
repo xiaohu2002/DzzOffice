@@ -2416,7 +2416,7 @@ c4a3bf9b5186325ae81a0c459f14798a *dzz/system/ueditor/third-party/webuploader/web
 527c3d756b0d22aeb122dc5d8da33e17 *dzz/system/ueditor/third-party/webuploader/webuploader.flashonly.min.js
 2cdc7bb54db94e5c8f842da451b46e93 *dzz/system/ueditor/third-party/webuploader/webuploader.html5only.js
 e11d9bc7dee10f72092a0867203251e8 *dzz/system/ueditor/third-party/webuploader/webuploader.html5only.min.js
-6c75aae8048de3d23cee4b255278a437 *dzz/system/ueditor/third-party/webuploader/webuploader.min.js
+6c75aae8048de3d23cee4b255278a437 *dzz/system/ueditor/third-party/webuploader/webuploader.js
 43487dfd7e2db6a93302608a16bb9424 *dzz/system/ueditor/third-party/webuploader/webuploader.min.js
 ac30cd2e245e5988d8cfb2dc6f185ec2 *dzz/system/ueditor/third-party/webuploader/webuploader.withoutimage.js
 3c3e8c363933509550c4a3709d514ee1 *dzz/system/ueditor/third-party/webuploader/webuploader.withoutimage.min.js
@@ -2535,7 +2535,7 @@ fa2772327f55d8198301fdb8bcfc8158 *static/bootstrap/fonts/glyphicons-halflings-re
 448c34a56d699c29117adc64c43affeb *static/bootstrap/fonts/glyphicons-halflings-regular.woff2
 5a061690c67238c5247c01873479570f *static/bootstrap/js/bootstrap-slider.js
 7d6ce53c150a26ec3a5d8b18e1903415 *static/bootstrap/js/bootstrap-typeahead.js
-6bfd171748f088ad503cb07c080b1f33 *static/bootstrap/js/bootstrap.js
+6bfd171748f088ad503cb07c080b1f33 *static/bootstrap/js/bootstrap.min.js
 36450289b3866f796bb36f95c874516d *static/bootstrap/js/bootstrap.min.js
 6898461f2e5d74eb15d686724b2f541a *static/bootstrap/js/bootstrapSwitch.js
 0ce8f355891c26c28f057e195e97dcd5 *static/bootstrap/js/html5shiv.min.js

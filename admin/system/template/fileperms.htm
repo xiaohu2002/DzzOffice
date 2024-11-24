@@ -1,35 +1,27 @@
-<!--{template common/header_simple_start}-->
-<!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
-<div class="bs-container clearfix">
-	<div class="bs-left-container  clearfix">
-		<!--{template left}-->
-	</div>
-	<div class="left-drager">
-		<div class="left-drager-op">
-		  <div class="left-drager-sub"></div>
-		</div>
-	  </div>
-	<div class="bs-main-container  clearfix">
-		<div class="main-content">
+<!--{template lyear/header_simple_start}-->
+<!--{template lyear/header_simple_end}-->
+<main class="bs-main-container">
+	<div class="container-fluid">
+		<div class="card">
+			<div class="card-body">
 			<!--{if $step==1}-->
 			<form method="post" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=fileperms&step=2">
 				<input name="formhash" value="{VERHASH}" type="hidden">
 				<div class="mb-3">
 					<label for="exampleFormControlInput1" class="form-label">主要检查文件及文件夹的写入权限，点击下面按钮开始进行检查</label>
 				</div>
-				<dl>
-				<input class="btn btn-primary" name="confirmed" value="确定" type="submit">
+				<dl class="mb-3 d-grid">
+					<input class="btn btn-primary" name="confirmed" value="确定" type="submit">
 				</dl>
 			</form>
 			<!--{elseif $step==2}-->
-			<div class="text-center" style="margin:20px 0;">
+			<div class="text-center m-2">
 				<h2 class="text-success ml20">正在进行文件权限检查，请稍候......</h2>
-				<div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span class="sr-only">100% Complete</span></div>
+				<div class="progress">
+					<div class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 				</div>
 			</div>
-			<dl><a href="{MOD_URL}&op=fileperms&step=3" class="btn btn-primary">{lang message_redirect}</a></dl>
+			<dl class="mb-3 d-grid"><a href="{MOD_URL}&op=fileperms&step=3" class="btn btn-primary">{lang message_redirect}</a></dl>
 			<script type="text/javascript">
 				jQuery('.progress-bar').animate({ width: '100%' }, 2000, function() {
 					window.location.href = '{MOD_URL}&op=fileperms&step=3';
@@ -49,7 +41,8 @@
 			<!--{else}-->
 			<!--{/if}-->
 			<!--{/if}-->
+			</div>
 		</div>
 	</div>
-</div>
-<!--{template common/footer_simple}-->
+</main>
+<!--{template lyear/footer_simple}-->

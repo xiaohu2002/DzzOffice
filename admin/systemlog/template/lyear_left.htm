@@ -1,0 +1,18 @@
+<ul class="nav-drawer nav-stacked nav-pills">
+	<li class="nav-item bs-left-title p-2">
+		<a href="{MOD_URL}">
+			<i class="mdi mdi-file-cog"></i>
+			<span>{lang appname}</span>
+		</a>
+	</li>
+	<li class="nav-item">
+		<a href="index.php?mod=appmanagement">
+			<i class="mdi mdi-chevron-left"></i>
+			<span>{lang goback}</span>
+		</a>
+	</li>
+	<li class="nav-item"><a href="{MOD_URL}" <!--{if $_GET[op]!="admin" }-->class="nav-link active"<!--{/if}-->><i class="mdi mdi-math-log"></i>
+        <span>{lang systemlog_list}</span></a></li> 
+    <li class="nav-item"><a href="{MOD_URL}&op=admin" <!--{if $_GET[op]=="admin" }--> class="nav-link active"<!--{/if}-->><i class="mdi mdi-cog"></i>
+        <span>{lang systemlog_setting}</span></a></li> 
+</ul>

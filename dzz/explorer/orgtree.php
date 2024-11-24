@@ -11,6 +11,7 @@ if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 include_once libfile('function/organization');
+$ismobile=helper_browser::ismobile();
 $uid =isset($_GET['uid'])?intval($_GET['uid']):$_G['uid'];
 $zero=$_GET['zero']?urldecode($_GET['zero']):lang('no_institution_users');
 if($_GET['do']=='orgtree'){

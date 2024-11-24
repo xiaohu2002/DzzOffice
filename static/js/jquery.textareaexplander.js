@@ -1,1 +1,42 @@
-!function(t){"use strict";t.fn.TextAreaExpander=function(e,i){var n=function(e,i,n){var r=t(e).attr("defaultHeight")||i;i&&r<i&&(r=i),r||(r=e.clientHeight||i,i&&r>i&&(r=i),t(e).attr("defaultHeight",r)),e.style.height=r+"px";var h=e.clientHeight||i,a=e.scrollHeight||n;a>n?a=n:t(e).is(":hidden")&&(a=i),h!==a&&(e.style.height=a+2+"px")};return this.off(".TextAreaExpander").on("input.TextAreaExpander propertychange.TextAreaExpander",function(){n(this,e,i)}).on("focus",function(){n(this,e,i)}),this.each(function(){n(this,e,i)}),this}}(jQuery);
+(function($) {
+	"use strict";
+	
+	// jQuery plugin definition
+	$.fn.TextAreaExpander = function(minHeight, maxHeight) {
+		var resize=function(target,minHeight,maxHeight){
+			// 保存初始高度，之后需要重新设置一下初始高度，避免只能增高不能减低。
+			var dh = $(target).attr('defaultHeight') || minHeight;
+			if(minHeight && dh<minHeight){
+				dh=minHeight;
+			}
+			if (!dh) {
+				dh = target.clientHeight || minHeight;
+				if(minHeight && dh>minHeight){
+					dh=minHeight;
+				}
+				$(target).attr('defaultHeight', dh);
+			}
+			target.style.height = dh +'px';
+			var clientHeight = target.clientHeight || minHeight;
+			var scrollHeight = target.scrollHeight || maxHeight;
+			if(scrollHeight>maxHeight){
+				scrollHeight=maxHeight;
+			}else if($(target).is(':hidden')){
+				scrollHeight=minHeight;
+			}
+			if (clientHeight !== scrollHeight) { 
+				target.style.height = scrollHeight + 2 + "px";
+			}
+		};
+		this.off(".TextAreaExpander").on("input.TextAreaExpander propertychange.TextAreaExpander", function () {
+		   resize(this,minHeight,maxHeight);
+		}).on('focus',function(){
+			resize(this,minHeight,maxHeight);
+		});
+		this.each(function(){
+		  	resize(this,minHeight,maxHeight);
+		});
+		
+		return this;
+	};
+})(jQuery);

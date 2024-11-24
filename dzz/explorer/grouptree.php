@@ -3,6 +3,7 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 global $_G;
+Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 $uid = $_G['uid'];
 $id = isset($_GET['id']) ? $_GET['id']:'';
 $do=$_GET['do']?$_GET['do']:'get_children';
@@ -17,7 +18,7 @@ if($do=='get_children'){
 				'id'=>'g_'.$v['orgid'],
 				'type'=>'group',
 				'children'=>$children,
-				'li_attr'=>array('href'=>MOD_URL.'&op=group','hashs'=>'group&gid='.$v['orgid'])
+				'li_attr'=>array('href'=>DZZSCRIPT.'?mod='.MOD_NAME.'&op=group','hashs'=>'group&gid='.$v['orgid'])
 			);
             if(intval($v['aid'])==0){
                $arr['text'] = avatar_group($v['orgid'],array($v['orgid']=>array('aid'=>$v['aid'],'orgname'=>$v['orgname']))).$v['orgname'];
@@ -42,7 +43,7 @@ if($do=='get_children'){
 					'type' => 'folder',
 					'children' => $children,
 					'li_attr' => array(
-						'href' => MOD_URL. '&op=group',
+						'href' => DZZSCRIPT . '?mod=' . MOD_NAME . '&op=group',
 						'hashs' => 'group&do=file&gid=' . $groupinfo['orgid'] . '&fid=' . $val['fid'])
 				);
 			}
@@ -59,7 +60,7 @@ if($do=='get_children'){
 					'type' => 'folder',
 					'children' => $children,
 					'li_attr' => array(
-						'href' => MOD_URL. '&op=group',
+						'href' => DZZSCRIPT . '?mod=' . MOD_NAME . '&op=group',
 						'hashs' => 'group&do=file&gid=' . $orginfo['orgid'] . '&fid=' . $val['fid']
 						)
 				);
@@ -109,7 +110,7 @@ if($do=='get_children'){
 				'type' => 'folder',
 				'children' => $children,
 				'li_attr' => array(
-					'href' => MOD_URL. '&op=group',
+					'href' => DZZSCRIPT . '?mod=' . MOD_NAME . '&op=group',
 					'hashs' => 'group&do=file&gid=' . $val['gid'] . '&fid=' . $val['fid'])
 			);
 		}
@@ -124,7 +125,7 @@ if($do=='get_children'){
 				'type'=>'folder',
 				'children'=>$children,
 				'li_attr'=>array(
-					'href'=>MOD_URL.'&op=home',
+					'href'=>DZZSCRIPT.'?mod='.MOD_NAME.'&op=home',
 					'hashs'=>'home&do=file&fid='.$v['oid']
 				)
 			);
@@ -175,7 +176,7 @@ if($do=='get_children'){
             $children = (count($groups) > 0) ? true:false;
             $data[] = array(
                 'id' => 'group',
-                'text' => lang('group'),
+                'text' => '群组',
                 'type' => 'group',
                 'children' => $children,
                 'li_attr' => array('hashs' => 'mygroup')
@@ -249,7 +250,7 @@ if($do=='get_children'){
             'id'=>'g_'.$groupinfo['orgid'],
             'type'=>'group',
             'children'=>$children,
-            'li_attr'=>array('href'=>MOD_URL.'&op=group','hashs'=>'group&gid='.$groupinfo['orgid'])
+            'li_attr'=>array('href'=>DZZSCRIPT.'?mod='.MOD_NAME.'&op=group','hashs'=>'group&gid='.$groupinfo['orgid'])
         );
         if(intval($groupinfo['aid'])==0){
             $arr['text'] = avatar_group($groupinfo['orgid'],array($groupinfo['orgid']=>array('aid'=>$groupinfo['aid'],'orgname'=>$groupinfo['orgname']))).$groupinfo['orgname'];

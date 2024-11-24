@@ -2,6 +2,7 @@
 if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
+Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 global $_G;
 $uid = $_G['uid'];
 $do = isset($_GET['do'])? trim($_GET['do']):'';
@@ -265,7 +266,6 @@ if($do == 'filelist'){
         }
 
     }
-
     if (!empty($or)) {
         if (!$condition['fid']) {
             $permsql .= " and (" . implode(' OR ', $or) . ")";

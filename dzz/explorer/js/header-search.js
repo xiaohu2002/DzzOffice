@@ -173,7 +173,8 @@ function show_more_search_condition(e) {
                 for (var o in data) {
                     var typeinfo = '';
                     if(data[o]['type'])  typeinfo = '('+data[o]['type']+')';
-                    html += '<div class="form-check form-check-inline"><input type="checkbox" class="form-check-input" name="position[]" value="' + data[o]['pfid'] + '"> <label class="form-check-label">' + data[o]['pname'] +typeinfo+ '</label></div>';
+                    html += '<div class="checkbox-custom checkbox-primary "> ' +
+                        '<input type="checkbox" name="position[]" value="' + data[o]['pfid'] + '"> <label>' + data[o]['pname'] +typeinfo+ '</label> </div>';
                 }
                 jQuery('#header-seaech-checkbox').append(html);
                 jQuery('#positionsearch').data('fill', true);
@@ -187,6 +188,24 @@ function show_more_search_condition(e) {
             }
         }, 'json')
     }
+
+    /*if (!userfill) {
+        jQuery.post("{MOD_URL}&op=search_condition", {'requestuser': true}, function (data) {
+            if (data) {
+                var html = '';
+                for (var o in data) {
+                    html += '<option value="' + data[o]['uid'] + '">' + data[o]['username'] + '</option>';
+                }
+                jQuery('#id_label_multiples').html(html);
+                jQuery('#id_label_multiples').data('filluser', true);
+                if (searchjson['userselect'] != 'undefined') {
+                    jQuery('.searchowner').parents('.dropdown-type').find('.typeowner,.name_emile').show();
+                    $('#id_label_multiples').select2('data', searchjson['userselect']);
+                }
+
+            }
+        }, 'json')
+    }*/
     if (positionfill && searchjson['fid'] != false && searchjson['fid'].length) {
         var fids = searchjson['fid'];
         for (var f in fids) {
@@ -416,7 +435,7 @@ jQuery('#selectEnd').change(function () {
     searchConditionChange();
 });
 //标记
-jQuery(document).on('change', '.header-seaech-checkbox input[name="flag[]"]', function () {
+jQuery(document).on('change', '.header-seaech-checkbox .checkbox-primary input[name="flag[]"]', function () {
     var obj = jQuery(this);//aaaa
     var pname = obj.next('label').text();
     var val = obj.val();
@@ -435,7 +454,7 @@ jQuery(document).on('change', '.header-seaech-checkbox input[name="flag[]"]', fu
     searchConditionChange();
 })
 //位置
-jQuery(document).on('change', '#header-seaech-checkbox input[name="position[]"]', function () {
+jQuery(document).on('change', '#header-seaech-checkbox .checkbox-primary input[name="position[]"]', function () {
     var obj = jQuery(this);
     var numpreg = /^\d+$/;
     var pname = obj.next('label').text();

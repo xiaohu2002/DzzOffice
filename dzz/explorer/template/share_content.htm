@@ -31,6 +31,9 @@
     $(document).ready(function(e) {
         var hash=location.hash;
         _filemanage.getData(_explorer.appUrl+'&op=share&do=filelist&sid=share-list');
+        $('.input-black').each(function() {
+            InputAnimate.init($(this));
+        });
     });
 	jQuery(document).on('showIcos_done',function(){
 		jQuery('.js_copy').each(function(){
@@ -43,11 +46,11 @@
 				});
 		});
 		 //鼠标滑过弹出二维码
-		$('.deatisinfo .share-copyaress .input-group-textcode').off('mouseenter.hoverqurcode').on('mouseenter.hoverqurcode', function () {
-			$(this).parent().find('.input-group-texthover').show();
+		$('.deatisinfo .share-copyaress .input-group-addoncode').off('mouseenter.hoverqurcode').on('mouseenter.hoverqurcode', function () {
+			$(this).parent().find('.input-group-addonhover').show();
 		})
-		$(document).off('mouseleave.leavequrcode').on('mouseleave.leavequrcode', '.deatisinfo .share-copyaress .input-group-textcode', function () {
-			$(this).parent().find('.input-group-texthover').hide();
+		$(document).off('mouseleave.leavequrcode').on('mouseleave.leavequrcode', '.deatisinfo .share-copyaress .input-group-addoncode', function () {
+			$(this).parent().find('.input-group-addonhover').hide();
 		})
 
 	});

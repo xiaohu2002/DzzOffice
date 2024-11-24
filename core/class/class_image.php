@@ -24,7 +24,7 @@ class image {
 
 	var $extension = array();
 
-	function __construct() {
+	function image() {
 		global $_G;
 
 

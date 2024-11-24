@@ -1,116 +1,104 @@
-<!--{template common/header_simple_start}-->
+<!--{template lyear/header_simple_start}-->
 <link href="{MOD_PATH}/images/folder.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="{MOD_PATH}/images/comment.css?Xqd" rel="stylesheet" media="all">
 <link href="static/dzzthumb/jquery.dzzthumb.css?{VERHASH}" rel="stylesheet" media="all">
 <script type="text/javascript" src="static/dzzthumb/jquery.dzzthumb.js?{VERHASH}"></script>
-<link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.css?{VERHASH}">
-<style type="text/css">
-	.overflow-auto{
-		max-height: 180px;
-	}
-	.lie{
-		min-width: 120px
-	}
-</style>
-<!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
-<div class="bs-container clearfix">
-	<div class="bs-left-container clearfix">
-		<!--{template left}-->
+<!--{template lyear/header_simple_end}-->
+<main class="bs-main-container">
+	<div class="container-fluid">
+		<div class="card">
+			<!--{if !$list}-->
+			<div class="card-body">
+				<div style="text-align: center;">
+					<img src="static/image/common/no_list.png" /><br>
+					<span class="no-result-title">{lang no_relevant_content}</span>
+				</div>
+			</div>
+			<!--{else}-->
+			<div class="card-header">
+				<form name="search" class="form-horizontal" action="{MOD_URL}" method="get">
+					<input type="hidden" name="mod" value="{MOD_NAME}" />
+					<ul class="nav nav-stacked nav-pills">
+					<li class="float-start btn-secetlt" style="display: none;">
+						<button  class="btn btn-danger " type="submit" value="{lang delete}" onclick="delete_file();">{lang delete}</button>
+					</li>
+					<li class="float-start btn-secetlt" style="display: none;">
+						<button  class="btn btn-primary col sharepame-selected" disabled>已选择<span class="ex-number"></span>项</button>
+					</li>
+					</ul>
+				</form>
+			</div>
+			<div class="card-body">
+				<form id="appform" name="appform" class="form-horizontal " action="{MOD_URL}" method="post" >
+					<input type="hidden" name="lpp" value="$lpp">
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+					<input type="hidden" name="keyword" value="$keyword" /> 
+					<div class="table-responsive">
+						<table class="table table-hover">
+						<thead node-type="title" class="title">
+							<tr class="item clearfix">
+							<th node-type="title-col"  class="col">
+												<div class="col-sm-10">
+								<div class="form-check">
+									<input class="form-check-input" name="del[]" type="checkbox" id="chkall"><label></label>
+								</div>
+								</div>
+							</th>
+							<th class="lie">内容</th>
+							<th class="lie">IP地址</th>
+							<th class="lie">设备信息</th>
+							<th node-type="title-col" data-key="dateline" class="lie col">发布时间<span class="asc $_GET['dateline']" style="visibility: <!--{if $_GET['dateline']}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </th>
+							<!--{if $_G['adminid']}--><th node-type="title-col" data-key="author" class="lie col">发布人<span class="asc $_GET[author]" style="visibility: <!--{if $_GET[author]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th><!--{/if}-->
+							<th class="lie">操作</th>
+							</tr>
+						</thead>
+						<tbody node-type="list" class="list list-share">
+										<!--{loop $list $value}-->
+							<tr node-type="item" id="comment_$value[cid]" data-cid="$value[cid]" class="item shareblock clearfix">
+							<td data-name="$value[name]" class="col">
+												<div class="col-sm-10">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input"  name="del[]" value="$value[cid]" data-cid="$value[cid]">
+									<label></label>
+								</div>
+								</div>
+							</td>
+							<td node-type="name" class="name" title="$value[name]" data-size="$value[name]"><div class="overflow-auto">$value[message]</div></td>
+							<td><div>$value[ip]</div></td>
+							<td><div>$value[xtllq]</div></td>
+							<td><div>{eval echo dgmdate($value['dateline'])}</div></td>
+							<!--{if $_G['adminid']}--><td><div>$value[author]</div></td><!--{/if}-->
+							<td>
+								<div>
+								<a class="btn btn-outline-info" href="javascript:void(0);" title="{lang delete}" onclick="feed_delete('$value[cid]','comment_$value[cid]','$value[cid]')"><i class="mdi mdi-delete lead"></i></a>
+													<!--{if $_G['adminid']}--><a class="btn btn-outline-info" title="编辑" hidefocus="true" href="javascript:void(0);" onclick="feed_edit('$value[cid]','$_GET[allowattach]','$_GET[allowat]','$_GET[allowsmiley]');"><i class="mdi mdi-pencil lead"></i></a><!--{/if}-->
+								</div>
+							</td>
+							</tr>
+							<!--{/loop}--> 
+						</tbody>
+						</table>
+					</div>
+					<div class="float-start">
+					<div class="input-group mb-3">
+						<span class="input-group-text">每页显示</span>
+						<select class="form-select" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
+						<option value="10" $checklpp[10]> 10 </option>
+						<option value="20" $checklpp[20]> 20 </option>
+						<option value="40" $checklpp[40]> 40 </option>
+						<option value="100" $checklpp[100]> 100 </option>
+						<option value="200" $checklpp[200]> 200 </option>
+						</select>
+						<span class="input-group-text">条记录</span>
+					</div>
+					</div>
+				</form>
+					$multi
+			</div>
+			<!--{/if}-->
+		</div>
 	</div>
-	<div class="left-drager">
-    <div class="left-drager-op">
-      <div class="left-drager-sub"></div>
-    </div>
-  </div>
-  <div class="bs-main-container">
-	<!--{if !$list}-->
-	<div style="text-align: center;">
-		<img src="static/image/common/no_list.png" /><br>
-		<span class="no-result-title">{lang no_relevant_content}</span>
-	</div>
-	<!--{else}-->
-	<div class="main-header clearfix">
-		<form name="search" class="form-horizontal" action="{MOD_URL}" method="get">
-			<input type="hidden" name="mod" value="{MOD_NAME}" />
-			<ul class="nav nav-pills">
-			<li class="pull-left btn-secetlt" style="display: none;">
-				<button  class="btn btn-danger " type="submit" value="{lang delete}" onclick="delete_file();">{lang delete}</button>
-			</li>
-			<li class="pull-left btn-secetlt" style="display: none;">
-				<button  class="btn btn-primary col sharepame-selected" disabled>已选择<span class="ex-number"></span>项</button>
-			</li>
-			</ul>
-		</form>
-	</div>
-	<div class="main-content clearfix">
-      <form id="appform" name="appform" class="form-horizontal " action="{MOD_URL}" method="post" >
-		<input type="hidden" name="lpp" value="$lpp">
-        <input type="hidden" name="formhash" value="{FORMHASH}" />
-		<input type="hidden" name="keyword" value="$keyword" /> 
-		<table class="table table-hover">
-          <thead node-type="title" class="title">
-            <tr class="item clearfix">
-              <th node-type="title-col"  class="col">
-								<div class="col-sm-10">
-                  <div class="form-check">
-                    <input class="form-check-input" name="del[]" type="checkbox" id="chkall"><label></label>
-                  </div>
-                </div>
-              </th>
-              <th class="lie">内容</th>
-              <th class="lie">IP地址</th>
-              <th class="lie">设备信息</th>
-              <th node-type="title-col" data-key="dateline" class="lie col">发布时间<span class="asc $_GET['dateline']" style="visibility: <!--{if $_GET['dateline']}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </th>
-              <!--{if $_G['adminid']}--><th node-type="title-col" data-key="author" class="lie col">发布人<span class="asc $_GET[author]" style="visibility: <!--{if $_GET[author]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th><!--{/if}-->
-			  <th class="lie">操作</th>
-            </tr>
-          </thead>
-          <tbody node-type="list" class="list list-share">
-						<!--{loop $list $value}-->
-            <tr node-type="item" id="comment_$value[cid]" data-cid="$value[cid]" class="item shareblock clearfix">
-              <td data-name="$value[name]" class="col">
-								<div class="col-sm-10">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input"  name="del[]" value="$value[cid]" data-cid="$value[cid]">
-                    <label></label>
-                  </div>
-                </div>
-              </td>
-              <td node-type="name" class="name" title="$value[name]" data-size="$value[name]"><div class="overflow-auto">$value[message]</div></td>
-              <td><div>$value[ip]</div></td>
-              <td><div>$value[xtllq]</div></td>
-              <td><div>{eval echo dgmdate($value['dateline'])}</div></td>
-              <!--{if $_G['adminid']}--><td><div>$value[author]</div></td><!--{/if}-->
-              <td>
-                <div>
-                  <a class="btn btn-outline-info" href="javascript:void(0);" title="{lang delete}" onclick="feed_delete('$value[cid]','comment_$value[cid]','$value[cid]')"><i class="dzz dzz-delete"></i></a>
-									<!--{if $_G['adminid']}--><a class="btn btn-outline-info" title="编辑" hidefocus="true" href="javascript:void(0);" onclick="feed_edit('$value[cid]','$_GET[allowattach]','$_GET[allowat]','$_GET[allowsmiley]');"><i class="dzz dzz-create"></i></a><!--{/if}-->
-                </div>
-              </td>
-            </tr>
-            <!--{/loop}--> 
-          </tbody>
-        </table>
-		<div class="pull-left">
-          <div class="input-group mb-3">
-            <span class="input-group-text">每页显示</span>
-            <select class="form-select" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
-              <option value="10" $checklpp[10]> 10 </option>
-              <option value="20" $checklpp[20]> 20 </option>
-              <option value="40" $checklpp[40]> 40 </option>
-              <option value="100" $checklpp[100]> 100 </option>
-              <option value="200" $checklpp[200]> 200 </option>
-            </select>
-            <span class="input-group-text">条记录</span>
-          </div>
-        </div>
-      </form>
-		$multi
-	</div>
-	<!--{/if}-->
-  </div>
-</div>
+</main>
 <script type="text/javascript">
 function feed_edit(cid,allowattach,allowat,allowsmiley){
 	showWindow('publish_edit_'+cid,DZZSCRIPT+'?mod=comment&op=ajax&do=edit&cid='+cid+'&allowattach='+allowattach+'&allowat='+allowat+'&allowsmiley='+allowsmiley);
@@ -140,9 +128,6 @@ function feed_delete(cid,domid,tid){
 var cids=[];
 var theurl='$theurl';
 	jQuery(document).ready(function(e) {
-		 jQuery('select').lyearSelect({
-      width:70,
-    });
 		jQuery(document).on('mouseenter', 'div[node-type=item]', function() {
 			jQuery(this).addClass('item-hover');
 		});
@@ -244,5 +229,4 @@ function delete_file(){
 	}
 }
 </script>
-<script type="text/javascript" src="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.js?{VERHASH}"></script>
-<!--{template common/footer_simple}-->
+<!--{template lyear/footer_simple}-->

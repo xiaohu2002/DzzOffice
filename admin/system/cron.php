@@ -85,7 +85,7 @@ if (empty($_GET['edit']) && empty($_GET['run'])) {
 		updatecache('setting');
 		$msg = lang('crons_succeed');
 		$redirecturl = BASESCRIPT . '?mod=system&op=cron';
-		$msg_type = 'text-success';
+		$msg_type = 'success';
 	}
 
 } else {
@@ -95,7 +95,7 @@ if (empty($_GET['edit']) && empty($_GET['run'])) {
 	if (!$cron) {
 		$msg = lang('cron_not_found');
 		$redirecturl = BASESCRIPT . '?mod=system&op=cron';
-		$msg_type = 'text-danger';
+		$msg_type = 'danger';
 		include template('cron');
 		exit();
 	}
@@ -107,7 +107,7 @@ if (empty($_GET['edit']) && empty($_GET['run'])) {
 
 		if (!submitcheck('editsubmit')) {
 
-			$navtitle = lang('misc_cron_edit') . ' - ' . lang('admin_navtitle');
+			$navtitle = lang('misc_cron_edit') . ' - ' . lang('appname');
 
 			$weekdayselect = $dayselect = $hourselect = '';
 
@@ -158,7 +158,7 @@ if (empty($_GET['edit']) && empty($_GET['run'])) {
 				$msg = lang('crons_time_invalid');
 			}
 			if (!empty($msg)) {
-				$msg_type = 'text-danger';
+				$msg_type = 'danger';
 				$redirecturl = dreferer();
 				include template('cron');
 				exit();
@@ -169,7 +169,7 @@ if (empty($_GET['edit']) && empty($_GET['run'])) {
 			dzz_cron::run($cronid);
 
 			$msg = lang('crons_succeed');
-			$msg_type = 'text-success';
+			$msg_type = 'success';
 			$redirecturl = BASESCRIPT . '?mod=system&op=cron';
 		}
 
@@ -186,13 +186,13 @@ if (empty($_GET['edit']) && empty($_GET['run'])) {
 
 		if (!file_exists($cronfile)) {
 			$msg = lang('crons_run_invalid', array('cronfile' => $cronfile));
-			$msg_type = 'text-danger';
+			$msg_type = 'danger';
 
 		} else {
 			dzz_cron::run($cron['cronid']);
 			$msg = lang('crons_run_succeed');
 			$redirecturl = BASESCRIPT . '?mod=system&op=cron';
-			$msg_type = 'text-success';
+			$msg_type = 'success';
 		}
 	}
 }

@@ -414,17 +414,6 @@ if($method == 'show_license') {
 	show_header();
 	echo '<iframe src="../misc.php?mod=syscache" style="display:none;"></iframe>';
 	echo '<h3>'.lang('install_successfully').'</h3>';
-	echo '<blockquote>
-<p class="text-muted">感谢您选用<a><strong>DzzOffice 小胡版</strong></a></p>
-<p class="text-danger">这个页面是初始安装后临时指导页，并且此页面只会出现一次。</p>
-<p><b>请使用管理员账号登录、并且按照下面的步骤依次配置系统！</b></p>
-<ol>
-<li>请访问<a href="https://gitee.com/xiaohu2024/">团队主页（https://gitee.com/xiaohu2024/）</a>或查阅DzzOffice 笔记进行插件安装与配置；
-<p class="help-block">使用DzzOffice 小胡版的话，需优先使用小胡版的插件，官方版的不确定兼容性</p>
-</li>
-<li>进入<a href="admin.php?mod=setting">系统设置</a>设置平台名称、logo、平台版权等系统基本设置；</li>
-</ol>
-   </blockquote>';
 	echo '<h4 class="red">'.lang('handwork_del').'"./install/index.php"</h4>';
 	echo '<div style="text-align:right;width:80%;padding-top:50px;"><a href="'.$bbserver.'" class="button" ><input type="button" value="'.lang('enter_desktop').'"></a></div>';
 	show_footer();

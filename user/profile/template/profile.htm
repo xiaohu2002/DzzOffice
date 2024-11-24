@@ -1,54 +1,12 @@
-<!--{template common/header_simple_start}-->
+<!--{template lyear/header_simple_start}-->
 <script type="text/javascript" src="static/js/jquery.textareaexplander.js?{VERHASH}"></script>
-<link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.css?{VERHASH}">
 <!--日期选择器css-->
 <link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-datepicker/bootstrap-datepicker3.min.css?{VERHASH}">
-<style>
-.form-horizontal-left .form-group .col-sm-10{
-	float:left;
-}
-.form-horizontal-left .help-inline{
-	padding:5px;
-}
-.has-error .form-control.privacy{
-	border-color:#e1e1e1;
-}
-.has-error .form-control.privacy:focus{
-	border-color:#66afe9;
-}
-.rq{
-	color:red;
-}
-.progress-relative{
-	position:relative;
-	height:26px;
-	line-height:24px;
-	background-color: #e6e6e6;
-
-}
-.progress-relative .progress-cover{
-	position:absolute;
-	text-align:center;
-	width:100%;
-	font-size:75%;
-	height:24px;
-	line-height:24px;
-	color:#FFF;
-	text-shadow:1px 1px 1px #000;
-	font-weight:700;
-}
-</style>
-<!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
-
-<div class="bs-container clearfix">
-  <div class="bs-left-container  clearfix">
-    <!--{template left}--> 
-  </div>
-  <div class="left-drager">
-  </div>
-  <div class="bs-main-container  clearfix" >
-		<div class="main-content">
+<!--{template lyear/header_simple_end}-->
+<main class="bs-main-container">
+	<div class="container-fluid">
+		<div class="card">
+			<div class="card-body">
       <!--{if $vid}-->
       <div class="alert <!--{if $showbtn}-->alert-warning<!--{else}-->alert-success<!--{/if}-->" style="margin-bottom:20px;line-height:1.8">
           <!--{if $showbtn}-->
@@ -58,7 +16,7 @@
             <p class="ml20">$desc</p>
             <!--{/if}-->
           <!--{else}-->
-           <p><i class="glyphicon glyphicon-ok" ></i> {lang profile_message2}</p>
+           <p><i class="mdi mdi-check-bold" ></i> {lang profile_message2}</p>
           <!--{/if}-->
       </div>
       <!--{else}-->
@@ -136,7 +94,7 @@
           </div>
           <!--{/if}-->
         <!--{if !$vid || $showbtn}-->
-        <dl>
+        <dl class="mb-3 d-grid">
              <input type="submit" class="btn btn-primary" <!--{if $vid}-->value="{lang submit_audit}"<!--{else}-->value="{lang save}"<!--{/if}-->>
         </dl>
          <!--{/if}-->
@@ -144,12 +102,8 @@
     </div>
   </div>
 </div>
-
+</main>
 <script type="text/javascript">
-jQuery(document).ready(function(){
-  jQuery('select').lyearSelect();
-	jQuery('textarea').TextAreaExpander(37,999);
-})
 jQuery(document).on('blur','.has-error .form-control',function(){
 	if(this.value) jQuery(this).closest('.form-group').removeClass('has-error');
 });
@@ -174,8 +128,7 @@ function clearErrorInfo() {
 	jQuery('.has-error').removeClass('has-error');
 }
 </script>
-<script type="text/javascript" src="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.js?{VERHASH}"></script>
 <!--日期选择器js-->
 <script type="text/javascript" src="static/lyear/js/bootstrap-datepicker/bootstrap-datepicker.min.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/lyear/js/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js?{VERHASH}"></script>
-<!--{template common/footer_simple}--> 
+<!--{template lyear/footer_simple}--> 

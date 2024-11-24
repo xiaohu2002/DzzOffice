@@ -14,7 +14,7 @@ $extall=C::t('app_open')->fetch_all_ext();
 $exts=array();
 foreach($extall as $value){
 	if($value['ext']=='mp3'){//mp3只使用简易播放器预览
-		if(strpos($value['url'],'?mod=music')!==false) $exts[$value['ext']]=$value;
+		if(strpos($value['url'],'?mod=sound')!==false) $exts[$value['ext']]=$value;
 	}else{
 		if(!isset($exts[$value['ext']]) ||$value['isdefault']) $exts[$value['ext']]=$value;
 	}

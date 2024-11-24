@@ -1,103 +1,112 @@
 <div class="middlebottomMenu  scroll-y">
 	<div class="middle-padding-left height-100 padding-left-1">
-    <div class="middletopMenu">
-        <div class="uploadMenu clearfix">
-          <div class="public-sizeMenu clearfix">
-            <div class="public-allgroup">
-              <div class="dropdown">
-                <button type="text" class="form-control" data-bs-toggle="dropdown" value="{lang all_groups}" readonly id="mygrouptext">
-                  <span class="dropdown_text">{lang all_groups}</span>
-                <i class="dzz dzz-arrow-dropdown input-icon"></i>
-                </button>
-                <ul class="dropdown-menu group-dropdownbutton" id="mygroupsearch">
-                  <li><a href="javascript:;" data-val="all">{lang all}</a></li>
-                  <li><a href="javascript:;" data-val="my">{lang my_create}</a></li>
-                  <li><a href="javascript:;" data-val="manage">{lang my_manage}</a></li>
-                  <li><a href="javascript:;" data-val="partake">{lang my_involved}</a></li>
-                </ul>
-             </div>
-          </div>                
-          <div class="groupmanage-time">
-            <div class="group-time-animate">
-              <input type="text" id="mygroupDate" class="form-control" placeholder="{lang start_time}"/>
+        <div class="middletopMenu">
+            <div class="uploadMenu clearfix">
+	            <div class="public-sizeMenu clearfix">
+	            	<div class="public-allgroup">
+                	 		
+                	 		<div class="dropdown">
+		                <button type="text" class="form-control" data-toggle="dropdown" value="{lang all_groups}" readonly id="mygrouptext">
+		                	<span class="dropdown_text">{lang all_groups}</span>
+		                <i class="dzz dzz-arrow-dropdown input-icon"></i>
+		                </button>
+		                <ul class="dropdown-menu group-dropdownbutton" id="mygroupsearch">
+		                	<li><a href="javascript:;" data-val="all">{lang all}</a></li>
+		                	<li><a href="javascript:;" data-val="my">{lang my_create}</a></li>
+		                	<li><a href="javascript:;" data-val="manage">{lang my_manage}</a></li>
+		                	<li><a href="javascript:;" data-val="partake">{lang my_involved}</a></li>
+		                </ul>
+	               </div>
+	            </div>                
+                	<div class="groupmanage-time">
+                		<div class="group-time-animate">
+	                            <input type="text" id="mygroupDate" class="form-control"
+	                                    placeholder="{lang start_time}"/>
+                        </div>
+                        <label class="group-time-animate-label"><span class="dzz dzz-vline"></span></label>
+                        <div class="group-time-animate">
+                            <input type="text" id="mygroupDate1" class="form-control"
+                                    placeholder="{lang finish_time}"/>
+                        </div>               		
+                	</div>
+                	
+				</div>
+
             </div>
-            <label class="group-time-animate-label"><span class="dzz dzz-vline"></span></label>
-            <div class="group-time-animate">
-                <input type="text" id="mygroupDate1" class="form-control" placeholder="{lang finish_time}"/>
-            </div>               		
-          </div>  	
         </div>
-      </div>
+       <!--文件夹列表开始-->
+	        <div class="group-filemember " id="group-filemember">
+	            <div class="group-filemember-header">
+	                <table class="table" width="100%" border="0">
+	                    <thead>
+	                    <tr>	                        
+	                        <th class="member_header member_header_0" width="50%">
+	                            <div class="member_header_td_div">
+	                                <span class="member_header_title">{lang group_name}</span>
+	                                <a class="detail_header_icon" data-val="0" style="display: inline-block;"><span
+                                            class="dzz dzz-expand-more"></span></a>
+	                            </div>
+	                        </th>
+	                        <th class="member_header_1" width="20%">
+	                            <div class="member_header_td_div">
+	                                <span class="member_header_type">{lang creater}</span>
+	                            </div>
+	                        </th>
+	                        <th class="member_header_2" width="10%">
+	                        	<div class="member_header_td_div">
+	                                <span class="member_header_title">{lang membership}</span>
+	                            </div>
+	                        	</th>
+	                        <th class="member_header member_header_3" width="20%">
+	                        	<div class="member_header_td_div">
+	                                <span class="member_header_title">{lang create_date}</span>
+	                                <a class="detail_header_icon" data-val="1"><span
+                                            class="dzz dzz-expand-more"></span></a>
+	                            </div>
+	                        </th>
+	                    </tr>
+	                    </thead>
+	                </table>
+	            </div>
+	
+					<div class="recent-con">
+	                <table class="table" width="100%" border="0">
+	                    <tbody id="grouplist">
+						<!--{loop $groups $v}-->
+	                    <tr  class="member_tr Icoblock" onclick="openGroup(this)" data-gid="$v[orgid]">
+	                        
+	                        <td class="member_item_td" valign="middle" width="50%" style="position: relative;">
+	                            <div class="member_item_td_div member_item_td_name">
+	                                <a href="javascript:;" style="float: left;">
+										{eval echo avatar_group($v[orgid]);}
+	                                </a>
+	                                <a href="javascript:;" id="" class="member_text member_item_name_text IcoText_folder"> $v[orgname]</a>
+	                            </div>
+	                        </td>
+	                        <td class="member_item_td" valign="middle" width="20%">
+	                            <span>$v[creater]</span>
+	                        </td>
+	                    	<td class="member_item_td" valign="middle" width="10%">
+	                            <span>$v[usernum]</span>
+	                        </td>
+	                        <td class="member_item_td" valign="middle" width="20%">
+	                            <span>{eval echo dgmdate($v['dateline'],'Y-m-d');}</span>
+	                        </td>
+	                    </tr>
+						<!--{/loop}-->
+						<!--{if $groupsnumber == 0}-->
+						<tr class="emptyshare">
+							<td colspan="6" style="border: none;">
+								<!--{template noFilePage-group}-->
+							</td>
+						</tr>
+						<!--{/if}-->
+	                    </tbody>
+	                </table>
+					</div>
+	        </div>
+	        <!--文件夹列表结束-->
     </div>
-    <!--文件夹列表开始-->
-    <div class="group-filemember " id="group-filemember">
-        <div class="group-filemember-header">
-            <table class="table" width="100%" border="0">
-                <thead>
-                <tr>	                        
-                    <th class="member_header member_header_0" width="50%">
-                        <div class="member_header_td_div">
-                            <span class="member_header_title">{lang group_name}</span>
-                            <a class="detail_header_icon" data-val="0" style="display: inline-block;"><span class="dzz dzz-expand-more"></span></a>
-                        </div>
-                    </th>
-                    <th class="member_header_1" width="20%">
-                        <div class="member_header_td_div">
-                            <span class="member_header_type">{lang creater}</span>
-                        </div>
-                    </th>
-                    <th class="member_header_2" width="10%">
-                      <div class="member_header_td_div">
-                            <span class="member_header_title">{lang membership}</span>
-                        </div>
-                      </th>
-                    <th class="member_header member_header_3" width="20%">
-                      <div class="member_header_td_div">
-                            <span class="member_header_title">{lang create_date}</span>
-                            <a class="detail_header_icon" data-val="1"><span class="dzz dzz-expand-more"></span></a>
-                        </div>
-                    </th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="recent-con">
-          <table class="table" width="100%" border="0">
-            <tbody id="grouplist">
-            <!--{loop $groups $v}-->
-              <tr  class="member_tr Icoblock" onclick="openGroup(this)" data-gid="$v[orgid]">
-                <td class="member_item_td" valign="middle" width="50%" style="position: relative;">
-                    <div class="member_item_td_div member_item_td_name">
-                        <a href="javascript:;" style="float: left;">
-                          {eval echo avatar_group($v['orgid']);}
-                        </a>
-                        <a href="javascript:;" id="" class="member_text member_item_name_text IcoText_folder"> $v[orgname]</a>
-                    </div>
-                </td>
-                <td class="member_item_td" valign="middle" width="20%">
-                    <span>$v[creater]</span>
-                </td>
-                <td class="member_item_td" valign="middle" width="10%">
-                    <span>$v[usernum]</span>
-                </td>
-                <td class="member_item_td" valign="middle" width="20%">
-                    <span>{eval echo dgmdate($v['dateline'],'Y-m-d');}</span>
-                </td>
-              </tr>
-              <!--{/loop}-->
-              <!--{if $groupsnumber == 0}-->
-              <tr class="emptyshare">
-                <td colspan="6" style="border: none;">
-                  <!--{template noFilePage-group}-->
-                </td>
-              </tr>
-              <!--{/if}-->
-            </tbody>
-          </table>
-        </div>
-      </div>
-  <!--文件夹列表结束-->
-  </div>
 </div>
 <div id="template_nofile_notice" style="display:none">
 	<tr class="emptyshare">
@@ -107,6 +116,11 @@
 	</tr>
 </div>
 <script type="text/javascript">
+jQuery(document).ready(function (e) {
+    $('.input-black').each(function() {			
+			InputAnimate.init($(this));			
+		});
+});
  $("#mygroupDate,#mygroupDate1").datepicker({ //添加日期选择功能
     numberOfMonths: 1, //显示几个月
     showButtonPanel: false, //是否显示按钮面板

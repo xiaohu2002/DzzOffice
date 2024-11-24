@@ -29,7 +29,6 @@
          * @var  public
          **/
         var $bgcolor = array(255, 255, 255);
-        var $formats = [];
 
         /**
          * Ico::bgcolor_transparent

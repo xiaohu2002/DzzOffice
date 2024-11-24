@@ -46,16 +46,6 @@ if (!submitcheck('settingsubmit')) {
 		$applist =DB::fetch_all("select appname,identifier from %t where isshow>0 and `available`>0 and app_path='dzz' ORDER BY disp",array('app_market'));
 		
 		//$orgtree=getDepartmentOption(0);
-	} elseif ($operation == 'qywechat') {
-		if ($setting['synorgid']) {
-			$patharr = getPathByOrgid($setting['synorgid']);
-			$syndepartment = implode(' - ', ($patharr));
-
-		}
-		if (empty($syndepartment)) {
-			$syndepartment = lang('all_username');
-			$setting['syndepartment'] = '0';
-		}
 	} elseif ($operation == 'desktop') {
 		if ($setting['desktop_default'] && !is_array($setting['desktop_default'])) {
 			$setting['desktop_default'] = unserialize($setting['desktop_default']);
@@ -81,13 +71,7 @@ if (!submitcheck('settingsubmit')) {
 		$navtitle = lang('loginSet').' - '.lang('appname');
 		$setting['strongpw'] = dunserialize($setting['strongpw']);
 		$setting['welcomemsgtitle'] = cutstr(trim(dhtmlspecialchars($setting['welcomemsgtitle'])), 75);
-	} elseif ($operation == 'notification') {
-		$navtitle = lang('Notification Settings').' - '.lang('appname');
-	} elseif ($operation == 'qywechat') {
-		$navtitle = lang('weinxin_company').' - '.lang('appname');
-	} elseif ($operation == 'denlu') {
-		$navtitle = lang('loginSet').' - '.lang('appname');
-	}elseif($operation == 'space'){//获取空间设置结果
+	} elseif($operation == 'space'){//获取空间设置结果
 		$navtitle=lang('spaceSet').' - '.lang('appname');
 		$openarr=json_encode(array('orgids'=>$open));
 		//获取用户组空间设置数据
@@ -196,13 +180,6 @@ if (!submitcheck('settingsubmit')) {
 
 			}
 		}
-	} elseif ($operation == 'notification') {
-		$settingnew['notification'] = intval($settingnew['notification']);
-	} elseif ($operation == 'cachethread') {
-		$settingnew['onlinehold'] = intval($settingnew['onlinehold']) > 0 ? intval($settingnew['onlinehold']) : 15;
-	} elseif ($operation == 'denlu') {
-		$settingnew['numberoflogins'] = intval($settingnew['numberoflogins']);
-		$settingnew['forbiddentime'] = intval($settingnew['forbiddentime']);
 	} elseif ($operation == 'access') {
 		isset($settingnew['reglinkname']) && empty($settingnew['reglinkname']) && $settingnew['reglinkname'] = lang('register_immediately');
 		$settingnew['pwlength'] = intval($settingnew['pwlength']);
@@ -314,23 +291,6 @@ if (!submitcheck('settingsubmit')) {
 					}else {
 				$settingnew['loginset']['transparency'] ='';
 			}
-		}
-	} elseif ($operation == 'qywechat') {
-		switch($_GET['fbind']) {
-			case 'bind' :
-				$wechat = new qyWechat( array('appid' => $settingnew['CorpID'], 'appsecret' => $settingnew['CorpSecret']));
-				if (!$wechat -> checkAuth()) {
-					showmessage(lang('verification_unsuccessful').',errCode：' . $wechat -> errCode . '; errMsg:' . $wechat -> errMsg, dreferer());
-				}
-				if (empty($setting['token_0']))
-					$settingnew['token_0'] = random(8);
-				if (empty($setting['encodingaeskey_0']))
-					$settingnew['encodingaeskey_0'] = random(43);
-				break;
-			case 'unbind' :
-				$settingnew['CorpID'] = '';
-				$settingnew['CorpSecret'] = '';
-				break;
 		}
 	}
 	$updatecache = FALSE;

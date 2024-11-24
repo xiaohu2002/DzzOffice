@@ -2,30 +2,36 @@
 <!--{if $operation == 'addgroup'}-->
 <!--新建群组-->
 <div class="modal-header">
-	<h4 class="modal-title">{lang new_group}</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span class="mdi mdi-close-circle "></span>
+    </button>
+    <h4 class="modal-title">{lang new_group}</h4>
 </div>
 <form class="form-horizontal" action="{MOD_URL}&op=ajax&operation=addgroup" method="post"
       onsubmit="return addgroup_submit(this)">
     <input type="hidden" name="arr[aid]" value="" id="defaultcolor"/>
     <div class="modal-body group-top">
-        <div class="row mb-3">
-          <label class="col-sm-3 col-form-label">{lang name}</label>
-          <div class="col-sm-9 col-form-label">
-              <input type="text" class="form-control" name="arr[orgname]">
-              <p id="name_error" class="input-error"></p>
-          </div>
+        <div class="form-group">
+            <div class="input-black input-float col-md-12 col-sm-12">
+                <label class="control-label  input-label">{lang name}</label>
+                <div class="input-animate">
+                    <input type="text" class="form-control" name="arr[orgname]">
+                    <p id="name_error" class="input-error"></p>
+                </div>
+            </div>
         </div>
-        <div class="row mb-3">
-          <label class="col-sm-3 col-form-label">{lang introduce}</label>
-          <div class="col-sm-9 col-form-label">
-              <input type="text" class="form-control" name="arr[desc]">
-          </div>
-      </div>
+        <div class="form-group">
+            <div class="input-black input-float col-md-12 col-sm-12">
+                <label class="control-label input-label">{lang introduce}</label>
+                <div class="input-animate">
+                    <input type="text" class="form-control" name="arr[desc]">
+                </div>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary">{lang newly_build}</button>
-        <button type="button" class="btn btn-danger cancel" data-bs-dismiss="modal" aria-label="Close">{lang
+        <button type="button" class="btn btn-default-outline cancel" data-dismiss="modal" aria-label="Close">{lang
             cancel}
         </button>
     </div>
@@ -35,6 +41,9 @@
 
     //index添加群组弹出框头像
     jQuery(document).ready(function (e) {
+        $('.input-black').each(function () {
+            InputAnimate.init($(this));
+        });
         var colors = ['#6b69d6', '#a966ef', '#e9308d', '#e74856', '#f35b42', '#00cc6a', '#0078d7', '#5290f3', '#00b7c3', '#0099bc', '#018574', '#c77c52', '#ff8c00', '#68768a', '#7083cb', '#26a255'];
         var num = parseInt(Math.random() * 10);
         $('#defaultcolor').val(colors[num]);
@@ -55,7 +64,7 @@
                 $('name_error').html();
                 gid = data['gid'];
                 newgroupgid = data['gid'];
-                var html = '<li class="document-data" data-href="{MOD_URL}&op=group" data-hash="group' + gid + '" data-args="gid_' + gid + '">' + groupname + '</li>';
+                var html = '<li class="document-data" data-href="index.php?mod=explorer&op=group" data-hash="group' + gid + '" data-args="gid_' + gid + '">' + groupname + '</li>';
                 if ($('#group_menu').find('.document-data').length < 1) {
                     $('#group_menu').html(html);
                 } else {
@@ -75,46 +84,67 @@
 <!--{elseif $operation == 'selectperm'}-->
 <!--目录权限-->
 <div class="modal-header">
-  <h4 class="modal-title" id="myModalLabel">{lang directory_right}</h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="mdi mdi-close-circle "></span>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">{lang directory_right}</h4>
 </div>
 <form>
     <div class="modal-body">
         <!--{if !$noperm}-->
-        <div class="col-md-12">
-            <div class="col-sm-3 col-form-label" id="permgroup">
-              <p>{lang select_permissions}：</p>
-              <!--{if $inheritperm}-->
-              <div class="form-check mb-3">
-                <input class="form-check-input inputRadios" type="radio"  name="inputRadios" value="$inheritperm" id="$inheritperm" <!--{if $groupperm == $inheritperm}-->checked="checked"<!--{/if}-->>
-                <label class="form-check-label" for="$inheritperm">{lang superior_authority}</label>
-              </div>
-              <!--{/if}-->
-              <!--{if $new}-->
-              <!--{loop $permgroups $val}-->
-            <div class="form-check mb-3">
-                <input class="form-check-input inputRadios" type="radio"  name="inputRadios" value="$val[perm]" id="$val[perm]" <!--{if $val['default']}-->checked="checked"<!--{/if}-->>
-                <label class="form-check-label" for="$val[perm]">$val[pername]</label>
-              </div>
-              <!--{/loop}-->
-              <!--{else}-->
-              <!--{loop $permgroups $val}-->
-            <div class="form-check mb-3">
-                <input class="form-check-input inputRadios" type="radio"  name="inputRadios" value="$val[perm]" id="$val[perm]" <!--{if $groupperm && $groupperm == ($val['perm'])}-->checked="checked"<!--{/if}-->>
-                <label class="form-check-label" for="$val[perm]">$val[pername]</label>
-              </div>
-              <!--{/loop}-->
-              <!--{/if}-->
+        <div class="Nfolder-con clearfix">
+            <div class="Nfolder-left col-md-4 col-sm-4 col-xs-4 col-lg-4">
+                <p>{lang select_permissions}：</p>
+                <ul style="height: 300px;overflow: auto;" id="permgroup">
+
+                    <li <!--{if !$inherit}-->class="hide"<!--{/if}-->>
+                    <div class="radio-custom radio-default">
+                        <input type="radio" class="inputRadios" name="inputRadios" value="$inheritperm"
+                               id="$inheritperm"
+                        <!--{if $groupperm == $inheritperm}-->checked="checked"<!--{/if}-->/>
+                        <label class="lbook-label" for="$inheritperm"><span>{lang superior_authority}</span></label>
+                    </div>
+                    </li>
+                    <!--{if $new}-->
+                    <!--{loop $permgroups $val}-->
+                    <li>
+                        <div class="radio-custom radio-default">
+                            <input type="radio" class="inputRadios" name="inputRadios" value="$val['perm']"
+                                   id="$val['perm']" <!--{if $val['default']}-->checked="checked"<!--{/if}-->/>
+                            <label class="lbook-label" for="$val['perm']"><span>$val[pername]</span></label>
+                        </div>
+                    </li>
+                    <!--{/loop}-->
+                    <!--{else}-->
+                    <!--{loop $permgroups $val}-->
+                    <li>
+                        <div class="radio-custom radio-default">
+                            <input type="radio" class="inputRadios" name="inputRadios" value="$val['perm']"
+                                   id="$val['perm']"
+                            <!--{if $groupperm && $groupperm == ($val['perm'])}-->checked="checked"<!--{/if}-->/>
+                            <label class="lbook-label" for="$val['perm']"><span>$val[pername]</span></label>
+                        </div>
+                    </li>
+                    <!--{/loop}-->
+                    <!--{/if}-->
+
+                </ul>
             </div>
-            <div class="col-sm-9 col-form-label">
+            <div class="Nfolder-right col-md-8 col-sm-8 col-xs-8 col-lg-8">
                 <p><span>{lang permission_illustrate}：</span></p>
                 <ul class="select-properties" id="select_perm">
                     <!--{loop $perms $k $v}-->
                     <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <div class="form-check mb-3">
-                        <input type="checkbox" value="$v[1]" class="form-check-input" name="selectperm[]" id="$v[1]"<!--{if $v[1] & $groupperm}--> checked="checked" <!--{/if}-->>
-                        <label class="form-check-label" for="$v[1]">$v[0]</label>
-                      </div>
+                        <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox" value="$v[1]" name="selectperm[]" id="$v[1]"
+                            <!--{if $v[1] & $groupperm}-->
+                            checked="checked" <!--{/if}-->>
+                            <label for="$v[1]">
+                                <div class="all-yourself">
+                                    <span class="{$v[2]} view-eidt perm_chk" data-perm="$v[1]"></span><span>$v[0]</span>
+                                </div>
+                            </label>
+                        </div>
+
                     </li>
                     <!--{/loop}-->
                 </ul>
@@ -124,7 +154,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="chk_create(this.form)">{lang affirm}</button>
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{lang cancel}</button>
+        <button type="button" class="btn btn-default-outline" data-dismiss="modal">{lang cancel}</button>
     </div>
 </form>
 <script type="text/javascript" reload="1">
@@ -177,7 +207,7 @@
         })
     }
     function chk_create(form) {
-        $.post('{MOD_URL}&op=ajax&operation=selectperm&permsubmit=true&fid={$fid}&gid={$gid}&new={$new}&setting={$setting}', $(form).serialize(), function (data) {
+        $.post('index.php?mod=explorer&op=ajax&operation=selectperm&permsubmit=true&fid={$fid}&gid={$gid}&new={$new}&setting={$setting}', $(form).serialize(), function (data) {
             if (data['success']) {
                 if ('{$new}' == 1) {
                     hideWindow('select_perm');
@@ -200,32 +230,32 @@
 <!--{elseif $operation == 'addsearchcat'}-->
 <!--新建类型-->
 <div class="modal-header">
-	<h4 class="modal-title" id="myModalLabel">{lang new_type}</h4>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span class="mdi mdi-close-circle "></span>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">{lang new_type}</h4>
 </div>
 <form action="{MOD_URL}&op=ajax&operation=addsearchcat" method="post" onsubmit="addsearchcat(this);return false;">
     <div class="modal-body group-top">
         <div class="custom-label">
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">{lang typename}</label>
-                <div class="col-sm-9 col-form-label">
-                    <input type="text" class="form-control" <!--{if $cat}-->value="$cat[catname]"<!--{/if}--> name="arr[catname]" max="20">
+            <div class="input-black input-float col-md-12 col-sm-12">
+                <label class="control-label input-label">{lang typename}</label>
+                <div class="input-animate">
+                    <input type="text" class="form-control" <!--{if $cat}-->value="$cat[catname]"<!--{/if}-->
+                    name="arr[catname]" max="20">
                 </div>
             </div>
-            <div class="input-select2 col-md-12 col-sm-12">
-                <label class="col-sm-3 col-form-label">{lang filename_extension}({lang more_ext_add_tips})</label>
-                <div class="col-sm-9 col-form-label">
-									<div class="input-group mb-3">
-                    <input type="text" class="js-tags-input form-control" name="arr[ext]" reload="1" value="$cat[ext]" data-source="" id="arrext">
-                  </div>
+            <div class="input-black input-float input-select2 col-md-12 col-sm-12">
+                <label class="control-label input-label">{lang filename_extension}({lang more_ext_add_tips})</label>
+                <div class="input-animate">
+                    <input type="text" class="form-control taginput" name="arr[ext]" reload="1"
+                           value="$cat[ext]" data-source="">
                 </div>
             </div>
-            <div class="input-select2 col-md-12 col-sm-12">
-                <label class="col-sm-3 col-form-label">{lang label}({lang more_tag_add_tips})</label>
-                <div class="col-sm-9 col-form-label">
-									<div class="input-group mb-3">
-                    <input type="text" class="js-tags-input form-control" name="arr[tag]" value="$cat[tag]" id="arrtag">
-                  </div>
+            <div class="input-black input-float input-select2 col-md-12 col-sm-12">
+                <label class="control-label input-label">{lang label}({lang more_tag_add_tips})</label>
+                <div class="input-animate">
+                    <input type="text" class="form-control taginput" name="arr[tag]" value="$cat[tag]">
                 </div>
             </div>
         </div>
@@ -233,7 +263,7 @@
     <div class="modal-footer">
         <!--{if $cat}-->
         <!--{if !$cat['default']}-->
-        <div class="btn-rdedanger pull-left" onclick="delete_searchcat('$cat[id]')"><span class="dzz dzz-delete"></span><span>{lang delete_type}</span>
+        <div class="btn-rdedanger pull-left" onclick="delete_searchcat('$cat[id]')"><span class="mdi mdi-delete lead dcolor"></span><span>{lang delete_type}</span>
         </div>
         <!--{else}-->
         <div class="btn-gaydanger pull-left"><span class="dzz dzz-info"></span><span>{lang system_preinstall_not_allow_delete}</span>
@@ -241,12 +271,12 @@
         <!--{/if}-->
         <input type="hidden" name="editcatsearch" value="$cat[id]"/>
         <button type="button" class="btn btn-primary" onclick="editsearchcat(this.form)">{lang save}</button>
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{lang cancel}</button>
+        <button type="button" class="btn btn-default-outline" data-dismiss="modal">{lang cancel}</button>
 
         <!--{else}-->
         <input type="hidden" name="addcatsearch" value="true"/>
         <button type="button" class="btn btn-primary" onclick="addsearchcat(this.form)">{lang create}</button>
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{lang cancel}</button>
+        <button type="button" class="btn btn-default-outline" data-dismiss="modal">{lang cancel}</button>
         <!--{/if}-->
     </div>
 </form>
@@ -254,17 +284,25 @@
 <script type="text/javascript" reload="1">
     //标签input框
     $(document).ready(function () {
-        jQuery('input.js-tags-input').each(function () {
+        jQuery('input.taginput').each(function () {
             $(this).tagsInput({
+                'width': '100%',
+                'height': 'auto',
                 'interactive': true,
                 'defaultText': '',
-                'width':'100%',
-                'height':'100%',
                 'removeWithBackspace': true,
+                'minChars': 0,
+                'maxChars': 0,
+                'placeholderColor': '#666666',
                 'typeahead': {
                     source: $(this).data('source')
                 }
             });
+        });
+
+
+        $('.input-black').each(function () {
+            InputAnimate.init($(this));
         });
     });
     function addsearchcat(form) {
@@ -333,27 +371,39 @@
 <!--{if !isset($arr['error'])}-->
 <!--新建文件夹-->
 <div class="modal-header">
-	<h4 class="modal-title">{lang newfolder}</h4>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span class="mdi mdi-close-circle "></span>
+    </button>
+    <h4 class="modal-title">{lang newfolder}</h4>
 </div>
 <form onsubmit=" return chk_create(this);">
     <div class="modal-body group-top">
-      <div class="mb-1 row clearfix">
-        <input type="text" class="form-control" name="foldername">
-      </div>
+        <div class="input-black input-float col-md-12 col-sm-12 clearfix">
+            <label class="control-label input-label">{lang default_folder_name}</label>
+            <div class="input-animate">
+                <input type="text" class="form-control" name="foldername">
+            </div>
+        </div>
         <!--{if !$noperm}-->
         <div class="Nfolder-con clearfix">
-            <div class="Nfolder-left col-sm-3 col-form-label col-lg-4">
+            <div class="Nfolder-left col-md-4 col-sm-4 col-xs-4 col-lg-4">
                 <p>{lang select_permissions}：</p>
-                <ul style="height: 300px;" id="permgroup">
+                <ul style="height: 300px;overflow: auto;" id="permgroup">
                     <li>
-                            <input type="radio" class="form-check-input inputRadios" name="inputRadios" value="$inheritperm" checked="checked" id="$inheritperm"/>
+                        <div class="radio-custom radio-primary">
+                            <input type="radio" class="inputRadios" name="inputRadios" value="$inheritperm"
+                                   checked="checked" id="$inheritperm"/>
                             <label class="lbook-label" for="$inheritperm"><span>{lang inheritperm}</span></label>
+                        </div>
                     </li>
                     <!--{loop $permgroups $val}-->
                     <li>
-                            <input type="radio" class="form-check-input inputRadios" name="inputRadios" value="$val[perm]" id="$val[perm]" <!--{if $inheritperm == $val[perm]}-->checked="checked"<!--{/if}-->/>
-                            <label class="lbook-label" for="$val[perm]"><span>$val[pername]</span></label>
+                        <div class="radio-custom radio-primary">
+                            <input type="radio" class="inputRadios" name="inputRadios" value="$val['perm']"
+                                   id="$val['perm']"
+                            <!--{if $inheritperm == $val['perm']}-->checked="checked"<!--{/if}-->/>
+                            <label class="lbook-label" for="$val['perm']"><span>$val[pername]</span></label>
+                        </div>
                     </li>
                     <!--{/loop}-->
                 </ul>
@@ -363,8 +413,9 @@
                 <ul class="properties-Nexplain" id="select_perm">
                     <!--{loop $perms $k $v}-->
                     <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <div class="checkbox-custom">
-                            <input type="checkbox" class="form-check-input" {if $inheritperm & $v[1]} checked="checked" {/if}value="$v[1]" name="selectperm[]" id="$v[1]">
+                        <div class="checkbox-custom checkbox-primary">
+                            <input type="checkbox" {if $inheritperm & $v[1]} checked="checked" {/if}value="$v[1]"
+                            name="selectperm[]" id="$v[1]">
                             <label for="$v[1]">
                                 <div class="all-yourself">
                                     <span class="{$v[2]} view-eidt perm_chk" data-perm="$v[1]"></span>$v[0]
@@ -381,11 +432,16 @@
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary">{lang create}</button>
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{lang cancel}</button>
+        <button type="button" class="btn btn-default-outline" data-dismiss="modal">{lang cancel}</button>
     </div>
 </form>
 <script type="text/javascript" reload="1">
     //名称初始化
+    jQuery(document).ready(function (e) {
+        $('.input-black').each(function () {
+            InputAnimate.init($(this));
+        });
+    });
     var permval = 0;
     $(function () {
         var perms = $('#permgroup input.inputRadios').filter(':checked').val();
@@ -468,79 +524,87 @@
 <!--{if !$error}-->
 <form onsubmit="return editsvae(this);">
     <div class="modal-header email-title">
-			<h4 class="modal-title"><!--{if $propertys[name]}-->$propertys[name]<!--{/if}-->{lang property}</h4>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="mdi mdi-close-circle "></span>
+        </button>
+        <h4 class="modal-title"><!--{if $propertys[name]}-->$propertys[name]<!--{/if}-->{lang property}</h4>
     </div>
-    <div class="modal-body">
+    <div class="modal-body nature-body">
         <!--{if $propertys[name]}-->
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{lang name}</label>
-            <div class="col-sm-9 col-form-label">
-                <input type="hidden" name="path" value="$propertys[rid]"/>
-                <input type="text" class="form-control"  <!--{if !$propertys[editperm]}-->readonly="readonly" <!--{/if}-->name="text" value="$propertys[name]">
+        <div class="nature-from clearfix">
+            <div class="input-black input-float col-md-12 col-sm-12">
+                <label class="control-label input-label">{lang name}</label>
+                <div class="input-animate">
+                    <input type="hidden" name="path" value="$propertys[rid]"/>
+                    <input type="text" class="form-control"  <!--{if !$propertys[editperm]}-->readonly="readonly"
+                    <!--{/if}-->name="text"
+                    value="$propertys[name]">
+                </div>
             </div>
+
         </div>
         <!--{/if}-->
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{lang type}</label>
-            <div class="col-sm-9 col-form-label">$propertys[type]</div>
-    </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{lang position}</label>
-            <div class="col-sm-9 col-form-label">$propertys[realpath]</div>
+        <div class="custom-from clearfix">
+            <div class="file-nature clearfix">
+                <label class="col-md-4 col-sm-4 col-xs-4">{lang type}</label>
+                <div class="col-md-8 col-sm-8 col-xs-8 label-text">$propertys['type']</div>
+            </div>
+            <div class="file-nature clearfix">
+                <label class="col-md-4 col-sm-4 col-xs-4">{lang position}</label>
+                <div class="col-md-8 col-sm-8 col-xs-8 label-text">$propertys[realpath]</div>
+            </div>
+            <div class="file-nature clearfix">
+                <label class="col-md-4 col-sm-4 col-xs-4">{lang possesor}</label>
+                <div class="col-md-8 col-sm-8 col-xs-8 label-text">$propertys['username']</div>
+            </div>
+            <!--{if $propertys['contain']}-->
+            <div class="file-nature clearfix">
+                <label class="col-md-4 col-sm-4 col-xs-4">{lang include}</label>
+                <div class="col-md-8 col-sm-8 col-xs-8 label-text">$propertys['contain']</div>
+            </div>
+            <!--{/if}-->
+            <div class="file-nature clearfix">
+                <label class="col-md-4 col-sm-4 col-xs-4">{lang big_small}</label>
+                <div class="col-md-8 col-sm-8 col-xs-8 label-text">$propertys['fsize']</div>
+            </div>
+            <!--{if $propertys[editdateline]}-->
+            <div class="file-nature clearfix">
+                <label class="col-md-4 col-sm-4 col-xs-4">{lang preceding_edit_time}</label>
+                <div class="col-md-8 col-sm-8 col-xs-8 label-text">$propertys[editdateline]</div>
+            </div>
+            <!--{/if}-->
+            <!--{if $propertys[opendateline]}-->
+            <div class="file-nature clearfix">
+                <label class="col-md-4 col-sm-4 col-xs-4">{lang preceding_open_time}</label>
+                <div class="col-md-8 col-sm-8 col-xs-8 label-text">$propertys[opendateline]</div>
+            </div>
+            <!--{/if}-->
+            <!--{if $propertys[fdateline]}-->
+            <div class="file-nature clearfix">
+                <label class="col-md-4 col-sm-4 col-xs-4">{lang create_time}</label>
+                <div class="col-md-8 col-sm-8 col-xs-8 label-text">$propertys[fdateline]</div>
+            </div>
+            <!--{/if}-->
         </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{lang possesor}</label>
-            <div class="col-sm-9 col-form-label">$propertys[username]</div>
-        </div>
-        <!--{if $propertys['contain']}-->
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{lang include}</label>
-            <div class="col-sm-9 col-form-label">$propertys['contain']</div>
-        </div>
-        <!--{/if}-->
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{lang big_small}</label>
-            <div class="col-sm-9 col-form-label">$propertys['fsize']</div>
-        </div>
-        <!--{if $propertys[editdateline]}-->
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{lang preceding_edit_time}</label>
-            <div class="col-sm-9 col-form-label">$propertys[editdateline]</div>
-        </div>
-        <!--{/if}-->
-        <!--{if $propertys[opendateline]}-->
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{lang preceding_open_time}</label>
-            <div class="col-sm-9 col-form-label">$propertys[opendateline]</div>
-        </div>
-        <!--{/if}-->
-        <!--{if $propertys[fdateline]}-->
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{lang create_time}</label>
-            <div class="col-sm-9 col-form-label">$propertys[fdateline]</div>
-        </div>
-        <!--{/if}-->
-        <!--{if !$propertys['contain'] && $_G[adminid]}-->
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">直链地址</label>
-            <div class="col-sm-9 col-form-label"><!--{eval $zldz = IO::getFileUri($propertys['rid'])}--><a href="$zldz">$zldz</a></div>
-        </div>
-        <!--{/if}-->
+
     </div>
     <div class="modal-footer">
-        <!--{if $propertys[editperm] && $propertys[name]}-->
+        <!--{if $propertys['editperm'] && $propertys['name']}-->
         <button type="submit" class="btn btn-primary">{lang submit}</button>
         <!--{/if}-->
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{lang close}</button>
+        <button type="button" class="btn btn-default-outline" data-dismiss="modal">{lang close}</button>
     </div>
 
 </form>
 <script type="text/javascript" reload="1">
+    jQuery(document).ready(function (e) {
+        $('.input-black').each(function () {
+            InputAnimate.init($(this));
+        });
+    });
     function editsvae(form) {
         var text = $(form).find('input[name="text"]').val();
         var path = $(form).find('input[name="path"]').val();
-        var ico = _explorer.sourcedata.icos[path];
+        var ico = _explorer.sourcedata.icos['path'];
         filemanage = _filemanage.cons[_filemanage.winid];
         jQuery.ajax({
             type: 'post',
@@ -575,91 +639,125 @@
 <!--创建分享-->
 <form action="{MOD_URL}&op=ajax&operation=share" method="post" onSubmit="return subshare(this);">
     <div class="modal-header email-title">
-			<h4 class="modal-title">{lang create_share}</h4>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="mdi mdi-close-circle "></span>
+        </button>
+        <h4 class="modal-title">{lang create_share}</h4>
     </div>
     <div class="modal-body">
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">{lang share_title}:</label>
+        <div class="form-group share-click clearfix">
+            <div class="input-black input-float col-md-12 col-sm-12 share-paddingleft">
+                <label class="share-label-bluer">{lang share_title}:</label>
+                <div class="input-animate share-input-text">
+                    <input type="text" class="form-control" name="share[title]" value="$share[title]"/>
+                    <input type="hidden" name="rid" value="$files"/>
+                    <input type="hidden" name="id" value="$share[id]" id="shareid"/>
+                    <input type="hidden" name="delshare" <!--{if $share['id']}--> value="1"<!--{else}-->value="0"
+                    <!--{/if}--> id="delshare" />
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group share-click clearfix">
+            <div class="input-black input-float col-sm-7 col-md-7 share-paddingleft">
+                <label class="share-label-bluer">{lang expiration_time}:</label>
+                <div class="input-animate share-input-text">
+                    <input type="text" class="form-control" placeholder="{lang expiration_time}" name="share[endtime]"
+                           id="selecttime" value="$share['endtime']"
+                           value="{eval echo  ($share['endtime'] && $share['endtime']!= 0)?$share['endtime']:''}"/>
+                </div>
+            </div>
+            <p class="col-sm-5 leace-blank">{lang left_blank_or_0_time_unlimited}</p>
+        </div>
+
+        <div class="form-group share-click clearfix">
+            <div class="input-black input-float col-sm-7 share-paddingleft">
+                <label class="share-label-bluer">{lang sharetimes}:</label>
+                <div class="input-animate share-input-text">
+                    <input type="text" class="form-control"
+                           placeholder="{lang sharing_restriction_times}" name="share[times]" value="$share[times]"/>
+                </div>
+            </div>
+            <p class="col-sm-5 leace-blank">{lang left_blank_or_0_means_unlimited}</p>
+        </div>
+        <div class="form-group share-click clearfix">
+            <div class="input-black input-float col-sm-7 share-paddingleft">
+                <label class="share-label-bluer">{lang extract_password}:</label>
+                <div class="input-animate share-input-text">
+                    <input type="text" class="form-control" placeholder="{lang share_password}" name="share[password]" value="$share['password']"/>
+                </div>
+            </div>
+            <p class="col-sm-5 leace-blank">{lang leave_blank_to_indicate_the_password_not_set}</p>
+        </div>
+        <div class="form-group share-click clearfix">
+            <label class="col-sm-3 col-form-label">分享权限</label>
             <div class="col-sm-9 col-form-label">
-                <input type="text" class="form-control" name="share[title]" value="$share[title]"/>
-                <input type="hidden" name="rid" value="$files"/>
-                <input type="hidden" name="id" value="$share[id]" id="shareid"/>
-                <input type="hidden" name="delshare" <!--{if $share[id]}--> value="1"<!--{else}-->value="0"
-                <!--{/if}--> id="delshare" />
+                <ul class="select-properties">
+                    <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="checkbox-custom checkbox-primary">
+                            <input class="form-check-input" type="checkbox" id="download" name="perm[]" value="1" <!--{if $share['perm']}--><!--{if in_array(1,$share['perm'])}-->checked="checked"<!--{/if}--><!--{/if}-->>
+                            <label class="form-check-label" for="download">禁用下载</label>
+                        </div>
+                    </li>
+                    <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="checkbox-custom checkbox-primary">
+                            <input class="form-check-input" type="checkbox" id="view" name="perm[]" value="2" <!--{if $share['perm']}--><!--{if in_array(2,$share['perm'])}-->checked="checked"<!--{/if}--><!--{/if}-->>
+                            <label class="form-check-label" for="view">禁用预览</label>
+                        </div>
+                    </li>
+                    <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="checkbox-custom checkbox-primary">
+                            <input class="form-check-input" type="checkbox" id="login" name="perm[]" value="3" <!--{if $share['perm']}--><!--{if in_array(3,$share['perm'])}-->checked="checked"<!--{/if}--><!--{/if}-->>
+                            <label class="form-check-label" for="login">仅登录访问</label>
+                        </div>
+                    </li>
+                    <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="checkbox-custom checkbox-primary">
+                            <input class="form-check-input" type="checkbox" id="edit" name="perm[]" value="4" <!--{if $share['perm']}--><!--{if in_array(4,$share['perm'])}-->checked="checked"<!--{/if}--><!--{/if}-->>
+                            <label class="form-check-label" for="edit">允许编辑</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+          </div>
+        <div class="form-group share-click clearfix" id="sharurldiv" <!--{if !$share[shareurl]}-->style="display:none;"
+        <!--{/if}-->>
+        <div class="input-black input-float col-sm-9 share-paddingleft">
+            <label class="share-label-bluer">{lang share_address}:</label>
+            <div class="input-animate share-input-text">
+                <input type="text" class="share-input-text aboutAnimate about-conte-input about-headinput form-control"
+                       placeholder="{lang copy_address}" value="$share[shareurl]" id="shareurl" onfocus="this.select()"
+                       style="padding-left: 1px;"/>
 
             </div>
         </div>
-        <div class="row mb-3">
-          <label class="col-sm-3 col-form-label">{lang expiration_time}:</label>
-          <div class="col-sm-9 col-form-label">
-            <input type="text" class="form-control" placeholder="{lang expiration_time}" name="share[endtime]" id="selecttime" value="$share[endtime]" value="{eval echo  ($share['endtime'] && $share['endtime']!= 0)?$share['endtime']:''}"/>
-            <span class="help-block">{lang left_blank_or_0_time_unlimited}</span>
-          </div>
-      </div>
-      <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">{lang sharetimes}:</label>
-        <div class="col-sm-9 col-form-label">
-          <input type="text" class="form-control" placeholder="{lang sharing_restriction_times}" name="share[times]" value="$share[times]"/>
-          <span class="help-block">{lang left_blank_or_0_means_unlimited}</span>
+        <div class="share-copybutton col-sm-3">
+            <button type="button" class="btn btn-default-outline js_copy" id="share_copy_{$share[id]}"
+                    data-clipboard-target="#shareurl" data-clipboard-text="$share[shareurl]"
+                    data-clipboard-action="copy" style="position: relative;">{lang copy_address}
+            </button>
+            <span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span>
         </div>
-      </div>
-      <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">{lang extract_password}:</label>
-        <div class="col-sm-9 col-form-label">
-          <input type="text" class="form-control" id="password" placeholder="{lang share_password}" name="share[password]" value="$share[password]"/>
-          <span class="help-block">{lang leave_blank_to_indicate_the_password_not_set}</span>
-          <div style="padding: 10px 0 0;"> <a href="javascript:;" class="btn btn-primary" onclick="randomPass()">{lang generate_random_password}</a> </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label class="col-sm-3 col-form-label"></label>
-        <div class="col-sm-9 col-form-label">
-          <div class="form-check form-check-inline form-switch">
-                <input class="form-check-input" type="checkbox" id="download" name="perm[]" value="1" <!--{if $share['perm']}--><!--{if in_array(1,$share['perm'])}-->checked="checked"<!--{/if}--><!--{/if}-->>
-                <label class="form-check-label" for="download">{lang prohibit_download}</label>
-            </div>
-            <div class="form-check form-check-inline form-switch">
-                <input class="form-check-input" type="checkbox" id="view" name="perm[]" value="2" <!--{if $share['perm']}--><!--{if in_array(2,$share['perm'])}-->checked="checked"<!--{/if}--><!--{/if}-->>
-                <label class="form-check-label" for="view">{lang disable_preview}</label>
-            </div>
-            <div class="form-check form-check-inline form-switch">
-                <input class="form-check-input" type="checkbox" id="login" name="perm[]" value="3" <!--{if $share['perm']}--><!--{if in_array(3,$share['perm'])}-->checked="checked"<!--{/if}--><!--{/if}-->>
-                <label class="form-check-label" for="login">{lang login_access_only}</label>
-            </div>
-            <div class="form-check form-check-inline form-switch">
-                <input class="form-check-input" type="checkbox" id="edit" name="perm[]" value="4" <!--{if $share['perm']}--><!--{if in_array(4,$share['perm'])}-->checked="checked"<!--{/if}--><!--{/if}-->>
-                <label class="form-check-label" for="edit">允许编辑</label>
-            </div>
-        </div>
-      </div>
-      <div class="row mb-3" id="sharurldiv" <!--{if !$share[shareurl]}-->style="display:none;"<!--{/if}-->>
-        <label class="col-sm-3 col-form-label">{lang share_address}:</label>
-        <div class="col-sm-9 col-form-label">
-          <input type="text" class="share-input-text aboutAnimate about-conte-input about-headinput form-control" placeholder="{lang copy_address}" value="$share[shareurl]" id="shareurl" onfocus="this.select()" readonly="readonly"/>
-          <button type="button" class="btn btn-primary js_copy" id="share_copy_{$share[id]}" data-clipboard-target="#shareurl" data-clipboard-text="$share[shareurl]" data-clipboard-action="copy" style="position: relative;">{lang copy_address}</button>
-          <span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span>
-        </div>
-      </div>
+    </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-danger pull-left <!--{if !$share[shareurl]}--> hide <!--{/if}--> delshare" onclick="removeshare(this.form)">{lang delete_share}</button>
-      <button type="submit" class="btn btn-primary" data-loading-text="{lang create_in}">
-          <!--{if $share['id']}-->
-          {lang edit_share}
-          <!--{else}-->
-          {lang create_share}
-          <!--{/if}-->
-      </button>
-      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{lang close}</button>
+        <button type="button" class="btn btn-danger pull-left <!--{if !$share[shareurl]}--> hide <!--{/if}--> delshare"
+                onclick="removeshare(this.form)">{lang delete_share}
+        </button>
+        <button type="submit" class="btn btn-primary" data-loading-text="{lang create_in}">
+            <!--{if $share['id']}-->
+            {lang edit_share}
+            <!--{else}-->
+            {lang create_share}
+            <!--{/if}-->
+        </button>
+        <button type="button" class="btn btn-default-outline" data-dismiss="modal">{lang close}</button>
     </div>
 </form>
 <script type="text/javascript" reload="1">
-	function randomPass() {
-		var pass = (Math.round(Math.random() * 100000000));
-		jQuery('#password').val(pass).trigger('blur');
-	}
     jQuery(document).ready(function (e) {
+        $('.input-black').each(function () {
+            InputAnimate.init($(this));
+        });
         jQuery.getScript('static/clipboard/clipboard.min.js?{VERHASH}', function () {
             jQuery('.js_copy').each(function () {
                 var clipboard = new Clipboard(this);
@@ -737,22 +835,22 @@
 <!--群组创建成功或者失败提示框-->
 <div class="modal-body judge">{$msgtext}</div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">{lang confirms}</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">{lang confirms}</button>
 </div>
 <!--{elseif $operation == 'newLink'}-->
 <!--{if !isset($arr[error])}-->
 <form onsubmit="return false;">
     <div class="modal-header">
-			<h4 class="modal-title">{lang add_url}</h4>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{lang add_url}</h4>
     </div>
     <div class="modal-body">
         <input type="text" class="form-control focus" value="http://" name="link">
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="chk_link(this.form)">{lang submit}</button>
-        <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">{lang close}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{lang close}</button>
     </div>
 </form>
 <script type="text/javascript" reload="1">
@@ -777,25 +875,34 @@
 <!--编辑版本信息-->
 <form action="" method="post" onsubmit="return false;">
     <div class="modal-header">
-			<h4 class="modal-title">{lang edit_version_information}</h4>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="mdi mdi-close-circle "></span>
+        </button>
+        <h4 class="modal-title">{lang edit_version_information}</h4>
     </div>
     <div class="modal-body group-top">
-        <div class="col-md-12 col-sm-12">
-            <label class="col-sm-3 col-form-label">{lang edit_version_information}</label>
-            <div class="col-sm-9 col-form-label">
-                <textarea class="form-control" id="vnametestarea" name="vname"><!--{if isset($versioninfo['vname'])}--> $versioninfo['vname']<!--{/if}--></textarea>
+        <div class="col-md-12 col-sm-12 input-float input-black">
+            <label class="control-label input-label">{lang edit_version_information}</label>
+            <div class="input-animate">
+                <textarea class="form-control" id="vnametestarea" name="vname"><!--{if isset($versioninfo['vname'])}--> $versioninfo['vname']
+                    <!--{/if}--></textarea>
             </div>
+
         </div>
     </div>
     <div class="modal-footer">
         <input type="hidden" name="rid" value="$rid"/>
         <input type="hidden" name="vid" value="$vid"/>
         <button type="submit" class="btn btn-primary saveversioninfo">{lang save}</button>
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{lang cancel}</button>
+        <button type="button" class="btn btn-default-outline" data-dismiss="modal">{lang cancel}</button>
     </div>
 </form>
 <script type="text/javascript" reload="1">
+    $(document).ready(function () {
+        $('.input-black').each(function () {
+            InputAnimate.init($(this));
+        });
+    });
     //编辑版本信息
     $(document).off('click.versioninfoedit').on('click.versioninfoedit', '.saveversioninfo', function () {
         var obj = $(this);
@@ -819,14 +926,14 @@
             if (data['vid']) {
                 if (querydata['vid']) {
                     if (querydata['vid'] == data['primaryvid']) {
-                        var html = '<span class="nameMenu">' + vname + '</span><p class="versioninfos text-muted">' + data['fdateline'] +
+                        var html = '<span class="nameMenu">' + vname + '</span><p class="versioninfos">' + data['fdateline'] +
                             '<span class="label label-gainsboro">{lang principal_edition}</span></p>';
                     } else {
-                        var html = '<span class="nameMenu">' + vname + '</span><p class="versioninfos text-muted">' + data['fdateline'] + '</p>';
+                        var html = '<span class="nameMenu">' + vname + '</span><p class="versioninfos">' + data['fdateline'] + '</p>';
                     }
                     $('#version_' + data['vid']).find('div.unameMenu-upload').html(html);
                 } else {
-                    var html = '<span class="nameMenu">' + vname + '</span><p class="versioninfos text-muted">' + data['fdateline'] + '</p>';
+                    var html = '<span class="nameMenu">' + vname + '</span><p class="versioninfos">' + data['fdateline'] + '</p>';
                     $('#version_0').find('div.unameMenu-upload').html(html);
                 }
                 obj.data('vid', data['vid']);
@@ -844,38 +951,51 @@
     <input type="hidden" name="rid" value="$rid"/>
     <input type="hidden" name="addtag" value="1"/>
     <div class="modal-header">
-			<h4 class="modal-title">{lang edit_label}</h4>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="mdi mdi-close-circle "></span>
+        </button>
+        <h4 class="modal-title">{lang edit_label}</h4>
     </div>
     <div class="modal-body group-top edit-labeltags">
         <div class="col-md-12 col-sm-12">
-            <label class="col-form-label">{lang add_label_return_car}</label>
-            <input type="text" class="js-tags-input form-control" name="tags" data-source="$tagstr" value="$tagval" id="tags">
+            <div class="custom-from">
+                <div class="input-black input-float col-md-12 col-sm-12">
+                    <label class="control-label input-label">{lang add_label_return_car}</label>
+                    <div class="input-animate">
+                        <input type="text" class="form-control taginput_tag" name="tags"
+                               data-source="$tagstr" value="$tagval">
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary">{lang save}</button>
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{lang cancel}</button>
+
+        <button type="button" class="btn btn-default-outline" data-dismiss="modal">{lang cancel}</button>
     </div>
 </form>
 
 <script type="text/javascript" reload="1">
     //标签input框
     $(document).ready(function () {
-      $('.js-tags-input').tagsInput({
-          'interactive': true,
-          'defaultText': '',
-          'removeWithBackspace': true,
-          'minChars': 0,
-          'maxChars': 0,
-          'with':'100%',
-          'height':'100%',
-          'placeholderColor': '#666666',
-          'typeahead': {
-              source: $(this).data('source')
-          }
-      });
+        $('.taginput_tag').tagsInput({
+            'height': '0px',
+            'width': '100%',
+            'interactive': true,
+            'defaultText': '',
+            'removeWithBackspace': true,
+            'minChars': 0,
+            'maxChars': 0,
+            'placeholderColor': '#666666',
+            'typeahead': {
+                source: $(this).data('source')
+            }
+        });
+        $('.input-black').each(function () {
+            InputAnimate.init($(this));
+        });
     });
     function save_tag(form) {
 
@@ -905,20 +1025,24 @@
 </script>
 <!--{else}-->
 <!--{if !isset($arr[error])}-->
-<!--{if $arr[type] == 'folder'}-->
-<li class="liste typefolder" data-href="{MOD_URL}&op=group" data-hash="group{$arr[gid]}_file-$arr[oid]" data-args="gid_{$arr[gid]}-do_file-fid_$arr[oid]" data-fid="$arr[oid]" id="$arr[rid]" data-rid="$arr[rid]">
-<!--{else}-->
-<li class="liste typefile"  <!--{if $arr[type] == 'link'}-->data-href="$arr[url]" <!--{else}-->data-href="{eval echo dzzencode($arr[path]);}" <!--{/if}-->data-rid="$arr[rid]" data-ext="$arr[ext]" data-type="$arr[type]"data-name="$arr[name]" id="$arr[rid]">
+<!--{if $arr['type'] == 'folder'}-->
+<li class="liste typefolder"
+    data-href="{MOD_URL}&op=group"
+    data-hash="group{$arr[gid]}_file-$arr[oid]" data-args="gid_{$arr[gid]}-do_file-fid_$arr[oid]" data-fid="$arr[oid]"
+    id="$arr[rid]" data-rid="$arr[rid]">
+    <!--{else}-->
+<li class="liste typefile"  <!--{if $arr['type'] == 'link'}-->data-href="$arr[url]" <!--{else}-->data-href="{eval echo dzzencode($arr['path']);}"<!--{/if}-->
+data-rid="$arr[rid]" data-ext="$arr[ext]" data-type="$arr['type']"data-name="$arr[name]" id="$arr[rid]">
 <!--{/if}-->
 <ul class="ul-file-li clearfix">
     <li class="td-file-name clearfix">
-        <div class="checkbox-custom">
-            <input type="checkbox" class="form-check-input listecheck"/>
+        <div class="checkbox-custom checkbox-primary">
+            <input type="checkbox" class=" listecheck"/>
             <label></label>
         </div>
         <div class="fileitemMenu">
             <div class="imgMenu">
-                <img src="{$_G[siteurl]}$arr[img]" style="width: 30px;height: 30px;">
+                <img src="{$_G['siteurl']}$arr[img]" style="width: 30px;height: 30px;">
             </div>
             <div class="itemMenu clearfix">
                 <div class="firstMenu ">
@@ -927,14 +1051,16 @@
                     </div>
                 </div>
                 <div class="iconleft">
-                    <i onclick="collectfile(this)" class="mstars <!--{if $arr[collect]}--> yellowstars <!--{else}--> fivestarts <!--{/if}-->" title="{lang add_to_favorites}" data-rid="$val[rid]" data-collect="$val[collect]"></i>
+                    <i onclick="collectfile(this)"
+                       class="mstars <!--{if $arr[collect]}--> yellowstars <!--{else}--> fivestarts <!--{/if}-->"
+                       title="{lang add_to_favorites}" data-rid="$val[rid]" data-collect="$val[collect]"></i>
                     <button type="button" class="mlabel tagmanage" title="{lang label}" data-rid="$arr[rid]"></button>
                 </div>
             </div>
         </div>
     </li>
     <li class="td-file-size"><span>$arr[fsize]</span></li>
-    <li class="td-file-proprietor">$arr[username]</li>
+    <li class="td-file-proprietor">$arr['username']</li>
     <li class="td-file-time">{eval echo dgmdate($arr['dateline'],'Y-m-d H:i:s')}</li>
 </ul>
 </li>
@@ -942,9 +1068,13 @@
 <!--{else}-->
 <script type="text/javascript" reload="1">
     closeModal('#exampleMultipleOne');
-    // showWindow('#exampleMultipleOne', '{MOD_URL}&op=ajax&operation=showtips&msg={$arr[error]}');
+    // showWindow('#exampleMultipleOne', 'index.php?mod=explorer&op=ajax&operation=showtips&msg={$arr[error]}');
     showDialog('{$arr[error]}');
+
 </script>
 <!--{/if}-->
 <!--{/if}-->
 <!--{template common/footer_ajax}-->
+
+
+

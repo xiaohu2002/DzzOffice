@@ -10,35 +10,6 @@ CREATE TABLE dzz_admincp_session (
   PRIMARY KEY (uid,panel)
 ) ENGINE=MyISAM;
 
-CREATE TABLE IF NOT EXISTS dzz_user_wechat (
-  uid int(10) unsigned NOT NULL DEFAULT '0',
-  openid char(28) NOT NULL DEFAULT '',
-  appid char(18) NOT NULL DEFAULT '',
-  unionid char(29) NOT NULL DEFAULT '',
-  dateline int(10) unsigned NOT NULL DEFAULT '0',
-  UNIQUE KEY uid (uid),
-  UNIQUE KEY openid (openid,appid)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS dzz_test;
-CREATE TABLE IF NOT EXISTS `dzz_test` (
-  `testid` int(10) NOT NULL AUTO_INCREMENT,
-  `name` char(30) NOT NULL DEFAULT '',
-  `dateline` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`testid`),
-  KEY `dateline` (`dateline`)
-) ENGINE=MyISAM;
-
-CREATE TABLE IF NOT EXISTS dzz_user_wechat (
-  uid int(10) unsigned NOT NULL DEFAULT '0',
-  openid char(28) NOT NULL DEFAULT '',
-  appid char(18) NOT NULL DEFAULT '',
-  unionid char(29) NOT NULL DEFAULT '',
-  dateline int(10) unsigned NOT NULL DEFAULT '0',
-  UNIQUE KEY uid (uid),
-  UNIQUE KEY openid (openid,appid)
-) ENGINE=MyISAM;
-
 DROP TABLE IF EXISTS dzz_app_market;
 CREATE TABLE dzz_app_market (
   `appid` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -60,7 +31,7 @@ CREATE TABLE dzz_app_market (
   `fileext` text NOT NULL COMMENT '可以打开的文件类型',
   `group` tinyint(1) NOT NULL DEFAULT '1' COMMENT '应用的分组:0:全部；-1:游客可用，3:系统管理员可用;2：部门管理员可用;1:所有成员可用',
   `orgid` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '可以使用的部门id，为0表示不限制',
-  `position` TINYINT NOT NULL DEFAULT 0 COMMENT '1: apparea, 2: desktop, 3: taskbar',
+  `position` tinyint(1) NOT NULL DEFAULT '0' COMMENT '2：desktop,3：taskbar,1：apparea',
   `system` tinyint(1) NOT NULL DEFAULT '0',
   `notdelete` tinyint(1) NOT NULL DEFAULT '0',
   `open` tinyint(1) NOT NULL DEFAULT '0',
@@ -1187,15 +1158,6 @@ CREATE TABLE dzz_user_profile (
   PRIMARY KEY (uid,fieldid)
 ) ENGINE=MyISAM;
 
-DROP TABLE IF EXISTS dzz_user_qqconnect;
-CREATE TABLE dzz_user_qqconnect (
-  openid varchar(255) NOT NULL COMMENT 'Openid',
-  uid int(10) unsigned NOT NULL COMMENT '对应UID',
-  dateline int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
-  unbind tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (openid(20)),
-  KEY uid (uid)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS dzz_user_profile_setting;
 CREATE TABLE dzz_user_profile_setting (

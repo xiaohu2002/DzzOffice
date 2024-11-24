@@ -27,7 +27,7 @@ $_config['language'] = '';
 $_config['mod_view_perm'] = '';
 $_config['action_name'] = 'do';
 $_config['do_name'] = 'action';
-$_config['ztys'] = '#3779ff';
+
 $_config['profile']['privacy'] = array(
     '-1'=>'私密',
     '0'=>'公开',

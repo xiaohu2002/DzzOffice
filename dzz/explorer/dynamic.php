@@ -3,9 +3,11 @@ if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 include_once libfile('function/code');
+Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 global $_G;
 $uid = $_G['uid'];
 $do = isset($_GET['do']) ? trim($_GET['do']) : '';
+
 //获取文件夹右侧信息
 if ($do == 'getfolderdynamic') {
     //接收文件夹id数据
@@ -82,7 +84,7 @@ if ($do == 'getfolderdynamic') {
         $events = C::t('resources_event')->fetch_by_pfid_rid($fid, '', $start, $limit, '');
     }
     $usergroupperm = C::t('organization_admin')->chk_memberperm($gid, $uid);
-    $fileinfo['type'] = lang('type_folder');
+    $fileinfo['type'] = '文件夹';
     $perms = get_permsarray();//获取所有权限
     include template('right_folder_menu');
     exit();

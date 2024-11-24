@@ -30,13 +30,7 @@ if($_GET['uid'] && $_GET['id']) {
     if(!submitcheck('getpwsubmit') || $_GET['newpasswd1'] != $_GET['newpasswd2']) {
         $hashid = $_GET['id'];
         $uid = $_GET['uid'];
-			if ($_G['setting'][loginset][template] == 2){
-			include template('getpasswd2');
-		}elseif ($_G['setting'][loginset][template] == 3){
-      include template('getpasswd3');
-		}else{
-      include template('getpasswd');
-		}
+        include template('getpasswd');
     } else {
         if($_GET['newpasswd1'] != addslashes($_GET['newpasswd1'])) {
             showmessage(lang('profile_passwd_illegal'));

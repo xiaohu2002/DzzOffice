@@ -5,4 +5,535 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-function checkAdminLogin(e){return!!e.match(/id=\"loginform\"/i)}function show_guide(){jQuery("#orguser_container").load(ajaxurl+"do=guide",function(){location.hash=""})}function delDepart(e){jQuery(e).parent().parent().remove()}var tpml_index=0;function addorgsel(){jQuery("#selorg_container").append(' <ul class="nav nav-pills">'+orgsel_html.replace(/orgid_tpml/gi,"orgid_tpml_"+tpml_index)+"</ul>"),tpml_index++}function selJob(e){var r=jQuery(e).attr("_jobid"),o=jQuery(e).parent().parent().parent(),t=e.innerHTML;o.find(".dropdown-toggle").attr("_jobid",r).find("span").html(t),o.find("input").val(r)}function selDepart(e){var r=jQuery(e).val(),o=jQuery(e).parent();o.parent().find(".job .dropdown-menu").load(ajaxurl+"do=getjobs&orgid="+r,function(e){checkAdminLogin(e)&&location.reload(),o.parent().find(".job .dropdown-menu li").length>1&&o.parent().find(".job .dropdown-toggle").trigger("click")}),o.parent().find(".job .dropdown-toggle").attr("_jobid",0).find("span").html(__lang.none),o.parent().find(".job input").val("0")}function errormessage(e,r,o){jQuery("#"+e).length>0&&("succeed"==(r=r||"")?(r="",jQuery("#suc_"+e).addClass("p_right")):""!==r&&jQuery("#suc_"+e).removeClass("p_right"),jQuery("#chk_"+e).find("kbd").html(r),r&&!o?jQuery("#"+e).parent().parent().addClass("has-warning"):jQuery("#"+e).parent().parent().removeClass("has-warning"))}function checkemail(e){errormessage(e);var r=trim(jQuery("#"+e).val());if(r=r.toLowerCase(),(!jQuery("#"+e).parent()[0].className.match(/ p_right/)||""!=r&&r!=lastemail)&&r!=lastemail)if(r.match(/<|"/gi))errormessage(e,__lang.Email_sensitivity);else{new Ajax;jQuery("#suc_"+e).removeClass("p_right"),jQuery.getJSON("user.php?mod=ajax&inajax=yes&infloat=register&handlekey=register&ajaxmenu=1&action=checkemail&email="+r,function(r){r.error?errormessage(e,r.error):errormessage(e,"succeed")})}}function checknick(e){errormessage(e);var r=trim(jQuery("#"+e).val());if((!jQuery("#chk_"+e).parent()[0].className.match(/ p_right/)||""!=r&&r!=lastusername)&&r!=lastusername)if(r.match(/<|"/gi))errormessage(e,__lang.profile_nickname_illegal);else if(r){var o=r.replace(/[^\x00-\xff]/g,"**").length;if(o<3||o>30)return void errormessage(e,__lang.username_character);new Ajax;jQuery("#suc_"+e).removeClass("p_right"),jQuery.getJSON("user.php?mod=ajax&inajax=yes&infloat=register&handlekey=register&ajaxmenu=1&action=checkusername&username="+encodeURI(r),function(r){r.error?errormessage(e,r.error):errormessage(e,"succeed")})}}function checkPwdComplexity(e,r,o){modifypwd=o||!1,e.onblur=function(){if(""==e.value){var o=modifypwd?__lang.js_change_password:__lang.register_password_tips;pwlength>0&&(o+=", "+__lang.register_password_length_tips1+pwlength+__lang.register_password_length_tips2),modifypwd||errormessage(e.id,o)}else errormessage(e.id,modifypwd?__lang.js_change_password:"succeed");checkpassword(e.id,r.id)},e.onkeyup=function(){if(0==pwlength||jQuery("#"+e.id).value.length>=pwlength){var r=new Array("",__lang.weak,__lang.center,__lang.strong),o=checkstrongpw(e.id);errormessage(e.id,'<span class="passlevel passlevel'+o+'">'+__lang.intension+":"+r[o]+"</span>","passlevel")}},r.onblur=function(){""==r.value&&(modifypwd||errormessage(r.id,modifypwd?__lang.register_repassword_tips:"succeed")),checkpassword(e.id,r.id)}}function checkstrongpw(e){var r=0,o=document.getElementById(e).value;return o&&o.match(/\d+/g)&&r++,o&&o.match(/[a-z]+/gi)&&r++,o&&o.match(/[^a-z0-9]+/gi)&&r++,r}function checkpassword(e,r){if(!document.getElementById(e).value&&document.getElementById(r).value,pwlength>0&&document.getElementById(e).value.length<pwlength)errormessage(e,__lang.password_too_short+pwlength+__lang.register_password_length_tips2);else{if(strongpw){var o=!1,t=0,a=new Array;for(var n in strongpw)1!==strongpw[n]||document.getElementById(e).value.match(/\d+/g)||(o=!0,a[t]=__lang.strongpw_1,t++),2!==strongpw[n]||document.getElementById(e).value.match(/[a-z]+/g)||(o=!0,a[t]=__lang.strongpw_2,t++),3!==strongpw[n]||document.getElementById(e).value.match(/[A-Z]+/g)||(o=!0,a[t]=__lang.strongpw_3,t++),4!==strongpw[n]||document.getElementById(e).value.match(/[^A-Za-z0-9]+/g)||(o=!0,a[t]=__lang.strongpw_4,t++);if(o)return void errormessage(e,__lang.password_weak+a.join("，"))}errormessage(r),document.getElementById(e).value!=document.getElementById(r).value?errormessage(r,__lang.profile_passwd_notmatch):(modifypwd&&errormessage(e,"succeed"),errormessage(r,"succeed"))}}function jstree_search(e){console.log(e),"stop"==e?(jQuery("#jstree_search_input").val(""),jQuery("#searchval").val(""),jQuery(".classtree-search").slideUp(500),jQuery("#classtree").jstree(!0).search()):(""==e&&(jQuery("#jstree_search_input").val(""),jQuery("#searchval").val(""),jQuery(".classtree-search").slideUp(500)),jQuery("#classtree").jstree(!0).search(e))}function jstree_create_organization(){var e=jQuery("#classtree").jstree(!0);jQuery.post(ajaxurl+"do=create",{forgid:0,t:(new Date).getTime()},function(r){if(!r||r.error)showmessage(r.error,"danger",3e3,1);else if(r.orgid>0){var o={id:r.orgid,text:r.orgname,type:"organization",icon:"dzz/system/images/organization.png"};e.create_node(e.get_node("#"),o,"first",function(r){setTimeout(function(){e.edit(r)},0)})}},"json")}function jstree_create_dir(){var e;if((r=jQuery("#classtree").jstree(!0)).get_selected(!0).length>0){if("user"==(e=(e=r.get_selected(!0))[0]).type)return showmessage(__lang.please_select_one_organization_department,"danger",1e3,1),!0;if(r.is_disabled(e))return!0;var r=jQuery("#classtree").jstree(!0);jQuery.post(ajaxurl+"do=create",{forgid:e.id,t:(new Date).getTime()},function(o){if(!o||o.error)showmessage(o.error,"danger",3e3,1);else if(o.orgid>0){var t={id:o.orgid,text:o.orgname,type:"organization",icon:o.forgid>0?"dzz/system/images/department.png":"dzz/system/images/organization.png"};r.create_node(e,t,"first",function(e){setTimeout(function(){r.edit(e)},0)})}},"json")}else showmessage(__lang.please_select_one_organization_department,"danger",1e3,1)}function jstree_create_user(e){var r,o=jQuery("#classtree").jstree(!0);if(o.get_selected(!0).length>0?r=(r=o.get_selected(!0))[0]:(e&&(e=0),r=o.get_node("#")),"user"==r.type&&(r=o.get_node(r.parent)),o.is_disabled(r))return!0;showDetail(0,"user",null,r.id)}function showDetail(e,r,o,t){var a=r+"_"+e,n="";o&&(a+="_"+o,n+="&do="+o),t&&(a+="_"+t,n+="&orgid="+t),currentHash=a,location.hash=a,n+="&t="+(new Date).getTime(),jQuery("#orguser_container").load(baseurl+"op=view&id="+e+"&idtype="+r+n,function(e){checkAdminLogin(e)&&location.reload()})}function open_node_dg(e,r,o){e.open_node(r,function(r){var t=jQuery.inArray(r.id,o);t<o.length&&t>-1&&document.getElementById(o[t+1])&&open_node_dg(e,document.getElementById(o[t+1]),o)})}function job_show_editor(e,r,o){var t=jQuery(o).addClass("hide");t.parent().find(".edit").removeClass("hide"),t.parent().find("input").focus(),jQuery(document).on("click.job_edit_"+e,function(o){jQuery(o.target).closest(t.parent()).length||(job_save(e,r),jQuery(document).off("click.job_edit_"+e))})}function job_save(e,r){var o=jQuery("#job_"+e),t=trim(o.find(".job-name").html()),a=trim(o.find(".job-edit-control input").val());if(t==a)return o.find(".job-name").removeClass("hide"),void o.find(".edit").addClass("hide");jQuery.post(ajaxurl+"do=jobedit",{name:a,jobid:e,orgid:r,t:(new Date).getTime()},function(e){e.error?(o.find(".job-name").html(t).removeClass("hide"),o.find(".edit").addClass("hide"),o.find(".job-edit-control input").val(t)):e.jobid>0&&(o.find(" .job-name").html(e.name).removeClass("hide"),o.find(".edit").addClass("hide"),o.find(".job-edit-control input").val(e.name))},"json")}function job_show_add_editor(e,r){var o=jQuery(r);o.addClass("hide"),o.parent().find(".new-job-control").removeClass("hide"),o.parent().find(".new-job-control input").focus(),jQuery(document).on("click.new-job-"+e,function(r){jQuery(r.target).closest(o.parent()).length||(job_cancel_add_editor(e),jQuery(document).off("click.new-job-"+e))})}function job_cancel_add_editor(e){var r=jQuery(".jobs .new-job");r.find(".new-job-control").addClass("hide"),r.find("a").removeClass("hide")}function job_del(e,r){var o=jQuery("#job_"+e);jQuery.post(ajaxurl+"do=jobdel",{jobid:e,orgid:r,t:(new Date).getTime()},function(e){e.error?showmessage(e.error,"danger",3e3,1):e.jobid>0&&o.remove()},"json")}function job_add(e){var r=jQuery(".jobs .new-job"),o=r.find(".new-job-text").val();""!=o?jQuery.post(ajaxurl+"do=jobadd",{name:o,orgid:e,t:(new Date).getTime()},function(e){e.jobid>0?(appendjob(e),r.find(".new-job-text").val("").focus()):showmessage(e.error,"danger",3e3,1)},"json"):newtodo.find(".new-job-text").focus()}function appendjob(e){var r="";r+='<div id="job_'+e.jobid+'" orgid="'+e.orgid+'" class="job-item-edit pull-left">',r+="    <button onclick=\"job_show_editor('"+e.jobid+"','"+e.orgid+'\', this)" class="btn btn-outline-secondary job-name mr20">'+e.name+"</button>",r+='    <div class="edit hide" style="min-width:250px">',r+='        <div class="job-edit-control pull-left" >',r+='            <input type="text" class="form-control" style="width:100px" value="'+e.name+'" onkeyup="if(event.keyCode==13){job_save(\''+e.name+"','"+e.orgid+"')}\">",r+="        </div>",r+="        <button onclick=\"job_save('"+e.name+"','"+e.orgid+'\')" data-loading-text="'+__lang.save+'" class="btn btn-outline-primary job-save">'+__lang.save+"</button>",r+='        <button class="btn btn-outline-primary todo-del" onclick="job_del(\''+e.name+"','"+e.orgid+"')\">"+__lang.delete+"</button>",r+="    </div> ",r+="</div>",jQuery(".jobs .new-job").before(r)}function callback_moderators(e,r,o){console.log(e),console.log(o),jQuery(".moderators-container .user-item").each(function(){var r=jQuery(this).attr("uid");-1===jQuery.inArray(r,e)&&jQuery(this).find(".delete").trigger("click")});for(var t=0;t<e.length;t++)moderator_add(o,e[t])}function moderator_add(e,r){if(jQuery("#moderators_container_"+e+" .user-item[uid="+r+"]").length)return jQuery("#moderators_container_"+e+" .user-item[uid="+r+"]").insertAfter(jQuery("#moderators_container_"+e+" .moderators-acceptor")),void jQuery("#moderators_container_"+e+" .moderators-acceptor").removeClass("hover");jQuery("#moderators_container_"+e+" .moderators-acceptor").removeClass("hover"),jQuery.post(ajaxurl+"do=moderator_add",{orgid:e,uid:r,t:(new Date).getTime()},function(e){e.error?showmessage(e.error,"danger",3e3,1):appendModerator(e)},"json")}function appendModerator(e){var r="";r+='<li class="user-item pull-left" uid="'+e.uid+'"> ',r+='\t\t\t<a href="javascrip:;" class="delete" onclick="moderator_del(\''+e.id+"','"+e.orgid+'\',this);return false"><i style="color:#d2322d;font-size:16px" class="glyphicon glyphicon-remove-sign"></i></a>',r+='\t\t\t<div class="avatar-cover"></div>',r+='\t\t\t<div class="user-item-avatar">',r+='\t\t\t\t<div class="avatar-face">',r+="\t\t\t\t\t"+e.avatar,r+="\t\t\t\t</div>",r+="\t\t\t</div>",r+='\t\t\t<p class="text-center" style="height:20px;margin:5px 0;line-height:25px;overflow:hidden;"> '+e.username+"</p>",r+="\t   </li>",jQuery("#moderators_container_"+e.orgid+" .moderators-acceptor").after(r);var o=jQuery("#classtree").jstree(!0),t=o.get_node("#"+e.orgid);o.refresh_node(t)}function moderator_del(e,r,o){jQuery.post(ajaxurl+"do=moderator_del",{orgid:r,id:e,t:(new Date).getTime()},function(e){e.error?showmessage(e.error,"danger",3e3,1):jQuery(o).parent().remove()},"json")}function folder_available(e,r){jQuery.post(ajaxurl+"do=folder_available",{orgid:r,available:e,t:(new Date).getTime()},function(r){r.error?showmessage(r.error,"danger",3e3,1):e?showmessage(__lang.share_enable_successful,"success",3e3,1):showmessage(__lang.share_close_successful,"success",3e3,1)},"json")}function group_on(e,r){jQuery.post(ajaxurl+"do=group_on",{orgid:r,available:e,t:(new Date).getTime()},function(r){r.error?showmessage(r.error,"danger",3e3,1):e?showmessage(__lang.group_on_successful,"success",3e3,1):showmessage(__lang.group_close_successful,"success",3e3,1)},"json")}function folder_indesk(e,r){jQuery.post(ajaxurl+"do=folder_indesk",{orgid:r,indesk:e,t:(new Date).getTime()},function(e){e.error&&showmessage(e.error,"danger",3e3,1)},"json")}function set_org_logo(e,r){jQuery.post(ajaxurl+"do=set_org_logo",{orgid:e,aid:r},function(e){e.error&&showmessage(e.error,"danger",3e3,1)},"json")}function set_org_orgname(e,r){var o=jQuery(r).data("oldname");console.log(o),jQuery.post(ajaxurl+"do=set_org_orgname",{orgid:e,orgname:r.value},function(t){if(t.error)r.value=o,showmessage(t.error,"danger",3e3,1);else{jQuery(r).data("oldname",r.value),jQuery("#title_orgname").html(r.value);var a=jQuery("#classtree").jstree(!0).get_node("#"+e);jQuery("#classtree").jstree("refresh",a)}},"json")}function set_org_desc(e,r){jQuery.post(ajaxurl+"do=set_org_desc",{orgid:e,desc:r},function(e){e.error&&showmessage(e.error,"danger",3e3,1)},"json")}function folder_maxspacesize(e,r){jQuery.post(ajaxurl+"do=folder_maxspacesize",{orgid:r,maxspacesize:e.value,t:(new Date).getTime()},function(o){o.error?(e.value=o.val,showmessage(o.error,"danger",3e3,1)):(jQuery("#"+r+" a.jstree-clicked").trigger("click"),showmessage("空间大小设置成功","success",3e3,1))},"json")}
+function checkAdminLogin(str){
+	if(str.match(/id=\"loginform\"/i)){
+		return true;
+	}else{
+		return false;
+	}
+}
+function show_guide(){
+	jQuery('#orguser_container').load(ajaxurl+'do=guide',function(){
+		location.hash='';
+	});
+}
+function delDepart(obj){
+	jQuery(obj).parent().parent().remove();
+}
+var tpml_index=0;
+function addorgsel(){
+	jQuery('#selorg_container').append(' <ul class="nav nav-stacked nav-pills">'+(orgsel_html.replace(/orgid_tpml/ig,'orgid_tpml_'+tpml_index))+'</ul>');
+	tpml_index++;
+}
+
+function selJob(obj){
+	var jobid=jQuery(obj).attr('_jobid');
+	var li=jQuery(obj).parent().parent().parent();
+	var html=obj.innerHTML;
+	li.find('.dropdown-toggle').attr('_jobid',jobid).find('span').html(html);
+	li.find('input').val(jobid);
+}
+function selDepart(obj){
+	var orgid=jQuery(obj).val();
+	var li=jQuery(obj).parent();
+	li.parent().find('.job .dropdown-menu').load(ajaxurl+'do=getjobs&orgid='+orgid,function(html){
+			if(checkAdminLogin(html)){
+				location.reload();
+			}
+			if(li.parent().find('.job .dropdown-menu li').length>1) li.parent().find('.job .dropdown-toggle').trigger('click');
+		});
+	li.parent().find('.job .dropdown-toggle').attr('_jobid',0).find('span').html(__lang.none);
+	li.parent().find('.job input').val('0');
+}
+function errormessage(id, msg,passlevel) {
+	if(jQuery('#'+id).length > 0) {
+		msg = !msg ? '' : msg;
+		if(msg == 'succeed') {
+			msg = '';
+			jQuery('#suc_' + id).addClass('p_right');
+		} else if(msg !== '') {
+			jQuery('#suc_' + id).removeClass('p_right');
+		}
+		jQuery('#chk_' + id).find('kbd').html(msg);
+		if(msg && !passlevel) jQuery('#'+id).parent().parent().addClass('has-warning');
+		else jQuery('#'+id).parent().parent().removeClass('has-warning');
+	}
+}
+
+function checkemail(id) {
+	errormessage(id);
+	var email = trim(jQuery('#'+id).val());
+	email=email.toLowerCase();
+	if(jQuery('#'+id).parent()[0].className.match(/ p_right/) && (email == '' || email == lastemail ) || email == lastemail) {
+		return;
+	} 
+	if(email.match(/<|"/ig)) {
+		errormessage(id, __lang.Email_sensitivity);
+		return;
+	}
+	
+	var x = new Ajax();
+	jQuery('#suc_' + id).removeClass('p_right');
+	jQuery.getJSON('user.php?mod=ajax&inajax=yes&infloat=register&handlekey=register&ajaxmenu=1&action=checkemail&email=' + email, function(json) {
+		if(json.error){
+			errormessage(id, json.error);
+		}else{
+			errormessage(id, 'succeed');
+		}
+		
+	});
+}
+function checknick(id) {
+	errormessage(id);
+	var username = trim(jQuery('#'+id).val());
+	if(jQuery('#chk_' + id).parent()[0].className.match(/ p_right/) && (username == '' || username == lastusername) || username == lastusername) {
+		return;
+	} 
+	if(username.match(/<|"/ig)) {
+		errormessage(id, __lang.profile_nickname_illegal);
+		return;
+	}
+	if(username){
+		var unlen = username.replace(/[^\x00-\xff]/g, "**").length;
+		if(unlen < 3 || unlen > 30) {
+			errormessage(id, unlen < 3 ? __lang.username_character : __lang.username_character);
+			return;
+		}
+		var x = new Ajax();
+		jQuery('#suc_' + id).removeClass('p_right');
+		jQuery.getJSON('user.php?mod=ajax&inajax=yes&infloat=register&handlekey=register&ajaxmenu=1&action=checkusername&username=' + encodeURI(username), function(json) {
+			if(json.error){
+				errormessage(id, json.error);
+			}else{
+				errormessage(id, 'succeed');
+			}
+		});
+	}
+}
+function checkPwdComplexity(firstObj, secondObj, modify) {
+	modifypwd = modify || false;
+	firstObj.onblur = function () {
+		if(firstObj.value == '') {
+			var pwmsg = !modifypwd ? __lang.register_password_tips :  __lang.js_change_password;
+			if(pwlength > 0) {
+				pwmsg += ', '+__lang.register_password_length_tips1+pwlength+__lang.register_password_length_tips2;
+			}
+			if(!modifypwd) errormessage(firstObj.id, pwmsg);
+		}else{
+			errormessage(firstObj.id, !modifypwd ? 'succeed' :  __lang.js_change_password);
+		}
+		checkpassword(firstObj.id, secondObj.id);
+	};
+	firstObj.onkeyup = function () {
+		if(pwlength == 0 || jQuery('#'+firstObj.id).value.length >= pwlength) {
+			var passlevels = new Array('',__lang.weak,__lang.center,__lang.strong);
+			var passlevel = checkstrongpw(firstObj.id);
+			
+			errormessage(firstObj.id, '<span class="passlevel passlevel'+passlevel+'">'+__lang.intension+':'+passlevels[passlevel]+'</span>','passlevel');
+		}
+	};
+	secondObj.onblur = function () {
+		if(secondObj.value == '') {
+			if(!modifypwd) errormessage(secondObj.id, !modifypwd ?'succeed' : __lang.register_repassword_tips);
+		}
+		checkpassword(firstObj.id, secondObj.id);
+	};
+}
+function checkstrongpw(id) {
+	var passlevel = 0;
+	var el=document.getElementById(id);
+	var val=el.value;
+	if(val && val.match(/\d+/g)) {
+		passlevel ++;
+	}
+	if(val && val.match(/[a-z]+/ig)) {
+		passlevel ++;
+	}
+	if(val && val.match(/[^a-z0-9]+/ig)) {
+		passlevel ++;
+	}
+	return passlevel;
+}
+function checkpassword(id1, id2) {
+	if(!document.getElementById(id1).value && !document.getElementById(id2).value) {
+		//return;
+	}
+	if(pwlength > 0) {
+		if(document.getElementById(id1).value.length < pwlength) {
+			errormessage(id1, __lang.password_too_short+pwlength+__lang.register_password_length_tips2);
+			return;
+		}
+	}
+	if(strongpw) {
+		var strongpw_error = false, j = 0;
+		var strongpw_str = new Array();
+		for(var i in strongpw) {
+			if(strongpw[i] === 1 && !document.getElementById(id1).value.match(/\d+/g)) {
+				strongpw_error = true;
+				strongpw_str[j] = __lang.strongpw_1;
+				j++;
+			}
+			if(strongpw[i] === 2 && !document.getElementById(id1).value.match(/[a-z]+/g)) {
+				strongpw_error = true;
+				strongpw_str[j] = __lang.strongpw_2;
+				j++;
+			}
+			if(strongpw[i] === 3 && !document.getElementById(id1).value.match(/[A-Z]+/g)) {
+				strongpw_error = true;
+				strongpw_str[j] = __lang.strongpw_3;
+				j++;
+			}
+			if(strongpw[i] === 4 && !document.getElementById(id1).value.match(/[^A-Za-z0-9]+/g)) {
+				strongpw_error = true;
+				strongpw_str[j] = __lang.strongpw_4;
+				j++;
+			}
+		}
+		if(strongpw_error) {
+			errormessage(id1, __lang.password_weak+strongpw_str.join('，'));
+			return;
+		}
+	}
+	errormessage(id2);
+	if(document.getElementById(id1).value !=document.getElementById(id2).value) {
+		errormessage(id2, __lang.profile_passwd_notmatch);
+	} else {
+		if(modifypwd) errormessage(id1,  'succeed' );
+		errormessage(id2,  'succeed' );
+		
+	}
+}
+function jstree_search(val){
+	console.log(val);
+	if(val=='stop'){
+		jQuery('#jstree_search_input').val('');
+		jQuery('#searchval').val('');
+		jQuery('.classtree-search').slideUp(500);
+		jQuery("#classtree").jstree(true).search();
+	}else{
+		if(val==''){
+			jQuery('#jstree_search_input').val('');
+			jQuery('#searchval').val('');
+			jQuery('.classtree-search').slideUp(500);
+		}
+		jQuery("#classtree").jstree(true).search(val);
+	}
+}
+function jstree_create_organization(){
+	var inst = jQuery("#classtree").jstree(true);
+		jQuery.post(ajaxurl+'do=create',{'forgid':0,'t':new Date().getTime()},function(json){
+			if(!json || json.error){
+				showmessage(json.error,'danger',3000,1);
+			}else if(json.orgid>0){
+				var arr={"id":json.orgid,"text":json.orgname,"type":"organization","icon":'dzz/system/images/organization.png'}
+				inst.create_node(inst.get_node('#'), arr, "first", function (new_node) {
+					setTimeout(function () { inst.edit(new_node); },0);
+				});
+			}
+		},'json');
+}
+function jstree_create_dir(){
+	var inst = jQuery("#classtree").jstree(true),obj;
+	if(inst.get_selected(true).length>0){
+		obj=inst.get_selected(true);
+		obj=obj[0];
+	}else{
+		showmessage(__lang.please_select_one_organization_department,'danger',1000,1);
+		return;
+	}
+	if(obj.type=='user'){
+		showmessage(__lang.please_select_one_organization_department,'danger',1000,1);
+		 return true;
+	}
+	if(inst.is_disabled(obj)){
+		return true;
+	}
+	var inst = jQuery("#classtree").jstree(true);
+	jQuery.post(ajaxurl+'do=create',{'forgid':obj.id,'t':new Date().getTime()},function(json){
+		if(!json || json.error){
+			showmessage(json.error,'danger',3000,1);
+		}else if(json.orgid>0){
+			var arr={"id":json.orgid,"text":json.orgname,"type":"organization","icon":(json.forgid>0)?'dzz/system/images/department.png':'dzz/system/images/organization.png'}
+			inst.create_node(obj, arr, "first", function (new_node) {
+				setTimeout(function () { inst.edit(new_node); },0);
+			});
+		}
+	},'json');
+	
+}
+function jstree_create_user(flag){
+	var inst = jQuery("#classtree").jstree(true),obj;
+	if(inst.get_selected(true).length>0){
+		obj=inst.get_selected(true);
+		obj=obj[0];
+	}else{
+		if(flag) flag=0;
+		obj=inst.get_node('#');
+	}
+	if(obj.type=='user'){
+		obj=inst.get_node(obj.parent);
+	}
+	if(inst.is_disabled(obj)){
+		return true;
+	}
+	showDetail(0,'user',null,obj.id);
+}
+
+function showDetail(id,idtype,ajaxdo,orgid){
+	var hash=idtype+'_'+id;
+	var urladd=''
+	if(ajaxdo){
+		hash+='_'+ajaxdo;
+		urladd+='&do='+ajaxdo
+	}
+	if(orgid){
+		hash+='_'+orgid;
+		urladd+='&orgid='+orgid
+	}
+	currentHash=hash;
+	location.hash=hash;
+	//console..log(hash);
+	urladd+='&t='+new Date().getTime()
+	
+	jQuery('#orguser_container').load(baseurl+'op=view&id='+id+'&idtype='+idtype+urladd,function(html){
+		if(checkAdminLogin(html)){
+			location.reload();
+		}
+	});
+}
+
+function open_node_dg(inst,node,arr){ //自动打开有权限的目录树
+	 inst.open_node(node,function(node){
+		 var i=jQuery.inArray(node.id,arr);
+		 if(i<arr.length && i>-1 && document.getElementById(arr[i+1])) open_node_dg(inst,document.getElementById(arr[i+1]),arr);
+		 else{
+			// inst.select_node(node);
+		 }
+	 });
+ }
+ 
+function job_show_editor(jobid,orgid,obj){
+	var el=jQuery(obj).addClass('hide');
+	el.parent().find('.edit').removeClass('hide');
+	el.parent().find('input').focus();
+	jQuery(document).on('click.job_edit_'+jobid,function(event){
+		if(!jQuery(event.target).closest(el.parent()).length){
+			 job_save(jobid,orgid);
+			 jQuery(document).off('click.job_edit_'+jobid);
+		}
+	});
+}
+
+function job_save(jobid,orgid){
+	var el=jQuery('#job_'+jobid);
+	var oname=trim(el.find('.job-name').html());
+	var name=trim(el.find('.job-edit-control input').val());
+	if(oname==name){
+		el.find('.job-name').removeClass('hide');
+		el.find('.edit').addClass('hide');
+		return;
+	}
+	jQuery.post(ajaxurl+'do=jobedit',{'name':name,'jobid':jobid,'orgid':orgid,'t':new Date().getTime()},function(json){
+		if(json.error){
+			el.find('.job-name').html(oname).removeClass('hide');
+			el.find('.edit').addClass('hide');
+			el.find('.job-edit-control input').val(oname);
+		}else if(json.jobid>0){
+			el.find(' .job-name').html(json.name).removeClass('hide');
+			el.find('.edit').addClass('hide');
+			el.find('.job-edit-control input').val(json.name);
+		}
+	},'json');
+}
+function job_show_add_editor(orgid,obj){
+	var el=jQuery(obj);
+	el.addClass('hide');
+	el.parent().find('.new-job-control').removeClass('hide');
+	el.parent().find('.new-job-control input').focus();
+	jQuery(document).on('click.new-job-'+orgid,function(event){
+		if(!jQuery(event.target).closest(el.parent()).length){
+			 job_cancel_add_editor(orgid);
+			 jQuery(document).off('click.new-job-'+orgid);
+		}
+	});
+}
+function job_cancel_add_editor(orgid){
+	var el=jQuery('.jobs .new-job');
+	el.find('.new-job-control').addClass('hide');
+	el.find('a').removeClass('hide');
+	
+}
+function job_del(jobid,orgid){
+	var el=jQuery('#job_'+jobid);
+	jQuery.post(ajaxurl+'do=jobdel',{'jobid':jobid,'orgid':orgid,'t':new Date().getTime()},function(json){
+		if(json.error){
+			showmessage(json.error,'danger',3000,1);
+		}else if(json.jobid>0){
+			el.remove();
+		}
+	},'json');
+}
+
+function job_add(orgid){
+	var newjob=jQuery('.jobs .new-job');
+	var name=newjob.find('.new-job-text').val();
+	if(name==''){
+		newtodo.find('.new-job-text').focus();
+		return;
+	}
+	jQuery.post(ajaxurl+'do=jobadd',{'name':name,'orgid':orgid,'t':new Date().getTime()},function(json){
+		
+		if(json.jobid>0){
+			appendjob(json);
+			newjob.find('.new-job-text').val('').focus();
+		}else{
+			showmessage(json.error,'danger',3000,1);
+		}
+	},'json');
+}
+function appendjob(json){
+	var html='';
+	html+='<div id="job_'+json.jobid+'" orgid="'+json.orgid+'" class="job-item-edit float-start">';
+    html+='    <button onclick="job_show_editor(\''+json.jobid+'\',\''+json.orgid+'\', this)" class="btn btn-outline-secondary job-name">'+json.name+'</button>';
+    html+='    <div class="edit hide" style="min-width:250px">';
+    html+='        <div class="job-edit-control float-start" >';
+    html+='            <input type="text" class="form-control" style="width:100px" value="'+json.name+'" onkeyup="if(event.keyCode==13){job_save(\''+json.name+'\',\''+json.orgid+'\')}">';
+    html+='        </div>';
+    html+='        <button onclick="job_save(\''+json.name+'\',\''+json.orgid+'\')" data-loading-text="'+__lang.save+'" class="btn btn-success job-save">'+__lang.save+'</button>';
+    html+='        <button class="btn btn-outline-danger" onclick="job_del(\''+json.name+'\',\''+json.orgid+'\')">'+__lang.delete+'</button>';
+    html+='    </div> ';
+    html+='</div>';
+	jQuery('.jobs .new-job').before(html);
+}
+function callback_moderators(ids,data,orgid){
+	console.log(ids);console.log(orgid);
+	//删除不在选择列表内的用户
+	jQuery('.moderators-container .user-item').each(function(){
+		var uid=jQuery(this).attr('uid');
+		if(jQuery.inArray(uid,ids)===-1){
+			jQuery(this).find('.delete').trigger('click');
+		}
+	});
+	for(var i=0;i<ids.length;i++){
+		moderator_add(orgid,ids[i]);
+	}
+	
+}
+function moderator_add(orgid,uid){
+	if(jQuery('#moderators_container_'+orgid+' .user-item[uid='+uid+']').length){
+		jQuery('#moderators_container_'+orgid+' .user-item[uid='+uid+']').insertAfter(jQuery('#moderators_container_'+orgid+' .moderators-acceptor'));
+		jQuery('#moderators_container_'+orgid+' .moderators-acceptor').removeClass('hover');
+		return;
+	}
+	jQuery('#moderators_container_'+orgid+' .moderators-acceptor').removeClass('hover');
+	jQuery.post(ajaxurl+'do=moderator_add',{'orgid':orgid,'uid':uid,'t':new Date().getTime()},function(json){
+		if(json.error) showmessage(json.error,'danger',3000,1);
+		else{
+			appendModerator(json);
+		}
+	},'json');
+}
+function appendModerator(json){
+	var html='';
+	html+='<li class="user-item float-start" uid="'+json.uid+'"> ';
+	html+='			<a href="javascrip:;" class="delete" onclick="moderator_del(\''+json.id+'\',\''+json.orgid+'\',this);return false"><i style="color:#d2322d;font-size:16px" class="mdi mdi-delete lead dcolor"></i></a>';
+	html+='			<div class="avatar-cover"></div>';
+	html+='			<div class="user-item-avatar">'; 
+	html+='				<div class="avatar-face">';
+	html+='					'+json.avatar; 
+	html+='				</div>';
+	html+='			</div>';
+	html+='			<p class="text-center" style="height:20px;margin:5px 0;line-height:25px;overflow:hidden;"> '+json.username+'</p>';
+	html+='	   </li>';
+	jQuery('#moderators_container_'+json.orgid+' .moderators-acceptor').after(html);
+	var inst = jQuery("#classtree").jstree(true);
+	
+	var node= inst.get_node('#'+json.orgid);
+	inst.refresh_node(node);
+}
+function moderator_del(id,orgid,obj){
+	jQuery.post(ajaxurl+'do=moderator_del',{'orgid':orgid,'id':id,'t':new Date().getTime()},function(json){
+		if(json.error) showmessage(json.error,'danger',3000,1);
+		else{
+			jQuery(obj).parent().remove();
+		}
+		
+	},'json');
+}
+
+function folder_available(available,orgid){
+	jQuery.post(ajaxurl+'do=folder_available',{'orgid':orgid,'available':available,'t':new Date().getTime()},function(json){
+		if(json.error){
+			 showmessage(json.error,'danger',3000,1);
+		}else{
+			if(available){
+				 showmessage(__lang.share_enable_successful,'success',3000,1);
+				 //jQuery('#indesk').show();
+			}else{
+				showmessage(__lang.share_close_successful,'success',3000,1);
+				//jQuery('#indesk').hide();
+			}
+		}
+	},'json');
+}
+function group_on(on,orgid){
+	jQuery.post(ajaxurl+'do=group_on',{'orgid':orgid,'available':on,'t':new Date().getTime()},function(json){
+		if(json.error){
+			showmessage(json.error,'danger',3000,1);
+		}else{
+			if(on){
+				showmessage(__lang.group_on_successful,'success',3000,1);
+			}else{
+				showmessage(__lang.group_close_successful,'success',3000,1);
+			}
+		}
+	},'json');
+}
+function folder_indesk(indesk,orgid){
+	jQuery.post(ajaxurl+'do=folder_indesk',{'orgid':orgid,'indesk':indesk,'t':new Date().getTime()},function(json){
+		if(json.error) showmessage(json.error,'danger',3000,1);
+	},'json');
+}
+function set_org_logo(orgid,aid){
+	jQuery.post(ajaxurl+'do=set_org_logo',{'orgid':orgid,'aid':aid},function(json){
+		if(json.error) showmessage(json.error,'danger',3000,1);
+	},'json');
+}
+/*function set_org_bgphoto(orgid,aid){
+	jQuery.post(ajaxurl+'&do=set_org_bgphoto',{'orgid':orgid,'aid':aid},function(json){
+		if(json.error) showmessage(json.error,'danger',3000,1);
+	},'json');
+}*/
+function set_org_orgname(orgid,obj){
+	var oldname=jQuery(obj).data('oldname');
+	console.log(oldname);
+	jQuery.post(ajaxurl+'do=set_org_orgname',{'orgid':orgid,'orgname':obj.value},function(json){
+		if(json.error){
+			obj.value=oldname;
+			showmessage(json.error,'danger',3000,1);
+		}else{
+			 jQuery(obj).data('oldname',obj.value);
+			 jQuery('#title_orgname').html(obj.value);
+			 var node=jQuery("#classtree").jstree(true).get_node('#'+orgid);
+			 jQuery("#classtree").jstree('refresh',node);
+		}
+	},'json');
+}
+function set_org_desc(orgid,desc){
+	jQuery.post(ajaxurl+'do=set_org_desc',{'orgid':orgid,'desc':desc},function(json){
+		if(json.error){
+			showmessage(json.error,'danger',3000,1);
+		}
+	},'json');
+}
+function folder_maxspacesize(obj,orgid){
+	jQuery.post(ajaxurl+'do=folder_maxspacesize',{'orgid':orgid,'maxspacesize':obj.value,'t':new Date().getTime()},function(json){
+		if(json.error){
+			 obj.value=json.val;
+			 showmessage(json.error,'danger',3000,1);
+		}else{
+			jQuery('#'+orgid+' a.jstree-clicked').trigger('click');
+			 showmessage('空间大小设置成功','success',3000,1);
+		}
+	},'json');
+}

@@ -23,23 +23,6 @@ if (!function_exists('sys_get_temp_dir')) {
     }
 }
 
-function replacesitevar($string, $replaces = array())
-{
-    global $_G;
-    $sitevars = array(
-        '{sitename}' => $_G['setting']['sitename'],
-        '{xhversion}' => CORE_XHVERSION,
-        '{version}' => CORE_VERSION,
-        '{years}' =>  date("Y"),
-        '{time}' => dgmdate(TIMESTAMP, 'Y-n-j H:i'),
-        '{adminemail}' => $_G['setting']['adminemail'],
-        '{username}' => $_G['member']['username'],
-        '{myname}' => $_G['member']['username']
-    );
-    $replaces = array_merge($sitevars, $replaces);
-    return str_replace(array_keys($replaces), array_values($replaces), $string);
-}
-
 function getfileinfo($icoid)
 {
     if (preg_match('/^dzz:[gu]id_\d+:.+?/i', $icoid)) {
@@ -669,14 +652,14 @@ function avatar($uid, $size = 'middle', $returnsrc = FALSE, $real = FALSE, $stat
     $size = in_array($size, array('big', 'middle', 'small')) ? $size : 'middle';
     $uid = abs(intval($uid));
     if (!$staticavatar && !$static) {
-        return $returnsrc ? 'avatar.php?uid=' . $uid . '&size=' . $size : '<img class="img-avatar" src="avatar.php?uid=' . $uid . '&size=' . $size . ($real ? '&type=real' : '') . '" />';
+        return $returnsrc ? 'avatar.php?uid=' . $uid . '&size=' . $size : '<img src="avatar.php?uid=' . $uid . '&size=' . $size . ($real ? '&type=real' : '') . '" />';
     } else {
         $uid = sprintf("%09d", $uid);
         $dir1 = substr($uid, 0, 3);
         $dir2 = substr($uid, 3, 2);
         $dir3 = substr($uid, 5, 2);
         $file = 'data/avatar/' . $dir1 . '/' . $dir2 . '/' . $dir3 . '/' . substr($uid, -2) . ($real ? '_real' : '') . '_avatar_' . $size . '.jpg';
-        return $returnsrc ? $file : '<img class="img-avatar" src="' . $file . '" onerror="this.onerror=null;this.src=\'data/avatar/noavatar_' . $size . '.gif\'" />';
+        return $returnsrc ? $file : '<img src="' . $file . '" onerror="this.onerror=null;this.src=\'data/avatar/noavatar_' . $size . '.gif\'" />';
     }
 }
 
@@ -684,7 +667,7 @@ function avatar($uid, $size = 'middle', $returnsrc = FALSE, $real = FALSE, $stat
  * param:$uid    		需要生成的用户UID;
  * param:$headercolors  传递的用户头像信息数组格式为array('1'=>'#e9308d','2'=>'#e74856'),键为UID，值为颜色值
  */
-function avatar_block($uid=0,$headercolors=array(),$class="img-avatar"){
+function avatar_block($uid=0,$headercolors=array(),$class="Topcarousel img-avatar"){
 	static $colors=array('#6b69d6','#a966ef','#e9308d','#e74856','#f35b42','#00cc6a','#0078d7','#5290f3','#00b7c3','#0099bc','#018574','#c77c52','#ff8c00','#68768a','#7083cb','#26a255');
    
 	if(!$uid){
@@ -697,9 +680,9 @@ function avatar_block($uid=0,$headercolors=array(),$class="img-avatar"){
 	}
 	if(empty($user)) return '';
 	if($user['avatarstatus']){//用户已经上传头像
-		return '<img src="avatar.php?uid='.$user['uid'].'" class="img-avatar" title="'.$user['username'].'">';
+		return '<img src="avatar.php?uid='.$user['uid'].'" class="img-circle special_avatar_class img-avatar" title="'.$user['username'].'">';
 	}else{//没有上传头像，使用背景+首字母
-        if ($uid) {
+		if ($uid) {
             if (isset($headercolors[$uid])) {
                 $headerColor = $headercolors[$uid];
             } else {
@@ -726,32 +709,32 @@ function avatar_group($gid,$groupcolors=array(),$class='iconFirstWord'){
 	if($groupcolors[$gid]){
 		if($groupcolor = $groupcolors[$gid]['aid']){
 			if(preg_match('/^\#.+/',$groupcolor)){
-				return '<span class="iconFirstWord" style="background:'.$groupcolor.';" title="'.$groupcolors[$gid]['orgname'].'">'.strtoupper(new_strsubstr($groupcolors[$gid]['orgname'],1,'')).'</span>';
+				return '<span class="iconFirstWord img-avatar" style="background:'.$groupcolor.';" title="'.$groupcolors[$gid]['orgname'].'">'.strtoupper(new_strsubstr($groupcolors[$gid]['orgname'],1,'')).'</span>';
 			}elseif(preg_match('/^\d+$/',$groupcolor) && $groupcolors > 0){
-				return '<img src="index.php?mod=io&op=thumbnail&width=24&height=24&path='. dzzencode('attach::' . $groupcolor).'" class="img-avatar" title="'.$groupcolors[$gid]['orgname'].'">';
+				return '<img src="index.php?mod=io&op=thumbnail&width=24&height=24&path='. dzzencode('attach::' . $groupcolor).'" class="img-circle" title="'.$groupcolors[$gid]['orgname'].'">';
 			}
 		}else{
 			$colorkey = rand(1,15);
 			$groupcolor = $colors[$colorkey];
 			C::t('organization')->update($gid,array('aid'=>$groupcolor));
-			return '<span class="iconFirstWord" style="background:'.$groupcolor.';"  title="'.$groupcolors[$gid]['orgname'].'">'.strtoupper(new_strsubstr($groupcolors[$gid]['orgname'],1,'')).'</span>';
+			return '<span class="iconFirstWord img-avatar" style="background:'.$groupcolor.';"  title="'.$groupcolors[$gid]['orgname'].'">'.strtoupper(new_strsubstr($groupcolors[$gid]['orgname'],1,'')).'</span>';
 		} 
 	}else{
 		 if(!$groupinfo = C::t('organization')->fetch($gid)){
-			return '<span class="dzz dzz-group"></span>';
+			return '<span class="dzz dzz-group mdi mdi-account"></span>';
 		}
 		if($groupinfo['aid']){
 			if(preg_match('/^\#.+/',$groupinfo['aid'])){
-				return '<span class="iconFirstWord" style="background:'.$groupinfo['aid'].';" title="'.$groupinfo['orgname'].'">'.strtoupper(new_strsubstr($groupinfo['orgname'],1,'')).'</span>';
+				return '<span class="iconFirstWord img-avatar" style="background:'.$groupinfo['aid'].';" title="'.$groupinfo['orgname'].'">'.strtoupper(new_strsubstr($groupinfo['orgname'],1,'')).'</span>';
 			}elseif(preg_match('/^\d+$/',$groupinfo['aid']) && $groupinfo['aid'] > 0){
-				return '<img src="index.php?mod=io&op=thumbnail&width=24&height=24&path='. dzzencode('attach::' . $groupinfo['aid']).'" class="img-avatar" title="'.$groupinfo['orgname'].'">';
+				return '<img src="index.php?mod=io&op=thumbnail&width=24&height=24&path='. dzzencode('attach::' . $groupinfo['aid']).'" class="img-circle" title="'.$groupinfo['orgname'].'">';
 			}
 		}else{
 
 			$colorkey = rand(1,15);
 			$groupcolor = $colors[$colorkey];
 			C::t('organization')->update($gid,array('aid'=>$groupcolor));
-			return '<span class="iconFirstWord" style="background:'.$groupcolor.';" title="'.$groupinfo['orgname'].'">'.strtoupper(new_strsubstr($groupinfo['orgname'],1,'')).'</span>';
+			return '<span class="iconFirstWord img-avatar" style="background:'.$groupcolor.';" title="'.$groupinfo['orgname'].'">'.strtoupper(new_strsubstr($groupinfo['orgname'],1,'')).'</span>';
 		} 
 	}
 }
@@ -805,6 +788,8 @@ function checkLanguage()
     $langList = $_G['config']['output']['language_list'];
     $langSet = '';
 
+    /*if($_G['cookie']['language']) $langSet=$_G['cookie']['language'];
+	else*/
     if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {// 自动侦测浏览器语言
         preg_match('/^([a-z\d\-]+)/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $matches);
         $langSet = strtolower($matches[1]);
@@ -1003,7 +988,7 @@ function dgmdate($timestamp, $format = 'dt', $timeoffset = '9999', $uformat = ''
                 $return = $s;
             }
             if ($time >= 0 && !defined('IN_MOBILE')) {
-                $return = '<span  class="p-2" title="' . $s . '">' . $return . '</span>';
+                $return = '<span  title="' . $s . '">' . $return . '</span>';
             }
         } elseif (($days = intval(($todaytimestamp - $timestamp) / 86400)) >= 0 && $days < 7) {
             if ($days == 0) {
@@ -1014,10 +999,10 @@ function dgmdate($timestamp, $format = 'dt', $timeoffset = '9999', $uformat = ''
                 $return = ($days + 1) . '&nbsp;' . $lang['day'] . $lang['before'];
             }
             if (!defined('IN_MOBILE')) {
-                $return = '<span  class="p-2" title="' . $s . '">' . $return . '</span>';
+                $return = '<span  title="' . $s . '">' . $return . '</span>';
             }
         } else {
-            $return ='<span class="p-2" title="' . $s . '">'.gmdate('Y-m-d', $timestamp) .'&nbsp;' . gmdate('H:s', $timestamp) . '</span>';
+            $return = gmdate('Y-m-d', $timestamp) . '&nbsp;<span class="hidden-xs" title="' . $s . '">' . gmdate('H:s', $timestamp) . '</span>';
         }
         return $return;
     } else {
@@ -1771,7 +1756,7 @@ $textexts = array('DZZDOC', 'HTM', 'HTML', 'SHTM', 'SHTML', 'HTA', 'HTC', 'XHTML
 $unRunExts = array('htm', 'html', 'js', 'php', 'jsp', 'asp', 'aspx', 'xml', 'htc', 'shtml', 'shtm', 'vbs'); //需要阻止运行的后缀名；
 $docexts = array('DOC', 'DOCX', 'XLS', 'XLSX', 'PPT', 'PPTX', 'ODT', 'ODS', 'ODG', 'RTF', 'ET', 'DPX', 'WPS');
 //echo strtolower(implode(',',$docexts));
-$imageexts = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP','WEBP');
+$imageexts = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP');
 $videoexts =
 $idtype2type = array(
     'picid' => 'image',

@@ -12,6 +12,7 @@ if(!defined('IN_DZZ')) {
 }
 Hook::listen('check_login');
 include_once libfile('function/organization');
+$ismobile=helper_browser::ismobile();
 $uid =isset($_GET['uid'])?intval($_GET['uid']):$_G['uid'];
 $zero=$_GET['zero']?htmlspecialchars($_GET['zero']):lang('no_institution_users');
 
@@ -183,7 +184,7 @@ function getuserIcon($uids,$datas,&$data){
 		}elseif($avatars[$uid]['headerColor']){
 			$headercolor = $avatars[$uid]['headerColor'];
 			$v['icon'] = false;
-			$v['text']= '<span class="img-avatar" style="background:'.$headercolor.';" title="'.preg_replace("/<em.+?\/em>/i",'',$v['text']).'">'.strtoupper(new_strsubstr($v['text'],1,'')).'</span>'.$v['text'];
+			$v['text']= '<span class="Topcarousel" style="background:'.$headercolor.';" title="'.preg_replace("/<em.+?\/em>/i",'',$v['text']).'">'.strtoupper(new_strsubstr($v['text'],1,'')).'</span>'.$v['text'];
 	
 		}else{
 			$v['icon'] = false;
@@ -194,4 +195,5 @@ function getuserIcon($uids,$datas,&$data){
 }
 $ismobile=helper_browser::ismobile();
 include template('orgtree');
+
 ?>

@@ -19,10 +19,12 @@
 <div class="bordeMenu-content" style="display:none">
     <!--{loop $grouppatharr $v}-->
     <li>
-        <a href="javascript:;" class="routes" data-type="group-gid_$gid">$v<span>></span></a>
+        <a href="javascript:;" class="routes"
+           data-type="group-gid_$gid">$v<span>></span></a>
     </li>
     <!--{/loop}-->
-    <input type="text" class="form-control bordeInput referer_path" name="referer_path" value="$grouppathstr" style="display: none;"/>
+    <input type="text" class="form-control bordeInput referer_path" name="referer_path"
+           value="$grouppathstr" style="display: none;"/>
 </div>
     <div class="group-dynamic">
     	<div class="group-allgame-top">
@@ -32,16 +34,18 @@
                 <label>{lang reach}</label>
                 <input type="text" id="selectDate1" readonly="readonly" />
             </div>
+            
             <div class="form-control-group clearfix">
-              <div class="group-input">
-                 <select class="js-example-basic-multiple js-states" id="id_label_multiple" multiple="multiple">
-                    {loop $users $k $v}
-                    <option value="$k">$v</option>
-                    {/loop}
-                 </select>
-              </div>
+                <div class="group-input">
+                    <select class="js-example-basic-multiple js-states" id="id_label_multiple" multiple="multiple">
+                        {loop $users $k $v}
+					 	<option value="$k">$v</option>
+                        {/loop}
+					 </select>
+                </div>
             </div>
-          </div>
+
+        </div>
         </div>
         <div class="group-table">
             <p class="group-tableword" style="display:none;">{lang additional_screening_conditions}：</p>
@@ -66,8 +70,8 @@
                     <!--{loop $events $val}-->
                     <tr>
                         <td class="w-13">{eval echo dgmdate($val['dateline'],'Y-m-d');}<br/>{eval echo dgmdate($val['dateline'],'H:i:s');}</td>
-                        <td class="w-15">$val[username]</td>
-                        <td class="w-13"><a href="javascript:;" onclick="search_do(this)" data-val="$val[do]">$val[do_lang]</a></td>
+                        <td class="w-15">$val['username']</td>
+                        <td class="w-13"><a href="javascript:;" onclick="search_do(this)" data-val="$val['do']">$val[do_lang]</a></td>
                         <td style="width: 31%;"><a href="javascript:;" onclick="search_obj(this)" data-val="$val[do_obj]"><!--{if $val[do_obj]}-->$val[do_obj]<!--{/if}--></a></td>
                         <td>$val[details]</td>
                     </tr>
@@ -105,7 +109,7 @@
         $.post(MOD_URL+'&op=group&do=dynamicsearch',search_data,function(data){
             $('#event_list').html(data);
             $('.group-tableword').show();
-            $('.group-tableword').append('<span>{lang operation}：'+dotext+'<i class="glyphicon glyphicon-remove" onclick="empty_do(this)" data-val="'+doval+'"></i></span>');
+            $('.group-tableword').append('<span>{lang operation}：'+dotext+'<i class="mdi mdi-delete lead" onclick="empty_do(this)" data-val="'+doval+'"></i></span>');
         })
     }
     function search_obj(obj){
@@ -115,7 +119,7 @@
         $.post(MOD_URL+'&op=group&do=dynamicsearch',search_data,function(data){
             $('#event_list').html(data);
             $('.group-tableword').show();
-            $('.group-tableword').append('<span>'+objtext+'<i class="glyphicon glyphicon-remove" onclick="empty_do(this)" data-val="'+doval+'"></i></span>');
+            $('.group-tableword').append('<span>'+objtext+'<i class="mdi mdi-delete lead" onclick="empty_do(this)" data-val="'+doval+'"></i></span>');
         })
     }
     function empty_do(obj){
@@ -133,7 +137,7 @@
             }
         })
     }
-	$.getScript('static/select2/select2.min.js',function(){
+$.getScript('static/select2/select2.min.js',function(){
     	$("#id_label_multiple").select2({
 		placeholder: "{__lang.click_or_import_to_start_adding_colleagues}",
 	}).on('change',function(){

@@ -191,9 +191,9 @@ if ($do == 'upload') {//上传图片文件
 } elseif ($do == 'getjobs') {
 	$orgid = intval($_GET['orgid']);
 	$jobs = C::t('organization_job') -> fetch_all_by_orgid($orgid);
-	$html = '<li role="presentation"><a href="javascript:;" tabindex="-1" role="menuitem" _jobid="0" onclick="selJob(this)">'.lang('none').'</a></li>';
+	$html = '<li><a href="javascript:;" class="dropdown-item" tabindex="-1" role="menuitem" _jobid="0" onclick="selJob(this)">'.lang('none').'</a></li>';
 	foreach ($jobs as $job) {
-		$html .= '<li role="presentation"><a href="javascript:;" tabindex="-1" role="menuitem" _jobid="' . $job['jobid'] . '" onclick="selJob(this)">' . $job['name'] . '</a></li>';
+		$html .= '<li><a href="javascript:;" class="dropdown-item" tabindex="-1" role="menuitem" _jobid="' . $job['jobid'] . '" onclick="selJob(this)">' . $job['name'] . '</a></li>';
 	}
 	exit($html);
 } elseif ($do == 'create') {

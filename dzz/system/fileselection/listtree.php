@@ -64,7 +64,7 @@ if ($operation == 'get_children') {
                     'type' => 'folder',
                     'children' => $children,
                     'li_attr' => array(
-                        'href' => MOD_URL. '&op=group',
+                        'href' => DZZSCRIPT . '?mod=' . MOD_NAME . '&op=group',
                         'hashs' => 'group&do=file&gid=' . $orginfo['orgid'] . '&fid=' . $val['fid']
                     )
                 );
@@ -111,7 +111,7 @@ if ($operation == 'get_children') {
                 'type' => 'folder',
                 'children' => $children,
                 'li_attr' => array(
-                    'href' => MOD_URL. '&op=group',
+                    'href' => DZZSCRIPT . '?mod=' . MOD_NAME . '&op=group',
                     'hashs' => 'group&do=file&gid=' . $val['gid'] . '&fid=' . $val['fid'])
             );
         }

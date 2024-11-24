@@ -13,7 +13,6 @@ if(!defined('IN_DZZ')) {
 
 $lang = array
 (
-	'page_background'=>'登录页面背景',
 	'database_export_custom_invalid' => '您至少需要选择一个数据表进行备份',
 	'database_export_file_invalid' => '数据文件无法保存到服务器，请检查目录属性',
 	'admin_navtitle'=>'管理中心',
@@ -31,8 +30,6 @@ $lang = array
 	'cloud_type_local'=>'内置',
 	'cloud_type_ftp'=>'FTP',
 	'cloud_type_disk'=>'本地磁盘',
-
-	'UserTrueName'=>'用户真实姓名',
 	'none_write_add_theme'=>'还没有添加主题',
 	'illegal'=>'不合法',
 	'data_set'=>'资料设置',
@@ -130,8 +127,6 @@ $lang = array
 	'agency_department'=>'本机构部门',
 	'no_section'=>'不能@部门',
 	'default_space'=>'默认空间',
-	'Personal storage'=>'个人存储',
-	'Control whether the system user has personal storage space'=>'控制系统用户是否有个人存储空间',
 	'update'=>'更新',
 	'update_success'=>'更新成功',
 	'detailedness'=>'详细',
@@ -224,6 +219,7 @@ $lang = array
 	'add_installation_package'=>'添加安装包',
 	'allow_show'=>'允许显示',	
 	'from_desktop_choose'=>'从桌面选择',
+	// 'config' => '设置',
 	'admin' => '管理',
 	'Install_and_uninstall'=>'安装和卸载',
 	'uninstall'=>'卸载',
@@ -347,11 +343,11 @@ $lang = array
 
 	'db_runquery' => '数据库升级',
 	'db_recover'=>'恢复数据库',
-	'db_runquery_tips' => '<li>出于安全考虑，Dzz! 后台默认情况下禁止 SQL 语句直接执行，只能使用常用 SQL 当中的内容，<br />如果您想自己随意书写 SQL 升级语句，需要将 config/config_global.php 当中的 $_config[admincp][runquery] 设置修改为 1。</li>',
+	'db_runquery_tips' => '<li>出于安全考虑，Dzz! 后台默认情况下禁止 SQL 语句直接执行，只能使用常用 SQL 当中的内容，<br />如果您想自己随意书写 SQL 升级语句，需要将 config/config.php 当中的 $_config[admincp][runquery] 设置修改为 1。</li>',
 	'db_runquery_sql' => 'Dzz! 数据库升级 - 请将数据库升级语句粘贴在下面',
-	'db_config_admincp'=>'config文件未设置相关此操作的权限，请检查config.php文件中相关admincp的设置',
-	'db_not_allow_config_admincp'=>'config文件设置不允许此操作，请检查config.php文件中相关admincp的设置',
-	'db_runquery_denied' => '对不起，此项功能已经被禁止，如果需要开启，请修改 config/config_global.php 中的相关配置',
+	'db_config_admincp'=>'config文件未设置相关此操作的权限，请检查config.php文件中相关admincp以及$_config[\'admincp\'][\'runquery\']的设置',
+	'db_not_allow_config_admincp'=>'config文件设置不允许此操作，请检查config.php文件中admincp以及$_config[\'admincp\'][\'dbimport\']的设置',
+	'db_runquery_denied' => '对不起，此项功能已经被禁止，如果需要开启，请修改 config/config.php 中的相关配置',
 	'db_runquery_comment' => '注意: 为确保升级成功，请不要修改 SQL 语句的任何部分',
 	'db_runquery_select' => '现有方案',
 	'db_runquery_simply' => '常用 SQL 升级语句',
@@ -494,6 +490,16 @@ $lang = array
 	'app_internal_frame_text'=>'<li>默认内部窗口打开，有些应用不适合内部打开时，可以选择在新窗口打开</li>
 								<li>当应用地址为类似dzzjs:时，只能内部打开，这里的设置不起作用</li>',
 	'app_form_parameter'=>'窗体参数',
+	'app_form_parameter_text'=>'<li>此项功能属于高级功能,留空表示使用系统默认，未定义的项目使用默认设置，各个值之间用,号隔开</li>
+						<li>如："class=noborder,titlebutton=fullscreen|refresh|close|max|min,width=500,height=400,left=50%,top=50%,right=0,bottom=0,resize=no,size=no,autorun=yes"</li>
+						<li>left,top,right,bottom:设定窗体的默认位置，如果用户拖动，将以用户拖动的位置为准；left优先于right，top优先于bottom；值可以是整数或百分比值</li>
+						<li>autorun：设置此应用是否自动运行，可用值yes 或者 no ,必须用户安装了此应用才有效</li>
+						<li>closetime：自动关闭时间，可用值 整数 单位秒 ,仅对自动运行的应用才有效；如：closetime=3 三秒后自动关闭</li>
+						<li>class：应用窗体的风格，设置后此窗体的风格将不随着桌面的主题变化（必须保证 ./dzz/styles/window/风格名称/style.css 存在</li>
+						<li>size：应用窗体默认大小，可用值 no：(默认); max:窗体最大化；min：窗体最小化；</li>
+						<li>titlebutton：应用窗体的功能按钮;目前仅支持fullscreen,refresh,close,max,min(注意refresh目前只对同域的应用有效);默认值:titlebutton=close|max|min</li>
+						<li>width 、height：应用窗体的默认打开高度和宽度;默认width=800,height=500;</li>
+						<li>resize:应用窗体改变大小;可用值："no",resize,resize-x,resize-y;默认resize=resize|resize-x|resize-y</li>',
 
 	'app_default_installation_location'=>'默认安装位置，应用将会默认安装到相应的位置',
 	'app_application_library'=>'在应用库中',
@@ -757,6 +763,7 @@ $lang = array
 	'setting_main_file_sharing'=>'禁用分享，文件属性页中不再出现分享和下载链接，Dzz文档，网址和网络视频类除外',
 	'setting_main_html_size'=>'支持html代码,面板可视区域大小为263*235',
 	'setting_main_dzz'=>'选择“是”将在页脚显示商业授权用户链接，链接将指向 Dzz! 官方网站，用户可通过此链接验证其所使用的 Dzz! 是否经过商业授权',
+	'prompt_leave_platform'=>'提示离开平台',
 	'setting_main_leave'=>'是否提示离开平台开关，设置否时，刷新页面将不会出现离开的提示信息',
 	'close_terrace'=>'关闭平台',
 	'setting_main_close_terrace'=>'暂时将平台关闭，其他人无法访问，但不影响管理员访问',
@@ -771,7 +778,7 @@ $lang = array
 							<li>分块太大或太小都会影响上传的性能,请根据服务器设置来调整此参数</li>
 							<li>分块大小必须小于php.ini中设置的post_max_size和upload_max_filesize的大小</li>',
 	'upload_permissions'=>'用户上传权限设置',
-	'upload_permissions_text'=>'<li>1.用户私有云(我的云中用户添加的云)不做限制，所以此处的设置的”默认空间“对用户私有云不起作用;</li><li>2.设置后清理缓存生效。</li>',
+	'upload_permissions_text'=>'注： 用户私有云(我的云中用户添加的云)不做限制，所以此处的设置的”默认空间“对用户私有云不起作用。',
 	'setting_main_default'=>'用户的默认空间大小，单位M。0或不填 不限制； -1: 无空间',
 	'setting_main_file_size'=>'允许上传的最大文件大小，单位M。0或不填 不限制',
 	'setting_main_file_suffix'=>'允许上传的文件后缀，多个使用半角逗号隔开，留空不限制',
@@ -792,6 +799,14 @@ $lang = array
 	'between'=>'居中',	
 	'icon_orientation'=>'图标排列方向',
 	'icon_orientation_state'=>'默认的桌面图标排列方向。（用户设置后，以用户设置为准）',
+	'open_qq_login'=>'是否开启QQ登录',
+	'qq_app_id'=>'在QQ互联申请的应用APP ID',
+	'qq_app_key'=>'在QQ互联申请的应用APP KEY',
+	'whether_allow_direct'=>'是否允许直接使用',
+	'user_must_binding'=>'必须绑定用户',
+	'user_must_binding_text'=>'用户不绑定用户，直接使用的话，系统将根据QQ的信息自动添加用户到系统并且和此QQ绑定。用户名默认使用QQ昵称；邮箱、密码随机生成。用户可以通过QQ登录正常登录或找回密码',
+	'allow_direct_use'=>'允许直接使用',
+	'token_url'=>'回调地址',
 	'enable_independent_login_page'=>'启用独立登录页',
 	'enable_independent_login_page_text'=>'启用独立登录页后，未登录用户默认首页为此登录页。',
 	'main_title_page'=>'页面主标题',
@@ -973,6 +988,7 @@ $lang = array
 	'nav_logs_system' => '系统记录',
 	'nav_logs_extended' => '扩展记录',
 	'logs' => '运行记录',
+	'logs_lpp' => '每页显示',
 	'logs_passwd' => '密码错误记录',
 	'logs_passwd_username' => '尝试用户名',
 	'logs_passwd_password' => '尝试密码',
@@ -1042,7 +1058,7 @@ $lang = array
 	
 	'upgrade_checking' => '正在检测新的升级版本',
 	
-	'upgrade_continue'=> '<p>您上次升级到 <b>{steplang}</b>，请继续完成升级<p><p><input type="button" class="btn btn-outline-primary" onclick="window.location.href=\'{stepurl}\'" value="继续升级" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-outline-info" onclick="window.location.href=\'{recheckurl}\'" value="重新检测" /></p>',
+	'upgrade_continue'=> '<p>您上次升级到 <b>{steplang}</b>，请继续完成升级<p><p><input type="button" class="btn btn-success" onclick="window.location.href=\'{stepurl}\'" value="继续升级" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-default" onclick="window.location.href=\'{recheckurl}\'" value="重新检测" /></p>',
 	'upgrade_website_FTP_set'=>'站点 FTP 设置',
 	'host_IP_address'=>'主机IP地址',
 	'IP_address'=>'IP地址',
@@ -1060,7 +1076,7 @@ $lang = array
 	'general_condition_passive_mode'=>'一般情况下非被动模式即可，如果存在上传失败问题，可尝试打开此设置',
 	'enable_secure_link'=>'启用安全链接',
 	'notice_FTP_open_SSL'=>'注意：FTP 服务器必需开启了 SSL',
-	'upgrade_continue_db'=> '<p>您上次升级到 <b>{steplang}</b>，请继续完成升级<p><p><input type="button" class="btn btn-outline-primary" onclick="createIframe(\'{stepurl}\')" value="继续升级">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-outline-info" onclick="window.location.href=\'{recheckurl}\'" value="重新检测" /></p>',
+	'upgrade_continue_db'=> '<p>您上次升级到 <b>{steplang}</b>，请继续完成升级<p><p><input type="button" class="btn btn-success" onclick="createIframe(\'{stepurl}\')" value="继续升级">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-default" onclick="window.location.href=\'{recheckurl}\'" value="重新检测" /></p>',
 	
   	'upgrade_close_site' => '升级前，请先关闭站点，并对文件及数据备份',
   	'upgrade_none' => '没有该升级信息 {upgradeurl}',
@@ -1140,16 +1156,7 @@ $lang = array
 	'space_organization_set'=>'机构存储空间设置',
 	'space_organization_set_tip'=>'设置机构默认空间大小，如果留空或为0则共享系统所有空间，为-1则没有存储空间',
 	'space_group_set'=>'群组存储空间设置',
-	'space_group_set_tip'=>'设置群组默认空间大小，如果留空或为0则共享系统所有空间，为-1则没有存储空间',
-	
-	'open_qq_login'=>'是否开启QQ登录',
-	'qq_app_id'=>'在QQ互联申请的应用APP ID',
-	'qq_app_key'=>'在QQ互联申请的应用APP KEY',
-	'whether_allow_direct'=>'是否允许直接使用',
-	'user_must_binding'=>'必须绑定用户',
-	'user_must_binding_text'=>'用户不绑定用户，直接使用的话，系统将根据QQ的信息自动添加用户到系统并且和此QQ绑定。用户名默认使用QQ昵称；邮箱、密码随机生成。用户可以通过QQ登录正常登录或找回密码',
-	'allow_direct_use'=>'允许直接使用',
-	'token_url'=>'回调地址',
+	'space_group_set_tip'=>'设置群组默认空间大小，如果留空或为0则共享系统所有空间，为-1则没有存储空间'	
 	
 );
 

@@ -1,10 +1,13 @@
 <!--{template common/header_simple_start}-->
 <link rel="stylesheet" href="static/select2/select2.css">
-<link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-datepicker/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" href="static/perfect-scrollbar/css/perfect-scrollbar.css?{VERHASH}">
+<link rel="stylesheet" href="static/js/datepicker/datepicker.css?{VERHASH}">
 <link href="static/jstree/themes/default/style.min.css?{VERHASH}" rel="stylesheet" media="all">
 <link rel="stylesheet" href="static/css/smilies.css">
-<link rel="stylesheet" type="text/css" href="static/tagsinput/jquery.tagsinput.css">
+<link rel="stylesheet" href="static/css/checkbox.css">
+<link rel="stylesheet" href="static/tagsinput/jquery.tagsinput.css">
 <link rel="stylesheet" href="static/dzzthumb/jquery.dzzthumb.css">
+<link rel="stylesheet" href="static/css/common.css">
 <link rel="stylesheet" href="{MOD_PATH}/css/index.css">
 <link rel="stylesheet" href="{MOD_PATH}/css/filelist_middleicon/style.css" />
 <link rel="stylesheet" href="{MOD_PATH}/css/filelist_detaillist/style.css" />
@@ -13,73 +16,42 @@
 <link rel="stylesheet" href="{MOD_PATH}/css/navigation.css">
 <link rel="stylesheet" href="{MOD_PATH}/css/headersearch.css">
 <link rel="stylesheet" href="{MOD_PATH}/css/single.css">
+
+<script type="text/javascript" src="static/js/jquery.leftDrager.js?{VERHASH}"></script>
+<style type="text/css">
+.bs-main-container {
+	padding: 0;
+}
+</style>
 <!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
-<!--第二部分-->
-<div class="bs-container clearfix"> 
-  <div class="bs-left-container  clearfix">
-		<!--{template left}-->
-  </div>
+    <!--固定的头部-->
+    <!--{template common/commer_header}-->
+
+    <!--第二部分-->
+<div class="below bs-container"> 
+  
   <!--左侧菜单--> 
+  <!--{template left}-->
   <div class="left-drager"></div>
+  <!--中间内容-->
   <div id="middleconMenu" class="bs-main-container"></div>
   <!--右侧菜单-->
-  <div class="rightMenu" id="rightMenu">
-    <div class="nothing_message">
-      <div class="nothing_allimg">
-        <img src="dzz/explorer/img/noFilePage-FileChoice.png">
-        <p>{lang choose_file_examine_information}</p>
-      </div>
-    </div>
-  </div>
-	<!--上传完成框-->
-<div class="docunment-dialog docunment-dialog-uploader ismin" id="upload_file_tips" style="display:none;">
-  <div class="dialog-header">
-   
-	  <h3 id="upload_header" class="dialog-header-title">
-		  <span id="upload_header_status" class="upload-all-text">{lang updload_prepare}</span>
-		  <span id="upload_header_number_container" class="upload-all-container" style="display: none">
-		  		[
-				<span id="upload_header_completed" class="upload-all-cpmpleted">0</span>
-			    <span class="pipe">/</span>
-				<span id="upload_header_total" class="upload-all-total">0</span>
-				]
-		  </span>
-		  <span id="upload_header_speed" class="upload-all-speed"></span>
-		  <div id="upload_header_progress" class="process" style="position:absolute;left:0;top:0;z-index:-1;height:45px;background-color:#e8f5e9;-webkit-transition:width 0.6s ease in;-o-transition:width 0.6s ease in;transition:width 0.6s ease in;width:0%;"></div>
-	  </h3>
-    <div class="dialog-control"> 
-    	<span class="dzz dzz-max dialog-header-narrow"></span> 
-    	<span class="dzz dzz-close dialog-header-close"></span> </div>
-  </div>
-  <div class="dialog-body">
-    <div class="upload-list-wrapper">
-      <div class="upload-list-header">
-        <div class="upload-file-name">{lang folder_file_name}</div>
-        <div class="upload-file-size">{lang big_small}</div>
-        <div class="upload-file-path">{lang update_catalogue}</div>
-        <div class="upload-file-status">{lang state}</div>
-        <div class="upload-file-operate">{lang operation}</div>
-      </div>
-      <div class="dialog-tips has-error">
-        <div id="dialog_body_text" class="dialog-body-text">{lang update_never_succeeded}</div>
-        <em class="dzz dzz-close dialog-close"></em> </div>
-      <div class="dialog-uploader-list">
-        <ul class="dialog-filelist-ul" id="uploading_file_list">
-        </ul>
-      </div>
-      <div class="progress-in"></div>
-    </div>
-  </div>
+	<div class="rightMenu" id="rightMenu">
+		<div class="nothing_message">
+			<div class="nothing_allimg">
+				<img src="dzz/explorer/img/noFilePage-FileChoice.png">
+				<p>{lang choose_file_examine_information}</p>
+			</div>
+		</div>
+	</div>
 </div>
-</div>
+
 
 <div id="contextmenu" style="display: none;"> 
   <!--{template right_contextmenu}--> 
 </div>
 <div id="_blank" unselectable="on" onselectstart="return event.srcElement.type== 'text';" style="background: url(&quot;dzz/images/b.gif&quot;); z-index: 10000; width: 100%; height: 100%; margin: 0px; padding: 0px; right: 0px; bottom: 0px; position: absolute; top: 0px; left: 0px; display: none;"></div>
 <iframe id="hideframe" name="hideframe" src="about:blank" frameborder="0" marginheight="0" marginwidth="0" width="0" height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>
-
 <script type="text/javascript">
 	//语言兼容
 	
@@ -91,6 +63,7 @@
     var newgroupgid = '';
 	jQuery(document).ready(function(e) {
         _explorer.getConfig(MOD_URL+'&op=json');
+		new PerfectScrollbar('.bs-left-container');
     });
     function adduser_group(ids,data){
         var formdata={};
@@ -117,13 +90,15 @@
 <script type="text/javascript" src="{MOD_PATH}/js/contextmenu.js?{VERHASH}"></script>
 <script type="text/javascript" src="{MOD_PATH}/js/_select.js?{VERHASH}"></script>
 <script type="text/javascript" src="{MOD_PATH}/js/_hotkey.js?{VERHASH}"></script>
+<script type="text/javascript" src="static/js/input_field.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/js/imgReady.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/js/smilies.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/lyear/js/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="static/lyear/js/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="static/js/datepicker/jquery.ui.core.min.js"></script>
+<script type="text/javascript" src="static/js/datepicker/jquery.ui.datepicker.min.js"></script>
+<script type="text/javascript" src="static/js/datepicker/jquery.datepicker-zh-CN.js"></script>
 <script type="text/javascript" src="static/js/jstree.min.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/dzzthumb/jquery.dzzthumb.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/tagsinput/jquery.tagsinput.js"></script>
+<script type="text/javascript" src="static/tagsinput/jquery.tagsinput.js?{VERHASH}"></script>
 <!-- The basic File Upload plugin --> 
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included --> 
 <script type="text/javascript" src="static/jquery_file_upload/jquery.ui.widget.js?{VERHASH}"></script> 
@@ -132,7 +107,8 @@
 <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload.js?{VERHASH}"></script> 
 <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload-process.js?{VERHASH}"></script> 
 <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload-validate.js?{VERHASH}"></script> 
-<script type="text/javascript" src="static/js/perfect-scrollbar.min.js?{VERHASH}"></script> 
+<script type="text/javascript" src="static/perfect-scrollbar/js/perfect-scrollbar.min.js?{VERHASH}"></script> 
 <script type="text/javascript" src="{MOD_PATH}/js/uplodfile.lang.js?{VERHASH}"></script>
 <!-- The basic File Upload plugin --> 
-<!--{template common/footer_simple}-->
+<script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js"></script> 
+<!--{template common/footer}-->

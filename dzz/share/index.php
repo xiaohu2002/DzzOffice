@@ -101,7 +101,7 @@ if ($short) {
 }
 $gets = array('mod' => MOD_NAME, 'type' => $type, 'keyword' => $keyword,'lpp' => $lpp, 'order' => $order, 'asc' => $asc, 'uid' => $uid, 'username' => $username);
 $theurl = BASESCRIPT . "?" . url_implode($gets);
-$multi = multi($count, $lpp, $page, $theurl, 'pull-right');
+$multi = multi($count, $lpp, $page, $theurl, 'justify-content-end');
 if ($short) {
   include template('short');
 } else {

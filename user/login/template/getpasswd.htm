@@ -1,72 +1,61 @@
-<!--{template common/header_common}-->
-<!--{if $_G['setting']['loginset']['lwaveanimation']}--><link rel="stylesheet" type="text/css" href="static/css/animate.min.css?{VERHASH}"><!--{/if}-->
-<link rel="stylesheet" type="text/css" href="static/dzzicon/materialdesignicons.min.css?{VERHASH}">
-<!--[if lt IE 9]>
-  <script src="static/js/jquery.placeholder.js" type="text/javascript"></script>
-<![endif]-->
-<!--{template common/beijing}-->
-<style>
-.signin-form .has-feedback {
-    position: relative;
-}
-.signin-form .has-feedback .form-control {
-    padding-left: 36px;
-}
-.signin-form .has-feedback .mdi {
-    position: absolute;
-    top: 0;
-    left: 5px;
-    right: auto;
-    width: 26px;
-    height: 36px;
-    line-height: 36px;
-    z-index: 4;
-    display: block;
-    text-align: center;
-    pointer-events: none;
-}
-	<!--{if $_G['setting']['loginset']['kbcolor']}-->
-	.card{
-		background-color:$_G['setting']['loginset']['kbcolor'];
-	}
+<!--{template common/header_simple_start}-->
+
+<!--{template common/header_simple_end}-->
+<div id="wrapper_div" style="width: 100%;height:100%;  position: absolute; top: 0px; left: 0px; margin: 0px; padding: 0px; overflow: hidden;z-index:0;  font-size: 0px; background:{eval echo $_G['setting']['loginset']['bcolor']?$_G['setting']['loginset']['bcolor']:'#76838f';};"> 
+	<!--{if $_G['setting']['loginset']['img']}-->
+	<img src="$_G['setting']['loginset']['img']" name="imgbg" id="imgbg" style="right: 0px; bottom: 0px; top: 0px; left: 0px; z-index:10;margin:0;padding:0;overflow:hidden; position: absolute;width:100%;height:100%" height="100%" width="100%">
 	<!--{/if}-->
-	<!--{if $_G['setting']['loginset']['transparency']}-->
-	.form-control{
-		background-color:$_G'[setting']['loginset']['transparency'];
-	}
-	<!--{/if}-->
-</style>
-<script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
-<!--{eval $loginhash = 'L'.random(4);}-->
-<div class="center-vh overflow-auto">
-<div class="card card-shadowed p-5 mb-0 mr-2 ml-2<!--{if $_G['setting']['loginset']['lwaveanimation']}--> wave wave-animate-slow<!--{/if}-->">
-  <div class="text-center mb-3">
-		<img alt="light year admin" src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->" style="max-height: 60px;">
-		<h1>{lang getpassword}</h1>
-   
-  </div>
-  <form action="user.php?mod=login&op=logging&action=getpasswd&uid=$uid&id=$hashid" onsubmit="return validate(this);" method="post" class="signin-form needs-validation" role="form" novalidate>
-		<input type="hidden" name="formhash" value="{FORMHASH}" />
-		<h5 class="text-center">{lang login_email}:$member[email]</h5>
-    <div class="mb-3 has-feedback">
-		<span class="mdi mdi-lock" aria-hidden="true"></span>
-      <input class="form-control" type="password" id="newpasswd1" name="newpasswd1" autocomplete="off" placeholder="{lang new_password}" required/>
-			<span id="chk_newpasswd1" class="help-block"> <span id="suc_newpasswd1"></span><kbd class="help-msg"></kbd></span>
-    </div>
-		<div class="mb-3 has-feedback">
-			<span class="mdi mdi-lock" aria-hidden="true"></span>
-      <input class="form-control" type="password" id="newpasswd2" name="newpasswd2" autocomplete="off" placeholder="{lang new_password_confirm}" required/>
-			<span id="chk_newpasswd2" class="help-block"><span id="suc_newpasswd2"></span><kbd class="help-msg"></kbd></span>
-    </div>
-    <div class="mb-3 d-grid">
-      <button class="btn btn-round btn-primary" role="button" type="submit" name="getpwsubmit" value="true">{lang identify_changes}</button>
-			<a href="$_G['siteurl']" title="{lang back_homepage}" class="btn btn-round btn-danger">{lang back_homepage}</a>
-    </div>
-  </form>    
-  <p class="text-center mb-0 text-dark"><!--{template common/copyright}--></p>
+    <!--{if $_G['setting']['loginset']['url']}-->
+    <iframe id="wrapper_frame" name="wrapper_frame" src="$_G['setting']['loginset']['url']" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true" style="z-index:20;position:absolute;width:100%;height:100%;background:url(dzz/images/b.gif);"></iframe>
+    <!--{/if}-->
 </div>
+<div id="modal_login" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:block">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<form class="form-horizontal" role="form" method="post" action="user.php?mod=login&op=logging&action=getpasswd&uid=$uid&id=$hashid" onsubmit="return validate(this);">
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+
+				<div class="modal-header">
+					<h4 class="modal-title text-center"> {lang getpassword}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label class="control-label col-sm-3">{lang login_email}:</label>
+						<div class="col-sm-9">
+							<p class="form-control-static">$member['email']</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="newpasswd1">{lang new_password}</label>
+						<div class="col-sm-5">
+							<input class="form-control" type="password" id="newpasswd1" name="newpasswd1" autocomplete="off" placeholder="{lang new_password}">
+						</div>
+						<div class="col-sm-4">
+							<span id="chk_newpasswd1" class="help-inline"> <span id="suc_newpasswd1"></span><kbd class="p_chk"></kbd></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-3" for="newpasswd2">{lang new_password_confirm}</label>
+						<div class="col-sm-5">
+							<input class="form-control" type="password" id="newpasswd2" name="newpasswd2" autocomplete="off" placeholder="{lang new_password_confirm}">
+						</div>
+						<div class="col-sm-4">
+							<span id="chk_newpasswd2" class="help-inline">
+            		<span id="suc_newpasswd2"></span>
+								<kbd class="p_chk"></kbd>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" role="button" type="submit" name="getpwsubmit" value="true">{lang identify_changes}</button>
+					<a class="btn btn-default" href="$_G['siteurl']" title="{lang back_homepage}">{lang back_homepage}</a>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
-<script type="text/javascript" src="user/scripts/setbacksize.js?{VERHASH}"></script>
 <script type="text/javascript" src="user/scripts/register.js?{VERHASH}"></script>
 <script type="text/javascript">
 	function validate(form) {
@@ -90,16 +79,9 @@
 	<!--{/if}-->
 	var pwlength = <!--{if $_G['setting']['pwlength']}-->$_G['setting']['pwlength']<!--{else}-->0<!--{/if}-->;
 		checkPwdComplexity(document.getElementById('newpasswd1'), document.getElementById('newpasswd2'));
-	var loader;
-  $(document).ajaxStart(function(){
-      $("button:submit").html('加载中...').attr("disabled", true);
-      loader = $('button:submit').lyearloading({
-          opacity: 0.2,
-          spinnerSize: 'nm'
-      });
-  }).ajaxStop(function(){
-      loader.destroy();
-      $("button:submit").html('{lang identify_changes}').attr("disabled", false);
-  });
 </script>
+<script type="text/javascript">
+	jQuery('body').addClass('modal-open');
+</script>
+<script src="static/bootstrap/js/bootstrap.min.js?{VERHASH}"></script>
 <!--{template common/footer}-->

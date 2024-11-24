@@ -15,7 +15,7 @@ require_once libfile('function/organization');
 if (!$_G['cache']['usergroups'])
 	loadcache('usergroups');
 
-	$do = isset($_GET['do']) ? $_GET['do'] : '';
+$do = trim($_GET['do']);
 $uid = intval($_GET['uid']);
 if (!$uid)
 	$do = 'add';
@@ -145,18 +145,10 @@ if ($do == 'add') {
 		C::t('organization_upjob') -> insert_by_uid($uid, intval($_GET['upjobid']));
 		Hook::listen('syntoline_user',$uid);//注册绑定到钉钉部门表
 		if ($_GET['sendmail']) {
-			$sitename=$_G['setting']['sitename'];
-			$email_password_message = <<<EOT
-      <p style="font-size:14px;color:#333; line-height:24px; margin:0;">尊敬的用户$member[username],您好！</p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">您收到这封邮件，是由于 $sitename 的管理员添加成员时使用了这个邮箱地址。如果您不知道 $sitename 请忽略这封邮件。您不需要退订或进行其他进一步的操作。</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;font-weight:bold;">登录帐号和密码</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 12px;">登录帐号：$_GET[email]</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">登录密码：$_GET[password]</span></p>
-			<p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">感谢您的访问，祝您使用愉快！</span></p>
-EOT;
+			$email_password_message = lang('email_password_message', array('sitename' => $_G['setting']['sitename'], 'siteurl' => $_G['siteurl'], 'email' => $_GET['email'], 'password' => $_GET['password']));
 
-			if (!sendmail("$_GET[email] <$_GET[email]>", '用户帐号和密码', $email_password_message)) {
-				runlog('sendmail', "$_GET[email]  发送失败");
+			if (!sendmail_cron("$_GET[email] <$_GET[email]>", lang('email_password_subject'), $email_password_message)) {
+				runlog('sendmail', "$_GET[email] sendmail failed.");
 			}
 		}
 

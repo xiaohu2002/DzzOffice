@@ -29,9 +29,8 @@ if( $json["status"]==1){
 	$list = $json["data"]["list"];
 	$total = $json["data"]["total"];
 	$perpage = $json["data"]["perpage"]; 
-	//$perpage =1;
 	$theurl = MOD_URL."&op=cloudappmarket"; 
-	$multi=multi($total, $perpage, $page, $theurl);
+	$multi=multi($total, $perpage, $page, $theurl,'justify-content-end');
 }
 //print_r($list);exit;
 $local_applist=DB::fetch_all("select * from %t where 1",array('app_market'));//C::tp_t("app_market")->select();
@@ -51,7 +50,7 @@ if( $list ){
 } 
 include template('cloudappmarket');
 exit;
-function curlcloudappmarket( $url="",$post_data="",  $token="" ){
+function curlcloudappmarket( $url="",$post_data="",  $token="" ){ 
     $curl = curl_init(); 
     curl_setopt($curl, CURLOPT_URL, $url); 
     curl_setopt($curl, CURLOPT_HEADER, 0); 

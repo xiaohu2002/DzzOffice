@@ -9,16 +9,13 @@ $lang = array (
 	'appname'=>$_G['setting']['sitename'],
 	'center'=>'中',
 	'strong'=>'强',
-	'back_homepage'=>'返回首页',
-	'Real-name authentication'=>'实名认证',
-	'You can also click Submit again to alert the administrator'=>'您也可以再次点击提交审核，以提醒管理员。',
 	'intension'=>'强度',
 	'save_file_to'=>'保存文件',
 	'select_position'=>'选择位置',
 	'save_success'=>'保存成功',
 	'all_save'=>'全部保存',
 	'all_download'=>'全部下载',
-  'explorer_user_root_dirname'=>'我的网盘',
+    'explorer_user_root_dirname'=>'我的网盘',
 	'js_prompt1_ctrlD' => '请按 Ctrl+D 键添加到收藏夹',
 	'Email_sensitivity' => 'Email 包含敏感字符',
 	'email_illegal'=>'请输入有效的邮箱',
@@ -40,6 +37,7 @@ $lang = array (
 	'upload_success'=>'上传成功',
 	'upload_failed'=>'上传失败',
 	'new_department'=>'新部门',
+	'siteslogan'=>'Power by DzzOffice',
 	'message_closetime' => '秒后窗口关闭',
 	'message_forward' => '如果您的浏览器没有自动跳转，请点击此链接',
 	'attach_forward' => '如果 {$refreshsecond} 秒后下载仍未开始，请点击此链接',
@@ -116,6 +114,7 @@ $lang = array (
 	'user_banned'=>'用户被禁止',
 	'stop'=>'停止',
 	'and'=>'和',
+	'homepage' => '首页',
 	'input_content' => '输入内容',
 	'describe' => '描述',
 	'input_describe_content' => '输入描述内容',
@@ -381,6 +380,7 @@ $lang = array (
 	'height'=>'高度',
 	'lengthways_arrange'=>'纵向排列',	
 	'crosswise_arrange'=>'横向排列',
+	'page_background'=>'页面背景',
 	'background'=>'背景',
 	'catalogue'=>'目录',
 	'number'=>'数量',
@@ -398,6 +398,7 @@ $lang = array (
 	'share' => '分享',
 	'approve' => '审批',
 	'recycle'=>'回收站',
+	'immdeiate_jump'=>'立即跳转',
 	'goback'=>'返回',
 	'return_to_the_naxt_level'=>'返回上一级',
 	'same_storage_area'=>'同一存储区域,不需要移动',
@@ -830,7 +831,7 @@ $lang = array (
 	'active_email_msg' => '请复制下面的激活链接到浏览器进行访问，以便激活您的邮箱。<br>邮箱激活链接:<br><a href="{url}" target="_blank">{url}</a>',
 	'login_clearcookie' => '登录痕迹已清除',
 	'login_succeed' => '欢迎您回来，{usergroup} {username}，现在将转入登录前页面',
-	'login_strike' => '密码错误次数过多，请 '.$_G['setting']['forbiddentime'].' 秒后重新登录',
+	'login_strike' => '密码错误次数过多，请 15 分钟后重新登录',
 	'logout_succeed' => '您已退出站点，现在将以游客身份转入退出前页面，请稍候…… <br /><a href="user.php?mod=clearcookies&formhash={formhash}">[ 清除痕迹 ]</a>',
 	'register_activation_invalid' => '抱歉，激活失败，请重新登录验证需要激活的用户',
 	'profile_nickname_tooshort' => '抱歉，您输入的用户名小于 3 个字符，请输入一个较长的用户名',
@@ -938,6 +939,164 @@ $lang = array (
     'user_set_space_text'=>'设置用户空间大小,值为0表示无单独空间大小设置，将根据系统架构空间计算，-1表示无空间，默认值为0',
 //	'moderate_member_delete' => '删除',
 //	'moderate_member_validate' => '通过',
+	
+	
+	'email_password_subject' =>	'用户帐号和密码',
+	'email_password_message' =>	'<br />
+<p>这封信是由 {sitename} 发送的。</p>
+
+<p>您收到这封邮件，是由于 {sitename}的管理员添加成员时使用了这个邮箱地址。如果您不知道 {sitename}，请忽
+略这封邮件。您不需要退订或进行其他进一步的操作。</p>
+<br />
+----------------------------------------------------------------------<br />
+<strong>登录帐号和密码</strong><br />
+----------------------------------------------------------------------<br />
+<br />
+<p>访问地址：<a href="{siteurl}" target="_blank">{sitename}</a> (如果上面不是链接形式，请将该地址手工粘贴到浏览器地址栏再访问)</p>
+<p>登录帐号：{email}</p>
+<p>登录密码：{password}</p>
+
+<p>感谢您的访问，祝您使用愉快！</p>
+
+
+<p>
+此致<br />
+
+{sitename} 管理团队.<br />
+{siteurl}</p>',
+
+	'get_passwd_subject' =>		'取回密码说明',
+	'get_passwd_message' =>		'
+<p>尊敬的用户{username}，您好，这封信是由 {sitename} 发送的。</p>
+
+<p>您收到这封邮件，是由于这个邮箱地址在 {sitename} 被登记为用户邮箱，
+且该用户请求使用 Email 密码重置功能所致。</p>
+<p>
+----------------------------------------------------------------------<br />
+<strong>重要！</strong><br />
+----------------------------------------------------------------------</p>
+
+<p>如果您没有提交密码重置的请求或不是 {sitename} 的注册用户，请立即忽略
+并删除这封邮件。只有在您确认需要重置密码的情况下，才需要继续阅读下面的
+内容。</p>
+<p>
+----------------------------------------------------------------------<br />
+<strong>密码重置说明</strong><br />
+----------------------------------------------------------------------</p>
+</p>
+您只需在提交请求后的三天内，通过点击下面的链接重置您的密码：<br />
+
+<a href="{siteurl}user.php?mod=login&op=logging&action=getpasswd&amp;uid={uid}&amp;id={idstring}" target="_blank">{siteurl}user.php?mod=getpasswd&amp;uid={uid}&amp;id={idstring}</a>
+<br />
+(如果上面不是链接形式，请将该地址手工粘贴到浏览器地址栏再访问)</p>
+
+<p>在上面的链接所打开的页面中输入新的密码后提交，您即可使用新的密码登录网站了。您可以在用户设置中随时修改您的密码。</p>
+
+<p>本请求提交者的 IP 为 {clientip}</p>
+
+
+<p>
+此致<br />
+</p>
+<p>{sitename} 管理团队.
+{siteurl}</p>',
+'get_passwd_message_wuser' =>		'
+<p>尊敬的投资人{username}，您好，这封信是由 {sitename} 发送的。</p>
+
+<p>您收到这封邮件，是由于这个邮箱地址在 {sitename} 被登记为用户邮箱，
+且该用户请求使用 Email 密码重置功能所致。</p>
+<p>
+----------------------------------------------------------------------<br />
+<strong>重要！</strong><br />
+----------------------------------------------------------------------</p>
+
+<p>如果您没有提交密码重置的请求或不是 {sitename} 的注册投资人，请立即忽略
+并删除这封邮件。只有在您确认需要重置密码的情况下，才需要继续阅读下面的
+内容。</p>
+<p>
+----------------------------------------------------------------------<br />
+<strong>密码重置说明</strong><br />
+----------------------------------------------------------------------</p>
+</p>
+您只需在提交请求后的三天内，通过点击下面的链接重置您的密码：<br />
+
+<a href="{siteurl}&amp;do=getpasswd&amp;wid={wid}&amp;id={idstring}" target="_blank">{siteurl}&amp;do=getpasswd&amp;wid={wid}&amp;id={idstring}</a>
+<br />
+(如果上面不是链接形式，请将该地址手工粘贴到浏览器地址栏再访问)</p>
+
+<p>在上面的链接所打开的页面中输入新的密码后提交，您即可使用新的密码登录网站了。您可以在用户设置中随时修改您的密码。</p>
+
+<p>本请求提交者的 IP 为 {clientip}</p>
+
+
+<p>
+此致<br />
+</p>
+<p>{sitename} 管理团队.
+{siteurl}</p>',
+
+	'email_verify_subject' =>	'Email 地址验证',
+	'email_verify_message' =>	'<br />
+<p>{username}，<br />
+这封信是由 {sitename} 发送的。</p>
+
+<p>您收到这封邮件，是由于在 {sitename} 进行了新用户注册，或用户修改 Email 使用
+了这个邮箱地址。如果您并没有访问过 {sitename}，或没有进行上述操作，请忽
+略这封邮件。您不需要退订或进行其他进一步的操作。</p>
+<br />
+----------------------------------------------------------------------<br />
+<strong>帐号激活说明</strong><br />
+----------------------------------------------------------------------<br />
+<br />
+<p>如果您是 {sitename} 的新用户，或在修改您的注册 Email 时使用了本地址，我们需
+要对您的地址有效性进行验证以避免垃圾邮件或地址被滥用。</p>
+
+<p>您只需点击下面的链接即可激活您的帐号：<br />
+
+<a href="{url}" target="_blank">{url}</a>
+<br />
+(如果上面不是链接形式，请将该地址手工粘贴到浏览器地址栏再访问)</p>
+
+<p>感谢您的访问，祝您使用愉快！</p>
+
+
+<p>
+此致<br />
+
+{sitename} 管理团队.<br />
+{siteurl}</p>',
+
+	'email_register_subject' =>	'注册地址',
+	'email_register_message' =>	'<br />
+<p>这封信是由 {sitename} 发送的。</p>
+
+<p>您收到这封邮件，是由于在 {sitename} 获取了新用户注册地址使用
+了这个邮箱地址。如果您并没有访问过 {sitename}，或没有进行上述操作，请忽
+略这封邮件。您不需要退订或进行其他进一步的操作。</p>
+<br />
+----------------------------------------------------------------------<br />
+<strong>新用户注册说明</strong><br />
+----------------------------------------------------------------------<br />
+<br />
+<p>如果您是 {sitename} 的新用户，或在修改您的注册 Email 时使用了本地址，我们需
+要对您的地址有效性进行验证以避免垃圾邮件或地址被滥用。</p>
+
+<p>您只需点击下面的链接即可进行用户注册，以下链接有效期为3天。过期可以重新请求发送一封新的邮件验证：<br />
+
+<a href="{url}" target="_blank">{url}</a>
+<br />
+(如果上面不是链接形式，请将该地址手工粘贴到浏览器地址栏再访问)</p>
+
+<p>感谢您的访问，祝您使用愉快！</p>
+
+
+<p>
+此致<br />
+
+{sitename} 管理团队.<br />
+{siteurl}</p>',
+
+
 	'add_member_subject' =>		'您被添加成为会员',
 	'add_member_message' => 	'
 {newusername} ，
@@ -1075,6 +1234,55 @@ $_G[siteurl]',
 <br />----------------------------------------------------------------------<br />
 重要！
 <br />----------------------------------------------------------------------<br />',
+    'bindemail_subject' =>		'Email 绑定',
+    'bindemail_message' => 		'<br />
+亲爱的{username}，您好。<br />
+这封信是由 {sitename} 发送的。<br />
+<br />
+您收到这封邮件，是由于在 {sitename} 进行了Email 绑定操作，或修改 Email 绑定使用
+了这个邮箱地址。如果您不是 {sitename} 的用户，或没有进行上述操作，请忽
+略这封邮件。您不需要退订或进行其他进一步的操作。。<br />
+<br />
+<br />
+<strong>邮箱绑定说明</strong><br />
+----------------------------------------------------------------------<br />
+<br />
+<p>如果您是 {sitename} 的用户，在您绑定 Email 时使用了本地址，我们需
+要对您的地址有效性进行验证以避免垃圾邮件或地址被滥用。</p>
+
+<p>您只需点击下面的链接即可激活您的帐号：<br />
+
+<a href="{url}" target="_blank">{url}</a>
+<br />
+(如果上面不是链接形式，请将该地址手工粘贴到浏览器地址栏再访问)</p>
+此致<br />
+<br />
+{sitename} 管理团队.<br />
+{siteurl}',
+    'varifyemail_subject' =>		'Email 安全验证',
+    'varifyemail_message' => 		'<br />
+亲爱的{username}，您好。<br />
+这封信是由 {sitename} 发送的。<br />
+<br />
+您收到这封邮件，是由于在 {sitename} 进行了Email安全验证操作，。如果您不是 {sitename} 的用户，或没有进行上述操作，请忽
+略这封邮件。您不需要退订或进行其他进一步的操作。。<br />
+<br />
+<br />
+<strong>邮箱安全验证说明</strong><br />
+----------------------------------------------------------------------<br />
+<br />
+<p>如果您是 {sitename} 的用户，在您绑定 Email 时使用了本地址，我们需
+要对您的地址操作的安全性进行验证以避免垃圾邮件或地址被滥用。</p>
+
+<p>您只需点击下面的链接即可激活您的帐号：<br />
+
+<a href="{url}" target="_blank">{url}</a>
+<br />
+(如果上面不是链接形式，请将该地址手工粘贴到浏览器地址栏再访问)</p>
+此致<br />
+<br />
+{sitename} 管理团队.<br />
+{siteurl}',
 	'nextpage' => '下一页',
 	'prevpage' => '上一页',
 	'pageunit' => '页',
@@ -1119,8 +1327,13 @@ $_G[siteurl]',
 	'seccode_sound_tips' => '<span class="seccode_sound_tips">输入您听到的字符</span>',
 	'seccode'=>'验证码',
 	'fullblankspace' => '　',
+
+
 	'search' => '搜索',
 	'page' => '第{page}页',
+
+	'login_title' => '登录管理中心',
+//	'login_username' => '用户名',
 	'login_password' => '密　码',
 	'script_name'=>'DzzOffice云桌面',
 	'script_name_tips'=>'是上海乐云网络科技开发的基于web的云桌面系统，可以通过这个平台，对无数的网络应用进行操作管理。',
@@ -1268,7 +1481,12 @@ $_G[siteurl]',
 	'community_edition'=>'社区版',
 	'title_admincp'=>'管理员登录入口',
 	'forbid_folder_to_sub_folder'=>'目标文件夹是源文件夹的子文件夹',
-	
+	//系统出错通知
+	'Error'=>'{errormsg}，详情请前往系统日志中查看。',
+	'Error_wx'=>'你收到了{title}',
+	'Error_redirecturl'=>'{url}',
+	'Error_title'=>'{title}',
+
 	'no_institution_users'=>'无机构用户',
 	'compellation'=>'用户名',
 	'usergroup' => '用户组',
@@ -1284,13 +1502,7 @@ $_G[siteurl]',
 	'from'=>'来源页面',
 	'Equipment information'=>'设备信息',
 	'ip' => 'IP 地址',
-	
-	'Error'=>'{errormsg}，详情请前往系统日志中查看。',
-	'Error_wx'=>'你收到了{title}',
-	'Error_redirecturl'=>'{url}',
-	'Error_title'=>'{title}',
-	'user_name_sensitive'=>'用户名含有敏感字符',
-	'quicklogin'=>'XH通用登录',
+
 	'congratulations' => '恭喜您',
  	'login_success' => '登录成功！',
 	'no_relevant_content' => '没有相关的内容…',

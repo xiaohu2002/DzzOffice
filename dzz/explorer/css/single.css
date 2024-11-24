@@ -13,12 +13,20 @@
 .group-filemember .table th{
 	border-bottom:1px solid #ddd;
 	line-height: 30px;
+	color: rgba(99, 99, 99, 1);
 	cursor: pointer;
+}
+.group-filemember  td, .group-filemember th,.group-filemember .member_item_td_name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .group-filemember .member_header_td_div {
     overflow: hidden;
     position: relative;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     line-height: 25px;
+    height: 22px;
 }
 .member_header_select{
 	
@@ -38,6 +46,9 @@
 .group-filemember .table td{
 	border-top: 0;
 	border-bottom: 1px solid rgba(238, 238, 238, 1);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	/*cursor: pointer;*/
 }
 .group-filemember .member_item_td_div{
@@ -124,5 +135,10 @@
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
+}
+#memberlist .Icoblock .switchery{
+	box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
 }
 /*单页面样式结束*/

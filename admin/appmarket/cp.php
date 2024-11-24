@@ -241,7 +241,7 @@ elseif ($do == 'uninstall') {//卸载应用
 	$app['extra'] = unserialize($app['extra']);
 	$finish = FALSE;
 	$request_uri = MOD_URL;
-	$refer = $_GET['refer']; 
+	$refer = $_GET['refer'];
 	$appinfo=$app;
 	$msg='';
 	if ($app['identifier']) {
@@ -282,6 +282,7 @@ elseif ($do == 'uninstall') {//卸载应用
 	}
 }
 elseif ($do == 'uninstall_confirm') {//卸载应用
+	$navtitle='卸载应用 - '.lang('appname');
 	$refer = $_GET['refer']; 
 	$appid=intval($_GET['appid']);
 	if(!$app=C::t('app_market')->fetch($appid)){

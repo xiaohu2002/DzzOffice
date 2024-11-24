@@ -12,7 +12,7 @@ if(!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 @ini_set('max_execution_time',0);
 @set_time_limit(0);
    $gets = array(
-		'mod'=>MOD_NAME,
+		'mod'=>'cloud',
 		'op'=>'movetool_run',
 		'oremoteid'=>intval($_GET['oremoteid']),
 		'remoteid' =>intval($_GET['remoteid']),

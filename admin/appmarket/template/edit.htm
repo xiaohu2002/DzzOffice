@@ -1,6 +1,6 @@
-<!--{template common/header_simple_start}-->
-<link rel="stylesheet" type="text/css" href="static/tagsinput/jquery.tagsinput.css?{VERHASH}">
-<script type="text/javascript" src="static/tagsinput/jquery.tagsinput.js?{VERHASH}"></script>
+<!--{template lyear/header_simple_start}-->
+<link rel="stylesheet" type="text/css" href="static/lyear/js/jquery-tagsinput/jquery.tagsinput.min.css">
+<script src="static/tagsinput/jquery.tagsinput.js"></script>
 <script type="text/javascript" src="dzz/system/scripts/selorg.js?{VERHASH}"></script>
 <script type="text/javascript">
 	<!--{if $openarr}-->
@@ -23,34 +23,25 @@
 		height: expression(this.height > 128 && this.width<=this.height ? 128: true);
 	}
 </style>
-<!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
-<div class="bs-container clearfix">
-	<div class="bs-left-container  clearfix">
-		<!--{template left}-->
-	</div>
-	<div class="left-drager">
-		<div class="left-drager-op">
-			<div class="left-drager-sub"></div>
-		</div>
-	</div>	
-	<div class="bs-main-container">	
-		<div class="main-header clearfix">
-			<!--{if !$appid}-->
-				<h4 class="main-header-title navbar-left">{lang add_app}</h4>			
-			<!--{else}-->
-				<h4 class="main-header-title navbar-left">{lang edit_app}</h4>
-			<!--{/if}-->
-			
-			<!--{if !$appid && $op=='edit'}-->
-			<div  class="button_add_content">
-				<a href="{MOD_URL}&op=edit&do=add&refer=$refer" id="button_add1" title="{lang add_app}" class="hide">+</a>				
-				<a href="{MOD_URL}&op=cp&do=import&refer=$refer" id="button_add2" class="hide" title="{lang import_type_app}" style="font-size:20px ;"><span  class="glyphicon glyphicon-download-alt"></span></a>				
-				<a href="javascript:;" id="button_add" style="z-index: 10;">+</a>				
-			</div>
-			<!--{/if}-->
-		</div>
-		<div class="main-content">
+<!--{template lyear/header_simple_end}-->
+<main class="bs-main-container">
+	<div class="container-fluid">
+	  <div class="card">
+      <header class="card-header">
+        <!--{if !$appid}-->
+        <h4 class="main-header-title navbar-left">{lang add_app}</h4>			
+        <!--{else}-->
+        <h4 class="main-header-title navbar-left">{lang edit_app}</h4>
+        <!--{/if}-->
+        <!--{if !$appid && $op=='edit'}-->
+        <div  class="button_add_content">
+          <a href="{MOD_URL}&op=edit&do=add&refer=$refer" id="button_add1" title="{lang add_app}" class="hide">+</a>				
+          <a href="{MOD_URL}&op=cp&do=import&refer=$refer" id="button_add2" class="hide" title="{lang import_type_app}"><span  class="mdi mdi-download"></span></a>				
+          <a href="javascript:;" id="button_add" style="z-index: 10;">+</a>				
+        </div>
+        <!--{/if}-->
+      </header>
+		<div class="card-body">
       <form id="appform" name="appform" class="form-horizontal-left form-horizontal" action="{MOD_URL}&op=edit&appid=$appid" method="post" enctype="multipart/form-data" onsubmit="return validate(this)">
         <input type="hidden" name="appsubmit" value="true" />
         <input type="hidden" name="appid" value="$appid" />
@@ -61,13 +52,13 @@
           <div class="col-sm-10">
             <input type="text" class="form-control" id="appname" name="appname" autocomplete="off" value="$app[appname]">
           </div>
-          <span class="help-block"></span> 
+          <span class="form-text"></span> 
         </div>
         <div class="row mb-3">
           <label for="identifier" class="col-sm-2">{lang application_identifier}</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="identifier" name="identifier" autocomplete="off" value="$app[identifier]">
-            <ul class="help-block">
+            <ul class="form-text">
               {lang app_application_identifier_text}
             </ul>
           </div>
@@ -76,7 +67,7 @@
           <label for="app_path" class="col-sm-2">{lang application_app_path}</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="app_path" name="app_path" autocomplete="off" value="$app[app_path]">
-            <ul class="help-block">
+            <ul class="form-text">
               {lang app_application_app_path_text}
             </ul>
           </div>
@@ -85,7 +76,7 @@
           <label for="appurl" class="col-sm-2">{lang application_site}</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="appurl" name="appurl" autocomplete="off" value="$app[appurl]">
-            <ul class="help-block">
+            <ul class="form-text">
               {lang app_application_site_text}
             </ul>
           </div>
@@ -94,7 +85,7 @@
           <label for="appadminurl" class="col-sm-2">{lang application_appadminurl}</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="appadminurl" name="appadminurl" autocomplete="off" value="$app[appadminurl]">
-            <ul class="help-block">
+            <ul class="form-text">
               {lang app_application_appadminurl_text}
             </ul>
           </div>
@@ -103,7 +94,7 @@
           <label for="vendor" class="col-sm-2">{lang supplier}</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="vendor" name="vendor" autocomplete="off" value="$app[vendor]">
-            <span class="help-block">{lang application_provider_name}</span>
+            <span class="form-text">{lang application_provider_name}</span>
           </div>
         </div>
         <div class="row mb-3">
@@ -122,8 +113,8 @@
               <a id="fileiz_1a" style="" href="javascript:;" onclick="document.getElementById('fileiz_0a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_0').name = 'TMPiconnew';document.getElementById('fileiz_1').name = 'iconnew';document.getElementById('fileiz_1').style.display = '';document.getElementById('fileiz_0').style.display = 'none'">{lang type_link}</a>
             </p>
             <!--{/if}-->
-            <span class="help-block">{lang suggest_image_size}128X128 px</span>
-          <span class="help-block">
+            <span class="form-text">{lang suggest_image_size}128X128 px</span>
+          <span class="form-text">
             <!--{if $appid}--><img class="img_128_128" src="$app[appico]?t=$_G[timestamp]" >
             <!--{else}--> <img class="img_128_128" src="dzz/images/default/icodefault.png" >
             <!--{/if}-->
@@ -139,7 +130,7 @@
               <label class="form-check-label" for="group$key">$value</label>
             </div>
             <!--{/loop}-->
-            <span class="help-block">{lang app_group_permissions}</span>
+            <span class="form-text">{lang app_group_permissions}</span>
           </div>
         </div>
         <div class="row mb-3" id="perm_depart" <!--{if $app[ 'group']!=1}-->style="display:none"<!--{/if}-->>
@@ -149,7 +140,7 @@
               <!--{loop $sel_org $value}-->
               <button id="orgids_sl_$value[orgid]" type="button" class="btn btn-outline-secondary btn-sorg" data-val="$value['orgid']">
                 {eval echo avatar_group($value['orgid']);} $value[orgname] 
-                <a href="javascript:;" class="ibtn dzz dzz-close"  title="{lang delete}" onclick="selorg.remove('orgids',this);"></a>
+                <a href="javascript:;" class="ibtn mdi mdi-close-circle "  title="{lang delete}" onclick="selorg.remove('orgids',this);"></a>
               </button>
               <!--{/loop}-->
             </div>
@@ -160,16 +151,16 @@
               </div>
             </div>
             <input id="sel_orgids" name="orgids" type="hidden" value="$sel" />
-            <span class="help-block">{lang app_set_application_jurisdiction}</span>
+            <span class="form-text">{lang app_set_application_jurisdiction}</span>
           </div>
         </div>
         <div class="row mb-3">
           <label class="col-sm-2" for="tag">{lang application_label}</label>
           <div class="col-sm-10">
             <div class="input-group mb-3">
-              <input class="js-tags-input form-control" type="text" name="tag" id="tag" autocomplete="off" ata-source="$tag_source" data-items="5" value="$app[tags]">
+              <input class="form-control" type="text" name="tag" id="tag" autocomplete="off" data-source="$tag_source" data-items="5" value="$app[tags]">
             </div>
-            <ul class="help-block">
+            <ul class="form-text">
               <li>{lang app_number_fields}</li>
               <li>{lang app_clear_label}</li>
             </ul>
@@ -179,9 +170,9 @@
           <label class="col-sm-2" for="fileext">{lang app_support_extension}</label>
           <div class="col-sm-10">
             <div class="input-group mb-3">
-              <input class="js-tags-input form-control" type="text" name="fileext" id="fileext" autocomplete="off" data-source="$fileext_source" value="$app[fileext]">
+              <input class="form-control" type="text" name="fileext" id="fileext" autocomplete="off" data-source="$fileext_source" value="$app[fileext]">
             </div>
-            <ul class="help-block">
+            <ul class="form-text">
             {lang app_not_allowed_open_text}
             </ul>
           </div>
@@ -197,7 +188,7 @@
               <input class="form-check-input" type="radio"id="open2" name="open" value="1" <!--{if $app[open]>0}-->checked<!--{/if}--> onclick="jQuery('#feature').hide();">
               <label class="form-check-label" for="open2">{lang new_Window}</label>
             </div>
-            <ul class="help-block">
+            <ul class="form-text">
             {lang app_internal_frame_text}
             </ul>
           </div>
@@ -213,7 +204,7 @@
               <input class="form-check-input" type="radio"id="hideInMarket2" name="hideInMarket" value="1" <!--{if $app[hideInMarket]>0}-->checked<!--{/if}-->>
               <label class="form-check-label" for="hideInMarket2">{lang hide}</label>
             </div>
-            <span class="help-block">{lang app_application_library_text}</span>
+            <span class="form-text">{lang app_application_library_text}</span>
           </div>
         </div>
         <div class="row mb-3">
@@ -227,7 +218,7 @@
               <input class="form-check-input" type="radio"id="isshow2" name="isshow" value="0" <!--{if $app[isshow]<1}-->checked<!--{/if}-->>
               <label class="form-check-label" for="isshow2">{lang hide}</label>
             </div>
-            <span class="help-block">{lang app_show_ico_text}</span>
+            <span class="form-text">{lang app_show_ico_text}</span>
           </div>
         </div>
       <div class="row mb-3">
@@ -256,9 +247,7 @@
               </li>
               <!--{/loop}-->
             </ul>
-
             <!--{/if}-->
-
             <table class="tb tb2 ">
               <tbody id="attachbodyhidden" style="display:none">
                 <tr class="noborder">
@@ -274,20 +263,18 @@
               </tbody>
               <tbody id="attachbody"></tbody>
             </table>
-
             <script src="admin/scripts/uploadpic.js?{VERHASH}" type="text/javascript"></script>
             <iframe id="uploadframe" name="uploadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
           </div>
         </div>
-        <dl>
+        <dl class="mb-3 d-grid">
           <label></label>
           <input class="btn btn-primary" id="submit_editsubmit" name="appsubmit" value="{lang submit}" type="button" onclick="document.getElementById('editbutton').click();">
         </dl>
       </div>
-		</div>
+    </div>
 	</div>
-</div>
-
+</main>
 <script type="text/javascript">
 	function screen_app(tagid,group){	
 		var url = '{MOD_URL}';
@@ -324,6 +311,37 @@
 		}
 	});
 
+  jQuery(document).ready(function(e) {
+
+jQuery('#fileext').tagsInput({
+  'height': 'auto',
+  'width': 'auto',
+  'interactive': true,
+  'defaultText': '',
+  'removeWithBackspace': true,
+  'minChars': 0,
+  'maxChars': 0,
+  'placeholderColor': '#666666',
+  'typeahead': {
+    source: jQuery('#fileext').data('source')
+  }
+});
+
+jQuery('#tag').tagsInput({
+  'height': 'auto',
+  'width': 'auto',
+  'interactive': true,
+  'defaultText': '',
+  'removeWithBackspace': true,
+  'minChars': 0,
+  'maxChars': 0,
+  'placeholderColor': '#666666',
+  'typeahead': {
+    source: jQuery('#tag').data('source')
+  }
+});
+});
+
 	jQuery('#un_selector_tag,#un_selector_fileext').on('click', function(e) {
 		document.getElementById(this.id.replace('un_selector_', '')).focus();
 	});
@@ -331,7 +349,7 @@
 	function addtaginput(key, id) {
 		var html = '<span>';
 		html += '<button data-bs-dismiss="alert" class="btn-close" type="button"></button>';
-		html += '<em title="' + key + '" class="pull-left">' + key + '</em><input type="hidden"  value="' + key + '" name="' + id + '[]">';
+		html += '<em title="' + key + '" class="float-start">' + key + '</em><input type="hidden"  value="' + key + '" name="' + id + '[]">';
 		html += '</span>';
 		jQuery('#' + id).val('').before(html).focus();
 	}
@@ -388,4 +406,4 @@
   })
 </script>
 <script src="static/bootstrap/js/bootstrap-typeahead.js?{VERHASH}"></script>
-<!--{template common/footer_simple}-->
+<!--{template lyear/footer_simple}-->

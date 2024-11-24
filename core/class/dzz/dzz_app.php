@@ -3,6 +3,8 @@ if(!defined('IN_DZZ')) {
     exit('Access Denied');
 }
 class dzz_app extends dzz_base{
+
+
     var $mem = null;
 
     var $session = null;
@@ -85,7 +87,12 @@ class dzz_app extends dzz_base{
     }
 
     private function _init_env() {
+
         error_reporting(E_ERROR);
+        /*if(PHP_VERSION < '5.3.0') {
+            set_magic_quotes_runtime(0);
+        }*/
+
         define('MAGIC_QUOTES_GPC', function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc());
         define('ICONV_ENABLE', function_exists('iconv'));
         define('MB_ENABLE', function_exists('mb_convert_encoding'));
@@ -98,12 +105,10 @@ class dzz_app extends dzz_base{
                 $GLOBALS[$key] = null; unset($GLOBALS[$key]);
             }
         }
-		if(!defined('CURSCRIPT')) {
-			define('CURSCRIPT', 'dzz');
-		}
         if(!defined('DZZ_CORE_FUNCTION') && !@include(DZZ_ROOT.'./core/function/function_core.php')) {
             exit('function_core.php is missing');
         }
+
         if(function_exists('ini_get')) {
             $memorylimit = @ini_get('memory_limit');
             if($memorylimit && return_bytes($memorylimit) < 33554432 && function_exists('ini_set')) {
@@ -112,6 +117,7 @@ class dzz_app extends dzz_base{
         }
 
         define('IS_ROBOT', checkrobot());
+
 
         global $_G;
         $_G = array(
@@ -131,10 +137,12 @@ class dzz_app extends dzz_base{
             'authkey' => '',
             'timenow' => array(),
 
+
             'PHP_SELF' => '',
             'siteurl' => '',
             'siteroot' => '',
             'siteport' => '',
+
 
             'config' => array(),
             'setting' => array(),
@@ -147,7 +155,10 @@ class dzz_app extends dzz_base{
             'lang' => array(),
 
             'rssauth' => '',
+
+
         );
+
         $_G['PHP_SELF'] = dhtmlspecialchars($this->_get_script_url());
         $_G['basescript'] = CURSCRIPT.'php';
         $_G['basefilename'] = basename($_G['PHP_SELF']);
@@ -157,12 +168,13 @@ class dzz_app extends dzz_base{
         } elseif(defined('IN_ARCHIVER')) {
             $sitepath = preg_replace("/\/archiver/i", '', $sitepath);
         }
-        $_G['isHTTPS'] = $this->is_HTTPS();
-		$_G['scheme'] = 'http'.($_G['isHTTPS'] ? 's' : '');
-        $_G['siteurl'] = dhtmlspecialchars($_G['scheme'].'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
+        $_G['isHTTPS'] = $this->is_HTTPS();//($_SERVER['HTTPS'] && strtolower($_SERVER['HTTPS']) != 'off') ? true : false;
+        $_G['siteurl'] = dhtmlspecialchars('http'.($_G['isHTTPS'] ? 's' : '').'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
+
         $url = parse_url($_G['siteurl']);
         $_G['siteroot'] = isset($url['path']) ? $url['path'] : '';
         $_G['siteport'] = empty($_SERVER['SERVER_PORT']) || $_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] == '443' ? '' : ':'.$_SERVER['SERVER_PORT'];
+
         if(defined('SUB_DIR')) {
             $_G['siteurl'] = str_replace(SUB_DIR, '/', $_G['siteurl']);
             $_G['siteroot'] = str_replace(SUB_DIR, '/', $_G['siteroot']);
@@ -170,6 +182,22 @@ class dzz_app extends dzz_base{
         $_G['browser']=helper_browser::getbrowser();
         $_G['platform']=helper_browser::getplatform();
         $this->var = & $_G;
+    }
+    private function is_HTTPS(){
+        if($_SERVER['HTTPS'] === 1){  //Apache
+            return TRUE;
+        }elseif($_SERVER['HTTPS'] === 'on'){ //IIS
+            return TRUE;
+        }elseif($_SERVER['SERVER_PORT'] == 443){ //其他
+            return TRUE;
+        }elseif($_SERVER['REQUEST_SCHEME'] == 'https'){ //其他
+            return TRUE;
+        }elseif(isset($_SERVER['HTTP_X_SCHEME']) && $_SERVER['HTTP_X_SCHEME'] == 'https'){ //k8s集群nginx-ingress
+            return TRUE;
+		 }elseif(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'){ //其他
+            return TRUE;
+        }
+        return FALSE;
     }
     private function _get_script_url() {
         if(!isset($this->var['PHP_SELF'])){
@@ -196,17 +224,21 @@ class dzz_app extends dzz_base{
         if (isset($_GET['GLOBALS']) ||isset($_POST['GLOBALS']) ||  isset($_COOKIE['GLOBALS']) || isset($_FILES['GLOBALS'])) {
             system_error('request_tainting');
         }
+
         if(MAGIC_QUOTES_GPC) {
             $_GET = dstripslashes($_GET);
             $_POST = dstripslashes($_POST);
             $_COOKIE = dstripslashes($_COOKIE);
         }
+
         $prelength = strlen($this->config['cookie']['cookiepre']);
         foreach($_COOKIE as $key => $val) {
             if(substr($key, 0, $prelength) == $this->config['cookie']['cookiepre']) {
                 $this->var['cookie'][substr($key, $prelength)] = $val;
             }
         }
+
+
         if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
             $_GET = array_merge($_GET, $_POST);
         }
@@ -360,42 +392,21 @@ class dzz_app extends dzz_base{
 
         return true;
     }
-    private function is_HTTPS() {
-        $checks = [
-            'HTTPS' => ['filter' => FILTER_VALIDATE_BOOLEAN],
-            'SERVER_PORT' => ['filter' => FILTER_VALIDATE_INT, 'value' => 443],
-            'REQUEST_SCHEME' => ['filter' => FILTER_SANITIZE_STRING, 'value' => 'https'],
-            'HTTP_X_SCHEME' => ['filter' => FILTER_SANITIZE_STRING, 'value' => 'https'],
-            'HTTP_FROM_HTTPS' => ['filter' => FILTER_SANITIZE_STRING, 'value' => 'https'],
-            'HTTP_X_CLIENT_SCHEME' => ['filter' => FILTER_SANITIZE_STRING, 'value' => 'https'],
-            'HTTP_X_FORWARDED_PROXY' => ['filter' => FILTER_SANITIZE_STRING, 'value' => 'https']
-        ];
-    
-        foreach ($checks as $key => $check) {
-            if (isset($_SERVER[$key])) {
-                $value = filter_var($_SERVER[$key], $check['filter']);
-                if (!isset($check['value']) || $value === $check['value']) {
-                    return TRUE;
+
+    private function _get_client_ip() {
+        $ip = $_SERVER['REMOTE_ADDR'];
+        if (isset($_SERVER['HTTP_CLIENT_IP']) && preg_match('/^([0-9]{1,3}\.){3}[0-9]{1,3}$/', $_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR']) AND preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#s', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches)) {
+            foreach ($matches[0] AS $xip) {
+                if (!preg_match('#^(10|172\.16|192\.168)\.#', $xip)) {
+                    $ip = $xip;
+                    break;
                 }
             }
         }
-    
-        return FALSE;
+        return $ip;
     }
-    private function _get_client_ip() {
-		$ip = $_SERVER['REMOTE_ADDR'];
-			if (isset($_SERVER['HTTP_CLIENT_IP']) && ip::validate_ip($_SERVER['HTTP_CLIENT_IP'])) {
-				$ip = $_SERVER['HTTP_CLIENT_IP'];
-			} elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-				if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ",") > 0) {
-					$exp = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR']);
-					$ip = ip::validate_ip(trim($exp[0])) ? $exp[0] : $ip;
-				} else {
-					$ip = ip::validate_ip($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $ip;
-				}
-			}
-		return $ip;
-	}
 
     private function _init_db() {
         if($this->init_db) {
@@ -508,7 +519,7 @@ class dzz_app extends dzz_base{
     }
 
     private function _init_guest() {
-        $username = "游客";
+        $username = '';
         $groupid = 7;
 
         setglobal('member', array( 'uid' => 0, 'username' => $username, 'adminid' => 0, 'groupid' => $groupid, 'credits' => 0, 'timeoffset' => 9999));
@@ -567,7 +578,6 @@ class dzz_app extends dzz_base{
 
             }
         }
-
         if(isset($this->var['setting']['nocacheheaders']) && $this->var['setting']['nocacheheaders']) {
             @header("Expires: -1");
             @header("Cache-Control: no-store, private, post-check=0, pre-check=0, max-age=0", FALSE);
@@ -576,11 +586,10 @@ class dzz_app extends dzz_base{
 
         $lastact = TIMESTAMP."\t".dhtmlspecialchars(basename($this->var['PHP_SELF']))."\t".dhtmlspecialchars($this->var['mod']);
         dsetcookie('lastact', $lastact, 86400);
-        setglobal('currenturl_encode', base64_encode($this->var['scheme'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
+        setglobal('currenturl_encode', base64_encode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
     }
 
     private function _init_setting() {
-        global $_G;
         if($this->init_setting) {
             if(empty($this->var['setting'])) {
                 $this->cachelist[] = 'setting';
@@ -593,7 +602,7 @@ class dzz_app extends dzz_base{
         !empty($this->cachelist) && loadcache($this->cachelist);
 
         if(!is_array($this->var['setting'])) {
-            $this->var['setting'] =C::t('setting')->fetch_all();
+            $this->var['setting'] = array();
         }
         if($ismobile=helper_browser::ismobile()) define('IN_MOBILE',$ismobile);
         define('VERHASH',isset($this->var['setting']['verhash'])?$this->var['setting']['verhash']:random(3));
@@ -626,4 +635,5 @@ class dzz_app extends dzz_base{
             @date_default_timezone_set('Etc/GMT'.($timeoffset > 0 ? '-' : '+').(abs($timeoffset)));
         }
     }
+
 }

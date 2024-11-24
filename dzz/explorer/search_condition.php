@@ -2,6 +2,7 @@
 if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
+Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 global $_G;
 $uid = $_G['uid'];
 if(isset($_GET['requestfile']) && $_GET['requestfile']){

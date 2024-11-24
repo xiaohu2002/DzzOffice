@@ -12,6 +12,7 @@ if(!defined('IN_DZZ')) {
 Hook::listen('check_login');
 require libfile('function/code');
 $filter=trim($_GET['filter']);
+$template = isset($_GET['template']) ? $_GET['template'] : '';
 if($filter=='new'){//列出所有新通知
     $list=array();
     $nids=array();//new>0
@@ -26,7 +27,7 @@ if($filter=='new'){//列出所有新通知
     }
 }elseif($filter=='checknew'){//检查有没有新通知
     $num=DB::result_first("select COUNT(*) from %t where new>0 and uid=%d",array('notification',$_G['uid']));
-    exit(json_encode(array('sum'=>$num,'timeout'=>$_G['setting']['notification']*1000)));
+    exit(json_encode(array('sum'=>$num,'timeout'=>60*1000)));
 }else{
     $list=array();
     $page = empty($_GET['page'])?1:intval($_GET['page']);
@@ -36,7 +37,7 @@ if($filter=='new'){//列出所有新通知
     $perpage=20;
     $start=($page-1)*$perpage;
     $gets = array(
-        'mod'=>MOD_NAME,
+        'mod'=>'system',
         'op' =>'notification',
         'filter'=>'all'
     );
@@ -67,8 +68,8 @@ if($filter=='new'){//列出所有新通知
         $img=$searchcats[$fromid]['appico'];
         $tongzhileixing=$searchcats[$fromid]['appname'];
     }else{
-      $tongzhileixing='全部通知';
-      $navtitle='全部通知'.' - '.lang('panel_notice_title');
+        $tongzhileixing='全部通知';
+        $navtitle='全部通知'.' - '.lang('panel_notice_title');
     }
     $params = array('notification','user','app_market',$_G['uid']);
     $countparam = array('notification',$_G['uid']);
@@ -88,7 +89,7 @@ if($filter=='new'){//列出所有新通知
             $value['dateline']=dgmdate($value['dateline'],'u');
 			$value['note']=dzzcode($value['note'],1,1,1,1,1);
 			if(!$value['appico']){
-			    $value['appico'] =$sitelogo;
+			    $value['appico'] = $sitelogo;
             }else{
                 $value['appico'] = $_G['setting']['attachurl']. $value['appico'];
             }
@@ -98,11 +99,14 @@ if($filter=='new'){//列出所有新通知
     $next=false;
     if($count && $count>$start+count($list)) $next=true;
     $theurl = DZZSCRIPT . "?" . url_implode ($gets);//分页链接
-    $multi = multi($count , $perpage ,$page, $theurl  );
-        include template('notification_list');
+    $multi = multi($count , $perpage ,$page, $theurl,'justify-content-end');
+    include template('notification_list');
     dexit();
 }
-
-include template('notification');
+if ($template == '1') {
+    include template('lyear_notification');
+} else {
+    include template('notification');
+}
 dexit();
 ?>

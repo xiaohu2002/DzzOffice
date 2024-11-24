@@ -8,24 +8,38 @@
     }
 </script>
 <div class="modal-header">
-  <h4 class="modal-title">{lang select_group_member}</h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title">{lang select_group_member}</h4>
 </div>
 <form onsubmit="return chkadd(this);">
     <div class="modal-body group-top">
         <div class="col-md-12 col-sm-12">
-            <label>{lang select_will_addmember}</label>
-            <!--<div class="usertree-search">-->
-            <!--<a href="javascript:;" class="group-select-search" onclick="selorg.search('seluser',document.getElementById('jstree_search_input'));return false" title="{lang search}"><i class="glyphicon glyphicon-search"></i></a>-->
-                <input id="jstree_search_input" type="text" class="form-control"
-                       onblur="selorg.search('seluser',this);"
-                       onkeyup="if(event.keyCode==13){selorg.search('seluser',this);}"/>
-                <!--</div>-->
+            <div class="custom-from">
+                <div class="input-black input-float">
+                    <label class="control-label input-label">{lang select_will_addmember}</label>
+                    <!--<div class="usertree-search">-->
+                    <!--<a href="javascript:;" class="group-select-search" onclick="selorg.search('seluser',document.getElementById('jstree_search_input'));return false" title="{lang search}"><i class="mdi mdi-magnify"></i></a>-->
+                    <div class="input-animate">
+                        <input id="jstree_search_input" type="text" class="form-control"
+                               onblur="selorg.search('seluser',this);"
+                               onkeyup="if(event.keyCode==13){selorg.search('seluser',this);}"/>
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
             <div class="user-select-content">
                 <div class="user-select-content-left">
                     <p class="user-select-content-title">{lang choose}{lang organization}/{lang department}/{lang member}</p>
-                        <iframe name="seluser_iframe" class="org-sel-box-iframe" src="index.php?mod=system&op=selorguser&callback=seluser&moderator=1&multiple=1&stype=2" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true"></iframe>
-                        <input id="sel_seluser" type="hidden" name="uids" value="{eval echo implode(',',array_keys($userarr));}"/>
+                    <div class="group-content " id="seluser_dropdown_menu" style="overflow:hidden">
+                        <iframe name="seluser_iframe" class="org-sel-box-iframe"
+                                src="index.php?mod=system&op=selorguser&callback=seluser&moderator=1&multiple=1&stype=2"
+                                frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%"
+                                allowtransparency="true"></iframe>
+                        <input id="sel_seluser" type="hidden" name="uids"
+                               value="{eval echo implode(',',array_keys($userarr));}"/>
+                    </div>
                 </div>
                 <div class="user-select-content-right">
                     <div class="selected-member">{lang selected_members}</div>
@@ -36,13 +50,13 @@
                                 <!--{if $value['avatarstatus'] == 1}-->
                                 <img src="avatar.php?uid={$value['uid']}" class="img-rounded select-mech">
                                 <!--{else}-->
-                                <span class="iconFirstWord" style="background:{$value['headerColor']}">
-			                        <span title="$value[username]">{eval echo new_strsubstr(ucfirst($value[username]),1,'');}</span>
+                                <span class="iconFirstWord" style="background:{$value[headerColor]}">
+			                        <span title="$value['username']">{eval echo new_strsubstr(ucfirst($value['username']),1,'');}</span>
 			                    </span>
                                 <!--{/if}-->
                                 $value['username']
                                 <!--{if ($perm > $value['perm']) || ($_G['adminid'] == 1 && $value['perm'] != 2 && $groupinfo['type'] == 1)}-->
-                                <i class="ti-close dzz dzz-close"></i>
+                                <i class="ti-close mdi mdi-close-circle "></i>
                                 <!--{/if}-->
                             </li>
                             <!--{/loop}-->
@@ -57,13 +71,18 @@
     <div class="modal-footer">
         <input type="hidden" name="add" value="true"/>
         <button type="submit" class="btn btn-primary">{lang confirms}</button>
-        <button type="button" class="btn btn-danger cancel" data-bs-dismiss="modal" aria-label="Close">{lang
+        <button type="button" class="btn btn-default-outline cancel" data-dismiss="modal" aria-label="Close">{lang
             cancel}
         </button>
 
     </div>
 </form>
 <script type="text/javascript" reload="1">
+    jQuery(document).ready(function (e) {
+        $('.input-black').each(function () {
+            InputAnimate.init($(this));
+        });
+    });
     var createid = '{$_G['uid']}';
     $(document).ready(function (e) {
         $(document).on('mouseenter', '.user-item', function () {
@@ -97,14 +116,14 @@
                     for (var o in data['insertuser']) {
                         if (data['insertuser'][o]['avatarstatus'] == 1) {
                             html += '<li class="right-numer-carousel" id="' + data['insertuser'][o]['uid'] + '_delete" >' +
-                                ' <a href="javascript:;" class="js-popboxs member_details_info adduser" data-bs-placement="bottom" data-bs-trigger="focus"' +
-                                ' data-auto-adapt="true"data-bs-toggle="popover" style="display: inline-block;width: 28px;"' +
+                                ' <a href="javascript:;" class="js-popboxs member_details_info adduser" data-placement="bottom" data-trigger="focus"' +
+                                ' data-auto-adapt="true"data-toggle="popover" style="display: inline-block;width: 28px;"' +
                                 ' data-href="{MOD_URL}&op=group&do=right_popbox&gid=$gid&uid=' + data['insertuser'][o]['uid'] + '"> ' +
-                                '<img src="avatar.php?uid=' + data['insertuser'][o]['uid'] + '" class="avatar" style="width: 25px;height: 25px;"> </a> </li>';
+                                '<img src="avatar.php?uid=' + data['insertuser'][o]['uid'] + '" class="img-circle avatar" style="width: 25px;height: 25px;"> </a> </li>';
                         } else {
                             html += '<li class="right-numer-carousel" style="background:' + data['insertuser'][o]['headerColor'] + '" id="' + data['insertuser'][o]['uid'] + '_delete">' +
-                                '<a href="javascript:;" class="js-popboxs member_details_info adduser" data-bs-placement="bottom" data-bs-trigger="focus"' +
-                                'data-auto-adapt="true" data-bs-toggle="popover" style="display: inline-block;width: 28px;"' +
+                                '<a href="javascript:;" class="js-popboxs member_details_info adduser" data-placement="bottom" data-trigger="focus"' +
+                                'data-auto-adapt="true" data-toggle="popover" style="display: inline-block;width: 28px;"' +
                                 'data-href="{MOD_URL}&op=group&do=right_popbox&gid=$gid&uid=' + data['insertuser'][o]['uid'] + '">' +
                                 '<span class="rightcarousel-first">' + data['insertuser'][o]['ufirst'] + '</span><span class="dzz dzz-expand-more dzz-right-first"></span></a></li>';
                         }
@@ -135,79 +154,130 @@
     <div class="table-con">
         <div class="setup-con content-form">
 	        <div class="modal-header">
-            <h4 class="modal-title">{lang about}</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>	
+			    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			        <span class="mdi mdi-close-circle "></span>
+			    </button>
+			    <h4 class="modal-title">{lang about}</h4>
+			</div>	
             <form class="form-horizontal about-editstaus" onsubmit="return set_submit(this)" id="about-editstaus">
                 <input type="hidden" name="setsubmit" value="true"/>
                 <input type="hidden" name="gid" value="$group[orgid]"/>
                 <div class="modal-body">
-                  <div class="about-block">
-									<div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Logo</label>
-                      <input type="hidden" value="$group[aid]" name="arr[aid]" class="form-control">
-                      <div class="col-sm-9 col-form-label">
-                        <ul class="group-head col-md-10 col-sm-10">
-                          <li class="head-file">
-                              <a href="javascript:;">{eval echo avatar_group($gid);}
-                                  <span class="dzz-hide"><img src="{MOD_PATH}/img/ic-imgMoreAdd1.jpg" style="width: 24px;height: 24px;padding: 0px;"></span>
-                                  <input type="file" onclick="upload_bgphoto(this,true)" name="files[]">
-                              </a>
-                          </li>
-                        </ul>
-                      </div>
+                <div class="about-block">
+                    <div class="about-blockgroup clearfix">
+                        <label class="control-label col-md-2 col-sm-2">Logo</label>
+                        <div class="about-blockhead col-md-10 col-sm-10">
+                            <input type="hidden" value="$group[aid]" name="arr[aid]" class="imgdata"/>
+                            <ul class="group-head col-md-10 col-sm-10">
+                                <li class="head-file">
+                                    <a href="javascript:;">
+                                        {eval echo avatar_group($gid);}
+                                       	<span class="dzz-hide"><img src="{MOD_PATH}/img/ic-imgMoreAdd1.jpg" style="width: 24px;height: 24px;padding: 0px;"></span>
+                                        <input type="file" onclick="upload_bgphoto(this,true)" name="files[]">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="row mb-3">
-                      <label class="col-sm-3 col-form-label">{lang name}</label>
-                      <div class="col-sm-9 col-form-label">
-                          <input type="text" name="arr[orgname]" value="$group[orgname]" class="form-control">
-                      </div>
+                    <div class="about-blockgroup clearfix" style="position: relative;">
+
+                        <div class="input-black input-float">
+                            <label class="control-label  col-md-2 col-sm-2">{lang name}</label>
+                            <div class="input-animate col-md-10 col-sm-10">
+                                <input type="text" class="form-control" name="arr[orgname]" value="$group[orgname]">
+                            </div>
+                        </div>
+
+
                     </div>
-                    <div class="row mb-3">
-                      <label class="col-sm-3 col-form-label">{lang introduce}</label>
-                      <div class="col-sm-9 col-form-label">
-                          <input type="text" name="arr[desc]" value="$group[desc]" class="form-control">
-                      </div>
+                    <div class="about-blockgroup clearfix">
+                        <div class="input-black input-float">
+                            <label class="control-label col-md-2 col-sm-2">{lang introduce}</label>
+                            <div class="input-animate col-md-10 col-sm-10">
+                                <input type="text" class="form-control" name="arr[desc]" value="$group[desc]">
+                            </div>
+                        </div>
+
                     </div>
+
+
                 </div>
                 <div class="about-block">
                     <div class="about-blockgroup clearfix">
-                        <label class="control-weight col-md-2">{lang state}</label>
+                        <label class="control-label control-weight col-md-2" style="padding-top: 4px;">{lang
+                            state}</label>
                         <div class="about-blockhead col-md-10 js-switch_value">
-                            <input type="checkbox" class="js-switch1 js-switch-sub form-check-input" data-name="manageon"<!--{if $group[diron]}--> checked<!--{/if}-->  />
+                            <input type="checkbox" class="js-switch1 js-switch-sub" data-name="manageon"
+                            <!--{if $group[diron]}--> checked <!--{/if}-->  />
+
                             <!--{if $group[diron]}-->
-                            <span class="about-checked about-open">{lang open_start}</span>
+                            <span class="about-checked about-open">
+                                {lang open_start}
+                            </span>
                             <!--{else}-->
-                            <span class="about-checked about-close">{lang close}</span>
+                            <span class="about-checked about-close">
+                                {lang close}
+                            </span>
                             <!--{/if}-->
                             <p class="about-cue">{lang close_group_tips}</p>
                             <input type="hidden" class="manageon" name="arr[diron]" value="$group[diron]"/>
                         </div>
                     </div>
-                    <!--<!--{if !$_G['setting']['allowshare']}-->
+                  <!--  {if $group[syatemon]}
                     <div class="about-blockgroup clearfix">
-                      <label class="control-weight col-md-2">{lang share}</label>
-                      <div class="about-blockhead col-md-10 js-switch_value">
-                          <input type="checkbox" class="js-switch1 js-switch-sub form-check-input" data-name="available"<!--{if $group[diron] && $group[available]}--> checked<!--{/if}--> />
-                          <!--{if $group[diron] && $group[available]}-->
-                          <span class="about-checked about-open">{lang open_start}</span>
-                          <!--{else}-->
-                          <span class="about-checked about-close">{lang close}</span>
-                          <!--{/if}-->
-                          <p class="about-cue">{lang close_groupdir_tips}</p>
-                          <input type="hidden" class="available" name="arr[available]" value="$group[available]"/>
-                      </div>
+                        <label class="control-label control-weight col-md-2" style="padding-top: 4px;">{lang
+                            state}</label>
+                        <div class="about-blockhead col-md-10 js-switch_value">
+                            <input type="checkbox" class="js-switch1 js-switch-sub" data-name="manageon"
+                            {if $group[manageon] && $group[syatemon]} checked {/if}  />
+
+                            {if $group[manageon] && $group[syatemon]}
+                            <span class="about-checked about-open">
+                                {lang open_start}
+                            </span>
+                            {else}
+                            <span class="about-checked about-close">
+                                {lang close}
+                            </span>
+                            {/if}
+                            <p class="about-cue">{lang close_group_tips}</p>
+                            <input type="hidden" class="manageon" name="arr[manageon]" value="$group[manageon]"/>
+                        </div>
                     </div>
-                    <!--{/if}-->-->
+                    {/if}
+                    {if $group['available']}
+                    <div class="about-blockgroup clearfix">
+                        <label class="control-label control-weight col-md-2" style="padding-top: 4px;">{lang
+                            share}</label>
+                        <div class="about-blockhead col-md-10 js-switch_value">
+                            <input type="checkbox" class="js-switch1 js-switch-sub" data-name="diron"
+                            {if $group[diron] && $group['available']}checked{/if} />
+
+                            {if $group[diron] && $group['available']}
+                            <span class="about-checked about-open">
+                                {lang open_start}
+                            </span>
+                            {else}
+                            <span class="about-checked about-close">
+                                {lang close}
+                            </span>
+                            {/if}
+
+                            <p class="about-cue">{lang close_groupdir_tips}</p>
+                            <input type="hidden" class="diron" name="arr[diron]" value="$group[diron]"/>
+                        </div>
+                    </div>
+                    {/if}-->
                 </div>
                 </div>
                 <div class="modal-footer clearfix">
                     <div class="about-button">
                         <!--{if ($_G['adminid'] == 1) || ($group['type'] == 1 && $perm > 1)}-->
-                    	<div  class="btn-rdedanger pull-left" onclick="delete_group('{$group[orgid]}')"><span class="dzz dzz-delete"></span><span>{lang delete_group}</span></div>
+                    	<div  class="btn-rdedanger pull-left" onclick="delete_group('{$group[orgid]}')"><span class="mdi mdi-delete lead dcolor"></span><span>{lang delete_group}</span></div>
                         <!--{/if}-->
                         <button type="submit" class="btn btn-primary">{lang save}</button>
-                        <button type="button" class="btn btn-danger about-cancel" id="about-cancel">{lang cancel}
+                        <button type="button" class="btn btn-default-outline about-cancel" id="about-cancel">{lang
+                            cancel}
                         </button>
                     </div>
                 </div>
@@ -217,6 +287,11 @@
 </div>
 <script type="text/javascript" reload="1">
     //名称初始化
+    jQuery(document).ready(function (e) {
+        $('.input-black').each(function () {
+            InputAnimate.init($(this));
+        });
+    });
     $('.js-switch-sub').change(function () {
         var check = $(this).prop('checked');
         var name = $(this).data('name');
@@ -243,6 +318,13 @@
     $(document).off('click.settingcancel').on('click.settingcancel', '.about-cancel', function () {
         hideWindow('groupsetting');
     });
+    //开关样式
+    $.getScript('{MOD_PATH}/js/switchery.min.js', function () {
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch1'));
+        elems.forEach(function (html) {
+            var switchery = new Switchery(html);
+        });
+    });
 
     function set_submit(form) {
         var array = $(form).serializeArray();
@@ -254,7 +336,7 @@
             if (array[o].name == 'arr[perm]' && empty.test(array[o].value)) {
                 showDialog(__lang.permission_value_cannot_be_empty);
             }
-            if (array[o].name == 'arr[aid]' && empty.test(array[o].value) && '$group[type]' == 1) {
+            if (array[o].name == 'arr[aid]' && empty.test(array[o].value) && '$group['type']' == 1) {
                 showDialog(__lang.please_select_group_head);
             }
 

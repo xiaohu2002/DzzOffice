@@ -9,8 +9,10 @@
 if(!defined('IN_DZZ')) {
     exit('Access Denied');
 }
-$uid = intval($_G['uid']);
-$space = C::t('user_profile')->get_userprofile_by_uid($uid);//用户资料信息
-$langList = $_G['config']['output']['language_list'];
-include template('navmenu');
+$template = isset($_GET['template']) ? $_GET['template'] : '';
+if ($template == '1') {
+    include template('lyear_navmenu');
+} else {
+    include template('navmenu');
+}
 exit();

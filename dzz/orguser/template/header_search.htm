@@ -1,7 +1,7 @@
  <!--{if empty($_GET[op])}-->
  <div class="input-search">
  <form name="search" action="{MOD_URL}"  onsubmit="return false">
-    <i class="input-search-icon glyphicon glyphicon-search" aria-hidden="true" onclick="jstree_search(jQuery('#searchval').val())"></i>
+    <i class="input-search-icon mdi mdi-magnify" aria-hidden="true" onclick="jstree_search(jQuery('#searchval').val())"></i>
     <input type="text"  class="form-control search  form-search"  value="" placeholder="{lang search}" id="searchval" onkeyup="if(this.value!=''){jQuery('#emptysearchcondition').show();}if(event.keyCode==13){jstree_search(jQuery('#searchval').val())}">
     <span aria-hidden="true" id="emptysearchcondition" class="header-closebutton">×</span>
  </form>

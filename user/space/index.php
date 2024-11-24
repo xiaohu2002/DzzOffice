@@ -9,6 +9,7 @@
 if(!defined('IN_DZZ')) {
     exit('Access Denied');
 }
+
 Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 $navtitle="用户资料";
 include_once libfile('function/profile');
@@ -39,7 +40,7 @@ $profiles['usergroup']=array('title'=>lang('usergroup'),'value'=>$usergroup['gro
 $department='';
 foreach(C::t('organization_user')->fetch_orgids_by_uid($uid) as $orgid){
     $orgpath=getPathByOrgid($orgid);
-    $department.='<span class="badge rounded-pill bg-primary me-1">'.implode('-',($orgpath)).'</span>';
+    $department.='<span class="label label-primary">'.implode('-',($orgpath)).'</span>';
 }
 if(empty($department)) $department=lang('not_join_agency_department');
 $profiles['department']=array('title'=>lang('category_department'),'value'=>$department);

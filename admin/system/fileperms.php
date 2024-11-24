@@ -11,13 +11,7 @@ if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 }
 include_once libfile('function/admin');
 $oparr = array('updatecache', 'database','cron', 'log','fileperms');
-$leftmenu = array();
-$op = $_GET['op'];
-foreach ($oparr as $key => $value) {
-	$leftmenu[$value] = array('title' => lang($value), 'active' => '');
-	if ($value == $op)
-		$leftmenu[$value]['active'] = 'class="nav-link active"';
-}
+$op = isset($_GET['op']) ? $_GET['op'] : '';
 $navtitle = lang('fileperms') . ' - ' . lang('appname');
 $step = max(1, intval($_GET['step']));
 if ($step == 1) {

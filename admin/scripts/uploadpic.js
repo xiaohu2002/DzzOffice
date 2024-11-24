@@ -5,4 +5,175 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-var forms,mainForm,attachexts=new Array,attachwh=new Array,insertType=1,thumbwidth=parseInt(60),thumbheight=parseInt(60),extensions="jpg,jpeg,gif,png",nowUid=0,uploadStat=0,picid=0,nowid=0,successState=!1;function getExt(e){return-1==e.lastIndexOf(".")?"":e.substr(e.lastIndexOf(".")+1,e.length).toLowerCase()}function delete_pic(e,t){document.getElementById("pic_container").removeChild(e.parentNode.parentNode);var n=document.createElement("input");n.type="hidden",n.name="delete_pics[]",n.value=t,document.getElementById("pic_delete").appendChild(n)}function delAttach(e){document.getElementById("attachbody").removeChild(document.getElementById("attach_"+e).parentNode.parentNode.parentNode),""==document.getElementById("attachbody").innerHTML&&addAttach(),document.getElementById("localimgpreview_"+e+"_menu")&&document.body.removeChild(document.getElementById("localimgpreview_"+e+"_menu"))}function addAttach(){newnode=document.getElementById("attachbodyhidden").rows[0].cloneNode(!0);var e,t=nowid;e=newnode.getElementsByTagName("form");for(var n=0;n<e.length;n++)e[n]&&"upload"==e[n].id&&(e[n].id="upload_"+t);e=newnode.getElementsByTagName("input");for(n=0;n<e.length;n++)"attach"==e[n].name&&(e[n].id="attach_"+t,e[n].name="attach",e[n].onchange=function(){insertAttach(t)},e[n].unselectable="on");e=newnode.getElementsByTagName("span");for(n=0;n<e.length;n++)"localfile"==e[n].id&&(e[n].id="localfile_"+t);nowid++,document.getElementById("attachbody").appendChild(newnode)}function insertAttach(e){var t=document.getElementById("attach_"+e).value,n=getExt(t),a=new RegExp("(^|\\s|,)"+n+"($|\\s|,)","ig"),d=document.getElementById("attach_"+e).value.substr(document.getElementById("attach_"+e).value.replace(/\\/g,"/").lastIndexOf("/")+1);if(""!=t)if(""==extensions||null!=a.exec(extensions)&&""!=n){attachexts[e]=inArray(n,["gif","jpg","jpeg","png"])?2:1;var i='<table cellspacing="0" cellpadding="0" class="up_row"><tr>';i+="<td><strong>"+d+"</strong>",i+='</td><td class="o"><span id="showmsg'+e+'"><a href="javascript:;" onclick="delAttach('+e+');return false;" class="xi2">['+__lang.delete+"]</a></span>",i+="</td></tr></table>",document.getElementById("localfile_"+e).innerHTML=i,document.getElementById("attach_"+e).style.display="none",addAttach()}else alert(__lang.support_upload_pictures_extensions)}function getPath(e){if(e)return BROWSER.ie&&BROWSER.ie<7?(e.select(),document.selection.createRange().text):BROWSER.firefox?e.files?e.files.item(0).getAsDataURL():e.value:""}function inArray(e,t){if("string"==typeof e)for(var n in t)if(t[n]==e)return!0;return!1}function insertAttachimgTag(e){edit_insert("[imgid="+e+"]")}function uploadSubmit(e){e.disabled=!0,mainForm=e.form,forms=document.getElementById("attachbody").getElementsByTagName("FORM"),upload()}function upload(){if(void 0===forms[nowUid])return!1;var e=forms[nowUid].id.split("_");if(e=e[1],nowUid>0){var t=document.getElementById("showmsg"+nowid);if(1==uploadStat){t.innerHTML=__lang.upload_success,successState=!0;try{var n=document.createElement('<input type="hidden" id="picid_'+picid+'" value="'+picid+'" name="picids[]">')}catch(e){(n=document.createElement("input")).setAttribute("name","picids[]"),n.setAttribute("type","hidden"),n.setAttribute("id","picid_"+picid),n.setAttribute("value",picid)}mainForm.appendChild(n)}else t.style.color="#f00",t.innerHTML=__lang.upload_failed+uploadStat}null!=document.getElementById("showmsg"+e)?(document.getElementById("showmsg"+e).innerHTML=__lang.upload_await+'(<a href="javascript:;" onclick="forms[nowUid].submit();">'+__lang.founder_upgrade_reset+"</a>)",forms[nowUid].submit()):nowUid+1==forms.length&&(window.onbeforeunload=null,mainForm.submit()),nowid=e,nowUid++,uploadStat=0}addAttach();
+
+var attachexts = new Array();
+var attachwh = new Array();
+
+var insertType = 1;
+var thumbwidth = parseInt(60);
+var thumbheight = parseInt(60);
+var extensions = 'jpg,jpeg,gif,png';
+var forms;
+var nowUid = 0;
+var uploadStat = 0;
+var picid = 0;
+var nowid = 0;
+var mainForm;
+var successState = false;
+function getExt(path) {
+	return path.lastIndexOf('.') == -1 ? '' : path.substr(path.lastIndexOf('.') + 1, path.length).toLowerCase();
+}
+function delete_pic(obj,picid){
+	document.getElementById('pic_container').removeChild(obj.parentNode.parentNode);
+	var input=document.createElement('input');
+	input.type='hidden';
+	input.name='delete_pics[]';
+	input.value=picid;
+	document.getElementById('pic_delete').appendChild(input);
+}
+function delAttach(id) {
+	document.getElementById('attachbody').removeChild(document.getElementById('attach_' + id).parentNode.parentNode.parentNode);
+	if(document.getElementById('attachbody').innerHTML == '') {
+		addAttach();
+	}
+	document.getElementById('localimgpreview_' + id + '_menu') ? document.body.removeChild(document.getElementById('localimgpreview_' + id + '_menu')) : null;
+}
+
+function addAttach() {
+	newnode = document.getElementById('attachbodyhidden').rows[0].cloneNode(true);
+	var id = nowid;
+	var tags;
+	tags = newnode.getElementsByTagName('form');
+	for(var i=0;i<tags.length;i++) {
+		
+		if(tags[i] && tags[i].id == 'upload') {
+			tags[i].id = 'upload_' + id;
+		}
+	}
+	tags = newnode.getElementsByTagName('input');
+	for(var i=0;i<tags.length;i++) {
+		if(tags[i].name == 'attach') {
+			tags[i].id = 'attach_' + id;
+			tags[i].name = 'attach';
+			tags[i].onchange = function() {insertAttach(id)};
+			tags[i].unselectable = 'on';
+		}
+		
+	}
+	tags = newnode.getElementsByTagName('span');
+	for(var i=0;i<tags.length;i++) {
+		if(tags[i].id == 'localfile') {
+			tags[i].id = 'localfile_' + id;
+		}
+	}
+	nowid++;
+
+	document.getElementById('attachbody').appendChild(newnode);
+}
+
+addAttach();
+
+function insertAttach(id) {
+	var localimgpreview = '';
+	var path = document.getElementById('attach_' + id).value;
+	var ext = getExt(path);
+	var re = new RegExp("(^|\\s|,)" + ext + "($|\\s|,)", "ig");
+	var localfile = document.getElementById('attach_' + id).value.substr(document.getElementById('attach_' + id).value.replace(/\\/g, '/').lastIndexOf('/') + 1);
+
+	if(path == '') {
+		return;
+	}
+	if(extensions != '' && (re.exec(extensions) == null || ext == '')) {
+		alert(__lang.support_upload_pictures_extensions);
+		return;
+	}
+	attachexts[id] = inArray(ext, ['gif', 'jpg', 'jpeg', 'png']) ? 2 : 1;
+
+	var inhtml = '<table cellspacing="0" cellpadding="0" class="up_row"><tr>';
+	
+	inhtml += '<td><strong>' + localfile +'</strong>';
+	inhtml += '</td><td class="o"><span id="showmsg' + id + '"><a href="javascript:;" onclick="delAttach(' + id + ');return false;" class="xi2">['+__lang.delete+']</a></span>';
+	inhtml += '</td></tr></table>';
+
+	document.getElementById('localfile_' + id).innerHTML = inhtml;
+	document.getElementById('attach_' + id).style.display = 'none';
+
+	addAttach();
+}
+
+function getPath(obj){
+	if (obj) {
+		if (BROWSER.ie && BROWSER.ie < 7) {
+			obj.select();
+			return document.selection.createRange().text;
+
+		} else if(BROWSER.firefox) {
+			if (obj.files) {
+				return obj.files.item(0).getAsDataURL();
+			}
+			return obj.value;
+		} else {
+			return '';
+		}
+		return obj.value;
+	}
+}
+function inArray(needle, haystack) {
+	if(typeof needle == 'string') {
+		for(var i in haystack) {
+			if(haystack[i] == needle) {
+					return true;
+			}
+		}
+	}
+	return false;
+}
+
+function insertAttachimgTag(id) {
+	edit_insert('[imgid=' + id + ']');
+}
+
+function uploadSubmit(obj) {
+	obj.disabled = true;
+	mainForm = obj.form;
+	forms = document.getElementById('attachbody').getElementsByTagName("FORM");
+	upload();
+}
+
+function upload() {
+	if(typeof(forms[nowUid]) == 'undefined') return false;
+	var nid = forms[nowUid].id.split('_');
+	nid = nid[1];
+	if(nowUid>0) {
+		var upobj = document.getElementById('showmsg'+nowid);
+		if(uploadStat==1) {
+			upobj.innerHTML = __lang.upload_success;
+			successState = true;
+			var InputNode;
+			try {
+				var InputNode = document.createElement("<input type=\"hidden\" id=\"picid_" + picid + "\" value=\""+ picid +"\" name=\"picids[]\">");
+			} catch(e) {
+				var InputNode = document.createElement("input");
+				InputNode.setAttribute("name", "picids[]");
+				InputNode.setAttribute("type", "hidden");
+				InputNode.setAttribute("id", "picid_" + picid);
+				InputNode.setAttribute("value",picid);
+			}
+			mainForm.appendChild(InputNode);
+
+		} else {
+			upobj.style.color = "#f00";
+			upobj.innerHTML = __lang.upload_failed+uploadStat;
+		}
+	}
+	if(document.getElementById('showmsg'+nid) != null) {
+		document.getElementById('showmsg'+nid).innerHTML = __lang.upload_await+'(<a href="javascript:;" onclick="forms[nowUid].submit();">'+__lang.founder_upgrade_reset+'</a>)';
+		forms[nowUid].submit();
+	} else if(nowUid+1 == forms.length) {
+		window.onbeforeunload = null;
+		mainForm.submit();
+	}
+	nowid = nid;
+	nowUid++;
+	uploadStat = 0;
+}

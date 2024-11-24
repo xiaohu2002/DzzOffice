@@ -1,31 +1,22 @@
-<!--{template common/header_simple_start}-->
+<!--{template lyear/header_simple_start}-->
 <link href="dzz/images/folder/folder.css?{VERHASH}" rel="stylesheet" media="all">
-<link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.css?{VERHASH}">
-<!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
-<div class="bs-container clearfix">
-	<div class="bs-left-container  clearfix">
-		<!--{template left}-->
-	</div>
-	<div class="left-drager">
-    <div class="left-drager-op">
-      <div class="left-drager-sub"></div>
-    </div>
-  </div>
-	<div class="bs-main-container">
+<!--{template lyear/header_simple_end}-->
+<main class="bs-main-container">
+	<div class="container-fluid">
+		<div class="card">
 		<!--{if $_G[adminid]==1}-->
 		<!--{if $list}-->
-		<div class="main-header2">
+		<div class="card-header">
 			<ul class="nav nav-pills clearfix">	
-				<li class="pull-right " style="margin:5px 0;">
+				<li class="float-end">
 					<form name="search" action="{DZZSCRIPT}" class="form-inline" method="get">
 						<input type="hidden" name="mod" value="{MOD_NAME}" />
 						<input type="hidden" name="lpp" value="$lpp">
 						<input type="hidden" name="type" value="$type" />
 						<input type="hidden" name="keyword" value="$keyword" /> 
 						<input name="username" type="text" value="$username" class="form-control" style="width:90px ;display:inline-block" placeholder="{lang username}" />
-						<button class="btn btn-outline-info" onclick="this.parentNode.submit()"><i class="glyphicon glyphicon-search"></i></button>
-						<div class="pull-right">
+						<button class="btn btn-outline-info" onclick="this.parentNode.submit()"><i class="mdi mdi-magnify"></i></button>
+						<div class="float-end">
 							<div class="input-group mb-3">
 								<span class="input-group-text">每页显示</span>
 								<select class="form-select" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
@@ -44,7 +35,7 @@
 		</div>
 		<!--{/if}-->
 		<!--{/if}-->
-		<div class="main-content clearfix">
+		<div class="card-body">
 			<!--{if !$list}-->
 			<div style="text-align: center;">
 				<img src="static/image/common/no_list.png" /><br>
@@ -118,9 +109,9 @@
 								{lang link}：
 								<a href="$value[sharelink]" target="_dzz">$value[sharelink]</a>
 								<!--{if $value[password]}-->&nbsp;{lang extract_password}：$value[password]<!--{/if}-->
-								&nbsp;<button class="btn btn-primary js_copy" data-clipboard-text="{eval echo $value['password']?('分享名称:'.$value['title'].' 分享链接:'.$value['sharelink'].' 提取码:'.$value['password']):$value['sharelink'];}" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>复制<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
+								&nbsp;<button class="btn btn-primary js_copy" data-clipboard-text="{eval echo $value['password']?('分享名称:'.$value['title'].' 分享链接:'.$value['sharelink'].' 提取码:'.$value['password']):$value['sharelink'];}" style="position:relative"><i class="mdi mdi-content-copy"></i>复制<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
 								<!--{if $value[password]}-->
-								<button class="btn btn-primary js_copy" data-clipboard-text="$value[password]" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>提取码<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
+								<button class="btn btn-primary js_copy" data-clipboard-text="$value[password]" style="position:relative"><i class="mdi mdi-content-copy"></i>提取码<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
 								<!--{/if}-->
 								<!--{if $value[endtime]}-->&nbsp;{lang expiration_time}：$value[fendtime]<!--{/if}-->
 								<!--{if $value[times]}-->&nbsp;{lang limited_number}：$value[count] / $value[times]<!--{/if}-->
@@ -135,11 +126,9 @@
 		</div>
 	</div>
 </div>
+</main>
 <script type="text/javascript">
 	jQuery(document).ready(function(e) {
-		jQuery('select').lyearSelect({
-			width:70,
-		});
 		jQuery(document).on('mouseenter', 'div[node-type=item]', function() {
 			jQuery(this).addClass('item-hover');
 		});
@@ -328,6 +317,5 @@
 		}
 	}
 </script>
-<script type="text/javascript" src="static/lyear/js/bootstrap-lyear-select/bootstrap-lyear-select.js?{VERHASH}"></script>
 <script type="text/javascript" src="static/clipboard/clipboard.min.js?{VERHASH}"></script>
-<!--{template common/footer_simple}-->
+<!--{template lyear/footer_simple}-->

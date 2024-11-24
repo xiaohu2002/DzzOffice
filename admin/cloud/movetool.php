@@ -13,7 +13,7 @@ $navtitle=lang('dzzpan').' - '.lang('migration_tool').' - '.lang('cloud_set');
 if(submitcheck('movesubmit')){
    $_GET=dhtmlspecialchars($_GET);
    $gets = array(
-		'mod'=>MOD_NAME,
+		'mod'=>'cloud',
 		'op'=>'movetool_run',
 		'oremoteid'=>intval($_GET['oremoteid']),
 		'remoteid' =>intval($_GET['remoteid']),

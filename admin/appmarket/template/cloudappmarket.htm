@@ -1,4 +1,4 @@
-<!--{template common/header_simple_start}-->
+<!--{template lyear/header_simple_start}-->
 <link href="{MOD_PATH}/images/market.css?{VERHASH}" rel="stylesheet" media="all">
 <style>
 .app_upgradelist{
@@ -25,75 +25,73 @@
 	padding: 5px 10px;
 }
 </style>
-<!--{template common/header_simple_end}-->
-<!--{template common/commer_header}-->
-<div class="bs-container clearfix">
-  <div class="bs-left-container  clearfix"> 
-    <!--{template left}--> 
-  </div>
-  <div class="left-drager"></div>
-  <div class="bs-main-container">
-    <div class="all-center-top clearfix">
-      <div class="app-info pull-left"> <a href="{MOD_URL}">{lang total}<span class="num">$total</span>{lang ge}{lang app}</a> 
-      </div>
-    </div>
-	<div class="alert alert-warning alert-dismissible fade show" role="alert">
-		<strong>{lang board_message}</strong> 
-			{lang manual_install_tip}
-		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-	  </div>
-    <div class="main-content clearfix" >
-		<table class="table table-hover" id="loopcontent">
-			<thead>
-			  <tr>
-				<th>{lang application_name}</th>
-				<th>{lang version}</th>
-				<th>{lang label}</th>
-				<th>{lang big_small}</th>
-				<th>{lang operation}</th>
-			  </tr>
-			</thead>
-			<tbody>
-				<!--{loop $list $value}--> 
-			  <tr id="app_div_{$value[mid]}" class="app_upgradelist">
-				<td>
-					<a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer"  class="appicon view-detail" title="$value[name]"><img src="$value[coverimg]" style="margin:0;float: left;" /></a>
-					<a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer" target="_blank" class="view-detail" title="$value[name]">$value[name]</a>
-					<div class="appdesc help-block" title="$value['appdesc']">{eval echo $value['desc_short']?$value['desc_short']:lang('none');}</div>
-					<div id="progess_{$value[mid]}">
-						<span id="upgrade_progess_{$value[mid]}" class="progress-bar progress-bar-striped progress-bar-animated upgrade_progess"></span> 
-					</div>
-				</td>
-				<td>$value[version]</td>
-				<td><div class="appdesc help-block">{$value['classid_name']}</div></td>
-				<td>{eval echo formatsize($value['packagesize']);}</td>
-				<td>
-					<!--{if $value[price]>0}-->
-					<button class="btn btn-outline-secondary"  onclick="showBuyInfo(this,'$value[mid]')" data-href="$cloudurl?mod=dzzmarket&op=ajax&do=getBuyInfo&mid=$value[mid]" title="{lang buy_contract}">{lang buy}</button>
-					<!--{else}--> 
-						<!--{if $value[package]}--> 
-							<!--{if $value["local_appinfo"]}-->
-							<button  class="btn btn-round btn-secondary" disabled data-mid="$value['mid']" title="{lang installed}">
-							{lang installed}
-							</button>
-							<!--{else}-->
-							<button class="btn btn-round btn-primary" style="white-space: inherit;" onclick="start_check_install('{MOD_URL}&op=install_app_ajax&operation=check_install&appid=$value[identifier]','{$value[mid]}','{$value[baseinfo]}');" id="upgrade_info_{$value[mid]}">{lang install_onekey}</button>
+<!--{template lyear/header_simple_end}-->
+<main class="bs-main-container">
+	<div class="container-fluid">
+	  <div class="card">
+		<header class="card-header">
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<strong>{lang board_message}</strong> 
+					{lang manual_install_tip}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			<div class="app-info float-start"> <a href="{MOD_URL}" class="dcolor">{lang total}<span class="num">$total</span>{lang ge}{lang app}</a> </div>
+		</header>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-hover align-middle" id="loopcontent">
+					<thead>
+					<tr>
+						<th>{lang application_name}</th>
+						<th>{lang version}</th>
+						<th>{lang label}</th>
+						<th>{lang big_small}</th>
+						<th>{lang operation}</th>
+					</tr>
+					</thead>
+					<tbody>
+						<!--{loop $list $value}--> 
+					<tr id="app_div_{$value[mid]}" class="app_upgradelist">
+						<td>
+							<a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer"  class="appicon view-detail" title="$value[name]"><img src="$value[coverimg]" style="margin:0;float: left;" /></a>
+							<a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer" target="_blank" class="view-detail" title="$value[name]">$value[name]</a>
+							<div class="appdesc form-text" title="$value['appdesc']">{eval echo $value['desc_short']?$value['desc_short']:lang('none');}</div>
+							<div id="progess_{$value[mid]}">
+								<span id="upgrade_progess_{$value[mid]}" class="progress-bar progress-bar-striped progress-bar-animated upgrade_progess"></span> 
+							</div>
+						</td>
+						<td>$value[version]</td>
+						<td><div class="appdesc form-text">{$value['classid_name']}</div></td>
+						<td>{eval echo formatsize($value['packagesize']);}</td>
+						<td>
+							<!--{if $value[price]>0}-->
+							<button class="btn btn-outline-secondary"  onclick="showBuyInfo(this,'$value[mid]')" data-href="$cloudurl?mod=dzzmarket&op=ajax&do=getBuyInfo&mid=$value[mid]" title="{lang buy_contract}">{lang buy}</button>
+							<!--{else}--> 
+								<!--{if $value[package]}--> 
+									<!--{if $value["local_appinfo"]}-->
+									<button  class="btn btn-round btn-secondary" disabled data-mid="$value['mid']" title="{lang installed}">
+									{lang installed}
+									</button>
+									<!--{else}-->
+									<button class="btn btn-round btn-primary" style="white-space: inherit;" onclick="start_check_install('{MOD_URL}&op=install_app_ajax&operation=check_install&appid=$value[identifier]','{$value[mid]}','{$value[baseinfo]}');" id="upgrade_info_{$value[mid]}">{lang install_onekey}</button>
+									<!--{/if}--> 
+								<!--{else}--> 
+								<a class="btn btn-round btn-primary view-detail" title="$value[name]" href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]" >{lang view_detail}</a> 
+								<!--{/if}--> 
 							<!--{/if}--> 
-						<!--{else}--> 
-						<a class="btn btn-round btn-primary view-detail" title="$value[name]" href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]" >{lang view_detail}</a> 
-						<!--{/if}--> 
-					<!--{/if}--> 
-				</td>
-			  </tr>
-			  <!--{/loop}-->
-			</tbody>
-		</table>
-    </div>
-	<!--{if $multi}-->
-	$multi
-	<!--{/if}-->
-  </div>
+						</td>
+					</tr>
+					<!--{/loop}-->
+					</tbody>
+				</table>
+			</div>
+			<!--{if $multi}-->
+			$multi
+			<!--{/if}-->
+		</div>
+	</div>
 </div>
+</main>
 <div class="modal fade">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -112,7 +110,6 @@
 </div>
 <!-- /.modal -->
 <script type="text/javascript">
-	
 	jQuery('.view-detail').on('click',function(){
 		showBuyInfo(this,'modal-lg');
 		return false;
@@ -388,4 +385,4 @@
 	} 
 		
 </script> 
-<!--{template common/footer_simple}-->
+<!--{template lyear/footer_simple}-->

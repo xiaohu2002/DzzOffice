@@ -150,7 +150,7 @@ class table_resources_version extends dzz_table
             return array('error'=>lang('no_privilege'));
         }
         //文件类型获取
-        $imgexts = array('jpg', 'jpeg', 'gif', 'png', 'bmp','webp');
+        $imgexts = array('jpg', 'jpeg', 'gif', 'png', 'bmp');
         if (in_array(strtolower($setarr['ext']), $imgexts)){
             $setarr['type'] = 'image';
         }elseif(in_array(strtoupper($setarr['ext']),$documentexts)){

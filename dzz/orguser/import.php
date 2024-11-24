@@ -9,11 +9,12 @@
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
-require_once libfile('function/mail');
-$navtitle = lang('user_import').' - '.lang('appname');
-if($_G['adminid']!=1) showmessage('orguser_import_user',dreferer());
+if ($_G['adminid'] != 1) {
+	if(!C::t('organization_admin') ->fetch_orgids_by_uid($_G['uid'])) showmessage('orguser_import_user',dreferer());
+}
 require_once libfile('function/organization');
-$do = isset($_GET['do']) ? $_GET['do'] : '';
+$do=trim($_GET['do']);
+$navtitle= lang('user_import').' - '.lang('appname');
 if($do=='importing'){
 	//判断邮箱是否存在
 	require_once libfile('function/user','','user');
@@ -29,6 +30,7 @@ if($do=='importing'){
 	if(!isemail($email)) exit(json_encode(array('error'=>'email'.lang('format_error'))));
 	
 	$isappend=intval($_GET['append']);
+	$sendmail=intval($_GET['sendmail']);
 	/*
 	if($sendmail){ //随机密码时重新设置密码为随机数；
 		$_GET['password']=random(8);
@@ -41,7 +43,6 @@ if($do=='importing'){
 		$exist=1;
 		if($isfounder=C::t('user')->checkfounder($user)) $isappend=1;//创始人不支持覆盖导入
 		if($isappend){//增量添加，如果原先没有nickname,增加
-			$sitename=$_G['setting']['sitename'];
 			$appendfield=array();
 			
 			if($_GET['mobile'] && empty($user['phone'])){
@@ -65,7 +66,6 @@ if($do=='importing'){
 			}
 			if($appendfield) C::t('user')->update($uid,$appendfield);
 		}else{ //覆盖导入时，覆盖用户的姓名和密码
-			$sitename=$_G['setting']['sitename'];
 			$salt=substr(uniqid(rand()), -6);
 			if(!check_username($_GET['username'])) exit(json_encode(array('error'=>lang('user_name_sensitive'))));
 			$setarr=array('username'=>$_GET['username'],
@@ -94,17 +94,15 @@ if($do=='importing'){
 			}
 			C::t('user')->update($uid,$setarr);
 			if($sendmail){ //发送密码到用户邮箱，延时发送
-				$email_password_message = <<<EOT
-      <p style="font-size:14px;color:#333; line-height:24px; margin:0;">尊敬的用户$member[username],您好！</p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">您收到这封邮件，是由于 $sitename 的管理员编辑成员信息时使用了这个邮箱地址。如果您不知道 $sitename 请忽略这封邮件。您不需要退订或进行其他进一步的操作。</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;font-weight:bold;">登录帐号和密码</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 12px;">登录帐号：$email</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">登录密码：$_GET[password]</span></p>
-			<p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">感谢您的访问，祝您使用愉快！</span></p>
-EOT;
+				$email_password_message = lang('email_password_message', array(
+						'sitename' => $_G['setting']['sitename'],
+						'siteurl' => $_G['siteurl'],
+						'email'=>$email,
+						'password'=>$_GET['password']
+					));
 					
-					if(!sendmail_cron("$_GET[username] <$email>", lang('email_password_subject'), $email_password_message)) {
-						runlog('sendmail', "$email  发送失败");
+					if(!sendmail_cron("$email <$email>", lang('email_password_subject'), $email_password_message)) {
+						runlog('sendmail', "$email sendmail failed.");
 					}
 			}
 		}
@@ -137,20 +135,17 @@ EOT;
 					$base['weixinid']=$_GET['weixinid'];
 				}
 			}
-		$sitename=$_G['setting']['sitename'];
 		C::t('user')->update($uid,$base);
 		if($sendmail){ //发送密码到用户邮箱，延时发送
-			$email_password_message = <<<EOT
-      <p style="font-size:14px;color:#333; line-height:24px; margin:0;">尊敬的用户$member[username],您好！</p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">您收到这封邮件，是由于 $sitename 的管理员添加成员时使用了这个邮箱地址。如果您不知道 $sitename 请忽略这封邮件。您不需要退订或进行其他进一步的操作。</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;font-weight:bold;">登录帐号和密码</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 12px;">登录帐号：$email</span></p>
-      <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">登录密码：$_GET[password]</span></p>
-			<p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">感谢您的访问，祝您使用愉快！</span></p>
-EOT;
+			$email_password_message = lang('email_password_message', array(
+					'sitename' => $_G['setting']['sitename'],
+					'siteurl' => $_G['siteurl'],
+					'email'=>$email,
+					'password'=>$_GET['password']
+				));
 				
-				if(!sendmail_cron("$_GET[username] <$email>", lang('email_password_subject'), $email_password_message)) {
-					runlog('sendmail', "$email  发送失败");
+				if(!sendmail_cron("$email <$email>", lang('email_password_subject'), $email_password_message)) {
+					runlog('sendmail', "$email sendmail failed.");
 				}
 		}
 	}

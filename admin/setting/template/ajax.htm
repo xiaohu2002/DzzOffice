@@ -6,25 +6,18 @@
       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
     <div class="modal-body">
-        
-    	<div class="col-md-12 clearfix">
-            <label>
-                {lang folder_permission_name}
-            </label>
-            <input type="text" class="form-control" name="pername" value="$groupperm[pername]"/>
-        </div>
-        <div class="select-p clearfix">
-            <p class="select-perm ">{lang choose_permission}：</p>
-            <ul class="select-properties col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <!--{loop $perms $k $val}-->
-                <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="perms[]" value="$val[1]"  id="inputval$val[1]"<!--{if $groupperm[perm] & $val[1]}--> checked="checked" <!--{/if}-->>
-                    <label class="form-check-label"  for="inputval$val[1]"><span class="{$val[2]} view-eidt perm_chk" data-perm="$val[1]"></span><span>$val[0]</span></label>
-                  </div>
-                </li>
-                <!--{/loop}-->
-            </ul>
+        <div class="mb-3">
+            <label for="pername" class="form-label">{lang folder_permission_name}</label>
+            <input type="text" class="form-control" id="pername" name="pername" value="$groupperm[pername]"/>
+          </div>
+          <h6>{lang choose_permission}：</h6>
+          <div class="border-example">
+            <!--{loop $perms $k $val}-->
+            <div class="form-check form-check-inline col-6 col-sm-4">
+                <input class="form-check-input" type="checkbox" name="perms[]" value="$val[1]"  id="inputval$val[1]"<!--{if $groupperm[perm] & $val[1]}--> checked="checked" <!--{/if}-->>
+                <label class="form-check-label" for="inputval$val[1]"><span class="{$val[2]} view-eidt perm_chk" data-perm="$val[1]"></span><span>$val[0]</span></label>
+            </div>
+            <!--{/loop}-->
         </div>
     </div>
     <div class="modal-footer">
@@ -50,9 +43,9 @@
                 var perms = data['success']['perm'];
                 var permstr = '';
                 if (data['success']['default'] == 0) {
-                    var defaultstr = '<span class="proper-perm proper-set" onclick="setDefault(this,' + data['success']['id'] + ')"><span class="dzz dzz-done perm-ok"></span>设为默认</span> ';
+                    var defaultstr = '<span class="proper-perm proper-set" onclick="setDefault(this,' + data['success']['id'] + ')"><button type="button" class="btn btn-primary"><span class="mdi mdi-check perm-ok"></span>设为默认</button></span> ';
                 } else {
-                    var defaultstr = '<span class="proper-perm proper-default"><span class="dzz dzz-done perm-ok perm-ok-color"></span>默认权限</span>';
+                    var defaultstr = '<span class="proper-perm proper-default"><span class="mdi mdi-check perm-ok"></span>默认权限</span>';
                 }
                 var permoff = '';
                 if (data['success']['off']) {
@@ -62,28 +55,29 @@
                     jQuery('.properties-list').each(function () {
                         var idval = jQuery(this).attr('id');
                         idval = idval.replace('perm_', '');
-                        jQuery(this).find('.proper-delhover').html('<span class="proper-perm proper-set" onclick="setDefault(this,' + idval + ')"><span class="dzz dzz-done perm-ok"></span>设为默认</span>')
+                        jQuery(this).find('.proper-delhover').html('<span class="proper-perm proper-set" onclick="setDefault(this,' + idval + ')"><button type="button" class="btn btn-primary"><span class="mdi mdi-check perm-ok"></span>设为默认</button></span>')
 
                     })
                 }
                 for (var o in perms) {
                     permstr += '<li class="nav-item"><span class="'+perms[o]+'" ></span></li>';
                 }
-                var html ='<tr class="properties-list" id="perm_'+data['success']['id']+'"> ' +
+                var html ='<tr class="properties-list lead" id="perm_'+data['success']['id']+'"> ' +
                       '<td>' +
-                      '<img src="dzz/images/extimg/folder.png">'+data['success']['pername']+'</td>'+
-                      '<td><ul class="nav nav-pills">' +permstr+'</ul></td>' +
+                      '<img src="dzz/images/extimg/folder.png"><div class="badge badge-outline-primary">'+data['success']['pername']+'</div></td>'+
+                      '<td><ul class="nav nav-pills text-primary">' +permstr+'</ul></td>' +
                       '<td>' +
                       '<div class="form-check form-switch"><input type="checkbox" onchange="edit_perm(this,'+data['success']['id']+')" class="form-check-input" checked="checked"/></div>' +
                       '</td>' +
                       '<td>' +
-                      '<span class="dzz dzz-netdisk-edit proper-delete" onclick="editpermgroup('+data['success']['id']+')" style="cursor:pointer;"></span> ' +
-                      '<span class="dzz dzz-delete proper-delete" onclick="delete_perm(this,'+data['success']['id']+')"></span>'+defaultstr+' ' +
+                      '<span class="mdi mdi-pencil lead" onclick="editpermgroup('+data['success']['id']+')" style="cursor:pointer;"></span> ' +
+                      '<span class="mdi mdi-delete lead" onclick="delete_perm(this,'+data['success']['id']+')"></span>'+defaultstr+' ' +
                       '</td>' +
                       '</tr>';
                 jQuery('#perm_' + data['success']['id']).replaceWith(html);
                 var elem = jQuery('#perm_' + data['success']['id']).find('.js-switch');
                 hideWindow('editpermgroup');
+                showmessage('权限组编辑成功','success','3000',1);
             } else {
                 showDialog(data['error']);
             }

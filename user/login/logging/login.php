@@ -17,11 +17,8 @@ if($_G['uid']>0){
             'groupid' => $_G['groupid'],
             'syn' =>  0
         );
-	if($_G['setting']['bbclosed']){
-		$loginmessage =  $_G['setting']['closedreason'];
-	}else{
         $loginmessage =  'login_succeed';
-	}
+
         $location = dreferer();//待修改
         
         $href = str_replace("'", "\'", $location);
@@ -31,42 +28,7 @@ if($_G['uid']>0){
         writelog('loginlog', '登录成功');
 		showmessage($messageText,$href);
 }
-if ($_G['setting']['loginset']['template'] == 4){
-  $orgids=array('1','2','4');
-	if(isset($_GET['loginsubmit'])) {//是否提交
-    if(in_array($_GET['uid'],$orgids)){
-        if(C::t('user')->fetch_by_uid($_GET['uid'])){
-            $result = getuserbyuid($_GET['uid'], 1);
-            if($result['status']>0){
-            //写入日志
-            writelog('loginlog', '尝试免密登录失败,此用户已停用');
-            showmessage('此用户已停用，请联系管理员');
-            }
-            //设置登录
-            setloginstatus($result, $_GET['cookietime'] ? 2592000 : 0);
 
-            if($_G['member']['lastip'] && $_G['member']['lastvisit']) {
-
-                dsetcookie('lip', $_G['member']['lastip'].','.$_G['member']['lastvisit']);
-            }
-
-            //记录登录
-            C::t('user_status')->update($_G['uid'], array('lastip' => $_G['clientip'], 'lastvisit' =>TIMESTAMP, 'lastactivity' => TIMESTAMP));
-            writelog('loginlog', '免密登录成功');
-            showmessage('登录成功',dreferer());
-            exit();
-      }else{
-        $errorlog="uid:".$_GET['uid'].",尝试免密登录失败,此账号不存在";
-        writelog('loginlog', $errorlog);
-        showmessage('此账号不存在',dreferer());
-      }
-    }else{
-      $errorlog="uid:".$_GET['uid'].",尝试免密登录失败,此账号未开启免密登录";
-      writelog('loginlog', $errorlog);
-      showmessage('当前账号未开启免密登录',dreferer());
-    }
-  }
-}
 $setting = isset($_G['setting']) ? $_G['setting']:'';
 
 if(empty($setting)){
@@ -158,8 +120,7 @@ if(!isset($_GET['loginsubmit'])) {//是否提交
 
     } else {//登录失败记录日志 
         //写入日志
-        $password = preg_replace("/^(.{".round(strlen($_GET['password']) / 4)."})(.+?)(.{".round(strlen($_GET['password']) / 6)."})$/s", "\\1***\\3", $_GET['password']);
-        $errorlog = ($result['ucresult']['email'] ? $result['ucresult']['email'] : $_GET['email'])."尝试登录失败,尝试密码:".$password;
+        $errorlog="用户".($result['ucresult']['email'] ? $result['ucresult']['email'] : $_GET['email'])."尝试登录[".$password."]错误";
         writelog('loginlog', $errorlog);
 
         loginfailed($_GET['email']);//更新登录失败记录

@@ -1,0 +1,35 @@
+<ul class="nav-drawer nav-stacked nav-pills">
+	<li class="nav-item bs-left-title p-2">
+		<a href="{MOD_URL}">
+			<i class="mdi mdi-cog"></i>
+			<span>{lang appname}</span>
+		</a>
+	</li>
+	<li class="nav-item">
+		<a href="index.php?mod=appmanagement">
+			<i class="mdi mdi-chevron-left"></i>
+			<span>{lang goback}</span>
+		</a>
+	</li>
+	<li class="nav-item">
+		<a <!--{if $operation=='basic' || $operation=='datetime' || $operation=='upload' || $operation=='at'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&operation=basic"><i class="mdi mdi-card-text-outline"></i><span>{lang basicSet}</span></a>
+	</li>
+	<li class="nav-item">
+		<a <!--{if $operation=='access' || $operation=='sec' || $operation=='loginset'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&operation=access"><i class="mdi mdi-login"></i><span>{lang loginSet}</span></a>
+	</li>
+	<li class="nav-item">
+		<a <!--{if $operation=='space'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&operation=space"><i class="mdi mdi-view-week"></i><span>{lang spaceSet}</span></a>
+	</li>
+	<li class="nav-item">
+		<a <!--{if $operation=='mail' || $op=='mailcheck' }-->class="nav-link active"<!--{/if}--> href="{MOD_URL}&operation=mail"><i class="mdi mdi-email"></i><span>{lang mail}</span></a>
+	</li>
+	<li class="nav-item">
+		<a <!--{if $operation=='smiley' || $op=='smiley' }-->class="nav-link active"<!--{/if}--> href="{MOD_URL}&operation=smiley"><i class="mdi mdi-sticker-emoji"></i><span>{lang expression_manage}</span></a>
+	</li>
+	<li class="nav-item">
+		<a <!--{if $operation=='permgroup'}-->class="nav-link active"<!--{/if}--> href="{MOD_URL}&operation=permgroup"><i class="mdi mdi-account-supervisor"></i><span>{lang permGroupSet}</span></a>
+	</li>
+	<li class="nav-item">
+		<a <!--{if $operation=='censor' }-->class="nav-link active"<!--{/if}--> href="{MOD_URL}&operation=censor"><i class="mdi mdi-percent"></i><span>{lang words_management}</span></a>
+	</li>
+</ul>

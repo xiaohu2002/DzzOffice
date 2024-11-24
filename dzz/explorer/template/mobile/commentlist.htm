@@ -4,7 +4,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd">{eval echo avatar_block($v['uid'],array($v['uid']=>$v['headerColor']));}</div>
             <div class="weui-cell__bd">
-                <h4><span class="weui-dynamic-user">$v[username]</span><span class="weui-dynamic-user-time">{eval echo dgmdate($v['dateline'],'Y-m-d');}&nbsp;{eval echo dgmdate($v['dateline'],'H:i');}</span></h4>
+                <h4><span class="weui-dynamic-user">$v['username']</span><span class="weui-dynamic-user-time">{eval echo dgmdate($v['dateline'],'Y-m-d');}&nbsp;{eval echo dgmdate($v['dateline'],'H:i');}</span></h4>
                 <p>
                     <span class="weui-comment-on">$v[details]</span>
                 </p>

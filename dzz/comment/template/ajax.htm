@@ -1,3 +1,4 @@
+
 <!--{if $do == 'getcomment'}-->
 	<!--{template common/header_ajax}-->
    
@@ -29,6 +30,7 @@
 		});
 		
    </script>
+   
    <!--{template common/footer_ajax}-->
 <!--{elseif $do == 'getcommentbycid'}-->
 	<!--{if $value['pcid']>0}-->
@@ -64,7 +66,7 @@
 	   });
 	 <!--{else}-->  
 	  jQuery('#comment_{$cid}').find('.txt_cfed a').on('click',function(){
-			 ajaxget('{MOD_URL}&op=ajax&do=getreplys&cid=$cid','reply_list_$cid','reply_list_$cid');
+			 ajaxget('{DZZSCRIPT}?mod=comment&op=ajax&do=getreplys&cid=$cid','reply_list_$cid','reply_list_$cid');
 			 return false;
 	  });
 	 <!--{/if}-->

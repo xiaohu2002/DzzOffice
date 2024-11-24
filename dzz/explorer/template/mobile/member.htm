@@ -15,11 +15,11 @@
         </div>
         <div class="weui-cell__bd">
             <h4>
-                <span class="weui-dynamic-user">$v[username]</span><span class="weui-member-type weui-member-creator">
+                <span class="weui-dynamic-user">$v['username']</span><span class="weui-member-type weui-member-creator">
 						<i class="dzz dzz-manager"></i>
-                <!--{if $v[perm] == 2 && $groupinfo[type] == 1}-->
+                <!--{if $v['perm'] == 2 && $groupinfo['type'] == 1}-->
                 创建者
-                <!--{elseif $v[perm] > 0}-->
+                <!--{elseif $v['perm'] > 0}-->
                 管理员
                 <!--{else}-->
                 协作成员
@@ -70,5 +70,4 @@
     })
 </script>
 <!--{eval output();}-->
-<!--{hook footer_tpl}-->
 </html>

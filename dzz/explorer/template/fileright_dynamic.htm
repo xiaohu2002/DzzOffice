@@ -1,8 +1,8 @@
 <div class="dynconMenu" id="dynconMenu">
-  <ul class="lyear-timeline lyear-timeline-left just-now" id="just-now"></ul>
-  <ul class="lyear-timeline lyear-timeline-left toadyTime">
-      <!--{template template_dynamic_list}-->
-  </ul>
+    <div class="just-now" id="just-now"></div>
+    <div class="toadyTime">
+        <!--{template template_dynamic_list}-->
+    </div>
 </div>
 
 <script type="text/javascript" reload="1">
@@ -22,7 +22,7 @@
             ids: 'js_textareaexplander',
             url: 'static/js/jquery.textareaexplander.js?{VERHASH}'
         }, function () {
-            jQuery('#leave_message').TextAreaExpander(37, 300);
+            jQuery('#leave_message').TextAreaExpander(32, 300);
         });
         jcLoader().load({
             type: 'js',
@@ -68,31 +68,39 @@
         $.post(form.action, jQuery(form).serialize(), function (data) {
             if (data['success']) {
                 if (data['return']['headerColor']) {
-                    var usericon = ' <span  class="img-avatar" style="margin-top:8px; background:' + data['return']['headerColor'] + '">' +
-                        ' <span title="$eventval[username]" >' + data['return']['userfirst'] + '</span> </span>';
+                    var usericon = ' <span  class="Topcarousel" style="margin-top:8px; background:' + data['return']['headerColor'] + '">' +
+                        ' <span title="$eventval['username']" >' + data['return']['userfirst'] + '</span> </span>';
                 } else {
 
-                    var usericon = '<img src="avatar.php?uid=' + data['return']['uid'] + '" class="avatar" style="width: 25px;height: 25px;">';
+                    var usericon = '<img src="avatar.php?uid=' + data['return']['uid'] + '" class="img-circle avatar" style="width: 25px;height: 25px;">';
                 }
                 var html = '';
-                html += '<li class="lyear-timeline-item text-muted">';
-                html += '<div class="lyear-timeline-item-dot"><span><a href="user.php?uid=' + data['return']['uid'] + '">';
-                html += usericon;
-                html += '</a></span></div>';
-                html += '<div class="lyear-timeline-item-content">'
-                html += '<p class="mb-1"><strong>' + data['return']['username'] + '</strong></p>';
-                html += '<p class="mb-0">' + data['return']['msg'];
-                html += '<span class="delete-comment dzz dzz-delete" data-commentid="' + data['return']['commentid'] + '"></span>';
-                html += '</p>';
-                html += '<p><time class="mb-3">' + data['return']['dateline'] + '</time></p>';
+                html += '<div class="dynameic-comment">';
+                html += '<div class="toadysmalltime">';
+                html += '<span class="dynameic-times">' + data['return']['dateline'] + '</span>';
                 html += '</div>';
-                html += '</li>';
+                html += '<div class="toadycon">';
+                html += usericon;
+                html += '<p class="activity-content">'
+                html += '<span class="activity-name">' + data['return']['username'] + '</span>';
+                html += '<span>' + data['return']['msg'] + '</span>';
+                html += '<span class="delete-comment mdi mdi-delete lead dcolor" data-commentid="' + data['return']['commentid'] + '"></span>'
+                html += '</p>';
+                html += '</div> ';
+                html += '</div>';
                 $('#just-now').prepend(html);
                 $('.scroll-y').animate({scrollTop: '0px'}, 200);
                 var Now = $('#just-now').children();
+                if (Now.length < 1) {
+                    $('#just-now').css('margin-bottom', '0px');
+                } else {
+                    $('#just-now').css('margin-bottom', '10px');
+                }
             }
             $('#leave_message').val('').trigger('input');
         }, 'json');
         return false;
     }
+
+
 </script>

@@ -1,7 +1,7 @@
 <div  class="pubblog_home">
   <div id="publish_{$idtype}_{$id}" class="publishsharewrap">
     <div id="return_publish_{$idtype}_{$id}" style="display:none"></div>
-    <form id="form_{$idtype}_{$id}" name="form_{$idtype}_{$id}" class="form-horizontal" action="{MOD_URL}&op=ajax" method="post"  onsubmit="ajaxpost('form_{$idtype}_{$id}', 'return_publish_{$idtype}_{$id}','return_publish_{$idtype}_{$id}');" style="margin:0">
+    <form id="form_{$idtype}_{$id}" name="form_{$idtype}_{$id}" class="form-horizontal" action="{DZZSCRIPT}?mod=comment&op=ajax" method="post"  onsubmit="ajaxpost('form_{$idtype}_{$id}', 'return_publish_{$idtype}_{$id}','return_publish_{$idtype}_{$id}');" style="margin:0">
       <input type="hidden" name="formhash" value="{FORMHASH}" />
  	   <input type="hidden" name="replysubmit" value="true" />
       <input type="hidden" name="handlekey" value="publish_{$idtype}_{$id}" />
@@ -11,10 +11,14 @@
       <input type="hidden" name="module" value="$module" />
       <input type="hidden" name="allowattach" value="$_GET['allowattach']" />  
       <input type="hidden" name="allowat" value="$_GET['allowat']" />  
-      <input type="hidden" name="allowsmiley" value="$_GET['allowat']" /> 
-			<div class="mb-3">
-				<textarea rows="" id="message_{$idtype}_{$id}" name="message" cols="" onkeyup="check_publish_enable('{$idtype}_{$id}')" tip="{lang said_two_sentences}" class="form-control">{lang said_two_sentences}</textarea>
-				<div id="publish_count_{$idtype}_{$id}" class="count_cpsw"> <span id="num_input_{$idtype}_{$id}" class="num_ccpsw">0</span>/<span class="leng_ccpsw">1000</span> </div>
+      <input type="hidden" name="allowsmiley" value="$_GET['allowat']" />             
+      <div class="container_psw">
+        <div class="textarea_cpsw">
+          <div class="wrap_tcpsw">
+            <textarea rows="" id="message_{$idtype}_{$id}" name="message" cols="" onkeyup="check_publish_enable('{$idtype}_{$id}')" tip="{lang said_two_sentences}" class="write_wtcpsw _bb_write_wtcpsw " style="overflow: hidden; word-wrap: break-word; resize: vertical;border:none;box-shadow:none;height:25px;">{lang said_two_sentences}</textarea>
+          </div>
+          <div id="publish_count_{$idtype}_{$id}" class="count_cpsw"> <span id="num_input_{$idtype}_{$id}" class="num_ccpsw">0</span>/<span class="leng_ccpsw">1000</span> </div>
+        </div>
       </div>
       <div id="publish_action_{$idtype}_{$id}" class="action_cpsw">
         <ul class="list_acpsw">
@@ -40,11 +44,11 @@
         </script>
           <!--{/if}-->
         </ul>
-         <a id="publish_submit_{$idtype}_{$id}" class="btn btn-primary" type="button" disabled="disabled" title="{lang publish}(Ctrl+Enter)" href="javascript:void(0);" ><b>{lang publish}</b></a> 
+         <a id="publish_submit_{$idtype}_{$id}" class="btn btn-primary btn-sm" type="button" disabled="disabled" title="{lang publish}(Ctrl+Enter)" href="javascript:void(0);" ><b>{lang publish}</b></a> 
       </div>
        <div id="attachmentViewBox_{$idtype}_{$id}" class="attachmentContainer clearfix"> </div>
     </form>
-    <div class="da actionUploadAttachment tobody" id="upload_from_{$idtype}_{$id}_menu" style="display:none;border-radius: var(--radius);">
+    <div class="actionUploadAttachment tobody" id="upload_from_{$idtype}_{$id}_menu" style="display:none">
       <!--{if $_GET[allowattach]>=2 }--><div class="local_auatth" style="position:relative;overflow:hidden"> <a href="javascript:void(0);" hidefocus onclick="jQuery(this).parent().parent().hide();">{lang web_upload}
         <input id="fileupload_{$idtype}_{$id}" type="file" name="files[]" multiple >
         </a> </div><!--{/if}-->
@@ -109,7 +113,7 @@ jQuery(document).ready(function(e) {
 		});
 		<!--{/if}-->			
 		
-		jQuery('#message_{$idtype}_{$id}').TextAreaExpander(37,99999);
+		jQuery('#message_{$idtype}_{$id}').TextAreaExpander(25,99999);
 		<!--{if $_GET[allowattach]>=2}-->
 		var attachextensions='{eval echo implode('|',$space['attachextensions']);}';
 		if(attachextensions=='') attachextensions="\.*$";
@@ -204,7 +208,7 @@ jQuery(document).ready(function(e) {
 							}                    
 						}
 			},
-			 tpl: "<li data-value='@[${name}:${id}]' title='${title}'>${icon}&nbsp;${name}</li>",
+			 tpl: "<li data-value='@[${name}:${id}]' title='${title}'><img src='${icon}'>&nbsp;${name}</li>",
 			 search_key: "searchkey",
 			 start_with_space: false,
 			 limit: 5,

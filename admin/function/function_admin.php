@@ -300,6 +300,7 @@ function upgradeinformation_app($status = 0) {
 	$update['uniqueid'] = $siteuniqueid;
 	$update['mid'] = $mid;
 	$update['curversion'] = $appinfo['version'];
+	$update['lastversion'] = $lastversion;
 	$update['identifier'] = $appinfo['identifier']; 
 	$update['lastversion'] = $lastversion;
 	$update['status'] = $status;
@@ -386,4 +387,5 @@ function getorders($alloworders, $default, $pre='') {
 	}
 	return $orders;
 }
+
 ?>

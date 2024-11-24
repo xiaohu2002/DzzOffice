@@ -9,6 +9,7 @@
 if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
+
 include_once  libfile('function/organization');
 $type = trim($_GET['idtype']);
 if ($type == 'user') {

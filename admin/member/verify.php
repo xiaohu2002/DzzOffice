@@ -39,7 +39,7 @@ if ($anchor != 'pass') {
 if (!submitcheck('verifysubmit', true)) {
 	$navtitle = $vid ? $_G['setting']['verify'][$vid]['title'] : lang('members_verify_profile').' - '.lang('appname');
 
-	$thurl = MOD_URL.'&op=verify&anchor=' . $anchor . '&vid=' . $vid;
+	$thurl = ADMINSCRIPT . '?mod=member&op=verify&anchor=' . $anchor . '&vid=' . $vid;
 	if ($anchor == 'refusal') {
 		$_GET['flag'] = -1;
 	} elseif ($anchor == 'authstr') {
@@ -108,7 +108,7 @@ if (!submitcheck('verifysubmit', true)) {
 			if ($anchor == 'pass') {
 				$value = array_merge($value, $profiles[$uid]);
 			}
-			$value['username'] = '<a href="user.php?&uid=' . $value['uid'] . '" target="_blank"><img src="avatar.php?uid=' . $value['uid'] . '&size=small"><br/>' . $value['username'] . '</a>';
+			$value['username'] = '<a href="user.php?&uid=' . $value['uid'] . '" target="_blank"><img src="avatar.php?uid=' . $value['uid'] . '&size=small" class="img-circle special_avatar_class img-avatar"><br/><br/>' . $value['username'] . '</a>';
 			if ($anchor != 'pass') {
 				$fields = $anchor != 'pass' ? dunserialize($value['field']) : $_G['setting']['verify'][$vid]['field'];
 				$value['verifytype'] = $value['verifytype'] ? $_G['setting']['verify'][$value['verifytype']]['title'] : lang('members_verify_profile');
@@ -179,7 +179,7 @@ if (!submitcheck('verifysubmit', true)) {
 				//showtablerow("id=\"mod_$value[uid]_row\"", $cssarr, $valuearr);
 			}
 		}
-		$multi = multi($count, $perpage, $page, $thurl, 'pull-right');
+		$multi = multi($count, $perpage, $page, $thurl, 'justify-content-end');
 	}
 
 } else {
@@ -255,7 +255,7 @@ if (!submitcheck('verifysubmit', true)) {
 			echo $verifylist;
 			exit();
 		} else {
-			showmessage('members_verify_succeed', MOD_URL.'&op=verify&vid=' . $vid . '&anchor=pass', array(), array('alert' => 'right'));
+			showmessage('members_verify_succeed', ADMINSCRIPT . '?mod=member&op=verify&vid=' . $vid . '&anchor=pass', array(), array('alert' => 'right'));
 		}
 	} else {
 		$vids = array();
@@ -342,7 +342,7 @@ if (!submitcheck('verifysubmit', true)) {
 		if ($single) {
 			echo "<script type=\"text/javascript\">var trObj = parent.document.getElementById('mod_{$single}_row');trObj.parentNode.removeChild(trObj);</script>";
 		} else {
-			showmessage('members_verify_succeed', MOD_URL.'&op=verify&vid=' . $vid . '&anchor=' . $_GET['anchor'], array(), array('alert' => 'right'));
+			showmessage('members_verify_succeed', ADMINSCRIPT . '?mod=member&op=verify&vid=' . $vid . '&anchor=' . $_GET['anchor'], array(), array('alert' => 'right'));
 		}
 	}
 }

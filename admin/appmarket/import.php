@@ -25,7 +25,7 @@ $apps = array();
 if ($do == 'available') {
 	if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('app_market') . " WHERE  available<1")) {
 		$apps = DB::fetch_all("SELECT * FROM " . DB::table('app_market') . " WHERE  available<1  limit $start,$perpage");
-		$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
+		$multi = multi($count, $perpage, $page, $theurl, 'justify-content-end');
 	}
 } elseif ($do == 'notinstall') {
 	$identifiers = C::t('app_market') -> fetch_all_identifier(); 
@@ -42,7 +42,7 @@ if ($do == 'available') {
 	}
 	if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('app_market') . " WHERE 1 $sql")) {
 		$apps = DB::fetch_all("SELECT * FROM " . DB::table('app_market') . " WHERE 1 $sql $order limit $start,$perpage");
-		$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
+		$multi = multi($count, $perpage, $page, $theurl, 'justify-content-end');
 	}
 }
 

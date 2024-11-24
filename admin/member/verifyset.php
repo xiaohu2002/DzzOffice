@@ -10,8 +10,8 @@
 if (!defined('IN_DZZ') || !defined('IN_ADMIN')) {
 	exit('Access Denied');
 }
-$navtitle = lang('members_verify').' - '.lang('appname');
 $op = isset($_GET['op']) ? $_GET['op'] : '';
+$navtitle = lang('members_verify').' - '.lang('appname');
 if ($_G['adminid'] != 1)
 	showmessage('no_privilege');
 include_once  libfile('function/cache');
@@ -92,7 +92,7 @@ if ($do == 'edit') {
 		C::t('setting') -> update('verify', $_G['setting']['verify']);
 
 		updatecache(array('setting'));
-		showmessage('members_verify_save_success', MOD_URL.'&op=verifyset', array(), array('alert' => 'right'));
+		showmessage('members_verify_save_success', ADMINSCRIPT . '?mod=member&op=verifyset', array(), array('alert' => 'right'));
 	}
 	include template('verifyset_edit');
 } else {

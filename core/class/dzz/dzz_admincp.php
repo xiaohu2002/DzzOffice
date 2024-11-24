@@ -47,10 +47,11 @@ class dzz_admincp
 
 		$this->sessionlimit = TIMESTAMP - $this->sessionlife;
 
-		$this->check_cpaccess();
+		$this->check_cpaccess(); 
 		if($_GET['mod']!="systemlog"){ 
 			$this->writecplog();
 		}
+		
 	}
 
 	function writecplog() {
@@ -197,9 +198,9 @@ class dzz_admincp
 			return false;
 		} elseif(empty($founders)) {
 			return true;
-		} elseif(strexists(",$founders,", ",{$user['uid']},")) {
+		} elseif(strexists(",$founders,", ",$user[uid],")) {
 			return true;
-		} elseif(!is_numeric($user['username']) && strexists(",$founders,", ",{$user['username']},")) {
+		} elseif(!is_numeric($user['nickname']) && strexists(",$founders,", ",$user[nickname],")) {
 			return true;
 		} else {
 			return FALSE;

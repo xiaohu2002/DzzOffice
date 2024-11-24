@@ -2,11 +2,13 @@
 <div class="rightBorder" id="rightinfo_content">
     <!--右侧头部开始-->
     <div class="briefMenu clearfix" id="rightfileinfo-{$fileinfo[rid]}">
-        <img src="{$_G[siteurl]}$fileinfo[img]" id="detailsimage">
-        <p class="right-imgname"><span>$fileinfo[name]</span></p>
-        <a href="javascript:;" class="toggRight toggright-icon">
-            <span class="dzz dzz-close"></span>
-        </a>
+        <div class="briefMenuimg">
+            <img src="{$_G['siteurl']}$fileinfo[img]" id="detailsimage">
+            <p class="right-imgname"><span>$fileinfo[name]</span></p>
+            <div class="toggRight toggright-icon">
+                <span class="mdi mdi-close-circle "></span>
+            </div>
+        </div>
     </div>
     <!--右侧头部结束-->
     <input type="hidden" value="$fileinfo[rid]" id="fileridinput"/>
@@ -16,80 +18,58 @@
         <div class="right_projectmain">
             <!--属性开始-->
             <div class="right-attribute">
-                <div class="attribute-basic clearfix">
-                    <p class="attribute-position">
-                        <span class="attribute-width">{lang type}</span>
-                        <span class="detailed_contenter">
-                          $fileinfo[type]
-                        </span>
-                    </p>
-                    <p class="attribute-position">
-                        <span class="attribute-width">{lang position}</span>
-                        <span class="detailed_contenter">$fileinfo[realpath]</span>
-                    </p>
-                    <p class="attribute-position">
-                        <span class="attribute-width">{lang possessor}</span>
-                        <span class="detailed_contenter">$fileinfo[username]</span>
-                    </p>
-                    <p class="attribute-position">
-                        <span class="attribute-width">{lang big_small}</span>
-                        <span class="detailed_contenter">$fileinfo[fsize]</span>
-                    </p>
-                    <p class="attribute-position">
-                        <span class="attribute-width">{lang preceding_edit_time}</span>
-                        <span class="detailed_contenter">$fileinfo[editdateline]</span>
-                    </p>
-                    <p class="attribute-position">
-                        <span class="attribute-width">{lang preceding_open_time}</span>
-                        <span class="detailed_contenter">$fileinfo[opendateline]</span>
-                    </p>
-                    <p class="attribute-position">
-                        <span class="attribute-width">{lang create_time}</span>
-                        <span class="detailed_contenter">$fileinfo[fdateline]</span>
-                    </p>
-                    <!--{if $_G['adminid']}-->
-                    <!--{if $fileinfo[downs]}-->
-                    <p class="attribute-position">
-                        <span class="attribute-width">{lang download_times}</span>
-                        <span class="detailed_contenter">$fileinfo[downs]</span>
-                    </p>
-                    <!--{/if}-->
-                    <!--{if $fileinfo[views]}-->
-                    <p class="attribute-position">
-                        <span class="attribute-width">{lang view_count}</span>
-                        <span class="detailed_contenter">$fileinfo[views]</span>
-                    </p>
-                    <!--{/if}-->
-                    <!--{if $fileinfo[edits]}-->
-                    <p class="attribute-position">
-                        <span class="attribute-width">修改次数</span>
-                        <span class="detailed_contenter">$fileinfo[edits]</span>
-                    </p>
-                    <!--{/if}-->
-                    <!--{/if}-->
+                <div class="ensemble-left">
+                    <div class="attribute-basic clearfix">
+                        <p class="attribute-position">
+                            <span class="attribute-width">{lang type}</span>
+                            <span class="detailed_contenter">
+							$fileinfo['type']
+						</span>
+                        </p>
+                        <p class="attribute-position">
+                            <span class="attribute-width">{lang position}</span>
+                            <span class="detailed_contenter">$fileinfo[realpath]</span></p>
+                        <p class="attribute-position">
+                            <span class="attribute-width">{lang possessor}</span>
+                            <span class="detailed_contenter">$fileinfo['username']</span></p>
+                        <p class="attribute-position">
+                            <span class="attribute-width">{lang big_small}</span>
+                            <span class="detailed_contenter">$fileinfo[fsize]</span></p>
+                        <p class="attribute-position">
+                            <span class="attribute-width">{lang preceding_edit_time}</span>
+                            <span class="detailed_contenter">$fileinfo[editdateline]</span></p>
+                        <p class="attribute-position">
+                            <span class="attribute-width">{lang preceding_open_time}</span>
+                            <span class="detailed_contenter">$fileinfo[opendateline]</span></p>
+                        <p class="attribute-position">
+                            <span class="attribute-width">{lang create_time}</span>
+                            <span class="detailed_contenter">$fileinfo[fdateline]</span></p>
+                    </div>
                 </div>
             </div>
             <!--属性结束-->
             <!--标签开始-->
             <div class="right-label clearfix">
-              <div class="right-newlabel clearfix">
-                  <p class="right-labelname">{lang label}</p>
-                  <p class="right-addlabel">
-                      <a href="javascript:;" class="opentagwindow"
-                         onclick="showWindow('addTag','{MOD_URL}&op=ajax&operation=tag&rid=$rid','get',0)">
-                          <span class="dzz dzz-create dzz-edit-button"></span>
-                      </a>
-                  </p>
-              </div>
-              <div id="taglist-{$rid}">
-                  <!--{if $tags}-->
-                  <!--{loop $tags $v}-->
-                  <span class="label label-wathet" daat-tid="$v[tid]" id="{$rid}-{$v[tid]}">$v[tagname]</span>
-                  <!--{/loop}-->
-                  <!--{else}-->
-                  {lang no_labels_set}
-                  <!--{/if}-->
-              </div>
+                <div class="ensemble-left">
+                    <div class="right-newlabel clearfix">
+                        <p class="right-labelname">{lang label}</p>
+                        <p class="right-addlabel">
+                            <a href="javascript:;" class="opentagwindow"
+                               onclick="showWindow('addTag','{MOD_URL}&op=ajax&operation=tag&rid=$rid','get',0)">
+                                <span class="dzz dzz-create dzz-edit-button"></span>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="right-morelabel" id="taglist-{$rid}">
+                        <!--{if $tags}-->
+                        <!--{loop $tags $v}-->
+                        <span class="label label-wathet" daat-tid="$v[tid]" id="{$rid}-{$v[tid]}">$v[tagname]</span>
+                        <!--{/loop}-->
+                        <!--{else}-->
+                        {lang no_labels_set}
+                        <!--{/if}-->
+                    </div>
+                </div>
             </div>
             <!--标签结束-->
             <!--{if $fileinfo['isdelete'] < 1}-->
@@ -114,13 +94,13 @@
                         <div class="unameMenuicon-icons">
                             <div class="unameMenu-upload">
                                 <!--{if !$v['vname']}-->
-                                <span class="nameMenu">$v[username]{lang upload_to}</span>
-                                <p class="versioninfos text-muted">{eval echo dgmdate($v['dateline'],'Y-m-d H:i:s');}
+                                <span class="nameMenu">$v['username']{lang upload_to}</span>
+                                <p class="versioninfos">{eval echo dgmdate($v['dateline'],'Y-m-d H:i:s');}
                                     <!--{if $fileinfo['vid'] == $v['vid']}--><span class="label label-gainsboro">{lang principal_edition}</span>
                                     <!--{/if}--></p>
                                 <!--{else}-->
                                 <span class="nameMenu">$v[vname]</span>
-                                <p class="versioninfos text-muted"><span class="versioninfo-dateline">{eval echo dgmdate($v['dateline'],'Y-m-d H:i:s');}</span>
+                                <p class="versioninfos"><span class="versioninfo-dateline">{eval echo dgmdate($v['dateline'],'Y-m-d H:i:s');}</span>
                                     <!--{if $fileinfo['vid'] == $v['vid']}--><span class="label label-gainsboro">{lang principal_edition}</span>
                                     <!--{/if}-->
                                 </p>
@@ -128,7 +108,8 @@
                             </div>
                             <p class="editMenu">{eval echo formatsize($v['size']);}</p>
 
-                            <a href="javascript:;" class="group-editMenu dropdown-toggle" data-bs-toggle="dropdown"></a>
+                            <a href="javascript:;" class="group-editMenu dropdown-toggle" data-toggle="dropdown"><span
+                                    class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-menu-version">
                                 <div class="h3-title">{lang version_information}</div>
                                 <li class="listedit-title">
@@ -160,12 +141,13 @@
                         <i class="glyphicon glyphicon-record"></i>
                         <div class="unameMenuicon-icons">
                             <div class="unameMenu-upload">
-                                <span class="nameMenu">$fileinfo[username]{lang upload_to}</span>
-                                <p class="versioninfos text-muted">$fileinfo[fdateline]
+                                <span class="nameMenu">$fileinfo['username']{lang upload_to}</span>
+                                <p class="versioninfos">$fileinfo[fdateline]
                                     <span class="label label-gainsboro">{lang principal_edition}</span>
                                 </p>
                             </div>
-                            <a href="javascript:;" class="group-editMenu dropdown-toggle" data-bs-toggle="dropdown"></a>
+                            <a href="javascript:;" class="group-editMenu dropdown-toggle" data-toggle="dropdown"><span
+                                    class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-menu-version">
                                 <div class="h3-title">{lang version_information}</div>
                                 <li class="listedit-title">
@@ -195,7 +177,7 @@
 
                 </ul>
                 <!-- {if $vnext}-->
-                <a href="javascript:;" class="btn_button_more btn btn-outline-primary"
+                <a href="javascript:;" class="btn_button_more btn btn-link"
                    onclick="loadingMoreVersion(this,0);" data-rid="{$rid}">{lang upload_more}</a>
                 <!--{/if}-->
             </div>
@@ -214,7 +196,7 @@
 <!--右侧中间部分结束-->
 <!--右侧底部评论开始-->
 <!--{if $fileinfo['isdelete'] < 1}-->
-<div class="da comment-area">
+<div class="comment-area">
     <div class="messageMenu">
         <form action="{MOD_URL}&op=ajax&operation=comment" method="post" onsubmit="return comment_file(this)"
               id="commentid">
@@ -280,7 +262,7 @@
                 })
                 $('#version_' + vid).find('p.versioninfos').append('<span class="label label-gainsboro">{lang principal_edition}</span>').end().find('.dropdown-menu-version .pramiry_version').data('primary', 'yes');
                 ;
-                var src = '{$_G[siteurl]}' + datas.img;
+                var src = '{$_G['siteurl']}' + datas.img;
                 var rid = '{$fileinfo[rid]}';
                 $('#rightfileinfo-' + rid).find('img').attr('src', src);
                 $('#rightfileinfo-' + rid).find('p.right-imgname').html(datas.name);
@@ -390,8 +372,8 @@
                             '<div class="unameMenuicon-icons"> ' +
                             '<div class="unameMenu-upload"> ' +
                             '<span class="nameMenu">' + versiontdata['username'] + '{lang upload_to}</span> ' +
-                            '<p class="versioninfos text-muted">' + versiontdata['fdateline'] + '<span class="label label-gainsboro">{lang principal_edition}</span></p> ' +
-                            '</div> <p class="editMenu">' + versiontdata['size'] + '</p> <a href="javascript:;" class="group-editMenu dropdown-toggle" data-bs-toggle="dropdown"></a>' +
+                            '<p class="versioninfos">' + versiontdata['fdateline'] + '<span class="label label-gainsboro">{lang principal_edition}</span></p> ' +
+                            '</div> <p class="editMenu">' + versiontdata['size'] + '</p> <a href="javascript:;" class="group-editMenu dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>' +
                             '<ul class="dropdown-menu dropdown-menu-version"> ' +
                             '<div class="h3-title" >{lang version_information}</div> ' + '<li class="listedit-title">' + '<a href="javascript:;" class="view_version" data-dpath="' + versiontdata['dpath'] + '" data-vid="' + versiontdata['vid'] + '" onclick="viewversion(this)"><span class="dzz dzz-visibility"></span>' + __lang.view_version + '</a></li>' +
                             '<li class="listedit-title"><a href="javascript:;" class="primary_version"' +
@@ -411,7 +393,7 @@
                         }
                         $('#versionmenulist').prepend(html);
 
-                        $('#detailsimage').attr('src', '{$_G[siteurl]}' + resourcesdata['img']);
+                        $('#detailsimage').attr('src', '{$_G['siteurl']}' + resourcesdata['img']);
                         _explorer.sourcedata.icos[data['filedata'].rid] = data['filedata'];
                         _filemanage.cons['f-' + data['filedata'].pfid].CreateIcos(data['filedata'], true);
                         resourcesdata.vid = 0;
@@ -441,10 +423,10 @@
             '<div class="process" style="position:absolute;z-index:-1;height:100%;background-color:#e8f5e9;-webkit-transition:width 0.6s ease;-o-transition:width 0.6s ease;transition:width 0.6s ease;width:0%;"></div> <div class="dialog-info"> <div class="upload-file-name">' +
             '<div class="dialog-file-icon" align="center">' + imgicon + '</div> <span class="name-text">' + file.name + '</span> ' +
             '</div> <div class="upload-file-size">' + (file.size ? formatSize(file.size) : '') + '</div> <div class="upload-file-path">' +
-            '<a title="" class="" href="javascript:;">' + relativePath + '</a> </div> <div class="upload-file-status"> <span class="uploading"><em class="precent"></em><em class="speed">'+__lang.upload_processing+'</em>' +
+            '<a title="" class="" href="javascript:;">' + relativePath + '</a> </div> <div class="upload-file-status"> <span class="uploading"><em class="precent"></em><em class="speed">排队中</em>' +
             '</span> <span class="success"><em></em><i></i></span> </div> <div class="upload-file-operate"> ' +
             '<em class="operate-pause"></em> <em class="operate-continue"></em> <em class="operate-retry"></em> <em class="operate-remove"></em> ' +
-            '<a class="error-link upload-cancel" href="javascript:void(0);">'+__lang.cancel+'</a> </div> </div>';
+            '<a class="error-link upload-cancel" href="javascript:void(0);">取消</a> </div> </div>';
         return html;
     }
     function uploadadd() {
@@ -483,7 +465,7 @@
     }
     function viewversion(obj) {
         var path = $(obj).data('dpath');
-        var viewhref = '{$_G[siteurl]}share.php?a=view&s=' + path;
+        var viewhref = '{$_G['siteurl']}share.php?a=view&s=' + path;
         var vid = $(obj).data('vid');
         if (vid) {
             viewhref += '&vid=' + vid;

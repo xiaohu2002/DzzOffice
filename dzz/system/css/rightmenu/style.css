@@ -332,3 +332,12 @@ ie6 .menu-icon{
 .menu .icon-chmod {
 	background-position:-528px -16px;
 }
+.menu .icon-docx {
+	background:url(../../../images/icons/docx.png) center no-repeat;
+}
+.menu .icon-xlsx {
+	background:url(../../../images/icons/xlsx.png) center no-repeat;
+}
+.menu .icon-pptx {
+	background:url(../../../images/icons/pptx.png) center no-repeat;
+}

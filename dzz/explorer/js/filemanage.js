@@ -109,7 +109,7 @@ _filemanage.getData = function (url, callback) {
 			obj.url = url;
 			//修改初始化时的排列方式指示
 			jQuery('.sizeMenu .icons-thumbnail').attr('iconview', obj.view).find('.dzz').removeClass('dzz-view-module').removeClass('dzz-view-list').addClass(obj.view === 2 ? 'dzz-view-list':'dzz-view-module');
-            jQuery('.sizeMenu .icons-thumbnail').attr('iconview', obj.view).find('.dzz').attr('data-bs-original-title',obj.view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
+            jQuery('.sizeMenu .icons-thumbnail').attr('iconview', obj.view).find('.dzz').attr('data-original-title',obj.view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
 			jQuery('.sizeMenu .icons-thumbnail').attr('folderid', obj.id);
 			if (typeof (callback) === 'function') {
 				callback(obj);
@@ -137,8 +137,8 @@ _filemanage.Arrange = function (obj, id, view) {
 	} else {
 		view = view * 1;
 	}
-	jQuery('.sizeMenu .icons-thumbnail').attr('iconview', view).find('.dzz').removeClass('dzz-view-module').removeClass('dzz-view-list').addClass(view === 4 ?  'dzz-view-list':'dzz-view-module');
-    jQuery('.sizeMenu .icons-thumbnail').attr('iconview', view).find('.dzz').attr('data-bs-original-title',view === 4 ? __lang.deltail_lsit : __lang.medium_icons);
+	jQuery('.sizeMenu .icons-thumbnail').attr('iconview', view).find('.dzz').removeClass('dzz-view-module').removeClass('dzz-view-list').addClass(view === 2 ?  'dzz-view-list':'dzz-view-module');
+    jQuery('.sizeMenu .icons-thumbnail').attr('iconview', view).find('.dzz').attr('data-original-title',view === 2 ? __lang.deltail_lsit : __lang.medium_icons);
 	if (filemanage.subfix === 'f') {
 		var fid = _filemanage.fid;
 		if (fid > 0 && _explorer.Permission_Container('admin', fid)) {
@@ -966,13 +966,13 @@ _filemanage.prototype._selectInfo = function () {
 			'margin-right': '0px'
 		});
 		$('.rightMenu').css('right', '-320px');
-		$('.toggRight').parent('li').removeClass('background-toggle').find('.dzz').attr("data-bs-original-title", "开启右侧信息");
+		$('.toggRight').parent('li').removeClass('background-toggle').find('.dzz').attr("data-original-title", "开启右侧信息");
 	} else {
 		$('.bs-main-container').css({
-			'margin-right': '305px'
+			'margin-right': '300px'
 		});
 		$('.rightMenu').css('right', '0');
-		$('.toggRight').parent('li').addClass('background-toggle').find('.dzz').attr("data-bs-original-title", "关闭右侧信息");
+		$('.toggRight').parent('li').addClass('background-toggle').find('.dzz').attr("data-original-title", "关闭右侧信息");
 	}
 		if (sum >= total) { //全部选中
 			jQuery('.selectall-box').addClass('Icoselected');
@@ -1111,8 +1111,6 @@ _filemanage.prototype.tddraging = function () {
 _filemanage.prototype.tddraged = function (e) {
 	this.DetachEvent(e);
 	jQuery('#_blank').hide();
-	//document.getElementById('_blank').style.cursor="url('dzz/images/cur/aero_arrow.cur'),auto";
-	//document.body.style.cursor="url('dzz/images/cur/aero_arrow.cur'),auto";
 	var xx = e.clientX - this.XX;
 	//计算新的各个td的百分比
 	var right_width = _window.windows[this.winid].bodyWidth - jQuery('#jstree_area').width();
@@ -1176,8 +1174,6 @@ _filemanage.prototype.tddraged = function (e) {
 	//alert(document.getElementById('tabs_cover').offsetLeft+'========='+document.getElementById('tabs_cover').offsetWidth);
 };
 _filemanage.prototype.DetachEvent = function () {
-
-	//document.body.style.cursor="url('dzz/images/cur/aero_arrow.cur'),auto";
 	document.onmousemove = _filemanage.onmousemove;
 	document.onmouseup = _filemanage.onmouseup;
 	document.onselectstart = _filemanage.onselectstart;
@@ -1344,6 +1340,15 @@ _filemanage.Open = function (rid, extid, title) {
         addstatis(rid);
 		window.open(data.url);
 		return;
+	} else if (obj.type === 'dzzdoc') {
+		obj.url = "index.php?mod=document&icoid=" + obj.id;
+		if(atdingding){ 
+			window.open( encodeURI(SITEURL+"index.php?mod=dingtalk&op=loginfromding&redirecturl="+encodeURIComponent(obj.url)) );
+		}else{
+			window.open(obj.url);
+		} 
+		addstatis(obj.id);
+		return;
 	} else if (obj.type === 'folder') {
 		var hash = '';
 		var fid = data.oid;
@@ -1374,8 +1379,7 @@ _filemanage.Open = function (rid, extid, title) {
                 addstatis(rid);
 				jQuery('.Icoblock[rid=' + rid + '] img[data-original]').trigger('click');
 				return;
-			}
-			else if (extdata_url.indexOf('dzzjs:') === 0) {
+			} else if (extdata_url.indexOf('dzzjs:') === 0) {
 				
 				eval((extdata_url.replace('dzzjs:','')));
 				addstatis(rid);
@@ -1695,7 +1699,7 @@ _filemanage.downpackage = function () {
 		return false;
 	}
 	var path = encodeURIComponent(dpaths.join(','));
-	if (path.length > 4048) {
+	if (path.length > 2048) {
 		showmessage(__lang.choose_file_many, 'danger', 3000, 1);
 		return false;
 	}
@@ -1785,9 +1789,9 @@ _filemanage.rename = function (id) {
 	filemanage.oldtext = el.html();
 	var html = '';
 	if (filemanage.view > 3) {
-		html = "<input type='text' class='form-control' name='text'  id='input_" + id + "' style=\"width:" + (el.closest('td').width() - 110) + "px;height:30px;padding:2px; \" value=\"" + filemanage.oldtext + "\">";
+		html = "<input type='text' class='' name='text'  id='input_" + id + "' style=\"width:" + (el.closest('td').width() - 110) + "px;height:30px;padding:2px; \" value=\"" + filemanage.oldtext + "\">";
 	} else {
-		html = "<textarea type='textarea' class='form-control textarea' name='text'  id='input_" + id + "' style=\"width:100%;height:30px;padding:2px;overflow:hidden;margin-top:3px;color:#666666 \">" + filemanage.oldtext + "</textarea>";
+		html = "<textarea type='textarea' class='textarea' name='text'  id='input_" + id + "' style=\"width:100%;height:30px;padding:2px;overflow:hidden;margin-top:3px;color:#666666 \">" + filemanage.oldtext + "</textarea>";
 	}
 
 	el.html(html);
@@ -2202,12 +2206,13 @@ _filemanage.delIco = function (rid, noconfirm) {
 				rids.push(i);
 				total--;
 				_filemanage.showTemplatenoFile(containid, total);
+
 			} else {
 				showmessage(json.msg[i], 'error', 3000, 1, 'right-bottom');
-				return false;
 			}
 		}
         _filemanage.removeridmore(rids);
+
 	}, 'json');
 };
 _filemanage.removeridmore = function(rids){

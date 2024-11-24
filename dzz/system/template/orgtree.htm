@@ -1,27 +1,23 @@
-<!--{template common/header_common}-->
+<!--{template lyear/header_simple}-->
 <link href="static/jstree/themes/default/style.min.css?{VERHASH}" rel="stylesheet" media="all">
 <style>
-html, body {
+body{
 	height:100%;
 	width:100%;
 	margin:0;
 	overflow:auto;
-	background: transparent;
-	background-color:transparent;
 	/*padding-bottom:34px;*/
 }
 .jstree-default .jstree-icon:empty{
 	font-size: 20px;
 }
-	em{
-		font-style: normal
-	}
 .orgtree-search{
 	position:fixed;
 	width:100%;
 	left:0;
 	top:0;
 	background-color:#FFF;
+	
 }
 .orgtree-search .form-control{
 	padding:5px 35px 5px 25px;
@@ -39,7 +35,7 @@ html, body {
 	top:0px;
 	width:24px;
 	height:32px;
-	padding:2px 5px;
+	padding:8px 5px;
 	font-size: 18px;
 	color: rgba(78,85,99,0.65);
 }
@@ -61,7 +57,18 @@ html, body {
 	background:#F7F7F7;
 }
 .jstree-default-responsive .jstree-anchor>.jstree-themeicon{
-	background-size:100%;
+	background-size:auto;
+}
+.Topcarousel{
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	display: inline-block;
+	line-height: 24px;
+    text-align: center;
+    margin-right: 2px;
+    color: #FFFFFF;
+	font-size:14px;
 }
 .iconFirstWord{
 	width: 24px;
@@ -107,7 +114,7 @@ body{
 var ctrlid='$_GET[ctrlid]';
 var multiple=parseInt('$_GET[multiple]')>0?true:false;
 var nouser=parseInt('$_GET[nouser]')>0?1:0;
-var showjob=parseInt('$_GET[showjob]')>0?1:1;
+var showjob=parseInt('$_GET[showjob]')>0?1:0;
 var stype='$_GET[stype]'?parseInt('$_GET[stype]'):0;//0:可以选择机构和用户；1：仅选择机构和部门：2：仅选择用户
 var range='$_GET[range]'?parseInt('$_GET[range]'):0;//0:机构和用户；1：仅机构和部门：2：仅群组
 var moderator=parseInt('$_GET[moderator]')>0?1:0;
@@ -118,7 +125,7 @@ var ismobile='$ismobile'?1:0;
 <!--{if intval($_GET['nosearch'])<1}-->
 <div  class="orgtree-search">
         <a href="javascript:;" class="search" onclick="jstree_search();return false" title="{lang search}"><i class="dzz dzz-search"></i></a>
-		<a href="javascript:;" class="delete" onclick="jstree_search('stop');return false" title="{lang close_search}"><i class="dzz dzz-close"></i></a>
+        <a href="javascript:;" class="delete" onclick="jstree_search('stop');return false" title="{lang close_search}"><i class="dzz dzz-close"></i></a>
         <input id="jstree_search_input" type="text" placeholder="{lang search_department_user}" class="form-control" onkeyup="if(event.keyCode==13){jstree_search()}"  />
     </div>
 <!--{/if}-->
@@ -162,18 +169,20 @@ jQuery(document).ready(function(e) {
                 "valid_children": ['depart','folder']
             },
             "group": {//群组
-                "icon": "dzz dzz-group",
+                "icon": "mdi mdi-account",
                 "valid_children": ['folder']
             },
             "default": {//我的网盘
-                "icon": "dzz dzz-account-circle",
+                "icon": "mdi mdi-account",
                 "valid_children": ['folder']
             },
         },
 		 "checkbox" : {
 		  "keep_selected_style" : false
-		   ,"three_state": true//父子级别级联选择
-		   ,"tie_selection": true
+		  <!--{if $_GET['stype']==1}-->
+		   ,"three_state": false//父子级别级联选择
+           ,"tie_selection": false
+		   <!--{/if}-->
 		},
 		
 	   "search":{ 
@@ -437,4 +446,5 @@ $(function(){
 
 </script>
 <script type="text/javascript" src="static/js/jstree.min.js?{VERHASH}"></script> 
-<!--{template common/footer_system}--> 
+</body>
+</html>

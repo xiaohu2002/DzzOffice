@@ -69,7 +69,7 @@ if($operation == 'addgroupuser') {//添加群组成员
                 }
             }
         }
-        $appid = C::t('app_market')->fetch_appid(CURMODULE);
+        $appid = C::t('app_market')->fetch_appid_by_mod('{dzzscript}?mod='.MOD_NAME, 2);
         if(count($removeuser) > 0) {
 
             foreach(C::t('organization_user')->delete_by_uid_orgid($removeuser, $gid) as $v) {

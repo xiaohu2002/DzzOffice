@@ -1,6 +1,7 @@
 
 .resSearch{
 	width: 100%;
+	max-width: 720px;
 	text-align:center;
 }
 .resSearch .form-group{
@@ -31,11 +32,25 @@
     /*pointer-events: none;*/
 }
 
+.input-search input{
+	height: 46px;
+}
+
+.input-search .form-search{
+	background: rgba(255,255,255,0.2);
+	border: 0;
+	border-radius: 4px;
+	padding-right: 80px;
+	color: rgba(255,255,255,0.7);
+}
+
 .input-search .form2-search{
 	background-color:#fff;
 }
 .input-search.focus .form-search{
-	border-radius:.5rem .5rem 0 0;
+	color: #333;
+	background:#FFF;
+	border-radius:2px 2px 0 0;
 }
 .input-search.focus .form-search::-webkit-input-placeholder { /* WebKit browsers */
     color:   #999;
@@ -70,6 +85,9 @@ button.input-search-drop {
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+.input-search .input-search-icon+.form-control {
+    padding-left: 53.5px;
 }
 
 .input-search-dark .form-control {
@@ -114,28 +132,30 @@ button:focus{
 
 .dropdown-height,.dropdown-width{
 	position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 10000;
-  width: 100%;
-  display: none;
-  float: left;
-  min-width: 160px;
-  padding:0px;
-  font-size: 14px;
-  text-align: left;
-  list-style: none;
-  background-color: #fff;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
+    top: 100%;
+    left: 0;
+    z-index: 1050;
+    width: 100%;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding:0px;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    /*border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);*/
 	border-top:1px solid #e7e7e7;
-  border-radius: 0 0 .5rem .5rem;
-  margin-top: 0;
-  -webkit-box-shadow: 0 5px 8px rgba(0,0,0,.2);
-  box-shadow: 0 5px 8px rgba(0,0,0,.2);
-  -webkit-transition: .25s;
-  -o-transition: .25s;
-  transition: .25s;
+    border-radius: 0;
+     margin-top: 0;
+    -webkit-box-shadow: 0 5px 8px rgba(0,0,0,.2);
+    box-shadow: 0 5px 8px rgba(0,0,0,.2);
+    -webkit-transition: .25s;
+    -o-transition: .25s;
+    transition: .25s;
 }
 .dropdown-height .divider {
     height: 1px;
@@ -171,10 +191,15 @@ button:focus{
 	font-size: 30px;
 }
 
+
+
+
 .input-search .input-search-icon,.input-search .input-search-drop,.header-closebutton{
+	color: #FFFFFF;
 	opacity: 0.5;
 }
 .input-search.focus .input-search-icon,.input-search.focus .input-search-drop,.focus .header-closebutton{
+	color: #666;
 	opacity: 0.5;
 }
 
@@ -183,6 +208,25 @@ button:focus{
 	font-size: 12px;
 	font-family: "微软雅黑";
 	font-weight: normal;
+}
+
+.typexdate{
+	/*margin-left: 95px;*/
+	display: none;
+}
+.typeowner{
+	/*margin-left: 95px;*/
+	display: none;
+}
+.typeowner input{
+	height:30px;
+}
+.typeword{
+	/*width: 90px;*/
+	padding:0;
+	text-align: left;
+	display: inline-block;
+	color: rgba(0,0,0,0.54);
 }
 .typebutton{
 	min-width: 256px;
@@ -194,12 +238,18 @@ button:focus{
 }
 .dropdown-type{
 	padding-top: 16px;
+	padding-bottom: 15px;
 	position:relative;
 }
 .dropdown-project{
 	padding-bottom: 15px;
 	position:relative;
 }
+.dropdown-type .dropdown-menu{
+	top: -5px;
+	/*left: 105px;*/
+}
+
 .typebutton span{
 	float: left;
 }
@@ -229,6 +279,22 @@ button:focus{
 .typexname{
 	display: inline-block;
 }
+.typexname input{
+	min-width: 256px;
+	height:30px;
+	border: 0;
+	box-shadow: inset 0 -1px 0 0 #ddd;
+	vertical-align: bottom;
+}
+.typexname input:focus{
+	outline: none;
+}
+.typexdate input{
+	min-width: 150px;
+}
+.typexdate .data-time{
+	padding-top: 30px;
+}
 /*select2样式修改开始*/
 .select2-drop-active{
 	border-radius: 4px;
@@ -241,6 +307,9 @@ button:focus{
 	border-right: none;
 	border-top: none;
 	border-radius: 0px;
+}
+.select2-container-multi .select2-choices .select2-search-field input{
+	padding: 8px;
 }
 .select2-container-multi.select2-container-active .select2-choices {
     border-bottom: 1px solid #3779ff;

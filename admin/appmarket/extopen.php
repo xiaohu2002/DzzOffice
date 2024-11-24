@@ -50,7 +50,7 @@ $appid = intval($_GET['appid']);
 
 $page = empty($_GET['page']) ? 1 : intval($_GET['page']);
 $perpage = 20;
-$gets = array('mod' => MOD_NAME, 'op' => 'extopen', 'ext' => $ext, 'appid' => $appid);
+$gets = array('mod' => 'appmarket', 'op' => 'extopen', 'ext' => $ext, 'appid' => $appid);
 $theurl = BASESCRIPT . "?" . url_implode($gets);
 $refer = urlencode($theurl . '&page=' . $page);
 
@@ -81,7 +81,7 @@ if($count){
 	}
 	$count = count($newlist);
 }
-$multi = multi($count, $perpage, $page, $theurl );
+$multi = multi($count, $perpage, $page, $theurl, 'justify-content-end');
 //根据分页截取数组
 ksort($newlist,SORT_STRING );
 $list = array_slice($newlist,$start,$perpage);

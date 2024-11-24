@@ -6,51 +6,7 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-var _header = {};
-_header.init = function(formhash){
-	_header.formhash=formhash;
-	/*if(jQuery('.bs-left-container').length<1){
-		jQuery('.resNav .leftTopmenu').hide();
-	}*/
-};
 
-_header.loging_close = function(){
-	var msg ='<span style="font-size:1.28rem">您确定要注销登录？</span>';
-	if(msg){		
-		showDialog( msg, 'confirm','', function(){		
-		jQuery.get('user.php?mod=login&op=logging&action=logout&formhash='+_header.formhash+'&t='+new Date().getTime(),function(data){
-			window.location.reload();
-		});
-	});
-	}
-};
-_header.leftTopmenu=function(obj,flag){
-	var clientWidth=document.documentElement.clientWidth;
-	if(!flag){
-		if(jQuery('.bs-left-container').is(':visible')){
-			flag='hide';
-		}else{
-			flag='show';
-		}
-	}
-	if(flag==='hide'){
-		jQuery('.bs-left-container').hide();
-		jQuery('.left-drager').hide();
-		jQuery('.bs-main-container').css('marginLeft',0);
-		jQuery(obj).removeClass('leftTopmenu');
-	}else if(flag==='show'){
-		jQuery('.bs-left-container').show();
-		var leftWidth=jQuery('.bs-left-container').outerWidth(true);
-		if(leftWidth<20){
-			leftWidth=20;
-			jQuery('.bs-left-container').width(leftWidth);
-			jQuery('.left-drager').css({'left':leftWidth,'cursor':'w-resize'});
-		}
-		jQuery('.left-drager').show();
-		jQuery('.bs-main-container').css('marginLeft',clientWidth<768?0:leftWidth);
-		jQuery(obj).addClass('leftTopmenu');
-	}
-};
 var BROWSER = {};
 var USERAGENT = navigator.userAgent.toLowerCase();
 browserVersion({'ie':'msie','edge':'edge','rv':'rv','firefox':'','chrome':'','opera':'','safari':'','mozilla':'','webkit':'','maxthon':'','qq':'qqbrowser','ie11':'trident'});
@@ -139,6 +95,7 @@ if(BROWSER.firefox && window.HTMLElement) {
 		return true;
 	});
 }
+
 //判断当前窗口是否激活，当窗口激活时不使用桌面通知
 var CurrentActive;
 if ("onfocusin" in document){//for IE 
@@ -157,6 +114,7 @@ if ("onfocusin" in document){//for IE
 		CurrentActive = false;
 	}
 }
+
 function $C(classname, ele, tag) {
 	var returns = [];
 	ele = ele || document;
@@ -290,6 +248,10 @@ function mb_cutstr(str, maxlen, dot) {
 	}
 	return ret;
 }
+function mb_cutstr_nohtml(str, maxlen,dot) {
+	str = strip_tags(str);
+	return mb_cutstr(str, maxlen, dot)
+};
 function strip_tags (input, allowed) {
   // http://kevin.vanzonneveld.net
   // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
@@ -1450,6 +1412,12 @@ function fetchOffset(obj, mode) {
 	return {'left' : left_offset, 'top' : top_offset};
 }
 
+
+
+
+
+
+
 function showError(msg) {
 	var p = /<script[^\>]*?>([^\x00]*?)<\/script>/ig;
 	msg = msg.replace(p, '');
@@ -1629,6 +1597,7 @@ function simulateSelect(selectId, widthvalue) {
 	};
 }
 
+
 function ctrlEnter(event, btnId, onlyEnter) {
 	if(isUndefined(onlyEnter)) onlyEnter = 0;
 	if((event.ctrlKey || onlyEnter) && event.keyCode == 13) {
@@ -1637,6 +1606,8 @@ function ctrlEnter(event, btnId, onlyEnter) {
 	}
 	return true;
 }
+
+
 
 function updatestring(str1, str2, clear) {
 	str2 = '_' + str2 + '_';
@@ -1665,6 +1636,12 @@ function setCopy(text, msg){
 	}
 }
 
+
+
+
+
+
+
 var secST = new Array();
 
 function strLenCalc(obj, checklen, maxlen) {
@@ -1681,6 +1658,7 @@ function strLenCalc(obj, checklen, maxlen) {
 	}
 }
 
+
 if(BROWSER.ie && BROWSER.ie<11) {
 	try{document.documentElement.addBehavior("#default#userdata");}catch(e){}
 }
@@ -1694,7 +1672,7 @@ function updateseccode(idhash, play) {
 			}
 			document.getElementById('checkseccodeverify_' + idhash).innerHTML = '';
 			ajaxget('misc.php?mod=seccode&action=update&idhash=' + idhash, 'seccode_' + idhash, null, '', '', function() {
-				secST['code_' + idhash] = setTimeout(function() {document.getElementById('seccode_' + idhash).innerHTML = '<span class="btn btn-primary" onclick="updateseccode(\''+idhash+'\')">'+__lang.refresh_verification_code+'</span>';}, 180000);
+				secST['code_' + idhash] = setTimeout(function() {document.getElementById('seccode_' + idhash).innerHTML = '<span class="btn btn-link" onclick="updateseccode(\''+idhash+'\')">'+__lang.refresh_verification_code+'</span>';}, 180000);
 			});
 		}
 	} else {
@@ -1780,6 +1758,8 @@ function showbirthday(){
 	el.value = birthday;
 }
 
+
+
 var tipTimer=[];
 function showTip(ctrlobj,pos,msg) {
 	if(!ctrlobj.id) {
@@ -1807,7 +1787,7 @@ function showTip(ctrlobj,pos,msg) {
 	if(!document.getElementById(menuid)) {
 		var div = document.createElement('div');
 		div.id = ctrlobj.id + '_menu';
-		div.className = 'tip da '+tip_classname;
+		div.className = 'tip '+tip_classname;
 		div.style.display = 'none';
 		div.innerHTML = '<div class="tip_horn"></div><div class="tip_c">' + (msg?msg:ctrlobj.getAttribute('tip')) + '</div>';
 		document.getElementById('append_parent').appendChild(div);
@@ -1903,11 +1883,21 @@ function mobileplayer()
 	}
 }
 
+
+/*if(typeof showusercard != 'undefined' && showusercard == 1) {
+	_attachEvent(window, 'load', cardInit, document);
+}*/
+function showTopMsg(msg,timeout){
+//显示
+	if(!timeout) time=5000;
+	var el=	jQuery('<div class="tips">'+msg+'</div>').appendTo(document.body);
+	el.slideDown();
+	el.css({"margin-left":-el.width()/2});
+	window.setTimeout(function(){el.slideUp(function(){el.remove();});},time);
+}
+
 //target='dzz'时在桌面打开
 jQuery(document).ready(function(e) {
-	jQuery('.js-popbox').each(function(){
-		jQuery(this).popbox();
-	});
     jQuery(document).on('click','a',function(){
 		var href=this.href,id='',name=jQuery(this).attr('title')?jQuery(this).attr('title'):strip_tags(this.innerHTML);
 		
@@ -1947,7 +1937,7 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 	var menuid = 'fwin_dialog';
 	var menuObj = document.getElementById(menuid);
 	var showconfirm = 1;
-	confirmtxtdefault ='确定';
+	confirmtxtdefault = __lang.confirms;
 	closetime = isUndefined(closetime) ? '' : closetime;
 	closefunc = function () {
 		if(typeof func == 'function') func();
@@ -1966,7 +1956,7 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 		//showconfirm = 0;
 	}
 	confirmtxt = confirmtxt ? confirmtxt : confirmtxtdefault;
-	canceltxt = canceltxt ? canceltxt : '取消';
+	canceltxt = canceltxt ? canceltxt : __lang.cancel;
 
 	if(menuObj) hideMenu('fwin_dialog', 'dialog');
 	menuObj = document.createElement('div');
@@ -1978,42 +1968,44 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 	if(!BROWSER.ie) {
 		hidedom = '<style type="text/css">object{visibility:hidden;}</style>';
 	}
-	var shadow='';
+	var shadow='';//'<div class="LEFT_TOP ROUND" ></div><div class="TOP ROUND"></div><div class="RIGHT_TOP ROUND" ></div><div class="RIGHT ROUND" ></div><div class="RIGHT_BOTTOM ROUND"></div><div class="BOTTOM ROUND" ></div><div class="LEFT_BOTTOM ROUND" ></div><div class="LEFT ROUND"></div>';
+	// var s = hidedom + shadow+ '<table cellpadding="0" cellspacing="0" class="fwin"><tr><td class="t_l"></td><td class="t_c"></td><td class="t_r"></td></tr><tr><td class="m_l"></td><td class="m_c"><h3 class="flb" id="drag_fwin_dialog"><em>';
+	// s += t ? t : __lang.board_message;
+	// s += '</em><button id="fwin_dialog_close" type="button" class="close" onclick="hideMenu(\'fwin_dialog\', \'dialog\')" >×</button></h3>';
     var s='';
     if(t) {
-        s=hidedom + shadow+ '<div class="modal-header"><h4 class="modal-title">';
+        s=hidedom + shadow+ '<table cellpadding="0" cellspacing="0" class="fwin"><tr><td class="t_l"></td><td class="t_c"></td><td class="t_r"></td></tr><tr><td class="m_l"></td><td class="m_c"><h3 class="flb" id="drag_fwin_dialog"><em>';
         s += t;
-        s += '</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="hideMenu(\'fwin_dialog\', \'dialog\')" ></button></div>';
+        s += '</em></h3><button id="fwin_dialog_close" type="button" class="close alert-close" onclick="hideMenu(\'fwin_dialog\', \'dialog\')" >×</button>';
     }else {
-        s=hidedom + shadow+ '<div class="modal-header"><h4 class="modal-title">';
-		s += '提示信息';
-        s += '</h4><button id="fwin_dialog_close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="hideMenu(\'fwin_dialog\', \'dialog\')" ></button></div>';
+        s=hidedom + shadow+ '<table cellpadding="0" cellspacing="0" class="fwin"><tr><td class="t_l"></td><td class="t_c"></td><td class="t_r"></td></tr><tr><td class="m_l"></td><td class="m_c"><h3 class="flb" style="padding: 0;height: 30px;" id="drag_fwin_dialog"><em>';
+        s += '</em></h3><button id="fwin_dialog_close" type="button" class="close alert-close" onclick="hideMenu(\'fwin_dialog\', \'dialog\')" >×</button>';
     }
     if(mode.indexOf('alert_icon_' )!== -1){
 		var icon=decodeURIComponent(mode.replace('alert_icon_' ,''));
 		if(icon){
-			s += '<div class="modal-body"><div class="alert_icon"><img class="alert_icon_img" src="'+icon+'"><p>' + msg + '</p></div></div>';
+			s += '<div class="c altw"><div class="alert_icon"><img class="alert_icon_img" src="'+icon+'"><p>' + msg + '</p></div></div>';
 		}else{
-			s += '<div class="modal-body"><div class="' + ('alert_info') + '"><p>' + msg + '</p></div></div>';
+			s += '<div class="c altw"><div class="' + ('alert_info') + '"><p>' + msg + '</p></div></div>';
 		}
-		s += '<div class="modal-footer">' + (leftmsg ? '<span class=" muted pull-left">' + leftmsg + '</span>' : '') + (showconfirm ? '<button id="fwin_dialog_submit" value="true" class="btn btn-primary"><strong>'+confirmtxt+'</strong></button>' : '');
+		s += '<p class="o pns">' + (leftmsg ? '<span class=" muted pull-left">' + leftmsg + '</span>' : '') + (showconfirm ? '<button id="fwin_dialog_submit" value="true" class="btn btn-primary"><strong>'+confirmtxt+'</strong></button>' : '');
 		
-		s += '</div>';
+		s += '</p>';
 	}else if(mode=='message'){
 		if(leftmsg){
-			s += '<div class="modal-body"><div class="alert_info"><p>' + msg + '</p></div></div>';
+			s += '<div class="c altw"><div class="alert_info"><p>' + msg + '</p></div></div>';
 		}else{
-			s += '<div class="modal-body">' + msg + '</div>';
+			s += '<div class="c altw">' + msg + '</div>';
 		}
-		s += '<div class="modal-footer">' + (leftmsg ? '<span class=" muted pull-left">' + leftmsg + '</span>' : '') + (showconfirm ? '<button id="fwin_dialog_submit" value="true" class="btn btn-primary"><strong>'+confirmtxt+'</strong></button>' : '');
-		s += '</div>';
+		s += '<p class="o pns">' + (leftmsg ? '<span class=" muted pull-left">' + leftmsg + '</span>' : '') + (showconfirm ? '<button id="fwin_dialog_submit" value="true" class="btn btn-primary"><strong>'+confirmtxt+'</strong></button>' : '');
+		s += '</p>';
 	} else {
-		s += '<div class="modal-body"><div class="' + (mode == 'alert' ? 'alert_error' : (mode == 'right' ? 'alert_right' : (mode == 'info' ? 'alert_info':''))) + '">' + msg + '</div></div>';
-		s += '<div class="modal-footer">' + (leftmsg ? '<span class="muted pull-left">' + leftmsg + '</span>' : '') + (showconfirm ? '<button id="fwin_dialog_submit" value="true" class="btn btn-outline-primary">'+confirmtxt+'</button>' : '');
-		s += mode == 'confirm' ? '<button id="fwin_dialog_cancel" value="true" class="btn btn-outline-danger" onclick="hideMenu(\'fwin_dialog\', \'dialog\')">'+canceltxt+'</button>' : '';
-		s += '</div>';
+		s += '<div class="c altw"><div class="' + (mode == 'alert' ? 'alert_error' : (mode == 'right' ? 'alert_right' : (mode == 'info' ? 'alert_info':''))) + '"><p>' + msg + '</p></div></div>';
+		s += '<p class="o pns">' + (leftmsg ? '<span class="muted pull-left">' + leftmsg + '</span>' : '') + (showconfirm ? '<button id="fwin_dialog_submit" value="true" class="btn btn-primary">'+confirmtxt+'</button>   ' : '');
+		s += mode == 'confirm' ? '<button id="fwin_dialog_cancel" value="true" class="btn btn-default-outline" onclick="hideMenu(\'fwin_dialog\', \'dialog\')">'+canceltxt+'</button>' : '';
+		s += '</p>';
 	}
-	s += '';
+	s += '</td><td class="m_r"></td></tr><tr><td class="b_l"></td><td class="b_c"></td><td class="b_r"></td></tr></table>';
 	menuObj.innerHTML = s;
 	if(document.getElementById('fwin_dialog_submit')) document.getElementById('fwin_dialog_submit').onclick = function() {
 		if(typeof func == 'function') func();
@@ -2102,17 +2094,30 @@ function showWindow(k, url, mode, cache, showWindow_callback,disablebacktohide) 
 		jQuery(menuObj).modal('show');
 	};
 	if(!menuObj) {
-		var html='<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">'
-				 +'	<div class="modal-content" id="fwin_content_'+k+'">'
+		var html='<div class="modal-dialog modal-center">'
+				 +'	<div class="modal-content" >'
+				 +'  <div class="modal-content-inner" id="fwin_content_'+k+'">'
+				/* +'	  <div class="modal-header">'
+				 +'		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>'
+				 +'		<h4 class="modal-title" id="fwin_title_'+k+'">加载中,请稍候</h4>'
+				 +'	  </div>'*/
+				/* +'	  <div class="m_c modal-body" id="fwin_content_' + k + '">'
+				 +'		<table   height="100%" width="100%"><tbody><tr><td align="center" valign="middle"><div class="loading_img"><div class="loading_process"></div></div></td></tr></tbody></table>'
+				 +'	  </div>'
+			   +'	  <div class="modal-footer">'
+				 +'		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'
+				 +'		<button type="button" class="btn btn-primary">Save changes</button>'
+				 +'	  </div>'*/
+				 +'	 </div>'
 				 +'	</div>'
 				 +'</div>';
 				 
 		menuObj = document.createElement('div');
 		menuObj.id = menuid;
-		menuObj.className = ' modal fade ';
+		menuObj.className = ' modal ';
 		if(disablebacktohide){
-			menuObj.setAttribute('data-bs-backdrop','static');
-			menuObj.setAttribute('data-bs-keyboard','false');
+			menuObj.setAttribute('data-backdrop','static');
+			menuObj.setAttribute('data-keyboard','false');
 			
 		} 
 		menuObj.style.display = 'none';
@@ -2150,51 +2155,46 @@ function showmessage(msg,type,timeout,haveclose,position,callback,maxwidth,maxhe
 	if(!maxwidth) maxwidth=300;  //最大宽度
 	if(!delay) delay=300;     //动画时间
 	
+	if(!position) position='top-center';
 	var el;
 	if(!document.getElementById('message_tip_box')){
-		el=jQuery('<div id="message_tip_box" class="toast fade show message_tip_box"><div id="message_tip_alert" class="alert"></div></div>').appendTo(document.body);
+		el=jQuery('<div id="message_tip_box" class="message_tip_box"><div id="message_tip_alert" class="alert"></div></div>').appendTo(document.body);
 		var isnew=true;
 	}else{
 		el=jQuery('#message_tip_box');
 	} 
 	var el1=jQuery('#message_tip_alert');
-	 el.attr('sytle','').attr('class','toast fade show message_tip_box');
+	 el.attr('sytle','').attr('class','message_tip_box position-'+position);
 	 el.css({'height':'auto','max-height':maxheight,width:maxwidth,margin:'0,auto','overflow':'hidden'});
+	
 	//设置消息框的类型（不同类型背景颜色不同）；
 	if(type=='error') type='danger';
 	var types=['danger','info','success','warning'];
-	if(jQuery.inArray(type,types)<0) type='info';
-	if(type) {
-		jQuery('#message_tip_alert').attr('class','alert alert-'+type);
-		if(type == 'info'){
-		var spantype ='<i class="dzz dzz-info-outline me-2 fs-5 text-info"></i>'	;
-			}else if(type == 'success'){
-				var spantype ='<i class="dzz dzz-notification-success me-2 fs-5 text-success"></i>';	
-			}else if(type == 'danger'){
-				var spantype ='<i class="dzz dzz-clear me-2 fs-5 text-danger"></i>';
-			}else if(type == 'warning'){
-				var spantype ='<i class="dzz dzz-error me-2 fs-5 text-warning"></i>';
-			}
-	}else  {
-		jQuery('#message_tip_alert').attr('class','alert alert-warning');
-	}
-	
-	if(type == 'success'){
-		var spantypes ='成功';	
-	}else if(type == 'danger'){
-		var spantypes ='错误';
-	}else if(type == 'warning'){
-		var spantypes ='警告';
+	/*if(jQuery.inArray(type,types)<0){
+		jQuery('#message_tip_alert').attr('class',' alert alert-'+type);
 	}else{
-		var spantypes ='信息';
+		jQuery('#message_tip_alert').attr('class','alert');
+	}*/	
+	if(jQuery.inArray(type,types)<0) type='';
+	if(type) {
+		jQuery('#message_tip_alert').attr('class',' alert alert-'+type);
+		if(type == 'info'){
+		var spantype ='<span class="dzz dzz-info-outline spantype" style="color:#3d91ea;"></span>'	;
+			}else if(type == 'success'){
+				var spantype ='<span class="dzz dzz-notification-success spantype" style="color:#48c874;"></span>';	
+			}else if(type == 'danger'){
+				var spantype ='<span class="dzz dzz-clear spantype" style="color:#f04836;"></span>';
+			}else if(type == 'warning'){
+				var spantype ='<span class="dzz dzz-error spantype" style="color:#fdc318;"></span>';
+			}
 	}
-
+	else  {
+		jQuery('#message_tip_alert').attr('class','alert alert-warning');}
+	
 	//处理关闭按钮
 	//处理关闭按钮
 	if(haveclose){
-		msg='<div class="toast-header">'+spantype+'<strong class="me-auto">'+spantypes+'</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">'+msg+'</div></div>';
-	}else  {
-		msg='<div class="toast-header">'+spantype+'<strong class="me-auto">'+spantypes+'</strong></div><div class="toast-body">'+msg+'</div></div>';
+		msg='<button type="button" class="close">×</button>'+spantype+'<div class="title-con">'+msg+'</div>';
 	}
 	jQuery('#message_tip_alert').html(msg);
 	//处理位置
@@ -2217,7 +2217,6 @@ function showmessage(msg,type,timeout,haveclose,position,callback,maxwidth,maxhe
 			//增加关闭事件
 			el1.find('button.close').off('click').on('click',function(){
 				el.animate({left:-width},delay,function(){
-					
 					el.remove();
 				});
 				if(typeof(callback)=='function') callback();//关闭时触发回调函数；
@@ -2517,6 +2516,9 @@ function correcturl(url){
 	return url;
 }
 
+
+
+
 Date.prototype.format = function(format) {
        var date = {
               "M+": this.getMonth() + 1,
@@ -2538,6 +2540,11 @@ Date.prototype.format = function(format) {
        }
        return format;
 };
+
+
+
+
+
 
 function dbind(id,ev,recall){
 /*
@@ -2580,6 +2587,8 @@ function checkHover(e,target){
         return !contains(target,getEvent(e).relatedTarget||getEvent(e).toElement) && !((getEvent(e).relatedTarget||getEvent(e).toElement)===target);
     }
 };
+
+
 
 function setMouseDownHide(id){
 	jQuery(document).bind('mousedown.'+id,function(e){
@@ -2856,35 +2865,3 @@ function htmlspecialchars_decode (string, quote_style) {
 
   return string;
 };
-function dzzNotification() {
-	var h5n = new Object();
-
-	h5n.issupport = function() {
-		return 'Notification' in window;
-	};
-
-	h5n.shownotification = function(replaceid, url, imgurl, subject, message) {
-		if (Notification.permission === 'granted') {
-			sendit();
-		} else if (Notification.permission !== 'denied') {
-			Notification.requestPermission().then(function (perm) {
-				if (perm === 'granted') {
-					sendit();
-				}
-			});
-		}
-		function sendit() {
-			var n = new Notification(subject, {
-				tag: replaceid,
-				icon: imgurl,
-				body: message
-			});
-			n.onclick = function (e) {
-				e.preventDefault();
-				window.open(url, '_blank');
-			};
-		}
-	};
-	return h5n;
-}
-!function(a){"function"==typeof define&&define.amd?define(["jquery"],a):"object"==typeof exports?a(require("jquery")):a(jQuery)}(function(a){function b(a){return h.raw?a:encodeURIComponent(a)}function c(a){return h.raw?a:decodeURIComponent(a)}function d(a){return b(h.json?JSON.stringify(a):String(a))}function e(a){0===a.indexOf('"')&&(a=a.slice(1,-1).replace(/\\"/g,'"').replace(/\\\\/g,"\\"));try{return a=decodeURIComponent(a.replace(g," ")),h.json?JSON.parse(a):a}catch(b){}}function f(b,c){var d=h.raw?b:e(b);return a.isFunction(c)?c(d):d}var g=/\+/g,h=a.cookie=function(e,g,i){if(void 0!==g&&!a.isFunction(g)){if(i=a.extend({},h.defaults,i),"number"==typeof i.expires){var j=i.expires,k=i.expires=new Date;k.setTime(+k+864e5*j)}return document.cookie=[b(e),"=",d(g),i.expires?"; expires="+i.expires.toUTCString():"",i.path?"; path="+i.path:"",i.domain?"; domain="+i.domain:"",i.secure?"; secure":""].join("")}for(var l=e?void 0:{},m=document.cookie?document.cookie.split("; "):[],n=0,o=m.length;o>n;n++){var p=m[n].split("="),q=c(p.shift()),r=p.join("=");if(e&&e===q){l=f(r,g);break}e||void 0===(r=f(r))||(l[q]=r)}return l};h.defaults={},a.removeCookie=function(b,c){return void 0===a.cookie(b)?!1:(a.cookie(b,"",a.extend({},c,{expires:-1})),!a.cookie(b))}});

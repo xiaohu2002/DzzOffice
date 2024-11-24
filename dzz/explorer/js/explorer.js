@@ -86,14 +86,14 @@ _explorer.toggleRight = function () {
 			'margin-right': '0px'
 		});
 		$('.rightMenu').css('right', '-320px');
-		$('.toggRight').parent('li').removeClass('background-toggle').find('.dzz').attr("data-bs-original-title", "开启右侧信息");
+		$('.toggRight').parent('li').removeClass('background-toggle').find('.dzz').attr("data-original-title", "开启右侧信息");
 		
 	} else {
 		$('.bs-main-container').css({
-			'margin-right': '305px'
+			'margin-right': '300px'
 		});
 		$('.rightMenu').css('right', '0');
-		$('.toggRight').parent('li').addClass('background-toggle').find('.dzz').attr("data-bs-original-title", "关闭右侧信息");
+		$('.toggRight').parent('li').addClass('background-toggle').find('.dzz').attr("data-original-title", "关闭右侧信息");
 
 	}
 };

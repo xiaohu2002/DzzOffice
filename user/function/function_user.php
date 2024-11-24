@@ -123,8 +123,8 @@ function logincheck($username)
     $return = 0;
     $username = trim($username);
     $login = C::t('failedlogin')->fetch_ip($_G['clientip'], $username);
-    $setting = C::t('setting') -> fetch_all(null);
-    $return = (!$_G['config']['userlogin']['checkip'] || !$login || (TIMESTAMP - $login['lastupdate'] > $setting['forbiddentime'])) ? $setting['numberoflogins'] : max(0, $setting['numberoflogins'] - $login['count']);
+    $return = (!$_G['config']['userlogin']['checkip'] || !$login || (TIMESTAMP - $login['lastupdate'] > 900)) ? 5 : max(0, 5 - $login['count']);
+
     if (!$login) {
         C::t('failedlogin')->insert(array(
             'ip' => $_G['clientip'],
@@ -190,6 +190,21 @@ function getinvite()
     }
 
     return $result;
+}
+
+function replacesitevar($string, $replaces = array())
+{
+    global $_G;
+    $sitevars = array(
+        '{sitename}' => $_G['setting']['sitename'],
+
+        '{time}' => dgmdate(TIMESTAMP, 'Y-n-j H:i'),
+        '{adminemail}' => $_G['setting']['adminemail'],
+        '{username}' => $_G['member']['username'],
+        '{myname}' => $_G['member']['username']
+    );
+    $replaces = array_merge($sitevars, $replaces);
+    return str_replace(array_keys($replaces), array_values($replaces), $string);
 }
 
 function clearcookies()

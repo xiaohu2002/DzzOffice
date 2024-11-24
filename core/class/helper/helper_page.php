@@ -10,8 +10,8 @@ class helper_page {
 	public static function multi($num, $perpage, $curpage, $mpurl,$classname='', $maxpages = 0, $page = 5, $autogoto = FALSE, $simple = FALSE, $jsfunc = FALSE) {
 		global $_G;
 		$ajaxtarget = !empty($_GET['ajaxtarget']) ? " ajaxtarget=\"".dhtmlspecialchars($_GET['ajaxtarget'])."\" " : '';
+
 		$a_name = '';
-		$mpurl = str_replace(array("'", '"', "\\"), array('%27', '%22', '%5c'), $mpurl);
 		if(strpos($mpurl, '#') !== FALSE) {
 			$a_strs = explode('#', $mpurl);
 			$mpurl = $a_strs[0];
@@ -25,11 +25,13 @@ class helper_page {
 			$pagevar = 'page=';
 		}
 
-		$shownum = $showkbd = TRUE;
-		$showpagejump = TRUE;
-		$shownum = true;
-		$showkbd = FALSE;
-
+			$shownum = $showkbd = TRUE;
+			$showpagejump = TRUE;
+//			$lang['prev'] = '&lsaquo;&lsaquo;';
+//			$lang['next'] = '&rsaquo;&rsaquo;';
+			$shownum = true;
+			$showkbd = FALSE;
+	
 		if(defined('IN_MOBILE') && !defined('TPL_DEFAULT')) {
 			$dot = '..';
 			$page = intval($page) < 10 && intval($page) > 0 ? $page : 4 ;
@@ -52,11 +54,7 @@ class helper_page {
 			$offset = floor($page * 0.5);
 
 			$realpages = @ceil($num / $perpage);
-			if ($realpages === null) {
-				$realpages = 1;
-			}
 			$curpage = $curpage > $realpages ? $realpages : $curpage;
-			$curpage = isset($curpage) ? $curpage : 1;
 			$pages = $maxpages && $maxpages < $realpages ? $maxpages : $realpages;
 
 			if($page > $pages) {
@@ -78,7 +76,7 @@ class helper_page {
 			}
 			$_G['page_next'] = $to;
 			$multipage = ($curpage - $offset > 1 && $pages > $page ? '<li class="page-item"><a href="'.(self::mpurl($mpurl, $pagevar, 1)).($ajaxtarget  && $autogoto ? '#' : $a_name).'" title="第一页" class="page-link first"'.$ajaxtarget.'>1 '.$dot.'</a></li>' : '').
-			($curpage > 1 && !$simple ? '<li class="page-item"><a href="'.(self::mpurl($mpurl, $pagevar, $curpage - 1)).($ajaxtarget  && $autogoto ? '#' : $a_name).'" class="page-link dzz dzz-chevron-left"'.$ajaxtarget.' title="上一页"></a></li>' : '');
+			($curpage > 1 && !$simple ? '<li class="page-item"><a href="'.(self::mpurl($mpurl, $pagevar, $curpage - 1)).($ajaxtarget  && $autogoto ? '#' : $a_name).'" class="page-link"'.$ajaxtarget.' title="上一页">«</a></li>' : '');
 			for($i = $from; $i <= $to; $i++) {
 				$multipage .= $i == $curpage ? '<li class="page-item active"><a class="page-link" title="第'.$i.'页">'.$i.'</strong></a>' :
 				'<li class="page-item"><a href="'.(self::mpurl($mpurl, $pagevar, $i)).($ajaxtarget  && $autogoto ? '#' : $a_name).'"'.$ajaxtarget.' class="page-link" title="第'.$i.'页">'.$i.'</a></li>';
@@ -92,8 +90,8 @@ class helper_page {
 
 			$multipage .= ($to < $pages ? '<li class="page-item"><a href="'.(self::mpurl($mpurl, $pagevar, $pages)).$a_name.'" title="最后一页" class="page-link last"'.$ajaxtarget.'>'.$dot.' '.$realpages.'</a></li>' : '').
 			($showpagejump && !$simple && !$ajaxtarget && !$wml ? '<li class="page-item"><a class="page-link"><div class="input-group" title="跳转页数，共'.$lang['total'].' '.$pages.' '.$lang['pageunit'].'页"><input  type="text" name="custompage"  class="form-control" style="width: 45px;" title="'.$lang['pagejumptip'].'" value="'.$curpage.'" onkeydown="if(event.keyCode==13) {window.location=\''.$jsurl.'}" /><span class="input-group-text"> / '.$pages.' '.$lang['pageunit'].'</span></div></a></li>' : '').
-			($curpage < $pages && !$simple ? '<li><a href="'.(self::mpurl($mpurl, $pagevar, $curpage + 1)).($ajaxtarget  && $autogoto ? '#' : $a_name).'" class="page-link dzz dzz-chevron-right
-"'.$ajaxtarget.' title="下一页"></a></li>' : '').
+			($curpage < $pages && !$simple ? '<li><a href="'.(self::mpurl($mpurl, $pagevar, $curpage + 1)).($ajaxtarget  && $autogoto ? '#' : $a_name).'" class="page-link
+"'.$ajaxtarget.' title="下一页">»</a></li>' : '').
 			($showkbd && !$simple && $pages > $page && !$ajaxtarget && !$wml ? '<li><kbd><input type="text" name="custompage" size="3" onkeydown="if(event.keyCode==13) {window.location=\''.$jsurl.'}" /></kbd></li>' : '');
 
 			$multipage = $multipage ? '<div class="text-center"><ul class="pagination '.($classname?$classname:'').'">'.$multipage.($shownum && !$simple ? '<li class="disable"><a class="page-link" title="共有'.$num.'条记录">'.$num.'</a></li>' : '').'</ul></div>' : '';

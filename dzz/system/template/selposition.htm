@@ -1,5 +1,11 @@
 <!--{template common/header_ajax}-->
 <style>
+    .user-select-search .input-black {
+        margin-bottom: 0;
+    }
+    .user-select-body {
+        padding-top: 20px!important;
+    }
     .user-select-body .user-select-content {
         margin-top: 0;
         border-bottom: 1px solid #e1e1e1;
@@ -31,13 +37,12 @@
         height: 40px;
         padding-right: 30px;
         white-space: nowrap;
+        overflow: hidden;
         text-overflow: ellipsis;
     }
-    .user-select-content-right .sele-right-classa .img-avatar {
+    .user-select-content-right .sele-right-classa li img {
         max-width: 24px;
         max-height: 24px;
-        line-height:24px;
-        margin-right:5px;
     }
     .user-select-content-right .sele-right-classa li .ti-close {
         position: absolute;
@@ -51,13 +56,17 @@
         display: none;
         cursor: pointer;
         padding: 0;
+        background-color: #f2f2f2;
     }
     .user-select-content-right .sele-right-classa li:hover {
-        background-color: rgba(0,0,0, .175);
+        background-color: #f2f2f2;
         border-radius: 3px;
     }
     .user-select-content-right .sele-right-classa li:hover .ti-close {
         display: block;
+    }
+    #seluser_dropdown_menu {
+        height: 299px;
     }
     .iconFirstWord {
         width: 24px;
@@ -76,14 +85,16 @@
 <link href="static/jstree/themes/default/style.min.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="dzz/system/css/selfilewindow.css?{VERHASH}" rel="stylesheet" media="all">
 <div class="modal-header">
-  <h4 class="modal-title">{lang select_position}</h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+    <h4 class="modal-title">{lang select_position}</h4>
 </div>
-<div class="modal-body">
-    <div class="group-content" id="seluser_dropdown_menu">
-        <iframe name="selposition_iframe" id="selposition_iframe" class="org-sel-box-iframe" src="$theurl" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true"></iframe>
+    <div class="group-content" id="seluser_dropdown_menu" style="overflow:hidden">
+        <iframe name="selposition_iframe" id="selposition_iframe" class="org-sel-box-iframe"
+                src="$theurl"
+                frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%"
+                allowtransparency="true"></iframe>
     </div>
-</div>
+
 <script type="text/javascript" reload="1">
     function hide_window(){
         hideWindow("$_GET['handlekey']");

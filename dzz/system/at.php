@@ -27,11 +27,12 @@
 	  foreach(DB::fetch_all("select u.uid,u.username  from %t u LEFT JOIN %t s on u.uid=s.uid  $sql_user order by s.lastactivity DESC limit 10",$param_user) as $value){
 		 if($value['uid']!=$_G['uid']){
 			 $data[]=array('name'=>$value['username'],
-				'searchkey'=> pinyin::encode($value['username'],'all').$value['username'],
-				'id'=>'u'.$value['uid'],
-				'icon'=>avatar_block($value['uid']),
-				'title'=>$value['username'].':'.'u'.$value['uid']
-			);
+						   'searchkey'=> pinyin::encode($value['username'],'all').$value['username'],
+						   'id'=>'u'.$value['uid'],
+						   'icon'=>'avatar.php?uid='.$value['uid'].'&size=small',
+						   'title'=>$value['username'].':'.'u'.$value['uid']
+						);
+			
 		 }
 	  }
   }

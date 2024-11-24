@@ -1,0 +1,19 @@
+<ul class="nav-drawer nav-stacked nav-pills">
+    <li class="nav-item bs-left-title p-2">
+		<a href="{MOD_URL}">
+			<i class="mdi mdi-account-circle"></i>
+			<span>{lang myCountCenter}</span>
+		</a>
+	</li>
+    <li class="nav-item"><a <!--{if !$_GET['op']=='index' && !$vid}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}">{lang basic_information}</a></li>
+	    <li class="nav-item"><a <!--{if $_GET['op']=='avatar'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=avatar">{lang Modify_the_picture}</a></li>
+	    <li class="nav-item"><a <!--{if $_GET['op']=='password'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=password">{lang password_and_security}</a></li>
+		<li class="nav-item"><a href="user.php" target="_blank">{lang Personal data display}</a></li>
+		<!--{loop $_G[setting][verify] $key $value}-->
+	  	<!--{if $value[available] && (empty($value[groupid]) || ($value[groupid] && in_array($_G[groupid],$value[groupid])))}-->
+		<li class="nav-item">
+	       <a <!--{if MOD_NAME=='profile' && $vid==$key}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&vid=$key">$value[title]</a>
+		</li>
+	<!--{/if}-->
+	<!--{/loop}-->
+</ul>

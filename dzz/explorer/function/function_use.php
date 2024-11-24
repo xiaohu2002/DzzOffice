@@ -1,4 +1,5 @@
 <?php
+
 //解析类型条件
 function parsefileType($type){
     $ext = array();
@@ -47,7 +48,29 @@ function parsePositionFlag($flags){
 
     return $positionarr;
 }
-
+/*function parseDateRange($daterange){
+    $enddate = strtotime(date('Y-m-d',TIMESTAMP)) + 86400;
+    $startdate = 0;
+    $ext = array();
+    switch ($daterange){
+        case 1 :
+            $startdate = strtotime(date('Y-m-d',TIMESTAMP));
+            break;
+        case -1:
+            $startdate = date("Y-m-d",strtotime("-1 day"));
+            break;
+        case -7:
+            $startdate = date("Y-m-d",strtotime("-7 day"));
+            break;
+        case -30:
+            $startdate = date("Y-m-d",strtotime("-30 day"));
+            break;
+        case -90:
+            $startdate = date("Y-m-d",strtotime("-90 day"));
+            break;
+    }
+    return array('start'=>$startdate,'end'=>$enddate);
+}*/
 //解析用户条件
 function parseUsers($users){
     $conditionarr = array();

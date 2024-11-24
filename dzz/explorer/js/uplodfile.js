@@ -46,7 +46,7 @@ function fileupload(el, fid) {
             data.files = '';
             _upload.uploaddone();
             $(this).parents('.dialog-info').find('.upload-cancel').hide();
-            $(this).parents('.dialog-info').find('.upload-file-status').html('<span class="cancel show_uploading_status"><em></em>'+__lang.already_cancel+'</span>');
+            $(this).parents('.dialog-info').find('.upload-file-status').html('<span class="cancel show_uploading_status"><em></em><i>' + __lang.already_cancel + '</i></span>');
         });
 
         _upload.uploadsubmit();
@@ -92,7 +92,7 @@ function fileupload(el, fid) {
             } else {
 				 _upload.uploaddone();
                 data.context.addClass('success').find('.upload-file-status .speed').html('');
-                data.context.find('.upload-file-operate').html(__lang.finish);
+                data.context.find('.upload-file-operate').html(__lang.completed);
 				
                 if (file.data.folderarr) {
                     for (var i = 0; i < file.data.folderarr.length; i++) {
@@ -194,15 +194,15 @@ function fileupload(el, fid) {
     var ext = filearr.pop();
     var imgicon = '<img src="dzz/images/extimg/' + ext + '.png" onerror="replace_img(this)" style="width:24px;height:24px;position:absolute;left:0;"/>';
     var typerule = new RegExp(attachextensions, 'i');
-	var uploadtips = (typerule.test(file.name)) ? '排队' : __lang.allow_file_type;
+	var uploadtips = (typerule.test(file.name)) ? __lang.queuing : __lang.file_type_not_allowed;
     if(maxfileSize && (maxfileSize < file.size)){
-        uploadtips = __lang.file_too_large;
+        uploadtips = '文件太大了！';
     }
     var html =
         '<div class="process" style="position:absolute;z-index:-1;height:100%;background-color:#e8f5e9;-webkit-transition:width 0.6s ease;-o-transition:width 0.6s ease;transition:width 0.6s ease;width:0%;"></div> <div class="dialog-info"> <div class="upload-file-name">' +
         '<div class="dialog-file-icon" align="center">' + imgicon + '</div> <span class="name-text">' + file.name + '</span> ' +
         '</div> <div class="upload-file-size">' + (file.size ? formatSize(file.size) : '') + '</div> <div class="upload-file-path">' +
-        '<a title="" class="" href="javascript:;">' + relativePath + '</a> </div> <div class="upload-file-status"> <span class="uploading"><em class="precent"></em><em class="speed">'+__lang.upload_processing+'</em>' +
+        '<a title="" class="" href="javascript:;">' + relativePath + '</a> </div> <div class="upload-file-status"> <span class="uploading"><em class="precent"></em><em class="speed">'+uploadtips+'</em>' +
         '</span> <span class="success"><em></em><i></i></span> </div> <div class="upload-file-operate"> ' +
         '<em class="operate-pause"></em> <em class="operate-continue"></em> <em class="operate-retry"></em> <em class="operate-remove"></em> ' +
         '<a class="error-link upload-cancel" href="javascript:void(0);">'+__lang.cancel+'</a> </div> </div>';
@@ -218,9 +218,10 @@ _upload.uploaddone=function(flag) {
 	else _upload.succeed++;
 	if(_upload.errored>0){
 		_upload.tips.addClass('errortips');
-		_upload.tips.find('.dialog-body-text').html(__lang.upload_failed+ ' : ' + _upload.errored).parent().show();
+		_upload.tips.find('.dialog-body-text').html( __lang.upload_failure+' : '+_upload.errored).parent().show();
 	}else{
 		_upload.tips.removeClass('errortips');
+		//_upload.tips.find('.dialog-body-text').html( __lang.upload_succeed+' : '+_upload.succeed).parent().hide();
 		
 	}
     if (_upload.completed >= _upload.total) {

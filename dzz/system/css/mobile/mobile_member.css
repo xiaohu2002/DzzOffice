@@ -90,7 +90,7 @@ ul,li,ul li{
 .weui-cell-member{
 	background-color: #FFFFFF;
 }
-.img-avatar,.iconFirstWord {
+.Topcarousel,.iconFirstWord {
     display: block;
     color: #fff;
     font-size: 1rem;
@@ -169,7 +169,7 @@ ul,li,ul li{
 	position: relative;
 }
 
-.weui-member-select-scroller .img-avatar{
+.weui-member-select-scroller .Topcarousel{
 	width: 1.5rem;
 	height: 1.5rem;
 	line-height: 1.5rem;

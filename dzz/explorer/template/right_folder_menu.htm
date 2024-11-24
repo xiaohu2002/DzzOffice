@@ -1,3 +1,8 @@
+<style>
+.popbox.popbox-bottom{
+margin-top:0px ;	
+}
+</style>
 <div class="rightBorder" id="rightinfo_content">
 <div id="more_dynameic" style="display: none;">
 	<!--template template_more_dynameic-->
@@ -15,17 +20,18 @@
 	<!--{else}-->
 	<span class="dzz dzz-folder right-topimg"></span>
 	<!--{/if}-->
-  <p class="right-imgname"><span><!--{if $fileinfo[name]}-->$fileinfo[name]<!--{elseif $fileinfo[fname]}-->$fileinfo[fname]<!--{else}--><!--{/if}--></span></p>
-  <a href="javascript:;" class="toggRight toggright-icon">
-   <span class="dzz dzz-close"></span>
-  </a>
+    <p class="right-imgname"><span><!--{if $fileinfo[name]}-->$fileinfo[name]<!--{elseif $fileinfo[fname]}-->$fileinfo[fname]<!--{else}--><!--{/if}--></span>
+    </p>
+    <a href="javascript:;" class="toggRight toggright-icon">
+ 	 <span class="mdi mdi-close-circle "></span>
+ 	</a>
 </div>
 <div class="right-messagetable  scroll-y" data-subtractor="{eval echo ($fid || $rid)?53:0}">
 	<!--根文件进度条开始-->
 	<!--{if ($fileinfo['isgroup'] || $fileinfo['pfid'] == 0) && !$fileinfo['ismulti']}-->
     <div class="right-progress">
 		<p>
-			{lang space_useed}{eval echo formatsize($usesize);}(<!--{if $maxspace == 0}-->{lang no_limit}<!--{elseif $maxspace < 0}-->0<!--{else}-->共{eval echo formatsize($maxspace);}<!--{/if}-->)
+			已使用{eval echo formatsize($usesize);}(<!--{if $maxspace == 0}-->不限制<!--{elseif $maxspace < 0}-->0<!--{else}-->共{eval echo formatsize($maxspace);}<!--{/if}-->)
 		</p>
 	    <div class="progress">
 		  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{$progress}%;">
@@ -37,58 +43,58 @@
     <!--文件夹详情开始-->
     <div class="right_projectmain">
     <div class="information">
-      <p class="attribute-position">
-        <span class="attribute-width">{lang type}</span>
-        <span class="detailed_contenter">
-        $fileinfo[type]
-        </span>
-      </p> 
-      <!--{if $fileinfo[realpath]}-->
-      <p class="in-position">
-          <span class="attribute-width">{lang position}</span>
-          <span class="detailed_contenter">$fileinfo[realpath]</span>
-      </p>
-      <!--{/if}-->
-      <!--{if $fileinfo[username]}-->
-      <p class="attribute-position">
-        <span class="attribute-width">{lang possesor}</span>
-        <span class="detailed_contenter">$fileinfo[username]</span>
-      </p>
+    	<div class="ensemble-left">
+        <!--<p class="in-basicp">{lang basic_message}</p>-->
+        	<p class="attribute-position">
+	 			<span class="attribute-width">{lang type}</span>
+	 			<span class="detailed_contenter">
+					$fileinfo['type']
+				</span>
+	 		</p> 
+			<!--{if $fileinfo[realpath]}-->
+            <p class="in-position">
+            	<span class="attribute-width">{lang position}</span>
+            	<span class="detailed_contenter">$fileinfo[realpath]</span>
+			</p>
+			<!--{/if}-->
+			<!--{if $fileinfo['username']}-->
+            <p class="attribute-position">
+            	<span class="attribute-width">{lang possesor}</span>
+            	<span class="detailed_contenter">$fileinfo['username']</span>
+            </p>
 			<!--{/if}-->
 			<!--{if $fileinfo[editdateline]}-->
-      <p class="attribute-position">
-        <span class="attribute-width">{lang preceding_edit_time}</span>
-        <span class="detailed_contenter">$fileinfo[editdateline]</span>
-      </p>
+            <p class="attribute-position">
+            	<span class="attribute-width">{lang preceding_edit_time}</span>
+            	<span class="detailed_contenter">$fileinfo[editdateline]</span>
+            </p>
 			<!--{/if}-->
 			<!--{if $fileinfo[opendateline]}-->
-      <p class="attribute-position">
-        <span class="attribute-width">{lang preceding_open_time}</span>
-        <span class="detailed_contenter">$fileinfo[opendateline]</span>
-      </p>
+            <p class="attribute-position">
+            	<span class="attribute-width">{lang preceding_open_time}</span>
+            	<span class="detailed_contenter">$fileinfo[opendateline]</span>
+            </p>
 			<!--{/if}-->
-			<!--{if $fileinfo[fsize]}-->
-      <p class="in-position">
-        <span class="attribute-width">{lang big_small}</span>
-        <span class="detailed_contenter">$fileinfo[fsize]</span>
-      </p>
-			<!--{/if}-->
+            <p class="in-position">
+            	<span class="attribute-width">{lang big_small}</span>
+            	<span class="detailed_contenter">$fileinfo[ffsize]</span></p>
 			<!--{if $fileinfo[contain]}-->
-      <p class="in-position">
-        <span class="attribute-width">{lang include}</span>
-        <span class="detailed_contenter">$fileinfo[contain]</span>
-      </p>
+            <p class="in-position">
+            	<span class="attribute-width">{lang include}</span>
+            	<span class="detailed_contenter">$fileinfo[contain]</span></p>
 			<!--{/if}-->
-      <!--{if $fileinfo[fdateline]}-->
-      <p class="in-position">
-        <span class="attribute-width">{lang create_time}</span>
-        <span class="detailed_contenter">$fileinfo[fdateline]</span>
-      </p>
+            <!--{if $fileinfo[fdateline]}-->
+            <p class="in-position">
+            	<span class="attribute-width">{lang create_time}</span>
+            	<span class="detailed_contenter">$fileinfo[fdateline]</span>
+            </p>
 			<!--{/if}-->
+       </div>
     </div>
 
 	<!--{if $perm && $fileinfo['isdelete'] < 1}-->
 	<div class="file-poewr">
+		<div class="ensemble-left">
 		<div class="poewr-top clearfix">
 			<span class="contents-poewr">{lang directory_right}</span>
 			<!--{if isset($usergroupperm) && $usergroupperm > 0}--><a class="conpile-poewr" type="button" onclick="editgroupperm('{$fileinfo[gid]}','{$fileinfo[fid]}')"><span class="dzz dzz-create"></span></a><!--{/if}-->
@@ -98,6 +104,7 @@
 			<li <!--{if $perm & $val[1]}-->style="display:block;padding:5px;"<!--{else}-->style="display:none;"<!--{/if}-->><span  class="{$val[2]}" title="$val[0]"></span></li>
 			<!--{/loop}-->
 		</ul>
+		</div>
 	</div>
 	<!--{/if}-->
     <!--成员开始-->
@@ -114,13 +121,14 @@
 
 				<!--{loop $members $v}-->
     			<li class="right-numer-carousel" id="{$v['uid']}_delete" >
-					<a href="javascript:;" class="js-popboxs member_details_info" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true"
-					   data-bs-toggle="popover" style="display: inline-block;width: 28px;" data-href="{MOD_URL}&op=group&do=right_popbox&gid=$gid&uid={$v['uid']}">
+					<a href="javascript:;" class="js-popboxs member_details_info" data-placement="bottom" data-trigger="focus" data-auto-adapt="true"
+					   data-toggle="popover" style="display: inline-block;width: 28px;" data-href="{MOD_URL}&op=group&do=right_popbox&gid=$gid&uid={$v['uid']}">
 					{eval echo avatar_block($v['uid'],array($v['uid']=>$v['headerColor']));}
 					<!--{if $v['perm'] > 1  && $org['type'] == 1 }-->
 						<span class="dzz-right-first creator"><img src="{MOD_PATH}/img/ic-creator.png"></span>
 					<!--{elseif $v['perm'] > 0}-->
 						<span class="dzz-right-first"><img src="{MOD_PATH}/img/ic-manager.png"></span>
+						<!--<span class="dzz-right-first"><img src="{MOD_PATH}/img/ic-systemManager.png"></span>-->
 					<!--{/if}-->
 					</a>					
     			</li>
@@ -143,26 +151,28 @@
 				<!--{/if}-->
     		</div>
     		<div class="right-about-bottom clearfix">
-					<div class="row mb-3">
-            <label class="col-sm-2">{lang identification}</label>
-            <div class="col-sm-10">
-              {eval echo avatar_group($gid);}
-            </div>
-          </div>
-					<div class="row mb-3">
-            <label class="col-sm-2">{lang name}</label>
-            <div class="col-sm-10">
-              $org[orgname]
-            </div>
-          </div>
-					<div class="row mb-3">
-            <label class="col-sm-2">{lang status}</label>
-            <div class="col-sm-10">
-              <div class="form-check form-switch">
-              <input type="checkbox" onchange="edit_perm(this,'4')" class="form-check-input" readonly name="syatemon" data-switchery="true" data-name="manageon" <!--{if $org[diron] && $org[diron]}--> checked <!--{/if}--> disabled> 
-            </div>
-            </div>
-          </div>
+    			<p>
+	    			<span class="right-about-name">{lang identification}</span>
+					<a href="javascript:;" class="right-about-name-icon">
+						{eval echo avatar_group($gid);}
+					</a>
+    			</p>
+    			<p>
+    				<span class="right-about-name">{lang name}</span>
+    				<span>$org[orgname]</span>
+    			</p>
+    			<p>
+    				<span class="right-about-name">{lang status}</span>
+    				<span class="right-about-name-switch">
+    					<input type="checkbox" class="js-switch" readonly name="syatemon" data-switchery="true" data-name="manageon" <!--{if $org[diron] && $org[diron]}--> checked <!--{/if}-->>
+    				</span>
+    			</p>
+    			<!--<p>
+    				<span class="right-about-name">{lang share}</span>
+    				<span class="right-about-name-switch">
+    					<input type="checkbox" class="js-switch" readonly name="diron" data-switchery="true" data-name="diron" &lt;!&ndash;{if $org[diron] && $org['available']}&ndash;&gt;checked&lt;!&ndash;{/if}&ndash;&gt;>
+    				</span>
+    			</p>-->
     		</div>
     		
     	</div>
@@ -180,7 +190,7 @@
     <!--文件夹动态结束-->
 	</div>
 <!--{if $fid || $rid}-->	
-<div class="da comment-area">
+<div class="comment-area">
     <div class="messageMenu"> 
 	    <form action="{MOD_URL}&op=ajax&operation=comment" method="post" onsubmit="return comment_file(this)" id="commentid">
 	        <input type="hidden" name="rid" value="$rid" />
@@ -208,9 +218,15 @@
 <!--<div id="old_rightinfo" class="hide"></div>-->
 <script>
 var userids = '';
-
 $(document).ready(function(){
     userids = '{$userstr}';
+	//开关样式
+    $.getScript('{MOD_PATH}/js/switchery.min.js', function () {
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        elems.forEach(function (html) {
+            var switchery = new Switchery(html);
+        });
+    });
 });
 jQuery(".right-numerbottom  .js-popboxs").each(function(){
 		jQuery(this).popbox();		
@@ -223,7 +239,7 @@ function editgroupperm(gid,fid){
 	showWindow('select_perm', MOD_URL+'&op=ajax&operation=selectperm&fid='+fid+'&gid='+gid+'&new=0','get','0');
 }
 function select_group_user(){
-    var userhref = 'index.php?mod=system&op=selorguser&callback=seluser_group&stype=2&multiple=1&ids='+userids;
+    var userhref = 'index.php?mod=system&op=selorguser&callback=seluser_group&stype=2&moderator=0&range=1&multiple=1&ids='+userids;
     showWindow('adduser',userhref,'get','0')
 }
 function seluser_group(ids,data) {
@@ -244,14 +260,14 @@ function seluser_group(ids,data) {
                 for (var o in data['insertuser']) {
                     if (data['insertuser'][o]['avatarstatus'] == 1) {
                       	html+= '<li class="right-numer-carousel" id="' + data['insertuser'][o]['uid'] + '_delete" >';
-                        html+= '<a href="javascript:;" class="js-popboxs member_details_info adduser" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover"  data-href="{MOD_URL}&op=group&do=right_popbox&gid=$gid&uid='+data['insertuser'][o]['uid']+'" style="display: inline-block;width:28px;">'; 
-						 html+= '<img src="avatar.php?uid=' + data['insertuser'][o]['uid'] + '" class="avatar" style="width: 28px;height: 27px;">';
+                        html+= '<a href="javascript:;" class="js-popboxs member_details_info adduser" data-placement="bottom" data-trigger="focus" data-auto-adapt="true" data-toggle="popover"  data-href="{MOD_URL}&op=group&do=right_popbox&gid=$gid&uid='+data['insertuser'][o]['uid']+'" style="display: inline-block;width:28px;">'; 
+						 html+= '<img src="avatar.php?uid=' + data['insertuser'][o]['uid'] + '" class="img-circle avatar" style="width: 28px;height: 27px;">';
                         html+= '</a>';
                         html+= '</li>';
                     } else {
                         html+= '<li class="right-numer-carousel" style="background:' + data['insertuser'][o]['headerColor'] + '" id="' + data['insertuser'][o]['uid'] + '_delete">';
-                        html+= '<a href="javascript:;" class="js-popboxs member_details_info adduser" data-bs-placement="bottom" data-bs-trigger="focus"' +
-                            'data-auto-adapt="true" data-bs-toggle="popover" style="display: inline-block;width: 28px;height: 27px;"' +
+                        html+= '<a href="javascript:;" class="js-popboxs member_details_info adduser" data-placement="bottom" data-trigger="focus"' +
+                            'data-auto-adapt="true" data-toggle="popover" style="display: inline-block;width: 28px;height: 27px;"' +
                             'data-href="{MOD_URL}&op=group&do=right_popbox&gid=$gid&uid=' + data['insertuser'][o]['uid'] + '">';
                         html+= '<span class="rightcarousel-first">' + data['insertuser'][o]['ufirst'] + '</span>';
                         html+='</a>';

@@ -30,10 +30,10 @@ if($operation && !in_array($operation,$allowoperation)){
 if($operation == 'setmemberperm'){
     $guid = isset($_GET['guid']) ? intval($_GET['guid']):'';
     $perm = isset($_GET['perm']) ? intval($_GET['perm']):'';
-    $appid = C::t('app_market')->fetch_appid(CURMODULE);
+    $appid = C::t('app_market')->fetch_appid_by_mod('{dzzscript}?mod='.MOD_NAME, 2);
     $return = C::t('organization_user')->set_admin_by_giduid($guid,$gid,$perm);
     if($return['success']){
-        $appid = C::t('app_market')->fetch_appid(CURMODULE);
+        $appid = C::t('app_market')->fetch_appid_by_mod('{dzzscript}?mod='.MOD_NAME, 2);
         $permtitle = lang('explorer_gropuperm');
         if ($guid != getglobal('uid')) {
             $notevars = array(
@@ -82,7 +82,7 @@ if($operation == 'setmemberperm'){
     $guid = isset($_GET['uids']) ? $_GET['uids']:'';
     $deluids = C::t('organization_user')->delete_by_uid_orgid($guid,$gid,1);
     if($deluids){
-        $appid = C::t('app_market')->fetch_appid(CURMODULE);
+        $appid = C::t('app_market')->fetch_appid_by_mod('{dzzscript}?mod=explorer', 2);
         foreach($deluids as $v) {
             if ($v['uid'] != getglobal('uid')) {
                 $notevars = array(

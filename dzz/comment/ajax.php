@@ -11,26 +11,28 @@ if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 include libfile('function/code');
+
 $do = isset($_GET['do']) ? $_GET['do'] : '';
 $guests = array('getcomment', 'getThread', 'getNewThreads', 'getReply', 'getReplys', 'getUserToJson');
-if ($_G['news']['youkepinglun']) {
 if (empty($_G['uid']) && !in_array($do, $guests)) {
-	if ($_G['uid']) {
 	include  template('common/header_ajax');
-    echo '&nbsp;&nbsp;&nbsp;<a href="user.php?mod=login" class="btn btn-primary">'.lang('login').'</a>';
+	/*echo "<script type=\"text/javascript\">";
+	 echo "try{top._login.logging();}catch(e){}";
+	 echo "</script>";	*/
+	echo '&nbsp;&nbsp;&nbsp;<a href="user.php?mod=login" class="btn btn-primary">'.lang('login').'</a>';
 	if( $_G['setting']['regstatus']>0){
-		echo '&nbsp;&nbsp;&nbsp;<a href="user.php?mod=register" class="btn btn-outline-primary">'.lang('register').'</a>';
+		echo '&nbsp;&nbsp;&nbsp;<a href="user.php?mod=register" class="btn btn-success">'.lang('register').'</a>';
 	}
 	include  template('common/footer_ajax');
 	exit();
 }
-}
-}
+
 if (submitcheck('replysubmit')) {
+
 	$message = censor($_GET['message']);
 
 	if (empty($message)) {
-		showmessage('please_enter_comment', MOD_URL, array());
+		showmessage('please_enter_comment', DZZSCRIPT . '?mod=comment', array());
 	}
 	$os= get_os();
 	foreach ($_G['browser'] as $key => $value) {
@@ -41,7 +43,7 @@ if (submitcheck('replysubmit')) {
 	$message = preg_replace_callback("/@\[(.+?):(.+?)\]/i", "atreplacement", $message);
 	$setarr = array('author' => $_G['username'], 'authorid' => $_G['uid'], 'pcid' => intval($_GET['pcid']), 'rcid' => intval($_GET['rcid']), 'id' => getstr($_GET['id'], 60), 'idtype' => trim($_GET['idtype']), 'module' => trim($_GET['module']), 'ip' => $_G['clientip'],'xtllq' =>$os.' '.$outputer, 'dateline' => TIMESTAMP, 'message' => $message, );
 	if (!$setarr['cid'] = C::t('comment') -> insert_by_cid($setarr, $at_users, $_GET['attach'])) {
-		showmessage('internal_server_error', MOD_URL, array('message' => $message));
+		showmessage('internal_server_error', DZZSCRIPT . '?mod=comment', array('message' => $message));
 	}
 	$setarr['attachs'] = C::t('comment_attach') -> fetch_all_by_cid($setarr['cid']);
 	$setarr['dateline'] = dgmdate($setarr['dateline'], 'u');
@@ -52,7 +54,7 @@ if (submitcheck('replysubmit')) {
 	$setarr['avatar']=avatar_block($setarr['authorid']);
 	if ($_G['adminid'] == 1 || $_G['uid'] == $setarr['authorid'])
 		$setarr['haveperm'] = 1;
-	showmessage('do_success', MOD_URL, array('data' => rawurlencode(json_encode($setarr))));
+	showmessage('do_success', DZZSCRIPT . '?mod=comment', array('data' => rawurlencode(json_encode($setarr))));
 } elseif ($do == 'edit') {
 	$cid = intval($_GET['cid']);
 	if ($data = C::t('comment') -> fetch($cid)) {
@@ -84,7 +86,7 @@ if (submitcheck('replysubmit')) {
 			$value['allowsmiley'] = intval($_GET['allowsmiley']);
 			$value['avatar']=avatar_block($value['authorid']);
 		}
-		showmessage('do_success', MOD_URL, array('data' => rawurlencode(json_encode($value))));
+		showmessage('do_success', DZZSCRIPT . '?mod=comment', array('data' => rawurlencode(json_encode($value))));
 	}
 
 } elseif ($do == 'getcomment') {
@@ -95,7 +97,7 @@ if (submitcheck('replysubmit')) {
 	$perpage = 10;
 	$start = ($page - 1) * $perpage;
 	$limit = $start . "-" . $perpage;
-	$gets = array('mod' => MOD_NAME, 'op' => 'ajax', 'do' => 'getcomment', 'id' => $id, 'idtype' => $idtype, );
+	$gets = array('mod' => 'comment', 'op' => 'ajax', 'do' => 'getcomment', 'id' => $id, 'idtype' => $idtype, );
 	$theurl = BASESCRIPT . "?" . url_implode($gets);
 	$count = C::t('comment') -> fetch_all_by_idtype($id, $idtype, $limit, true);
 	$list = array();
@@ -196,5 +198,6 @@ function atreplacement($matches) {
 		}
 	}
 }
+
 include template('ajax');
 ?>

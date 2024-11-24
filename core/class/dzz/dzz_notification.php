@@ -11,6 +11,7 @@
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
+
 class dzz_notification {
 
 
@@ -28,10 +29,7 @@ class dzz_notification {
 
 		$title=lang($note.'_title',$notevars,'',$langfolder);
 		$oldnote = array();
-		
-		if(!$_G['setting']['Duplicatenotification']) {
-			$oldnote = C::t('notification')->fetch_by_fromid_uid_type($notevars['from_id'], $notevars['from_idtype'], $touid,$type);
-		}
+		$oldnote = C::t('notification')->fetch_by_fromid_uid_type($notevars['from_id'], $notevars['from_idtype'], $touid,$type);
 
 		if(empty($oldnote['from_num'])) $oldnote['from_num'] = 0;
 		$notevars['from_num'] = (isset($notevars['from_num'])&& $notevars['from_num']) ? $notevars['from_num'] : 1;
@@ -52,26 +50,6 @@ class dzz_notification {
 			'from_num' => ($oldnote['from_num']+$notevars['from_num']),
 			'category'=>$category
 		);
-		$redirect = (strpos($redirect, 'http://') === 0 || strpos($redirect, 'https://') === 0) 
-             ? $redirect 
-             : $_G['siteurl'] . $redirect;
-		$_G['setting']['mail'] = dunserialize($_G['setting']['mail']);
-		if($_G['setting']['mail']['tzxxyjtz']) {
-		//发送邮件
-        require_once libfile('function/mail');
-        $member = C::t('user')->fetch_by_uid($touid);
-        $member1=C::t('user')->fetch_by_uid($_G['uid']);
-        $youjiantz = <<<EOT
-        <p style="font-size:14px;color:#333; line-height:24px; margin:0;">尊敬的用户$member[username],您好！</p>
-        <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">$notestring</span></p>
-        <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 14px;">链接：</span></p>
-        <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;"><span style="color: rgb(51, 51, 51); font-size: 12px;"><a href="$redirect" title="$redirect" style="text-decoration-line: none; word-break: break-all; overflow-wrap: normal; color: rgb(51, 51, 51); font-size: 12px;" rel="noopener" target="_blank"><span style="color: rgb(0, 164, 255);">$redirect</span></a><span style="font-size: 12px; color: rgb(51, 51, 51);">,(如果上面不是链接形式，请将该地址手工粘贴到浏览器地址栏再访问)</span></p>															
-EOT;
-        ;
-        if(!sendmail("$member[username] <$member[email]>", $title, $youjiantz)) {
-          runlog('sendmail', "$member[email]  发送失败");
-        }
-		}
 		if($oldnote['id']) {
 			$setarr['id']=$oldnote['id'];
 			C::t('notification')->update($oldnote['id'], $setarr);

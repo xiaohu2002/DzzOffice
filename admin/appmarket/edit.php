@@ -36,11 +36,13 @@ if (submitcheck('appsubmit')) {
 					'appadminurl' => $appadminurl,
 					'identifier' => $identifier,
 					'app_path' => $app_path, 
+					'noticeurl' => trim($_GET['noticeurl']),
 					'haveflash' => intval($_GET['haveflash']),
 					'vendor' => trim($_GET['vendor']),
 					'hideInMarket' => intval($_GET['hideInMarket']),
 					'appdesc' => ($_GET['appdesc']),
 					'isshow' => intval($_GET['isshow']),
+					'havetask' => intval($_GET['havetask']),
 					'feature' => $_GET['feature'],
 					'fileext' => $_GET['fileext'],
 					'group' => intval($_GET['group']),
@@ -199,6 +201,7 @@ if (submitcheck('appsubmit')) {
 		$app = array();
 		$app['hideInMarket'] = 0;
 		$app['isshow'] = 1;
+		$app['havetask'] = 1;
 		$app['haveflash'] = 0;
 		$app['group'] = 1;
 	}

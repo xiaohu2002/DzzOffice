@@ -60,19 +60,56 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 	$field['unchangeable'] = !$ignoreunchangable && $field['unchangeable'] ? 1 : 0;
 	if($fieldid == 'birthday') {
 		if($field['unchangeable'] && !empty($space[$fieldid])) {
-			return '<p class="form-control-static profile-'.$fieldid.'">'.$space['birthyear'].'-'.$space['birthmonth'].'-'.$space['birthday'].'</p><input type="hidden" name="birthyear" value="'.$space['birthyear'].'" />			<input type="hidden" name="birthmonth" value="'.$space['birthmonth'].'" /><input type="hidden" name="birthday" value="'.$space['birthday'].'" />';
+			return '<p class="form-control-static profile profile-'.$fieldid.'">'.$space['birthyear'].'-'.$space['birthmonth'].'-'.$space['birthday'].'</p><input type="hidden" name="birthyear" value="'.$space['birthyear'].'" />			<input type="hidden" name="birthmonth" value="'.$space['birthmonth'].'" /><input type="hidden" name="birthday" value="'.$space['birthday'].'" />';
 		}
 		$birthyeayhtml = '';
-		$nowy = dgmdate($_G['timestamp'], 'Y-m-d');
-		$html = '<input type="text" class="form-control" data-provide="datepicker" value="'.$nowy.'" data-autoclose="true">';
+		$nowy = dgmdate($_G['timestamp'], 'Y');
+		for ($i=0; $i<100; $i++) {
+			$they = $nowy - $i;
+			$selectstr = ($they == $space['birthyear']) ?' selected':'';
+			$birthyeayhtml .= "<option value=\"$they\"$selectstr>$they</option>";
+		}
+		$birthmonthhtml = '';
+		for ($i=1; $i<13; $i++) {
+			$selectstr = (($i == $space['birthmonth'])?' selected':'');
+			$birthmonthhtml .= "<option value=\"$i\"$selectstr>$i</option>";
+		}
+		$birthdayhtml = '';
+		if(empty($space['birthmonth']) || in_array($space['birthmonth'], array(1, 3, 5, 7, 8, 10, 12))) {
+			$days = 31;
+		} elseif(in_array($space['birthmonth'], array(4, 6, 9, 11))) {
+			$days = 30;
+		} elseif($space['birthyear'] && (($space['birthyear'] % 400 == 0) || ($space['birthyear'] % 4 == 0 && $space['birthyear'] % 400 != 0))) {
+			$days = 29;
+		} else {
+			$days = 28;
+		}
+		for ($i=1; $i<=$days; $i++) {
+			$selectstr = ($i == $space['birthday'])?' selected':'';
+			$birthdayhtml .= "<option value=\"$i\"$selectstr>$i</option>";
+		}
+		$html = '<div class="input-group mb-3 profile-group-birthday">'
+					.'<select name="birthyear" id="birthyear"  onchange="showbirthday();" class="form-select input-sm pull-left profile profile-birthyear"  style="width:80px;margin-right:5px;">'
+					.'<option value="">'.lang('year').'</option>'
+					.$birthyeayhtml
+					.'</select>'
+					.'<select name="birthmonth" id="birthmonth"  onchange="showbirthday();"  class="form-select input-sm pull-left profile profile-birthmonth"    style="width:60px;margin-right:5px;">'
+					.'<option value="">'.lang('month').'</option>'
+					.$birthmonthhtml
+					.'</select>'
+					.'<select name="birthday" id="birthday" class="form-select input-sm pull-left profile profile-birthday"    style="width:60px">'
+					.'<option value="">'.lang('day').'</option>'
+					.$birthdayhtml
+					.'</select>'
+				.'</div>';
 				
 	} elseif($fieldid=='gender') {
 		$space[$fieldid] = isset($space[$fieldid]) ? $space[$fieldid]:'';
 		if($field['unchangeable']  && $space[$fieldid] > 0) {
-			return '<p class="form-control-static profile-'.$fieldid.'">'.lang('gender_'.intval($space[$fieldid])).'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
+			return '<p class="form-control-static profile profile-'.$fieldid.'">'.lang('gender_'.intval($space[$fieldid])).'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
 		}
 		$selected = array($space[$fieldid]=>' selected="selected"');
-		$html = '<select name="gender" id="gender" class="form-select" >';
+		$html = '<select name="gender" id="gender" class="form-select input-sm  profile profile-'.$fieldid.'" >';
 		if($field['unchangeable']) {
 			$html .= '<option value="">'.lang('gender').'</option>';
 		} else {
@@ -85,20 +122,20 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 	} elseif($fieldid=='department') {
 		$space[$fieldid] = !empty($space[$fieldid]) ? $space[$fieldid]:'';
 		if($field['unchangeable']  && $space[$fieldid] > 0) {
-			return '<p class="form-control-static profile-'.$fieldid.'">'.$space['department_tree'].'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
+			return '<p class="form-control-static profile profile-'.$fieldid.'">'.$space['department_tree'].'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
 		}
 			$html=' <script type="text/javascript">'
 				  .'	var selorg={};'
 				  .'	selorg.add=function(ctrlid,vals){'
 				  ."		if(vals[0].orgid=='other') vals[0].path=".lang('not_choose_agencies_departments1').";"
-				  ."		jQuery('#'+ctrlid+'_Menu').html(vals[0].path+'');"
+				  ."		jQuery('#'+ctrlid+'_Menu').html(vals[0].path+' <span class=\"caret\"></span>');"
 				  ."		jQuery('#sel_'+ctrlid).val(vals[0].orgid);"
 				  .'	}'
 				  .'  </script>'
 				  .'<div class="dropdown profile-group-department"  >'
 				  .'	  <input id="sel_'.$fieldid.'"  type="hidden" name="'.$fieldid.'"  value="'.(!empty($space[$fieldid]) ? $space[$fieldid]:'').'" />'
-				  .'	  <button type="button" id="'.$fieldid.'_Menu" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">'
-				  .'	'.($space['department_tree']?$space['department_tree']:lang('please_select_a_organization_or_department')).' '
+				  .'	  <button type="button" id="'.$fieldid.'_Menu" class="btn btn-default dropdown-toggle" data-toggle="dropdown">'
+				  .'	'.($space['department_tree']?$space['department_tree']:lang('please_select_a_organization_or_department')).' <span class="caret"></span>'
 				  .'  </button>'
 				  .'  <div id="'.$fieldid.'_dropdown_menu" class="dropdown-menu org-sel-box" role="menu" aria-labelledby="'.$fieldid.'_Menu">'
 				  .'	   <iframe name="'.$fieldid.'_iframe" class="org-sel-box-iframe" src="index.php?mod=system&op=orgtree&ctrlid='.$fieldid.'&nouser=1&range=1" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true" ></iframe>'
@@ -108,23 +145,23 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 		if($field['unchangeable'] && $space[$fieldid]!='') {
 			if($field['formtype']=='file') {
 				$imgurl = getglobal('setting/attachurl').$space[$fieldid];
-				return '<p class="form-control-static profile-'.$fieldid.'"><a href="'.$imgurl.'" target="_blank"><img src="'.$imgurl.'" /></a></span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
+				return '<p class="form-control-static profile profile-'.$fieldid.'"><a href="'.$imgurl.'" target="_blank"><img src="'.$imgurl.'" /></a></span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
 			} else {
-				return '<p class="form-control-static profile-'.$fieldid.'">'.nl2br($space[$fieldid]).'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
+				return '<p class="form-control-static profile profile-'.$fieldid.'">'.nl2br($space[$fieldid]).'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
 			}
 		}
 		if($field['formtype']=='textarea') {
-			$html = "<textarea name=\"$fieldid\"  id=\"$fieldid\" class=\"form-control profile-$fieldid\" rows=\"3\"   >$space[$fieldid]</textarea>";
+			$html = "<textarea name=\"$fieldid\"  id=\"$fieldid\" class=\"form-control input-sm profile profile-$fieldid\" rows=\"3\"   >$space[$fieldid]</textarea>";
 		} elseif($field['formtype']=='select') {
 			$field['choices'] = explode("\n", $field['choices']);
-			$html = "<select name=\"$fieldid\" id=\"$fieldid\" class=\"form-select\" >";
+			$html = "<select name=\"$fieldid\" id=\"$fieldid\" class=\"form-select input-sm profile profile-$fieldid\" >";
 			foreach($field['choices'] as $op) {
 				$html .= "<option value=\"$op\"".($op==$space[$fieldid] ? 'selected="selected"' : '').">$op</option>";
 			}
 			$html .= '</select>';
 		} elseif($field['formtype']=='list') {
 			$field['choices'] = explode("\n", $field['choices']);
-			$html = "<select name=\"{$fieldid}[]\" id=\"$fieldid\"  class=\"form-select\"  multiple=\"multiplue\" >";
+			$html = "<select name=\"{$fieldid}[]\" id=\"$fieldid\"  class=\"form-select input-sm profile profile-$fieldid\"  multiple=\"multiplue\" >";
 			$space[$fieldid] = explode("\n", $space[$fieldid]);
 			foreach($field['choices'] as $op) {
 				$html .= "<option value=\"$op\"".(in_array($op, $space[$fieldid]) ? 'selected="selected"' : '').">$op</option>";
@@ -133,7 +170,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 		} elseif($field['formtype']=='checkbox') {
 			$field['choices'] = explode("\n", $field['choices']);
 			$space[$fieldid] = explode("\n", $space[$fieldid]);
-			$html.='<div class="class="profile-'.$fieldid.'" >';
+			$html.='<div class="class="profile profile-'.$fieldid.'" >';
 			foreach($field['choices'] as $op) {
 				$html .= ''
 					."<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"{$fieldid}[]\" id=\"$fieldid\"  value=\"$op\" ".(in_array($op, $space[$fieldid]) ? ' checked="checked"' : '')." />"
@@ -142,7 +179,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 			$html.='</div>';
 		} elseif($field['formtype']=='radio') {
 			$field['choices'] = explode("\n", $field['choices']);
-			$html.='<div class="profile-'.$fieldid.'" >';
+			$html.='<div class="profile profile-'.$fieldid.'" >';
 			foreach($field['choices'] as $op) {
 				$html .= ''
 						."<label class=\"radio-inline\"><input type=\"radio\" name=\"{$fieldid}\"  value=\"$op\" ".($op == $space[$fieldid] ? ' checked="checked"' : '')." />"
@@ -150,14 +187,14 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 			}
 			$html.='</div>';
 		} elseif($field['formtype']=='file') {
-			$html = "<input type=\"file\" value=\"\" name=\"$fieldid\" id=\"$fieldid\" class=\"form-control profile-$fieldid\" /><input type=\"hidden\" name=\"$fieldid\" value=\"$space[$fieldid]\"  />";
+			$html = "<input type=\"file\" value=\"\" name=\"$fieldid\" id=\"$fieldid\" class=\"form-control input-sm profile profile-$fieldid\" /><input type=\"hidden\" name=\"$fieldid\" value=\"$space[$fieldid]\"  />";
 			if(!empty($space[$fieldid])) {
 				$url = getglobal('setting/attachurl').$space[$fieldid];
 				$html .= "&nbsp;<label class=\"checkbox-inline\"><input type=\"checkbox\" name=\"deletefile[$fieldid]\" id=\"$fieldid\" value=\"yes\" />".lang('delete')."</label><br /><a href=\"$url\" target=\"_blank\"><img src=\"$url\" width=\"200\" class=\"mtm\" /></a>";
 			}
 		
 		} else {
-			$html = "<input type=\"text\" name=\"$fieldid\" id=\"$fieldid\"  value=\"$space[$fieldid]\"  placeholder=\"$field[title]\" class=\"form-control profile-$fieldid\" />";
+			$html = "<input type=\"text\" name=\"$fieldid\" id=\"$fieldid\"  value=\"$space[$fieldid]\"  class=\"form-control input-sm profile profile-$fieldid\" />";
 		}
 	}
 	$showerror = !$ignoreshowerror ? "id=\"showerror_$fieldid\"" : '';
@@ -315,7 +352,7 @@ function showdistrict($values, $elems=array(), $container='districtbox', $showle
 		$level = $i+1;
 		if(!empty($options[$level])) {
 			$jscall = "showdistrict('$container', ['$elems[0]', '$elems[1]', '$elems[2]', '$elems[3]'], $showlevel, $level, '$containertype')";
-			$html .= '<select name="'.$elems[$i].'" id="'.$elems[$i].'" style="width:100px;" onchange="'.$jscall.'" >';
+			$html .= '<select name="'.$elems[$i].'" id="'.$elems[$i].'" class="form-select" style="width:100px;" onchange="'.$jscall.'" >';
 			$html .= '<option value="">'.lang('district_level_'.$level).'</option>';
 			foreach($options[$level] as $option) {
 				$selected = $option[0] == $values[$i] ? ' selected="selected"' : '';
@@ -327,6 +364,7 @@ function showdistrict($values, $elems=array(), $container='districtbox', $showle
 	}
 	return $html;
 }
+
 function countprofileprogress($uid = 0) {
 	global $_G;
 

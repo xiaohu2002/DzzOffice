@@ -1,0 +1,101 @@
+<style type="text/css">
+    .org-sel-box.dropdown-menu {
+        padding: 0px;
+    }
+</style>
+<div class="middlebottomMenu scroll-y padding-left-1">
+    <form class="form-horizontal middletopMenu form_app_manage" action="{MOD_URL}&op=personset"
+          onsubmit="return submitsetting(this);">
+        <input type="hidden" name="userset" value="true"/>
+        <input type="hidden" name="formhash" value="{FORMHASH}"/>
+        <input type="hidden" name="referer" value="$referer"/>
+        <input type="hidden" name="handlekey" value="$_GET[handlekey]"/>
+        <div class="function-con">
+            <div class="form-groups clearfix">
+                <label class="col-sm-3 col-xs-3 control-label app-label col-lg-3 col-md-3">{lang select_user_default_folder}</label>
+                <input type="hidden" name="userexplorerhash" readonly="readonly" id="hash" value="{$userhash}"/>
+                <div class="selectdir col-sm-9 col-xs-9 col-lg-9 col-md-9" >
+                <div class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle btn btn-default-outline" id="orgids_Menu"
+                       data-toggle="dropdown">{if $foldername} $foldername{else}{lang select_folder}{/if}<span
+                            class="caret"></span></a>
+                    <div id="orgids_dropdown_menu" class="dropdown-menu org-sel-box" role="menu"
+                         aria-labelledby="orgids_Menu">
+                        <iframe name="orgids_iframe" class="org-sel-box-iframe"
+                                src="{DZZSCRIPT}?mod=system&op=positionlist&savefile=0&callback=seldir&defaultsel=$fid"
+                                frameborder="0" marginheight="0" marginwidth="0" width="100%"
+                                height="100%" allowtransparency="true"></iframe>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            </div>
+<div class="function-button">
+    <div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-xs-offset-3 col-sm-9 col-md-9 col-lg-9 col-xs-9">
+        <input type="submit" value="{lang affirm}" class="btn btn-primary"/>
+        <input type="button" value="{lang recover_default}" onclick="recover_default();return false;" class="btn btn-primary"/>
+    </div>
+</div>
+</form>
+
+</div>
+
+<script type="text/javascript" reload="1">
+    var recylenum = true;
+    //开关样式
+    $.getScript('{MOD_PATH}/js/switchery.min.js', function () {
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        elems.forEach(function (html) {
+            var switchery = new Switchery(html);
+        });
+    });
+    function hide_window(){
+        $('#orgids_dropdown_menu').trigger('click');
+    }
+    function seldir(fid,data){
+        var hash = '';
+        if(fid){
+            if(fid && data.gid > 0){
+                hash = 'group&do=file&gid='+data.gid+'&fid='+fid;
+            }else{
+                hash = 'home&do=file&fid='+fid;
+            }
+            $('#defaultfolder').val(data.fname);
+            $('#hash').val(hash);
+            $('#orgids_Menu').text(data.fname);
+        }else{
+            showDialog('{lang error_selecting_directory}');
+        }
+    }
+    function submitsetting(form) {
+        if(!$('#hash').val()) {
+            showDialog('{lang please_select_the_catalogue_first}');
+        }else{
+            $.post(form.action, jQuery(form).serialize(), function (data) {
+                if (data['success']) {
+                    showDialog(data['msg'] + '{lang page_automatically_updated_after_three_seconds}', 'right');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000)
+                } else {
+                    showDialog(data['msg']);
+                }
+            }, 'json')
+        }
+        return false;
+    }
+    function recover_default(){
+        $.post(MOD_URL+'&op=personset', {'recoverdefault':true}, function (data) {
+            if (data['success']) {
+                showDialog(data['msg'] + '{lang page_automatically_updated_after_three_seconds}', 'right');
+                setTimeout(function () {
+                    location.reload();
+                }, 3000)
+            } else {
+                showDialog(data['msg']);
+            }
+        }, 'json')
+    }
+
+</script>

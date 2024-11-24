@@ -1,12 +1,12 @@
 <!--头部开始-->
 <div class="modal-header">
-  <h4 class="modal-title"><!--{if $type == 1}-->另存为<!--{elseif $type == 2}-->选择位置<!--{else}-->选择文件<!--{/if}--></h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="hide_window()"></button>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="hide_window()"> <span aria-hidden="true">×</span> </button>
+    <h4 class="modal-title"><!--{if $type == 1}-->另存为<!--{elseif $type == 2}-->选择位置<!--{else}-->选择文件<!--{/if}--></h4>
 </div>
 <!--头部结束-->
 <!--内容区开始-->
-<div class="modal-body">
-    <div class="select-filetop clearfix">
+<div class="select-fileall clearfix">
+    <div class="select-filetop clearfix bs-top-container">
         <!--地址栏开始-->
         <div class="select-address">
             <div class="address-all">
@@ -30,7 +30,7 @@
         <!--地址栏右侧开始-->
         <div class="select-filetopbottom clearfix">           
             <div class="select-filetopright pull-right">
-            	<div class="input-group" style="width: auto;">
+            	<div class="input-group">
 	                <input type="text" placeholder="搜索" class="form-control select-display" id="searchval" style="display: none;"/>
 	                <span class="dzz dzz-none"></span>
 	                <span class="dzz dzz-search select-search-block"></span>
@@ -41,7 +41,7 @@
             <input id="$ctrlid" type="hidden" name="fid" value=""/>
             <!--{if $allowcreate}-->
             <div class="dropdown newMenu pull-left">
-                <button type="text" class="select-button-dropdown" id="exampleColorDropdown2" data-bs-toggle="dropdown"><span class="dzz dzz-folder select-button-folder"></span></button>
+                <button type="text" class="dropdown-toggle select-button-dropdown" id="exampleColorDropdown2" data-toggle="dropdown"><span class="dzz dzz-folder select-button-folder"></span></button>
                 <ul class="dropdown-menu dropdown-menu-primary" aria-labelledby="exampleGroupDrop1" role="menu" id="createmenu">
                     <li role="presentation" class="js-newfolder folderPermMust">
                         <a href="javascript:void(0)" onclick="_selectfile.NewIco('newFolder')" role="menuitem">
@@ -91,7 +91,7 @@
             	
                 <!--{if !$type}-->
                 <!--<div class="select-display dropdown">
-                    <button type="text" class="form-control" value="" data-bs-toggle="dropdown" id="select-button">
+                    <button type="text" class="form-control" value="" data-toggle="dropdown" id="select-button">
                         <span class="select-alltype">{lang all_type}</span>
                         <span class="dzz dzz-arrow-dropdown dzz-select-button"></span>
                     </button>
@@ -147,16 +147,18 @@
 
     <div class="select-filebottom clearfix " data-selectHeight="45">
     	    <!--{if $type == 1}-->
-        <div class="row mb-3 clearfix">
-            <label>文件名:</label>
+        <div class="input-black input-fixation clearfix">
+            <label class="control-label input-label">文件名:</label>
+            <div class="input-animate">
                 <input type="text" class="form-control" placeholder="文件名" value="$savefile[name]" name="savenewname" id="savenewname"/>
+            </div>
         </div>
          <!--{/if}-->
-         <!--{if $exttype}-->
-        <div class="row mb-3 clearfix">
-            <label>类型:</label>
+        <div class="input-black input-fixation clearfix">
+            <label class="control-label input-label ">类型:</label>
+            <div class="input-animate ">
 	            <div class="dropup typestyle">
-	            	<button type="text" class="form-control" value="" data-bs-toggle="dropdown" id="type">
+	            	<button type="text" class="form-control" value="" data-toggle="dropdown" id="type">
 	            		<span class="select-style">文档格式</span>
 	            		<span class="dzz dzz-arrow-dropdown dzz-select-button"></span>
 	            	</button>
@@ -171,18 +173,21 @@
 	            		<li><a href="javascript:;">TIFF(*.TIF;*.TIFF)</a></li>
 	            	</ul>
 	            </div>
+	        	
+            </div>
         </div>
-        <!--{/if}-->
     </div>
+   
 </div>
+
 <script type="text/javascript" reload="1">
-//拖拽初始化
+    //拖拽初始化
     jQuery('.left-drager').leftDrager_layout(function () {
     });
     var opened = {};
     //input框初始化
     $(document).ready(function (e) {
-$('.input-black').each(function () {
+        $('.input-black').each(function () {
             InputAnimate.init($(this));
         });
 

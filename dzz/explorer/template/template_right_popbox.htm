@@ -1,12 +1,12 @@
 <ul class="right_popbox_header member_details_infos">
 	<li class="rightdropdown_top">
 		<!--{if $userinfos['avatarstatus']}-->
-			<img src="avatar.php?uid={$userinfos['uid']}" class="avatar" style="width: 25px;height: 25px;">
+			<img src="avatar.php?uid={$userinfos['uid']}" class="img-circle avatar" style="width: 25px;height: 25px;">
 		<!--{else}-->
 			<span class="rightdropdown-first" style="background:{$userinfos['headerColor']}">{eval echo new_strsubstr(ucfirst($userinfos['username']),1,'');}</span>
 		<!--{/if}-->
 		<div class="rightdropdown_title">
-			<span class="rightdropdown_name">$userinfos[username]</span>
+			<span class="rightdropdown_name">$userinfos['username']</span>
 			<p class="numer_admin">
 			<span class="dzz dzz-manager dzz-admin"></span>
 			<span class="rightdropdown_admin permgrouptextspan">
@@ -32,7 +32,7 @@
 			<!--{if $group['type'] == 1}-->
 			<li class="popbox_li permedit" data-perm="2">
 				<a href="javascript:;">
-				<span class="dzz dzz-done dzz-fit"></span>
+				<span class="mdi mdi-check-circle dzz-fit"></span>
 				<span class="popbox-text">{lang explorer_groupperm_creater}</span>
 				</a>
 			</li >
@@ -40,10 +40,10 @@
 			<li class="popbox_li permedit"  data-perm="1">
 				<a href="javascript:;">
 				<!--{if $userinfos['perm'] == 1}-->
-					<span class="dzz dzz-done dzz-fit dzz-color"></span>
+					<span class="mdi mdi-check-circle dzz-fit dzz-color"></span>
 					<span class="popbox-text" style="color:#4c89fb;">{lang explorer_groupperm_manager}</span>
 				<!--{else}-->
-					<span class="dzz dzz-done dzz-fit"></span>
+					<span class="mdi mdi-check-circle dzz-fit"></span>
 					<span class="popbox-text" >{lang explorer_groupperm_manager}</span>
 				<!--{/if}-->
 				</a>
@@ -51,10 +51,10 @@
 			<li class="popbox_li permedit"  data-perm="0">
 				<a href="javascript:;">
 					<!--{if $userinfos['perm'] == 0}-->
-					<span class="dzz dzz-done dzz-fit dzz-color"></span>
+					<span class="mdi mdi-check-circle dzz-fit dzz-color"></span>
 					<span class="popbox-text" style="color:#4c89fb;">{lang explorer_groupperm_cooperative}</span>
 					<!--{else}-->
-					<span class="dzz dzz-done dzz-fit"></span>
+					<span class="mdi mdi-check-circle dzz-fit"></span>
 					<span class="popbox-text" >{lang explorer_groupperm_cooperative}</span>
 					<!--{/if}-->
 				</a>
@@ -71,7 +71,7 @@
     			
 <script>
 	var gid = '{$gid}';
-	var orgtype = '{$group[type]}';
+	var orgtype = '{$group['type']}';
     jQuery(document).off('click.editgroupperm').on('click.editgroupperm','.popbox-header-twomenu .permedit',function(){
        var currentUid = '{$userinfos['uid']}';
        var obj = jQuery(this);

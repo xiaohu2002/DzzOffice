@@ -28,7 +28,7 @@ if(submitcheck('addroutersubmit')){
 		C::t('local_router')->insert($router);
 	}
 	
-	showmessage('do_success',MOD_URL.'&op=router');
+	showmessage('do_success',BASESCRIPT.'?mod=cloud&op=router');
 }else{
 	$routerid=intval($_GET['routerid']);
 	$router=C::t('local_router')->fetch_by_routerid($routerid);
