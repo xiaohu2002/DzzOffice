@@ -19,6 +19,7 @@
 		var $this=$(this);
 		var $leftContainer=$('.bs-left-container');
 		var $mainContainer=$('.bs-main-container');
+		var $middleconMenu=$('.middleconMenu');
 		var $topContainer=$('.bs-top-container');
 		var oleft=((options.cookieid && getcookie(options.cookieid+'_width'))?parseInt(getcookie(options.cookieid+'_width')):$leftContainer.outerWidth(true))|| 0;
 		var left=oleft;
@@ -47,6 +48,7 @@
 			} 
 			$leftContainer.css('width',left);
 			$mainContainer.css('paddingLeft',left);
+			$middleconMenu.css('left',left+5);
 			$topContainer.css('paddingLeft',left);
 			var currentRightWidth = mainWidth - xx;
 			$mainContainer.trigger('leftDrager_layout.changeWidthValue',[currentRightWidth]);
@@ -58,13 +60,15 @@
 		var dragerClick=function(flag,nocookie){
 			if(flag==='hide'){
 				$mainContainer.css('paddingLeft',0);
+				$middleconMenu.css('left',left+5);
 				$topContainer.css('paddingLeft',0);
 				$this.css({'left':0,'cursor':'default'});
 				if(options.cookieid && !nocookie) setcookie(options.cookieid+'_isshow','hide',options.cookietime);
 				jQuery('.left-drager-op').addClass('left-drager-op2');
 			}else if(flag==='show'){
 				$leftContainer.css({width:left,'display':'block'});
-				$mainContainer.css('paddingLeft',document.documentElement.clientWidth<opt.leftHide?0:left);
+				$mainContainer.css('Left',document.documentElement.clientWidth<opt.leftHide?0:left);
+				$middleconMenu.css('left',left+5);
 				$topContainer.css('paddingLeft',document.documentElement.clientWidth<opt.leftHide?0:left);
 				$this.css({'left':left,'cursor':'w-resize'});
 				if(options.cookieid && !nocookie) setcookie(options.cookieid+'_isshow','show',options.cookietime);

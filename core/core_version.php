@@ -12,6 +12,6 @@ if(!defined('IN_DZZ')) {
 
 if(!defined('CORE_VERSION')) {
 	define('CORE_VERSION', '2.4.0');
-	define('CORE_RELEASE', '20241124');
+	define('CORE_RELEASE', '20241115');
 	define('CORE_FIXBUG' , '21000000');
 }

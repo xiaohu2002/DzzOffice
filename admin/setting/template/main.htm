@@ -466,20 +466,6 @@
               </div>
             </div>
             <div class="row mb-3">
-              <label class="col-sm-2" for="kbcolor">登录框背景</label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="kbcolor" name="settingnew[loginset][kbcolor]" value="$setting[loginset][kbcolor]">
-                  <span class="form-text">可以为颜色(如:#FFF);图片(以.jpeg,.jpg,.png结尾)。</span>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label class="col-sm-2" for="transparency">输入框背景颜色</label>
-              <div class="col-sm-10">
-                  <input type="text" id="transparency" class="form-control" name="settingnew[loginset][transparency]" value="$setting[loginset][transparency]">
-                <span class="form-text">只能输入颜色(如:rgba(8, 169, 249, 0.57))</span>
-              </div>
-            </div>
-            <div class="row mb-3">
               <label class="col-sm-2">{lang Login template}</label>
               <div class="col-sm-10">
                 <div class="input-group mb-3">
@@ -500,12 +486,6 @@
                         <span class="mdi mdi-check-bold"></span>
                     </div>
                     <img style="width: 100%;" src="admin/setting/images/template3.jpg" alt=""/>
-                  </a>
-                  <a class="loginset-template" href="admin/setting/images/template4.png" target="_blank">
-                    <div class="loginset-template-icon<!--{if $setting[loginset][template] == 4}--> loginset-template-icon1<!--{/if}-->" data-template="4">
-                        <span class="mdi mdi-check-bold"></span>
-                    </div>
-                    <img style="width: 100%;" src="admin/setting/images/template4.png" alt=""/>
                   </a>
                   <input type="hidden" class="form-control loginset-template-input" name="settingnew[loginset][template]" value="$setting[loginset][template]"/>
                 </div>

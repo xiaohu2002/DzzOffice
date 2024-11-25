@@ -49,7 +49,7 @@ if($action == 'update') {
 				}
 				exit;
 			} else {
-				$message = lang('seccode_image'.$ani.'_tips').'<img onclick="updateseccode(\''.$idhash.'\')" width="'.$_G['setting']['seccodedata']['width'].'" height="'.$_G['setting']['seccodedata']['height'].'" src="misc.php?mod=seccode&update='.$rand.'&idhash='.$idhash.'" class="img-seccode" title="'.lang('refresh_verification_code').'" alt="" />';
+				$message = '<img onclick="updateseccode(\''.$idhash.'\')" width="'.$_G['setting']['seccodedata']['width'].'" height="'.$_G['setting']['seccodedata']['height'].'" src="misc.php?mod=seccode&update='.$rand.'&idhash='.$idhash.'" class="img-seccode" title="'.lang('refresh_verification_code').'" alt="" />';
 			}
 		}
 	}

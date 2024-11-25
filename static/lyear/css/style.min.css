@@ -5073,6 +5073,14 @@ body[data-theme='translucent-pink'],
     border-color: rgba(33, 37, 41, .01);
     color: #D5D9DA;
 }
+
+[data-theme='dark'] .alert-info,
+[data-theme='dark'] .alert-warning,
+[data-theme='dark'] .alert-danger,
+[data-theme='dark'] .alert-success,
+[data-theme='dark'] .alert-dark  {
+    color: #DFF4FB;
+}
 [data-theme='dark'] .select2-container--default .select2-selection--single,
 [data-theme|='translucent'] .select2-container--default .select2-selection--single,
 [data-theme='dark'] .select2-container--default .select2-selection--multiple,

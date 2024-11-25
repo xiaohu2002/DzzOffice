@@ -272,26 +272,6 @@ if (!submitcheck('settingsubmit')) {
 			} else {
 				$settingnew['loginset']['bcolor'] = '';
 			}
-			if ($back = trim($settingnew['loginset']['kbcolor'])) {
-		if (strpos($back, '#') === 0 || strpos($back, 'rgb') === 0) {
-			$settingnew['loginset']['kbcolor'] = $back;
-				}else {
-					$arr = explode('.', $back);
-					$ext = array_pop($arr);
-					if ($ext && in_array(strtolower($ext), array('jpg', 'jpeg', 'gif', 'png'))) {
-						$settingnew['loginset']['kbcolor'] = $back;
-					}else {
-			$settingnew['loginset']['kbcolor'] ='';
-			}
-				}
-			}
-		if ($back = trim($settingnew['loginset']['transparency'])) {
-			if (strpos($back, '#') === 0 || strpos($back, 'rgb') === 0) {
-				$settingnew['loginset']['transparency'] = $back;
-					}else {
-				$settingnew['loginset']['transparency'] ='';
-			}
-		}
 	}
 	$updatecache = FALSE;
 	$settings = array();
