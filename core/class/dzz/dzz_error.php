@@ -173,7 +173,13 @@ class dzz_error
 	public static function show_error($type, $errormsg, $phpmsg = '', $typemsg = '') {
 		global $_G;
 		ob_end_clean();
-		$gzip = getglobal('gzipcompress');
+		try {
+			$gzip = getglobal('gzipcompress');
+			
+		} catch (Exception $e) {
+			$gzip = '';
+			$gziperror =$e;
+		}
 		ob_start($gzip ? 'ob_gzhandler' : null);
 		$host = $_SERVER['HTTP_HOST'];
 		$title = $type == 'db' ? 'Database' : 'System';
@@ -271,7 +277,7 @@ if(!empty($errormsg)) {
 		echo '<div class="help">'.lang('suggestion_user').'</div>';
 		echo '<div class="help">'.lang('suggestion').'</div>';
 		$helplink = '';
-		
+		echo $gziperror;
 
 		$endmsg = lang('error_end_message', array('host'=>$host));
 		echo <<<EOT
