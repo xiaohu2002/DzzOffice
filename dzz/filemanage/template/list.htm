@@ -1,8 +1,13 @@
 <!--{template lyear/header_simple_start}-->
-<link href="{MOD_PATH}/images/folder.css?{VERHASH}" rel="stylesheet" media="all">
-<link href="static/dzzthumb/jquery.dzzthumb.css?{VERHASH}" rel="stylesheet" media="all">
-<link href="dzz/styles/icoblock/default/style.css?{VERHASH}" rel="stylesheet" media="all">
-<script type="text/javascript" src="static/dzzthumb/jquery.dzzthumb.js?{VERHASH}"></script>
+<link rel="stylesheet" href="static/lyear/js/bootstrap-table/bootstrap-table.min.css">
+<style>
+	.iconFirstWord {
+		width: 18px;
+		height: 18px;
+		line-height: 16px;
+		font-size: 12px;
+	}
+</style>
 <!--{template lyear/header_simple_end}-->
 <script type="text/javascript">
 	var selorg={};
@@ -10,311 +15,410 @@
 		if(vals[0].orgid=='other') vals[0].path='{lang please_select_a_organization_or_department}';
 		jQuery('#'+ctrlid+'_Menu').html(vals[0].path+' ');
 		jQuery('#sel_'+ctrlid).val(vals[0].orgid);
-		//jQuery('#orgid_{$org[orgid]}_Menu').dropdown('toggle');
 	}
 </script>
 <main class="bs-main-container">
 	<div class="container-fluid">
 		<div class="card">
-			<!--{if !$list}-->
-			<div class="card-body">
-				<div style="text-align: center;">
-					<img src="static/image/common/no_list.png" /><br>
-					<span class="no-result-title">{lang no_relevant_content}</span>
-				</div>
+			<div class="card-header">
+				<div class="btn-group" id="breadcrumb">
+                  </div>
 			</div>
-			<!--{else}-->
-			<div class="card-header clearfix">
-				<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-					<ol class="breadcrumb">
-					<li class="breadcrumb-item" data-href="{MOD_URL}"><a href="{MOD_URL}">{lang all_typename_attach}</a></li>
-					<!--{if !empty($foldername)}-->
-					{eval $i=0;}
-				{loop $foldername $v}
-				{eval $i++;}
-				<!--{if $i==count($foldername)}-->
-					<li class="breadcrumb-item active" data-fid="$v[fid]" aria-current="page">$v[fname]</li>
-					<!--{else}-->
-					<li class="breadcrumb-item" data-fid="$v[fid]"><a href="{MOD_URL}&pfid=$v[fid]">$v[fname]</a></li>
-					<!--{/if}-->
-					{/loop} 
-					<!--{/if}--> 
-					</ol>
-				</nav>
-				<form name="search" class="form-horizontal" action="{MOD_URL}" method="get">
-					<input type="hidden" name="mod" value="filemanage" />
-					<ul class="nav nav-pills">
-					<li>
-						<select class="form-select" name="pfid">
-						<option value="" selected="selected">{lang file_position}</option>
-						<option value="-1" &lt;!&ndash;{if $pfid==-1}&ndash;&gt;selected="selected"&lt;!&ndash;{/if}&ndash;&gt;>{lang in_recycle}
-						</option>
-						</select>
-					</li>
-					<!--{if !isset($pfid) || $pfid <= 0}-->
-					<li class="dropdown org">
-						<input id="sel_orgid_{$org[orgid]}" type="hidden" name="orgid"  value="$org[orgid]" onchange="selDepart(this)" />
-						<button type="button" id="orgid_{$org[orgid]}_Menu" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"> $org[depart]  </button>
-						<div id="orgid_$orgid_dropdown_menu" class="dropdown-menu org-sel-box" role="menu" aria-labelledby="orgid_{$org[orgid]}_Menu">
-						<iframe name="orgid_{$org[orgid]}_iframe" class="org-sel-box-iframe" src="index.php?mod=system&op=orgtree&ctrlid=orgid_{$org[orgid]}&nouser=1&range=0&stype=1&zero={eval echo urlencode('{lang unselect_a_organization_or_department}');}" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true" ></iframe>
+			<div class="card-body">
+				<div class="card-search mb-2-5">
+					  <div class="row">
+						<div class="col-md-4">
+						  <div class="row">
+							<label class="col-sm-4 col-form-label">名称</label>
+							<div class="col-sm-8">
+							  <input type="text" class="form-control pull-left" name="keyword" id="keyword" placeholder="{lang filemanage_file_user}">
+							</div>
+						  </div>
 						</div>
-					</li>
-					<!--{/if}-->
-					<li class="float-start">
-						<input type="hidden" name="pfid" id="pfid" value="$pfid"/>
-						<button  class="btn btn-primary " type="submit">{lang search}</button>
-					</li>
-					<li class="float-start btn-secetlt" style="display: none;">
-						<button  class="btn btn-danger " type="submit" value="{lang delete}" onclick="delete_file();">{lang delete}</button>
-					</li>
-					<li class="float-start btn-secetlt" style="display: none;">
-						<button  class="btn btn-primary col sharepame-selected" disabled>({lang checkednum})</button>
-					</li>
-					</ul>
-				</form>
+						<div class="col-md-4">
+						  <div class="row">
+							<div class="dropdown org">
+								<input id="sel_orgid_{$org[orgid]}" type="hidden" name="orgid"  value="$org[orgid]" onchange="selDepart(this)" />
+								<button type="button" id="orgid_{$org[orgid]}_Menu" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"> $org[depart]  </button>
+								<div id="orgid_$orgid_dropdown_menu" class="dropdown-menu org-sel-box" role="menu" aria-labelledby="orgid_{$org[orgid]}_Menu">
+								<iframe name="orgid_{$org[orgid]}_iframe" class="org-sel-box-iframe" src="index.php?mod=system&op=orgtree&ctrlid=orgid_{$org[orgid]}&nouser=1&range=0&stype=1&zero={eval echo urlencode('{lang unselect_a_organization_or_department}');}" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true" ></iframe>
+								</div>
+							</div>
+						  </div>
+						</div>
+						<div class="col-md-4">
+						  <button type="submit" class="btn btn-primary me-1" id="search-btn">搜索</button>
+						  <button type="reset" class="btn btn-default" id="refreshsearch">重置</button>
+						</div>
+					  </div>
+				  </div>
+                <div id="toolbar" class="toolbar-btn-action">
+                  <button id="btn_delete" type="button" class="btn btn-danger">
+                    <span class="mdi mdi-delete" aria-hidden="true"></span>删除
+                  </button>
+                </div>
+                <table id="table"></table>
 			</div>
-			<div class="card-body">
-				<form id="appform" name="appform" class="form-horizontal " action="{MOD_URL}" method="post" >
-					<input type="hidden" name="delsubmit" value="true" />
-					<input type="hidden" name="formhash" value="{FORMHASH}" />
-					<input type="hidden" name="lpp" value="$lpp">
-					<input type="hidden" name="refer" value="$refer" />
-					<input type="hidden" name="keyword" value="$keyword" /> 
-					<div class="table-responsive">
-						<table class="table table-hover">
-						<thead node-type="title" class="title">
-							<tr class="item clearfix">
-							<th>
-								<div class="col-sm-10">
-								<div class="form-check">
-									<input class="form-check-input" name="del[]" type="checkbox" id="chkall"><label></label>
-								</div>
-								</div>
-							</th>
-							<th node-type="title-col" data-key="name" class="lie col">{lang filename}<span node-type="order-status" class="asc $_GET[name]" style="visibility: <!--{if $_GET[name]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></span></th>
-							<th node-type="title-col" data-key="size" class="lie col">{lang file_size}<span node-type="order-status" class="asc $_GET[size]" style="visibility:<!--{if $_GET[size]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-							<th node-type="title-col" data-key="ftype" class="lie col">{lang file_type}<span node-type="order-status" class="asc $_GET[ftype]" style="visibility: <!--{if $_GET[ftype]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-							<th class="lie">{lang file_location}</th>
-							<!--{if $_G[adminid]}-->
-							<th node-type="title-col" data-key="username" class="lie col">{lang possessor}<span node-type="order-status" class="asc $_GET[username]" style="visibility: <!--{if $_GET[username]}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-							<!--{/if}-->
-							<th node-type="title-col" data-key="dateline" class="lie col">{lang add_time} <span node-type="order-status" class="asc $_GET['dateline']" style="visibility: <!--{if $_GET['dateline']}-->visible<!--{else}-->hidden<!--{/if}-->;"></span></th>
-							<th class="lie">操作</th>
-							</tr>
-						</thead>
-						<tbody node-type="list" class="list list-share">
-							<!--{loop $list $key $value}-->
-							<tr node-type="item" data-dpath="$value[dpath]" data-rid="$value[rid]" <!--{if $value[type] == 'folder' && $value[oid]}--> data-containpath="$value[oid]"<!--{/if}--> data-type="$value[type]" class="item shareblock clearfix">
-							<td data-name="$value[name]" class="col">
-								<div class="col-sm-10">
-								<div class="form-check">
-									<input type="checkbox" class="form-check-input"  name="del[]" value="$value[rid]" data-rid="$value[rid]">
-								</div>
-								</div>
-							</td>
-							<td node-type="name" class="name" title="$value[name]" data-size="$value[name]">
-								<!--{if $value[img]}--><img class="icon" title="$value[name]" src="$value[img]" <!--{if $value[type]=='image' }--> data-original="$value[url]" data-dpath="$value[dpath]" 
-								<!--{/if}-->/> 
-								<!--{/if}--> 
-								<span node-type="name-text" data-href="$value[shareurl]" class="name-text enabled">$value[name]</span>
-							</td>
-							<td><!--{if $value[type] !=='folder'}--><div>$value[fsize]</div><!--{/if}--></td>
-							<td><div>$value[ftype]</div></td>
-							<td><div>$value[relpath]</div></td>
-							<!--{if $_G[adminid]}-->
-							<td><div>$value[username]</div></td>
-							<!--{/if}-->
-							<td><div>$value[fdateline]</div></td>
-							<td>
-								<div>
-								<a node-type="btn-item" data-key="download" class="btn btn-outline-info" title="下载" href="javascript:void(0);"><i class="mdi mdi-download "></i></a>
-								<a class="btn btn-outline-info" href="{MOD_URL}&do=delete&icoid=$value[rid]&refer={eval echo urlencode($refer);}" data-bs-toggle="tooltip" title="{lang delete}" onclick="if(confirm('{lang filemanage_del_file}')){return true}else{return false}"><i class="mdi mdi-delete"></i></a>
-								<!--{if $_G[adminid]}-->
-								<a class="btn btn-outline-info" href="javascript:;" onclick="togglecplog('{$key}')" data-bs-toggle="tooltip" title="更多信息"><i class="mdi mdi-order-bool-descending"></i></a><!--{/if}-->
-								</div>
-							</td>
-							<!--{if $_G[adminid]}-->
-							<tr id="cplog_{$key}" style="display:none">
-								<td colspan="8">
-								<!--{if $value[type]!=='folder'}-->
-								<!--{eval $zldz=IO::getFileUri($value['path'])}-->直链地址：<a href="$zldz">$zldz</a><br/>引用：$value[copys]<br/>
-								<!--{/if}-->
-								是否在回收站：<!--{if $value[isdelete]}-->是<!--{else}-->否<!--{/if}-->
-							</td>
-							</tr>
-							<!--{/if}-->
-							<!--{/loop}--> 
-						</tbody>
-						</table>
-					</div>
-					<div class="float-start">
-					<div class="input-group mb-3">
-						<span class="input-group-text">每页显示</span>
-						<select class="form-select" onchange="if(this.options[this.selectedIndex].value != '') {this.form.lpp.value = this.options[this.selectedIndex].value;this.form.submit(); }">
-						<option value="10" $checklpp[10]> 10 </option>
-						<option value="20" $checklpp[20]> 20 </option>
-						<option value="40" $checklpp[40]> 40 </option>
-						<option value="100" $checklpp[100]> 100 </option>
-						<option value="200" $checklpp[200]> 200 </option>
-						</select>
-						<span class="input-group-text">条记录</span>
-					</div>
-					</div>
-					$multi
-				</form>
-			</div>
-			<!--{/if}-->
 		</div>
 	</div>
 </main>
-<iframe id="hideframe" name="hideframe" src="about:blank" frameBorder="0" marginHeight="0" marginWidth="0" width="0" height="0" allowtransparency="true" style="display:none;z-index:-99999"></iframe>
-<script type="text/javascript">
-var theurl='$theurl';
-	jQuery(document).ready(function(e) {
-		jQuery('.title .item .col[node-type=title-col][data-key=dateline],.title .item .col[node-type=title-col][data-key=name],.title .item .col[node-type=title-col][data-key=size],.title .item .col[node-type=title-col][data-key=username],.title .item .col[node-type=title-col][data-key=ftype],.title .item .col[node-type=title-col][data-key=ftype]').on('click', function() {
-			var el = jQuery(this);
-			el.find('.asc').css('visibility', 'visible').toggleClass('desc');
-			el.siblings().find('.asc').css('visibility', 'hidden');
-			
-			var param=el.data('key')+'='+ (el.find('.asc').hasClass('desc') ? 'desc' : 'asc');
-			var regx=new RegExp('&(dateline|size|name|username|ftype)=(asc|desc)','i');
-			var url=theurl.replace(regx,'')+'&'+param;
-			location.href=correcturl(url);
-		});
-		jQuery(document).on('click', 'a[data-key=download]', function() {
-			download(this);
-			return false;
-		});
-		jQuery('img[data-original]').dzzthumb();
-		jQuery(document).on('click', 'span[node-type=name-text],.module-grid-view .item', function() {
-			var item = jQuery(this).closest('.item');
-			var type = item.data('type');
-			if(item.closest('.module-grid-view').length) {
-				var rander = 'grid';
-			} else {
-				var rander = 'list';
+<script src="static/lyear/js/bootstrap-table/bootstrap-table.js"></script>
+<script src="static/lyear/js/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script>
+
+	/**
+     * 批量 删除按钮
+     */
+	 $(document).on('click', '#btn_delete', function () {
+        var self    = $(this);
+        var selRows = $('#table').bootstrapTable("getSelections");
+        if(selRows.length == 0){
+			showmessage("请至少选择一行", 'danger',3000,1);
+            return;
+        }
+        var postData = "";
+        $.each(selRows,function(i) {
+            postData +=  this.rid;
+            if (i < selRows.length - 1) {
+                postData += ",";
+            }
+        });
+		showDialog('您确定要删除这'+selRows.length+'文件(如果是文件夹将包含其下的子文件都会被删除)吗？删除之后不可恢复！', 'confirm','', function(){	
+			var loader = $('body').lyearloading({
+				opacity: 0.2,
+				spinnerSize: 'lg'
+			});
+			jQuery.post('{MOD_URL}&do=delete', {'icoid': postData},function(json){
+				loader.destroy();
+				if(json['msg']=='success'){
+					showmessage('删除成功', 'success', '3000', 1);
+					$('#table').bootstrapTable("refresh");
+					return false;
+				}else if(json['msg']){
+					showmessage(json['msg'], 'danger', '3000', 1);
+				} else {
+					showmessage('{lang error}', 'danger', '3000', 1);
+				}
+				},'json')
+				.fail(function() {
+					loader.destroy();
+					showmessage('服务器发生错误，请稍后再试', 'danger',3000,1);
+		  });
+        });
+        return false;
+    });
+
+	 /**
+     * 搜索按钮
+     */
+	 $(document).on('click', '#search-btn', function() {
+        $('#table').bootstrapTable('refresh');
+    })
+
+	/**
+     * 重置按钮
+     */
+	$('#refreshsearch').click(function() {
+		// 清空表单内容
+        $('#sel_orgid_{$org[orgid]}').val('');
+        $('#keyword').val('');
+		// 重置按钮内容
+		$('#orgid_{$org[orgid]}_Menu').text('$org[depart]');
+        // 刷新表格
+        $('#table').bootstrapTable('refresh');
+    });
+
+	/**
+     * 文件夹按钮
+     */
+	var pfid = '';
+	$(document).on('click', '.fid-btn', function() {
+		pfid = $(this).data('fid');
+		$('#table').bootstrapTable('refresh');
+    });
+	var type = '';
+	$(document).on('click', '.type-btn', function() {
+		// 移除所有 .type-btn 的 active 类
+		$('.type-btn').removeClass('active');
+		// 为当前点击的按钮添加 active 类
+		$(this).addClass('active');
+		// 获取当前的 type 值
+		type = $(this).data('type');
+		$('#table').bootstrapTable('refresh');
+    })
+    
+	/**
+	 * 分页相关的配置
+	 **/
+	const pagination = {
+		// 分页方式：[client] 客户端分页，[server] 服务端分页
+		sidePagination: "server",
+		// 初始化加载第一页，默认第一页
+		pageNumber: 1,
+		// 每页的记录行数
+		pageSize: 10,
+		// 可供选择的每页的行数 - (亲测大于1000存在渲染问题)
+		pageList: [5, 10, 25, 50, 100],
+		// 在上百页的情况下体验较好 - 能够显示首尾页
+		paginationLoop: true,
+		// 展示首尾页的最小页数
+		paginationPagesBySide: 2,
+	};
+	
+	/**
+	 * 按钮相关配置
+	 **/
+	const button = {
+		// 按钮的类
+		buttonsClass: 'default',
+		// 类名前缀
+		buttonsPrefix: 'btn'
+	}
+	
+	/**
+	 * 图标相关配置
+	 **/
+	const icon = {
+		// 图标前缀
+		iconsPrefix: 'mdi',
+		// 图标大小
+		iconSize: 'mini',
+		// 图标的设置
+		icons: {
+			paginationSwitchDown: 'mdi-door-closed',
+			paginationSwitchUp: 'mdi-door-open',
+			refresh: 'mdi-refresh',
+			toggleOff: 'mdi-toggle-switch-off',
+			toggleOn: 'mdi-toggle-switch',
+			columns: 'mdi-table-column-remove',
+			detailOpen: 'mdi-plus',
+			detailClose: 'mdi-minus',
+			fullscreen: 'mdi-monitor-screenshot',
+			search: 'mdi-table-search',
+			clearSearch: 'mdi-trash-can-outline'
+		}
+	};
+	
+	/**
+	 * 表格相关的配置
+	 **/
+	const table = {
+		classes: 'table table-bordered table-hover table-striped lyear-table',
+		// 请求地址
+		url: '{MOD_URL}&do=getinfo',
+		// 唯一ID字段
+		uniqueId: 'id',
+		// 每行的唯一标识字段
+		idField: 'id',
+		// 是否启用点击选中行
+		clickToSelect: true,
+		// 是否显示详细视图和列表视图的切换按钮(clickToSelect同时设置为true时点击会报错)
+		// showToggle: true,
+		// 请求得到的数据类型
+		dataType: 'jsonp',
+		// 请求方法
+		method: 'get',
+		// 工具按钮容器
+		toolbar: '#toolbar',
+		// 是否分页
+		pagination: true,
+		// 是否显示所有的列
+		showColumns: true,
+		// 是否显示刷新按钮
+		showRefresh: true,
+		// 显示图标
+		showButtonIcons: true,
+		// 显示文本
+		showButtonText: false,
+		// 显示全屏
+		showFullscreen: true,
+		// 总数字段
+		totalField: 'total',
+		// 当字段为 undefined 显示
+		undefinedText: '-',
+		// 排序方式
+		sortOrder: "asc",
+		...icon,
+		...pagination,
+		...button,
+		detailView:true,
+		detailFormatter:"detailFormatter",
+	};
+	
+	/**
+	 * 用于演示的列信息
+	 **/
+	const columns = [{
+		field: 'example',
+		checkbox: true,
+		// 列的宽度
+		width: 5,
+		// 宽度单位
+		widthUnit: 'rem'
+	}, {
+		field: 'id',
+		title: '编号',
+		// 使用[align]，[halign]和[valign]选项来设置列和它们的标题的对齐方式。
+		// h表示横向，v标识垂直
+		align: 'center',
+		switchable: false,
+		// 列的宽度
+		width: 4,
+		// 宽度单位
+		widthUnit: 'rem'
+	},<!--{if $_G['adminid']}--> {
+		field: 'username',
+		align: 'center',
+		sortable: true,
+		title: '{lang possessor}'
+	},<!--{/if}--> {
+		field: 'name',
+		align: 'center',
+		sortable: true,
+		title: '{lang filename}',
+	}, {
+		field: 'size',
+		sortable: true,
+		// 是否可视(默认 - true)
+		align: 'center',
+		title: '{lang file_size}'
+	}, {
+		field: 'type',
+		sortable: true,
+		align: 'center',
+		title: '{lang file_type}'
+	}, {
+        field: 'relpath',
+        title: '{lang file_location}'
+    }, {
+        field: 'dateline',
+		sortable: true,
+        title: '{lang add_time}'
+    }, {
+        field: 'operate',
+        title: '{lang operation}',
+        formatter: btnGroup,  // 自定义方法
+        events: {
+			'click .view-btn': function (event, value, row, index) {
+                event.stopPropagation();
+                view(row);
+            },
+            'click .download-btn': function (event, value, row, index) {
+                event.stopPropagation();
+                download(row);
+            },
+            'click .del-btn': function (event, value, row, index) {
+                event.stopPropagation();
+                delUser(row);
+            }
+        }
+    }];
+    
+    // 自定义操作按钮
+    function btnGroup () {
+        let html =
+            '<a class="btn btn-sm btn-default me-1 view-btn" title="{lang view}" data-bs-toggle="tooltip"><i class="mdi mdi-magnify-expand"></i></a><a class="btn btn-sm btn-default me-1 download-btn" title="{lang download}" data-bs-toggle="tooltip"><i class="mdi mdi-download"></i></a>' +
+            '<a class="btn btn-sm btn-default del-btn" title="{lang delete}" data-bs-toggle="tooltip"><i class="mdi mdi-delete"></i></a>';
+        return html;
+    }
+	// 操作方法 - 预览
+    function view(row) {
+		if (row.ftype == 'folder') {
+			pfid = row.oid;
+			$('table').bootstrapTable('refresh');
+		} else {
+			var url = 'share.php?a=view&s='+row.dpath;
+			window.open(url);
+		}
+    }
+    // 操作方法 - 编辑
+    function download(row) {
+		var url = DZZSCRIPT + '?mod=io&op=download&path='+row.dpath;
+		window.open(url);
+    }
+    // 操作方法 - 删除
+	function delUser(row) {
+		showDialog('{lang filemanage_del_file}', 'confirm','', function(){	
+			var loader = $('body').lyearloading({
+				opacity: 0.2,
+				spinnerSize: 'lg'
+			});
+			$.ajax({
+            type: "post",
+            url: "{MOD_URL}&do=delete",
+            data: {icoid: row.rid},
+            dataType: 'json',
+            success: function (res, status) {
+				loader.destroy();
+                if (res.msg == 'success') {
+					showmessage('删除成功', 'success',3000,1);
+                    $("#table").bootstrapTable('refresh');
+                } else {
+					showmessage(res.msg, 'danger',3000,1);
+                }
+            },
+            error: function () {
+				loader.destroy();
+				showmessage('服务器发生错误，请稍后再试', 'danger',3000,1);
+            }
+        });
+	});
+        
+    }
+	
+	$('table').bootstrapTable({
+		...table,
+		// 自定义的查询参数
+		queryParams: function (params) {
+			return {
+				// 每页数据量
+				limit: params.limit,
+				// sql语句起始索引
+				offset: params.offset,
+				page: (params.offset / params.limit) + 1,
+				// 排序的列名
+				sort: params.sort,
+				// 排序方式 'asc' 'desc'
+				sortOrder: params.order,
+				// 搜索关键词
+                keyword: $('#keyword').val(),
+				orgid: $('#sel_orgid_{$org[orgid]}').val(),
+				pfid:pfid,
+				type:type,
+			};
+		},
+		columns,
+        onLoadSuccess: function(data){
+			if(data.breadcrumb) {
+				$('#breadcrumb').html(data.breadcrumb);
 			}
-			if(type == 'folder') {
-				jQuery('#pfid').val(item.data('containpath'));
-				location.href='{MOD_URL}&pfid=' + item.data('containpath');
-				return false;
-			} else {
-				if(type == 'image' && item.find('img[data-original]').trigger('click.dzzthumb')) {} else {
-					var preurl = 'share.php?a=view&s=' + item.data('dpath');
-					if(top._config) {
-						top.OpenWindow('url', preurl, item.find('img').attr('title'), null, { img: item.find('img').attr('src'), name: item.find('img').attr('title') });
-					} else {
-						window.open(preurl, jQuery(this).html());
+            $("[data-bs-toggle='tooltip']").tooltip();
+        }
+	});
+	function detailFormatter(index, row) {
+		var html = [];
+		$.each(row, function (key, value) {
+			if (key === 'FileUri' || key === 'copys' || key === 'isdelete') {
+				var label;
+				if (value) {
+					switch (key) {
+						case 'FileUri':
+							label = '直链地址';
+							value = '<a href="' + value + ';">' + value + '</a>';
+							break;
+						case 'copys':
+							label = '引用';
+							break;
+						case 'isdelete':
+							label = '是否在回收站';						
+							break;
 					}
+					html.push('<p><b>' + label + ':</b> ' + value + '</p>');
 				}
 			}
-			return false;
 		});
-	});
-   function download(obj) {
-		var li = jQuery(obj).closest('.item');
-	
-		var url = DZZSCRIPT + '?mod=io&op=download&path=' + li.data('dpath');
-		if(BROWSER.ie) {
-			window.open(correcturl(url));
-		} else {
-			window.frames['hideframe'].location = correcturl(url);
-		}
+		return html.join('');
 	}
-	
-var rids=[];
-//复选框选中问题
-jQuery(document).off('click.shareclick').on('click.shareclick',".shareblock",function(){
-	var checkinput = jQuery(this).find("input[name='del[]']");
-	if(checkinput.prop('checked')){
-		checkinput.prop('checked',false);
-		jQuery(this).removeClass('item-block');
-		var rid=jQuery(this).find('input[name="del[]"]').data('rid');
-		var index = jQuery.inArray(rid,rids);
-		if(index != -1){
-			rids.splice(index,1);
-		}
 
-	}else{
-		checkinput.prop('checked',true);
-		jQuery(this).addClass('item-block');
-		var rid=jQuery(this).data('rid');
-			if(jQuery.inArray(rid,rids) == -1){
-				rids.push(rid);
-			}
-
-	}
-	sharelength();
-});
-jQuery(document).off('click.inputclick').on('click.inputclick',".shareblock input[name='del[]']",function(){
-	if($(this).prop('checked')){
-		jQuery(this).prop('checked',false);
-		jQuery(this).removeClass('item-block');
-		
-	}else{
-		jQuery(this).prop('checked',true);
-		jQuery(this).addClass('item-block');
-	}
-});
-//复选框全选
-jQuery(document).off('click.allclick').on('click.allclick','#chkall',function(){
-	var allchecked=jQuery(this).prop('checked');
-	jQuery(this).closest('.title').next('.list-share').find('input[name="del[]"]').each(function(){
-		if(allchecked){
-			jQuery(this).prop('checked',true);
-			jQuery(this).closest('.item').addClass('item-block');
-			var rid=jQuery(this).data('rid');
-			if(jQuery.inArray(rid,rids) == -1){
-				rids.push(rid);
-			}
-		}else{
-			jQuery(this).prop('checked',false);
-			jQuery(this).closest('.item').removeClass('item-block');
-			var rid=jQuery(this).data('rid');
-			var index = jQuery.inArray(rid,rids);
-			if(index != -1){
-				rids.splice(index,1);
-			}
-
-		}
-	});
-	sharelength();
-})
-
-function sharelength(){
-	if(rids.length>0){
-		jQuery('.sharepame-selected').show().next('.show_first').hide();
-		jQuery('#chkall').prop('checked',true);
-		jQuery('.btn-secetlt').show();
-	}else{
-		jQuery('.sharepame-selected').hide().next('.show_first').show();
-		jQuery('#chkall').prop('checked',false);
-		jQuery('.btn-secetlt').hide();
-	}
-	jQuery('.ex-number').html(rids.length);
-}
-function delete_file(){
-	var delnums = rids.length;
-	var icoids = rids.join(',');
-	if(confirm('{lang Are you sure you want to delete this}'+delnums+'{lang file (if it is a folder, all the sub files under it will be deleted)? Cannot recover after deletion}')){
-		jQuery.post('{MOD_URL}&do=delete',{'icoid':icoids},function(data){
-			if(data['msg']['success']){
-				window.location.reload();
-			} else{
-				showmessage(data['msg']['error'], 'error', 3000, 1);
-			}
-		})
-	}
-}
-<!--{if $_G[adminid]}-->
-function togglecplog(k) {
-  var cplogobj = document.getElementById('cplog_' + k);
-  if(cplogobj.style.display == 'none') {
-    cplogobj.style.display = '';
-  } else {
-    cplogobj.style.display = 'none';
-  }
-}
-<!--{/if}-->
 </script>
 <!--{template lyear/footer_simple}-->

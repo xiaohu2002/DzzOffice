@@ -6,11 +6,11 @@
 		</a>
 	</li>
     <li class="nav-item">
-		<a class="nav-link <!--{if !$type}-->active<!--{/if}-->" href="{MOD_URL}">{lang all}</a>
+		<a class="nav-link type-btn active" href="{MOD_URL}">{lang all}</a>
 	</li>
 	<!--{loop $typearr $key $value}-->
 	<li class="nav-item">
-		<a class="nav-link <!--{if $type==$key}-->active<!--{/if}-->" href="{MOD_URL}&type=$key">$value</a>
+		<a href="javascript:;" class="nav-link type-btn" data-type="$key">$value</a>
 	</li>
 	<!--{/loop}-->
 </ul>

@@ -67,7 +67,7 @@
 				jQuery('.left-drager-op').addClass('left-drager-op2');
 			}else if(flag==='show'){
 				$leftContainer.css({width:left,'display':'block'});
-				$mainContainer.css('Left',document.documentElement.clientWidth<opt.leftHide?0:left);
+				$mainContainer.css('paddingLeft',document.documentElement.clientWidth<opt.leftHide?0:left);
 				$middleconMenu.css('left',left+5);
 				$topContainer.css('paddingLeft',document.documentElement.clientWidth<opt.leftHide?0:left);
 				$this.css({'left':left,'cursor':'w-resize'});
