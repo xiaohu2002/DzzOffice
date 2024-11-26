@@ -682,20 +682,17 @@ function avatar_block($uid=0,$headercolors=array(),$class="Topcarousel img-avata
 	if($user['avatarstatus']){//用户已经上传头像
 		return '<img src="avatar.php?uid='.$user['uid'].'" class="img-circle special_avatar_class img-avatar" title="'.$user['username'].'">';
 	}else{//没有上传头像，使用背景+首字母
-		if ($uid) {
-            if (isset($headercolors[$uid])) {
-                $headerColor = $headercolors[$uid];
-            } else {
-                $headerColor = C::t('user_setting')->fetch_by_skey('headerColor', $user['uid']);
-                if (empty($headerColor)) { // 没有设置时，创建头像背景色，并且入库
-                    $colorkey = rand(0, 14); // 确保随机数在有效范围内
-                    $headerColor = $colors[$colorkey];
-                    C::t('user_setting')->insert_by_skey('headerColor', $headerColor, $user['uid']);
-                }
-            }
-        } else { // 游客默认使用第一个值
-            $headerColor = $colors[0];
-        }
+		if($uid){
+			if($headercolors[$uid]) $headerColor=$headercolors[$uid];
+			else $headerColor = C::t('user_setting')->fetch_by_skey('headerColor',$user['uid']);
+			if(empty($headerColor)){//没有设置时，创建头像背景色，并且入库
+				$colorkey = rand(1,15);
+    			$headerColor = $colors[$colorkey];
+				C::t('user_setting')->insert_by_skey('headerColor',$headerColor,$user['uid']);
+			}
+		}else{//游客默认使用第一个值；
+			$headerColor = $colors[0];
+		}
 		return '<span class="'.$class.'" style="background:'.$headerColor.'" title="'.$user['username'].'">'. new_strsubstr(ucfirst($user['username']),1,'').'</span>';
 	}
 }
@@ -867,14 +864,12 @@ function lang($langvar = null, $vars = array(), $default = null, $curpath = '')
         preg_match_all('/\{_G\/(.+?)\}/', $return, $gvar);
         foreach ($gvar[0] as $k => $v) {
 
-            $searchs[] = (string)$v;
+            $searchs[] = $v;
             $replaces[] = getglobal($gvar[1][$k]);
         }
     }
 
-    if($searchs || $replaces) {
-		$return = str_replace($searchs, $replaces, $return);
-	}
+    $return = str_replace($searchs, $replaces, $return);
     return $return;
 }
 
@@ -1441,19 +1436,14 @@ function dmkdir($dir, $mode = 0777, $makeindex = TRUE)
     }
     return true;
 }
-function durlencode($url) {
-	static $fix = array('%21', '%2A','%3B', '%3A', '%40', '%26', '%3D', '%2B', '%24', '%2C', '%2F', '%3F', '%25', '%23', '%5B', '%5D');
-	static $replacements = array('!', '*', ';', ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
-	return str_replace($fix, $replacements, urlencode($url));
-}
 
 function dreferer($default = '')
 {
     global $_G;
 
     $default = '';
-    $_G['referer'] = !empty($_GET['referer']) ? $_GET['referer'] : $_SERVER['HTTP_REFERER'];
-	$_G['referer'] = substr($_G['referer'], -1) == '?' ? substr($_G['referer'], 0, -1) : $_G['referer'];
+    $_G['referer'] = !empty($_GET['referer']) ? $_GET['referer'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
+    $_G['referer'] = substr($_G['referer'], -1) == '?' ? substr($_G['referer'], 0, -1) : $_G['referer'];
 
     if (strpos($_G['referer'], 'user.php?mod=login&op=logging&action=login')) {
         $_G['referer'] = $default;
@@ -1462,19 +1452,15 @@ function dreferer($default = '')
     $_G['referer'] = str_replace('&amp;', '&', $_G['referer']);
     $reurl = parse_url($_G['referer']);
 
-    $hostwithport = $reurl['host'] . (isset($reurl['port']) ? ':' . $reurl['port'] : '');
-
-	if(!$reurl || (isset($reurl['scheme']) && !in_array(strtolower($reurl['scheme']), array('http', 'https')))) {
-		$_G['referer'] = '';
-	}
-    if (!empty($hostwithport) && !in_array($hostwithport, array($_SERVER['HTTP_HOST'], 'www.' . $_SERVER['HTTP_HOST'])) && !in_array($_SERVER['HTTP_HOST'], array($hostwithport, 'www.' . $hostwithport))) {
+    if ($reurl['port']) $reurl['host'] .= ':' . $reurl['port'];
+    if (!empty($reurl['host']) && !in_array($reurl['host'], array($_SERVER['HTTP_HOST'], 'www.' . $_SERVER['HTTP_HOST'])) && !in_array($_SERVER['HTTP_HOST'], array($reurl['host'], 'www.' . $reurl['host']))) {
         $_G['referer'] = 'index.php';
 
-    } elseif (empty($hostwithport)) {
+    } elseif (empty($reurl['host'])) {
         $_G['referer'] = $_G['siteurl'] . './' . $_G['referer'];
     }
-    $_G['referer'] = durlencode($_G['referer']);
-	return $_G['referer'];
+
+    return strip_tags($_G['referer']);
 }
 
 function diconv($str, $in_charset, $out_charset = CHARSET, $ForceTable = FALSE)
@@ -2231,13 +2217,11 @@ function dzzlang($file, $langvar = null, $vars = array(), $default = null)
     if (is_string($return) && strpos($return, '{_G/') !== false) {
         preg_match_all('/\{_G\/(.+?)\}/', $return, $gvar);
         foreach ($gvar[0] as $k => $v) {
-            $searchs[] = (string)$v;
+            $searchs[] = $v;
             $replaces[] = getglobal($gvar[1][$k]);
         }
     }
-    if($searchs || $replaces) {
-		$return = str_replace($searchs, $replaces, $return);
-	}
+    $return = str_replace($searchs, $replaces, $return);
     return $return;
 }
 

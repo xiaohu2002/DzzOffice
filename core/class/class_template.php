@@ -15,7 +15,6 @@ class template {
 	private $includeTemplate = array();//记录模版更新时间和路径
     private $tplkey = '';
     private $tplname = '';//模板名称
-	private $debug = 0;
 
     //获取模板语言
 	public function check_language(){
@@ -149,7 +148,6 @@ class template {
 		$var_regexp = "((?!\\\$[a-zA-Z]+\()(\\\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*(\-\>)?[a-zA-Z0-9_\x7f-\xff]*)(\[[a-zA-Z0-9_\-\.\"\'\[\]\$\x7f-\xff]+\])*)";
 		$const_regexp = "([A-Z_\x7f-\xff][A-Z0-9_\x7f-\xff]*)";
 		$template = preg_replace("/([\n\r]+)\t+/s", "\\1", $template);
-		$template = preg_replace("/\/\*\*\{(.+?)\}\*\//s", "{\\1}", $template);
 		$template = preg_replace("/\<\!\-\-\{(.+?)\}\-\-\>/s", "{\\1}", $template);
 //	    js的lang替换
 		$template = preg_replace_callback("/<script[^>]+?src=\"(.+?)\".*?>[\s\S]*?/is", array($this, 'parse_template_callback_javascript'), $template);
@@ -173,7 +171,6 @@ class template {
 		$template = preg_replace_callback("/[\n\r\t]*\{eval\}\s*(\<\!\-\-)*(.+?)(\-\-\>)*\s*\{\/eval\}[\n\r\t]*/is", array($this, 'parse_template_callback_evaltags_2'), $template);
 		$template = preg_replace_callback("/[\n\r\t]*\{eval\s+(.+?)\s*\}[\n\r\t]*/is", array($this, 'parse_template_callback_evaltags_1'), $template);
 		$template = str_replace("{LF}", "<?=\"\\n\"?>", $template);
-		$template = preg_replace("/\{(\\\$[a-zA-Z0-9_\-\>\[\]\'\"\$\.\x7f-\xff]+)\s(or|\?\?)\s([a-zA-Z0-9\']+)\}/s", "{echo \\1 ?? \\3}", $template);
 		$template = preg_replace("/\{(\\\$[a-zA-Z0-9_\-\>\[\]\'\"\$\.\x7f-\xff]+)\}/s", "<?=\\1?>", $template);
         $template = preg_replace_callback("/[\n\r\t]*\{Hook\s+([\w]+)\}[\n\r\t]*/is", array($this, 'parse_template_callback_hook'), $template);//钩子解析
         $template = preg_replace_callback("/[\n\r\t]*\{Hook\s+([\w]+)\#(.+?)\#\}[\n\r\t]*/is", array($this, 'parse_template_callback_hook_1'), $template);//钩子解析,传参形式
@@ -194,12 +191,9 @@ class template {
 		$template = preg_replace("/ \?\>[\n\r]*\<\? /s", " ", $template);
 		$template = preg_replace_callback("/\"(http)?[\w\.\/:]+\?[^\"]+?&[^\"]+?\"/", array($this, 'parse_template_callback_transamp_0'), $template);
 		$template = preg_replace_callback("/\<script[^\>]*?src=\"(.+?)\"(.*?)\>\s*\<\/script\>/is", array($this, 'parse_template_callback_stripscriptamp_12'), $template);
-		$template = preg_replace_callback("/[\n\r\t]*\{block\s+([a-zA-Z0-9_\[\]']+)\}(.+?)\{\/block\}/is", array($this, 'parse_template_callback_stripblock_12'), $template);
+		$template = preg_replace_callback("/[\n\r\t]*\{block\s+([a-zA-Z0-9_\[\]]+)\}(.+?)\{\/block\}/is", array($this, 'parse_template_callback_stripblock_12'), $template);
 		$template = preg_replace("/\<\?(\s{1})/is", "<?php\\1", $template);
 		$template = preg_replace("/\<\?\=(.+?)\?\>/is", "<?php echo \\1;?>", $template);
-		if($this->debug) {
-			$template = preg_replace_callback("/\<script[\s\w=\/\"]*?\>.+?\<\/script\>/is", array($this, 'parse_template_callback_scriptdebugconvert_0'), $template);
-		}
 		$template = str_replace('self.＄','self.$',  $template);
         $template = str_replace('_＄','$',  $template);
 	}
@@ -287,7 +281,7 @@ class template {
 	}
 
 	function parse_template_callback_stripvtags_echo1($matches) {
-		return $this->stripvtags('<? echo '.$this->echopolyfill($matches[1]).'; ?>');
+		return $this -> stripvtags('<? echo ' . $matches[1] . '; ?>');
 	}
 
 	function parse_template_callback_stripvtags_if123($matches) {
@@ -299,11 +293,11 @@ class template {
 	}
 
 	function parse_template_callback_stripvtags_loop12($matches) {
-		return $this->stripvtags($this->looptags($matches[1], $matches[2]));
+		return $this -> stripvtags('<? if(is_array(' . $matches[1] . ')) foreach(' . $matches[1] . ' as ' . $matches[2] . ') { ?>');
 	}
 
 	function parse_template_callback_stripvtags_loop123($matches) {
-		return $this->stripvtags($this->looptags($matches[1], $matches[2], $matches[3]));
+		return $this -> stripvtags('<? if(is_array(' . $matches[1] . ')) foreach(' . $matches[1] . ' as ' . $matches[2] . ' => ' . $matches[3] . ') { ?>');
 	}
 
 	function parse_template_callback_transamp_0($matches) {
@@ -311,15 +305,11 @@ class template {
 	}
 
 	function parse_template_callback_stripscriptamp_12($matches) {
-		return $this->stripscriptamp($matches[1], $matches[2]);
+		return $this -> stripscriptamp($matches);
 	}
 
 	function parse_template_callback_stripblock_12($matches) {
 		return $this -> stripblock($matches[1], $matches[2]);
-	}
-
-	function parse_template_callback_scriptdebugconvert_0($matches) {
-		return $this->scriptdebugconvert($matches[0]);
 	}
 
 
@@ -473,7 +463,6 @@ class template {
 
 	function adtags($parameter, $varname = '') {
 		$parameter = stripslashes($parameter);
-		$parameter = preg_replace("/(\\\$[a-zA-Z0-9_\-\>\[\]\'\"\$\.\x7f-\xff]+)/s", "{\\1}", $this->addquote($parameter));
 		$i = count($this -> replacecode['search']);
 		$this -> replacecode['search'][$i] = $search = "<!--AD_TAG_$i-->";
 		$this -> replacecode['replace'][$i] = "<?php " . (!$varname ? 'echo ' : '$' . $varname . '=') . "adshow(\"$parameter\");?>";
@@ -497,9 +486,10 @@ class template {
 	}
 
 	function evaltags($php) {
-		$i = count($this->replacecode['search']);
-		$this->replacecode['search'][$i] = $search = "<!--EVAL_TAG_$i-->";
-		$this->replacecode['replace'][$i] = $this->debug ? '<? '.preg_replace(array('/^L\d+[\w\.\/]*\-\-\>/', '/\<\!\-\-L\d+[\w\.\/]*\-\-\>/', '/\<\!\-\-L\d+[\w\.\/]*$/', '/^\s*\<\!\-\-/', '/\-\-\>\s*$/'), '', $php).'?>' : "<? $php?>";
+		$php = str_replace('\"', '"', $php);
+		$i = count($this -> replacecode['search']);
+		$this -> replacecode['search'][$i] = $search = "<!--EVAL_TAG_$i-->";
+		$this -> replacecode['replace'][$i] = "<? $php?>";
 		return $search;
 	}
 
@@ -524,11 +514,12 @@ class template {
 	function loadsubtemplate($file) {
 		$tplfile = template($file, 0, '', 1);
 		$filename =DZZ_ROOT.'/' . $tplfile;
-		if((file_exists($filename) && is_readable($filename) && ($content = implode('', file($filename)))) || (file_exists(substr($filename, 0, -4).'.php') && is_readable(substr($filename, 0, -4).'.php') && ($content = $this->getphptemplate(implode('', file(substr($filename, 0, -4).'.php')))))) {
-			$this->subtemplates[] = $tplfile;
-			return $this->debug ? $this->insertdebugmsg($content, $tplfile) : $content;
+
+		if (($content = @implode('', file($filename))) || ($content = $this -> getphptemplate(@implode('', file(substr($filename, 0, -4) . '.php'))))) {
+			$this -> subtemplates[] = $tplfile;
+			return $content;
 		} else {
-			return '<!-- '.$file.' -->';
+			return '<!-- ' . $file . ' -->';
 		}
 	}
 
@@ -552,90 +543,49 @@ class template {
 		}
 		return;
 	}
-	function looptags($param1, $param2, $param3 = '') {
-		if(preg_match("/^\<\?\=\\\$.+?\?\>$/s", $param1)) {
-			$exprtemp = $param1;
-			$return = '<? if(isset('.$param1.') && is_array('.$param1.')) ';
-		} else {
-			$exprtemp = '$l_'.random(8);
-			$return = '<? '.$exprtemp.' = '.$param1.';if(is_array('.$exprtemp.')) ';
-		}
-		if($param3) {
-			$return .= 'foreach('.$exprtemp.' as '.$param2.' => '.$param3.') { ?>';
-		} else {
-			$return .= 'foreach('.$exprtemp.' as '.$param2.') { ?>';
-		}
-		return $return;
-	}
-	function echopolyfill($str) {
-		$str = str_replace(' or ', ' ?? ', $str);
-		if(strpos($str, ' ?? ') !== false && version_compare(PHP_VERSION, '7.0', '<')) {
-			$str = preg_replace('/^(.+)\s\?\?\s(.+)$/', "isset(\\1) ? (\\1) : (\\2)", $str);
-		}
-		return $str;
-	}
-
 	function transamp($str) {
 		$str = str_replace('&', '&amp;', $str);
 		$str = str_replace('&amp;amp;', '&amp;', $str);
+		$str = str_replace('\"', '"', $str);
 		return $str;
 	}
 
 	function addquote($var) {
-		return str_replace("\\\"", "\"", preg_replace_callback("/\[([a-zA-Z0-9_\-\.\x7f-\xff]+)\]/s", array($this, 'addquote_exec'), $var));
-	}
-
-	function addquote_exec($matches) {
-		return is_numeric($matches[1]) ? '['.$matches[1].']' : "['".$matches[1]."']";
+		return str_replace("\\\"", "\"", preg_replace("/\[([a-zA-Z0-9_\-\.\x7f-\xff]+)\]/s", "['\\1']", $var));
 	}
 
 	function stripvtags($expr, $statement = '') {
 		$expr = str_replace('\\\"', '\"', preg_replace("/\<\?\=(\\\$.+?)\?\>/s", "\\1", $expr));
-		if($this->debug) {
-			$expr = preg_replace('/\<\!\-\-L\d+[\w\.\/]*\-\-\>/', '', $expr);
-		}
 		$statement = str_replace('\\\"', '\"', $statement);
 		return $expr . $statement;
 	}
 
-	function stripscriptamp($s, $extra) {
-		$s = str_replace('&amp;', '&', $s);
-		return "<script src=\"$s\" type=\"text/javascript\"$extra></script>";
+	function stripscriptamp($matches) {
+	    global $_G;
+		$_G['template_extra-replace_val'] = str_replace('\\"', '"', $matches[2]);
+		$_G['template_src_replace_val'] = str_replace('&amp;', '&', $matches[1]);
+        $return =  preg_replace_callback("/\<script([^\>]*?)src=\"(.+?)\"(.*?)\>\s*\<\/script\>/is",function($match){
+            return  "<script".$match[1]."src=\"".getglobal('template_src_replace_val')."\" ".getglobal('template_extra-replace_val')."></script>";
+        },$matches[0]);
+        unset($_G['template_extra-replace_val']);
+        unset($_G['template_src_replace_val']);
+		return $return;
 	}
 
 	function stripblock($var, $s) {
-		$var = $this->addquote($var);
+		$s = str_replace('\\"', '"', $s);
 		$s = preg_replace("/<\?=\\\$(.+?)\?>/", "{\$\\1}", $s);
 		preg_match_all("/<\?=(.+?)\?>/", $s, $constary);
 		$constadd = '';
 		$constary[1] = array_unique($constary[1]);
-		foreach($constary[1] as $const) {
-			$constadd .= '$__'.$const.' = '.$const.';';
+		foreach ($constary[1] as $const) {
+			$constadd .= '$__' . $const . ' = ' . $const . ';';
 		}
 		$s = preg_replace("/<\?=(.+?)\?>/", "{\$__\\1}", $s);
 		$s = str_replace('?>', "\n\$$var .= <<<EOF\n", $s);
 		$s = str_replace('<?', "\nEOF;\n", $s);
 		$s = str_replace("\nphp ", "\n", $s);
-		return "<?\n$constadd\$$var = <<<EOF\n".$s."\nEOF;\n?>";
-	}
-
-	function scriptdebugconvert($str) {
-		return preg_replace('/\<\!\-\-L(\d+[\w\.\/]*)\-\-\>/', '/**L\1*/', $str);
-	}
-
-	function insertdebugmsg($str, $filename) {
-		$startmsg = '<!-- BEGIN '.$filename.' -->';
-		$endmsg = '<!-- END '.$filename.' -->';
-		$count = 2;
-		$debuglevel = $this->debug;
-		$str = preg_replace_callback('/\n(\t*)/', function($matches) use (&$count, $filename, $debuglevel){
-			if($debuglevel > 1) {
-				return "\n".$matches[1].'<!--L'.$count++.$filename.'-->';
-			} else {
-				return "\n".$matches[1].'<!--L'.$count++.'-->';
-			}
-		}, $str);
-		return $startmsg.$str.$endmsg;
+		return "<?\n$constadd\$$var = <<<EOF\n" . $s . "\nEOF;\n?>";
 	}
 
 	function error($message, $tplname) {
