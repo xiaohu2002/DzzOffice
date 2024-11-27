@@ -80,7 +80,7 @@ if ($_GET['do'] == 'delete') {
             $data = DB::fetch_all("SELECT * FROM " . DB::table('comment') . " WHERE authorid =$uid and $sql $order $limitsql", $param);
         }
     }
-    $multi = multi($count, $lpp, $page, $theurl, 'justify-content-end');
+    $multi = multi($count, $lpp, $page, $theurl, 'pull-right');
     $list = array();
     foreach ($data as $value) {
         $list[] = $value;

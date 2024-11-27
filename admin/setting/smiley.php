@@ -119,7 +119,7 @@ if (!$operation) {
 		$start_limit = ($page - 1) * $smiliesperpage;
 
 		$num = C::t('smiley') -> count_by_type_typeid('smiley', $id);
-		$multipage = multi($num, $smiliesperpage, $page, MOD_URL.'&op=smiley&operation=edit&id=' . $id,'justify-content-end');
+		$multipage = multi($num, $smiliesperpage, $page, MOD_URL.'&op=smiley&operation=edit&id=' . $id,'pull-right');
 
 		$smileynum = 1;
 		$smilies = '';

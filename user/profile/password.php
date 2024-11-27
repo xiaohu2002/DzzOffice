@@ -233,7 +233,7 @@ if($do == 'editpass'){
 		
 		$list[$k]=$log;
 	}
-	$multi = multi($count, $lpp, $page, $theurl,'justify-content-end');
+	$multi = multi($count, $lpp, $page, $theurl,'pull-right');
 }elseif($do == 'changeemail'){
 
     $emailchange = $member['emailstatus'];

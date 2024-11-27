@@ -81,7 +81,7 @@ if($count){
 	}
 	$count = count($newlist);
 }
-$multi = multi($count, $perpage, $page, $theurl, 'justify-content-end');
+$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
 //根据分页截取数组
 ksort($newlist,SORT_STRING );
 $list = array_slice($newlist,$start,$perpage);

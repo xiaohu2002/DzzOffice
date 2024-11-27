@@ -877,11 +877,18 @@ function lang($langvar = null, $vars = array(), $default = null, $curpath = '')
  * 模板函数
  * $file=>模板,$tpldir=>模板文件夹，$templateNotMust=>模板不存在时返回空字符串，屏蔽错误提示，默认不开启
  * */
-function template($file, $tpldir = '', $templateNotMust = false)
+function template($file, $tpldir = '', $templateNotMust = true)
 {
     global $_G;
     static $tplrefresh, $timestamp, $targettplname;
-
+    if(!$tpldir && strpos($file, ':') !== false) {
+		list($templateid, $file) = explode(':', $file);
+		$tpldir = $templateid;
+        $file = $file;
+	}
+    if (!$tpldir && isset($_G['setting']['template'])) {
+        $tpldir = $_G['setting']['template'];
+    }
     $file .= !empty($_G['inajax']) && ($file == 'common/header' || $file == 'common/footer') ? '_ajax' : '';
 
     $tplfile = $file;

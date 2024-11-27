@@ -1,0 +1,134 @@
+<!--{template lyear:header_simple_start}-->
+<script type="text/javascript" src="static/js/jquery.textareaexplander.js?{VERHASH}"></script>
+<!--日期选择器css-->
+<link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-datepicker/bootstrap-datepicker3.min.css?{VERHASH}">
+<!--{template lyear:header_simple_end}-->
+<main class="bs-main-container">
+	<div class="container-fluid">
+		<div class="card">
+			<div class="card-body">
+      <!--{if $vid}-->
+      <div class="alert <!--{if $showbtn}-->alert-warning<!--{else}-->alert-success<!--{/if}-->" style="margin-bottom:20px;line-height:1.8">
+          <!--{if $showbtn}-->
+            <p><i class="glyphicon glyphicon-question-sign" ></i> {lang profile_message1}。</p> 
+            <!--{if $_G['setting']['verify'][$vid]['desc']}-->
+            {eval $desc=dzzcode($_G['setting']['verify'][$vid]['desc']);}
+            <p class="ml20">$desc</p>
+            <!--{/if}-->
+          <!--{else}-->
+           <p><i class="mdi mdi-check-bold" ></i> {lang profile_message2}</p>
+          <!--{/if}-->
+      </div>
+      <!--{else}-->
+      <div class="" style="padding:20px 0;line-height:1.8">
+      	<div class="progress progress-relative" style="margin:0">
+          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="$userstatus[profileprogress]" aria-valuemin="0" aria-valuemax="100" style="width: {$userstatus[profileprogress]}%">
+            <span class="sr-only">{lang Information_complete} $userstatus[profileprogress]% </span>
+          </div>
+          <div class="progress-cover">{lang Information_complete} {$userstatus[profileprogress]}%</div>
+        </div>
+      </div>
+      <!--{/if}-->
+      <iframe id="frame_profile" name="frame_profile" style="display: none"></iframe>
+      <form id="accountform" name="accountform" class="row gx-3 gy-2 align-items-center" action="{MOD_URL}" method="post" enctype="multipart/form-data" target="frame_profile" onsubmit="clearErrorInfo();">
+        <input type="hidden" name="profilesubmit" value="true" />
+        <input type="hidden" name="formhash" value="{FORMHASH}" />
+         <input type="hidden" name="vid" value="$vid" />
+        
+        <div class="row mb-3">
+          <label class="col-sm-2">{lang username}</label>
+          <div class="col-sm-10"><strong><code>$_G[username]</code></strong>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-2">最近在线时间</label>
+          <div class="col-sm-10"><strong><code><!--{eval echo dgmdate($userstatus['lastvisit'])}--></code></strong>
+          </div>
+        </div>
+				<div class="row mb-3">
+          <label class="col-sm-2"><!--{if $users[regip]}-->{lang registration_time}<!--{else}-->{lang add_time}<!--{/if}--></label>
+          <div class="col-sm-10"><strong><code><!--{eval echo dgmdate($users['regdate'])}--></code></strong>
+          </div>
+        </div>
+				<div class="row mb-3">
+          <label class="col-sm-2">{lang email}</label>
+          <div class="col-sm-10"><strong><code>$space['email']</code></strong>
+          </div>
+        </div>
+        <!--{loop $settings $key $value}--> 
+        <!--{if $value[available]}-->
+        <div class="row mb-3" id="th_$key">
+          <label class="col-sm-2" for="$key" >$value[title]<!--{if $value[required]}--><span class="rq" title="{lang required}">*</span><!--{/if}--></label>
+					<div class="col-md-4 col-form-label">
+            $htmls[$key]
+          </div>
+					<div class="col-md-4 col-form-label">
+            <!--{if $vid || $key=='department'}-->
+            <input type="hidden" name="privacy[$key]" value="$privacy[$key]" />
+            <!--{else}-->
+            <select name="privacy[$key]" class="form-select" style="width:80px;">
+                <!--{loop $_config['profile']['privacy'] $k $v}-->
+                <option value="$k" {if $privacy[$key] == $k} selected="selected"{/if}>$v</option>
+                <!--{/loop}-->
+            </select>
+            <!--{/if}-->
+          </div>
+          </div>
+        <!--{/if}-->
+        <!--{/loop}--> 
+        <!--{if in_array('timeoffset', $allowitems)}-->
+          <div class="row mb-3">
+              <label class="col-sm-2">{lang time_zone}</label>
+              <div class="col-md-4 col-form-label">
+                  <!--{eval $timeoffset = array({lang timezone});}-->
+                  <select name="timeoffset" class="form-select">
+                      <!--{loop $timeoffset $key $desc}-->
+                      <option value="$key" {if $key==$space[timeoffset]} selected="selected" {/if}>$desc</option>
+                      <!--{/loop}-->
+                  </select>
+                  <p class="mt10">{lang current_time} :
+                      <!--{date($_G[timestamp])}-->
+                  </p>
+                  <p class="gray">{lang time_zone_state}</p>
+              </div>
+          </div>
+          <!--{/if}-->
+        <!--{if !$vid || $showbtn}-->
+        <dl class="mb-3 d-grid">
+             <input type="submit" class="btn btn-primary" <!--{if $vid}-->value="{lang submit_audit}"<!--{else}-->value="{lang save}"<!--{/if}-->>
+        </dl>
+         <!--{/if}-->
+      </form>
+    </div>
+  </div>
+</div>
+</main>
+<script type="text/javascript">
+jQuery(document).on('blur','.has-error .form-control',function(){
+	if(this.value) jQuery(this).closest('.form-group').removeClass('has-error');
+});
+function show_error(fieldid, extrainfo) {
+	var elem = jQuery('#th_'+fieldid);
+	if(elem) {
+		elem.addClass('has-error');
+		elem.title = elem.innerHTML;
+		extrainfo = (typeof extrainfo == "string") ? extrainfo : "";
+		
+		document.getElementById('showerror_'+fieldid).innerHTML = "{lang check_date_item} " + extrainfo;
+		$(fieldid).focus();
+	}
+}
+function show_success(message) {
+	message = message == '' ? '{lang update_date_success}' : message;
+	showDialog(message, 'right', '{lang reminder}', function(){
+		window.location.href=window.location.href;
+	}, 0, null, '', '', '', '', 3);
+}
+function clearErrorInfo() {
+	jQuery('.has-error').removeClass('has-error');
+}
+</script>
+<!--日期选择器js-->
+<script type="text/javascript" src="static/lyear/js/bootstrap-datepicker/bootstrap-datepicker.min.js?{VERHASH}"></script>
+<script type="text/javascript" src="static/lyear/js/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js?{VERHASH}"></script>
+<!--{template lyear:footer_simple}--> 

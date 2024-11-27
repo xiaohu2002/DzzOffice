@@ -2,6 +2,7 @@
 if (!defined('IN_DZZ')) {
     exit('Access Denied');
 }
+$navtitle = lang('app_name');
 $uid = $_G['uid'];
 $space = dzzgetspace($uid);
 $space['self']=intval($space['self']);

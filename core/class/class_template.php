@@ -97,21 +97,34 @@ class template {
 	}
     //解析模板路径
     private function parse_tplfile($tplfile, $tpldir = '',$master_template = false,$nomasttplfile = false){
-        if(!$tpldir){
-            if( defined('CURSCRIPT') && defined('CURMODULE') && file_exists (DZZ_ROOT.'./'.CURSCRIPT.'/'.CURMODULE.'/template/'.$tplfile.'.htm')){
-				$tpldir= './'.CURSCRIPT.'/'.CURMODULE.'/template/';
-				if($master_template)$this->tplkey=CURSCRIPT.'_'.str_replace('/','_',CURMODULE);
-			}elseif(defined('CURSCRIPT') && file_exists (DZZ_ROOT.'./'.CURSCRIPT.'/template/'.$tplfile.'.htm')){
-				$tpldir= './'.CURSCRIPT.'/template/';
-				if($master_template)$this->tplkey=CURSCRIPT;
-			}elseif(file_exists (DZZ_ROOT.'./core/template/default/'.$tplfile.'.htm')){
-				$tpldir= './core/template/default/';
-				if($master_template)$this->tplkey='core';
-			}elseif(file_exists (DZZ_ROOT.'./core/template/default/common/'.$tplfile.'.htm')){
-				$tpldir= './core/template/default/common/';
-				if($master_template)$this->tplkey='corecommon';
-		  	}
-        }
+		if($tpldir && defined('CURSCRIPT') && defined('CURMODULE') && file_exists (DZZ_ROOT.'./'.CURSCRIPT.'/'.CURMODULE.'/template/'.$tpldir.'/'.$tplfile.'.htm')){
+			$tpldir= './'.CURSCRIPT.'/'.CURMODULE.'/template/'.$tpldir.'/';
+			if($master_template)$this->tplkey=CURSCRIPT.'_'.str_replace('/','_',CURMODULE).'_'.str_replace('/','_',$tpldir);
+		}elseif(defined('CURSCRIPT') && defined('CURMODULE') && file_exists (DZZ_ROOT.'./'.CURSCRIPT.'/'.CURMODULE.'/template/'.$tplfile.'.htm')){
+			$tpldir= './'.CURSCRIPT.'/'.CURMODULE.'/template/';
+			if($master_template)$this->tplkey=CURSCRIPT.'_'.str_replace('/','_',CURMODULE);
+		}elseif($tpldir && defined('CURSCRIPT') && file_exists (DZZ_ROOT.'./'.CURSCRIPT.'/template/'.$tpldir.'/'.$tplfile.'.htm')){
+			$tpldir= './'.CURSCRIPT.'/template/'.$tpldir.'/';
+			if($master_template)$this->tplkey=CURSCRIPT.'_'.str_replace('/','_',$tpldir);
+		}elseif(defined('CURSCRIPT') && file_exists (DZZ_ROOT.'./'.CURSCRIPT.'/template/'.$tplfile.'.htm')){
+			$tpldir= './'.CURSCRIPT.'/template/';
+			if($master_template)$this->tplkey=CURSCRIPT;
+		}elseif($tpldir && file_exists (DZZ_ROOT.'./core/template/'.$tpldir.'/'.$tplfile.'.htm')){
+			$tpldir= './core/template/'.$tpldir.'/';
+			if($master_template)$this->tplkey='core'.'_'.str_replace('/','_',$tpldir);
+		}elseif(file_exists (DZZ_ROOT.'./core/template/'.$tplfile.'.htm')){
+			$tpldir= './core/template/';
+			if($master_template)$this->tplkey='core';
+		}elseif($tpldir && file_exists (DZZ_ROOT.'./core/template/'.$tpldir.'/common/'.$tplfile.'.htm')){
+			$tpldir= './core/template/'.$tpldir.'/common/';
+			if($master_template)$this->tplkey='corecommon'.'_'.str_replace('/','_',$tpldir);
+		}elseif(file_exists (DZZ_ROOT.'./core/template/default/'.$tplfile.'.htm')){
+			$tpldir= './core/template/default/';
+			if($master_template)$this->tplkey='core';
+		}elseif(file_exists (DZZ_ROOT.'./core/template/default/common/'.$tplfile.'.htm')){
+			$tpldir= './core/template/default/common/';
+			if($master_template)$this->tplkey='corecommon';
+		}
         $file = $tplfile;
         $tplfile = $tpldir.$tplfile.'.htm';
         $basefile = basename(DZZ_ROOT . $tplfile, '.htm');
@@ -134,7 +147,13 @@ class template {
     }
 	//读取模板内容
 	private function parse_template_include($tpl){
-        $template = $this->parse_tplfile($tpl,'',false,true);
+		global $_G;
+		if(strpos($tpl, ':') !== false) {
+			list($templateid, $tpl) = explode(':', $tpl);
+			$tpldir = $templateid;
+			$tpl = $tpl;
+		}
+        $template = $this->parse_tplfile($tpl,$tpldir,false,true);
         $this->includeTemplate[$template] = filemtime($template);
         if(!is_file($template) || !$fp = fopen($template, 'r')){
             return;

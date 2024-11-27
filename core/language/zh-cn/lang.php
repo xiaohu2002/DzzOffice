@@ -1509,6 +1509,9 @@ $_G[siteurl]',
 	'degree_exhaust'=>'次数用尽',
 	'short'=>'短链接',
 	'logs_lpp' => '每页显示',
+	'founder_upgrade_normal' => '正常',
+	'logs_invite_status_4' => '已过期',
+	'del_share'=>'删除分享',
 );
 
 ?>

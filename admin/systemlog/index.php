@@ -129,7 +129,7 @@ if($type=="list"){
 			$log[3] = $usergroup[$log[3]];
 			$list[$k]=$log;
 		}
-		$multipage = multi($count, $lpp, $page, $theurl,'justify-content-end'); 
+		$multipage = multi($count, $lpp, $page, $theurl,'pull-right'); 
     }
 	include template('list');
 }

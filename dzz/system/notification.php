@@ -99,12 +99,12 @@ if($filter=='new'){//列出所有新通知
     $next=false;
     if($count && $count>$start+count($list)) $next=true;
     $theurl = DZZSCRIPT . "?" . url_implode ($gets);//分页链接
-    $multi = multi($count , $perpage ,$page, $theurl,'justify-content-end');
+    $multi = multi($count , $perpage ,$page, $theurl,'pull-right');
     include template('notification_list');
     dexit();
 }
 if ($template == '1') {
-    include template('lyear_notification');
+    include template('lyear_notification','lyear');
 } else {
     include template('notification');
 }

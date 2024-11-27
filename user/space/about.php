@@ -46,7 +46,7 @@ $version='V'.CORE_VERSION;
 //站点logo,留空不显示
 //
 if ($template == '1') {
-    include template('lyear/about');
+    include template('lyear_about','lyear');
 } else {
     if ($ismobile && !$_GET['inajax']) {
 		include template('mobile_about');

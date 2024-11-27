@@ -11,7 +11,7 @@ if(!defined('IN_DZZ')) {
 }
 $template = isset($_GET['template']) ? $_GET['template'] : '';
 if ($template == '1') {
-    include template('lyear_navmenu');
+    include template('lyear_navmenu','lyear');
 } else {
     include template('navmenu');
 }

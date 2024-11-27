@@ -89,15 +89,15 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 			$birthdayhtml .= "<option value=\"$i\"$selectstr>$i</option>";
 		}
 		$html = '<div class="input-group mb-3 profile-group-birthday">'
-					.'<select name="birthyear" id="birthyear"  onchange="showbirthday();" class="form-select input-sm pull-left profile profile-birthyear"  style="width:80px;margin-right:5px;">'
+					.'<select name="birthyear" id="birthyear"  onchange="showbirthday();" class="form-select form-control input-sm pull-left profile profile-birthyear"  style="width:80px;margin-right:5px;">'
 					.'<option value="">'.lang('year').'</option>'
 					.$birthyeayhtml
 					.'</select>'
-					.'<select name="birthmonth" id="birthmonth"  onchange="showbirthday();"  class="form-select input-sm pull-left profile profile-birthmonth"    style="width:60px;margin-right:5px;">'
+					.'<select name="birthmonth" id="birthmonth"  onchange="showbirthday();"  class="form-select form-control input-sm pull-left profile profile-birthmonth"    style="width:60px;margin-right:5px;">'
 					.'<option value="">'.lang('month').'</option>'
 					.$birthmonthhtml
 					.'</select>'
-					.'<select name="birthday" id="birthday" class="form-select input-sm pull-left profile profile-birthday"    style="width:60px">'
+					.'<select name="birthday" id="birthday" class="form-select form-control input-sm pull-left profile profile-birthday"    style="width:60px">'
 					.'<option value="">'.lang('day').'</option>'
 					.$birthdayhtml
 					.'</select>'
@@ -109,7 +109,7 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 			return '<p class="form-control-static profile profile-'.$fieldid.'">'.lang('gender_'.intval($space[$fieldid])).'</span><input type="hidden" name="'.$fieldid.'" value="'.$space[$fieldid].'" />';
 		}
 		$selected = array($space[$fieldid]=>' selected="selected"');
-		$html = '<select name="gender" id="gender" class="form-select input-sm  profile profile-'.$fieldid.'" >';
+		$html = '<select name="gender" id="gender" class="form-select form-control input-sm  profile profile-'.$fieldid.'" >';
 		if($field['unchangeable']) {
 			$html .= '<option value="">'.lang('gender').'</option>';
 		} else {
@@ -154,14 +154,14 @@ function profile_setting($fieldid, $space=array(), $showstatus=false, $ignoreunc
 			$html = "<textarea name=\"$fieldid\"  id=\"$fieldid\" class=\"form-control input-sm profile profile-$fieldid\" rows=\"3\"   >$space[$fieldid]</textarea>";
 		} elseif($field['formtype']=='select') {
 			$field['choices'] = explode("\n", $field['choices']);
-			$html = "<select name=\"$fieldid\" id=\"$fieldid\" class=\"form-select input-sm profile profile-$fieldid\" >";
+			$html = "<select name=\"$fieldid\" id=\"$fieldid\" class=\"form-select form-control input-sm profile profile-$fieldid\" >";
 			foreach($field['choices'] as $op) {
 				$html .= "<option value=\"$op\"".($op==$space[$fieldid] ? 'selected="selected"' : '').">$op</option>";
 			}
 			$html .= '</select>';
 		} elseif($field['formtype']=='list') {
 			$field['choices'] = explode("\n", $field['choices']);
-			$html = "<select name=\"{$fieldid}[]\" id=\"$fieldid\"  class=\"form-select input-sm profile profile-$fieldid\"  multiple=\"multiplue\" >";
+			$html = "<select name=\"{$fieldid}[]\" id=\"$fieldid\"  class=\"form-select form-control input-sm profile profile-$fieldid\"  multiple=\"multiplue\" >";
 			$space[$fieldid] = explode("\n", $space[$fieldid]);
 			foreach($field['choices'] as $op) {
 				$html .= "<option value=\"$op\"".(in_array($op, $space[$fieldid]) ? 'selected="selected"' : '').">$op</option>";
@@ -352,7 +352,7 @@ function showdistrict($values, $elems=array(), $container='districtbox', $showle
 		$level = $i+1;
 		if(!empty($options[$level])) {
 			$jscall = "showdistrict('$container', ['$elems[0]', '$elems[1]', '$elems[2]', '$elems[3]'], $showlevel, $level, '$containertype')";
-			$html .= '<select name="'.$elems[$i].'" id="'.$elems[$i].'" class="form-select" style="width:100px;" onchange="'.$jscall.'" >';
+			$html .= '<select name="'.$elems[$i].'" id="'.$elems[$i].'" class="form-select form-control" style="width:100px;" onchange="'.$jscall.'" >';
 			$html .= '<option value="">'.lang('district_level_'.$level).'</option>';
 			foreach($options[$level] as $option) {
 				$selected = $option[0] == $values[$i] ? ' selected="selected"' : '';

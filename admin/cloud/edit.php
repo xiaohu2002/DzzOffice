@@ -52,7 +52,7 @@ if($_GET['do']=='usercloud'){
 			$value1['dateline']=dgmdate($value1['dateline']);
 			$list[]=$value1;
 		}
-		$multi=multi($count, $perpage, $page, $theurl,'justify-content-end');
+		$multi=multi($count, $perpage, $page, $theurl,'pull-right');
 		include template('edit');
 	}
 }elseif($_GET['do']=='getBucket'){

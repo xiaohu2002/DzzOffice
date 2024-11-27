@@ -12449,3 +12449,7 @@ fieldset:disabled .btn {
 .seccode-wrapper .mdi.mdi-close-circle {
     color: #FF0000;
 }
+
+.pull-right {
+    justify-content: flex-end !important;
+}

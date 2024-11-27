@@ -26,7 +26,7 @@
 		<div class="main-title">$_G[setting][loginset][title]</div>
 		<!--{/if}--> 
 		<div class="sub-title">请选择下列用户登录</div>
-		<!--{if $_G[setting]['bbclosed']}-->
+		<!--{if $_G[setting][bbclosed]}-->
 		<div class="text-danger">{lang site_closed_please_admin}</div>
 		<!--{else}-->	
 		<form method="post"  name="login" id="loginform_$loginhash" class="loginForm" role="form" action="login.php" onsubmit="if(this.uid.value=='') return false">
@@ -40,7 +40,7 @@
 				
 				<!--{loop $val[users] $k $v}-->		
 				<li><a data-uid="40" class="user-a" onClick="$('#login_uid').val('$v[uid]');$('#loginsubmit').removeClass('disabled');$(this).closest('.user-ul').find('li').removeClass('hover');$(this).parent().addClass('hover')">
-					<span class="cavatar">{eval echo avatar_block($v['uid']);}</span>
+					<span class="cavatar">{eval echo avatar_block($v[uid]);}</span>
 					<span class="cusername">
 						<span class="username">$v[username]</span>
 						<span class="orgname">$val[path]</span>

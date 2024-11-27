@@ -1,5 +1,25 @@
 @charset "utf-8";
 /* CSS Document */
+html, body {
+	overflow: hidden;
+	word-break:break-all;
+	background:#FFF;
+}
+
+.navbar-brand{
+	padding-left:50px;
+	position:relative;
+	
+}
+.navbar-brand .logo{
+	position:absolute;
+	left:0;top:0;
+	padding:5px;
+	width:50px;
+	height:50px;
+}
+
+
 .img_236{
 	max-width: 236px;
 }
@@ -118,6 +138,7 @@
 }
 
 .document-header{
+	
 	padding:0;
 	position:relative;
 	margin:0;
@@ -237,6 +258,9 @@ span.attach-item img{
 
 
 /*12.12修改*/
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+	white-space:nowrap;
+}
 .group-td-wrapper{
 	max-width:120px;
 	white-space:normal;
@@ -267,6 +291,16 @@ span.attach-item img{
 	overflow: hidden;
     text-overflow: ellipsis;
 }
+.app-info>a{
+	color:#999;
+	line-height: 34px;
+}
+.app-info .select-info{
+	position:absolute;
+	left:0;
+	top:0;
+	display:none;
+}
 span.num {
 	color:#4A89FD;
 	font-weight:700;
@@ -274,6 +308,19 @@ span.num {
 	margin:0;
 
 }
+.main-header{
+	padding:5px
+}
+.main-header>div{
+	line-height:34px;
+	/*margin:0 5px;*/
+}
+.checkbox-custom{
+	margin-bottom:0;	
+	margin-top:0;
+}
+
+
 
 .appname{
 	margin:0;
@@ -301,4 +348,15 @@ span.num {
 .btn-top a{
 	margin-right: 10px;
 }
+.all-center-top{
+	padding: 13px;
+	position:relative;
+}
+
+
+
+
+
+
+
 /*结束*/

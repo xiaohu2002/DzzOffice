@@ -66,6 +66,7 @@ html, body {
 }
 .module-list-view .title {
 	background: #F7F7F7;
+	color: #888;
 	border-bottom:1px solid #e1e1e1;
 }
 .module-list-view .title .asc {

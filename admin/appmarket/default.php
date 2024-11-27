@@ -107,7 +107,7 @@ $apps = array();
 
 if ($count = DB::result_first("SELECT COUNT(*) FROM " . DB::table('app_market') . " WHERE $sql ")) {
 	$apps = DB::fetch_all("SELECT * FROM " . DB::table('app_market') . " WHERE $sql $order limit $start,$perpage");
-	$multi = multi($count, $perpage, $page, $theurl, 'justify-content-end');
+	$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
 }
 $orgs = array();
  foreach(DB::fetch_all("select a.appid,o.orgid,o.orgname from %t a LEFT JOIN %t o ON o.orgid=a.orgid where 1 ",array('app_organization','organization')) as $value) {

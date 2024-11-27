@@ -1,4 +1,4 @@
-<!--{template lyear/header_simple}-->
+<!--{template common/header_simple_start}-->
 <link href="static/jstree/themes/default/style.min.css?{VERHASH}" rel="stylesheet" media="all">
 <style>
 body{
@@ -121,6 +121,7 @@ var moderator=parseInt('$_GET[moderator]')>0?1:0;
 var callback_url = '{$callback_url}';
 var ismobile='$ismobile'?1:0;
 </script>
+<!--{template common/header_simple_end}-->
 <div id="orgtree" class="orgtree-container" style=""></div>
 <!--{if intval($_GET['nosearch'])<1}-->
 <div  class="orgtree-search">
@@ -169,11 +170,11 @@ jQuery(document).ready(function(e) {
                 "valid_children": ['depart','folder']
             },
             "group": {//群组
-                "icon": "mdi mdi-account",
+                "icon": "dzz dzz-group",
                 "valid_children": ['folder']
             },
             "default": {//我的网盘
-                "icon": "mdi mdi-account",
+                "icon": "dzz dzz-account-circle",
                 "valid_children": ['folder']
             },
         },

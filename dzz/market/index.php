@@ -68,7 +68,7 @@ if (!$_G['uid']) {//游客
 }
 if ($count = DB::result_first("SELECT COUNT(*) FROM %t WHERE  $sql ",$param)) {
 	$apps = DB::fetch_all("SELECT * FROM %t WHERE  $sql  $order limit $start,$perpage",$param);
-	$multi = multi($count, $perpage, $page, $theurl, 'justify-content-end');
+	$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
 }
 $list = array();
 //$grouptitle=array('0'=>'全部','-1'=>'仅游客可用','1'=>'成员可用','2'=>'部门管理员可用','3'=>'仅系统管理员可用');

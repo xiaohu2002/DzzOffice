@@ -179,7 +179,7 @@ if (!submitcheck('verifysubmit', true)) {
 				//showtablerow("id=\"mod_$value[uid]_row\"", $cssarr, $valuearr);
 			}
 		}
-		$multi = multi($count, $perpage, $page, $thurl, 'justify-content-end');
+		$multi = multi($count, $perpage, $page, $thurl, 'pull-right');
 	}
 
 } else {

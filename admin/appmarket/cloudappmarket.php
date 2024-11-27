@@ -30,7 +30,7 @@ if( $json["status"]==1){
 	$total = $json["data"]["total"];
 	$perpage = $json["data"]["perpage"]; 
 	$theurl = MOD_URL."&op=cloudappmarket"; 
-	$multi=multi($total, $perpage, $page, $theurl,'justify-content-end');
+	$multi=multi($total, $perpage, $page, $theurl,'pull-right');
 }
 //print_r($list);exit;
 $local_applist=DB::fetch_all("select * from %t where 1",array('app_market'));//C::tp_t("app_market")->select();

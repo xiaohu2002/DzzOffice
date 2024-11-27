@@ -57,7 +57,7 @@ if ($group) {
 }
 if ($count = DB::result_first("SELECT COUNT(*) FROM %t WHERE ".$string,$param)) {
 	$apps = DB::fetch_all("SELECT * FROM %t WHERE ".$string." $order limit $start,$perpage",$param);
-	$multi = multi($count, $perpage, $page, $theurl, 'justify-content-end');
+	$multi = multi($count, $perpage, $page, $theurl, 'pull-right');
 }
 
 $list = array();

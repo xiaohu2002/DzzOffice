@@ -79,7 +79,7 @@ if($operation == 'app'){
 		} 
 	}
 	if ($template == '1') {
-		include template('lyear_app_ajax');
+		include template('lyear_app_ajax','lyear');
 	} else {
 		include template('app_ajax');
 	}
