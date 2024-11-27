@@ -52,7 +52,7 @@ if($_GET['action'] == 'checkupgrade') {
 			$html=' <div class="panel panel-warning" style="margin:0;min-width:300px;">';
 			$html.=' <div class="panel-heading" style="border-radius:0">';
 			$html.=     lang('upgrade_notice_title');
-			$html.='     <button type="button" class="close" onclick="jQuery(\'#systemNotice\').hide();setcookie(\'upgradenotice\',1,3600);"><span aria-hidden="true">×</span></button>';
+			$html.='     <button type="button" class="btn-close" onclick="jQuery(\'#systemNotice\').hide();setcookie(\'upgradenotice\',1,3600);"></button>';
 			$html.=' </div>';
 			$html.=' <div class="panel-body" style="padding:0;max-height:500px;overflow-y:auto">';
 			$html.='  <table class="table table-hover" style="margin:0">';
@@ -68,9 +68,7 @@ if($_GET['action'] == 'checkupgrade') {
 			$html.='</div>';
 		}
 	}
-	//include template('common/header_ajax');
 	echo $html;
-	//include template('common/footer_ajax');
 	exit;
 
 } elseif($_GET['action'] == 'appnotice') {

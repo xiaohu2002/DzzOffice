@@ -422,8 +422,8 @@ elseif ($operation == 'showupgrade') {
                 $list[$type]['btn1'] = lang('founder_upgrade_require_config') . ' php v' . PHP_VERSION . 'MYSQL v' . $dbversion;
             } else {
                 $list[$type]['title'] = 'DzzOffice' . $upgrade['latestversion'] . '_' . $locale . '_' . $charset;
-                $list[$type]['btn1'] = '<input type="button" class="btn btn-success" onclick="confirm(\'' . lang('founder_upgrade_backup_remind') . '\') ? window.location.href=\'' . $linkurl . '\' : \'\';" value="' . lang('founder_upgrade_automatically') . '">';
-                $list[$type]['official'] = '<a class="btn btn-link" href="' . $upgrade['official'] . '" target="_blank">' . lang('founder_upgrade_manually') . '</a>';
+                $list[$type]['btn1'] = '<input type="button" class="btn btn-primary" onclick="confirm(\'' . lang('founder_upgrade_backup_remind') . '\') ? window.location.href=\'' . $linkurl . '\' : \'\';" value="' . lang('founder_upgrade_automatically') . '">';
+                $list[$type]['official'] = '<a class="btn btn-success" href="' . $upgrade['official'] . '" target="_blank">' . lang('founder_upgrade_manually') . '</a>';
             }
         }
     } else {
