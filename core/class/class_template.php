@@ -97,27 +97,34 @@ class template {
 	}
     //解析模板路径
     private function parse_tplfile($tplfile, $tpldir = '',$master_template = false,$nomasttplfile = false){
+		if ($tpldir) {
+			if (strpos($tpldir, '/') !== false) {
+				$tpldirkey = str_replace('/', '_', $tpldir);
+			}else{
+				$tpldirkey = $tpldir;
+            }
+		}
 		if($tpldir && defined('CURSCRIPT') && defined('CURMODULE') && file_exists (DZZ_ROOT.'./'.CURSCRIPT.'/'.CURMODULE.'/template/'.$tpldir.'/'.$tplfile.'.htm')){
 			$tpldir= './'.CURSCRIPT.'/'.CURMODULE.'/template/'.$tpldir.'/';
-			if($master_template)$this->tplkey=CURSCRIPT.'_'.str_replace('/','_',CURMODULE);
+			if($master_template)$this->tplkey=CURSCRIPT.'_'.str_replace('/','_',CURMODULE).'_'.$tpldirkey;
 		}elseif(defined('CURSCRIPT') && defined('CURMODULE') && file_exists (DZZ_ROOT.'./'.CURSCRIPT.'/'.CURMODULE.'/template/'.$tplfile.'.htm')){
 			$tpldir= './'.CURSCRIPT.'/'.CURMODULE.'/template/';
 			if($master_template)$this->tplkey=CURSCRIPT.'_'.str_replace('/','_',CURMODULE);
 		}elseif($tpldir && defined('CURSCRIPT') && file_exists (DZZ_ROOT.'./'.CURSCRIPT.'/template/'.$tpldir.'/'.$tplfile.'.htm')){
 			$tpldir= './'.CURSCRIPT.'/template/'.$tpldir.'/';
-			if($master_template)$this->tplkey=CURSCRIPT;
+			if($master_template)$this->tplkey=CURSCRIPT.'_'.$tpldirkey;
 		}elseif(defined('CURSCRIPT') && file_exists (DZZ_ROOT.'./'.CURSCRIPT.'/template/'.$tplfile.'.htm')){
 			$tpldir= './'.CURSCRIPT.'/template/';
 			if($master_template)$this->tplkey=CURSCRIPT;
 		}elseif($tpldir && file_exists (DZZ_ROOT.'./core/template/'.$tpldir.'/'.$tplfile.'.htm')){
 			$tpldir= './core/template/'.$tpldir.'/';
-			if($master_template)$this->tplkey='core';
+			if($master_template)$this->tplkey='core'.'_'.$tpldirkey;
 		}elseif(file_exists (DZZ_ROOT.'./core/template/'.$tplfile.'.htm')){
 			$tpldir= './core/template/';
 			if($master_template)$this->tplkey='core';
 		}elseif($tpldir && file_exists (DZZ_ROOT.'./core/template/'.$tpldir.'/common/'.$tplfile.'.htm')){
 			$tpldir= './core/template/'.$tpldir.'/common/';
-			if($master_template)$this->tplkey='corecommon';
+			if($master_template)$this->tplkey='corecommon'.'_'.$tpldirkey;
 		}elseif(file_exists (DZZ_ROOT.'./core/template/default/'.$tplfile.'.htm')){
 			$tpldir= './core/template/default/';
 			if($master_template)$this->tplkey='core';
