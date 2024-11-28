@@ -287,6 +287,9 @@ if (!submitcheck('settingsubmit')) {
 	}
 	if ($settings) {
 		C::t('setting') -> update_batch($settings);
+		if($settings['template']!=$setting['template']) {
+			cleartemplatecache();
+		}
 	}
 	if($operation == 'basic'){
 		if($settingnew['sitelogo'] && $settingnew['sitelogo']!=$setting['sitelogo']){

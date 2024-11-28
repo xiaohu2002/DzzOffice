@@ -411,22 +411,22 @@ class table_user extends dzz_table
 
 	
 
-	public function insert($uid, $return_insert_id = false, $replace = false, $silent = false, $adminid = 0) {
+	public function insert($uid, $ip = false, $groupid = false, $extdata = false, $adminid = 0) {
 		if(($uid = dintval($uid))) {
-			$profile = isset($silent['profile']) ? $silent['profile'] : array();
+			$profile = isset($extdata['profile']) ? $extdata['profile'] : array();
 			//$profile['uid'] = $uid;
 			$base = array(
 				'uid' => $uid,
 				'adminid' => intval($adminid),
-				'groupid' => intval($replace),
+				'groupid' => intval($groupid),
 				'regdate' => TIMESTAMP,
-				'emailstatus' => intval($silent['emailstatus']),
+				'emailstatus' => intval($extdata['emailstatus']),
 				
 			);
 			$status = array(
 				'uid' => $uid,
-				'regip' => (string)$return_insert_id,
-				'lastip' => (string)$return_insert_id,
+				'regip' => (string)$ip,
+				'lastip' => (string)$ip,
 				'lastvisit' => TIMESTAMP,
 				'lastactivity' => TIMESTAMP,
 				'lastsendmail' => 0
