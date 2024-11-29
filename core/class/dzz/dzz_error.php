@@ -270,12 +270,11 @@ if(!empty($errormsg)) {
 		}
 		echo '<div class="help">'.lang('suggestion_user').'</div>';
 		echo '<div class="help">'.lang('suggestion').'</div>';
-		$helplink = '';
 		echo $gziperror;
 
 		$endmsg = lang('error_end_message', array('host'=>$host));
 		echo <<<EOT
-<div class="help">$endmsg  $helplink</div>
+<div class="help">$endmsg</div>
 </div>
 </body>
 </html>

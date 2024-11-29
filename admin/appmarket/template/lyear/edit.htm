@@ -27,6 +27,7 @@
 <main class="bs-main-container">
 	<div class="container-fluid">
 	  <div class="card">
+      <div class="container">
       <header class="card-header">
         <!--{if !$appid}-->
         <h4 class="main-header-title navbar-left">{lang add_app}</h4>			
@@ -41,236 +42,237 @@
         </div>
         <!--{/if}-->
       </header>
-		<div class="card-body">
-      <form id="appform" name="appform" class="form-horizontal-left form-horizontal" action="{MOD_URL}&op=edit&appid=$appid" method="post" enctype="multipart/form-data" onsubmit="return validate(this)">
-        <input type="hidden" name="appsubmit" value="true" />
-        <input type="hidden" name="appid" value="$appid" />
-        <input type="hidden" name="refer" value="$refer" />
-        <input type="hidden" name="formhash" value="{FORMHASH}" />
-        <div class="row mb-3">
-          <label for="appname" class="col-sm-2">{lang application_name}</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="appname" name="appname" autocomplete="off" value="$app[appname]">
-          </div>
-          <span class="form-text"></span> 
-        </div>
-        <div class="row mb-3">
-          <label for="identifier" class="col-sm-2">{lang application_identifier}</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="identifier" name="identifier" autocomplete="off" value="$app[identifier]">
-            <ul class="form-text">
-              {lang app_application_identifier_text}
-            </ul>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="app_path" class="col-sm-2">{lang application_app_path}</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="app_path" name="app_path" autocomplete="off" value="$app[app_path]">
-            <ul class="form-text">
-              {lang app_application_app_path_text}
-            </ul>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="appurl" class="col-sm-2">{lang application_site}</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="appurl" name="appurl" autocomplete="off" value="$app[appurl]">
-            <ul class="form-text">
-              {lang app_application_site_text}
-            </ul>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="appadminurl" class="col-sm-2">{lang application_appadminurl}</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="appadminurl" name="appadminurl" autocomplete="off" value="$app[appadminurl]">
-            <ul class="form-text">
-              {lang app_application_appadminurl_text}
-            </ul>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="vendor" class="col-sm-2">{lang supplier}</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="vendor" name="vendor" autocomplete="off" value="$app[vendor]">
-            <span class="form-text">{lang application_provider_name}</span>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label class="col-sm-2">{lang application_ico}</label>
-          <div class="col-sm-10">
-            <!--{if $appid>0}-->
-              <input id="fileiz_0" class="form-control" name="TMPiconnew" value="" style="display: none;" type="file">
-              <input id="fileiz_1" class="form-control" style="" name="iconnew" value="$app[appico]" type="text">
-              <a id="fileiz_0a" style="" href="javascript:;" onclick="document.getElementById('fileiz_1a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_1').name = 'TMPiconnew';document.getElementById('fileiz_0').name = 'iconnew';document.getElementById('fileiz_0').style.display = '';document.getElementById('fileiz_1').style.display = 'none'">{lang uploading}</a>&nbsp;
-              <a id="fileiz_1a" style="font-weight: bold;" href="javascript:;" onclick="document.getElementById('fileiz_0a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_0').name = 'TMPiconnew';document.getElementById('fileiz_1').name = 'iconnew';document.getElementById('fileiz_1').style.display = '';document.getElementById('fileiz_0').style.display = 'none'">{lang type_link}</a>
-            <!--{else}-->
-              <input id="fileiz_0" class="form-control" name="iconnew" value="" type="file">
-              <input id="fileiz_1" class="form-control" style="display: none;" name="TMPiconnew" value="$app[appico]" type="text">
-            <p>
-              <a id="fileiz_0a" style="font-weight: bold;" href="javascript:;" onclick="document.getElementById('fileiz_1a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_1').name = 'TMPiconnew';document.getElementById('fileiz_0').name = 'iconnew';document.getElementById('fileiz_0').style.display = '';document.getElementById('fileiz_1').style.display = 'none'">{lang uploading}</a>&nbsp;
-              <a id="fileiz_1a" style="" href="javascript:;" onclick="document.getElementById('fileiz_0a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_0').name = 'TMPiconnew';document.getElementById('fileiz_1').name = 'iconnew';document.getElementById('fileiz_1').style.display = '';document.getElementById('fileiz_0').style.display = 'none'">{lang type_link}</a>
-            </p>
-            <!--{/if}-->
-            <span class="form-text">{lang suggest_image_size}128X128 px</span>
-          <span class="form-text">
-            <!--{if $appid}--><img class="img_128_128" src="$app[appico]?t=$_G[timestamp]" >
-            <!--{else}--> <img class="img_128_128" src="dzz/images/default/icodefault.png" >
-            <!--{/if}-->
-            </span>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label class="col-sm-2">{lang group_permissions}</label>
-          <div class="col-sm-10">
-            <!--{loop $grouptitle $key $value}-->
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" class="form-check-input" id="group$key" name="group" value="$key" <!--{if $app[group]==$key}-->checked<!--{/if}--> onclick="{if $key==1}jQuery('#perm_depart').show();{else}jQuery('#perm_depart').hide();{/if}">
-              <label class="form-check-label" for="group$key">$value</label>
+      <div class="card-body">
+        <form id="appform" name="appform" class="form-horizontal-left form-horizontal" action="{MOD_URL}&op=edit&appid=$appid" method="post" enctype="multipart/form-data" onsubmit="return validate(this)">
+          <input type="hidden" name="appsubmit" value="true" />
+          <input type="hidden" name="appid" value="$appid" />
+          <input type="hidden" name="refer" value="$refer" />
+          <input type="hidden" name="formhash" value="{FORMHASH}" />
+          <div class="row mb-3">
+            <label for="appname" class="col-sm-2">{lang application_name}</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="appname" name="appname" autocomplete="off" value="$app[appname]">
             </div>
-            <!--{/loop}-->
-            <span class="form-text">{lang app_group_permissions}</span>
+            <span class="form-text"></span> 
           </div>
-        </div>
-        <div class="row mb-3" id="perm_depart" <!--{if $app[ 'group']!=1}-->style="display:none"<!--{/if}-->>
-          <label class="col-sm-2">{lang department_permissions}</label>
-          <div class="col-sm-10">
-            <div id="orgids">
-              <!--{loop $sel_org $value}-->
-              <button id="orgids_sl_$value[orgid]" type="button" class="btn btn-outline-secondary btn-sorg" data-val="$value['orgid']">
-                {eval echo avatar_group($value['orgid']);} $value[orgname] 
-                <a href="javascript:;" class="ibtn mdi mdi-close-circle "  title="{lang delete}" onclick="selorg.remove('orgids',this);"></a>
-              </button>
-              <!--{/loop}-->
+          <div class="row mb-3">
+            <label for="identifier" class="col-sm-2">{lang application_identifier}</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="identifier" name="identifier" autocomplete="off" value="$app[identifier]">
+              <ul class="form-text">
+                {lang app_application_identifier_text}
+              </ul>
             </div>
-            <div class="dropdown controls_adapt">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="orgids_Menu" data-bs-toggle="dropdown" aria-expanded="false">{lang please_select_a_organization_or_department}</button>
-              <div id="orgids_dropdown_menu" class="dropdown-menu org-sel-box" role="menu" aria-labelledby="orgids_Menu">
-                <iframe name="orgids_iframe" class="org-sel-box-iframe" src="index.php?mod=system&op=orgtree&ctrlid=orgids&multiple=1&nouser=1&stype=1" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true"></iframe>
+          </div>
+          <div class="row mb-3">
+            <label for="app_path" class="col-sm-2">{lang application_app_path}</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="app_path" name="app_path" autocomplete="off" value="$app[app_path]">
+              <ul class="form-text">
+                {lang app_application_app_path_text}
+              </ul>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="appurl" class="col-sm-2">{lang application_site}</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="appurl" name="appurl" autocomplete="off" value="$app[appurl]">
+              <ul class="form-text">
+                {lang app_application_site_text}
+              </ul>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="appadminurl" class="col-sm-2">{lang application_appadminurl}</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="appadminurl" name="appadminurl" autocomplete="off" value="$app[appadminurl]">
+              <ul class="form-text">
+                {lang app_application_appadminurl_text}
+              </ul>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="vendor" class="col-sm-2">{lang supplier}</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="vendor" name="vendor" autocomplete="off" value="$app[vendor]">
+              <span class="form-text">{lang application_provider_name}</span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2">{lang application_ico}</label>
+            <div class="col-sm-10">
+              <!--{if $appid>0}-->
+                <input id="fileiz_0" class="form-control" name="TMPiconnew" value="" style="display: none;" type="file">
+                <input id="fileiz_1" class="form-control" style="" name="iconnew" value="$app[appico]" type="text">
+                <a id="fileiz_0a" style="" href="javascript:;" onclick="document.getElementById('fileiz_1a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_1').name = 'TMPiconnew';document.getElementById('fileiz_0').name = 'iconnew';document.getElementById('fileiz_0').style.display = '';document.getElementById('fileiz_1').style.display = 'none'">{lang uploading}</a>&nbsp;
+                <a id="fileiz_1a" style="font-weight: bold;" href="javascript:;" onclick="document.getElementById('fileiz_0a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_0').name = 'TMPiconnew';document.getElementById('fileiz_1').name = 'iconnew';document.getElementById('fileiz_1').style.display = '';document.getElementById('fileiz_0').style.display = 'none'">{lang type_link}</a>
+              <!--{else}-->
+                <input id="fileiz_0" class="form-control" name="iconnew" value="" type="file">
+                <input id="fileiz_1" class="form-control" style="display: none;" name="TMPiconnew" value="$app[appico]" type="text">
+              <p>
+                <a id="fileiz_0a" style="font-weight: bold;" href="javascript:;" onclick="document.getElementById('fileiz_1a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_1').name = 'TMPiconnew';document.getElementById('fileiz_0').name = 'iconnew';document.getElementById('fileiz_0').style.display = '';document.getElementById('fileiz_1').style.display = 'none'">{lang uploading}</a>&nbsp;
+                <a id="fileiz_1a" style="" href="javascript:;" onclick="document.getElementById('fileiz_0a').style.fontWeight = '';this.style.fontWeight = 'bold';document.getElementById('fileiz_0').name = 'TMPiconnew';document.getElementById('fileiz_1').name = 'iconnew';document.getElementById('fileiz_1').style.display = '';document.getElementById('fileiz_0').style.display = 'none'">{lang type_link}</a>
+              </p>
+              <!--{/if}-->
+              <span class="form-text">{lang suggest_image_size}128X128 px</span>
+            <span class="form-text">
+              <!--{if $appid}--><img class="img_128_128" src="$app[appico]?t=$_G[timestamp]" >
+              <!--{else}--> <img class="img_128_128" src="dzz/images/default/icodefault.png" >
+              <!--{/if}-->
+              </span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2">{lang group_permissions}</label>
+            <div class="col-sm-10">
+              <!--{loop $grouptitle $key $value}-->
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" class="form-check-input" id="group$key" name="group" value="$key" <!--{if $app[group]==$key}-->checked<!--{/if}--> onclick="{if $key==1}jQuery('#perm_depart').show();{else}jQuery('#perm_depart').hide();{/if}">
+                <label class="form-check-label" for="group$key">$value</label>
               </div>
-            </div>
-            <input id="sel_orgids" name="orgids" type="hidden" value="$sel" />
-            <span class="form-text">{lang app_set_application_jurisdiction}</span>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label class="col-sm-2" for="tag">{lang application_label}</label>
-          <div class="col-sm-10">
-            <div class="input-group mb-3">
-              <input class="form-control" type="text" name="tag" id="tag" autocomplete="off" data-source="$tag_source" data-items="5" value="$app[tags]">
-            </div>
-            <ul class="form-text">
-              <li>{lang app_number_fields}</li>
-              <li>{lang app_clear_label}</li>
-            </ul>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label class="col-sm-2" for="fileext">{lang app_support_extension}</label>
-          <div class="col-sm-10">
-            <div class="input-group mb-3">
-              <input class="form-control" type="text" name="fileext" id="fileext" autocomplete="off" data-source="$fileext_source" value="$app[fileext]">
-            </div>
-            <ul class="form-text">
-            {lang app_not_allowed_open_text}
-            </ul>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label class="col-sm-2">{lang open_mode}</label>
-          <div class="col-sm-10">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio"id="open1" name="open" value="0" <!--{if $app[open]<1}-->checked<!--{/if}--> onclick="jQuery('#feature').show();">
-              <label class="form-check-label" for="open1">{lang app_internal_frame}</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio"id="open2" name="open" value="1" <!--{if $app[open]>0}-->checked<!--{/if}--> onclick="jQuery('#feature').hide();">
-              <label class="form-check-label" for="open2">{lang new_Window}</label>
-            </div>
-            <ul class="form-text">
-            {lang app_internal_frame_text}
-            </ul>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label class="col-sm-2">{lang app_application_library}</label>
-          <div class="col-sm-10">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio"id="hideInMarket1" name="hideInMarket" value="0" <!--{if $app[hideInMarket]<1}-->checked<!--{/if}-->>
-              <label class="form-check-label" for="hideInMarket1">{lang show}</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio"id="hideInMarket2" name="hideInMarket" value="1" <!--{if $app[hideInMarket]>0}-->checked<!--{/if}-->>
-              <label class="form-check-label" for="hideInMarket2">{lang hide}</label>
-            </div>
-            <span class="form-text">{lang app_application_library_text}</span>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label class="col-sm-2">{lang show_ico}</label>
-          <div class="col-sm-10">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio"id="isshow1" name="isshow" value="1" <!--{if $app[isshow]>0}-->checked<!--{/if}-->>
-              <label class="form-check-label" for="isshow1">{lang show}</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio"id="isshow2" name="isshow" value="0" <!--{if $app[isshow]<1}-->checked<!--{/if}-->>
-              <label class="form-check-label" for="isshow2">{lang hide}</label>
-            </div>
-            <span class="form-text">{lang app_show_ico_text}</span>
-          </div>
-        </div>
-      <div class="row mb-3">
-        <label class="col-sm-2" for="appdesc">{lang application_introduce}</label>
-        <div class="col-sm-10">
-          <textarea type="textarea" rows="3" class="form-control" name="appdesc" id="appdesc">$app[appdesc]</textarea>
-        </div>
-      </div>
-      <div id="pic_delete"></div>
-      <input id="editbutton" name="appbutton" value="{lang submit}" onclick="validate(this);" style="display: none;" type="button" />
-      </form>
-      <div class="form-horizontal-left form-horizontal">
-        <div class="row mb-3">
-          <label class="col-sm-2">{lang application_introduce_img}</label>
-          <div class="col-sm-10">
-            <!--{if $piclist}-->
-            <ul id="pic_container" class="thumbnails list-unstyled ml20">
-              <!--{loop $piclist $key $value}-->
-              <li class="wd120" style="margin:10px;width:90px;" id="pic_{$value[picid]}">
-                <div class="thumbnail text-center" style="margin-bottom:10px;">
-                  <img data_src="$value[pic]" src="$value[pic]" />
-                </div>
-                <p class="text-center">
-                  <a class="btn btn-primary" href="javascript:;" onclick="delete_pic(this,{$value[picid]})">{lang delete}</a>
-                </p>
-              </li>
               <!--{/loop}-->
-            </ul>
-            <!--{/if}-->
-            <table class="tb tb2 ">
-              <tbody id="attachbodyhidden" style="display:none">
-                <tr class="noborder">
-                  <td class="tb27">
-                    <form method="post" autocomplete="off" id="upload" action="{MOD_URL}&op=$op&do=upload" enctype="multipart/form-data" target="uploadframe">
-                      <input type="file" name="attach" class="pf" size="0" />
-                      <span id="localfile"></span>
-                      <input type="hidden" name="uploadsubmit" id="uploadsubmit" value="true" />
-                      <input type="hidden" name="formhash" value="{FORMHASH}" />
-                    </form>
-                  </td>
-                </tr>
-              </tbody>
-              <tbody id="attachbody"></tbody>
-            </table>
-            <script src="admin/scripts/uploadpic.js?{VERHASH}" type="text/javascript"></script>
-            <iframe id="uploadframe" name="uploadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
+              <span class="form-text">{lang app_group_permissions}</span>
+            </div>
+          </div>
+          <div class="row mb-3" id="perm_depart" <!--{if $app[ 'group']!=1}-->style="display:none"<!--{/if}-->>
+            <label class="col-sm-2">{lang department_permissions}</label>
+            <div class="col-sm-10">
+              <div id="orgids">
+                <!--{loop $sel_org $value}-->
+                <button id="orgids_sl_$value[orgid]" type="button" class="btn btn-outline-secondary btn-sorg" data-val="$value['orgid']">
+                  {eval echo avatar_group($value['orgid']);} $value[orgname] 
+                  <a href="javascript:;" class="ibtn mdi mdi-close-circle "  title="{lang delete}" onclick="selorg.remove('orgids',this);"></a>
+                </button>
+                <!--{/loop}-->
+              </div>
+              <div class="dropdown controls_adapt">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="orgids_Menu" data-bs-toggle="dropdown" aria-expanded="false">{lang please_select_a_organization_or_department}</button>
+                <div id="orgids_dropdown_menu" class="dropdown-menu org-sel-box" role="menu" aria-labelledby="orgids_Menu">
+                  <iframe name="orgids_iframe" class="org-sel-box-iframe" src="index.php?mod=system&op=orgtree&ctrlid=orgids&multiple=1&nouser=1&stype=1" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" allowtransparency="true"></iframe>
+                </div>
+              </div>
+              <input id="sel_orgids" name="orgids" type="hidden" value="$sel" />
+              <span class="form-text">{lang app_set_application_jurisdiction}</span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2" for="tag">{lang application_label}</label>
+            <div class="col-sm-10">
+              <div class="input-group mb-3">
+                <input class="form-control" type="text" name="tag" id="tag" autocomplete="off" data-source="$tag_source" data-items="5" value="$app[tags]">
+              </div>
+              <ul class="form-text">
+                <li>{lang app_number_fields}</li>
+                <li>{lang app_clear_label}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2" for="fileext">{lang app_support_extension}</label>
+            <div class="col-sm-10">
+              <div class="input-group mb-3">
+                <input class="form-control" type="text" name="fileext" id="fileext" autocomplete="off" data-source="$fileext_source" value="$app[fileext]">
+              </div>
+              <ul class="form-text">
+              {lang app_not_allowed_open_text}
+              </ul>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2">{lang open_mode}</label>
+            <div class="col-sm-10">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"id="open1" name="open" value="0" <!--{if $app[open]<1}-->checked<!--{/if}--> onclick="jQuery('#feature').show();">
+                <label class="form-check-label" for="open1">{lang app_internal_frame}</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"id="open2" name="open" value="1" <!--{if $app[open]>0}-->checked<!--{/if}--> onclick="jQuery('#feature').hide();">
+                <label class="form-check-label" for="open2">{lang new_Window}</label>
+              </div>
+              <ul class="form-text">
+              {lang app_internal_frame_text}
+              </ul>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2">{lang app_application_library}</label>
+            <div class="col-sm-10">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"id="hideInMarket1" name="hideInMarket" value="0" <!--{if $app[hideInMarket]<1}-->checked<!--{/if}-->>
+                <label class="form-check-label" for="hideInMarket1">{lang show}</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"id="hideInMarket2" name="hideInMarket" value="1" <!--{if $app[hideInMarket]>0}-->checked<!--{/if}-->>
+                <label class="form-check-label" for="hideInMarket2">{lang hide}</label>
+              </div>
+              <span class="form-text">{lang app_application_library_text}</span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2">{lang show_ico}</label>
+            <div class="col-sm-10">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"id="isshow1" name="isshow" value="1" <!--{if $app[isshow]>0}-->checked<!--{/if}-->>
+                <label class="form-check-label" for="isshow1">{lang show}</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"id="isshow2" name="isshow" value="0" <!--{if $app[isshow]<1}-->checked<!--{/if}-->>
+                <label class="form-check-label" for="isshow2">{lang hide}</label>
+              </div>
+              <span class="form-text">{lang app_show_ico_text}</span>
+            </div>
+          </div>
+        <div class="row mb-3">
+          <label class="col-sm-2" for="appdesc">{lang application_introduce}</label>
+          <div class="col-sm-10">
+            <textarea type="textarea" rows="3" class="form-control" name="appdesc" id="appdesc">$app[appdesc]</textarea>
           </div>
         </div>
-        <dl class="mb-3 d-grid">
-          <label></label>
-          <input class="btn btn-primary" id="submit_editsubmit" name="appsubmit" value="{lang submit}" type="button" onclick="document.getElementById('editbutton').click();">
-        </dl>
+        <div id="pic_delete"></div>
+        <input id="editbutton" name="appbutton" value="{lang submit}" onclick="validate(this);" style="display: none;" type="button" />
+        </form>
+        <div class="form-horizontal-left form-horizontal">
+          <div class="row mb-3">
+            <label class="col-sm-2">{lang application_introduce_img}</label>
+            <div class="col-sm-10">
+              <!--{if $piclist}-->
+              <ul id="pic_container" class="thumbnails list-unstyled ml20">
+                <!--{loop $piclist $key $value}-->
+                <li class="wd120" style="margin:10px;width:90px;" id="pic_{$value[picid]}">
+                  <div class="thumbnail text-center" style="margin-bottom:10px;">
+                    <img data_src="$value[pic]" src="$value[pic]" />
+                  </div>
+                  <p class="text-center">
+                    <a class="btn btn-primary" href="javascript:;" onclick="delete_pic(this,{$value[picid]})">{lang delete}</a>
+                  </p>
+                </li>
+                <!--{/loop}-->
+              </ul>
+              <!--{/if}-->
+              <table class="tb tb2 ">
+                <tbody id="attachbodyhidden" style="display:none">
+                  <tr class="noborder">
+                    <td class="tb27">
+                      <form method="post" autocomplete="off" id="upload" action="{MOD_URL}&op=$op&do=upload" enctype="multipart/form-data" target="uploadframe">
+                        <input type="file" name="attach" class="pf" size="0" />
+                        <span id="localfile"></span>
+                        <input type="hidden" name="uploadsubmit" id="uploadsubmit" value="true" />
+                        <input type="hidden" name="formhash" value="{FORMHASH}" />
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody id="attachbody"></tbody>
+              </table>
+              <script src="admin/scripts/uploadpic.js?{VERHASH}" type="text/javascript"></script>
+              <iframe id="uploadframe" name="uploadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
+            </div>
+          </div>
+          <dl class="mb-3 d-grid">
+            <label></label>
+            <input class="btn btn-primary" id="submit_editsubmit" name="appsubmit" value="{lang submit}" type="button" onclick="document.getElementById('editbutton').click();">
+          </dl>
+        </div>
       </div>
     </div>
 	</div>
