@@ -13,10 +13,10 @@
 			<span>{lang goback}</span>
 		</a>
 	</li>
-	<li class="nav-item"> <a <!--{if $operation=='setting'}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&operation=setting"><i class="mdi mdi-cog"></i><span>{lang cloud_set}</span></a>
+	<li class="nav-item"> <a class="nav-link <!--{if $operation=='setting'}-->active<!--{/if}-->" href="{MOD_URL}&operation=setting"><i class="mdi mdi-cog"></i><span>{lang cloud_set}</span></a>
 	</li>
 	<!--{loop $clouds $value}--> 
-	<li class="nav-item"><a <!--{if $operation!='setting' && $bz==$value[bz]}-->class="nav-link active"<!--{/if}-->href="{MOD_URL}&op=edit&bz=$value[bz]"><i class="mdi mdi-cloud"></i><span>$value[name]</span></a>
+	<li class="nav-item"><a class="nav-link <!--{if $operation!='setting' && $bz==$value[bz]}-->active<!--{/if}-->" href="{MOD_URL}&op=edit&bz=$value[bz]"><i class="mdi mdi-cloud"></i><span>$value[name]</span></a>
 	</li>
 	<!--{/loop}-->
 </ul>

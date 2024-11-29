@@ -6,7 +6,7 @@
 <main class="bs-main-container">
 	<div class="container-fluid">
 		<div class="card">
-			<div class="card-body">
+			<div class="card-body container">
       <!--{if $vid}-->
       <div class="alert <!--{if $showbtn}-->alert-warning<!--{else}-->alert-success<!--{/if}-->" style="margin-bottom:20px;line-height:1.8">
           <!--{if $showbtn}-->
@@ -66,7 +66,7 @@
             <!--{if $vid || $key=='department'}-->
             <input type="hidden" name="privacy[$key]" value="$privacy[$key]" />
             <!--{else}-->
-            <select name="privacy[$key]" class="form-select" style="width:80px;">
+            <select name="privacy[$key]" class="form-select" style="width:120px;">
                 <!--{loop $_config['profile']['privacy'] $k $v}-->
                 <option value="$k" {if $privacy[$key] == $k} selected="selected"{/if}>$v</option>
                 <!--{/loop}-->

@@ -11,8 +11,8 @@
 			<span>{lang goback}</span>
 		</a>
 	</li>
-	<li class="nav-item"><a href="{MOD_URL}" <!--{if $_GET[op]!="admin" }-->class="nav-link active"<!--{/if}-->><i class="mdi mdi-math-log"></i>
+	<li class="nav-item"><a href="{MOD_URL}" class="nav-link <!--{if $_GET[op]!="admin" }-->active<!--{/if}-->"><i class="mdi mdi-math-log"></i>
         <span>{lang systemlog_list}</span></a></li> 
-    <li class="nav-item"><a href="{MOD_URL}&op=admin" <!--{if $_GET[op]=="admin" }--> class="nav-link active"<!--{/if}-->><i class="mdi mdi-cog"></i>
+    <li class="nav-item"><a href="{MOD_URL}&op=admin" class="nav-link <!--{if $_GET[op]=="admin" }-->active<!--{/if}-->"><i class="mdi mdi-cog"></i>
         <span>{lang systemlog_setting}</span></a></li> 
 </ul>

@@ -85,7 +85,7 @@
 <label class="col-sm-2" for="$key">{lang position_management}</label>
 <div class="col-sm-10 clearfix jobs">
   <!--{loop $jobs $value}-->
-  <div id="job_$value[jobid]" orgid="$value['orgid']" class="job-item-edit float-start mb10">
+  <div id="job_$value[jobid]" orgid="$value['orgid']" class="job-item-edit float-start pe-2">
     <button onclick="job_show_editor('$value[jobid]','$value['orgid']', this)" class="btn btn-outline-secondary job-name">$value[name]</button>
     <div class="edit hide" style="min-width:250px">
       <div class="input-group">

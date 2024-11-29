@@ -15,6 +15,6 @@ $oparr = array('updatecache' => 'mdi-cog-counterclockwise','database' => 'mdi-da
 		</a>
 	</li>
 	<!--{loop $oparr $key $value}-->
-	<li class="nav-item"><a <!--{if $op==$key}-->class="nav-link active"<!--{/if}--> href="{MOD_URL}&op=$key"><i class="mdi $value"></i><span><!--{eval echo lang($key)}--></span></a></li>
+	<li class="nav-item"><a class="nav-link <!--{if $op==$key}-->active<!--{/if}-->" href="{MOD_URL}&op=$key"><i class="mdi $value"></i><span><!--{eval echo lang($key)}--></span></a></li>
 	<!--{/loop}-->
 </ul>
