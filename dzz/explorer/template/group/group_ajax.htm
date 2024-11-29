@@ -20,7 +20,7 @@
                 <div class="input-black input-float">
                     <label class="control-label input-label">{lang select_will_addmember}</label>
                     <!--<div class="usertree-search">-->
-                    <!--<a href="javascript:;" class="group-select-search" onclick="selorg.search('seluser',document.getElementById('jstree_search_input'));return false" title="{lang search}"><i class="mdi mdi-magnify"></i></a>-->
+                    <!--<a href="javascript:;" class="group-select-search" onclick="selorg.search('seluser',document.getElementById('jstree_search_input'));return false" title="{lang search}"><i class="glyphicon glyphicon-search"></i></a>-->
                     <div class="input-animate">
                         <input id="jstree_search_input" type="text" class="form-control"
                                onblur="selorg.search('seluser',this);"
@@ -56,7 +56,7 @@
                                 <!--{/if}-->
                                 $value['username']
                                 <!--{if ($perm > $value['perm']) || ($_G['adminid'] == 1 && $value['perm'] != 2 && $groupinfo['type'] == 1)}-->
-                                <i class="ti-close mdi mdi-close-circle "></i>
+                                <i class="ti-close dzz dzz-close "></i>
                                 <!--{/if}-->
                             </li>
                             <!--{/loop}-->
@@ -155,7 +155,7 @@
         <div class="setup-con content-form">
 	        <div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			        <span class="mdi mdi-close-circle "></span>
+			        <span class="dzz dzz-close "></span>
 			    </button>
 			    <h4 class="modal-title">{lang about}</h4>
 			</div>	
@@ -273,7 +273,7 @@
                 <div class="modal-footer clearfix">
                     <div class="about-button">
                         <!--{if ($_G['adminid'] == 1) || ($group['type'] == 1 && $perm > 1)}-->
-                    	<div  class="btn-rdedanger pull-left" onclick="delete_group('{$group[orgid]}')"><span class="mdi mdi-delete lead dcolor"></span><span>{lang delete_group}</span></div>
+                    	<div  class="btn-rdedanger pull-left" onclick="delete_group('{$group[orgid]}')"><span class="dzz dzz-delete"></span><span>{lang delete_group}</span></div>
                         <!--{/if}-->
                         <button type="submit" class="btn btn-primary">{lang save}</button>
                         <button type="button" class="btn btn-default-outline about-cancel" id="about-cancel">{lang

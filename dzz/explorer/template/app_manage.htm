@@ -62,7 +62,7 @@
 	                                    class="btn btn-simple btn-sorg" data-val="$value['orgid']">
 									{eval echo avatar_group($value['orgid'],null,'iconFirstWord');}
 	                                $value[orgname] <a href="javascript:;"
-	                                                   class="ibtn mdi mdi-close-circle "
+	                                                   class="ibtn dzz dzz-close "
 	                                                   title="{lang delete}"
 	                                                   onclick="selorg.remove('orgids',this);"></a>
 	                            </button>
@@ -71,7 +71,7 @@
 	                            <button id="orgids_sl_uid_$value1['uid']" data-val="uid_$value1['uid']"
 	                                    type="button" class="btn btn-simple btn-sorg">
 									{eval echo avatar_block($value1['uid'],array($value1['uid']=>$value1['headerColor']),'iconFirstWord');} $value1['username'] <a
-	                                    href="javascript:;" class="ibtn mdi mdi-close-circle "
+	                                    href="javascript:;" class="ibtn dzz dzz-close "
 
 	                                    title="{lang delete}" onclick="selorg.remove('orgids',this);"></a>
 	                            </button>
@@ -145,12 +145,12 @@
 					            <!--{loop $sel_org1 $value}-->
 					            <button id="groupcreateids_sl_$value[orgid]" type="button" class="btn btn-simple btn-sorg" data-val="$value['orgid']">
 									{eval echo avatar_group($value['orgid'],null,'iconFirstWord');}
-					                $value[orgname] <a href="javascript:;" class="ibtn mdi mdi-close-circle " title="{lang delete}" onclick="selorg.remove('groupcreateids',this);"></a>
+					                $value[orgname] <a href="javascript:;" class="ibtn dzz dzz-close " title="{lang delete}" onclick="selorg.remove('groupcreateids',this);"></a>
 					            </button>
 					            <!--{/loop}-->
 					            <!--{loop $sel_user1 $value1}-->
 					            <button id="groupcreateids_sl_uid_$value1['uid']" data-val="uid_$value1['uid']" type="button" class="btn btn-simple btn-sorg">
-									{eval echo avatar_block($value1['uid'],array($value1['uid']=>$value1['headerColor']),'iconFirstWord');}$value1['username'] <a href="javascript:;" class="ibtn mdi mdi-close-circle "  title="{lang delete}" onclick="selorg.remove('groupcreateids',this);"></a>
+									{eval echo avatar_block($value1['uid'],array($value1['uid']=>$value1['headerColor']),'iconFirstWord');}$value1['username'] <a href="javascript:;" class="ibtn dzz dzz-close "  title="{lang delete}" onclick="selorg.remove('groupcreateids',this);"></a>
 					            </button>
 					            <!--{/loop}-->
 					        </div>

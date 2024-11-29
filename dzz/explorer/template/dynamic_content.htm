@@ -198,7 +198,7 @@
             if($('.group-tableword .docondition').length > 0){
                 $('.group-tableword .docondition').remove();
             }
-            $('.group-tableword').append('<span class="label  label-text docondition">{lang operation}：' + dotext + '<i class="mdi mdi-close-circle  group-closeicon" onclick="empty_do(this)" data-val="' + doval + '"></i></span>');
+            $('.group-tableword').append('<span class="label  label-text docondition">{lang operation}：' + dotext + '<i class="dzz dzz-close  group-closeicon" onclick="empty_do(this)" data-val="' + doval + '"></i></span>');
         })
     }
     function search_obj(obj) {
@@ -213,7 +213,7 @@
             if($('.group-tableword .objcondition').length > 0){
                 $('.group-tableword .objcondition').remove();
             }
-            $('.group-tableword').append('<span class="label label-text objcondition">' + objtext + '<i class="mdi mdi-close-circle  group-closeicon" onclick="empty_do(this)" data-val="' + doval + '"></i></span>');
+            $('.group-tableword').append('<span class="label label-text objcondition">' + objtext + '<i class="dzz dzz-close  group-closeicon" onclick="empty_do(this)" data-val="' + doval + '"></i></span>');
         })
     }
     function empty_do(obj) {

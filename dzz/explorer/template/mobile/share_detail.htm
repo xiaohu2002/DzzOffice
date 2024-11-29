@@ -80,7 +80,7 @@
         <p>编辑</p>
     </a>
     <a href="javascript:;" class="weui-footer-item weui-footer-share-link sharedelete" data-sid="$share[id]">
-        <i class="mdi mdi-delete lead dcolor"></i>
+        <i class="dzz dzz-delete"></i>
         <p>删除</p>
     </a>
 </footer>
@@ -148,7 +148,7 @@
     function shareCode() {
         jQuery.modal({
             title: "",
-            text: "<button class='shareClose' onclick='closeShare()'><i class='mdi mdi-close-circle '></i></button><p><img class='img-thumbnail qrcodeImg' src='" + MOD_PATH + "/img/mobile/loading.gif' alt=''></p><p class='shareInfo'>长按分享二维码</p>",
+            text: "<button class='shareClose' onclick='closeShare()'><i class='dzz dzz-close '></i></button><p><img class='img-thumbnail qrcodeImg' src='" + MOD_PATH + "/img/mobile/loading.gif' alt=''></p><p class='shareInfo'>长按分享二维码</p>",
             buttons: [
                 {
                     text: "复制地址", className: "shareBtn1", onClick: function () {

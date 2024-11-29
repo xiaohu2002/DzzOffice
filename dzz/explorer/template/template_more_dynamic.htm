@@ -3,7 +3,7 @@
 	<span class="dzz dzz-chevron-left dzz-right-backing"  data-rid="$ridval" onclick="reback_last(this)"></span>
 	<p class="right_name">动态</p>
 	<div class="toggRight toggright-icon">
-	 	 <span class="mdi mdi-close-circle "></span>
+	 	 <span class="dzz dzz-close "></span>
 	</div>
 </div>
 <div class="dynconMenu  scroll-y" id="dynconMenu" data-subtractor="{eval echo ($pfid || $rid)?53:0}">
@@ -41,7 +41,7 @@
       <div class="toadycon">
          <div class="toadycon-img">{eval echo avatar_block($eventval['uid'],array($eventval['uid']=>$eventval['headerColor']));}</div>
         <p class="activity-content"><span class="activity-name">$eventval['username']</span> <span>{$eventval[details]}</span>
-            <span class="delete-comment mdi mdi-delete lead dcolor" data-commentid="$eventval[id]"></span></p>
+            <span class="delete-comment dzz dzz-delete" data-commentid="$eventval[id]"></span></p>
       </div>
     </div>
     <!--{/if}--> 

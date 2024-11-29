@@ -443,7 +443,7 @@ if ($operation == 'upload') {//上传图片文件
     //获得提醒用户
     $at_users = array();
     $message = preg_replace_callback("/@\[(.+?):(.+?)\]/i", "atreplacement", $msg);
-    $appid = C::t('app_market')->fetch_appid(CURMODULE);
+    $appid = C::t('app_market')->fetch_appid_by_mod('{dzzscript}?mod=' . MOD_NAME,1);
     if ($rid) {
         if (!$file = C::t('resources')->fetch_info_by_rid($rid)) {
             exit(json_encode(array('error' => true)));

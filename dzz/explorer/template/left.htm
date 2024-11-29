@@ -21,9 +21,9 @@
         <!--{if $v[catname] == lang('pictures')}--> 
         <span class="dzz dzz-photo"></span> 
         <!--{elseif $v[catname] == lang('document')}--> 
-        <span class="dzz mdi mdi-file"></span> 
+        <span class="dzz dzz-file"></span> 
         <!--{else}--> 
-        <span class="dzz mdi mdi-file-type"></span> 
+        <span class="dzz dzz-file-type"></span> 
         <!--{/if}--> 
         $v[catname] </p>
       <!--{/loop}--> 
@@ -34,7 +34,7 @@
     <div class="toolaMenu">
       <p class="dynamics document-data" data-href="{MOD_URL}&op=share" data-hash="share&uid={$uid}"><span class="dzz dzz-share"></span>{lang share}</p>
       <p class="dynamics document-data" data-href="{MOD_URL}&op=dynamic" data-hash="dynamic"><span class="dzz dzz-dynamic"></span>{lang dynamic}</p>
-      <p class="dynamics document-data" data-href="{MOD_URL}&op=recycle" data-hash="recycle&uid={$uid}"><span class="mdi mdi-delete lead dcolor"></span>{lang explorer_recycle_name}</p>
+      <p class="dynamics document-data" data-href="{MOD_URL}&op=recycle" data-hash="recycle&uid={$uid}"><span class="dzz dzz-delete"></span>{lang explorer_recycle_name}</p>
       <p class="collection document-data"  data-href="{MOD_URL}&op=collection" data-hash="collection"><span class="dzz dzz-grade"></span>{lang collect}</p>
     </div>
   </div>
@@ -77,7 +77,7 @@
 	  </h3>
     <div class="dialog-control"> 
     	<span class="dzz dzz-max dialog-header-narrow"></span> 
-    	<span class="mdi mdi-close-circle  dialog-header-close"></span> </div>
+    	<span class="dzz dzz-close  dialog-header-close"></span> </div>
   </div>
   <div class="dialog-body">
     <div class="upload-list-wrapper">
@@ -90,7 +90,7 @@
       </div>
       <div class="dialog-tips has-error">
         <div id="dialog_body_text" class="dialog-body-text">{lang update_never_succeeded}</div>
-        <em class="mdi mdi-close-circle  dialog-close"></em> </div>
+        <em class="dzz dzz-close  dialog-close"></em> </div>
       <div class="dialog-uploader-list">
         <ul class="dialog-filelist-ul" id="uploading_file_list">
         </ul>

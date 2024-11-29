@@ -109,7 +109,7 @@
         $.post(MOD_URL+'&op=group&do=dynamicsearch',search_data,function(data){
             $('#event_list').html(data);
             $('.group-tableword').show();
-            $('.group-tableword').append('<span>{lang operation}：'+dotext+'<i class="mdi mdi-delete lead" onclick="empty_do(this)" data-val="'+doval+'"></i></span>');
+            $('.group-tableword').append('<span>{lang operation}：'+dotext+'<i class="glyphicon glyphicon-remove" onclick="empty_do(this)" data-val="'+doval+'"></i></span>');
         })
     }
     function search_obj(obj){
@@ -119,7 +119,7 @@
         $.post(MOD_URL+'&op=group&do=dynamicsearch',search_data,function(data){
             $('#event_list').html(data);
             $('.group-tableword').show();
-            $('.group-tableword').append('<span>'+objtext+'<i class="mdi mdi-delete lead" onclick="empty_do(this)" data-val="'+doval+'"></i></span>');
+            $('.group-tableword').append('<span>'+objtext+'<i class="glyphicon glyphicon-remove" onclick="empty_do(this)" data-val="'+doval+'"></i></span>');
         })
     }
     function empty_do(obj){
