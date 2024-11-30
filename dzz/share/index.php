@@ -10,7 +10,7 @@ if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 $sharestatus = array('-5'=>lang('sharefile_isdeleted_or_positionchange'),'-4' => lang('been_blocked'), '-3' => lang('file_been_deleted'), '-2' => lang('degree_exhaust'), '-1' => lang('logs_invite_status_4'), '0' => lang('founder_upgrade_normal'));
-$typearr = array('folder' => lang('catalogue'), 'image' => lang('photo'), 'document' => lang('type_attach'), 'dzzdoc' => 'Dzz'.lang('type_attach'), 'video' => lang('type_video'), 'attach' => lang('attachment'), 'link' => lang('type_link'),'url' => lang('other'));
+$typearr = array('folder' => lang('catalogue'), 'image' => lang('photo'), 'document' => lang('type_attach'), 'dzzdoc' => 'Dzz'.lang('type_attach'), 'video' => lang('type_video'), 'attach' => lang('attachment'), 'link' => lang('type_link'), 'short' => lang('short'), 'url' => lang('other'));
 $type = trim($_GET['type']);
 $keyword = trim($_GET['keyword']);
 $page = empty($_GET['page']) ? 1 : intval($_GET['page']);
@@ -18,6 +18,28 @@ $lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
 $checklpp = array();
 $checklpp[$lpp] = 'selected="selected"';
 $start = ($page - 1) * $lpp;
+if ($type == 'short' && $_G['adminid']) {
+  $short=true;
+} else {
+  $short=false;
+}
+if ($short) {
+  $sql = "1";
+  $param = array('shorturl');
+  $navtitle=$typearr[$type].' - '.lang('appname');
+  if ($keyword) {
+    $sql .= " and sid LIKE %s";
+    $param[] = '%' . $keyword . '%';
+  }
+  $list = array();
+  if ($count = DB::result_first("SELECT COUNT(*) FROM %t WHERE $sql", $param)) {
+    $list = DB::fetch_all("SELECT * FROM %t WHERE $sql limit $start,$lpp", $param);
+  }
+  foreach ($list as $k=> $value) {
+    $value['short'] = getglobal('siteurl').'short.php?sid='.$value['sid'];
+    $list[$k] = $value;
+  }
+} else {
   $username = trim($_GET['username']);
   $asc = isset($_GET['asc']) ? intval($_GET['asc']) : 1;
   $uid = intval($_GET['uid']);
@@ -76,8 +98,13 @@ $start = ($page - 1) * $lpp;
     $value['shareurl'] = $_G['siteurl'] . 's.php?sid=' . $value['sid'];
     $list[$k] = $value;
   }
+}
 $gets = array('mod' => MOD_NAME, 'type' => $type, 'keyword' => $keyword,'lpp' => $lpp, 'order' => $order, 'asc' => $asc, 'uid' => $uid, 'username' => $username);
 $theurl = BASESCRIPT . "?" . url_implode($gets);
 $multi = multi($count, $lpp, $page, $theurl, 'pull-right');
-include template('share');
+if ($short) {
+  include template('short');
+} else {
+  include template('share');
+}
 ?>

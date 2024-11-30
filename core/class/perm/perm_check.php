@@ -165,6 +165,14 @@ class perm_check{
         if ($arr['sid']) {
             $share = C::t('shares')->fetch($arr['sid']);
             if ($share) {
+                if ($share['status'] == -4) exit(lang('shared_links_screened_administrator'));
+                if ($share['status'] == -5) exit(lang('sharefile_isdeleted_or_positionchange'));
+                if ($share['endtime'] && $share['endtime'] < TIMESTAMP) {
+                    exit(lang('share_link_expired'));
+                }
+                if ($share['status'] == -3) {
+                    exit(lang('share_file_deleted'));
+                }
                 if ($share['perm']) {
                     $perms = array_flip(explode(',', $share['perm'])); // 将权限字符串转换为数组
                     if ($action == 'read') {

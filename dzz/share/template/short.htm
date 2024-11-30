@@ -21,8 +21,6 @@
 						<input type="hidden" name="lpp" value="$lpp">
 						<input type="hidden" name="type" value="$type" />
 						<input type="hidden" name="keyword" value="$keyword" /> 
-						<input name="username" type="text" value="$username" class="form-control input-sm" style="width:90px ;display:inline-block" placeholder="{lang username}" />&nbsp;<input name="keyword" type="text" class="form-control input-sm" value="$keyword" style="width:90px ;display:inline-block" placeholder="{lang share_title}">
-						<button class="btn btn-default" onclick="this.parentNode.submit()"><i class="glyphicon glyphicon-search"></i></button>
 						<div class="pull-right input-group">
 							<div class="input-group mb-3">
 								<span class="input-group-addon">每页显示</span>
@@ -55,9 +53,7 @@
             	<span class="chk"></span>
 					</span>
 					<span class="text">{lang checked}<span node-type="num">0</span>{lang file_number_type}</span>
-					<button class="btn btn-sm btn-danger" data-key="unshare"><span>{lang del_share}</span> </button><!--{if $_G[adminid]==1}--> &nbsp;
-					<button class="btn btn-sm btn-warning" data-key="forbidden"><span>{lang screen_share}</span> </button> &nbsp;
-					<button class="btn btn-sm btn-success" data-key="allow"><span>{lang cancel_shielding}</span> </button><!--{/if}-->
+					<button class="btn btn-sm btn-danger" data-key="unshare"><span>{lang del_share}</span> </button>
 				</div>
 			</div>
 			<div node-type="module" class="module-list-view">
@@ -65,70 +61,41 @@
 					<div node-type="title" class="title" style="padding-right: 16px;">
 						<div class="item clearfix">
 							<!-- 第一列 -->
-							<div node-type="title-col" data-key="title" class="col c1" style="width: 50%">
+							<div node-type="title-col" data-key="title" class="col c1">
 								<span node-type="chk-all" class="chk"> <span class="chk-ico"></span> </span>
-								<div class="name"> <span>{lang sharing_file}</span>
+								<div class="name"> <span>sid</span>
 									<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='title'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span> </div>
 							</div>
 							<!-- 其他列 -->
-							<div node-type="title-col" data-key="dateline" class="col" style="width: 15%;"> {lang share_time}
-								<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='dateline'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
+							<div node-type="title-col" class="col"> url
 							</div>
-							<div node-type="title-col" data-key="count" class="col" style="width: 8%;"> {lang view_count}
-								<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='count'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
+							<div node-type="title-col" class="col"> {lang view_count}
 							</div>
-							<div node-type="title-col" data-key="size" class="col" style="width: 8%;"> {lang file_size}
-								<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='size'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
+							<div class="col" style="width: 120px;"> {lang operation}
 							</div>
-							<div node-type="title-col" data-key="type" class="col" style="width: 8%;"> {lang file_type}
-								<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='type'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
-							</div>
-							<!--{if $_G[adminid]==1}-->
-							<div node-type="title-col" data-key="username" class="col" style="width: 8%; border-right: none;"> {lang share_user}
-								<span node-type="order-status" class="asc <!--{if $asc}-->desc<!--{/if}-->" style="visibility: <!--{if $order=='username'}-->visible<!--{else}-->hidden<!--{/if}-->;"></span>
-							</div>
-							<!--{/if}-->
 						</div>
 
 					</div>
 					<div node-type="list" class="list list-share">
 						<!--{loop $list $value}-->
-						<div node-type="item" data-sid="$value[id]" data-status="$value[status]" class="item clearfix">
+						<div node-type="item" data-sid="$value[sid]" class="item clearfix">
 							<!-- 第一列 -->
-							<div class="col c1 name" style="width: 50%;" data-name="$value[title]">
+							<div class="col c1">
 								<span node-type="chk" class="chk"> <span class="chk-ico"></span></span>
-								<!-- 私密分享图标 -->
-								<!--{if $value[password]}--><span class="ico-private-share" title="{lang private_share}"></span><!--{/if}-->
-
-								<div node-type="name" class="name" title="$value[title]">
-									<!--{if $value[img]}--><img class="icon" src="$value[img]" />
-									<!--{/if}-->
-									<!--{if $value[status]<0}--><span node-type="name-tip" style="color: red;">($value[fstatus])</span><!--{/if}-->
-									<span class="name-text-wrapper"> <span node-type="name-text"  data-href="$value[sharelink]" class="name-text enabled">$value[title]</span> </span>
+								<div node-type="name" class="name">
+									<span class="name-text enabled" node-type="name-text" data-href="$value['short']">$value[sid]</span>
 								</div>
-
 							</div>
-
 							<!-- 其他列 -->
-							<div class="col dateline" style="width: 15%" data-dateline="$value[dateline]">$value[fdateline]</div>
-							<div class="col count" style="width: 8%" data-count="$value[count]">$value[count]{lang degree}</div>
-							<div class="col size" style="width: 8%" data-size="$value[size]">$value[fsize]</div>
-							<div class="col type" style="width: 8%" data-type="$value[ftype]">$value[ftype]</div>
-							<!--{if $_G[adminid]==1}-->
-							<div class="col username" style="width: 8%" data-type="$value[username]">
-								<a href="user.php?uid=$value[uid]">$value[username]</a>
-							</div>
-							<!--{/if}-->
+							<div class="col"><a href="$value[url]" target="_blank">$value[url]</a></div>
+							<div class="col">$value[count]{lang degree}</div>
+							<div class="col" style="width: 120px;"><button class="btn btn-primary js_copy" data-clipboard-text="$value[sid]" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>sid<span class="alert copy-success  alert-success hide ">{lang copy_success}</span></button>
+								<button class="btn btn-primary js_copy" data-clipboard-text="$value[url]" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>url<span class="alert copy-success  alert-success hide ">{lang copy_success}</span></button></div>
 							<!-- 复制 -->
 							<div node-type="copy-bar" class="copy-bar">
-								<!--{if $value[qrcode]}-->
-								<a href="javascript:;" class="qrcode glyphicon glyphicon-qrcode" title="{lang scon_code_send_mobile}" data-container="body" data-html="true" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="<p class='text-center'><img src='$value[qrcode]'></p>"></a><!--{/if}-->
-								{lang link}：
-								<a href="$value[sharelink]" target="_dzz">$value[sharelink]</a>
-								<!--{if $value[password]}-->&nbsp;{lang extract_password}：$value[password]<!--{/if}-->
-								&nbsp;<button class="btn btn-sm btn-default js_copy" data-clipboard-text="{eval echo $value[password]?(lang('link').':'.$value[sharelink]. lang('password').':'.$value[password]):$value[sharelink];}" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i> {lang copy}<span class="alert copy-success  alert-success hide ">{lang copy_success_paste_need_place}</span></button>
-								<!--{if $value[endtime]}-->&nbsp;{lang expiration_time}：$value[fendtime]<!--{/if}-->
-								<!--{if $value[times]}-->&nbsp;{lang limited_number}：$value[count] / $value[times]<!--{/if}-->
+								{lang short}：
+								<a href="$value['short']" target="_dzz">$value['short']</a>
+								<button class="btn btn-primary js_copy" data-clipboard-text="$value['short']" style="position:relative"><i class="glyphicon glyphicon-duplicate"></i>{lang short}<span class="alert copy-success  alert-success hide ">{lang copy_success}</span></button>
 							</div>
 						</div>
 						<!--{/loop}-->
@@ -212,7 +179,7 @@
 				el.find('.copy-bar').hide();
 			} else {
 				el.addClass('item-active').find('span[node-type=chk]').addClass('chked');
-				if(parseInt(el.data('status')) > -1) el.find('.copy-bar').show();
+				el.find('.copy-bar').show();
 			}
 			refresh_header();
 		});
@@ -236,14 +203,6 @@
 			var msg = '{lang share_stop_sharing1}';
 			showDialog(msg, 'confirm', '{lang affirm_stop_sharing}', share_delete, 1)
 		});
-		jQuery('button[data-key=forbidden]').on('click', function() {
-			var msg = '{lang share_stop_sharing2}';
-			showDialog(msg, 'confirm', '{lang affirm_screen_share}', share_forbidden, 1)
-		});
-		jQuery('button[data-key=allow]').on('click', function() {
-			var msg = '{lang share_stop_sharing3}';
-			showDialog(msg, 'confirm', '{lang affirm_cancel_shielding}', share_allow, 1)
-		});
 		jQuery('[data-toggle="popover"]').popover();
 	});
 
@@ -253,11 +212,11 @@
 	}
 
 	function share_delete() {
-		var sids = new Array();
+		var sid = new Array();
 		jQuery('.list .item-active').each(function() {
-			sids.push(jQuery(this).data('sid'));
+			sid.push(jQuery(this).data('sid'));
 		});
-		jQuery.post('{MOD_URL}&op=ajax&do=delete', { "sids": sids }, function(json) {
+		jQuery.post('{MOD_URL}&op=ajax&do=shortdel', { "sid": sid }, function(json) {
 		    for(var o in json.msg){
 				if(json.msg[o]['success']){
                     jQuery('.list div[data-sid="'+o+'"]').remove();
@@ -267,67 +226,15 @@
 		}, 'json');
 	}
 
-	function share_forbidden() {
-		var sids = new Array();
-		jQuery('.list .item-active').each(function() {
-			sids.push(jQuery(this).data('sid'));
-		});
-		jQuery.post('{DZZSCRIPT}?mod=share&op=ajax&do=forbidden', { "sids": sids, "flag": 'forbidden' }, function(json) {
-			if(json.msg == 'success') {
-				showmessage('{lang share_screen_success}', 'success', 2000, 1);
-				jQuery('.list .item-active').each(function() {
-					jQuery(this).attr('data-status', '-4');
-					if(jQuery(this).find('span[node-type=name-tip]').length) {
-						jQuery(this).find('span[node-type=name-tip]').html('({lang been_blocked})');
-					} else {
-						jQuery('<span node-type="name-tip" style="color: red;">({lang been_blocked})</span>').insertBefore('.list .item-active .name-text-wrapper');
-					}
-				});
-				refresh_header();
-			} else {
-				showmessage('{lang shielding_failure}', 'danger', 3000, 1);
-			}
-		}, 'json');
-	}
-
-	function share_allow() {
-		var sids = new Array();
-		jQuery('.list .item-active').each(function() {
-			if(jQuery(this).data('status') == '-4') sids.push(jQuery(this).data('sid'));
-		});
-		if(sids.length) {
-			jQuery.post('{DZZSCRIPT}?mod=share&op=ajax&do=forbidden', { "sids": sids, "flag": 'allow' }, function(json) {
-				if(json.msg == 'success') {
-					showmessage('{lang cancel_shielding_success}', 'success', 2000, 1);
-					jQuery('.list .item-active').attr('data-status', '0').find('span[node-type=name-tip]').remove();
-					refresh_header();
-				} else {
-					showmessage('{lang cancel_shielding_failure}', 'danger', 3000, 1);
-				}
-			}, 'json');
-		}
-	}
-
 	function refresh_header() {
 		var sum = jQuery('.list .item.item-active').length;
 		var tsum = jQuery('.list .item').length;
-		var psum = jQuery('.list .item.item-active[data-status=-4]').length;
 		if(sum > 0) {
 			jQuery('.module-list-toolbar').find('span[node-type=num]').html(sum).end().show();
 			if(sum == tsum) {
 				jQuery('.module-list-toolbar').find('.chk').addClass('chked');
 			} else {
 				jQuery('.module-list-toolbar').find('.chk').removeClass('chked');
-			}
-			if(psum == sum) {
-				jQuery('.module-list-toolbar .bar').find('button[data-key=forbidden]').hide();
-			} else {
-				jQuery('.module-list-toolbar .bar').find('button[data-key=forbidden]').show();
-			}
-			if(psum > 0) {
-				jQuery('.module-list-toolbar .bar').find('button[data-key=allow]').show();
-			} else {
-				jQuery('.module-list-toolbar .bar').find('button[data-key=allow]').hide();
 			}
 		} else {
 			jQuery('.module-list-toolbar').hide();

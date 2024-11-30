@@ -2328,3 +2328,34 @@ function htmlspecialchars_decode (string, quote_style) {
 
   return string;
 };
+function dzzNotification() {
+	var h5n = new Object();
+
+	h5n.issupport = function() {
+		return 'Notification' in window;
+	};
+
+	h5n.shownotification = function(replaceid, url, imgurl, subject, message) {
+		if (Notification.permission === 'granted') {
+			sendit();
+		} else if (Notification.permission !== 'denied') {
+			Notification.requestPermission().then(function (perm) {
+				if (perm === 'granted') {
+					sendit();
+				}
+			});
+		}
+		function sendit() {
+			var n = new Notification(subject, {
+				tag: replaceid,
+				icon: imgurl,
+				body: message
+			});
+			n.onclick = function (e) {
+				e.preventDefault();
+				window.open(url, '_blank');
+			};
+		}
+	};
+	return h5n;
+};
