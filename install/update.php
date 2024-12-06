@@ -314,31 +314,56 @@ if($_GET['step'] == 'start') {
 											 'system'=>0,
 											 'notdelete'=>1,
 											 'position'=>1,
+											 'mid'=>'27',
 											 'app_path'=>'dzz',
 											 'identifier'=>'explorer',
 											 'version'=>'2.04',
 											 'available'=>1),0,1);
 		   }
+		//添加图片预览应用
+		if(!DB::result_first("select COUNT(*) from %t where identifier=%s",array('app_market','OpenPicWin'))){
+			C::t('app_market')->insert(array('mid' => '25','appname' => '图片预览','appico' => 'appico/202411/02/184008xbuvo0sh8y1xey8f.png','appdesc' => '简易的图片浏览器','appurl' => "dzzjs:OpenPicWin('{icoid}')",'appadminurl' => '','noticeurl' => '','dateline' => '0','disp' => '101','vendor' => '乐云网络','haveflash' => '0','isshow' => '0','havetask' => '1','hideInMarket' => '0','feature' => '','fileext' => 'image','group' => '0','orgid' => '0','position' => '1','system' => '0','notdelete' => '1','open' => '0','nodup' => '0','identifier' => 'OpenPicWin','app_path' => 'dzz/link','available' => '1','version' => '2.1'));
+			$OpenPicWin=C::t('app_market')->fetch_by_identifier('OpenPicWin','dzz/link');
+			if($OpenPicWin['appid']){
+				C::t('app_open')->insert_by_exts($OpenPicWin['appid'], 'image');
+			}
+		}
+		//添加DPlayer应用
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=DPlayer'))){
+			C::t('app_market')->insert(array('mid' => '41','appname' => 'DPlayer','appico' => 'appico/202411/02/184037v0by6dzb1wwobdy3.png','appdesc' => 'DPlayer，支持MP3,mp4,flv,wav等格式','appurl' => '{dzzscript}?mod=DPlayer','appadminurl' => '','noticeurl' => '','dateline' => '0','disp' => '0','vendor' => '小胡（gitee.com/xiaohu2024)','haveflash' => '0','isshow' => '0','havetask' => '1','hideInMarket' => '0','feature' => '','fileext' => 'mp3,mp4,m4v,flv,mov,webm,ogv,ogg,wav,m3u8,f4v,webmv,mkv,magne','group' => '0','orgid' => '0','position' => '1','system' => '0','notdelete' => '1','open' => '1','nodup' => '0','identifier' => 'DPlayer','app_path' => 'dzz','available' => '1','version' => '1.2'),1,1);
+			$DPlayer=C::t('app_market')->fetch_by_identifier('DPlayer');
+			if($DPlayer['appid']){
+				C::t('app_open')->insert_by_exts($DPlayer['appid'], 'mp3,mp4,m4v,flv,mov,webm,ogv,ogg,wav,m3u8,f4v,webmv,mkv,magne');
+			}
+		}
+		//添加PDF阅读器应用
+		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=pdf'))){
+			C::t('app_market')->insert(array('mid' => '13','appname' => 'PDF阅读器','appico' => 'appico/202411/02/170328nz056he0mixeezpo.png','appdesc' => '通过HTML5的方式来实现pdf在线预览','appurl' => 'index.php?mod=pdf','appadminurl' => '','noticeurl' => '','dateline' => '0','disp' => '110','vendor' => 'PDS.JS','haveflash' => '0','isshow' => '0','havetask' => '1','hideInMarket' => '0','feature' => '','fileext' => 'pdf,ai','group' => '1','orgid' => '0','position' => '1','system' => '0','notdelete' => '1','open' => '0','nodup' => '0','identifier' => 'pdf','app_path' => 'dzz','available' => '1','version' => '2.1'),1,1);
+			$pdf=C::t('app_market')->fetch_by_identifier('pdf');
+			if($pdf['appid']){
+				C::t('app_open')->insert_by_exts($pdf['appid'], 'pdf,ai');
+			}
+		}
 		//修改应用
 		$appurl = "{adminscript}?mod=filemanage";
-		$appid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
-		if ($appid) {
-			C::t('app_market')->update($appid, array('appurl' => "{dzzscript}?mod=filemanage", 'group' => 1,'open'=>1,'app_path'=>'dzz','position'=>1));
+		$filemanageappid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
+		if ($filemanageappid) {
+			C::t('app_market')->update($filemanageappid, array('appurl' => "{dzzscript}?mod=filemanage", 'group' => 1,'open'=>1,'app_path'=>'dzz','position'=>1));
 		}
 		$appurl = "{adminscript}?mod=orguser";
-		$appid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
-		if ($appid) {
-			C::t('app_market')->update($appid, array('appurl' => "{dzzscript}?mod=orguser", 'group' => 1,'open'=>1,'app_path'=>'dzz','position'=>1));
+		$orguserappid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
+		if ($orguserappid) {
+			C::t('app_market')->update($orguserappid, array('appurl' => "{dzzscript}?mod=orguser", 'group' => 1,'open'=>1,'app_path'=>'dzz','position'=>1));
 		}
 		$appurl = "{adminscript}?mod=share";
-		$appid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
-		if ($appid) {
-			C::t('app_market')->update($appid, array('appurl' => "{dzzscript}?mod=share", 'group' => 1,'open'=>1,'app_path'=>'dzz','position'=>1));
+		$shareappid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
+		if ($shareappid) {
+			C::t('app_market')->update($shareappid, array('appurl' => "{dzzscript}?mod=share", 'group' => 1,'open'=>1,'app_path'=>'dzz','position'=>1));
 		}
 		$appurl = "{dzzscript}?mod=comment";
-		$appid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
-		if ($appid) {
-			C::t('app_market')->update($appid, array('group' => 1,'open'=>1,'position'=>1));
+		$commentappid = DB::result_first("SELECT appid FROM %t WHERE appurl=%s", array('app_market', $appurl));
+		if ($commentappid) {
+			C::t('app_market')->update($commentappid, array('group' => 1,'open'=>1,'position'=>1));
 		}
 		//处理更新之后群组开关问题
 		DB::update('organization',array('manageon'=>1,'available'=>1,'syatemon'=>1),"1");

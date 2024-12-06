@@ -639,6 +639,9 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
 	margin-top: 1px;
 *zoom:1
 }
+.cmt_fed:hover .btn_acfed{
+	display: inline-block;
+}
 .item_cfed {
 	padding: 10px 0 10px 40px;
 	position: relative;

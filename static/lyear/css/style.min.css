@@ -5540,3 +5540,8 @@ button.input-search-drop {
     width: 24px;
     height: 24px;
 }
+
+.img-emotion{
+	max-width:24px;
+	max-height:24px;
+}
