@@ -664,7 +664,7 @@ function ajaxpost(formid, showid, waitid, showidclass, submitbtn, recall) {
 		var s = '';
 		var evaled = false;
 
-		showloading('none');
+		loader.destroy();
 		try {
 			s = document.getElementById(ajaxframeid).contentWindow.document.XMLDocument.text;
 		} catch(e) {
@@ -729,7 +729,13 @@ function ajaxpost(formid, showid, waitid, showidclass, submitbtn, recall) {
 
 	_attachEvent(ajaxframe, 'load', handleResult);
 
-	showloading();
+	var loader = $('body').lyearloading({
+		opacity: 0.2,
+		spinnerSize: 'lg',
+		spinnerText: __lang.please_wait,
+		textColorClass: 'text-info',
+        spinnerColorClass: 'text-info', 
+	});
 	curform.target = ajaxframeid;
 	var action = curform.getAttribute('action');
 	action = hostconvert(action).replace(/(&|&|\?)inajax\=1/g, '');
