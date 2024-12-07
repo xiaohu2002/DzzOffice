@@ -1,7 +1,7 @@
-﻿# DzzOffice
-## DzzOffice 官方网站：https://dzzoffice.com
-## DzzOffice 演示地址：http://demo.dzzoffice.com
-## DzzOffice 介绍
+﻿## DzzOffice
+### DzzOffice 官方网站：https://dzzoffice.com
+### DzzOffice 演示地址：http://demo.dzzoffice.com
+### DzzOffice 介绍
 Dzzoffice是一套开源办公套件，适用于企业、团队搭建自己的 类似“Google企业应用套件”、“微软Office365”的企业协同办公平台。套件由多个工具组成，包含但不限于如：
 
 **网盘**: 企业、团队文件集中管理。主要体现的功能是支持企业部门的组织架构建立共享目录，也支持组的方式灵活建立共享目录。支持文件标签，多版本，评论，详细的目录权限等协作功能。
@@ -47,15 +47,15 @@ Dzzoffice是一套开源办公套件，适用于企业、团队搭建自己的 �
 7. 管理员登录后，系统工具 -> 更新系统缓存。
 8. 系统设置 -> 打开站点。
 
-## Issues
+### Issues
 
 如您在使用中遇到问题，可以优先在常见问题中查找。仍无法解决，可以向我们提交Issues。
 
-## 常见问题
+### 常见问题
 
 其他相关内容，如关于DzzOffice的开发与二次开发，技术交流与分享，教程与问题解答，以及开发手册和文档等方面的内容在官网底部栏查找。
 
-# 运行环境
+### 运行环境
 - 服务器:
     - Windows，Linux，Mac ...
     - PHP 5.2+
@@ -66,7 +66,7 @@ Dzzoffice是一套开源办公套件，适用于企业、团队搭建自己的 �
     - Opera
     - IE8+
 
-# 版权声明
+### 版权声明
 DzzOffice 使用 AGPL-3.0 协议.  license.[License](http://www.dzzoffice.com/licenses/license.txt)  
 Contact: info#oaooa.com(#换成@)
 Copyright (C) 2012 www.dzzoffice.com
