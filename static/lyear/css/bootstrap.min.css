@@ -5160,7 +5160,7 @@ fieldset:disabled .btn {
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: .25rem
+    border-radius: .25rem;
 }
 
 .card>hr {
@@ -13049,4 +13049,14 @@ fieldset:disabled .btn {
     border-radius: 0.25rem;
     position: absolute;
     right: 0;
+}
+
+.popover-body,
+.dropdown-menu,
+.modal-content,
+.fwinmask {
+    background-image: url(../images/color-bg.png);
+    background-size: 100% auto;
+    background-position: top 0 right 0;
+    background-repeat: no-repeat;
 }
