@@ -22,6 +22,9 @@
     max-height: 45px;
     margin: 0;
 }
+.app-info{
+	display:inline-block;
+}
 .app-info .select-info{
 	display:none;
 }
@@ -73,7 +76,7 @@
 							</th>
 							<td>
 								{eval $appadminurl=$value['appadminurl']?$value['appadminurl']:$value['appurl']}
-								<a href="$appadminurl" target="_blank" class="appicon"><img src="$value[appico]" style="margin:0" /></a><a href="$appadminurl" target="_blank">$value[appname]</a>
+								<a href="$appadminurl" target="_blank" class="appicon"><img src="$value[appico]" style="margin:0" /></a><a class="dcolor" href="$appadminurl" target="_blank">$value[appname]</a>
 								<div class="appdesc form-text" title="$value['appdesc']">
 									{eval echo $value['upgrade_version']['desc_short']?$value['upgrade_version']['desc_short']:lang('none');}
 								</div>

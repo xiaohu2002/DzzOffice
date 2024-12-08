@@ -53,7 +53,7 @@
         </header>
         <div class="card-body">
             <!--{if $operation=='basic'}-->
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post"  name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post"  name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash">
               <input type="hidden" value="basic" name="operation">
               <div class="row mb-3">
@@ -291,7 +291,7 @@
           <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload-process.js?{VERHASH}"></script>
           <script type="text/javascript" src="static/jquery_file_upload/jquery.fileupload-validate.js?{VERHASH}"></script>
             <!--{elseif $operation=='at'}-->
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post" name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash">
               <input type="hidden" value="upload" name="operation">
                 <!--{loop $usergroups $value}-->
@@ -328,7 +328,7 @@
               </dl>
             </form>
             <!--{elseif $operation=='upload'}-->
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post" name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash">
               <input type="hidden" value="upload" name="operation">
               <div class="row mb-3">
@@ -431,7 +431,7 @@
                 display: block !important;
               }
             </style>
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post" name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash">
               <input type="hidden" value="loginset" name="operation">
               <input type="hidden" value="1" name="settingnew[loginset][available]">
@@ -495,7 +495,7 @@
                 })
             </script> 
             <!--{elseif $operation=='mail'}-->
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post" name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash">
               <input type="hidden" value="mail" name="operation">
               <div class="row mb-3">
@@ -640,7 +640,7 @@
             </script>
             <!--文件夹权限设置-->
             <!--{elseif $operation=='access'}-->
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post" name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash">
               <input type="hidden" value="access" name="operation">
               <div class="row mb-3">
@@ -749,7 +749,7 @@
                     selorg.openarr = openarr;
                 });
             </script>
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post" name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash"/>
               <input type="hidden" value="space" name="operation"/>
               <div class="row mb-3">
@@ -826,7 +826,7 @@
             <link rel="stylesheet" type="text/css" href="static/lyear/js/jquery-tagsinput/jquery.tagsinput.min.css">
             <script type="text/javascript" src="static/lyear/js/jquery-tagsinput/jquery.tagsinput.min.js"></script>
             <!--{elseif $operation=='smiley'}-->
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post" name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash">
               <input type="hidden" value="smiley" name="operation">
               <div class="row mb-3">
@@ -855,7 +855,7 @@
               </dl>
             </form>
             <!--{elseif $operation=='datetime'}-->
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post" name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash">
               <input type="hidden" value="datetime" name="operation">
               <div class="row mb-3">
@@ -925,7 +925,7 @@
                 </ul>
               </div>
             </div>
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post" name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash">
               <input type="hidden" value="sec" name="operation">
               <div class="row mb-3">
@@ -1164,7 +1164,7 @@
             }
             </style>
             <!--{elseif $operation=='censor'}-->
-            <form id="cpform" action="{MOD_URL}" class="form-horizontal-left" method="post" name="cpform">
+            <form id="cpform" action="{MOD_URL}" method="post" name="cpform">
               <input type="hidden" value="{FORMHASH}" name="formhash">
               <input type="hidden" value="censor" name="operation">
               <div class="row mb-3">

@@ -2481,9 +2481,6 @@ img {
 }
 
 /* popover */
-.popover {
-	border-color: var(--bs-border-color);
-}
 
 .bs-popover-top>.popover-arrow::before,
 .bs-popover-auto[data-popper-placement^=top]>.popover-arrow::before {
@@ -2520,12 +2517,6 @@ img {
 }
 
 /* 下拉菜单 */
-.dropdown-menu {
-	font-size: 14px;
-	border: none;
-	-webkit-box-shadow: 0 3px 8px rgb(var(--bs-dark-rgb), .1), 0 0 1px rgb(var(--bs-dark-rgb), .15);
-	box-shadow: 0 3px 8px rgb(var(--bs-dark-rgb), .1), 0 0 1px rgb(var(--bs-dark-rgb), .15);
-}
 
 .dropdown-item,
 .dropdown-header,
@@ -2535,11 +2526,6 @@ img {
 
 .dropleft .dropdown-toggle::before {
 	vertical-align: 1px;
-}
-
-.dropdown-item:hover,
-.dropdown-item:focus {
-	background-color: var(--bs-light-hover);
 }
 
 .dropdown-item.active,
@@ -2745,7 +2731,7 @@ hr.dropdown-divider {
 .toast {
 	border-color: var(--bs-border-color);
 	box-shadow: 0 0.125rem 0.75rem rgba(var(--bs-dark-rgb), .0375);
-	border-radius: var(--radius);
+	border-radius: 0.125rem;
 }
 
 .toast-header i {
@@ -3318,14 +3304,6 @@ hr.dropdown-divider {
 	}
 }
 
-
-/** ----------------------------------
- * 网站布局
- -------------------------------------- */
-body {
-    background-color: var(--bs-body-bg);
-}
-
 /** ----------------------------------
  * 左侧导航
  -------------------------------------- */
@@ -3682,7 +3660,7 @@ body {
 
 /* 主题配置选择 */
 .dropdown-skin .dropdown-menu {
-    width: 262px;
+    width: 264px;
     -moz-user-select: none; /* 火狐 */
     -webkit-user-select: none; /* webkit浏览器 */
     -ms-user-select: none; /* IE10 */

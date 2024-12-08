@@ -40,7 +40,7 @@
 						{lang misc_cron_edit_tips}
 					</ul>
 				</div>
-				<form id="cpform" action="{MOD_URL}&op=cron&edit=$cronid" class="form-horizontal form-horizontal-left" method="post" name="cpform">
+				<form id="cpform" action="{MOD_URL}&op=cron&edit=$cronid" class="form-horizontal" method="post" name="cpform">
 					<input type="hidden" value="{FORMHASH}" name="formhash">
 					<input type="hidden" value="true" name="editsubmit">
 					<div class="row mb-3">
@@ -102,7 +102,7 @@
 						{lang misc_cron_tips}
 					</ul>
 				</div>
-				<form id="cpform" action="{MOD_URL}&op=cron" class="form-horizontal form-horizontal-left" method="post" name="cpform">
+				<form id="cpform" action="{MOD_URL}&op=cron" class="form-horizontal" method="post" name="cpform">
 					<input type="hidden" value="{FORMHASH}" name="formhash">
 					<input type="hidden" value="true" name="cronssubmit">
 					<div class="table-responsive">
@@ -140,7 +140,6 @@
 
 								<td>
 									<a class="btn btn-outline-primary" href="{MOD_URL}&op=cron&edit=$cron[cronid]">{lang edit}</a>
-									<br />
 									<!--{if $cron['run']}-->
 									<a class="btn btn-outline-success" href="{MOD_URL}&op=cron&run=$cron[cronid]">{lang execute}</a>
 									<!--{else}-->

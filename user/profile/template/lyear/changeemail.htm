@@ -35,7 +35,7 @@
     }
 </script>
 <!--{if !$newchange}-->
-<form id="emailform" name="emailform" class="form-horizontal form-horizontal-left" role="form" action="{MOD_URL}&op=password&do=changeemail" method="post" onsubmit="bind_email();return false">
+<form id="emailform" name="emailform" class="form-horizontal" role="form" action="{MOD_URL}&op=password&do=changeemail" method="post" onsubmit="bind_email();return false">
     <input type="hidden" name="changeemail" value="true" />
     <input type="hidden" name="uid" value="$uid" />
     <input type="hidden" name="formhash" value="{FORMHASH}" />

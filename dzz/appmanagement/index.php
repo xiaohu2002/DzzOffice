@@ -116,7 +116,7 @@ foreach($env_items as $key => $item) {
 	$env_str .= "<td>$key</td>\n";
 	$env_str .= "<td>$item[r]</td>\n";
 	$env_str .= "<td>$item[b]</td>\n";
-	$env_str .= ($status ? "<td class=\"w text-success\"><i class=\"mdi lead mdi-check-circle\"></i>" : "<td class=\"nw text-danger\"><i class=\"mdi lead mdi-close-circle\"></i>").$item['current']."</td>\n";
+	$env_str .= ($status ? "<td class=\"text-success\"><i class=\"mdi lead mdi-check-circle me-2\"></i>" : "<td class=\"nw text-danger\"><i class=\"mdi lead mdi-close-circle me-2\"></i>").$item['current']."</td>\n";
 	$env_str .= "</tr>\n";
 }
 include template('main');

@@ -49,15 +49,15 @@ if($_GET['action'] == 'checkupgrade') {
 			$list[$type]['appurl']= replace_canshu($upgrade['appurl']);
 		}
 		if($list){
-			$html=' <div class="panel panel-warning" style="margin:0;min-width:300px;">';
-			$html.=' <div class="panel-heading" style="border-radius:0">';
+			$html=' <div class="panel panel-warning toast show" style="margin:0;min-width:300px;">';
+			$html.=' <div class="panel-heading toast-header" style="border-radius:0"><strong class="me-auto">';
 			$html.=     lang('upgrade_notice_title');
-			$html.='     <button type="button" class="btn-close" onclick="jQuery(\'#systemNotice\').hide();setcookie(\'upgradenotice\',1,3600);"></button>';
+			$html.='     </strong><button type="button" class="btn-close" onclick="jQuery(\'#systemNotice\').hide();setcookie(\'upgradenotice\',1,3600);"></button>';
 			$html.=' </div>';
 			$html.=' <div class="panel-body" style="padding:0;max-height:500px;overflow-y:auto">';
 			$html.='  <table class="table table-hover" style="margin:0">';
 			foreach($list as $type =>$value){
-				$html.=  '<tr><td><div style="line-height:30px;"><img src="'.$value['icon'].'" style="max-height:30px;" /><a href="'.$value['official'].'" title="'.lang('examine_details').'">'.$value['title'].'</a></div>';
+				$html.=  '<tr><td><div style="line-height:30px;"><img src="'.$value['icon'].'" style="max-height:30px;" /><a class="dcolor" href="'.$value['official'].'" title="'.lang('examine_details').'">'.$value['title'].'</a></div>';
 				if($value['note']){
 					$html.= '<div class="text-muted" style="font-size:12px;margin-left:40px;">'.$value['note'].'</div>';
 				}

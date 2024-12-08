@@ -39,9 +39,9 @@
 						</thead>
 						<!--{loop $list $value}-->
 						<tr>
-							<td width="40"><input type="text" class="form-control" name="disp[{$value[appid]}]" value="$value[disp]" style="width:45px;" /></td>
+							<td width="40"><input type="text" class="form-control" name="disp[{$value[appid]}]" value="$value[disp]" /></td>
 							<td>
-								<a href="$value[appurl]"><img src="$value[appico]" />$value[appname]</a>
+								<a href="$value[appurl]" class="dcolor"><img src="$value[appico]" />$value[appname]</a>
 							</td>
 							<td>
 								<select name="position[{$value[appid]}]" class="form-select">

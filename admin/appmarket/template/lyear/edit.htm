@@ -43,7 +43,7 @@
         <!--{/if}-->
       </header>
       <div class="card-body">
-        <form id="appform" name="appform" class="form-horizontal-left form-horizontal" action="{MOD_URL}&op=edit&appid=$appid" method="post" enctype="multipart/form-data" onsubmit="return validate(this)">
+        <form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}&op=edit&appid=$appid" method="post" enctype="multipart/form-data" onsubmit="return validate(this)">
           <input type="hidden" name="appsubmit" value="true" />
           <input type="hidden" name="appid" value="$appid" />
           <input type="hidden" name="refer" value="$refer" />
@@ -231,7 +231,7 @@
         <div id="pic_delete"></div>
         <input id="editbutton" name="appbutton" value="{lang submit}" onclick="validate(this);" style="display: none;" type="button" />
         </form>
-        <div class="form-horizontal-left form-horizontal">
+        <div class="form-horizontal">
           <div class="row mb-3">
             <label class="col-sm-2">{lang application_introduce_img}</label>
             <div class="col-sm-10">

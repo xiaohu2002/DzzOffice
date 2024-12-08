@@ -11,7 +11,7 @@
             <input type="text" class="form-control" id="pername" name="pername" value="$groupperm[pername]"/>
           </div>
           <h6>{lang choose_permission}：</h6>
-          <div class="border-example">
+          <div class="border-example fs-6">
             <!--{loop $perms $k $val}-->
             <div class="form-check form-check-inline col-6 col-sm-4">
                 <input class="form-check-input" type="checkbox" name="perms[]" value="$val[1]"  id="inputval$val[1]"<!--{if $groupperm[perm] & $val[1]}--> checked="checked" <!--{/if}-->>

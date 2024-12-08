@@ -20,7 +20,8 @@
 				</ul>
 			</header>
 			<div class="card-body">
-				<form id="cpform" action="{MOD_URL}&type=list&operation=$operation" class="form-horizontal form-horizontal-left" method="post" name="cpform">
+				<!--{if $list}-->
+				<form id="cpform" action="{MOD_URL}&type=list&operation=$operation" class="form-horizontal" method="post" name="cpform">
 					<input type="hidden" value="{FORMHASH}" name="formhash">
 					<input type="hidden" name="lpp" value="$lpp">
 					<input type="hidden" name="keyword" value="$keyword">
@@ -33,7 +34,6 @@
 								<th style="width: 180px;">{lang time}</th>
 								<th>{lang info}</th>
 							</thead>
-							<!--{if $list}-->
 								<!--{loop $list $key $log}-->
 								<tr>
 									<td>$log[2]</td>
@@ -63,11 +63,14 @@
 							</select>
 						</div>
 						$multipage
-						<!--{else}-->
-						{lang there_no_such_results}
-						<!--{/if}--> 
 				</div>
 				</form>
+				<!--{else}-->
+				<div class="text-center">
+					<img src="static/image/common/no_list.png" /><br>
+					<span class="lead">{lang there_no_such_results}…</span>
+				</div>
+				<!--{/if}--> 
 			</div>
 		</div>
 	</div>

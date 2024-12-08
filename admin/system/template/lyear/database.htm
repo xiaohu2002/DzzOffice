@@ -26,7 +26,7 @@
 					</ul>
 				</div>
 				<!--{if !$submit}-->
-				<form id="cpform" action="{MOD_URL}&op=database&operation=export&setup=1" class="form-horizontal form-horizontal-left" method="post" name="cpform">
+				<form id="cpform" action="{MOD_URL}&op=database&operation=export&setup=1" class="form-horizontal" method="post" name="cpform">
 				<input type="hidden" value="{FORMHASH}" name="formhash">
 				<input type="hidden" value="true" name="exportsubmit">
 				<div class="row mb-3">
@@ -133,7 +133,7 @@
 					</ul>
 				</div>
 				$do_import_option
-				<form id="cpform" action="{MOD_URL}&op=database&operation=import" class="form-horizontal form-horizontal-left " method="post" name="cpform">
+				<form id="cpform" action="{MOD_URL}&op=database&operation=import" class="form-horizontal" method="post" name="cpform">
 					<input type="hidden" value="{FORMHASH}" name="formhash">
 					<input type="hidden" value="true" name="deletesubmit">
 					<div class="table-responsive">

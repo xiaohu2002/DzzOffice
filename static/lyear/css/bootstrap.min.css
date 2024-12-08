@@ -4033,14 +4033,16 @@ fieldset:disabled .btn {
     min-width: 10rem;
     padding: .5rem 0;
     margin: 0;
-    font-size: 1rem;
     color: #212529;
     text-align: left;
     list-style: none;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: var(--radius);
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    font-size: 14px;
+	-webkit-box-shadow: 0 3px 8px rgb(var(--bs-dark-rgb), .1), 0 0 1px rgb(var(--bs-dark-rgb), .15);
+	box-shadow: 0 3px 8px rgb(var(--bs-dark-rgb), .1), 0 0 1px rgb(var(--bs-dark-rgb), .15);
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -6747,8 +6749,10 @@ fieldset:disabled .btn {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, .2);
+    border: 1px solid #dee2e6;
     border-radius: var(--radius);
+    -webkit-box-shadow: 0 3px 8px rgb(var(--bs-dark-rgb), .1), 0 0 1px rgb(var(--bs-dark-rgb), .15);
+	box-shadow: 0 3px 8px rgb(var(--bs-dark-rgb), .1), 0 0 1px rgb(var(--bs-dark-rgb), .15);
 }
 
 .popover .popover-arrow {
@@ -12255,10 +12259,6 @@ fieldset:disabled .btn {
 	max-height: 32px;
 	margin-right: 10px;
 }
-
-.mdi:hover {
-    color: var(--bs-primary);
-}
 /*滚动条样式*/
 ::-webkit-scrollbar-button {
 	display: none;
@@ -13049,14 +13049,4 @@ fieldset:disabled .btn {
     border-radius: 0.25rem;
     position: absolute;
     right: 0;
-}
-
-.popover-body,
-.dropdown-menu,
-.modal-content,
-.fwinmask {
-    background-image: url(../images/color-bg.png);
-    background-size: 100% auto;
-    background-position: top 0 right 0;
-    background-repeat: no-repeat;
 }

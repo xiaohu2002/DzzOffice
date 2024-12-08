@@ -10,7 +10,7 @@
         <!--{template lyear:right_header}--> 
       </div>
       <div class="card-body">
-        <form id="cpform" action="{MOD_URL}&op=edit&bz=$bz" class="form-horizontal form-horizontal-left" method="post" name="cpform">
+        <form id="cpform" action="{MOD_URL}&op=edit&bz=$bz" class="form-horizontal" method="post" name="cpform">
           <input type="hidden" value="{FORMHASH}" name="formhash">
           <input type="hidden" value="editsubmit" name="true">
           <div class="row mb-3">
@@ -48,7 +48,7 @@
       </div>
       <!--{if $_GET[do]=='usercloud'}-->
       <div class="card-body">
-        <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=edit&do=usercloud" method="post" >
+        <form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}&op=edit&do=usercloud" method="post" >
           <input type="hidden" name="cloudsubmit" value="true" />
           <input type="hidden" name="bz" value="$bz" />
           <input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -88,7 +88,7 @@
       </div>
       <!--{else}-->
       <div class="card-body">
-        <form id="cpform" action="{MOD_URL}&op=edit&bz=$bz" class="form-horizontal form-horizontal-left"   method="post" name="cpform">
+        <form id="cpform" action="{MOD_URL}&op=edit&bz=$bz" class="form-horizontal"   method="post" name="cpform">
           <input type="hidden" value="{FORMHASH}" name="formhash">
           <input type="hidden" value="editsubmit" name="true">
           <div class="row mb-3">
@@ -185,7 +185,7 @@
       </div>
       <!--{if $_GET[do]=='usercloud'}-->
       <div class="card-body">
-        <form id="appform" name="appform" class="form-horizontal form-horizontal-left" action="{MOD_URL}&op=edit&do=usercloud" method="post" >
+        <form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}&op=edit&do=usercloud" method="post" >
           <input type="hidden" name="cloudsubmit" value="true" />
           <input type="hidden" name="bz" value="$bz" />
           <input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -225,7 +225,7 @@
       </div>
       <!--{else}-->
       <div class="card-body">
-        <form id="cpform" action="{MOD_URL}&op=edit&bz=$bz" class="form-horizontal form-horizontal-left" method="post" name="cpform">
+        <form id="cpform" action="{MOD_URL}&op=edit&bz=$bz" class="form-horizontal" method="post" name="cpform">
           <input type="hidden" value="{FORMHASH}" name="formhash">
           <input type="hidden" value="editsubmit" name="true">
           <div class="row mb-3">

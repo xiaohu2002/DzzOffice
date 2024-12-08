@@ -54,7 +54,7 @@
 					<tr id="app_div_{$value[mid]}" class="app_upgradelist">
 						<td>
 							<a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer"  class="appicon view-detail" title="$value[name]"><img src="$value[coverimg]" style="margin:0;float: left;" /></a>
-							<a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer" target="_blank" class="view-detail" title="$value[name]">$value[name]</a>
+							<a href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]&refer=$refer" target="_blank" class="dcolor view-detail" title="$value[name]">$value[name]</a>
 							<div class="appdesc form-text" title="$value['appdesc']">{eval echo $value['desc_short']?$value['desc_short']:lang('none');}</div>
 							<div id="progess_{$value[mid]}">
 								<span id="upgrade_progess_{$value[mid]}" class="progress-bar progress-bar-striped progress-bar-animated upgrade_progess"></span> 

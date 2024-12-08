@@ -1,6 +1,8 @@
 <div class="card-header">
-  <strong class="float-start lead">$space[username]</strong>
 	<ul class="nav nav-stacked nav-pills">
+    <li class="nav-item">
+			<strong class="nav-link lead">$space[username]</strong>
+		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="{MOD_URL}&op=edituser&uid=$uid#user_{$user['uid']}_" onclick="jQuery('#orguser_container').load(this.href);return false;">{lang basic_message}</a>
 		</li>
