@@ -89,7 +89,7 @@ class helper_page {
 			}
 
 			$multipage .= ($to < $pages ? '<li class="page-item"><a href="'.(self::mpurl($mpurl, $pagevar, $pages)).$a_name.'" title="最后一页" class="page-link last"'.$ajaxtarget.'>'.$dot.' '.$realpages.'</a></li>' : '').
-			($showpagejump && !$simple && !$ajaxtarget && !$wml ? '<li class="page-item"><a class="page-link"><div class="input-group" title="跳转页数，共'.$lang['total'].' '.$pages.' '.$lang['pageunit'].'页"><input  type="text" name="custompage"  class="form-control" style="width: 45px;" title="'.$lang['pagejumptip'].'" value="'.$curpage.'" onkeydown="if(event.keyCode==13) {window.location=\''.$jsurl.'}" /><span class="input-group-text"> / '.$pages.' '.$lang['pageunit'].'</span></div></a></li>' : '').
+			($showpagejump && !$simple && !$ajaxtarget && !$wml ? '<li class="page-item"><a class="page-link"><div class="input-group" title="跳转页数，共'.$lang['total'].' '.$pages.' '.$lang['pageunit'].'页"><input  type="text" name="custompage"  class="form-control height-24" style="width: 45px;" title="'.$lang['pagejumptip'].'" value="'.$curpage.'" onkeydown="if(event.keyCode==13) {window.location=\''.$jsurl.'}" /><span class="input-group-text"> / '.$pages.' '.$lang['pageunit'].'</span></div></a></li>' : '').
 			($curpage < $pages && !$simple ? '<li><a href="'.(self::mpurl($mpurl, $pagevar, $curpage + 1)).($ajaxtarget  && $autogoto ? '#' : $a_name).'" class="page-link
 "'.$ajaxtarget.' title="下一页">»</a></li>' : '').
 			($showkbd && !$simple && $pages > $page && !$ajaxtarget && !$wml ? '<li><kbd><input type="text" name="custompage" size="3" onkeydown="if(event.keyCode==13) {window.location=\''.$jsurl.'}" /></kbd></li>' : '');

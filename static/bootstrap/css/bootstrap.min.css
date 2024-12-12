@@ -1795,3 +1795,7 @@ fieldset[disabled] .btn-pure.focus {
     border-radius: .25rem;
     opacity: .5
 }
+
+.height-24 {
+    height: 24px !important;
+}
