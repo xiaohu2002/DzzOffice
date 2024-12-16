@@ -4037,7 +4037,6 @@ fieldset:disabled .btn {
     text-align: left;
     list-style: none;
     background-color: #fff;
-    background-clip: padding-box;
     border: 1px solid #dee2e6;
     border-radius: .25rem;
     font-size: 14px;
@@ -6220,7 +6219,6 @@ fieldset:disabled .btn {
     font-size: .875rem;
     pointer-events: auto;
     background-color: rgba(255, 255, 255, .85);
-    background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .1);
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
     border-radius: .25rem
@@ -6338,7 +6336,6 @@ fieldset:disabled .btn {
     width: 100%;
     pointer-events: auto;
     background-color: #fff;
-    background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: .3rem;
     outline: 0;
@@ -6748,7 +6745,6 @@ fieldset:disabled .btn {
     font-size: .875rem;
     word-wrap: break-word;
     background-color: #fff;
-    background-clip: padding-box;
     border: 1px solid #dee2e6;
     border-radius: var(--radius);
     -webkit-box-shadow: 0 3px 8px rgb(var(--bs-dark-rgb), .1), 0 0 1px rgb(var(--bs-dark-rgb), .15);
