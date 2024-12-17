@@ -11,7 +11,6 @@ function loginsub(formid,rspaceid){
     var type = 'json';
 
     jQuery.post(url+'&returnType='+type,formData,function(json){
-
         if(json['success']){
             showmessage(json['success']['message'],"success",0,1);
 			setTimeout(function() {
@@ -20,12 +19,15 @@ function loginsub(formid,rspaceid){
         }else if(json['error']){
             showmessage(json['error'],"danger",3000,1);
             jQuery('#'+rspaceid).html(json['error']);
-
         }else{
             showmessage(__lang.system_busy,"danger",3000,1);
             jQuery('#'+rspaceid).html(__lang.system_busy);
         }
-    },'json');
+    },'json')
+    .fail(function (jqXHR, textStatus, errorThrown) {
+        showmessage(__lang.system_error, 'error', '3000', 1);
+        jQuery('#'+rspaceid).html(__lang.system_error);
+    });
 }
 function lostpass(contid,formid,rspaceid){
     var url = jQuery('#'+formid).attr('action');

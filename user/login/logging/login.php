@@ -32,7 +32,6 @@ if($_G['uid']>0){
 $setting = isset($_G['setting']) ? $_G['setting']:'';
 
 if(empty($setting)){
-
 	$setting= C::t('setting')->fetch_all(array(),true);
 }
 $_G['allow_loginmod'] = $setting['allow_loginmod'] = unserialize($setting['allow_loginmod']);
