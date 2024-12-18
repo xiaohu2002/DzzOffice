@@ -42,7 +42,6 @@ function dshowmessage($message, $url_forward = '', $values = array(), $extrapara
 	define('CACHE_FORBIDDEN', TRUE);
 	$_G['setting']['msgforward'] = @dunserialize($_G['setting']['msgforward']);
 	$handlekey = $leftmsg = '';
-
 	if(empty($_G['inajax']) && (!empty($_GET['quickforward']) || $_G['setting']['msgforward']['quick'] && empty($extraparam['clean_msgforward']) && $_G['setting']['msgforward']['messages'] && @in_array($message, $_G['setting']['msgforward']['messages']))) {
 		$param['header'] = true;
 	}
@@ -100,7 +99,6 @@ function dshowmessage($message, $url_forward = '', $values = array(), $extrapara
 		include template('common/footer_ajax');
 		dexit();
 	}
-
 	$vars = explode(':', $message);
 	if(count($vars) == 2) {
 		$show_message = lang($vars[1], $values,null,$vars[0]);

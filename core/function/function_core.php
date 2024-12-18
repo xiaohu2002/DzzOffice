@@ -851,9 +851,7 @@ function lang($langvar = null, $vars = array(), $default = null, $curpath = '')
     $return = $langvar !== null ? (isset($returnvalue['template'][$langvar]) ? $returnvalue['template'][$langvar] : null) : $returnvalue['template'];
     $return = $return === null ? ($default !== null ? $default : $langvar) : $return;
     $searchs = $replaces = array();
-
     if ($vars && is_array($vars)) {
-
         foreach ($vars as $k => $v) {
             $searchs[] = '{' . $k . '}';
             $replaces[] = $v;
@@ -863,7 +861,6 @@ function lang($langvar = null, $vars = array(), $default = null, $curpath = '')
     if (is_string($return) && strpos($return, '{_G/') !== false) {
         preg_match_all('/\{_G\/(.+?)\}/', $return, $gvar);
         foreach ($gvar[0] as $k => $v) {
-
             $searchs[] = $v;
             $replaces[] = getglobal($gvar[1][$k]);
         }

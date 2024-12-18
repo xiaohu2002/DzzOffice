@@ -1508,6 +1508,7 @@ $_G[siteurl]',
 	'founder_upgrade_normal' => '正常',
 	'logs_invite_status_4' => '已过期',
 	'del_share'=>'删除分享',
+	'app_upgrade_dzzversion_error' => 'DzzOffice版本要求：{version}',
 );
 
 ?>

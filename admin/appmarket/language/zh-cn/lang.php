@@ -26,7 +26,6 @@ $lang = array (
     'app_upgrade_installed' => '已安装该应用',
     'app_upgrade_installed_local' => '已安装本地应用与该应用冲突',
     'app_upgrade_identifier_error' => '应用标识为空',
-    'app_upgrade_dzzversion_error' => 'Dzzoffice版本要求: {version}',
     'app_upgrade_phpversion_error' => 'php版本要求: {version}',
     'app_upgrade_mysqlversion_error' => 'Mysql版本要求: {version}',
     'app_upgrade_newversion_will_start'=>'升级即将开始',
