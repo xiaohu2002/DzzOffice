@@ -4,7 +4,7 @@
 <script type="text/javascript" src="user/scripts/jquery.mousewheel.js?{VERHASH}"></script>
 <script type="text/javascript" src="user/scripts/jquery.cropbox.js?{VERHASH}"></script>
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
 	<div class="container-fluid">
 		<div class="card">
             <div class="card-body">
@@ -27,7 +27,7 @@
                 <img class="cropimage" src="avatar.php?uid=$_G['uid']&size=big&ramdom=1" />
             </div>
             <div class=" clearfix">
-                <div class="float-start" style="position:relative;overflow:hidden">
+                <div class="float-start me-2" style="position:relative;overflow:hidden">
                     <button class="btn btn-outline-primary">{lang upload_image}</button>
                     <input id="upload" name="files[]" tabIndex="-1" style="position: absolute;outline:none; filter: alpha(opacity=0); PADDING-BOTTOM: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; font-family: Arial; font-size: 180px;height:40px;width:86px;display:inline-block;top: 0px; cursor: pointer; right: 0px; padding-top: 0px; opacity: 0;direction:ltr;background-image:none" type="file" accept="image/png,image/gif,image/jpeg">
                 </div>
@@ -61,7 +61,7 @@
                 autoUpload: true,
                 maxChunkSize: 2000000, //2M
                 maxFileSize: 5000000, // 5 MB
-                acceptFileTypes: new RegExp("(\.|\/)([jpeg|jpg|gif|png|bmp])$", 'i'),
+                acceptFileTypes: new RegExp("(\.|\/)([jpeg|jpg|gif|png|bmp|webp])$", 'i'),
                 dropZone: jQuery('.crop-container'),
                 pasteZone: jQuery('.crop-container'),
                 sequentialUploads: true

@@ -1,12 +1,12 @@
 <!--{template lyear:header_simple_start}-->
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
 	<div class="container-fluid">
 	  <div class="card">
 		<div class="container">
 			<header class="card-header">
 			<div class="card-title">
-				<ul class="nav nav-stacked nav-pills">
+				<ul class="nav nav-pills">
 					<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&operation=mail">{lang set}</a> </li>
 					<li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&op=mailcheck">{lang setting_mail_check}</a> </li>
 				</ul>
@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<dl class="mb-3 d-grid">
-						<input class="btn btn-primary" id="submit_mailchecksubmit" name="mailchecksubmit" value="{lang setting_mail_check_submit}" type="submit">
+						<input class="btn btn-primary bodyloading" id="submit_mailchecksubmit" name="mailchecksubmit" value="{lang setting_mail_check_submit}" type="submit">
 						<iframe style="display: none" name="mailcheckiframe"> </iframe>
 					</dl>
 				</form>

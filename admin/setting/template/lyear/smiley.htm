@@ -1,13 +1,13 @@
 <!--{template lyear:header_simple_start}-->
 <script src="admin/scripts/admin.js?{VERHASH}"></script>
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
   <div class="container-fluid">
     <div class="card">
       <div class="container">
         <header class="card-header">
           <div class="card-title">
-            <ul class="nav nav-stacked nav-pills">
+            <ul class="nav nav-pills">
               <li class="nav-item"><a class="nav-link" href="{MOD_URL}&operation=smiley">{lang expression_set}</a> </li>
               <li class="nav-item"><a class="nav-link active" href="{MOD_URL}&op=smiley">{lang expression_class}</a> </li>
             </ul>
@@ -64,7 +64,7 @@
                       <input type="checkbox"  class="form-check-input" name="chkall" id="chkall"  onclick="checkAll('prefix', this.form, 'delete')">
                       &nbsp;{lang del}</label>
                     &nbsp;&nbsp;
-                    <input type="submit" class="btn btn-primary" value="{lang submit}" />
+                    <input type="submit" class="btn btn-primary bodyloading" value="{lang submit}" />
                 </th>
                 </thead>
               </table>

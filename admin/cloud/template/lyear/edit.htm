@@ -1,7 +1,7 @@
 <!--{template lyear:header_simple_start}-->
 <script src="admin/scripts/admin.js?{VERHASH}"></script>
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
 	<div class="container-fluid">
 		<div class="card">
       <div class="container">
@@ -31,13 +31,13 @@
             </div>
           </div>
           <dl class="mb-3 d-grid">
-            <input class="btn btn-primary" name="editsubmit" value="{lang save_changes}" type="submit">
+            <input class="btn btn-primary bodyloading" name="editsubmit" value="{lang save_changes}" type="submit">
           </dl>
         </form>
       </div>
       <!--{elseif $cloud['type']=='pan'}-->
       <div class="card-header" >
-        <ul class="nav nav-stacked nav-pills">
+        <ul class="nav nav-pills">
           <li class="nav-item"> <a class="nav-link <!--{if empty($_GET[do])}-->active<!--{/if}-->" href="{MOD_URL}&op=edit&bz=$bz">{lang set}</a>
           </li>
           <!--{if $cloud['available']>0}--> 
@@ -81,7 +81,7 @@
             </div>
           </div>
           <dl class="mb-3 d-grid">
-            <input type="submit" class="btn btn-primary" value="{lang submit}" />
+            <input type="submit" class="btn btn-primary bodyloading" value="{lang submit}" />
           </dl>
             $multi
         </form>
@@ -167,14 +167,14 @@
             </div>
           </div>
           <dl class="mb-3 d-grid">
-              <input class="btn btn-primary" name="editsubmit" value="{lang save_changes}" type="submit">
+              <input class="btn btn-primary bodyloading" name="editsubmit" value="{lang save_changes}" type="submit">
           </dl>
         </form>
       </div>
       <!--{/if}--> 
       <!--{else}-->
       <div class="card-header">
-        <ul class="nav nav-stacked nav-pills">
+        <ul class="nav nav-pills">
           <li class="nav-item"> <a class="nav-link <!--{if empty($_GET[do])}-->active<!--{/if}-->" href="{MOD_URL}&op=edit&bz=$bz">{lang set}</a>
           </li>
           <!--{if $cloud['available']>0}--> 
@@ -218,7 +218,7 @@
             </div>
           </div>
           <dl class="mb-3 d-grid">
-            <input type="submit" class="btn btn-primary" value="{lang submit}" />
+            <input type="submit" class="btn btn-primary bodyloading" value="{lang submit}" />
           </dl>
           $multi
         </form>
@@ -272,7 +272,7 @@
             </div>
           </div>
           <dl class="mb-3 d-grid">
-              <input class="btn btn-primary" name="editsubmit" value="{lang save_changes}" type="submit">
+              <input class="btn btn-primary bodyloading" name="editsubmit" value="{lang save_changes}" type="submit">
           </dl>
         </form>
       </div>

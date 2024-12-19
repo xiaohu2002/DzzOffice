@@ -1,12 +1,12 @@
 <!--{template lyear:header_simple_start}-->
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
   <div class="container-fluid">
     <div class="card">
       <div class="container">
         <header class="card-header">
           <div class="card-title">
-            <ul class="nav nav-stacked nav-pills">
+            <ul class="nav nav-pills">
             <!--{if $operation=='censor' || $operation=='space' || $operation == 'permgroup'}-->
             <li class="nav-item"><a class="nav-link active" href="{MOD_URL}&operation=$operation">{lang set}</a></li>
             <!--{elseif $operation=='mail'}-->
@@ -229,7 +229,7 @@
                 </div>
               </div>
               <dl class="mb-3 d-grid">
-                <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
+                <input class="btn btn-primary bodyloading" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
               </dl>
             </form>
             <script type="text/javascript">
@@ -324,7 +324,7 @@
                 </div>
                 <!--{/loop}-->
               <dl class="mb-3 d-grid">
-                  <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
+                  <input class="btn btn-primary bodyloading" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
               </dl>
             </form>
             <!--{elseif $operation=='upload'}-->
@@ -382,7 +382,7 @@
                 </div>
               </div>
               <dl class="mb-3 d-grid">
-                  <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
+                  <input class="btn btn-primary bodyloading" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
               </dl>
             </form>
             <link rel="stylesheet" type="text/css" href="static/lyear/js/jquery-tagsinput/jquery.tagsinput.min.css">
@@ -484,7 +484,7 @@
                 </div>
               </div>
               <dl class="mb-3 d-grid">
-                  <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
+                  <input class="btn btn-primary bodyloading" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
               </dl>
             </form>
             <script type="text/javascript">
@@ -618,7 +618,7 @@
                 </div>
               </div>
               <dl class="mb-3 d-grid">
-                <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
+                <input class="btn btn-primary bodyloading" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
               </dl>
             </form>
             <script>
@@ -732,7 +732,7 @@
               </div>
               </div>
               <dl class="mb-3 d-grid">
-                <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit"  value="{lang save_changes}" type="submit">
+                <input class="btn btn-primary bodyloading" id="submit_editsubmit" name="settingsubmit"  value="{lang save_changes}" type="submit">
               </dl>
             </form>
             <!--文件夹权限设置--> 
@@ -820,7 +820,7 @@
                   </div>
               </div>
               <dl class="mb-3 d-grid">
-                <input class="btn btn-primary" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
+                <input class="btn btn-primary bodyloading" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
               </dl>
             </form>
             <link rel="stylesheet" type="text/css" href="static/lyear/js/jquery-tagsinput/jquery.tagsinput.min.css">

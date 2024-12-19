@@ -1,11 +1,11 @@
 <!--{template lyear:header_simple_start}-->
 <script src="admin/scripts/admin.js?{VERHASH}"></script>
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
 	<div class="container-fluid">
 		<div class="card">
 			<header class="card-header">
-				<ul class="nav nav-stacked nav-pills">
+				<ul class="nav nav-pills">
 					<li class="nav-item">
 						<a hidefocus="true" class="nav-link <!--{if empty($_GET[ 'edit']) && empty($_GET[ 'run'])}-->active<!--{/if}-->" href="{MOD_URL}&op=cron">{lang cron}</a>
 					</li>
@@ -91,7 +91,7 @@
 
 					</div>
 					<dl class="mb-3 d-grid">
-						<button type="submit" class="btn btn-primary" name="exportsubmit" value="true">{lang blank_submit}</button>
+						<button type="submit" class="btn btn-primary bodyloading" name="exportsubmit" value="true">{lang blank_submit}</button>
 					</dl>
 				</form>
 				<!--{elseif $_GET['run']}-->
@@ -162,7 +162,7 @@
 						</div>
 					</div>
 					<div class="col-12">
-						<button type="submit" class="btn btn-primary" name="exportsubmit" value="true">{lang blank_submit}</button>
+						<button type="submit" class="btn btn-primary bodyloading" name="exportsubmit" value="true">{lang blank_submit}</button>
 					</div>
 				</form>
 				<!--{/if}-->

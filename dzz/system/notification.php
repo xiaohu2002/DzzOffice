@@ -9,7 +9,6 @@
 if(!defined('IN_DZZ')) {
     exit('Access Denied');
 }
-Hook::listen('check_login');
 require libfile('function/code');
 $filter=trim($_GET['filter']);
 $template = isset($_GET['template']) ? $_GET['template'] : '';
@@ -29,6 +28,7 @@ if($filter=='new'){//列出所有新通知
     $num=DB::result_first("select COUNT(*) from %t where new>0 and uid=%d",array('notification',$_G['uid']));
     exit(json_encode(array('sum'=>$num,'timeout'=>60*1000)));
 }else{
+    Hook::listen('check_login');
     $list=array();
     $page = empty($_GET['page'])?1:intval($_GET['page']);
     $fromid = isset($_GET['appid']) ? intval($_GET['appid']):'';

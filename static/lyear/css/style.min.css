@@ -18,7 +18,7 @@
     /* 侧边栏菜单宽度 */
     --sidebar-width: 240px;
     /* header高度 */
-    --header-height: 68px;
+    --header-height: 64px;
 
 	--bs-purple: #926dde;
     --bs-purple-hover: #a282e3;
@@ -2721,6 +2721,7 @@ hr.dropdown-divider {
 
 .nav-pills .nav-link {
 	border-radius: var(--radius);
+	color: #000;
 }
 .nav-pills .nav-link:hover {
 	background-color:rgba(55, 121, 255, 0.1);
@@ -3333,7 +3334,6 @@ hr.dropdown-divider {
 .nav-stacked {
     margin: 0;
     padding: 1px;
-    overflow: auto;
 }
 
 .nav-stacked>li {
@@ -3566,7 +3566,7 @@ hr.dropdown-divider {
 
 .bs-top-container .navbar {
 	min-height: var(--header-height);
-	padding: 0 1rem;
+	padding: 0;
 	margin-bottom: 0;
 	border: 0px;
 	background-color: transparent;
@@ -3609,23 +3609,12 @@ hr.dropdown-divider {
 	margin: 0px;
 }
 
-/* 头像菜单 */
-.navbar-right>li>a {
-	position: relative;
-	display: block;
-	background: rgba(255, 255, 255, 0.2);
-	border-radius: var(--radius);
-	line-height: 1;
+.navbar-right .nav-link {
 	color: #fff;
-	font-size: 24px;
-	vertical-align: middle;
+	padding: 0 .5rem 0 .5rem;
 }
-.navbar-right>li>a:hover {
+.navbar-right .nav-link:hover {
 	color: #000;
-}
-.navbar-right .nav-item {
-	cursor: pointer;
-	padding: var(--radius);
 }
 
 /* 消息列表 */
@@ -3804,7 +3793,6 @@ li.lyear-skin-li .form-check:first-child .form-check-input:checked+label::after 
 	padding-left: var(--sidebar-width);
 	-webkit-transition: padding 0.3s;
 	transition: padding 0.3s;
-	overflow: auto;
 }
 
 /** ----------------------------------

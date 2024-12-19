@@ -1,11 +1,11 @@
 <!--{template lyear:header_simple_start}-->
 <script src="admin/scripts/admin.js?{VERHASH}"></script>
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
 	<div class="container-fluid">
 		<div class="card">
 			<header class="card-header">
-				<ul class="nav nav-stacked nav-pills">
+				<ul class="nav nav-pills">
 					<li class="nav-item">
 						<a class="nav-link <!--{if $operation=='export' }-->active<!--{/if}-->" hidefocus="true" href="{MOD_URL}&op=database&operation=export">{lang export}</a>
 					</li>
@@ -94,7 +94,7 @@
 					</div>
 				</div>
 				<dl class="mb-3 d-grid">
-					<button type="submit" class="btn btn-primary" name="exportsubmit" value="true" >{lang blank_submit}</button>
+					<button type="submit" class="btn btn-primary bodyloading" name="exportsubmit" value="true" >{lang blank_submit}</button>
 					<div class="form-check">
 					<input  type="checkbox" class="form-check-input" value="1" onclick="document.getElementById('advanceoption').style.display = document.getElementById('advanceoption').style.display == 'none' ? '' : 'none'; this.value = this.value == 1 ? 0 : 1; this.checked = this.value == 1 ? false : true" id="btn_more">
 					<label class="form-check-label" for="btn_more">{lang more_options}</label>
@@ -200,7 +200,7 @@
 						</div>
 					</div>
 					<div class="col-12">
-						<button type="submit" class="btn btn-primary" name="exportsubmit" value="true" >{lang blank_submit}</button>
+						<button type="submit" class="btn btn-primary bodyloading" name="exportsubmit" value="true" >{lang blank_submit}</button>
 					</div>
 				</form>
 				<!--{/if}-->
@@ -238,7 +238,7 @@
 						</div>
 					  </div>
 					<dl class="mb-3 d-grid">
-						<div class="col-sm-10"><button type="submit" class="btn btn-primary">{lang blank_submit}</button></div>
+						<div class="col-sm-10"><button type="submit" class="btn btn-primary bodyloading">{lang blank_submit}</button></div>
 					</dl>
 				</form>
 				<!--{/if}-->

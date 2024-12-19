@@ -39,7 +39,7 @@
           <!--{template lyear:lyear_header_search}-->
           <ul class="navbar-right d-flex align-items-center">
             <!--切换主题配色-->
-            <li class="dropdown dropdown-skin nav-item">
+            <li class="dropdown dropdown-skin">
               <a data-bs-toggle="dropdown" class="nav-link">
                 <i class="mdi mdi-palette fs-5"></i>
               </a>
@@ -187,37 +187,35 @@
               </ul>
             </li>
             <!--{if !$_G['setting']['bbclosed'] || !$_G['adminid'] ==0}-->
-            <li class="nav-item">
-            <a href="javascript:;" id="desktop_app" data-href="index.php?mod=system&template=1&op=app_ajax&operation=app" class="app_popup_icon nav-link active js-popbox" role="button" data-bs-container="body" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover"><span class="mdi mdi-apps fs-5"></span></a>
+            <li>
+            <a href="javascript:;" id="desktop_app" data-href="index.php?mod=system&template=1&op=app_ajax&operation=app" class="app_popup_icon nav-link js-popbox" role="button" data-bs-container="body" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover"><span class="mdi mdi-apps fs-5"></span></a>
+            </li>
+            <li>
+              <a href="javascript:;" id="dzz_notification" data-href="index.php?mod=system&template=1&op=notification&filter=new" class="animations-box position-relative nav-link navbar-notice js-popbox" role="button" data-bs-container="body" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover">
+              <span class="mdi mdi-bell-outline fs-5"></span>
+              <span class="position-absolute translate-middle badge bg-danger rounded-pill d-none">&nbsp;</span>
+              </a>
             </li>
             <!--{/if}-->
             <!--{if $_G['uid']}-->
-            <!--{if !$_G['setting']['bbclosed'] || !$_G['adminid'] ==0}-->
-            <li class="nav-item">
-            <a href="javascript:;" id="dzz_notification" data-href="index.php?mod=system&template=1&op=notification&filter=new" class="animations-box position-relative nav-link active navbar-notice js-popbox" role="button" data-bs-container="body" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover">
-            <span class="mdi mdi-bell-outline fs-5"></span>
-            <span class="position-absolute translate-middle badge bg-danger rounded-pill d-none">&nbsp;</span>
-            </a>
-            </li>
-            <!--{/if}-->
             <li>
-            <a href="javascript:;" class="js-popbox" data-href="user.php?mod=space&template=1&op=navmenu&modname={MOD_NAME}" role="button" data-bs-container="body" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover">
+            <a href="javascript:;" class="nav-link js-popbox" data-href="user.php?mod=space&template=1&op=navmenu&modname={MOD_NAME}" role="button" data-bs-container="body" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover">
             {eval echo avatar_block($_G['uid']);}	
             </a>
             </li>
             <!--{else}-->
-            <li class="nav-item">
-            <a href="javascript:;" class="nav-link active basil" onclick="location.href='$_G[siteurl]user.php?mod=login';return false;"><span>{lang login}</span></a>
+            <li>
+            <a href="javascript:;" class="nav-link basil" onclick="location.href='$_G[siteurl]user.php?mod=login';return false;"><span>{lang login}</span></a>
             </li>
             <!--{if !$_G['setting']['bbclosed'] && $_G['setting']['regstatus']}-->
-            <li class="nav-item">
-            <a href="javascript:;" class="nav-link active basil" onclick="location.href='$_G[siteurl]user.php?mod=register';return false;">
+            <li>
+            <a href="javascript:;" class="nav-link basil" onclick="location.href='$_G[siteurl]user.php?mod=register';return false;">
             <span >{lang register}</span>
             </a>
             </li>
             <!--{/if}-->
-            <li class="nav-item">
-            <a href="javascript:;" class="nav-link active basil" onclick="showWindow('about','user.php?mod=space&template=1&op=about&modname={MOD_NAME}');">{lang about}</a>
+            <li>
+            <a href="javascript:;" class="nav-link basil" onclick="showWindow('about','user.php?mod=space&template=1&op=about&modname={MOD_NAME}');">{lang about}</a>
             </li>
             <!--{/if}-->
           </ul>

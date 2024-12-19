@@ -22,7 +22,7 @@ $member=C::t('user_profile')->get_userprofile_by_uid($_G['uid']);
 //$openid= C::t('user_qqconnect')->fetch_bindstatus_by_uid($uid);
 
 if($do == 'editpass'){
-
+	$navtitle=lang('password_edit');
     $strongpw = ($_G['setting']['strongpw']) ? json_encode($_G['setting']['strongpw']):'';
     if(isset($_GET['editpass'])){
 
@@ -91,6 +91,7 @@ if($do == 'editpass'){
     }
 
 }elseif($do == 'login'){
+	$navtitle='登录记录';
 	function get_log_files($logdir = '', $action = 'action') {
 		$dir = opendir($logdir);
 		$files = array();
@@ -235,6 +236,7 @@ if($do == 'editpass'){
 	}
 	$multi = multi($count, $lpp, $page, $theurl,'pull-right');
 }elseif($do == 'changeemail'){
+	$navtitle=lang('bindemail_subject');
 
     $emailchange = $member['emailstatus'];
 

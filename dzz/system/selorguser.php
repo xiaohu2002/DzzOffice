@@ -10,6 +10,7 @@
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
+Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 include_once libfile('function/organization');
 $ismobile=helper_browser::ismobile();
 $ids =isset($_GET['ids'])?rawurldecode($_GET['ids']):'';

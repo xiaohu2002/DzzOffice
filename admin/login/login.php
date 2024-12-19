@@ -154,7 +154,7 @@ echo <<<EOT
 				<input  name="admin_password"  id="admin_password"  type="password" class="form-control"  value="" autocomplete="off" placeholder="$lang1[password]" />
 
 		</div>
-		<input name="submit" value="$lang1[login]" type="submit" class="btn btn-primary"  />
+		<input name="submit" value="$lang1[login]" type="submit" class="btn btn-primary bodyloading"  />
 		<div class="copyright">Powered by <a href="http://www.dzzoffice.com/" target="_blank">DzzOffice</a> &copy; 2012-$year</div>
 		</div>
 		

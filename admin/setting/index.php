@@ -261,7 +261,7 @@ if (!submitcheck('settingsubmit')) {
 				} else {
 					$arr = explode('.', $back);
 					$ext = array_pop($arr);
-					if ($ext && in_array(strtolower($ext), array('jpg', 'jpeg', 'gif', 'png'))) {
+					if ($ext && in_array(strtolower($ext), array('jpg', 'jpeg', 'gif', 'png', 'webp'))) {
 						$settingnew['loginset']['img'] = $back;
 						$settingnew['loginset']['bcolor'] = '';
 					} else {

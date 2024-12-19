@@ -9,6 +9,7 @@
 if (!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
+Hook::listen('check_login');
 $navtitle= lang('appname');
 $orgtree = array();
 if ($_G['adminid'] != 1) {

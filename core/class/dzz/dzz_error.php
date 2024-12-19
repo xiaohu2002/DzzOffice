@@ -13,14 +13,14 @@ class dzz_error
 		}
 
 		list($showtrace, $logtrace) = dzz_error::debug_backtrace();
-
+		$messagesave = '<b>'.$message.'</b><br><b>PHP:</b>'.$logtrace;
+		$BackTraceID = md5(dzz_error::clear($messagesave));
 		if($save) {
-			$messagesave = '<b>'.$message.'</b><br><b>PHP:</b>'.$logtrace;
-			dzz_error::write_error_log($messagesave);
+			dzz_error::write_error_log($messagesave.' BackTraceID:'.$BackTraceID);
 		}
 
 		if($show) {
-			dzz_error::show_error('system', "<li>$message</li>", $showtrace, 0);
+			dzz_error::show_error('system', "<li>$message</li>", $showtrace, '', $BackTraceID);
 		}
 
 		if($halt) {
@@ -83,8 +83,6 @@ class dzz_error
 		$msg = '<li>[Type] '.$title.'</li>';
 		$msg .= $dberrno ? '<li>['.$dberrno.'] '.$dberror.'</li>' : '';
 		$msg .= $sql ? '<li>[Query] '.$sql.'</li>' : '';
-		dzz_error::show_error('db', $msg, $showtrace, false);
-		unset($msg, $phperror);
 
 		$errormsg = '<b>'.$title.'</b>';
 		$errormsg .= "[$dberrno]<br /><b>ERR:</b> $dberror<br />";
@@ -93,8 +91,9 @@ class dzz_error
 		}
 		$errormsg .= "<br />";
 		$errormsg .= '<b>PHP:</b> '.$logtrace;
-
-		dzz_error::write_error_log($errormsg);
+		$BackTraceID = md5(dzz_error::clear($errormsg));
+		dzz_error::write_error_log($errormsg.' BackTraceID:'.$BackTraceID);
+		dzz_error::show_error('db', $msg, $showtrace, '', $BackTraceID);
 		exit();
 
 	}
@@ -164,17 +163,29 @@ class dzz_error
 			    'line' => $error['line'],
 			    'function' => $error['function'],
 			);
+			$file = str_replace(array(DZZ_ROOT, '\\'), array('', '/'), $error['file']);
+			$func = isset($error['class']) ? $error['class'] : '';
+			$func .= isset($error['type']) ? $error['type'] : '';
+			$func .= isset($error['function']) ? $error['function'] : '';
+			$line = sprintf('%04d', $error['line']);
+			$logmsg .= (!empty($logmsg) ? ' -> ' : '').$file.'#'.$func.':'.$line;
 		}
-		self::show_error($type, $errormsg, $phpmsg);
+		$messagesave = '<b>'.$errormsg.'</b><br><b>PHP:</b>'.$logmsg;
+		$BackTraceID = md5(dzz_error::clear($messagesave));
+		self::write_error_log($messagesave.' BackTraceID:'.$BackTraceID);
+		self::show_error($type, $errormsg, $phpmsg, '', $BackTraceID);
 		exit();
 
 	}
 
-	public static function show_error($type, $errormsg, $phpmsg = '', $typemsg = '') {
+	public static function show_error($type, $errormsg, $phpmsg = '', $typemsg = '', $backtraceid = '') {
 		global $_G;
 		ob_end_clean();
 		$gzip = getglobal('gzipcompress');
 		ob_start($gzip ? 'ob_gzhandler' : null);
+		header("HTTP/1.1 503 Service Temporarily Unavailable");
+		header("Status: 503 Service Temporarily Unavailable");
+		header("Retry-After: 3600");
 		$host = $_SERVER['HTTP_HOST'];
 		$title = $type == 'db' ? 'Database' : 'System';
 		echo <<<EOT
@@ -185,6 +196,8 @@ class dzz_error
 	<meta charset="{$_G['config']['output']['charset']}" />
 	<meta name="renderer" content="webkit" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="ROBOTS" content="NOINDEX,NOFOLLOW,NOARCHIVE" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style type="text/css">
 	<!--
 	body { background-color: white; color: black; font: 9pt/11pt verdana, arial, sans-serif;}
@@ -244,7 +257,7 @@ if (defined('CORE_VERSION')) {
 } else {
 	$VERSION = 'Unknown';
 }
-echo '<p>Time: ' . date('Y-m-d H:i:s O') .' IP: ' . getglobal('clientip') . ' version: ' . $VERSION . '</p>';
+echo '<p>Time: ' . date('Y-m-d H:i:s O') .' IP: ' . getglobal('clientip') . ' version: ' . $VERSION . ' BackTraceID: ' . $backtraceid . '</p>';
 if(!empty($errormsg)) {
 	echo '<div class="info">'.$errormsg.'</div>';
 }
@@ -270,7 +283,6 @@ if(!empty($errormsg)) {
 		}
 		echo '<div class="help">'.lang('suggestion_user').'</div>';
 		echo '<div class="help">'.lang('suggestion').'</div>';
-		echo $gziperror;
 
 		$endmsg = lang('error_end_message', array('host'=>$host));
 		echo <<<EOT

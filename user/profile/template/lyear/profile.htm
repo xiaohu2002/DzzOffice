@@ -3,7 +3,7 @@
 <!--日期选择器css-->
 <link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-datepicker/bootstrap-datepicker3.min.css?{VERHASH}">
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
 	<div class="container-fluid">
 		<div class="card">
 			<div class="card-body container">
@@ -95,7 +95,7 @@
           <!--{/if}-->
         <!--{if !$vid || $showbtn}-->
         <dl class="mb-3 d-grid">
-             <input type="submit" class="btn btn-primary" <!--{if $vid}-->value="{lang submit_audit}"<!--{else}-->value="{lang save}"<!--{/if}-->>
+             <input type="submit" class="btn btn-primary bodyloading" <!--{if $vid}-->value="{lang submit_audit}"<!--{else}-->value="{lang save}"<!--{/if}-->>
         </dl>
          <!--{/if}-->
       </form>

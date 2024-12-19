@@ -11,11 +11,11 @@
 	}
   </script>
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
 	<div class="container-fluid">
 	  <div class="card">
       <div class="card-header">
-        <ul class="nav nav-stacked nav-pills"> 
+        <ul class="nav nav-pills"> 
           <li class="nav-item"><a class="nav-link active" href="{MOD_URL}&op=export&orgid=$orgid">{lang export_change}</a></li>
         </ul>
       </div>
@@ -52,7 +52,7 @@
               
             </div>
             <dl class="mb-3 d-grid">
-              <button type="submit" class="btn btn-primary" data-loading-text="{lang in_export}">{lang export_immediately}</button>
+              <button type="submit" class="btn btn-primary bodyloading" data-loading-text="{lang in_export}">{lang export_immediately}</button>
             </dl>
           </form>
       </div>

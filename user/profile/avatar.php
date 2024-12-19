@@ -38,7 +38,7 @@ if(empty($user['avatarstatus']) && dzz_check_avatar($_G['uid'], 'middle')) {
 
 	C::t('user')->update($_G['uid'], array('avatarstatus'=>'1'));
 }
-
+$navtitle=lang('Modify_the_picture');
 include template("avatar");
 
 function dzz_check_avatar($uid, $size = 'middle', $type = 'virtual') {

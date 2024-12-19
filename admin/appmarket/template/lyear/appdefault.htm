@@ -1,10 +1,10 @@
 <!--{template lyear:header_simple_start}-->
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
 	<div class="container-fluid">
 	  <div class="card">
 		<header class="card-header">
-			<ul class="nav nav-stacked nav-pills">
+			<ul class="nav nav-pills">
 				<li class="nav-item">
 					<a class="nav-link <!--{if $group=='0' && !$org}-->active<!--{/if}-->" href="{MOD_URL}&op=default&group=0">{lang universal_application}</a>
 				</li>
@@ -71,7 +71,7 @@
 						</tr>
 						<!--{/loop}-->
 						<tr>
-							<th valign="middle" style="border-bottom:none"><input type="submit" class="btn btn-primary" value="{lang save_set}" /></th>
+							<th valign="middle" style="border-bottom:none"><input type="submit" class="btn btn-primary bodyloading" value="{lang save_set}" /></th>
 							<th colspan="5" style="border-bottom:none"> $multi</th>
 						</tr>
 					</table>

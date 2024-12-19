@@ -1746,7 +1746,7 @@ $textexts = array('DZZDOC', 'HTM', 'HTML', 'SHTM', 'SHTML', 'HTA', 'HTC', 'XHTML
 $unRunExts = array('htm', 'html', 'js', 'php', 'jsp', 'asp', 'aspx', 'xml', 'htc', 'shtml', 'shtm', 'vbs'); //需要阻止运行的后缀名；
 $docexts = array('DOC', 'DOCX', 'XLS', 'XLSX', 'PPT', 'PPTX', 'ODT', 'ODS', 'ODG', 'RTF', 'ET', 'DPX', 'WPS');
 //echo strtolower(implode(',',$docexts));
-$imageexts = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP');
+$imageexts = array('JPG', 'JPEG', 'GIF', 'PNG', 'BMP', 'webp');
 $videoexts =
 $idtype2type = array(
     'picid' => 'image',
@@ -2473,7 +2473,7 @@ function curl_redir_exec($ch, $debug = "")
 function ico_png($source, $target, $proxy = '')
 {
     $ext = strtolower(substr(strrchr($source, '.'), 1, 10));
-    $imgexts = array('png', 'jpg', 'jpeg', 'gif');
+    $imgexts = array('png', 'jpg', 'jpeg', 'gif', 'webp');
     if (in_array($ext, $imgexts)) {
         exit($source);
         $data = dzz_file_get_contents($source, 0, $proxy);
@@ -2556,7 +2556,7 @@ function imagetolocal($source, $dir = 'appimg', $target = '')
         $target = '';
     }
     if (!$target) {
-        $imageext = array('jpg', 'jpeg', 'png', 'gif');
+        $imageext = array('jpg', 'jpeg', 'png', 'gif', 'webp');
         $ext = strtolower(substr(strrchr($source, '.'), 1, 10));
         if (!in_array($ext, $imageext)) return false;
         $subdir = $subdir1 = $subdir2 = '';
@@ -2586,7 +2586,7 @@ function image_to_icon($source, $target, $domain)
         return false;
     }
     if (!$target) {
-        $imageext = array('jpg', 'jpeg', 'png', 'gif');
+        $imageext = array('jpg', 'jpeg', 'png', 'gif', 'webp');
         $ext = str_replace("/\?.+?/i", '', strtolower(substr(strrchr($source, '.'), 1, 10)));
         if (!in_array($ext, $imageext)) $ext = 'jpg';
         $subdir = $subdir1 = $subdir2 = '';
@@ -2987,7 +2987,7 @@ function save_to_local($source, $target)
 }
 
 
-function uploadtolocal($upload, $dir = 'appimg', $target = '', $exts = array('jpg', 'jpeg', 'png', 'gif'))
+function uploadtolocal($upload, $dir = 'appimg', $target = '', $exts = array('jpg', 'jpeg', 'png', 'gif', 'webp'))
 {
     global $_G;
     if ($target == 'dzz/images/default/icodefault.png' || $target == 'dzz/images/default/widgetdefault.png' || preg_match("/^(http|ftp|https|mms)\:\/\/(.+?)/i", $target)) {
@@ -3019,7 +3019,7 @@ function upload_to_icon($upload, $target, $domain='')
     global $_G;
     $source = $upload['tmp_name'];
     if (!$target) {
-        $imageext = array('jpg', 'jpeg', 'png', 'gif');
+        $imageext = array('jpg', 'jpeg', 'png', 'gif', 'webp');
         $ext = strtolower(substr(strrchr($upload['name'], '.'), 1, 10));
         if (!in_array($ext, $imageext)) return false;
         $subdir = $subdir1 = $subdir2 = '';
@@ -3041,7 +3041,7 @@ function upload_to_icon($upload, $target, $domain='')
 function dzz_app_pic_save($FILE, $dir = 'appimg')
 {
     global $_G;
-    $imageext = array('jpg', 'jpeg', 'png', 'gif');
+    $imageext = array('jpg', 'jpeg', 'png', 'gif', 'webp');
     $ext = strtolower(substr(strrchr($FILE['name'], '.'), 1, 10));
     if (!in_array($ext, $imageext)) return '文件格式不允许';
     $subdir = $subdir1 = $subdir2 = '';

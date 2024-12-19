@@ -3969,7 +3969,8 @@ fieldset:disabled .btn {
 }
 
 .fade:not(.show) {
-    opacity: 0
+    opacity: 0;
+    display: none;
 }
 
 .collapse:not(.show) {
@@ -4535,7 +4536,6 @@ fieldset:disabled .btn {
 }
 
 .nav-pills .nav-link {
-    background: 0 0;
     border: 0;
     border-radius: .25rem
 }
@@ -6876,6 +6876,12 @@ fieldset:disabled .btn {
 .popover-body {
     padding: var(--radius);
     color: #212529
+}
+
+.popover-body .loadding{
+	background:url(loading.gif) center no-repeat;
+	width:50px;
+	height:50px;
 }
 
 .carousel {

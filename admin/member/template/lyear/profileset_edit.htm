@@ -1,11 +1,11 @@
 <!--{template lyear:header_simple_start}-->
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
 	<div class="container-fluid">
       <div class="card">
         <div class="container">
           <div class="card-header">
-              <ul class="nav nav-stacked nav-pills">
+              <ul class="nav nav-pills">
                 <li class="nav-item">
                   <a class="nav-link <!--{if !$fieldid}-->active<!--{/if}-->" href="{MOD_URL}&op=profileset">{lang data_item_list}</a>
                 </li>
@@ -225,7 +225,7 @@
                   </div>
                 </div>
                 <dl class="mb-3 d-grid">
-                  <input type="submit" class="btn btn-primary" name="editsubmit" value="{lang save_set}">
+                  <input type="submit" class="btn btn-primary bodyloading" name="editsubmit" value="{lang save_set}">
                 </dl>
               </form>
 	        </div>

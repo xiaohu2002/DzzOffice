@@ -1,11 +1,11 @@
 <!--{template lyear:header_simple_start}-->
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container">
+<main class="bs-main-container lyear-scroll">
 	<div class="container-fluid">
 		<div class="card">
       <div class="container">
         <div class="card-header">
-            <ul class="nav nav-stacked nav-pills"  >
+            <ul class="nav nav-pills"  >
               <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&op=edit&bz=dzz"> {lang set}</a> </li>
               <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&op=router">{lang routing_management}</a> </li>
               <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&op=rootedit">{lang add_routing}</a> </li>
@@ -75,7 +75,7 @@
               </div>
             </div>
             <dl class="mb-3 d-grid">
-              <input class="btn btn-primary" name="addroutersubmit" value="<!--{if $routerid}-->{lang edit}<!--{else}-->{lang add}<!--{/if}-->" type="submit">
+              <input class="btn btn-primary bodyloading" name="addroutersubmit" value="<!--{if $routerid}-->{lang edit}<!--{else}-->{lang add}<!--{/if}-->" type="submit">
             </dl>
           </form>
         </div>

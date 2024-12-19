@@ -2,11 +2,11 @@
 <link href="{MOD_PATH}/css/passsafe.css?{VERHASH}" rel="stylesheet" media="all">
 <script src="user/scripts/register.js?{VERHASH}"></script>
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container main-allnotice">
+<main class="bs-main-container lyear-scroll main-allnotice">
 	<div class="container-fluid">
 	  <div class="card">
         <div class="card-header clearfix">
-            <ul class="nav nav-stacked nav-pills">
+            <ul class="nav nav-pills">
                 <li class="nav-item"><a class="nav-link {if $do == 'editpass'}active{/if}" href="{MOD_URL}&op=password">{lang password_edit}</a></li>
                 <li class="nav-item"><a class="nav-link {if $do == 'login'}active{/if}" href="{MOD_URL}&op=password&do=login">登录记录</a></li>
                 <li class="nav-item"><a class="nav-link {if $do == 'changeemail'}active{/if}" href="{MOD_URL}&op=password&do=changeemail">{lang bindemail_subject}</a></li>
