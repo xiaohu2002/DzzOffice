@@ -436,7 +436,7 @@ function moderator_add(orgid,uid){
 function appendModerator(json){
 	var html='';
 	html+='<li class="user-item float-start" uid="'+json.uid+'"> ';
-	html+='			<a href="javascrip:;" class="delete" onclick="moderator_del(\''+json.id+'\',\''+json.orgid+'\',this);return false"><i style="color:#d2322d;font-size:16px" class="mdi mdi-delete lead dcolor"></i></a>';
+	html+='			<a href="javascrip:;" class="delete" onclick="moderator_del(\''+json.id+'\',\''+json.orgid+'\',this);return false"><i style="color:#d2322d;font-size:16px" class="mdi mdi-delete dzz dzz-delete lead dcolor"></i></a>';
 	html+='			<div class="avatar-cover"></div>';
 	html+='			<div class="user-item-avatar">'; 
 	html+='				<div class="avatar-face">';

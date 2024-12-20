@@ -127,9 +127,9 @@ function kuozhan(){
     $status = function_exists($item);
     $func_str .= "<div class=\"col-sm-4 float-start\">$item\n";
     if($status) {
-      $func_str .= "<span class=\"mdi mdi-check-circle text-success lead\"></span>\n";
+      $func_str .= "<span class=\"mdi mdi-check-circle bei dzz dzz-done text-success lead\"></span>\n";
     } else {
-      $func_str .= "<span class=\"mdi mdi-close-circle text-danger lead\"></span>\n";
+      $func_str .= "<span class=\"mdi mdi-close-circle beii dzz dzz-close text-danger lead\"></span>\n";
     }
     $func_str .= "</div>\n";
   }
