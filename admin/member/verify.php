@@ -108,7 +108,8 @@ if (!submitcheck('verifysubmit', true)) {
 			if ($anchor == 'pass') {
 				$value = array_merge($value, $profiles[$uid]);
 			}
-			$value['username'] = '<a href="user.php?&uid=' . $value['uid'] . '" target="_blank"><img src="avatar.php?uid=' . $value['uid'] . '&size=small" class="img-circle special_avatar_class img-avatar"><br/><br/>' . $value['username'] . '</a>';
+			$value['username'] = '<a href="user.php?&uid=' . $value['uid'] . '" target="_blank">'.avatar_block($value['uid']).'<br/><br/>' . $value['username'] . '</a>';
+
 			if ($anchor != 'pass') {
 				$fields = $anchor != 'pass' ? dunserialize($value['field']) : $_G['setting']['verify'][$vid]['field'];
 				$value['verifytype'] = $value['verifytype'] ? $_G['setting']['verify'][$value['verifytype']]['title'] : lang('members_verify_profile');

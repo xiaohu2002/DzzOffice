@@ -3,6 +3,7 @@
 if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
+define('NOROBOT', TRUE);
 $returntype =  isset($_GET['returnType']) ?  $_GET['returnType']: 'json';//返回值方式
  
 $checkLanguage = $_G['language']; 

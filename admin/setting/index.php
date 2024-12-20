@@ -46,6 +46,16 @@ if (!submitcheck('settingsubmit')) {
 		$applist =DB::fetch_all("select appname,identifier from %t where isshow>0 and `available`>0 and app_path='dzz' ORDER BY disp",array('app_market'));
 		
 		//$orgtree=getDepartmentOption(0);
+	} elseif ($operation == 'qywechat') {
+		if ($setting['synorgid']) {
+			$patharr = getPathByOrgid($setting['synorgid']);
+			$syndepartment = implode(' - ', ($patharr));
+
+		}
+		if (empty($syndepartment)) {
+			$syndepartment = lang('all_username');
+			$setting['syndepartment'] = '0';
+		}
 	} elseif ($operation == 'desktop') {
 		if ($setting['desktop_default'] && !is_array($setting['desktop_default'])) {
 			$setting['desktop_default'] = unserialize($setting['desktop_default']);
@@ -272,6 +282,23 @@ if (!submitcheck('settingsubmit')) {
 			} else {
 				$settingnew['loginset']['bcolor'] = '';
 			}
+	} elseif ($operation == 'qywechat') {
+		switch($_GET['fbind']) {
+			case 'bind' :
+				$wechat = new qyWechat( array('appid' => $settingnew['CorpID'], 'appsecret' => $settingnew['CorpSecret']));
+				if (!$wechat -> checkAuth()) {
+					showmessage(lang('verification_unsuccessful').',errCode：' . $wechat -> errCode . '; errMsg:' . $wechat -> errMsg, dreferer());
+				}
+				if (empty($setting['token_0']))
+					$settingnew['token_0'] = random(8);
+				if (empty($setting['encodingaeskey_0']))
+					$settingnew['encodingaeskey_0'] = random(43);
+				break;
+			case 'unbind' :
+				$settingnew['CorpID'] = '';
+				$settingnew['CorpSecret'] = '';
+				break;
+		}
 	}
 	$updatecache = FALSE;
 	$settings = array();
