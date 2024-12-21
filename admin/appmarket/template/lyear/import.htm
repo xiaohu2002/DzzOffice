@@ -1,6 +1,6 @@
 <!--{template lyear:header_simple_start}-->
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container lyear-scroll">
+<main class="bs-main-container">
 	<div class="container-fluid">
 	  <div class="card">
 		<header class="card-header">
@@ -40,6 +40,14 @@
 							<textarea type="textarea" class="form-control" id="importtxt" name="importtxt" rows="5"></textarea>
 						</div>
 					</div>
+					<div class="row mb-3">
+						<label class="col-sm-2" for="ignoreversion">忽略版本限制</label>
+						<div class="col-sm-10">
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" id="ignoreversion" name="ignoreversion">
+							  </div>
+						</div>
+					  </div>
 				<dl class="mb-3 d-grid">
 					<input type="submit" class="btn btn-primary bodyloading" value="{lang submit}"/>
 				</dl>

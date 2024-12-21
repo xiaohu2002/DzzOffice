@@ -81,6 +81,9 @@ elseif ($do == 'import') {//导入应用
 			if (!is_dir(DZZ_ROOT . './'.$apparray['app']['app_path'].'/' . $apparray['app']['identifier'])) {
 				showmessage(lang('list_cp_Application_directory_exist',array('app_path'=>$app['app_path'],'identifier'=>$app['identifier'])));
 			}
+			if($apparray['version'] && empty($_GET['ignoreversion']) && (version_compare($apparray['version'], $_G['setting']['version'])>0)) {
+				showmessage(lang('application_import_version_invalid'), '', array('cur_version' => $apparray['version'], 'set_version' => $_G['setting']['version']));
+			}
 			$extra = $apparray['app']['extra'];
 			$filename = isset($extra['installfile']) ? $extra['installfile'] : '';
 			if (!empty($filename) && preg_match('/^[\w\.]+$/', $filename)) {
@@ -293,6 +296,7 @@ elseif ($do == 'uninstall_confirm') {//卸载应用
 	exit;
 }
 elseif ($do == 'upgrade') {//本地升级应用
+	$navtitle='升级应用 - '.lang('appname');
 	$appid = intval($_GET['appid']);
 	if (!$app = C::t('app_market') -> fetch($appid)) {
 		showmessage('list_cp_Application_delete');
@@ -307,7 +311,9 @@ elseif ($do == 'upgrade') {//本地升级应用
 	}
 	$importtxt = @implode('', file($file));
 	$apparray = getimportdata('Dzz! app', 0, 0, $importtxt);
-
+	if($apparray['version'] && empty($_GET['ignoreversion']) && (version_compare($apparray['version'], $_G['setting']['version'])>0)) {
+		showmessage(lang('application_upgrade_version_invalid'), '', array('cur_version' => $apparray['version'], 'set_version' => $_G['setting']['version'], 'url' => MOD_URL.'&op=cp&do=upgrade&ignoreversion=1&appid='.$appid));
+	}
 	$filename = $apparray['app']['extra']['upgradefile'];
 	$toversion = $apparray['app']['version'];
 	if (!empty($apparray['app']['extra']['upgradefile']) && preg_match('/^[\w\.]+$/', $apparray['app']['extra']['upgradefile'])) {
@@ -324,6 +330,5 @@ elseif ($do == 'upgrade') {//本地升级应用
 		C::t('app_market') -> update($appid, array('version' => $toversion));
 		showmessage('application_upgrade_successful', MOD_URL, array(), array('alert' => 'right'));
 	}
-
 } 
 ?>

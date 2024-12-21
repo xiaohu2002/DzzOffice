@@ -604,7 +604,7 @@
     function editsvae(form) {
         var text = $(form).find('input[name="text"]').val();
         var path = $(form).find('input[name="path"]').val();
-        var ico = _explorer.sourcedata.icos['path'];
+        var ico = _explorer.sourcedata.icos[path];
         filemanage = _filemanage.cons[_filemanage.winid];
         jQuery.ajax({
             type: 'post',

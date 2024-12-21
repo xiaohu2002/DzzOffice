@@ -1,6 +1,6 @@
 <!--{template lyear:header_simple_start}-->
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container lyear-scroll">
+<main class="bs-main-container">
   <div class="container-fluid">
     <div class="card">
       <div class="container">
@@ -94,7 +94,7 @@
                     <input id="sel_defaultdepartment" type="hidden" name="settingnew[defaultdepartment]" value="$setting[defaultdepartment]"/>
                     <button type="button" id="defaultdepartment_Menu" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"> $defaultdepartment </button>
                     <div id="defaultdepartment_dropdown_menu" class="dropdown-menu org-sel-box" role="menu" aria-labelledby="defaultdepartment_Menu">
-                      <iframe name="defaultdepartment_iframe" class="org-sel-box-iframe" src="index.php?mod=system&op=orgtree&ctrlid=defaultdepartment&nouser=1&stype=1"  frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%"  allowtransparency="true"></iframe>
+                      <iframe name="defaultdepartment_iframe" class="org-sel-box-iframe" src="index.php?mod=system&op=orgtree&template=1&ctrlid=defaultdepartment&nouser=1&stype=1"  frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%"  allowtransparency="true"></iframe>
                     </div>
                   </div>
                   <span class="form-text">{lang setting_main_section}</span>
@@ -203,6 +203,7 @@
                     <input class="form-check-input" type="radio" id="template2" name="settingnew[template]"  value="lyear"<!--{if $setting[template] == 'lyear'}--> checked <!--{/if}-->>
                     <label class="form-check-label" for="template2">光年模板</label>
                   </div>
+                  <span class="form-text">只对当前页面具有多套模板的情况下生效</span>
                 </div>
               </div>
               <div class="row mb-3">
@@ -549,7 +550,7 @@
                       <td colspan="7" align="left"><a href="javascript:;" onclick="addSMTP(this,1)"><i class="glyphicon glyphicon-plus"></i>{lang add_SMTP_server}</a></td>
                     </tr>
                   </table>
-                  <div class="table-responsive">
+                  <div class="table-responsive-xxl">
                     <table id="hidden2" class="table table-hover align-middle" style="margin-bottom:0; <!--{if $setting[mail][mailsend]!=3}-->display:none<!--{/if}-->">
                       <thead>{lang add_SMTP_server_set}</thead>
                       <!--{loop $smtps $id $smtp}-->

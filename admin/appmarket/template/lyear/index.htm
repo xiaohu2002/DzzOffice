@@ -57,7 +57,7 @@
 }
 </style>
 <!--{template lyear:header_simple_end}-->
-<main class="bs-main-container lyear-scroll">
+<main class="bs-main-container">
 	<div class="container-fluid">
 	  <div class="card">
 		<header class="card-header">
@@ -98,7 +98,7 @@
 			<form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}" method="post">
 				<input type="hidden" name="appsubmit" value="true" />
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
-				<div class="table-responsive">
+				<div class="table-responsive-xxl">
 					<table class="table table-hover align-middle">
 						<thead> 
 							<th >{lang application_name}</th>
@@ -160,6 +160,7 @@
 								<a class="btn btn-small btn-success-outline" href="{MOD_URL}&op=cp&do=enable&appid=$value[appid]&refer=$refer" title="{lang enable}">{lang enable}</a>
 								<!--{/if}-->
 								<!--{/if}-->
+								<a class="btn btn-outline-primary" href="{MOD_URL}&op=cp&do=upgrade&appid=$value[appid]&refer=$refer">本地升级</a>
 								<a class="btn btn-outline-primary" href="{MOD_URL}&op=cp&do=export&appid=$value[appid]&refer=$refer" title="{lang export}" target="_blank">{lang export}</a>
 							</td>
 						</tr>

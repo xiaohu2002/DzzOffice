@@ -11,6 +11,7 @@ if (!defined('IN_DZZ')) {
 }
 Hook::listen('check_login');
 $uid = $_G['uid'];
+include_once libfile('function/appperm');
 $navtitle = '评论管理';
 $do = isset($_GET['do']) ? $_GET['do'] : '';
 if ($do == 'getinfo') {

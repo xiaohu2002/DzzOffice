@@ -3353,6 +3353,7 @@ hr.dropdown-divider {
     background: #4285F4;
     background-color: rgba(55, 121, 255, 0.1);
     color: var(--bs-primary);
+	text-decoration: none;
 }
 
 .nav-stacked>.active>a {
@@ -3377,6 +3378,7 @@ hr.dropdown-divider {
 }
 
 .bs-left-container-info {
+	overflow: auto;
 	height: -moz-calc(100% - var(--header-height));
 	height: -webkit-calc(100% - var(--header-height));
 	height: calc(100% - var(--header-height));
@@ -3617,36 +3619,6 @@ hr.dropdown-divider {
 	color: #000;
 }
 
-/* 消息列表 */
-.dropdown-notice .dropdown-menu {
-	min-width: 200px;
-	max-width: 280px;
-}
-
-.dropdown-notice .badge {
-	font-size: .5em;
-	top: 25px;
-}
-
-.dropdown-notice .dropdown-item {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	word-break: break-all;
-}
-
-.dropdown-notice .lyear-notifications-title {
-	padding: 5px 15px 10px 15px;
-	border-bottom: 1px solid var(--bs-border-color);
-}
-
-.dropdown-notice .lyear-notifications-info {
-	position: relative;
-	height: 200px;
-	max-height: 200px;
-	margin: 0;
-	padding: 0;
-}
-
 /* 主题配置选择 */
 .dropdown-skin .dropdown-menu {
     width: 264px;
@@ -3788,6 +3760,7 @@ li.lyear-skin-li .form-check:first-child .form-check-input:checked+label::after 
  -------------------------------------- */
 .bs-main-container {
 	position: absolute;
+	overflow: auto;
 	height: 100%;
 	width: 100%;
 	padding-left: var(--sidebar-width);
@@ -4005,10 +3978,8 @@ li.lyear-skin-li .form-check:first-child .form-check-input:checked+label::after 
 }
 @media screen and (max-width: 430px) {
     .dropdown-skin .dropdown-menu {
-        left: -64px!important;
-    }
-    .dropdown-notice .dropdown-menu {
-        left: -38px!important;
+        left: 0;
+		width: 100%;
     }
     .nav-step .nav-step-item p {
         display: none;
@@ -4156,7 +4127,6 @@ body[data-theme='dark'] .jconfirm .jconfirm-box,
 [data-theme|='translucent'] .table>thead>tr>th,
 [data-theme|='translucent'] .border-example,
 [data-theme|='translucent'] .border-example-row,
-[data-theme='dark'] .dropdown-notice .lyear-notifications-title,
 [data-theme='dark'] #header_bg_8+label,
 [data-theme='dark'] #logo_bg_8+label,
 [data-theme='dark'] #sidebar_bg_8+label,
@@ -5043,14 +5013,6 @@ body[data-theme='translucent-pink'],
     background-color: rgba(33, 37, 41, .45);
     border-color: rgba(33, 37, 41, .01);
     color: #D5D9DA;
-}
-
-[data-theme='dark'] .alert-info,
-[data-theme='dark'] .alert-warning,
-[data-theme='dark'] .alert-danger,
-[data-theme='dark'] .alert-success,
-[data-theme='dark'] .alert-dark  {
-    color: #DFF4FB;
 }
 [data-theme='dark'] .select2-container--default .select2-selection--single,
 [data-theme|='translucent'] .select2-container--default .select2-selection--single,

@@ -181,6 +181,8 @@ class dzz_app extends dzz_base{
         }
         $_G['browser']=helper_browser::getbrowser();
         $_G['platform']=helper_browser::getplatform();
+        if($ismobile=helper_browser::ismobile()) define('IN_MOBILE',$ismobile);
+        $_G['ismobile'] = $ismobile;
         $this->var = & $_G;
     }
     private function is_HTTPS(){
@@ -574,8 +576,11 @@ class dzz_app extends dzz_base{
             } else {
                 $closedreason = C::t('setting')->fetch('closedreason');
                 $closedreason = str_replace(':', '&#58;', $closedreason);
-                dheader("Location: user.php?mod=login");
-
+                if ($this->var['uid']) {
+                    dheader("Location: user.php?mod=profile");
+                } else {
+                    dheader("Location: user.php?mod=login");
+                }
             }
         }
         if(isset($this->var['setting']['nocacheheaders']) && $this->var['setting']['nocacheheaders']) {
@@ -604,7 +609,6 @@ class dzz_app extends dzz_base{
         if(!is_array($this->var['setting'])) {
             $this->var['setting'] = array();
         }
-        if($ismobile=helper_browser::ismobile()) define('IN_MOBILE',$ismobile);
         define('VERHASH',isset($this->var['setting']['verhash'])?$this->var['setting']['verhash']:random(3));
     }
 

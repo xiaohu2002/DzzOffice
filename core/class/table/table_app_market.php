@@ -140,7 +140,7 @@ class table_app_market extends dzz_table
 	  	return DB::fetch_all("select * from %t where $sql and  notdelete>0 and available>0 order by disp ",array($this->_table),'appid');
 	}
 
-	public function fetch_all_by_default($uid = 0, $onlyAppid = false) { // 取得所有默认的应用
+	public function fetch_all_by_default($uid = 0, $appid = false) { // 取得所有默认的应用
 		if ($uid && $space = getuserbyuid($uid)) {
 			if ($space['groupid'] == 1) { // 系统管理员
 				$l = "`group` = '1'";
@@ -166,10 +166,10 @@ class table_app_market extends dzz_table
 			$sql = "`position` > 0 and (`group` = '-1' or `group` = '0')";
 		}
 	
-		// 根据 $onlyAppid 参数决定返回哪些字段
-		$select = $onlyAppid ? "appid" : "*";
+		// 根据 $appid 参数决定返回哪些字段
+		$select = $appid ? "appid" : "*";
 	
-		if ($onlyAppid) {
+		if ($appid) {
 			// 如果只需要 appid，直接返回一个包含所有 appid 的数组
 			$result = DB::fetch_all("select $select from %t where $sql and available > 0 order by disp ", array($this->_table));
 			return array_column($result, 'appid');

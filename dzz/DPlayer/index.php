@@ -17,7 +17,7 @@ if($_GET['path']){
   if(!$meta) showmessage(lang('file_not_exist'));
   //判断有无查看权限
   if($meta['rid']) {
-    if(!perm_check::checkperm('read', $meta)) showmessage(lang('no_privilege'),dreferer());
+    if(!perm_check::checkperm('read', $meta)) showmessage(lang('file_read_no_privilege'),dreferer());
   }
   if($meta['name']){
     $navtitle=$meta['name'];

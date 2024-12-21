@@ -22,6 +22,8 @@ if(!$url=(IO::getStream($path))){
 	exit(lang('attachment_nonexistence'));
 }
 if (is_array($url) && isset($url['error'])) {
+	@header('HTTP/1.1 403 Not Found');
+    @header('Status: 403 Not Found');
     exit($url['error']);
 }
 $filename = trim($_GET['n'], '.dzz') ?: $_GET['filename'];

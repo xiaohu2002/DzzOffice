@@ -103,11 +103,15 @@ if($uids){
 }
 $openarr_length=count($open)?'1':'';
 $openarr=json_encode($open);
-$ismobile = helper_browser::ismobile();
-if($ismobile){
-	include template('mobile_selectuser');
-	dexit();
-}else{
-	include template('selorguser');
-	exit();
+if ($template == '1') {
+    include template('lyear_selorguser','lyear');
+} else {
+	$ismobile = helper_browser::ismobile();
+	if($ismobile){
+		include template('mobile_selectuser');
+		dexit();
+	}else{
+		include template('selorguser');
+		exit();
+	}
 }

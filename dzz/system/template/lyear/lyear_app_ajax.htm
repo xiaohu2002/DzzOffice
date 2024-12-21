@@ -1,3 +1,4 @@
+<!--{if $applist_1}-->
 <!--{if $operation=='app'}-->
 <div id="app_context" >
     <ul class="list-inline app_popup nav nav-stacked nav-pills" id="app_popup">
@@ -57,4 +58,9 @@
   }) 
   </script>
 <!--{eval output();}-->
+<!--{/if}-->
+<!--{else}-->
+<div class="alert alert-primary">
+    {lang noapp_app}
+  </div>
 <!--{/if}-->

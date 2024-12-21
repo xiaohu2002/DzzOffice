@@ -407,7 +407,7 @@ class io_dzz extends io_api
 
         $gid = DB::result_first("select gid from %t where fid=%d", array('folder', $icoarr['pfid']));
         if (!$force && !perm_check::checkperm('edit', $icoarr)) {
-            return array('error' => lang('no_privilege'));
+            return array('error' => lang('file_edit_no_privilege'));
         }
         if (!$attach = getTxtAttachByMd5($fileContent, $icoarr['name'], $icoarr['ext'])) {
             return array('error' => lang('file_save_failure'));

@@ -243,6 +243,8 @@ $lang = array
 	'application_install_successful'=>'应用安装成功',
 	'application_uninstall_successful'=>'应用卸载成功!',
 	'application_upgrade_successful'=>'应用升级成功!',
+	'application_import_version_invalid'=>'本插件适用于 Dzz! {cur_version} 与当前版本 V{set_version} 不一致。<br />如果您需要强制安装本插件请在导入应用时选择忽略版本限制安装',
+	'application_upgrade_version_invalid'=>'本插件适用于 Dzz! {cur_version} 与当前版本 V{set_version} 不一致。<br />如果您需要强制升级本插件请点击<a href="{url}">强制升级</a>',
 
 	'add_new' => '新增',
 	'select' => '请选择',

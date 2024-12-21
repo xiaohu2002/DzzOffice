@@ -1482,7 +1482,7 @@ $_G[siteurl]',
 	'title_admincp'=>'管理员登录入口',
 	'forbid_folder_to_sub_folder'=>'目标文件夹是源文件夹的子文件夹',
 	'system_error'=>'系统异常!',
-
+	'operation_error'=>'操作异常!',
 	'no_institution_users'=>'无机构用户',
 	'compellation'=>'用户名',
 	'usergroup' => '用户组',
@@ -1509,6 +1509,11 @@ $_G[siteurl]',
 	'logs_invite_status_4' => '已过期',
 	'del_share'=>'删除分享',
 	'app_upgrade_dzzversion_error' => 'DzzOffice版本要求：{version}',
+	'File_open_success' =>'文件打开成功',
+	'File_open_error' =>'文件打开失败',
+	'file_read_no_privilege'=>'抱歉！您没有该文件的预览权限',
+	'file_download_no_privilege'=>'抱歉！您没有该文件的下载权限',
+	'file_edit_no_privilege'=>'抱歉！您没有该文件的下载权限',
 );
 
 ?>

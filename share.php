@@ -96,7 +96,6 @@ if($_GET['a']=='down'){
 		}
 		
 	}else{//没有可用的打开方式，转入下载；
-		$path=dzzencode($path);
 		IO::download($path);
 		exit();
 	}

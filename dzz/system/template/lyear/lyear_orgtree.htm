@@ -35,7 +35,6 @@ body{
 	top:0px;
 	width:24px;
 	height:32px;
-	padding:8px 5px;
 	font-size: 18px;
 	color: rgba(78,85,99,0.65);
 }
@@ -45,7 +44,6 @@ body{
 	top: 0px;
 	width:24px;
 	height:32px;
-	padding:8px 5px;
 	font-size: 18px;
 	color: rgba(78,85,99,0.65);
 }
@@ -124,8 +122,8 @@ var ismobile='$ismobile'?1:0;
 <div id="orgtree" class="orgtree-container" style=""></div>
 <!--{if intval($_GET['nosearch'])<1}-->
 <div  class="orgtree-search">
-        <a href="javascript:;" class="search" onclick="jstree_search();return false" title="{lang search}"><i class="dzz dzz-search"></i></a>
-        <a href="javascript:;" class="delete" onclick="jstree_search('stop');return false" title="{lang close_search}"><i class="dzz dzz-close"></i></a>
+        <a href="javascript:;" class="search" onclick="jstree_search();return false" title="{lang search}"><i class="mdi mdi-magnify"></i></a>
+        <a href="javascript:;" class="delete" onclick="jstree_search('stop');return false" title="{lang close_search}"><i class="mdi mdi-close"></i></a>
         <input id="jstree_search_input" type="text" placeholder="{lang search_department_user}" class="form-control" onkeyup="if(event.keyCode==13){jstree_search()}"  />
     </div>
 <!--{/if}-->
@@ -161,7 +159,7 @@ jQuery(document).ready(function(e) {
                 "valid_children": -1
             },
             "organization": {//部门
-                "icon": "dzz dzz-account-box",
+                "icon": "mdi mdi-account-box",
                 "valid_children": ['depart','folder']
             },
             "department": {
@@ -446,5 +444,4 @@ $(function(){
 
 </script>
 <script type="text/javascript" src="static/js/jstree.min.js?{VERHASH}"></script> 
-</body>
-</html>
+<!--{template lyear:footer}--> 

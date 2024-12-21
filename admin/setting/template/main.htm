@@ -327,8 +327,9 @@
       <dl>
         <dt>模板切换:</dt>
         <dd class="clearfix">
-          <label class="radio-inline"> <input type="radio" name="settingnew[template]" value="" <!--{if !$setting[template]}-->checked<!--{/if}--> >默认模板</label>
-          <label class="radio-inline"> <input type="radio" name="settingnew[template]"  value="lyear"<!--{if $setting[template] == 'lyear'}-->checked <!--{/if}--> >光年模板</label>
+          <label class="radio-inline"> <input type="radio" name="settingnew[template]" value="" <!--{if !$setting[template]}-->checked<!--{/if}-->>默认模板</label>
+          <label class="radio-inline"> <input type="radio" name="settingnew[template]"  value="lyear" <!--{if $setting[template] == 'lyear'}-->checked<!--{/if}-->>光年模板</label>
+          <span class="help-block">只对当前页面具有多套模板的情况下生效</span>
           </dd>
       </dl>
       <dl>
