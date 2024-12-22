@@ -1855,6 +1855,95 @@ function showWindow(k, url, mode, cache, showWindow_callback,disablebacktohide) 
 	doane();
 }
 
+/*
+     * 提取通用的通知消息方法
+     * 这里只采用简单的用法，如果想要使用回调或者更多的用法，请查看lyear_js_notify.html页面
+     * @param $msg          提示信息;
+     * @param $type         提示类型:'info', 'success', 'warning', 'danger';
+     * @param $delay        定时关闭，毫秒数，例如：1000;
+     * @param $haveclose    是否显示关闭按钮;
+     * @param $position     消息框位置，'left-top'、'right-top'、'right-bottom'、'left-bottom','top-center','center'，默认'top-center';
+     * @param $callback     回调函数，timeout用尽时才会触发；
+     * @param $url          跳转链接，$delay毫秒后跳转  例如： https://www.xxxx.com;
+     */
+
+function showmessage($msg, $type, $delay, $haveclose, $position, $callback, $url) {
+	$type  = $type || 'info';
+	$enter = 'animate__animated animate__fadeInUp';
+	$url   = $url || '';
+	switch($type){
+		case 'success':
+			$icon = 'mdi mdi-check-circle';
+			break;
+		case 'warning':
+			$enter = 'animate__animated animate__shakeY';
+			$icon = 'mdi mdi-alert-octagram';
+			break;
+		case 'danger':
+			$enter = 'animate__animated animate__shakeX';
+			$icon = 'mdi mdi-alert-circle';
+			break;
+		default:
+			$icon = 'mdi mdi-alert';
+			break;
+	}
+	switch($position){
+		case 'left-top':
+			$from = 'top';
+			$align = 'left';
+			break;
+		case 'right-top':
+			$from = 'top';
+			$align = 'right';
+			break;
+		case 'right-bottom':
+			$from = 'right';
+			$align = 'bottom';
+			break;
+		case 'left-bottom':
+			$from = 'bottom';
+			$align = 'left';
+			break;
+		case 'bottom-center':
+			$from = 'bottom';
+			$align = 'center';
+			break;
+		case 'center':
+			$from = 'bottom';
+			$align = 'center';
+			break;
+		default:
+			$from = 'top';
+			$align = 'center';
+			break;
+	}
+	jQuery.notify({
+		icon: $icon,
+		message: $msg,
+		url: $url,
+		target: '_blank'
+	},
+	{
+		type: $type,
+		allow_dismiss: ($haveclose ? true : false),
+		placement: {
+			from: $from,
+			align: $align
+		},
+		delay: $delay,
+		animate: {
+			enter: $enter,
+			exit: 'animate__animated animate__fadeOutDown'
+		},
+		onClosed: $callback
+	});
+	if ($url != '') {
+		setTimeout(function() {
+			window.location.href = $url;
+		}, $delay);
+	}
+}
+
 var _header = {};
 _header.init = function(formhash){
 	_header.formhash=formhash;
