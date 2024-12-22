@@ -193,6 +193,10 @@ class table_app_market extends dzz_table
 	public function fetch_by_identifier($identifier,$app_path='dzz'){
 	    return DB::fetch_first("select * from %t where app_path=%s and identifier=%s ",array($this->_table,$app_path,$identifier));
 	}
+
+	public function fetch_by_allidentifier($identifier){
+	    return DB::fetch_first("select * from %t where identifier=%s ",array($this->_table,$identifier));
+	}
 	public function fetch_by_mod(){
 	    return DB::fetch_first("select * from %t where app_path=%s and identifier=%s ",array($this->_table,CURSCRIPT,CURMODULE));
 	}
