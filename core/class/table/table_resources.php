@@ -842,6 +842,11 @@ class table_resources extends dzz_table
             $fileinfo['opendateline'] = ($filestatis['opendateline']) ? dgmdate($filestatis['opendateline'], 'Y-m-d H:i:s') : dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
             $fileinfo['editdateline'] = ($filestatis['editdateline']) ? dgmdate($filestatis['editdateline'], 'Y-m-d H:i:s') : dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
             $fileinfo['fdateline'] = dgmdate($fileinfo['dateline'], 'Y-m-d H:i:s');
+            if ($_G['adminid']) {
+                $fileinfo['downs'] = $filestatis['downs'];
+                $fileinfo['views'] = $filestatis['views'];
+                $fileinfo['edits'] = $filestatis['edits'];
+            }
             //编辑权限信息
             $fileinfo['editperm'] = 1;
             if ($fileinfo['gid'] > 0) {

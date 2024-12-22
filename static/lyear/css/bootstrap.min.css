@@ -6435,11 +6435,11 @@ fieldset:disabled .btn {
         max-width: 1140px
     }
 }
-@media (min-width:1280px) {
+@media (min-width:1200px) {
     .modal-dialog {
-      max-width: 800px;
+        max-width: 1140px
     }
-  }
+}
 .modal-fullscreen {
     width: 100vw;
     max-width: none;

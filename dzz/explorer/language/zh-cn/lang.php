@@ -330,6 +330,7 @@ $lang = array(
     'all_file_more_format' => '全部文件/多种格式预览',
     'select_correct_time_interval' => '请选择正确的时间区间',
     'add_to_favorites' => '加入收藏',
+    'cancel_collection' => '取消收藏',
     'edit_label' => '编辑标签',
     'more_tag_add_tips' => '多个标签用回车分隔',
     'personal_store' => '个人存储',

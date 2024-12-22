@@ -584,6 +584,14 @@
                 <div class="col-md-8 col-sm-8 col-xs-8 label-text">$propertys[fdateline]</div>
             </div>
             <!--{/if}-->
+            <!--{if $propertys['flag']!=='folder'}-->
+            <!--{if $_G[adminid]}-->
+            <div class="file-nature clearfix">
+                <label class="col-md-4 col-sm-4 col-xs-4">直链地址</label>
+                <div class="col-md-8 col-sm-8 col-xs-8 label-text">{eval echo IO::getFileUri($propertys[rid])}</div>
+            </div>
+            <!--{/if}-->
+            <!--{/if}-->
         </div>
 
     </div>

@@ -43,7 +43,28 @@
                             <span class="detailed_contenter">$fileinfo[opendateline]</span></p>
                         <p class="attribute-position">
                             <span class="attribute-width">{lang create_time}</span>
-                            <span class="detailed_contenter">$fileinfo[fdateline]</span></p>
+                            <span class="detailed_contenter">$fileinfo[fdateline]</span>
+                        </p>
+                        <!--{if $_G['adminid']}-->
+                        <!--{if $fileinfo[downs]}-->
+                        <p class="attribute-position">
+                            <span class="attribute-width">{lang download_times}</span>
+                            <span class="detailed_contenter">$fileinfo[downs]</span>
+                        </p>
+                        <!--{/if}-->
+                        <!--{if $fileinfo[views]}-->
+                        <p class="attribute-position">
+                            <span class="attribute-width">{lang view_count}</span>
+                            <span class="detailed_contenter">$fileinfo[views]</span>
+                        </p>
+                        <!--{/if}-->
+                        <!--{if $fileinfo[edits]}-->
+                        <p class="attribute-position">
+                            <span class="attribute-width">修改次数</span>
+                            <span class="detailed_contenter">$fileinfo[edits]</span>
+                        </p>
+                        <!--{/if}-->
+                        <!--{/if}-->
                     </div>
                 </div>
             </div>

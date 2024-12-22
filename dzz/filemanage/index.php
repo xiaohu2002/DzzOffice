@@ -155,6 +155,8 @@ if ($do == 'delete') {
 		if (!$data = C::t('resources')->fetch_by_rid($value['rid'])) {
 			continue;
 		}
+		//文件统计信息
+		$filestatis = C::t('resources_statis')->fetch_by_rid($value['rid']);
 		if($data['relpath'] == '/'){
 			$data['relpath'] = '回收站';
 		}
@@ -182,9 +184,12 @@ if ($do == 'delete') {
 			"oid" => $data['oid'],
 			"relpath" => $data['relpath'],
 			"dateline" => $data['fdateline'],
-			"isdelete" => $isdelete,
-			"copys" => $copys,
-			"FileUri" => $FileUri
+			"isdelete" => $isdelete?:'',
+			"copys" => $copys?:'',
+			"FileUri" => $FileUri,
+			"downs" => $filestatis['downs']?:'',
+			"views" => $filestatis['views']?:'',
+			"edits" => $filestatis['edits']?:'',
 		];
 	}
 	$breadcrumb = '<a href="javascript:;" class="btn btn-primary fid-btn" data-fid="">' . lang('all_typename_attach') . '</a>';

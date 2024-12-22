@@ -4087,6 +4087,7 @@ body[data-theme='dark'] .jconfirm .jconfirm-box,
 [data-theme='dark'] .bs-top-container,
 [data-theme='dark'] .card,
 [data-theme='dark'] .fwinmask,
+[data-theme='dark'] .dtheme,
 [data-theme='dark'] .nav-tabs .nav-link.active,
 [data-theme='dark'] .nav-tabs .nav-item.show .nav-link {
     background-color: #313844;
@@ -4580,6 +4581,7 @@ body[data-theme='translucent-pink'],
 [data-theme|='translucent'] .bs-left-container-info,
 [data-theme|='translucent'] .bs-top-container,
 [data-theme|='translucent'] .fwinmask,
+[data-theme|='translucent'] .dtheme,
 [data-theme|='translucent'] .card,
 [data-theme|='translucent'] .card>.card-header+.callout {
     background-color: rgba(var(--bs-black-rgb), .175);

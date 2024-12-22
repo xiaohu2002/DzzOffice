@@ -397,7 +397,7 @@
 	function detailFormatter(index, row) {
 		var html = [];
 		$.each(row, function (key, value) {
-			if (key === 'FileUri' || key === 'copys' || key === 'isdelete') {
+			if (key === 'FileUri' || key === 'copys' || key === 'isdelete' || key === 'downs' || key === 'views' || key === 'edits') {
 				var label;
 				if (value) {
 					switch (key) {
@@ -410,6 +410,15 @@
 							break;
 						case 'isdelete':
 							label = '是否在回收站';						
+							break;
+						case 'downs':
+							label = '下载次数';						
+							break;
+						case 'views':
+							label = '{lang view_count}';						
+							break;
+						case 'edits':
+							label = '修改次数';						
 							break;
 					}
 					html.push('<p><b>' + label + ':</b> ' + value + '</p>');
