@@ -15,20 +15,6 @@ if(!$path=dzzdecode(rawurldecode($_GET['path']))){
 	@header('Status: 404 Not Found');
 	exit('Access Denied');
 }
-$meta = IO::getMeta($path);
-if(!$meta) {
-	@header('HTTP/1.1 403 Not Found');
-	@header('Status: 403 Not Found');
-	exit(lang('file_not_exist'));
-}
-//判断有无查看权限
-if($meta['rid']) {
-	if(!perm_check::checkperm('read', $meta)) {
-		@header('HTTP/1.1 403 Not Found');
-		@header('Status: 403 Not Found');
-		exit(lang('file_read_no_privilege'));
-	}
-}
 if(!$url=(IO::getStream($path))){
 	@header('HTTP/1.1 403 Not Found');
 	@header('Status: 403 Not Found');
