@@ -46,7 +46,7 @@ function fileupload(el, fid) {
             data.files = '';
             _upload.uploaddone();
             $(this).parents('.dialog-info').find('.upload-cancel').hide();
-            $(this).parents('.dialog-info').find('.upload-file-status').html('<span class="cancel show_uploading_status"><em></em><i>' + __lang.already_cancel + '</i></span>');
+            $(this).parents('.dialog-info').find('.upload-file-status').html('<span class="cancel show_uploading_status"><em></em>'+__lang.already_cancel+'</span>');
         });
 
         _upload.uploadsubmit();
@@ -194,7 +194,7 @@ function fileupload(el, fid) {
     var ext = filearr.pop();
     var imgicon = '<img src="dzz/images/extimg/' + ext + '.png" onerror="replace_img(this)" style="width:24px;height:24px;position:absolute;left:0;"/>';
     var typerule = new RegExp(attachextensions, 'i');
-	var uploadtips = (typerule.test(file.name)) ? __lang.queuing : __lang.file_type_not_allowed;
+	var uploadtips = (typerule.test(file.name)) ? '排队' : __lang.allow_file_type;
     if(maxfileSize && (maxfileSize < file.size)){
         uploadtips = '文件太大了！';
     }

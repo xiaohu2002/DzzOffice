@@ -1793,9 +1793,9 @@ _filemanage.rename = function (id) {
 	filemanage.oldtext = el.html();
 	var html = '';
 	if (filemanage.view > 3) {
-		html = "<input type='text' class='' name='text'  id='input_" + id + "' style=\"width:" + (el.closest('td').width() - 110) + "px;height:30px;padding:2px; \" value=\"" + filemanage.oldtext + "\">";
+		html = "<input type='text' class='form-control' name='text'  id='input_" + id + "' style=\"width:" + (el.closest('td').width() - 110) + "px;height:30px;padding:2px; \" value=\"" + filemanage.oldtext + "\">";
 	} else {
-		html = "<textarea type='textarea' class='textarea' name='text'  id='input_" + id + "' style=\"width:100%;height:30px;padding:2px;overflow:hidden;margin-top:3px;color:#666666 \">" + filemanage.oldtext + "</textarea>";
+		html = "<textarea type='textarea' class='form-control textarea' name='text'  id='input_" + id + "' style=\"width:100%;height:30px;padding:2px;overflow:hidden;margin-top:3px;color:#666666 \">" + filemanage.oldtext + "</textarea>";
 	}
 
 	el.html(html);
