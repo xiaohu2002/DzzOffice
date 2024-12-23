@@ -32,7 +32,7 @@ if($identify && file_exists($appConfig)){
 	}
 }
 if(empty($about['name_en'])){
-	$about['name_en']='Office';//英文名称，注意前面的dzz去掉，留空不显示
+	$about['name_en']='DzzOffice';
 }
 $version='V'.CORE_VERSION;
 if ($_G['ismobile'] && !$_GET['inajax']) {
