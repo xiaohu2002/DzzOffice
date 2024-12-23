@@ -23,7 +23,6 @@ $config = array(
 	'tablepre' => $_G['config']['db']['1']['tablepre']
 );
 $theurl = 'update.php';
-
 $_G['siteurl'] = preg_replace('/\/install\/$/i', '/', $_G['siteurl']);
 
 if($_GET['from']) {
@@ -538,7 +537,12 @@ if($_GET['step'] == 'start') {
 	dir_clear(DZZ_ROOT.'./data/template');
 	dir_clear(DZZ_ROOT.'./data/cache');
 	savecache('setting', '');
-	
+	if($_G['setting']['default_mod']) {
+		$configfile = DZZ_ROOT.'data/cache/default_mod.php';  
+		$configarr = array();
+		$configarr['default_mod']=$_G['setting']['default_mod'];
+		@file_put_contents($configfile,"<?php \t\n return ".var_export($configarr,true).";");
+	}
 	
 	if($_GET['from']) {
 		show_msg('<span id="finalmsg">缓存更新中，请稍候 ...</span><iframe src="../misc.php?mod=syscache" style="display:none;" onload="parent.window.location.href=\''.$_GET['from'].'\'"></iframe><iframe src="../misc.php?mod=setunrun" style="display:none;"></iframe>');
