@@ -2,18 +2,6 @@
 $oparr = array('updatecache' => 'mdi-cog-counterclockwise','database' => 'mdi-database', 'cron' => 'mdi-clipboard-clock-outline','systemupgrade' => 'mdi-upload','xtxx' => 'mdi-cog-pause-outline','fileperms' => 'mdi-floppy');
 }-->
 <ul class="nav-drawer nav-stacked nav-pills">
-	<li class="nav-item bs-left-title">
-		<a href="{MOD_URL}">
-			<i class="mdi mdi-tools"></i>
-			<span>{lang appname}</span>
-		</a>
-	</li>
-	<li class="nav-item">
-		<a href="index.php?mod=appmanagement">
-			<i class="mdi mdi-chevron-left"></i>
-			<span>{lang goback}</span>
-		</a>
-	</li>
 	<!--{loop $oparr $key $value}-->
 	<li class="nav-item"><a class="nav-link <!--{if $op==$key}-->active<!--{/if}-->" href="{MOD_URL}&op=$key"><i class="mdi $value"></i><span><!--{eval echo lang($key)}--></span></a></li>
 	<!--{/loop}-->

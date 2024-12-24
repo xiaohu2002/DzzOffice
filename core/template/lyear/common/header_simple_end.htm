@@ -1,23 +1,9 @@
 </head>
 <body id="nv_{$_G['basescript']}" class="$bodyClass">
-<!--页面loading-->
-<div id="lyear-preloader" class="loading">
-  <div class="ctn-preloader">
-    <div class="round_spinner">
-      <div class="spinner"></div>
-      <img src="static/image/common/logo.png" alt="">
-    </div>
-  </div>
-</div>
 <div id="append_parent" style="z-index:99999;"></div>
 <div id="ajaxwaitid" style="z-index:99999;"></div>
 <aside class="bs-left-container">
-    <div id="logo" class="sidebar-header">
-      <a class="text-white text-truncate lead" href="{$_G[siteurl]}">
-        <img src="<!--{if !$_G['setting']['bbclosed']}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{else}-->static/image/common/logo.png<!--{/if}-->">
-       $_G['setting']['sitename']
-      </a>
-    </div>
+  <!--{template lyear:lyear_header_left}-->
     <div class="bs-left-container-info">
       <nav class="sidebar-main">
         <!--{template lyear:lyear_left}-->

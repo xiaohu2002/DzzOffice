@@ -3395,6 +3395,9 @@ hr.dropdown-divider {
 	width: 100%;
 	-webkit-box-shadow: 0 1px 1px -1px rgba(var(--bs-dark-rgb), 0.25);
 	box-shadow: 0 1px 1px -1px rgba(var(--bs-dark-rgb), 0.25);
+	display: flex;
+	height: var(--header-height);
+	align-items: center;
 }
 
 .sidebar-header:before,
@@ -3404,20 +3407,16 @@ hr.dropdown-divider {
 }
 
 .sidebar-header a {
-	display: block;
-	width: 100%;
-	height: var(--header-height);
-	overflow: hidden;
-	display: -webkit-box;
-	display: -moz-box;
-	display: box;
-	-webkit-box-align: center;
-	-moz-box-align: center;
-	box-align: center;
-	-webkit-box-pack: start;
-	-moz-box-pack: start;
-	box-pack: start;
+	display: inline-block;
 	padding: 5px;
+}
+.sidebar-header i {
+	border-radius:50%;
+	padding:8px;
+}
+
+.sidebar-header i:hover {
+	background-color:rgba(0, 0, 0, 0.071);
 }
 
 .sidebar-header a img {
