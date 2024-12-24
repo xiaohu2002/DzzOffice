@@ -54,7 +54,7 @@ if($_GET['action'] == 'checkupgrade') {
 			$html.=     lang('upgrade_notice_title');
 			$html.='     </strong><button type="button" class="btn-close" onclick="jQuery(\'#systemNotice\').hide();setcookie(\'upgradenotice\',1,3600);"></button>';
 			$html.=' </div>';
-			$html.=' <div class="panel-body" style="padding:0;max-height:500px;overflow-y:auto">';
+			$html.=' <div class="panel-body" style="padding:0;max-height:500px;overflow-y:auto;width:100%;">';
 			$html.='  <table class="table table-hover" style="margin:0">';
 			foreach($list as $type =>$value){
 				$html.=  '<tr><td><div style="line-height:30px;"><img src="'.$value['icon'].'" style="max-height:30px;" /><a class="dcolor" href="'.$value['official'].'" title="'.lang('examine_details').'">'.$value['title'].'</a></div>';

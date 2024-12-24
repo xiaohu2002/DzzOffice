@@ -181,7 +181,8 @@ class dzz_app extends dzz_base{
         }
         $_G['browser']=helper_browser::getbrowser();
         $_G['platform']=helper_browser::getplatform();
-        if($ismobile=helper_browser::ismobile()) define('IN_MOBILE',$ismobile);
+        $ismobile=helper_browser::ismobile();
+        if($ismobile) define('IN_MOBILE',$ismobile);
         $_G['ismobile'] = $ismobile;
         $this->var = & $_G;
     }
