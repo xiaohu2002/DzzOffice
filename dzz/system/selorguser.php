@@ -12,7 +12,6 @@ if(!defined('IN_DZZ')) {
 }
 Hook::listen('check_login');//检查是否登录，未登录跳转到登录界面
 include_once libfile('function/organization');
-$ismobile=helper_browser::ismobile();
 $ids =isset($_GET['ids'])?rawurldecode($_GET['ids']):'';
 $template = isset($_GET['template']) ? $_GET['template'] : '';
 $zero=$_GET['zero']?urldecode($_GET['zero']):lang('no_institution_users');//无机构用户名称
@@ -106,8 +105,7 @@ $openarr=json_encode($open);
 if ($template == '1') {
     include template('lyear_selorguser','lyear');
 } else {
-	$ismobile = helper_browser::ismobile();
-	if($ismobile){
+	if($_G['ismobile']){
 		include template('mobile_selectuser');
 		dexit();
 	}else{

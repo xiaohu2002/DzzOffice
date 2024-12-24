@@ -100,7 +100,6 @@ $wheresql = " where rid in(%n)  and isdelete < 1";
 $list = array();
 $foldername = '';
 $allrids = '';
-$ismobile = helper_browser::ismobile();
 if(!empty($rids)){
     if($currentfolder){
         $fileinfo = DB::fetch_first("select * from %t where rid = %s",array('resources',$rids[0]));
@@ -121,7 +120,7 @@ if(!empty($rids)){
                 $fileinfo['filenum'] = $fileinfo['contaions']['contain'][0];
                 $fileinfo['foldernum'] = $fileinfo['contaions']['contain'][1];
             } else {
-                if ($ismobile) {
+                if ($_G['ismobile']) {
                     $opendata=getOpenUrl($fileinfo,$share);
                     $fileinfo['type']=$opendata['type'];
                     $fileinfo['url']=$opendata['url'];
@@ -146,7 +145,7 @@ if (count($list) >= $perpage) {
 } else {
 	$naxtpage = 0;
 }
-if($ismobile){
+if($_G['ismobile']){
     include template('mobile/list_item');
 }else{
     include template('list_item');

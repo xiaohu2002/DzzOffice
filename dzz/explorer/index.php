@@ -18,8 +18,7 @@ if(!C::t('folder')->check_home_by_uid($uid)){
 //搜索类型
 $catsearch = C::t('resources_cat')->fetch_by_uid($uid);
 $explorer_setting = get_resources_some_setting();
-$ismobile = helper_browser::ismobile();
-if($ismobile){
+if($_G['ismobile']){
     include require MOD_PATH.'/mobile.php';
     exit();
 }else{

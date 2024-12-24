@@ -151,7 +151,6 @@ if ($do == 'adddowns') {
     $wheresql = " where rid in(%n) and isdelete < 1";
     $list = array();
     $allrids = '';
-    $ismobile = helper_browser::ismobile();
     $count = DB::result_first("select count(*) from %t $wheresql $ordersql $limitsql", $params);
     //获取分享数据
     foreach (DB::fetch_all("select rid from %t $wheresql $ordersql $limitsql", $params) as $v) {
@@ -163,7 +162,7 @@ if ($do == 'adddowns') {
             $fileinfo['filenum'] = $fileinfo['contaions']['contain'][0];
             $fileinfo['foldernum'] = $fileinfo['contaions']['contain'][1];
         } else {
-            if ($ismobile) {
+            if ($_G['ismobile']) {
                 $opendata=getOpenUrl($fileinfo,$share);
 				$fileinfo['type']=$opendata['type'];
 				$fileinfo['url']=$opendata['url'];
@@ -187,7 +186,7 @@ if ($do == 'adddowns') {
     } else {
         $nextpage = 0;
     }
-    if ($ismobile) {
+    if ($_G['ismobile']) {
         include template('mobile/list');
     } else {
         include template('list');
