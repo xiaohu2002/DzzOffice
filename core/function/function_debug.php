@@ -144,7 +144,7 @@ elseif(isset($_GET[\''.$mysqlplek.'\'])) {
 	$debug .= '<!DOCTYPE html><html><head>';
 	$debug .= '<meta charset="'.CHARSET.'" />';
 	$debug .= '<meta name="renderer" content="webkit" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />';
-	$debug .= "<script src='../static/js/common.js'></script><script>
+	$debug .= "</script><script><script src='../static/js/common.js'></script><script>
 	function switchTab(prefix, current, total, activeclass) {
 	activeclass = !activeclass ? 'a' : activeclass;
 	for(var i = 1; i <= total;i++) {
@@ -174,12 +174,12 @@ EOF;
 		foreach($_G as $k => $v) {
 			if(is_array($v)) {
 				if($k != 'lang') {
-					$_GA .= "<li><a name=\"S_$k\"></a><br />['$k'] => ".nl2br(str_replace('  ','&nbsp;', dhtmlspecialchars(print_r($v, true)))).'</li>';
+					$_GA .= "<li><a name=\"S_$k\"></a>['$k'] => ".nl2br(str_replace('  ','&nbsp;', dhtmlspecialchars(print_r($v, true)))).'</li>';
 				}
 			} elseif(is_object($v)) {
-				$_GA .= "<li><br />['$k'] => <i>object of ".get_class($v)."</i></li>";
+				$_GA .= "<li>['$k'] => <i>object of ".get_class($v)."</i></li>";
 			} else {
-				$_GS .= "<li><br />['$k'] => ".dhtmlspecialchars($v)."</li>";
+				$_GS .= "<li>['$k'] => ".dhtmlspecialchars($v)."</li>";
 			}
 		}
 	}
@@ -304,7 +304,7 @@ EOF;
 		if(strexists($k, $_G['config']['cookie']['cookiepre'])) {
 			$k = '<font color=blue>'.$k.'</font>';
 		}
-		$debug .= "<li><br />['$k'] => ".dhtmlspecialchars($v)."</li>";
+		$debug .= "<li>['$k'] => ".dhtmlspecialchars($v)."</li>";
 	}
 	if(isset($_ENV['analysis']['function'])) {
 		unset($_ENV['analysis']['function']['sum']);
@@ -327,7 +327,7 @@ EOF;
 			<a href="#S_style">$_G[\'style\']</a><br />
 			<a href="#S_cache">$_G[\'cache\']</a><br />
 			</div>'.
-		'<ol><a name="top"></a>'.$_GS.$_GA.'</ol></div>'.$mco.'</body></html>';
+		'<ol>'.$_GS.$_GA.'</ol></div>'.$mco.'</body></html>';
 	$fn = 'data/'.$debugfile;
 	file_put_contents(DZZ_ROOT.'./'.$fn, $debug);
 	echo '<iframe src="'.$fn.'?k='.$akey.'" class="debug_iframe" name="_debug_iframe" id="_debug_iframe" style="border-top:1px solid gray;overflow-x:hidden;overflow-y:auto" width="100%" height="200" frameborder="0"></iframe><div id="_debug_div"></div><iframe name="_debug_initframe" id="_debug_initframe" style="display:none"></iframe>';

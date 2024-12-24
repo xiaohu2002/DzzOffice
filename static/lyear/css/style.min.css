@@ -3613,6 +3613,7 @@ hr.dropdown-divider {
 .navbar-right .nav-link {
 	color: #fff;
 	padding: 0 .5rem 0 .5rem;
+	border-radius: var(--radius);
 }
 .navbar-right .nav-link:hover {
 	color: #000;
