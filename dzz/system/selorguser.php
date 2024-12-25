@@ -30,6 +30,7 @@ $gets = array(
 		'nouser'=>$nouser,
 		'stype'=>$stype,
 		'moderator'=>$moderator,
+		'template'=>$template,
 		'range'=>$range,
 		'multiple'=>$multiple,
 		'nosearch'=>1,
