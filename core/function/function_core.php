@@ -1208,7 +1208,6 @@ function aidencode($aid, $type = 0, $tid = 0)
     return rawurlencode(base64_encode($s));
 }
 
-
 function output()
 {
     global $_G;
@@ -1228,7 +1227,6 @@ function output()
         function_exists('debugmessage') && debugmessage();
     }
 }
-
 
 function outputurl( $url="" )
 {

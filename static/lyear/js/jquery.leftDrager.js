@@ -116,11 +116,10 @@
 		
 		var Layout=function(){
 			var headerHeight=jQuery('.bs-top-container').outerHeight(true);
-			var isTopFixed=jQuery('.bs-top-container').hasClass('navbar-fixed-top');
 			var clientHeight = Math.max(document.documentElement.clientHeight, document.body.clientHeight);
-			jQuery('.bs-main-container').css('margin-top',isTopFixed?headerHeight:0);
+			jQuery('.bs-main-container').css('margin-top',headerHeight?headerHeight:0);
 			jQuery('.bs-main-container,.left-drager').css('height',clientHeight-headerHeight-1);
-			jQuery('.left-drager').css('top',isTopFixed?headerHeight:0);
+			jQuery('.left-drager').css('top',headerHeight?headerHeight:0);
 			if(typeof(resizefunc)==='function'){
 			   resizefunc();  
 			}
