@@ -33,6 +33,7 @@
 <main class="bs-main-container">
 	<div class="container-fluid">
 	  <div class="card">
+		<!--{if $list}-->
 		<header class="card-header">
 			<div class="float-start">
 				<input class="form-check-input" type="checkbox" name="chkall" id="chkall">
@@ -97,6 +98,15 @@
 				<!--{/if}-->
 			</form>
 		</div>
+		<!--{else}-->
+		<div class="card-body">
+			<div class="text-center">
+				<img src="static/image/common/no_list.png" /><br>
+				<span class="lead">还没有可以升级的应用…</span><br>
+				<button class="btn btn-outline-primary" id="update_check" title="{lang app_upgrade_check_need_update}"  onclick="upgrade_check(this);" data-loading-text="{lang app_upgrade_check_need_update}">{lang app_upgrade_check_need_update2}</button>
+			</div>
+		</div>
+		<!--{/if}--> 
 	</div>
 </div>
 </main>
