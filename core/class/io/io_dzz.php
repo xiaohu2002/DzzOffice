@@ -404,9 +404,9 @@ class io_dzz extends io_api
         if ($icoarr['type'] != 'document' && $icoarr['type'] != 'attach' && $icoarr['type'] != 'image') {
             return array('error' => lang('no_privilege'));
         }
-
         $gid = DB::result_first("select gid from %t where fid=%d", array('folder', $icoarr['pfid']));
-        if (!$force && !perm_check::checkperm('edit', $icoarr)) {
+        $editperm = perm_check::checkperm('edit', $icoarr);
+        if (!$force && !$editperm) {
             return array('error' => lang('file_edit_no_privilege'));
         }
         if (!$attach = getTxtAttachByMd5($fileContent, $icoarr['name'], $icoarr['ext'])) {
@@ -440,14 +440,14 @@ class io_dzz extends io_api
             }
             $setarr = array(
                 'uid' => $_G['uid'],
-                'username' => $_G['username'],
+                'username' => $_G['username'] ? $_G['username'] : '游客',
                 'name' => $icoarr['name'],
                 'aid' => $attach['aid'],
                 'size' => $attach['filesize'],
                 'ext' => $attach['filetype'],
                 'dateline' => TIMESTAMP
             );
-            $return = C::t('resources_version')->add_new_version_by_rid($icoarr['rid'], $setarr,$force);
+            $return = C::t('resources_version')->add_new_version_by_rid($icoarr['rid'], $setarr,$force,$editperm);
             if($return['error']){
                 return array('error'=>$return['error']);
             }

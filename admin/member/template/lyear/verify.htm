@@ -25,7 +25,7 @@
 <main class="bs-main-container">
 	<div class="container-fluid">
 		<div class="card">
-			<div class="card-header">
+			<div class="card-body">
 				<ul class="nav nav-pills">
 					<li class="nav-item">
 						<a class="nav-link <!--{if $anchor=='authstr' }-->active<!--{/if}--> " href="{MOD_URL}&op=verify&anchor=authstr&vid=$vid">{lang members_verify_nav_authstr}</a>
@@ -40,7 +40,10 @@
 					<!--{/if}-->
 				</ul>
 			</div>
+		</div>
+		<div class="card">
 			<div class="card-body">
+				<!--{if $list}-->
 				<form class="row gx-3 gy-2 align-items-center" action="{MOD_URL}" method="get">
 					<input type="hidden" name="mod" value="{MOD_NAME}">
 					<input type="hidden" name="op" value="verify">
@@ -151,6 +154,12 @@
 						</table>
 					</div>
 				</form>
+				<!--{else}-->
+				<div style="text-align: center;">
+					<img src="static/image/common/no_list.png" /><br>
+					<span class="lead">{lang no_relevant_content}…</span>
+				  </div>
+				  <!--{/if}-->
 			</div>
 		</div>
 	</div>

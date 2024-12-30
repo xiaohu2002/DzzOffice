@@ -161,7 +161,7 @@ class perm_check{
     //$arr=array('uid','gid','desktop');其中这几项必须
     function checkperm($action,$arr,$bz=''){ //检查某个图标是否有权限;
         global $_G;
-        if($_G['uid'] && $_G['adminid']==1) return true; //网站管理员 有权限;
+        if($_G['uid']>0 && $_G['adminid']==1) return true; //网站管理员 有权限;
         if ($arr['sid']) {
             $share = C::t('shares')->fetch($arr['sid']);
             if ($share) {
@@ -175,22 +175,23 @@ class perm_check{
                 }
                 if ($share['perm']) {
                     $perms = array_flip(explode(',', $share['perm'])); // 将权限字符串转换为数组
+                    if (isset($perms[3]) && $_G['uid']<1) { // 3 表示仅登录使用
+                        return false; // 未登录，返回 false
+                    }
                     if ($action == 'read') {
-                        if (isset($perms[3]) && !$_G['uid']) { // 3 表示仅登录访问
-                            return false; // 未登录，返回 false
-                        } elseif (isset($perms[2])) { // 2 表示禁用预览权限
+                        if (isset($perms[2])) { // 2 表示禁用预览权限
                             return false; // 预览权限被禁用，返回 false
                         } else {
                             return true; // 其他情况，默认允许访问
                         }
-                    } elseif ($action == 'edit' && $_G['uid'] && isset($perms[4])) {
+                    } elseif ($action == 'edit' && isset($perms[4])) {
                         return true; // 编辑权限
                     } elseif ($action == 'download' && isset($perms[1])) {
                         return false; // 下载权限被禁用
                     }
                 } else {
                     if ($action == 'download' || $action == 'read') {
-                        return true; // 默认允许下载和阅读
+                        return true; // 默认允许下载和预览
                     }
                 }
             } else {

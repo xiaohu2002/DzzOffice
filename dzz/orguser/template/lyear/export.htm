@@ -13,12 +13,7 @@
 <!--{template lyear:header_simple_end}-->
 <main class="bs-main-container">
 	<div class="container-fluid">
-	  <div class="card">
-      <div class="card-header">
-        <ul class="nav nav-pills"> 
-          <li class="nav-item"><a class="nav-link active" href="{MOD_URL}&op=export&orgid=$orgid">{lang export_change}</a></li>
-        </ul>
-      </div>
+    <div class="card">
       <div class="card-body">
           <form id="cpform" action="{MOD_URL}&op=export" class="form-horizontal form-horizontal-left"  method="post" name="cpform" onsubmit="return validate(this)">
             <input type="hidden" value="{FORMHASH}" name="formhash">

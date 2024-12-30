@@ -12,10 +12,10 @@
     <!--{/if}-->
 </div>
 <div class="card card-shadowed p-5 mb-0 mr-2 ml-2">
-	<div class="card-header text-center">
+	<div class="card-body text-center">
 		<div class="text-center mb-3">
 			<img alt="light year admin" src="<!--{if $_G['setting']['bbclosed']}-->static/image/common/logo.png<!--{else}-->{eval echo $_G['setting']['sitelogo']?'index.php?mod=io&op=thumbnail&size=small&path='.dzzencode('attach::'.$_G['setting']['sitelogo']):'static/image/common/logo.png';}<!--{/if}-->">
-			</div>
+		</div>
 		<!--{if $_G[setting][loginset][title]}-->
 		<h2 class="main-title">$_G[setting][loginset][title]</h2>
 		<!--{/if}--> 
@@ -26,56 +26,46 @@
 		<p class="text-danger">{lang site_closed_please_admin}</p>
 		<!--{/if}-->
       </div>
-  <form method="post"  name="login" id="loginform_$loginhash" class="loginForm" role="form" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}pwdclear = 1; loginsub('loginform_$loginhash', 'returnmessage_$loginhash');return false;"  action="user.php?mod=login&op=logging&action=login&loginsubmit=yes{if !empty($_GET['handlekey'])}&handlekey=$_GET[handlekey]{/if}{if isset($_GET['frommessage'])}&frommessage{/if}&loginhash=$loginhash">
-	<input type="hidden" name="formhash" value="{FORMHASH}" />
-	<input type="hidden" name="referer" value="{$referer}" />
-	<!--{if $auth}-->
-	<input type="hidden" name="auth" value="$auth" />
-	<!--{else}--> 
-	<div class="mb-3 has-feedback">
-		<span class="mdi mdi-account" aria-hidden="true"></span>
-		<input type="text" class="form-control" id="email_$loginhash" placeholder="{lang email_username}" name="email"  autocomplete="off" required>
-	</div>
-	<div class="mb-3 has-feedback">
-		<span class="mdi mdi-lock" aria-hidden="true"></span>
-		<input type="password" class="form-control" id="password3_$loginhash" placeholder="{lang user_login_password}" name="password" onfocus="this.type='password'" autocomplete="off" required>
-	</div>
-	<!--{/if}-->
-     <!--{if $seccodecheck}-->
-	 <div class="mb-3 has-feedback row">
-	<!--{template lyear:seccheck}-->
-	</div>
-	<!--{/if}-->
-	<div class="mb-3">
-		<input type="checkbox" class="form-check-input" name="cookietime" id="cookietime_$loginhash" value="2592000" $cookietimecheck>
-		<label class="form-check-label not-user-select" for="cookietime_$loginhash">{lang automatic_login_within_thirtydays}</label>
-		<div class="float-end">
-			<!--{if $_G['setting']['regstatus']>0}--> 
-			<a class="pull-right"  href="user.php?mod=register&referer={eval echo urlencode($referer);}"  <!--{if !empty($_GET['inajax'])}-->onclick="_login.register($referer);return false;"<!--{/if}--> title="$_G['setting']['reglinkname']">$_G['setting']['reglinkname']</a> 
-			<span class="spacer  pull-right">|</span> 
-			<!--{/if}--> 
-			<a class="pull-right" href="user.php?mod=login&op=logging&action=lostpasswd">{lang getpassword}</a>
+	<form method="post"  name="login" id="loginform_$loginhash" class="loginForm" role="form" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}pwdclear = 1; loginsub('loginform_$loginhash', 'returnmessage_$loginhash');return false;"  action="user.php?mod=login&op=logging&action=login&loginsubmit=yes{if !empty($_GET['handlekey'])}&handlekey=$_GET[handlekey]{/if}{if isset($_GET['frommessage'])}&frommessage{/if}&loginhash=$loginhash">
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="referer" value="{$referer}" />
+		<!--{if $auth}-->
+		<input type="hidden" name="auth" value="$auth" />
+		<!--{else}--> 
+		<div class="mb-3 has-feedback">
+			<span class="mdi mdi-account" aria-hidden="true"></span>
+			<input type="text" class="form-control" id="email_$loginhash" placeholder="{lang email_username}" name="email"  autocomplete="off" required>
 		</div>
-	</div>
-	<div class="third-wrapper clearfix">
-		<!--{hook third_login}-->
-	</div>
-    <p class="error-msg text-danger text-center" id="returnmessage_$loginhash"></p>
-    <div class="mb-3 d-grid">
-      <button class="btn btn-primary lyearloading" type="submit" name="loginsubmit" value="true">{lang login_empty}</button>
-    </div>
-  </form>
-  
+		<div class="mb-3 has-feedback">
+			<span class="mdi mdi-lock" aria-hidden="true"></span>
+			<input type="password" class="form-control" id="password3_$loginhash" placeholder="{lang user_login_password}" name="password" onfocus="this.type='password'" autocomplete="off" required>
+		</div>
+		<!--{/if}-->
+		<!--{if $seccodecheck}-->
+		<div class="mb-3 has-feedback row">
+		<!--{template lyear:seccheck}-->
+		</div>
+		<!--{/if}-->
+		<div class="mb-3">
+			<input type="checkbox" class="form-check-input" name="cookietime" id="cookietime_$loginhash" value="2592000" $cookietimecheck>
+			<label class="form-check-label not-user-select" for="cookietime_$loginhash">{lang automatic_login_within_thirtydays}</label>
+			<div class="float-end">
+				<!--{if $_G['setting']['regstatus']>0}--> 
+				<a class="pull-right"  href="user.php?mod=register&referer={eval echo urlencode($referer);}"  <!--{if !empty($_GET['inajax'])}-->onclick="_login.register($referer);return false;"<!--{/if}--> title="$_G['setting']['reglinkname']">$_G['setting']['reglinkname']</a> 
+				<span class="spacer  pull-right">|</span> 
+				<!--{/if}--> 
+				<a class="pull-right" href="user.php?mod=login&op=logging&action=lostpasswd">{lang getpassword}</a>
+			</div>
+		</div>
+		<div class="third-wrapper clearfix">
+			<!--{hook third_login}-->
+		</div>
+		<div class="mb-3 d-grid">
+		<button class="btn btn-primary lyearloading" type="submit" name="loginsubmit" value="true">{lang login_empty}</button>
+		</div>
+		<p class="error-msg text-danger text-center" id="returnmessage_$loginhash"></p>
+	</form>
   <p class="text-center text-muted mb-0"><!--{template lyear:copyright}--></p>
-  <div class="nfl" id="main_succeed" style="display: none;text-align: center;">
-	<div class="modal-body">
-  		<div class="alert_right" style="display: inline-block;">
-    		<div id="succeedmessage"></div>
-    		<div id="succeedlocation" class="alert_btnleft"></div>
-    		<p class="alert_btnleft"><a id="succeedmessage_href" href="javascript:;">{lang message_forward}</a></p>
-  		</div>
-	</div>
-</div>
 </div>
 <!--{if $_G['setting']['pwdsafety']}--> 
 <script type="text/javascript" src="static/js/md5.js?{VERHASH}" reload="1"></script> 

@@ -337,7 +337,7 @@ if($_GET['step'] == 'start') {
 		}
 		//添加PDF阅读器应用
 		if(!DB::result_first("select COUNT(*) from %t where appurl=%s",array('app_market','{dzzscript}?mod=pdf'))){
-			C::t('app_market')->insert(array('mid' => '13','appname' => 'PDF阅读器','appico' => 'appico/202411/02/170328nz056he0mixeezpo.png','appdesc' => '通过HTML5的方式来实现pdf在线预览','appurl' => 'index.php?mod=pdf','appadminurl' => '','noticeurl' => '','dateline' => '0','disp' => '110','vendor' => 'PDS.JS','haveflash' => '0','isshow' => '0','havetask' => '1','hideInMarket' => '0','feature' => '','fileext' => 'pdf,ai','group' => '1','orgid' => '0','position' => '1','system' => '0','notdelete' => '1','open' => '0','nodup' => '0','identifier' => 'pdf','app_path' => 'dzz','available' => '1','version' => '2.1'),1,1);
+			C::t('app_market')->insert(array('mid' => '13','appname' => 'PDF阅读器','appico' => 'appico/202411/02/170328nz056he0mixeezpo.png','appdesc' => '通过HTML5的方式来实现pdf在线预览','appurl' => 'index.php?mod=pdf','appadminurl' => '','noticeurl' => '','dateline' => '0','disp' => '110','vendor' => 'PDS.JS','haveflash' => '0','isshow' => '0','havetask' => '1','hideInMarket' => '0','feature' => '','fileext' => 'pdf,ai','group' => '0','orgid' => '0','position' => '1','system' => '0','notdelete' => '1','open' => '0','nodup' => '0','identifier' => 'pdf','app_path' => 'dzz','available' => '1','version' => '2.1'),1,1);
 			$pdf=C::t('app_market')->fetch_by_identifier('pdf');
 			if($pdf['appid']){
 				C::t('app_open')->insert_by_exts($pdf['appid'], 'pdf,ai');

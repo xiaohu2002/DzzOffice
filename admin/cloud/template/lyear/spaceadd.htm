@@ -6,7 +6,7 @@
 	cursor:pointer;
 }
 .thumbnails>li.Selected  .thumbnail {
-	background:#F7F7F7/*RGBA(200,200,200,0.8)*/;
+	background:#F7F7F7;
 	
 }
 .thumbnails .thumbnail{
@@ -33,14 +33,8 @@
 <!--{template lyear:header_simple_end}-->
 <main class="bs-main-container">
 	<div class="container-fluid">
+		<!--{template lyear:right_header}-->
 		<div class="card">
-			<div class="card-header">
-				<ul class="nav nav-pills">
-					<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&op=edit&bz=dzz"> {lang set}</a> </li>
-					<li class="nav-item"> <a class="nav-link" href="{MOD_URL}&op=space">{lang space_management}</a> </li>
-					<li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&op=spaceadd">{lang add_storage_location}</a> </li>
-				</ul>
-			</div>
 			<div class="card-body">
 				<!--{loop $list $key $value}-->
 				<h4>$value[header]</h4>

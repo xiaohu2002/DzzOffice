@@ -3,7 +3,7 @@
 <main class="bs-main-container">
 	<div class="container-fluid">
 	  <div class="card">
-		<header class="card-header">
+		<div class="card-body">
 			<ul class="nav nav-pills">
 				<li class="nav-item">
 					<a class="nav-link <!--{if $group=='0' && !$org}-->active<!--{/if}-->" href="{MOD_URL}&op=default&group=0">{lang universal_application}</a>
@@ -22,7 +22,9 @@
 					<a class="nav-link <!--{if $group=='2' && !$org}-->active<!--{/if}-->" href="{MOD_URL}&op=default&group=2">{lang section_administrator_application}</a>
 				</li>
 			</ul>
-		</header>
+		</div>
+	</div>
+	<div class="card">
 		<div class="card-body">
 			<form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}&op=default" method="post">
 				<input type="hidden" name="appsubmit" value="true" />

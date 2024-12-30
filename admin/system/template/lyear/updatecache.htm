@@ -3,24 +3,26 @@
 <main class="bs-main-container">
 	<div class="container-fluid">
 		<div class="card">
-			<header class="card-header">
+			<div class="card-body">
 				<ul class="nav nav-step">
-                    <li class="nav-item <!--{if $step==2 || $step==3}-->complete<!--{/if}-->">
-                      <span>1.{lang nav_updatecache_confirm}</span>
-                      <a class="nav-link <!--{if $step==1}-->active<!--{/if}-->" data-toggle="tab"></a>
-                    </li>
+					<li class="nav-item <!--{if $step==2 || $step==3}-->complete<!--{/if}-->">
+						<span>1.{lang nav_updatecache_confirm}</span>
+						<a class="nav-link <!--{if $step==1}-->active<!--{/if}-->" data-toggle="tab"></a>
+					</li>
 
-                    <li class="nav-item <!--{if $step==3}-->complete<!--{/if}-->">
-                      <span>2.{lang nav_updatecache_verify}</span>
-                      <a class="nav-link <!--{if $step==2}-->active<!--{/if}-->" data-toggle="tab"></a>
-                    </li>
+					<li class="nav-item <!--{if $step==3}-->complete<!--{/if}-->">
+						<span>2.{lang nav_updatecache_verify}</span>
+						<a class="nav-link <!--{if $step==2}-->active<!--{/if}-->" data-toggle="tab"></a>
+					</li>
 
-                    <li class="nav-item">
-                      <span>3.{lang nav_updatecache_completed}</span>
-                      <a class="nav-link <!--{if $step==3}-->active<!--{/if}-->" data-toggle="tab"></a>
-                    </li>
-                  </ul>
-			</header>
+					<li class="nav-item">
+						<span>3.{lang nav_updatecache_completed}</span>
+						<a class="nav-link <!--{if $step==3}-->active<!--{/if}-->" data-toggle="tab"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="card">
 			<div class="card-body">
 				<!--{if $step==1}-->
 					<form method="post" class="form-horizontal" action="{MOD_URL}&op=updatecache&step=2">

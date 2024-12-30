@@ -8,7 +8,7 @@
 <main class="bs-main-container">
 	<div class="container-fluid">
 		<div class="card">
-			<header class="card-header">
+			<div class="card-body">
 				<ul class="nav nav-pills">
 					<!--{loop $systemlog_setting $mark $info}-->
 						<!--{if $info[is_open]==1 }-->
@@ -18,7 +18,9 @@
 						<!--{/if}-->
 					<!--{/loop}-->  
 				</ul>
-			</header>
+			</div>
+		</div>
+		<div class="card">
 			<div class="card-body">
 				<!--{if $list}-->
 				<form id="cpform" action="{MOD_URL}&type=list&operation=$operation" class="form-horizontal" method="post" name="cpform">

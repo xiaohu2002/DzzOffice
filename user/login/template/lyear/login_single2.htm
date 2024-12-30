@@ -85,23 +85,14 @@
 		<div class="third-wrapper clearfix">
 			<!--{hook third_login}-->
 		</div>
-		<p class="error-msg text-danger text-center" id="returnmessage_$loginhash"></p>
 		<div class="mb-3 d-grid">
 			<button class="btn btn-primary lyearloading" type="submit" name="loginsubmit" value="true">{lang login_empty}</button>
 		</div>
+		<p class="error-msg text-danger text-center" id="returnmessage_$loginhash"></p>
 	  </form>
 	  
 	  <p class="text-center text-white"><!--{template lyear:copyright}--></p>
 	</div>
-  <div class="nfl" id="main_succeed" style="display: none;text-align: center;">
-	<div class="modal-body">
-  		<div class="alert_right" style="display: inline-block;">
-    		<div id="succeedmessage"></div>
-    		<div id="succeedlocation" class="alert_btnleft"></div>
-    		<p class="alert_btnleft"><a id="succeedmessage_href" href="javascript:;">{lang message_forward}</a></p>
-  		</div>
-	</div>
-</div>
 <!--{if $_G['setting']['pwdsafety']}--> 
 <script type="text/javascript" src="static/js/md5.js?{VERHASH}" reload="1"></script> 
 <!--{/if}--> 

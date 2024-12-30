@@ -3,8 +3,9 @@
 <!--{template lyear:header_simple_end}-->
 <main class="bs-main-container">
 	<div class="container-fluid">
+		<!--{if $_GET['edit'] || $_GET['run']}-->
 		<div class="card">
-			<header class="card-header">
+			<div class="card-body">
 				<ul class="nav nav-pills">
 					<li class="nav-item">
 						<a hidefocus="true" class="nav-link <!--{if empty($_GET[ 'edit']) && empty($_GET[ 'run'])}-->active<!--{/if}-->" href="{MOD_URL}&op=cron">{lang cron}</a>
@@ -20,7 +21,10 @@
 					</li>
 					<!--{/if}-->
 				</ul>
-			</header>
+			</div>
+		</div>
+		<!--{/if}-->
+		<div class="card">
 			<div class="card-body">
 				<!--{if $msg}-->
 				<div class="alert alert-{$msg_type}" role="alert">
@@ -52,7 +56,6 @@
 							</select>
 							<span class="form-text">{lang misc_cron_edit_weekday_comment}</span>
 						</div>
-
 					</div>
 					<div class="row mb-3">
 						<label  class="col-sm-2">{lang everyday}</label>
@@ -63,7 +66,6 @@
 							</select>
 							<span class="form-text">{lang misc_cron_edit_day_comment}</span>
 						</div>
-
 					</div>
 					<div class="row mb-3">
 						<label  class="col-sm-2">{lang hour}</label>
@@ -161,9 +163,9 @@
 							<label class="form-check-label" for="chkallspKI">{lang del}</label>
 						</div>
 					</div>
-					<div class="col-12">
+					<dl class="mb-3 d-grid">
 						<button type="submit" class="btn btn-primary bodyloading" name="exportsubmit" value="true">{lang blank_submit}</button>
-					</div>
+					</dl>
 				</form>
 				<!--{/if}-->
 				<!--{/if}-->

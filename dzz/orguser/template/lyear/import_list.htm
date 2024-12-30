@@ -20,12 +20,14 @@
 <main class="bs-main-container">
 	<div class="container-fluid">
 	  <div class="card">
-		<div class="card-header">
+		<div class="card-body">
 			<ul class="nav nav-pills"> 
 				<li class="nav-item"><a class="nav-link" href="{MOD_URL}&op=import">{lang start_import}</a></li>
 				<li class="nav-item"><a class="nav-link active" href="{MOD_URL}&op=import&do=list">{lang import_set}</a></li>
 			</ul>
 		</div>
+	</div>
+	<div class="card">
 		<div class="card-body">
 			<div class="row mb-3">
 					<label class="col-sm-2" for="pswdefault">{lang import_organization}</label>
@@ -90,8 +92,7 @@
 				<td class="editable" key="$value1"><p class="form-control">$value[$value1]</p></td>
 				<!--{/if}--> 
 				<!--{/loop}-->
-				<td><button type="button" id="button_item_$i" class="btn btn-outline-secondary" onclick="item_import('item_$i',this);" data-loading-text="{lang in_import}">{lang import_nbsp}</button>
-				&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" title="{lang delete_item}" onclick="item_remove(this);return false;"><i class="mdi mdi-delete lead dcolor"></i></a></td>
+				<td><button type="button" id="button_item_$i" class="btn btn-outline-primary me-2" onclick="item_import('item_$i',this);" data-loading-text="{lang in_import}">{lang import_nbsp}</button><a href="javascript:;" class="btn btn-outline-danger" title="{lang delete_item}" onclick="item_remove(this);return false;"><i class="mdi mdi-delete"></i></a></td>
 			</tr>
 			{eval $i++;}
 			<!--{/loop}-->

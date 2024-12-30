@@ -2,17 +2,22 @@
 <!--{template lyear:header_simple_end}-->
 <main class="bs-main-container">
 	<div class="container-fluid">
-	  <div class="card">
-		<header class="card-header">
-			<ul class="nav nav-pills">
-				<li class="nav-item"><a class="nav-link active" href="{MOD_URL}&op=cp&do=import">{lang import_type_app}</a></li>
-			</ul>
-			<div class="button_add_content">
-				<a href="{MOD_URL}&op=edit&do=add" id="button_add1" title="{lang add_app}" class="hide">+</a>				
-				<a href="{MOD_URL}&op=cp&do=import" id="button_add2" class="hide" title="{lang import_type_app}"><span class="mdi mdi-download"></span></a>				
-				<a href="javascript:;" class="" id="button_add">+</a>				
+		<div class="card">
+			<div class="card-body">
+				<ul class="nav nav-pills">
+				<li class="nav-item">
+					<a class="nav-link" href="{MOD_URL}">{lang installed}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{MOD_URL}&op=edit&do=add">{lang add_app}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" href="{MOD_URL}&op=cp&do=import">{lang import_type_app}</a>
+				</li>
+				</ul>
 			</div>
-		</header>
+		</div>
+	<div class="card">
 		<div class="card-body">
 			<form id="importform" name="importform" class="form-horizontal" action="{MOD_URL}&op=cp&do=import" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="importsubmit" value="true" />

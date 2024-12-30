@@ -1513,7 +1513,7 @@ $_G[siteurl]',
 	'File_open_error' =>'文件打开失败',
 	'file_read_no_privilege'=>'抱歉！您没有该文件的预览权限',
 	'file_download_no_privilege'=>'抱歉！您没有该文件的下载权限',
-	'file_edit_no_privilege'=>'抱歉！您没有该文件的下载权限',
+	'file_edit_no_privilege'=>'抱歉！您没有该文件的编辑权限',
 );
 
 ?>

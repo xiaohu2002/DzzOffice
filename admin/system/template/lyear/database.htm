@@ -4,7 +4,7 @@
 <main class="bs-main-container">
 	<div class="container-fluid">
 		<div class="card">
-			<header class="card-header">
+			<div class="card-body">
 				<ul class="nav nav-pills">
 					<li class="nav-item">
 						<a class="nav-link <!--{if $operation=='export' }-->active<!--{/if}-->" hidefocus="true" href="{MOD_URL}&op=database&operation=export">{lang export}</a>
@@ -16,7 +16,9 @@
 						<a class="nav-link <!--{if $operation=='runquery' }-->active<!--{/if}-->" hidefocus="true" href="{MOD_URL}&op=database&operation=runquery">{lang nav_db_runquery}</a>
 					</li>
 				</ul>
-			</header>
+			</div>
+		</div>
+		<div class="card">
 			<div class="card-body">
 				<!--{if $operation=='export'}-->
 				<div class="alert alert-warning">

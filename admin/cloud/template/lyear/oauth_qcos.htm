@@ -3,13 +3,15 @@
 <main class="bs-main-container">
 	<div class="container-fluid">
       <div class="card">
-          <div class="card-header">
+        <div class="card-body">
                 <ul class="nav nav-pills">
                     <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&op=edit&bz=dzz"> {lang set}</a> </li>
                     <li class="nav-item"> <a class="nav-link" href="{MOD_URL}&op=space">{lang space_management}</a> </li>
                     <li class="nav-item"> <a class="nav-link active" href="{MOD_URL}&op=oauth&bz=QCOS">{lang oauth_QCOS_add_ALY}</a> </li>
                 </ul>
             </div>
+        </div>
+        <div class="card">
             <div class="card-body">
                 <form name="aliform" class="form-horizontal" action="{MOD_URL}&op=oauth" method="post" onsubmit="return validate(this)">
                     <input type="hidden" name="alisubmit" value="true" />

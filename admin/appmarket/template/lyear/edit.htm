@@ -26,22 +26,26 @@
 <!--{template lyear:header_simple_end}-->
 <main class="bs-main-container">
 	<div class="container-fluid">
+    <div class="card">
+			<div class="card-body">
+				<ul class="nav nav-pills">
+				<li class="nav-item">
+					<a class="nav-link" href="{MOD_URL}">{lang installed}</a>
+				</li>
+				<li class="nav-item">
+          <!--{if !$appid}-->
+          <a class="nav-link active" href="{MOD_URL}&op=edit&do=add">{lang add_app}</a>	
+          <!--{else}-->
+          <a class="nav-link active" href="{MOD_URL}&op=edit&do=edit&appid=$appid">{lang edit_app}</a>
+          <!--{/if}-->
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{MOD_URL}&op=cp&do=import">{lang import_type_app}</a>
+				</li>
+				</ul>
+			</div>
+		</div>
 	  <div class="card">
-      <div class="container">
-      <header class="card-header">
-        <!--{if !$appid}-->
-        <h4 class="main-header-title navbar-left">{lang add_app}</h4>			
-        <!--{else}-->
-        <h4 class="main-header-title navbar-left">{lang edit_app}</h4>
-        <!--{/if}-->
-        <!--{if !$appid && $op=='edit'}-->
-        <div  class="button_add_content">
-          <a href="{MOD_URL}&op=edit&do=add&refer=$refer" id="button_add1" title="{lang add_app}" class="hide">+</a>				
-          <a href="{MOD_URL}&op=cp&do=import&refer=$refer" id="button_add2" class="hide" title="{lang import_type_app}"><span  class="mdi mdi-download"></span></a>				
-          <a href="javascript:;" id="button_add" style="z-index: 10;">+</a>				
-        </div>
-        <!--{/if}-->
-      </header>
       <div class="card-body">
         <form id="appform" name="appform" class="form-horizontal" action="{MOD_URL}&op=edit&appid=$appid" method="post" enctype="multipart/form-data" onsubmit="return validate(this)">
           <input type="hidden" name="appsubmit" value="true" />
@@ -273,7 +277,6 @@
             <input class="btn btn-primary bodyloading" id="submit_editsubmit" name="appsubmit" value="{lang submit}" type="button" onclick="document.getElementById('editbutton').click();">
           </dl>
         </div>
-      </div>
     </div>
 	</div>
 </main>
