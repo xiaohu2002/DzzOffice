@@ -40,6 +40,9 @@
   </p>
 </div>
 <div class="copyright text-center">
-  <!--{template lyear:copyright}-->
+  Copyright ©2012-{eval echo dgmdate(TIMESTAMP,'Y');} <a href="http://www.dzzoffice.com" target="_blank" >DzzOffice</a>  All Rights Reserved
+  <!--{if $_G['setting']['sitebeian']}-->
+	<br>$_G[setting][sitebeian]
+  <!--{/if}-->
 </div>
 <!--{template common/footer_ajax}-->

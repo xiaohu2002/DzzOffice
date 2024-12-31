@@ -100,7 +100,7 @@ if($_GET['step'] == 'start') {
 		show_msg('您的站点未关闭，正在关闭，请稍后...', $theurl.'?step=start', 5000);
 	}
 		show_msg('说明：<br>本升级程序会参照最新的SQL文件，对数据库进行同步升级。<br>
-			请确保当前目录下 ./data/install.sql 文件为最新版本。<br><br>
+			请确保网站根目录下 ./install/data/install.sql 文件为最新版本。<br>请在升级之前做好站点全量数据（含数据库、文件）的备份操作，并小心操作。<br><br>
 			<a href="'.$theurl.'?step=prepare'.($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '').'">准备完毕，升级开始</a>');
 	
 } elseif ($_GET['step'] == 'waitingdb') {
@@ -655,7 +655,7 @@ END;
 
 function show_header() {
 	global $config;
-
+	$version = CORE_VERSION;
 	$nowarr = array($_GET['step'] => ' class="current"');
 	if(in_array($_GET['step'], array('waitingdb','prepare'))) {
 		$nowarr = array('sql' => ' class="current"');
@@ -680,7 +680,7 @@ function show_header() {
 	</head>
 	<body>
 	<div class="bodydiv">
-	<h1>DzzOffice 数据库升级工具</h1>
+	<h1>DzzOffice V$version 数据库升级工具</h1>
 	<div style="width:90%;margin:0 auto;">
 	<table id="menu">
 	<tr>
@@ -696,9 +696,10 @@ END;
 }
 
 function show_footer() {
+	$date = date("Y");
 	print<<<END
 	</div>
-	<div id="footer">Copyright © 2012-2017 DzzOffice.com All Rights Reserved.</div>
+	<div id="footer">Copyright © 2012-$date DzzOffice.com All Rights Reserved.</div>
 	</div>
 	<br>
 	</body>

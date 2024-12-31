@@ -2724,7 +2724,7 @@ hr.dropdown-divider {
 	color: #000;
 }
 .nav-pills .nav-link:hover {
-	background-color:rgba(55, 121, 255, 0.1);
+	background-color:rgba(var(--bs-primary-rgb),0.1);
 	color:var(--bs-primary);
 }
 
