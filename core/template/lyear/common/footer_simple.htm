@@ -15,14 +15,14 @@ try{
 <!--{/if}-->
 <script type="text/javascript" src="misc.php?mod=sendwx&rand=$_G[timestamp]"></script>
 <!--{/if}-->
-<!--{if $_G['uid'] && $_G['adminid'] == 1}-->
-<!--{if !isset($_G['cookie']['checkupgrade'])}-->
+<!--{if $_G['setting']['upgradetis'] !== '3' && $_G['uid'] && $_G['adminid'] == 1}-->
+<!--{if $_G['setting']['upgradetis'] !== '1' && !isset($_G['cookie']['checkupgrade'])}-->
 <script type="text/javascript">jQuery.getScript('misc.php?mod=upgrade&action=checkupgrade&rand=$_G['timestamp']');</script>
 <!--{/if}-->
-<!--{if !isset($_G['cookie']['checkappupgrade'])}-->
+<!--{if $_G['setting']['upgradetis'] !== '2' && !isset($_G['cookie']['checkappupgrade'])}-->
 <script type="text/javascript">jQuery.getScript('misc.php?mod=upgrade&action=checkappupgrade&rand=$_G['timestamp']');</script>
 <!--{/if}-->
-<!--{if !isset($_G['cookie']['upgradenotice'])}-->
+<!--{if $_G['setting']['upgradetis'] !== '3' && !isset($_G['cookie']['upgradenotice'])}-->
 <script type="text/javascript">
   jQuery(document).ready(function(){
     try{jQuery('#systemNotice').load('misc.php?mod=upgrade&action=upgradenotice');}catch(e){};	

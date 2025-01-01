@@ -144,7 +144,7 @@ elseif(isset($_GET[\''.$mysqlplek.'\'])) {
 	$debug .= '<!DOCTYPE html><html><head>';
 	$debug .= '<meta charset="'.CHARSET.'" />';
 	$debug .= '<meta name="renderer" content="webkit" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />';
-	$debug .= "</script><script><script src='../static/js/common.js'></script><script>
+	$debug .= "<script src='../static/jquery/jquery.min.js'></script><script src='../static/js/common.js'></script><script>
 	function switchTab(prefix, current, total, activeclass) {
 	activeclass = !activeclass ? 'a' : activeclass;
 	for(var i = 1; i <= total;i++) {
@@ -216,12 +216,12 @@ EOF;
 		.hide{ display : none;}
 		#__debugbar__ { padding: 80px 1px 0 1px;  }
 		#__debugbar__ table { width:90%;border:1px solid gray; }
-		#__debugbar__ div { padding-top: 40px; }
+		#__debugbar__ div { padding-top: 20px; }
 		#__debugbar_s { border-bottom:1px dotted #EFEFEF;background:#FFF;width:100%;font-size:12px;position: fixed; top:0px; left:5px; }
 		#__debugbar_s a { color:blue; }
 		#__debugbar_s a.a { border-bottom: 1px dotted gray; }
 		#__debug_c_1 ol { margin-left: 20px; padding: 0px; }
-		#__debug_c_4_nav { background:#FFF; border:1px solid black; border-top:none; padding:5px; position: fixed; top:0px; right:0px }
+		#__debug_c_4_nav { background:#FFF; border:1px solid black; border-top:none; padding:5px; position: fixed;right:0px }
 		</style>
 		<script>function toggle(dom){dom.style.display = dom.style.display != "block" ? "block" : "none";}</script>
 		</head><body>'.

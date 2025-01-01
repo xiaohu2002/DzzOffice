@@ -199,10 +199,32 @@
                     <label class="form-check-label" for="template1">默认模板</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="template2" name="settingnew[template]"  value="lyear"<!--{if $setting[template] == 'lyear'}--> checked <!--{/if}-->>
+                    <input class="form-check-input" type="radio" id="template2" name="settingnew[template]" value="lyear"<!--{if $setting[template] == 'lyear'}--> checked <!--{/if}-->>
                     <label class="form-check-label" for="template2">光年模板</label>
                   </div>
                   <span class="form-text">只对当前页面具有多套模板的情况下生效</span>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2">升级提醒</label>
+                <div class="col-sm-10">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="upgradetis1" name="settingnew[upgradetis]" value="0"<!--{if !$setting[upgradetis]}--> checked <!--{/if}-->>
+                    <label class="form-check-label" for="upgradetis1">全部开启</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="upgradetis2" name="settingnew[upgradetis]" value="1"<!--{if $setting[upgradetis] == '1'}--> checked <!--{/if}-->>
+                    <label class="form-check-label" for="upgradetis2">关闭系统</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="upgradetis3" name="settingnew[upgradetis]" value="2"<!--{if $setting[upgradetis] == '2'}--> checked <!--{/if}-->>
+                    <label class="form-check-label" for="upgradetis3">关闭插件</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="upgradetis4" name="settingnew[upgradetis]" value="3"<!--{if $setting[upgradetis] == '3'}--> checked <!--{/if}-->>
+                    <label class="form-check-label" for="upgradetis4">全部关闭</label>
+                  </div>
+                  <span class="form-text">关闭系统升级提醒后，只能前往系统工具中进行手动检测升级。关闭插件升级提醒后，只能前往应用市场进行手动检测升级。</span>
                 </div>
               </div>
               <div class="row mb-3">
