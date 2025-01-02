@@ -1793,7 +1793,7 @@ function showWindow(k, url, mode, cache, showWindow_callback,disablebacktohide) 
 			ajaxpost(url, 'fwin_content_' + k, '', '', '', function() {initMenu();show();});
 		}
 		if(parseInt(BROWSER.ie) != 6) {
-			loadingst = setTimeout(function() {showDialog('', 'info', '<img src="' + IMGDIR + '/loading.gif"> '+__lang.please_wait)}, 500);
+			loadingst = setTimeout(function() {showDialog('正在为您加载中...', 'info', '<img src="' + IMGDIR + '/loading.gif"> '+__lang.please_wait)}, 500);
 		}
 		if(mode == 'html'){
 			document.getElementById('fwin_content_' + k).innerHTML = url;

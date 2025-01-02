@@ -9,22 +9,23 @@
 
 var BROWSER = {};
 var USERAGENT = navigator.userAgent.toLowerCase();
-browserVersion({'ie':'msie','edge':'edge','rv':'rv','firefox':'','chrome':'','opera':'','safari':'','mozilla':'','webkit':'','maxthon':'','qq':'qqbrowser','ie11':'trident'});
+browserVersion({'ie':'msie','trident':'','edge':'edge','rv':'rv','firefox':'','chrome':'','opera':'','safari':'','mozilla':'','webkit':'','maxthon':'','qq':'qqbrowser','ie11':'trident'});
 if(BROWSER.ie11){
 	BROWSER.ie=11;
 	BROWSER.rv=11;
 }else{
 	BROWSER.rv=0;
 }
-if(BROWSER.safari) {
+if(BROWSER.safari || BROWSER.rv) {
 	BROWSER.firefox = true;
 }
 BROWSER.opera = BROWSER.opera ? opera.version() : 0;
 HTMLNODE = document.getElementsByTagName('head')[0].parentNode;
-if(BROWSER.ie) {
+if(BROWSER.ie || BROWSER.trident) {
 	BROWSER.iemode = parseInt(typeof document.documentMode != 'undefined' ? document.documentMode : BROWSER.ie);
-	HTMLNODE.className = 'ie_all ie' + BROWSER.iemode;
+	HTMLNODE.className = (BROWSER.iemode<9?'ie_all ':'') +'ie' + BROWSER.iemode;
 }
+
 var CSSLOADED = [];
 var JSLOADED = [];
 var JSMENU = [];

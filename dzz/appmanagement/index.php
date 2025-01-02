@@ -12,25 +12,79 @@ if(!defined('IN_DZZ')) {
 $navtitle=lang('后台管理');
 //管理权限进入
 Hook::listen('adminlogin');
-
-$appdata=DB::fetch_all("select appname,appico,appurl,identifier from %t where `group`=3 and isshow>0 and `available`>0",array('app_market')); 
-$data=array();
-foreach($appdata as $k => $v){
-	if( $v["identifier"]=="appmanagement") continue;
-	if ($v['appico'] != 'dzz/images/default/icodefault.png' && !preg_match("/^(http|ftp|https|mms)\:\/\/(.+?)/i", $v['appico'])) {
-		$v['appico'] = $_G['setting']['attachurl'] . $v['appico'];
-	} 
-	$v['url']=replace_canshu($v['appurl']);
-	$data[]=$v;
-}
-if (isset($_G['setting']['template']) && $_G['setting']['template'] === 'lyear') {
-	$zaixianrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('session') . " WHERE uid");
-	$yonghurenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE uid");
-	$tingyongrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE status");
-	$wenjiangeshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('attachment') . " WHERE aid");
-	$kongjianshiyong=formatsize(DB::result_first("SELECT SUM(filesize) FROM ".DB::table('attachment')));
-	$version = 'V'.CORE_VERSION;//版本信息
-	$RELEASE = CORE_RELEASE;
+$do = isset($_GET['do']) ? $_GET['do'] : '';
+if ($do == 'stats') {
+	$starttime=trim($_GET['starttime']);
+	$endtime=trim($_GET['endtime']);
+	$time=trim($_GET['time']) ? trim($_GET['time']) : 'day';
+	$operation=trim($_GET['operation']);
+	switch($time){
+		case 'month':
+			if(!$starttime){
+				$start=strtotime("-6 month",TIMESTAMP);
+				$starttime=dgmdate($start,'Y-m');
+			}
+			if(!$endtime){
+				$endtime=dgmdate(TIMESTAMP,'Y-m');
+			}
+			break;
+		case 'week':
+			if(!$starttime){
+				$start=strtotime("-12 week",TIMESTAMP);
+			}else{
+				$start=strtotime($starttime);
+			}
+			$stamp_l=strtotime("this Monday",$start);
+			$starttime=dgmdate($stamp_l,'Y-m-d');
+			
+			if(!$endtime){
+				$end=TIMESTAMP;
+			}else{
+				$end=strtotime($endtime);
+			}
+			$endtime=dgmdate($end,'Y-m-d');
+			break;
+		case 'day':
+			if(!$starttime){
+				$start=strtotime("-12 day",TIMESTAMP);
+				$starttime=dgmdate($start,'Y-m-d');
+			}
+			if(!$endtime){
+				$endtime=dgmdate(TIMESTAMP,'Y-m-d');
+			}
+			break;
+		
+	}
+	if($operation=='getdata'){
+		 $data=getData($time,$starttime,$endtime);
+		 // 构建返回的数据
+		$response = [
+			'success' => true,
+			'labels' => array_keys($data['total']),
+			'datasets' => [
+				[
+					'label' => "用户总数",
+					'backgroundColor' => "#33cabb",
+					'borderColor' => "#33cabb",
+					'fill' => false,
+					'data' => array_values($data['total'])
+				],
+				[
+					'label' => '新增用户',
+					'fill' => false,
+					'backgroundColor' => "#fa8734",
+					'borderColor' => "#fa8734",
+					'data' => array_values($data['add'])
+				]
+			]
+		];
+		// 返回JSON数据
+		exit(json_encode($response));
+	}else{
+		include template('stats','lyear');
+		exit();
+	}
+} elseif ($do == 'systemcheck') {
 	define('ROOT_PATH', dirname(__FILE__));
 	$lang=array (
 		'php_version_too_low' => 'php版本太低啦，请先升级php到5.3以上，建议使用php5.4及以上',
@@ -120,5 +174,111 @@ if (isset($_G['setting']['template']) && $_G['setting']['template'] === 'lyear')
 		$env_str .= ($status ? "<td class=\"text-success\"><i class=\"mdi lead mdi-check-circle me-2\"></i>" : "<td class=\"nw text-danger\"><i class=\"mdi lead mdi-close-circle me-2\"></i>").$item['current']."</td>\n";
 		$env_str .= "</tr>\n";
 	}
+	include template('systemcheck','lyear');
+	exit();
+}
+$appdata=DB::fetch_all("select appname,appico,appurl,identifier from %t where `group`=3 and isshow>0 and `available`>0",array('app_market')); 
+$data=array();
+foreach($appdata as $k => $v){
+	if( $v["identifier"]=="appmanagement") continue;
+	if ($v['appico'] != 'dzz/images/default/icodefault.png' && !preg_match("/^(http|ftp|https|mms)\:\/\/(.+?)/i", $v['appico'])) {
+		$v['appico'] = $_G['setting']['attachurl'] . $v['appico'];
+	} 
+	$v['url']=replace_canshu($v['appurl']);
+	$data[]=$v;
+}
+if (isset($_G['setting']['template']) && $_G['setting']['template'] === 'lyear') {
+	$zaixianrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('session') . " WHERE uid");
+	$yonghurenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE uid");
+	$tingyongrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE status");
+	$wenjiangeshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('attachment') . " WHERE aid");
+	$kongjianshiyong=formatsize(DB::result_first("SELECT SUM(filesize) FROM ".DB::table('attachment')));
+	$version = 'V'.CORE_VERSION;//版本信息
+	$RELEASE = CORE_RELEASE;
 }
 include template('main');
+function getData($time,$starttime,$endtime){
+	
+	$endtime=strtotime($endtime);
+	$data=array('total'=>array(),
+				'add'=>array(),
+				'total_d'=>array(),
+				'add_d'=>array(),
+				);
+	switch($time){
+			case 'month':
+				$stamp=strtotime($starttime);
+				$arr=getdate($stamp);
+				$key=$arr['year'].'-'.$arr['mon'];
+				$low=strtotime($key);
+				$up=strtotime('+1 month',$low);
+				$ltotal=$data['total'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d",array('user',$up));
+				$data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+				$ltotal+=$data['add'][$key];
+				while($up<=$endtime){
+					$key=dgmdate($up,'Y-m');
+					$low=strtotime($key);
+					$up=strtotime('+1 month',$low);
+					$data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+					$ltotal+=$data['add'][$key];
+					$data['total'][$key]=$ltotal;
+				}
+				break;
+			case 'week':
+				$stamp=strtotime($starttime);
+				$arr=getdate($stamp);
+				$low=strtotime('+'.(1-$arr['wday']).' day',$stamp);
+				$up=strtotime('+1 week',$low);
+				$key=dgmdate($low,'m-d').'~'.dgmdate($up-60*60*24,'m-d');
+				$ltotal=$data['total'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d",array('user',$up));
+				$data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+				$ltotal+=$data['add'][$key];
+				while($up<$endtime){
+					$low=$up;
+					$up=strtotime('+1 week',$low);
+					$key=dgmdate($low,'m-d').'~'.dgmdate($up-60*60*24,'m-d');
+					$data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+					$ltotal+=$data['add'][$key];
+					$data['total'][$key]=$ltotal;
+				}
+				break;
+			case 'day':
+				$low=strtotime($starttime);//strtotime('+'.(1-$arr['hours']).' day',$stamp);
+				$up=$low+24*60*60;
+				$key=dgmdate($low,'Y-m-d');
+				$ltotal=$data['total'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d",array('user',$up));
+				$data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+				$ltotal+=$data['add'][$key];
+				while($up<=$endtime){
+					$low=$up;
+					$up=strtotime('+1 day',$low);
+					$key=dgmdate($low,'Y-m-d');
+					$data['add'][$key]=DB::result_first("select COUNT(*) from %t where regdate<%d and regdate>=%d",array('user',$up,$low));
+					$ltotal+=$data['add'][$key];
+					$data['total'][$key]=$ltotal;
+				}
+				break;
+			case 'all':
+				$min=DB::result_first("select min(regdate) from %t where regdate>0",array('user'));
+				$min-=60;
+				$max=TIMESTAMP+60*60*8;
+				$days=($max-$min)/(60*60*24);
+				if($days<20){
+					$time='day';
+					$starttime=gmdate('Y-m-d',$min);
+					$endtime=gmdate('Y-m-d',$max);
+				}elseif($days<70){
+					$time='week';
+					$starttime=gmdate('Y-m-d',$min);
+					$endtime=gmdate('Y-m-d',$max);
+				}else{
+					$time='month';
+					$starttime=gmdate('Y-m',$min);
+					$endtime=gmdate('Y-m',$max);
+				}
+				$data=getData($time,$starttime,$endtime);
+				break;
+		}
+		
+	return $data;
+}
