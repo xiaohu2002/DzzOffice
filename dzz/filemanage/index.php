@@ -12,6 +12,7 @@ if (!defined('IN_DZZ')) {
 $navtitle = lang('appname');
 $uid=$_G['uid'];
 $do = isset($_GET['do']) ? $_GET['do'] : '';
+$orgid = isset($_GET['orgid']) ? intval($_GET['orgid']) : '';
 $typearr = array('image' => lang('photo'),
     'document' => lang('type_attach'),
     'link' => lang('type_link'),
@@ -91,7 +92,6 @@ if ($do == 'delete') {
 	$callback = isset($_GET['callback']) ? $_GET['callback'] : '';
 	$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
 	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
-	$orgid = isset($_GET['orgid']) ? intval($_GET['orgid']) : '';
 	$pfid = isset($_GET['pfid']) ? intval($_GET['pfid']) : '';
 	$sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : '';
 	$limit = empty($_GET['limit']) ? 20 : $_GET['limit'];
@@ -212,12 +212,12 @@ if ($do == 'delete') {
 	];
 	exit($callback . '(' . json_encode($return) . ');');
   } else {
-	if (isset($_G['setting']['template']) && $_G['setting']['template'] !== 'lyear') {
-        $perpage = 20;
+	if (isset($_G['setting']['template']) && $_G['setting']['template'] == 'lyear') {
+    } else {
+		$perpage = 20;
 		$pfid = isset($_GET['pfid']) ? intval($_GET['pfid']) : '';
 		$type = isset($_GET['type']) ? trim($_GET['type']) : '';
 		$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
-		$orgid = isset($_GET['orgid']) ? intval($_GET['orgid']) : '';
 		$page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
 		$start = ($page - 1) * $perpage;
 		$gets = array(
@@ -291,13 +291,13 @@ if ($do == 'delete') {
 		}
     }
 	if ($org = C::t('organization')->fetch($orgid)) {
-        $orgpath = getPathByOrgid($org['orgid']);
-        $org['depart'] = implode('-', ($orgpath));
-    } else {
-        $org = array();
-        $org['depart'] = lang('select_a_organization_or_department');
-        $org['orgid'] = $orgid;
-    }
+		$orgpath = getPathByOrgid($org['orgid']);
+		$org['depart'] = implode('-', ($orgpath));
+	} else {
+		$org = array();
+		$org['depart'] = lang('select_a_organization_or_department');
+		$org['orgid'] = $orgid;
+	}
     include template('list');
 }
 ?>
