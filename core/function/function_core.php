@@ -680,7 +680,7 @@ function avatar_block($uid=0,$headercolors=array(),$class="Topcarousel img-avata
 	}
 	if(empty($user)) return '';
 	if($user['avatarstatus']){//用户已经上传头像
-		return '<img src="avatar.php?uid='.$user['uid'].'" class="img-circle special_avatar_class img-avatar '.$class.'" title="'.$user['username'].'">';
+		return '<img src="avatar.php?uid='.$user['uid'].'" class="img-circle special_avatar_class '.$class.'" title="'.$user['username'].'">';
 	}else{//没有上传头像，使用背景+首字母
 		if($uid){
 			if($headercolors[$uid]) $headerColor=$headercolors[$uid];
