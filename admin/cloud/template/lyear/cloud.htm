@@ -39,10 +39,10 @@
                   <input type="checkbox" class="form-check-input" name="available[{$value[bz]}]" value="{eval echo ($value['available']?$value['available']:1)}" <!--{if $value[available]>0}-->checked<!--{/if}--> <!--{if $value[warning]}-->disabled<!--{/if}--> > <span class="text-danger" style="padding-left:3px">$value[warning]</span> 
                   <!--{/if}-->
                 </td>
-                <td width="140"><a class="btn btn-outline-primary" href="{MOD_URL}&op=edit&bz=$value[bz]">{lang set}</a> 
+                <td width="140"><a class="btn btn-outline-primary btn-sm" href="{MOD_URL}&op=edit&bz=$value[bz]">{lang set}</a> 
                   <!--{if $value[warning]}--> 
                   <!-- <br /> -->
-                  <a class="btn btn-outline-danger" href="{MOD_URL}&operation=delete&bz=$value[bz]">{lang delete}</a> 
+                  <a class="btn btn-outline-danger btn-sm" href="{MOD_URL}&operation=delete&bz=$value[bz]">{lang delete}</a> 
                   <!--{/if}-->
                   </td>
               </tr>
@@ -50,7 +50,7 @@
             </table>
           </div>
           <dl class="mb-3 d-grid">
-            <input type="submit" class="btn btn-primary bodyloading" value="{lang save_set}" />
+            <input type="submit" class="btn btn-primary btn-round bodyloading" value="{lang save_set}" />
           </dl>
         </form>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">

@@ -393,7 +393,7 @@ function job_add(orgid){
 }
 function appendjob(json){
 	var html='';
-	html+='<div id="job_'+json.jobid+'" orgid="'+json.orgid+'" class="job-item-edit float-start">';
+	html+='<div id="job_'+json.jobid+'" orgid="'+json.orgid+'" class="job-item-edit float-start me-2">';
     html+='    <button onclick="job_show_editor(\''+json.jobid+'\',\''+json.orgid+'\', this)" class="btn btn-outline-secondary job-name">'+json.name+'</button>';
     html+='    <div class="edit hide" style="min-width:250px">';
     html+='        <div class="job-edit-control float-start" >';
@@ -436,7 +436,7 @@ function moderator_add(orgid,uid){
 function appendModerator(json){
 	var html='';
 	html+='<li class="user-item float-start" uid="'+json.uid+'"> ';
-	html+='			<a href="javascrip:;" class="delete" onclick="moderator_del(\''+json.id+'\',\''+json.orgid+'\',this);return false"><i style="color:#d2322d;font-size:16px" class="mdi mdi-delete dzz dzz-delete lead dcolor"></i></a>';
+	html+='			<a href="javascrip:;" class="delete" onclick="moderator_del(\''+json.id+'\',\''+json.orgid+'\',this);return false"><i style="color:#d2322d;font-size:16px" class="mdi mdi-delete dzz dzz-delete"></i></a>';
 	html+='			<div class="avatar-cover"></div>';
 	html+='			<div class="user-item-avatar">'; 
 	html+='				<div class="avatar-face">';

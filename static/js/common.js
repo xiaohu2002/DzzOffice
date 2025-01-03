@@ -2077,18 +2077,6 @@ function showWindow(k, url, mode, cache, showWindow_callback,disablebacktohide) 
 	};
 	var initMenu = function() {
 		clearTimeout(loadingst);
-		/*var objs = menuObj.getElementsByTagName('*');
-		var fctrlidinit = false;
-		for(var i = 0; i < objs.length; i++) {
-			if(objs[i].id) {
-				objs[i].setAttribute('fwin', k);
-			}
-			if(objs[i].className == 'flb' && !fctrlidinit) {
-				if(!objs[i].id) objs[i].id = 'fctrl_' + k;
-				drag = objs[i].id;
-				fctrlidinit = true;
-			}
-		}*/
 	};
 	var show = function() {
 		hideMenu('fwin_dialog', 'dialog');
@@ -2098,17 +2086,6 @@ function showWindow(k, url, mode, cache, showWindow_callback,disablebacktohide) 
 		var html='<div class="modal-dialog modal-center">'
 				 +'	<div class="modal-content" >'
 				 +'  <div class="modal-content-inner" id="fwin_content_'+k+'">'
-				/* +'	  <div class="modal-header">'
-				 +'		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>'
-				 +'		<h4 class="modal-title" id="fwin_title_'+k+'">加载中,请稍候</h4>'
-				 +'	  </div>'*/
-				/* +'	  <div class="m_c modal-body" id="fwin_content_' + k + '">'
-				 +'		<table   height="100%" width="100%"><tbody><tr><td align="center" valign="middle"><div class="loading_img"><div class="loading_process"></div></div></td></tr></tbody></table>'
-				 +'	  </div>'
-			   +'	  <div class="modal-footer">'
-				 +'		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'
-				 +'		<button type="button" class="btn btn-primary">Save changes</button>'
-				 +'	  </div>'*/
 				 +'	 </div>'
 				 +'	</div>'
 				 +'</div>';

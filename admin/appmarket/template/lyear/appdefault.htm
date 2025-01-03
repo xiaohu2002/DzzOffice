@@ -68,12 +68,12 @@
 								</div>
 							</td>
 							<td>
-								<button id="clear_{$value['appid']}" class="btn btn-round btn-primary" data-loading-text="{lang in_clear}" type="button" title="{lang clear_application_install}" onclick="clearAppFromUser('$value[appid]');return false">{lang clear}</button>
+								<button id="clear_{$value['appid']}" class="btn btn-round btn-outline-primary btn-sm" data-loading-text="{lang in_clear}" type="button" title="{lang clear_application_install}" onclick="clearAppFromUser('$value[appid]');return false">{lang clear}</button>
 							</td>
 						</tr>
 						<!--{/loop}-->
 						<tr>
-							<th valign="middle" style="border-bottom:none"><input type="submit" class="btn btn-primary bodyloading" value="{lang save_set}" /></th>
+							<th valign="middle" style="border-bottom:none"><input type="submit" class="btn btn-primary btn-round bodyloading" value="{lang save_set}" /></th>
 							<th colspan="5" style="border-bottom:none"> $multi</th>
 						</tr>
 					</table>

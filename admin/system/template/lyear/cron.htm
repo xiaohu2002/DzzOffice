@@ -93,7 +93,7 @@
 
 					</div>
 					<dl class="mb-3 d-grid">
-						<button type="submit" class="btn btn-primary bodyloading" name="exportsubmit" value="true">{lang blank_submit}</button>
+						<button type="submit" class="btn btn-primary btn-round bodyloading" name="exportsubmit" value="true">{lang blank_submit}</button>
 					</dl>
 				</form>
 				<!--{elseif $_GET['run']}-->
@@ -117,15 +117,14 @@
 								<th style="min-width: 120px">{lang time}</th>
 								<th style="min-width: 120px">{lang misc_cron_last_run}</th>
 								<th style="min-width: 120px">{lang misc_cron_next_run}</th>
-								<th style="min-width: 60px">{lang operation}</th>
+								<th style="min-width: 140px">{lang operation}</th>
 							</thead>
 							<!--{loop $crons $cron}-->
 							<tr>
 								<td align="right"><input type="checkbox" class="form-check-input" name="delete[]" value="$cron[cronid]" <!--{if $cron[type]=='system' }-->disabled
 									<!--{/if}-->></td>
 								<td>
-									<p class="clearfix">
-										<input type="text" name="namenew[{$cron[cronid]}]" class="form-control" value="$cron[name]"></p>
+									<input type="text" name="namenew[{$cron[cronid]}]" class="form-control" value="$cron[name]">
 									<strong>$cron[filename]</strong>
 								</td>
 								<td><label class="checkbox-inline"><input  type="checkbox" class="form-check-input" name="availablenew[{$cron[cronid]}]" value="1" <!--{if $cron[available]>0}-->checked="checked"<!--{/if}-->></label></td>
@@ -164,7 +163,7 @@
 						</div>
 					</div>
 					<dl class="mb-3 d-grid">
-						<button type="submit" class="btn btn-primary bodyloading" name="exportsubmit" value="true">{lang blank_submit}</button>
+						<button type="submit" class="btn btn-primary btn-round bodyloading" name="exportsubmit" value="true">{lang blank_submit}</button>
 					</dl>
 				</form>
 				<!--{/if}-->

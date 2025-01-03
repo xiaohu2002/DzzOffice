@@ -56,7 +56,7 @@
               <span class="avatar-md rounded-circle avatar-box text-white bg-success">
                 <i class="mdi mdi-account fs-4"></i>
               </span>
-              <span class="fs-4 text-truncate">$yonghurenshu</span>
+              <span class="fs-4 text-truncate"><a href="{DZZSCRIPT}?mod=orguser" class="dcolor">$yonghurenshu</a></span>
             </div>
             <div class="text-end">用户总数</div>
           </div>
@@ -167,10 +167,10 @@ $('#userstats').click(function() {
         shadeClose: true,
         shade: false,
         maxmin: true, // 开启最大化最小化按钮
-        area: ['70%', '70%'],
+        area: ['50%', '70%'],
         content: '{MOD_URL}&do=stats', // iframe的url
     });
 });
 </script>
-<script type="text/javascript" src="static/lyear/js/layer/layer.js"></script>
+<script type="text/javascript" src="static/lyear/js/layer/layer.js?{VERHASH}"></script>
 <!--{template lyear:footer_simple}-->

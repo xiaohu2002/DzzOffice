@@ -1,9 +1,4 @@
 <!--{template lyear:header_simple_start}-->
-<style>
-	.overflow-auto{
-		max-height: 80px;
-	}
-</style>
 <!--{template lyear:header_simple_end}-->
 <main class="bs-main-container">
 	<div class="container-fluid">
@@ -43,7 +38,7 @@
 									<td>$log[4]</td>
 									<td>$log[1]</td>
 									<td>
-										<a href="javascript:;" onclick="togglecplog('{$key}')"><div class="overflow-auto">{eval echo cutstr($log[5], 200)}</div></a>
+										<a href="javascript:;" onclick="togglecplog('{$key}')">{eval echo cutstr($log[5], 200)}</a>
 									</td>
 								</tr>
 								<thead id="cplog_{$key}" style="display:none">

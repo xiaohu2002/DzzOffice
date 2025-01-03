@@ -58,7 +58,7 @@ jQuery(document).ready(function(){
 	jump(3);
 });
 </script>
-<!--{elseif $param['msgtype'] == 2}-->
+<!--{elseif $param['msgtype'] == 2 && !$_GET['layerindex']}-->
 <div class="modal-header">
 	<h4 class="modal-title">{lang board_message}</h4>
 	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

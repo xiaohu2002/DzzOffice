@@ -7,7 +7,7 @@
     <!--{loop $searchcats $val}-->
     <li class="nav-item" data-appid="$val[appid]">
         <a class="nav-link <!--{if $fromid == $val['appid']}-->active<!--{/if}-->" href="{MOD_URL}&op=notification&appid=$val[appid]">
-            <img style="margin-right: 5px;"src="$val[appico]">
+            <img src="$val[appico]">
             <span>$val[appname]</span>
         </a>
     </li>

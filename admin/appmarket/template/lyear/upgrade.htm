@@ -46,7 +46,7 @@
 				</div>
       		</div>
 			<div class="float-end">
-				<button class="btn btn-round btn-primary " id="update_check" title="{lang app_upgrade_check_need_update}"  onclick="upgrade_check(this);" data-loading-text="{lang app_upgrade_check_need_update}">{lang app_upgrade_check_need_update2}</button>
+				<button class="btn btn-round btn-primary" id="update_check" title="{lang app_upgrade_check_need_update}"  onclick="upgrade_check(this);" data-loading-text="{lang app_upgrade_check_need_update}">{lang app_upgrade_check_need_update2}</button>
 			</div>
 		</header>
 		<div class="card-body">
@@ -61,7 +61,7 @@
 							<th>{lang application_name}</th>
 							<th>{lang installed}</th>
 							<th>{lang newest}</th>
-							<th>{lang time}</th>
+							<th>更新内容</th>
 							<th>{lang operation}</th>
 						</tr>
 						</thead>
@@ -86,7 +86,7 @@
 							<td>$value[upgrade_version][version]</td>
 							<td>$value[upgrade_version][desc]</td>
 							<td>
-								<a class="btn btn-round btn-primary" id="upgrade_info_{$value[appid]}" href="javascript:;" onclick="start_check_upgrade('$value[appid]',1);" title="{lang update_onekey}">{lang update_onekey}</a>
+								<a class="btn btn-round btn-primary btn-sm" id="upgrade_info_{$value[appid]}" href="javascript:;" onclick="start_check_upgrade('$value[appid]',1);" title="{lang update_onekey}">{lang update_onekey}</a>
 							</td>
 						</tr>
 						<!--{/loop}-->
@@ -103,7 +103,7 @@
 			<div class="text-center">
 				<img src="static/image/common/no_list.png" /><br>
 				<span class="lead">还没有可以升级的应用…</span><br>
-				<button class="btn btn-outline-primary" id="update_check" title="{lang app_upgrade_check_need_update}"  onclick="upgrade_check(this);" data-loading-text="{lang app_upgrade_check_need_update}">{lang app_upgrade_check_need_update2}</button>
+				<button class="btn btn-outline-primary btn-round" id="update_check" title="{lang app_upgrade_check_need_update}"  onclick="upgrade_check(this);" data-loading-text="{lang app_upgrade_check_need_update}">{lang app_upgrade_check_need_update2}</button>
 			</div>
 		</div>
 		<!--{/if}--> 

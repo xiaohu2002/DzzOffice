@@ -188,7 +188,7 @@ foreach($appdata as $k => $v){
 	$data[]=$v;
 }
 if (isset($_G['setting']['template']) && $_G['setting']['template'] === 'lyear') {
-	$zaixianrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('session') . " WHERE uid");
+	$zaixianrenshu = C::app()->session->count(1);
 	$yonghurenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE uid");
 	$tingyongrenshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('user') . " WHERE status");
 	$wenjiangeshu = DB::result_first("SELECT COUNT(*) FROM " . DB::table('attachment') . " WHERE aid");

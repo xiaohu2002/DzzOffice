@@ -1762,15 +1762,59 @@ function Confirm(msg,callback)
 	showDialog(msg, 'confirm', __lang.confirm_message, callback, 1);
 };
 
+function layerajax(k, url, mode, cache,shadeClose,maxmin) {
+	if(shadeClose){
+		shadeClose=true;
+	}else{
+		shadeClose=false;
+	}
+	if(maxmin){
+		maxmin=true;
+	}else{
+		maxmin=false;
+	}
+	var index = layer.open({
+		type: 1,
+		shadeClose: shadeClose,
+		shade: 0.2,
+		id: 'fwin_content_' + k,
+		maxmin: maxmin, // 开启最大化最小化按钮
+		content: '<img src="' + IMGDIR + '/loading.gif">正在为您加载中...', // 设置弹窗的内容
+		title: sitename // 弹窗的标题
+	});
+	mode = isUndefined(mode) ? 'get' : mode;
+	cache = isUndefined(cache) ? 1 : cache;
+	url += '&layerindex='+index;
+	if(disallowfloat && disallowfloat.indexOf(k) != -1) {
+		if(BROWSER.ie) url += (url.indexOf('?') != -1 ?  '&' : '?') + 'referer=' + escape(location.href);
+		location.href = url;
+		doane();
+		return;
+	}
+	var fetchContent = function() {
+		if(mode == 'get') {
+			url += (url.search(/\?/) > 0 ? '&' : '?') + 'infloat=yes&handlekey=' + k;
+			url += cache == -1 ? '&t='+(+ new Date()) : '';
+			if(BROWSER.ie &&  url.indexOf('referer=') < 0) {
+				url = url + '&referer=' + encodeURIComponent(location);
+			}
+			ajaxget(url, 'fwin_content_' + k);
+		} else if(mode == 'post') {
+			ajaxpost(url, 'fwin_content_' + k);
+		} else if(mode == 'html'){
+			document.getElementById('fwin_content_' + k).innerHTML = url;
+		}
+	};
+	fetchContent();
+}
+
 function showWindow(k, url, mode, cache, showWindow_callback,disablebacktohide) {
 
 	mode = isUndefined(mode) ? 'get' : mode;
 	cache = isUndefined(cache) ? 1 : cache;
 	var menuid = 'fwin_' + k;
 	var menuObj = document.getElementById(menuid);
-	var drag = null;
 	var loadingst = null;
-	var hidedom = '';
 
 	if(disallowfloat && disallowfloat.indexOf(k) != -1) {
 		if(BROWSER.ie) url += (url.indexOf('?') != -1 ?  '&' : '?') + 'referer=' + escape(location.href);
@@ -1803,18 +1847,6 @@ function showWindow(k, url, mode, cache, showWindow_callback,disablebacktohide) 
 	};
 	var initMenu = function() {
 		clearTimeout(loadingst);
-		/*var objs = menuObj.getElementsByTagName('*');
-		var fctrlidinit = false;
-		for(var i = 0; i < objs.length; i++) {
-			if(objs[i].id) {
-				objs[i].setAttribute('fwin', k);
-			}
-			if(objs[i].className == 'flb' && !fctrlidinit) {
-				if(!objs[i].id) objs[i].id = 'fctrl_' + k;
-				drag = objs[i].id;
-				fctrlidinit = true;
-			}
-		}*/
 	};
 	var show = function() {
 		hideMenu('fwin_dialog', 'dialog');

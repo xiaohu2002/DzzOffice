@@ -80,7 +80,7 @@
                 <td><input type="checkbox" class="form-check-input" name="settingnew[is_open][$i]" value="1" <!--{if $info[is_open]==1}-->checked<!--{/if}-->  /></td>
                 <td>
                   <!--{if $info[issystem]!=1}-->
-                  <a href="javascript:;" class="col-xs-2 img_delete" onclick="deletesystem(this);"><span class="mdi mdi-delete lead dcolor" style="font-size:22px;"></span></a>
+                  <a href="javascript:;" class="btn btn-outline-danger btn-sm" onclick="deletesystem(this);"><span class="mdi mdi-delete"></span></a>
                   <!--{/if}--> 
                 </td>
                 </tr>
@@ -93,7 +93,7 @@
             </div>
           </div>
           <dl class="mb-3 d-grid">
-            <input class="btn btn-primary bodyloading" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
+            <input class="btn btn-primary btn-round bodyloading" id="submit_editsubmit" name="settingsubmit" value="{lang save_changes}" type="submit">
           </dl>
         </form> 
       </div>
@@ -108,7 +108,7 @@
 	});
 	function addsystemtype( obj ){
 		var num=jQuery("#systemlogtable").find("tr").length-1; 
-		var html='<tr><td><input  type="hidden" name="settingnew[issystem]['+num+']" value="0" /><input class="form-control" type="text" name="settingnew[title]['+num+']" value="" /></td><td><input class="form-control" style="width:100px;" type="text" name="settingnew[mark]['+num+']" value="" /></td><td><input type="checkbox"  class="form-check-input" name="settingnew[is_open]['+num+']" value="1" checked /></td><td><a class="col-xs-2 img_delete" onclick="deletesystem(this);"  href="javascript:;"><span class="mdi mdi-delete lead dcolor" style="font-size:22px;"></span></a></td></tr>';
+		var html='<tr><td><input  type="hidden" name="settingnew[issystem]['+num+']" value="0" /><input class="form-control" type="text" name="settingnew[title]['+num+']" value="" /></td><td><input class="form-control" style="width:100px;" type="text" name="settingnew[mark]['+num+']" value="" /></td><td><input type="checkbox"  class="form-check-input" name="settingnew[is_open]['+num+']" value="1" checked /></td><td><a class="btn btn-outline-danger btn-sm" onclick="deletesystem(this);"  href="javascript:;"><span class="mdi mdi-delete"></span></a></td></tr>';
 		jQuery(obj).parents("tr").before(html);
 		return false;
 	}

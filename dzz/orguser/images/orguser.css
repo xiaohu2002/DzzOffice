@@ -49,42 +49,6 @@
 .classtree-topbar a:active{
 
 }
-
-.classtree-search{
-	position:absolute;
-	left:0;
-	top:0;
-	width:100%;
-	height:39px;
-	display:none;
-}
-.classtree-search input.form-control{
-	padding:5px 50px 5px 5px;
-	height:100%;
-	border:0;
-}
-.classtree-search .form-control:focus{
-	box-shadow:none;
-}
-.classtree-search>a{
-	position:absolute;
-	line-height: 40px;
-    width: 25px;
-    text-align: center;
-}
-.classtree-search>a:hover{
-	background-color:#F1f1f1;
-}
-.classtree-search .search{
-	position:absolute;
-	right:25px;
-	top:0px;
-}
-.classtree-search .delete{
-	position:absolute;
-	right:0;
-	top:0;
-}
 /*重定义图标*/
 
 .jstree-default .jstree-icon:empty {

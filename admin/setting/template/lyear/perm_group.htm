@@ -19,11 +19,14 @@
   .properties-list:hover .proper-set{
     display:inline-block;
   }
+  .proper-delhover{
+    display: inline-block;
+  }
 </style>
 <div class="middle-center-content"> 
   <!--地址栏结束-->
     <div class="new-button">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="myModalLabel" data-bs-target="#myjurisdic" aria-expanded="false"> {lang new_permissions} </button>
+      <button type="button" class="btn btn-primary btn-round" data-bs-toggle="modal" id="myModalLabel" data-bs-target="#myjurisdic" aria-expanded="false"> {lang new_permissions} </button>
       <div class="modal fade" id="myjurisdic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
           <div class="modal-content">
@@ -67,7 +70,7 @@
             <th>{lang name}</th>
             <th style="min-width: 120px;">{lang jurisdiction}</th>
             <th>启用</th>
-            <th width="140px">{lang operation}</th>
+            <th width="180px">{lang operation}</th>
           </tr>
         </thead>
         <tbody class="properties-con">
@@ -75,7 +78,7 @@
           <tr class="properties-list lead" id="perm_$v[id]">
             <td>
               <img src="dzz/images/extimg/folder.png">
-              <div class="badge badge-outline-primary">$v[pername]<!--{if $v['system']}--><span class="badge bg-secondary">{lang system_default}</span><!--{/if}--></div>
+              <h6 class="d-inline-flex">$v[pername]<!--{if $v['system']}--><span class="badge bg-primary ms-2">{lang system_default}</span><!--{/if}--></h6>
             </td>
             <td>
               <ul class="nav nav-pills text-primary">
@@ -92,14 +95,14 @@
             </td>
             <td>
               <!--{if !$v['system']}--> 
-              <span class="mdi mdi-pencil lead" onclick="editpermgroup('$v[id]')"  style="cursor:pointer;"></span>
-              <span class="mdi mdi-delete lead" onclick="delete_perm(this,'$v[id]')"></span>
+              <span class="mdi mdi-pencil lead dcolor" onclick="editpermgroup('$v[id]')"  style="cursor:pointer;"></span>
+              <span class="mdi mdi-delete lead dcolor" onclick="delete_perm(this,'$v[id]')"></span>
               <!--{/if}-->
               <div class="proper-delhover">
               <!--{if $v[default]}--> 
-              <span class="proper-perm proper-default"><button type="button" class="btn btn-primary" disabled=""><span class="mdi mdi-check perm-ok"></span>{lang default_permission}</button></span>
+              <span class="proper-perm proper-default"><button type="button" class="btn btn-primary btn-sm" disabled=""><span class="mdi mdi-check perm-ok"></span>{lang default_permission}</button></span>
               <!--{else}--> 
-              <span class="proper-perm proper-set" onclick="setDefault(this,'$v[id]')"><button type="button" class="btn btn-primary"><span class="mdi mdi-check perm-ok"></span>{lang set_default}</button></span> 
+              <span class="proper-perm proper-set" onclick="setDefault(this,'$v[id]')"><button type="button" class="btn btn-outline-primary btn-sm"><span class="mdi mdi-check perm-ok"></span>{lang set_default}</button></span> 
               <!--{/if}-->
             </div>
             </td>
@@ -124,13 +127,13 @@
               var perms = data['success']['perm'];
               var permstr = '';
               if (data['success']['default'] == 0) {
-                  var defaultstr = '<span class="proper-perm proper-set" onclick="setDefault(this,'+data['success']['id']+')"><button type="button" class="btn btn-primary"><span class="mdi mdi-check perm-ok"></span>{lang set_default}</button></span>';
+                  var defaultstr = '<span class="proper-perm proper-set" onclick="setDefault(this,'+data['success']['id']+')"><button type="button" class="btn btn-outline-primary btn-sm"><span class="mdi mdi-check perm-ok"></span>{lang set_default}</button></span>';
               } else {
                 var defaultstr = '<span class="proper-perm proper-default"><button type="button" class="btn btn-primary"><span class="mdi mdi-check perm-ok"></span>{lang default_permission}</button></span>';
                   jQuery('.properties-list').each(function(){
                       var idval = jQuery(this).attr('id');
                     idval = idval.replace('perm_','');
-                    jQuery(this).find('.proper-delhover').html('<span class="proper-perm proper-set" onclick="setDefault(this,'+idval+')"><button type="button" class="btn btn-primary"><span class="mdi mdi-check perm-ok"></span>{lang set_default}</button></span>')
+                    jQuery(this).find('.proper-delhover').html('<span class="proper-perm proper-set" onclick="setDefault(this,'+idval+')"><button type="button" class="btn btn-outline-primary btn-sm"><span class="mdi mdi-check perm-ok"></span>{lang set_default}</button></span>')
 
                   })
               }
@@ -139,14 +142,14 @@
               }
               var html ='<tr class="properties-list lead" id="perm_'+data['success']['id']+'"> ' +
                         '<td>' +
-                        '<img src="dzz/images/extimg/folder.png"><div class="badge badge-outline-primary">' + data['success']['pername'] + '</div></td>'+
-                        '<td><ul class="nav nav-pills">' +permstr+'</ul></td>' +
+                        '<img src="dzz/images/extimg/folder.png"><h6 class="d-inline-flex">' + data['success']['pername'] + '</h6></td>'+
+                        '<td><ul class="nav nav-pills text-primary">' +permstr+'</ul></td>' +
                         '<td>' +
                         '<div class="form-check form-switch"><input type="checkbox" onchange="edit_perm(this,'+data['success']['id']+')" class="form-check-input" checked="checked"/></div>' +
                         '</td>' +
                         '<td>' +
-                        '<span class="mdi mdi-pencil lead" onclick="editpermgroup('+data['success']['id']+')" style="cursor:pointer;"></span> ' +
-                        '<span class="mdi mdi-delete lead" onclick="delete_perm(this,'+data['success']['id']+')"></span><div class="proper-delhover">'+defaultstr+'</div>' +
+                        '<span class="mdi mdi-pencil lead dcolor" onclick="editpermgroup('+data['success']['id']+')" style="cursor:pointer;"></span> ' +
+                        '<span class="mdi mdi-delete lead dcolor" onclick="delete_perm(this,'+data['success']['id']+')"></span><div class="proper-delhover">'+defaultstr+'</div>' +
                         '</td>' +
                         '</tr>';
                 var elem = jQuery(html).appendTo('.properties-con').find('.js-switch');
@@ -185,11 +188,11 @@
                 jQuery('.properties-list').each(function () {
                     var id = jQuery(this).attr('id').replace('perm_', '');
                     if (id != pid) {
-                      jQuery(this).find('.proper-delhover').html('<span class="proper-perm proper-set" onclick="setDefault(this,' + id + ')"><button type="button" class="btn btn-primary"><span class="mdi mdi-check perm-ok"></span>{lang set_default}</button></span>');
+                      jQuery(this).find('.proper-delhover').html('<span class="proper-perm proper-set" onclick="setDefault(this,' + id + ')"><button type="button" class="btn btn-outline-primary btn-sm"><span class="mdi mdi-check perm-ok"></span>{lang set_default}</button></span>');
                     }
 
                 })
-                jQuery(obj).replaceWith('<span class="proper-perm proper-default"><button type="button" class="btn btn-primary" disabled=""><span class="mdi mdi-check perm-ok"></span>{lang default_permission}</button></span>');
+                jQuery(obj).replaceWith('<span class="proper-perm proper-default"><button type="button" class="btn btn-primary btn-sm" disabled=""><span class="mdi mdi-check perm-ok"></span>{lang default_permission}</button></span>');
                 showmessage('{lang set_default_permission_succeeded}','success','3000',1);
             } else {
                 showmessage('设置失败,请刷新重试','error','3000',1);

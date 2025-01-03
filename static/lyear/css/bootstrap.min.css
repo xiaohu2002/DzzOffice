@@ -12387,6 +12387,13 @@ fieldset:disabled .btn {
 .dcolor:hover {
     color: var(--bs-primary);
 }
+.copyright .dcolor {
+    color: rgba(var(--bs-body-color-rgb), 1);
+}
+
+.copyright .dcolor:hover {
+    color: var(--bs-primary);
+}
 
 .img-sitelogo{
 	max-height:32px;

@@ -69,14 +69,14 @@
 							<!--{else}--> 
 								<!--{if $value[package]}--> 
 									<!--{if $value["local_appinfo"]}-->
-									<button  class="btn btn-round btn-secondary" disabled data-mid="$value['mid']" title="{lang installed}">
+									<button  class="btn btn-round btn-secondary btn-sm" disabled data-mid="$value['mid']" title="{lang installed}">
 									{lang installed}
 									</button>
 									<!--{else}-->
-									<button class="btn btn-round btn-primary" style="white-space: inherit;" onclick="start_check_install('{MOD_URL}&op=install_app_ajax&operation=check_install&appid=$value[identifier]','{$value[mid]}','{$value[baseinfo]}');" id="upgrade_info_{$value[mid]}">{lang install_onekey}</button>
+									<button class="btn btn-round btn-primary btn-sm" style="white-space: inherit;" onclick="start_check_install('{MOD_URL}&op=install_app_ajax&operation=check_install&appid=$value[identifier]','{$value[mid]}','{$value[baseinfo]}');" id="upgrade_info_{$value[mid]}">{lang install_onekey}</button>
 									<!--{/if}--> 
 								<!--{else}--> 
-								<a class="btn btn-round btn-primary view-detail" title="$value[name]" href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]" >{lang view_detail}</a> 
+								<a class="btn btn-round btn-primary btn-sm view-detail" title="$value[name]" href="javascript:;" data-href="{$cloudurl}?mod=dzzmarket&op=ajax&do=view&mid=$value[mid]" >{lang view_detail}</a> 
 								<!--{/if}--> 
 							<!--{/if}--> 
 						</td>

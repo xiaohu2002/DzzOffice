@@ -42,9 +42,9 @@
 									<td width="60"><input type="checkbox" class="form-check-input" name="showincard[$fieldid]" <!--{if $value[showincard]}-->checked="checked"<!--{/if}-->value="1"></td>
 									<td width="60"><input type="checkbox" class="form-check-input" name="showinregister[$fieldid]" <!--{if $value[showinregister]}-->checked="checked"<!--{/if}-->value="1"></td>
 									<td width="100">
-										<a href="{MOD_URL}&op=profileset&fieldid=$fieldid" class="btn btn-outline-primary" title="{lang edit}"><i class="mdi mdi-pencil"></i></a>
-										<!--{if $value['customable']}-->&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href="{MOD_URL}&op=profileset&do=delete&fieldid=$fieldid" onclick="return confirm('{lang profileset_delete}')" class="ibtn glyphicon glyphicon-trash " title="{lang delete}"></a>
+										<a href="{MOD_URL}&op=profileset&fieldid=$fieldid" class="btn btn-outline-primary btn-sm" title="{lang edit}"><i class="mdi mdi-pencil"></i></a>
+										<!--{if $value['customable']}-->
+										<a href="{MOD_URL}&op=profileset&do=delete&fieldid=$fieldid" onclick="return confirm('{lang profileset_delete}')" class="btn btn-outline-danger btn-sm" title="{lang delete}"><i class="mdi mdi-delete"></i></a>
 										<!--{/if}-->
 									</td>
 								</tr>
@@ -55,7 +55,7 @@
 							</table>
 						</div>
 						<dl class="mb-3 d-grid">
-							<input class="btn btn-primary bodyloading" type="submit" value="{lang save_set}" />
+							<input class="btn btn-primary btn-round bodyloading" type="submit" value="{lang save_set}" />
 						</dl>
 					</form>
 				</div>

@@ -43,7 +43,7 @@
                 var perms = data['success']['perm'];
                 var permstr = '';
                 if (data['success']['default'] == 0) {
-                    var defaultstr = '<span class="proper-perm proper-set" onclick="setDefault(this,' + data['success']['id'] + ')"><button type="button" class="btn btn-primary"><span class="mdi mdi-check perm-ok"></span>设为默认</button></span> ';
+                    var defaultstr = '<span class="proper-perm proper-set" onclick="setDefault(this,' + data['success']['id'] + ')"><button type="button" class="btn btn-outline-primary btn-sm"><span class="mdi mdi-check perm-ok"></span>设为默认</button></span> ';
                 } else {
                     var defaultstr = '<span class="proper-perm proper-default"><span class="mdi mdi-check perm-ok"></span>默认权限</span>';
                 }
@@ -55,7 +55,7 @@
                     jQuery('.properties-list').each(function () {
                         var idval = jQuery(this).attr('id');
                         idval = idval.replace('perm_', '');
-                        jQuery(this).find('.proper-delhover').html('<span class="proper-perm proper-set" onclick="setDefault(this,' + idval + ')"><button type="button" class="btn btn-primary"><span class="mdi mdi-check perm-ok"></span>设为默认</button></span>')
+                        jQuery(this).find('.proper-delhover').html('<span class="proper-perm proper-set" onclick="setDefault(this,' + idval + ')"><button type="button" class="btn btn-outline-primary btn-sm"><span class="mdi mdi-check perm-ok"></span>设为默认</button></span>')
 
                     })
                 }
@@ -64,14 +64,14 @@
                 }
                 var html ='<tr class="properties-list lead" id="perm_'+data['success']['id']+'"> ' +
                       '<td>' +
-                      '<img src="dzz/images/extimg/folder.png"><div class="badge badge-outline-primary">'+data['success']['pername']+'</div></td>'+
+                      '<img src="dzz/images/extimg/folder.png"><h6 class="d-inline-flex">'+data['success']['pername']+'</h6></td>'+
                       '<td><ul class="nav nav-pills text-primary">' +permstr+'</ul></td>' +
                       '<td>' +
                       '<div class="form-check form-switch"><input type="checkbox" onchange="edit_perm(this,'+data['success']['id']+')" class="form-check-input" checked="checked"/></div>' +
                       '</td>' +
                       '<td>' +
-                      '<span class="mdi mdi-pencil lead" onclick="editpermgroup('+data['success']['id']+')" style="cursor:pointer;"></span> ' +
-                      '<span class="mdi mdi-delete lead" onclick="delete_perm(this,'+data['success']['id']+')"></span>'+defaultstr+' ' +
+                      '<span class="mdi mdi-pencil lead dcolor" onclick="editpermgroup('+data['success']['id']+')" style="cursor:pointer;"></span> ' +
+                      '<span class="mdi mdi-delete lead dcolor" onclick="delete_perm(this,'+data['success']['id']+')"></span>'+defaultstr+' ' +
                       '</td>' +
                       '</tr>';
                 jQuery('#perm_' + data['success']['id']).replaceWith(html);
