@@ -370,7 +370,9 @@ label {
 }
 
 button {
-    border-radius: 0
+    border-radius: 0;
+    border:1px solid transparent;
+    background-color:transparent;
 }
 
 button:focus:not(:focus-visible) {
@@ -6892,7 +6894,11 @@ fieldset:disabled .btn {
     background-color: #f0f0f0;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
     border-top-left-radius: calc(.3rem - 1px);
-    border-top-right-radius: calc(.3rem - 1px)
+    border-top-right-radius: calc(.3rem - 1px);
+    display:flex;
+    justify-content:space-between;
+    align-content:center;
+    align-items:center;
 }
 
 .popover-header:empty {

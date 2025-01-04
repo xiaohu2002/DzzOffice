@@ -479,5 +479,6 @@ $lang = array(
     'affirm_stop_sharing'=>'确定取消分享',
     'stop_sharing_success'=>'取消分享成功',
     'share_stop_sharing1'=>'<p class="text-center">取消分享后，该条分享记录将被删除，将无法再访问此分享链接。</p><p class="text-center">你确认要取消分享吗？</p>',
+    'global_appinfo_error'=>'全局应用信息错误！请检查Dzz版本与应用是否匹配。',
 );
 ?>
