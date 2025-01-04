@@ -1,14 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-.img_236{
-	max-width: 236px;
-}
-* html .img_236 {
-	width: expression(this.width > 236 && this.width>=this.height ? 236 : true);
-	
-}
 .market-container .appitem{
-	
 	background:#FFF;
 	width:236px;
 	height:330px;
@@ -16,6 +8,10 @@
 	position:relative;
 	border-radius:2px;
 	margin:8px;
+}
+.img_236 {
+	max-width: 236px;
+	max-height: 136px;
 }
 .ie8 .market-container .appitem{
 	border:1px solid #D9D9D7;
@@ -78,64 +74,31 @@
 	padding-bottom: 8px;
 	border-bottom: 1px solid #eee;
 }
-.color-block-1 {
-	background: #B82F68;
-}
-.color-block-2 {
-	background: #DB4B00;
-}
-.color-block-3 {
-	background: #BA4B3A;
-}
-.color-block-4 {
-	background: #009BCB;
-}
-.color-block-5 {
-	background: #37B298;
-}
-.color-block-6 {
-	background: #F1C42C;
-}
-.color-block-7 {
-	background: #7BBA39;
-}
-.color-block-8 {
-	background: #7938BA;
-}
-.color-block-9 {
-	background: #3850BA;
-}
-.color-block-10 {
-	background: #51CB8F;
-}
 
 .price-container p{ margin:0 0 5px 0}
-
-
-
-.document-container {
-	background:#FFF;
-}
 
 .document-header{
 	padding:0;
 	position:relative;
 	margin:0;
-	border-bottom:1px solid #DDD;
-	min-height:137px;
-	text-shadow: 0 1px 0 rgba(0,0,0,.1);
-	background-color: #6f5499;
-	background-image: -webkit-gradient(linear,left top,left bottom,from(#563d7c),to(#6f5499));
-	background-image: -webkit-linear-gradient(top,#563d7c 0,#6f5499 100%);
-	background-image: -o-linear-gradient(top,#563d7c 0,#6f5499 100%);
-	background-image: linear-gradient(to bottom,#563d7c 0,#6f5499 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#563d7c', endColorstr='#6F5499', GradientType=0);
-	background-repeat: repeat-x;
-	color: #cdbfe3;
-	border-radius:2px 2px 0 0;
+	background-color: rgba(var(--bs-light-rgb), 1);
+	border:1px solid #dee2e6;
+	border-radius:.3rem;
 }
-.ie8 .document-header{
-	min-height:135px;
+.price-container .label-success{
+	font-weight:300;
+	border-radius:var(--radius);
+	background-color:rgba(var(--bs-primary-rgb), 1);
+	display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: .75em;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
 }
 .document-header .img-container{
 	border-radius:2px 0 0 0;
@@ -147,6 +110,8 @@
 	padding: 0px 0 10px 246px;
 	line-height:30px;
 	min-width:500px;
+	display: flex;
+	flex-wrap:wrap;
 }
 .ie8 .document-header .header-info{
 	min-width:150px;
@@ -154,7 +119,6 @@
 .document-header .header-info .appname{
 	font-size:16px;
 	line-height:35px;
-	color:#FFF;
 }
 .download-container{
 	position:absolute;
@@ -166,11 +130,9 @@
 	width:100%;
 	margin:0;
 	border:none;
-	background:#FFF;
 	box-shadow:none;
 	overflow-x:hidden;
 }
-
 
 .document-container .document-body {
 	padding: 20px 0 0 0;
@@ -178,8 +140,6 @@
 	overflow-x:hidden;
 	position:relative;
 	line-height:2;
-	
-	
 }
 .document-container .document-body img.dzz-image{
 	max-width: 100%;
@@ -290,6 +250,7 @@ span.num {
     overflow: hidden;
     text-overflow: ellipsis;
 	cursor:default;
+	font-size: 14px;
 	max-width:300px;
 }
 .btn-top{
