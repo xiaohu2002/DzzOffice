@@ -1730,7 +1730,7 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 	} else {
 		s += '<div class="modal-body"><div class="' + (mode == 'alert' ? 'alert_error' : (mode == 'right' ? 'alert_right' : (mode == 'info' ? 'alert_info':''))) + '">' + msg + '</div></div>';
 		s += '<div class="modal-footer">' + (leftmsg ? '<span class="muted pull-left">' + leftmsg + '</span>' : '') + (showconfirm ? '<button id="fwin_dialog_submit" value="true" class="btn btn-outline-primary">'+confirmtxt+'</button>' : '');
-		s += mode == 'confirm' ? '<button id="fwin_dialog_cancel" value="true" class="btn btn-outline-danger" onclick="hideMenu(\'fwin_dialog\', \'dialog\')">'+canceltxt+'</button>' : '';
+		s += mode == 'confirm' ? '<button id="fwin_dialog_cancel" value="true" class="btn btn-outline-secondary" onclick="hideMenu(\'fwin_dialog\', \'dialog\')">'+canceltxt+'</button>' : '';
 		s += '</div>';
 	}
 	menuObj.innerHTML = s;

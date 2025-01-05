@@ -183,17 +183,17 @@
             </li>
             <!--{if !$_G['setting']['bbclosed'] || !$_G['adminid'] ==0}-->
             <li>
-            <a href="javascript:;" id="desktop_app" data-href="index.php?mod=system&template=1&op=app_ajax&operation=app" class="app_popup_icon nav-link js-popbox" role="button" data-bs-container="body" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover"><span class="mdi mdi-apps fs-4"></span></a>
+            <a href="javascript:;" id="desktop_app" data-href="index.php?mod=system&template=1&op=app_ajax&operation=app" class="app_popup_icon nav-link js-popbox" role="button" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover"><span class="mdi mdi-apps fs-4"></span></a>
             </li>
             <li>
-              <a href="javascript:;" id="dzz_notification" data-href="index.php?mod=system&template=1&op=notification&filter=new" class="animations-box position-relative nav-link navbar-notice js-popbox" role="button" data-bs-container="body" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover">
+              <a href="javascript:;" id="dzz_notification" data-href="index.php?mod=system&template=1&op=notification&filter=new" class="animations-box position-relative nav-link navbar-notice js-popbox" role="button" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover">
               <span class="mdi mdi-bell-outline fs-4"></span>
               <span class="position-absolute translate-middle badge bg-danger rounded-pill d-none">&nbsp;</span>
               </a>
             </li>
             <!--{/if}-->
             <li>
-              <a href="javascript:;" class="nav-link js-popbox" data-href="user.php?mod=space&template=1&op=navmenu&modname={MOD_NAME}" role="button" data-bs-container="body" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover">
+              <a href="javascript:;" class="nav-link js-popbox" data-href="user.php?mod=space&template=1&op=navmenu&modname={MOD_NAME}" role="button" data-bs-placement="bottom" data-bs-trigger="focus" data-auto-adapt="true" data-bs-toggle="popover">
                 <!--{if $_G['uid']}-->
                 {eval echo avatar_block($_G['uid']);}
                 <!--{else}-->
