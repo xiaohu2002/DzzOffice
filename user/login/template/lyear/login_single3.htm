@@ -1,11 +1,6 @@
 <!--{eval $bodyClass = 'bg-white overflow-x-hidden';}-->
 <!--{template lyear:header_simple}-->
 <script type="text/javascript" src="user/scripts/login.js?{VERHASH}"></script>
-<style type="text/css">
-	.dcolor {
-		color: rgba(var(--bs-secondary-rgb), 1);
-	}
-</style>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{eval $loginimg = $_G['setting']['loginset']['img'];if (!$loginimg) $loginimg = MOD_PATH.'/images/login.jpg';}-->
 <!--背景层-->
@@ -61,7 +56,7 @@
 					<a class="pull-right" href="user.php?mod=login&op=logging&action=lostpasswd">{lang getpassword}</a>
 				</div>
 			</div>
-			<div class="third-wrapper clearfix">
+			<div class="mb-3 third-wrapper clearfix">
 				<!--{hook third_login}-->
 			</div>
 			<div class="mb-3 d-grid">

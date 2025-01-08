@@ -9,7 +9,7 @@
         <!--{template lyear:lyear_left}-->
       </nav>
       <div class="sidebar-footer">
-        <p class="copyright text-body">
+        <p class="copyright text-muted">
         <!--{template lyear:copyright}-->
         </p>
       </div>
@@ -33,6 +33,7 @@
         <div class="navbar-collapse collapse" id="navbarText" style="">
           <!--{template lyear:lyear_header_search}-->
           <ul class="navbar-right d-flex align-items-center">
+            <!--{template lyear:lyear_header_right}-->
             <!--切换主题配色-->
             <li class="dropdown dropdown-skin">
               <a data-bs-toggle="dropdown" class="nav-link">
@@ -202,14 +203,12 @@
               </a>
             </li>
           </ul>
-          
         </div>
       </div>
     </nav>
   </header>
   <script type="text/javascript">
   jQuery(document).ready(function(e) {
-  _header.init('{FORMHASH}');//初始化头部效果
   _notice.getNotificationCount();
   });
   _notice={};
@@ -227,11 +226,9 @@
   if(sum>0){
   jQuery('#dzz_notification>span.badge').html(sum).removeClass('d-none');
   jQuery('#dzz_notification>span.dzz').hide();
-  //_notice.flashTitle();
   }else{
   jQuery('#dzz_notification>span.badge').addClass('d-none');
   jQuery('#dzz_notification>span.dzz').show();
-  //_notice.flashTitle(1);
   }
   }
   _notice.flashTitle=function(flag){

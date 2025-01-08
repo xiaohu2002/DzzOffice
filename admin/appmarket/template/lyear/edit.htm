@@ -141,7 +141,7 @@
           <div class="row mb-3" id="perm_depart" <!--{if $app[ 'group']!=1}-->style="display:none"<!--{/if}-->>
             <label class="col-sm-2">{lang department_permissions}</label>
             <div class="col-sm-10">
-              <div id="orgids">
+              <div id="orgids"  class="d-flex flex-wrap">
                 <!--{loop $sel_org $value}-->
                 <button id="orgids_sl_$value[orgid]" type="button" class="btn btn-outline-secondary btn-sorg" data-val="$value['orgid']">
                   {eval echo avatar_group($value['orgid']);} $value[orgname] 

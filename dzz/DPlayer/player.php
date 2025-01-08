@@ -7,18 +7,18 @@
 	}
 </style>
 <div id="dplayer"></div>
-<script src="js/flv.min.js"></script>
-<script src="js/dash.all.min.js"></script>
-<script src="js/DPlayer.min.js"></script>
-<script src="js/hls.min.js"></script>
-<script src="js/dash.all.min.js"></script>
-<script src="js/webtorrent.min.js"></script>
+<script src="/dzz/DPlayer/images/flv.min.js"></script>
+<script src="/dzz/DPlayer/images/dash.all.min.js"></script>
+<script src="/dzz/DPlayer/images/DPlayer.min.js"></script>
+<script src="/dzz/DPlayer/images/hls.min.js"></script>
+<script src="/dzz/DPlayer/images/dash.all.min.js"></script>
+<script src="/dzz/DPlayer/images/webtorrent.min.js"></script>
 <script>
 const dp = new DPlayer({
     container: document.getElementById('dplayer'),
     screenshot: true,
     video: {
-        url: '<?php echo $_GET['url'] ?>',
+        url: '<?php echo urldecode($_GET['url']) ?>',
         type: '',
         customType: {
             shakaDash: function (video, player) {

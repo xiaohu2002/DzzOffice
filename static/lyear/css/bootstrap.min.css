@@ -3622,6 +3622,16 @@ fieldset:disabled .btn {
     border-color: #0d6efd
 }
 
+.btn-outline-primary:hover a{
+    color: #fff;
+}
+
+.btn-sorg {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
 .btn-check:focus+.btn-outline-primary,
 .btn-outline-primary:focus {
     box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .5)
@@ -7630,11 +7640,11 @@ fieldset:disabled .btn {
 .align-text-top {
     vertical-align: text-top !important
 }
-
+.pull-left,
 .float-start {
     float: left !important
 }
-
+.pull-right,
 .float-end {
     float: right !important
 }
@@ -8051,11 +8061,11 @@ fieldset:disabled .btn {
 .justify-content-start {
     justify-content: flex-start !important
 }
-
+.pull-right,
 .justify-content-end {
     justify-content: flex-end !important
 }
-
+.pull-center,
 .justify-content-center {
     justify-content: center !important
 }
@@ -12393,12 +12403,12 @@ fieldset:disabled .btn {
 .dcolor:hover {
     color: var(--bs-primary);
 }
-.copyright .dcolor {
-    color: rgba(var(--bs-body-color-rgb), 1);
+.text-muted .dcolor {
+    color: rgba(var(--bs-secondary-rgb), 1);
 }
 
-.copyright .dcolor:hover {
-    color: var(--bs-primary);
+.text-muted .dcolor:hover {
+    color: var(--bs-primary) !important;
 }
 
 .img-sitelogo{
@@ -12445,11 +12455,6 @@ fieldset:disabled .btn {
 .seccode-wrapper .mdi.mdi-close-circle {
     color: #FF0000;
 }
-
-.pull-right {
-    justify-content: flex-end !important;
-}
-
 
 .panel {
 	margin-bottom: 20px;

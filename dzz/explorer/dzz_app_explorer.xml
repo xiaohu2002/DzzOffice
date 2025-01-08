@@ -389,13 +389,13 @@ gInxqxpwkXzyUE9c0IfjVyOwF9hbW8ex0dJeo44ASdgSLsAJWIH++7VEUc9Q9gEdtXVEz4Q2ub0K
 			<item id="nodup"><![CDATA[0]]></item>
 			<item id="identifier"><![CDATA[explorer]]></item>
 			<item id="app_path"><![CDATA[dzz]]></item>
-			<item id="version"><![CDATA[2.04]]></item>
+			<item id="version"><![CDATA[2.05]]></item>
 			<item id="extra">
 				<item id="installfile"><![CDATA[install.php]]></item>
 				<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
 			</item>
 			<item id="mid"><![CDATA[27]]></item>
 		</item>
-		<item id="version"><![CDATA[2.0]]></item>
+		<item id="version"><![CDATA[2.3.1]]></item>
 	</item>
 </root>

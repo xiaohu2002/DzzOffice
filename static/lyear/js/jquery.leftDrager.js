@@ -11,10 +11,10 @@
 	$.fn.leftDrager_layout = function(resizefunc,options)
 	{
 		var opt={	
-					'cookieid':null, //记忆左侧大小和关闭状态的cookie标志符
-					'cookietime':60*60*24*30,
-					'leftHide':700
-			}
+			'cookieid':null, //记忆左侧大小和关闭状态的cookie标志符
+			'cookietime':60*60*24*30,
+			'leftHide':700
+		}
 	  	options=$.extend(opt,options);
 		var $this=$(this);
 		var $leftContainer=$('.bs-left-container');
@@ -64,7 +64,6 @@
 				$topContainer.css('paddingLeft',0);
 				$this.css({'left':0,'cursor':'default'});
 				if(options.cookieid && !nocookie) setcookie(options.cookieid+'_isshow','hide',options.cookietime);
-				jQuery('.left-drager-op').addClass('left-drager-op2');
 			}else if(flag==='show'){
 				$leftContainer.css({width:left,'display':'block'});
 				$mainContainer.css('paddingLeft',document.documentElement.clientWidth<opt.leftHide?0:left);
@@ -72,7 +71,6 @@
 				$topContainer.css('paddingLeft',document.documentElement.clientWidth<opt.leftHide?0:left);
 				$this.css({'left':left,'cursor':'w-resize'});
 				if(options.cookieid && !nocookie) setcookie(options.cookieid+'_isshow','show',options.cookietime);
-				jQuery('.left-drager-op').removeClass('left-drager-op2');
 				
 			}else{
 				if($leftContainer.width()<10 || $leftContainer.is(':hidden')){
@@ -143,12 +141,8 @@
 		};
 		
 		var init=function(){
-			Layout();				
-			$this.find('.left-drager-op').off('click').on('click',function(){
-				dragerClick();
-			});
+			Layout();
 			jQuery('.lyear-aside-toggler').off('click').on('click',function(){
-				
 				if($leftContainer.width()<10 || $leftContainer.is(':hidden')){
 					dragerClick('hide');
 				}else{

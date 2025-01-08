@@ -8,17 +8,12 @@
   <div class="modal-body">
   <!--{/if}-->
     <!--{loop $list $value}-->
-    <!--{template thread_item}-->
+	<ul class="list-unstyled lyear-message-list" id="comment_container" style="">
+		<!--{template lyear:lyear_thread_item}-->
+	</ul>
     <!--{/loop}-->
     <!--{if $multi}--><div class="comment-page clearfix">$multi</div><!--{/if}-->	
     <script type="text/javascript" reload="1">
-		  jQuery(document)
-			.on('mouseenter','.cmt_fed',function(){
-				jQuery(this).addClass('hover_cmt_fed');
-			})
-			.on('mouseleave','.cmt_fed',function(){
-				jQuery(this).removeClass('hover_cmt_fed');
-			});
 		jcLoader().load({  
 				type:'css', 
 				ids:'js_dzzthumb.css', 
@@ -49,12 +44,14 @@
   </div>
   <div class="modal-body">
   <!--{/if}-->
+  <ul class="list-unstyled lyear-message-list" id="comment_container" style="">
    <!--{if $value['pcid']>0}-->
     {eval $value1=$value}
-     <!--{template reply_item}-->
+     <!--{template lyear:lyear_reply_item}-->
     <!--{else}-->
-      <!--{template thread_item}-->
+      <!--{template lyear:lyear_thread_item}-->
     <!--{/if}-->
+</ul>
 	<!--{if $modal}-->
 	</div>
 	<div class="modal-footer">
@@ -65,7 +62,7 @@
 <!--{elseif $do == 'getreplys'}-->
 	<!--{template common/header_ajax}-->
     <!--{loop $list $value1}-->
-      <!--{template reply_item}-->
+      <!--{template lyear:lyear_reply_item}-->
     <!--{/loop}-->	
     <script type="text/javascript" reload="1">
 	<!--{if $limit=='0'}-->
@@ -87,7 +84,7 @@
 	   });
 	 <!--{else}-->  
 	  jQuery('#comment_{$cid}').find('.txt_cfed a').on('click',function(){
-			 ajaxget('{DZZSCRIPT}?mod=comment&op=ajax&do=getreplys&cid=$cid','reply_list_$cid','reply_list_$cid');
+			 ajaxget('{DZZSCRIPT}?mod=comment&op=ajax&template=1&do=getreplys&cid=$cid','reply_list_$cid','reply_list_$cid');
 			 return false;
 	  });
 	 <!--{/if}-->
@@ -96,14 +93,14 @@
    <!--{template common/footer_ajax}-->
 <!--{elseif $do == 'getReplyForm'}-->
 	<!--{template common/header_ajax}-->
-	<!--{template reply_form}-->
+	<!--{template lyear:lyear_reply_form}-->
     <!--{template common/footer_ajax}-->
 <!--{elseif $do == 'getPublishForm'}-->
 	<!--{template common/header_ajax}-->
-    <!--{template publish_form}-->
+    <!--{template lyear:lyear_publish_form}-->
     <!--{template common/footer_ajax}-->
 <!--{elseif $do == 'edit'}-->
 	<!--{template common/header_ajax}-->
-    <!--{template edit_form}-->
+    <!--{template lyear:lyear_edit_form}-->
     <!--{template common/footer_ajax}-->
 <!--{/if}--> 

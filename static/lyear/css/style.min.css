@@ -3964,7 +3964,12 @@ li.lyear-skin-li .form-check:first-child .form-check-input:checked+label::after 
     .table-responsive-sm>.table>thead>tr>td,
     .table-responsive-sm>.table>thead>tr>th {
         white-space: nowrap;
-    }    
+    }
+	.gallery-grid {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+    }
     .pagination .page-item {
         display: none;
     }
@@ -4432,13 +4437,13 @@ body[data-theme='dark'] .jconfirm .jconfirm-box,
 [data-theme|='translucent'] .datepicker.datepicker-dropdown {
     color: var(--bs-white);
 }
+[data-theme='dark'] .text-muted .dcolor {
+	color: rgba(var(--bs-secondary-rgb), 1);
+}
 [data-theme='dark'] .nav-link,
 [data-theme='dark'] .dcolor,
 [data-theme='dark'] .nav-stacked>li>a {
 	color: #fff;
-}
-[data-theme='dark'] .dcolor:hover {
-	color: var(--bs-primary);
 }
 [data-theme='dark'] .nav-pills .nav-link.active {
 	background: rgba(var(--bs-white-rgb), .65);
@@ -4698,6 +4703,7 @@ body[data-theme='translucent-pink'],
 [data-theme|='translucent'] .navbar-light .navbar-nav .nav-link.disabled {
     color: rgba(var(--bs-white-rgb), .65);
 }
+[data-theme|='translucent'] .text-body,
 [data-theme|='translucent'] .text-muted {
     color: rgba(var(--bs-white-rgb), .45)!important;
 }
@@ -5379,7 +5385,6 @@ button.input-search-drop {
 }
 
 .input-search .header-closebutton:hover {
-    background: RGBA(255, 255, 255, .8);
     opacity: 1;
 }
 

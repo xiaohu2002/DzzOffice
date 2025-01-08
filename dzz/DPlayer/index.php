@@ -27,7 +27,7 @@ if($_GET['path']){
   }
   $src=$_G['siteurl'].'index.php?mod=io&op=getStream&path='.$_GET['path'].'&filename='.$meta['name'];
 }elseif($_GET['url']){
-    $src=$_GET['url'];
-  }
+  $src=urldecode($_GET['url']);
+}
 include template('index');
 ?>

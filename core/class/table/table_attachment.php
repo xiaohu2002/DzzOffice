@@ -63,6 +63,7 @@ class table_attachment extends dzz_table
 		}*/
 		return (defined('DZZSCRIPT')?DZZSCRIPT:'index.php').'?mod=io&op=thumbnail&width='.$width.'&height='.$height.'&original='.$original.'&path='.dzzencode($path);
 	}
+
 	public function get_total_filesize() {
 		$attachsize = 0;
 		$attachsize = DB::result_first("SELECT SUM(filesize) FROM ".DB::table($this->table));

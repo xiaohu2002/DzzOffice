@@ -1578,28 +1578,28 @@ function showTip(ctrlobj,pos,msg) {
 	var tip_classname='';
 	switch(pos){
 		case '12':
-			tip_classname='tip_4';
+			tip_classname='tip_4 bs-popover-top';
 			break;
 		case '21':
-			tip_classname='tip_3';
+			tip_classname='tip_3 bs-popover-bottom';
 			break;
 		case '43':
-			tip_classname='tip_1';
+			tip_classname='tip_1 bs-popover-bottom';
 			break;
 		case '34':
-			tip_classname='tip_2';
+			tip_classname='tip_2 bs-popover-left';
 			break;
 		default:
 			pos='12';
-			tip_classname='tip_4';
+			tip_classname='tip_4 bs-popover-top';
 	}
 	menuid = ctrlobj.id + '_menu';
 	if(!document.getElementById(menuid)) {
 		var div = document.createElement('div');
 		div.id = ctrlobj.id + '_menu';
-		div.className = 'tip '+tip_classname;
+		div.className = 'popover tip '+tip_classname;
 		div.style.display = 'none';
-		div.innerHTML = '<div class="tip_horn"></div><div class="tip_c">' + (msg?msg:ctrlobj.getAttribute('tip')) + '</div>';
+		div.innerHTML = '<div class="popover-arrow"></div><div class="popover-header">' + (msg?msg:ctrlobj.getAttribute('tip')) + '</div>';
 		document.getElementById('append_parent').appendChild(div);
 		div.onmouseover=function(){
 			if(tipTimer[this.id]) window.clearTimeout(tipTimer[this.id]);
@@ -1613,48 +1613,6 @@ function showTip(ctrlobj,pos,msg) {
 	
 	showMenu({'mtype':'prompt','ctrlid':ctrlobj.id,'pos':pos+'!','duration':3,'zindex':JSMENU['zIndex']['prompt']});
 	
-}
-
-function showPrompt(ctrlid, evt, msg, timeout, classname) {
-	var menuid = ctrlid ? ctrlid + '_pmenu' : 'ntcwin';
-	var duration = timeout ? 0 : 3;
-	if(document.getElementById(menuid)) {
-		document.getElementById(menuid).parentNode.removeChild(document.getElementById(menuid));
-	}
-	var div = document.createElement('div');
-	div.id = menuid;
-	div.className = !classname ? (ctrlid ? 'tip tip_js' : 'ntcwin') : classname;
-	div.style.display = 'none';
-	document.getElementById('append_parent').appendChild(div);
-	if(ctrlid) {
-		msg = '<div id="' + ctrlid + '_prompt"><div class="tip_horn"></div><div class="tip_c">' + msg + '</div>';
-	} else {
-		msg = '<table cellspacing="0" cellpadding="0" class="popupcredit"><tr><td class="pc_l">&nbsp;</td><td class="pc_c"><div class="pc_inner">' + msg +
-			'</td><td class="pc_r">&nbsp;</td></tr></table>';
-	}
-	div.innerHTML = msg;
-	if(ctrlid) {
-		if(!timeout) {
-			evt = 'click';
-		}
-		if(document.getElementById(ctrlid)) {
-			if(document.getElementById(ctrlid).evt !== false) {
-				var prompting = function() {
-					showMenu({'mtype':'prompt','ctrlid':ctrlid,'evt':evt,'menuid':menuid,'pos':'210'});
-				};
-				if(evt == 'click') {
-					document.getElementById(ctrlid).onclick = prompting;
-				} else {
-					document.getElementById(ctrlid).onmouseover = prompting;
-				}
-			}
-			showMenu({'mtype':'prompt','ctrlid':ctrlid,'evt':evt,'menuid':menuid,'pos':'210','duration':duration,'timeout':timeout,'zindex':JSMENU['zIndex']['prompt']});
-			document.getElementById(ctrlid).unselectable = false;
-		}
-	} else {
-		showMenu({'mtype':'prompt','pos':'00','menuid':menuid,'duration':duration,'timeout':timeout,'zindex':JSMENU['zIndex']['prompt']});
-		document.getElementById(menuid).style.top = (parseInt(document.getElementById(menuid).style.top) - 100) + 'px';
-	}
 }
 
 var showDialogST = null;

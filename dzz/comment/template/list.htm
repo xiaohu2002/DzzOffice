@@ -1,5 +1,5 @@
 <!--{template lyear:header_simple_start}-->
-<link href="{MOD_PATH}/images/comment.css?{VERHASH}" rel="stylesheet" media="all">
+<link href="{MOD_PATH}/images/lyear_comment.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="static/css/smilies.css?{VERHASH}"rel="stylesheet" media="all">
 <link rel="stylesheet" href="static/lyear/js/bootstrap-table/bootstrap-table.min.css?{VERHASH}">
 <link href="static/dzzthumb/jquery.dzzthumb.css?{VERHASH}" rel="stylesheet" media="all">
@@ -298,14 +298,14 @@
         return html;
     }
 	function edit(row) {
-		showWindow('publish_edit_'+row.cid,DZZSCRIPT+'?mod=comment&op=ajax&do=edit&cid='+row.cid+'&allowattach=3&allowat=1&allowsmiley=1');
+		showWindow('publish_edit_'+row.cid,'{MOD_URL}&op=ajax&do=edit&template=1&cid='+row.cid+'&allowattach=3&allowat=1&allowsmiley=1');
     }
 	function viewid(row) {
-		showWindow('publish_view_'+row.fid,'{DZZSCRIPT}?mod=comment&op=ajax&do=getcomment&modal=1&idtype='+row.idtype+'&id='+row.fid+'&allowattach=3&allowat=1&allowsmiley=1','get',0);
+		showWindow('publish_view_'+row.fid,'{MOD_URL}&op=ajax&do=getcomment&template=1&modal=1&idtype='+row.idtype+'&id='+row.fid+'&allowattach=3&allowat=1&allowsmiley=1','get',0);
     }
 	// 操作方法 - 预览
     function view(row) {
-		showWindow('publish_view_'+row.cid,'{DZZSCRIPT}?mod=comment&op=ajax&do=getcommentbycid&modal=1&cid='+row.cid+'&allowattach=3&allowat=1&allowsmiley=1','get',0);
+		showWindow('publish_view_'+row.cid,'{MOD_URL}&op=ajax&do=getcommentbycid&template=1&modal=1&cid='+row.cid+'&allowattach=3&allowat=1&allowsmiley=1','get',0);
     }
     // 操作方法 - 删除
 	function delUser(row) {
@@ -360,7 +360,7 @@
 	});
 
 </script>
-<script src="dzz/comment/scripts/comment.js?{VERHASH}" type="text/javascript"></script> 
+<script src="dzz/comment/scripts/lyear_comment.js?{VERHASH}" type="text/javascript"></script> 
 <script type="text/javascript" src="static/js/smilies.js?{VERHASH}"></script> 
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included --> 
 <script type="text/javascript" src="static/jquery_file_upload/jquery.ui.widget.js?{VERHASH}"></script> 

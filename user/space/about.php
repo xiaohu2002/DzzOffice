@@ -23,12 +23,12 @@ if($identify && file_exists($appConfig)){
 	if(isset($config['about'])){
 		$about=$config['about'];
 		$appinfo=C::t('app_market')->fetch_by_allidentifier($identify);
-		if($appinfo['appico']){
-			$about['logo']=$_G['setting']['attachurl'].$appinfo['appico'];
-		} else {
-			$about['logo']=$sitelogo;
+		if(empty($about['logo'])){
+			if($appinfo['appico']){
+				$about['logo']=$_G['setting']['attachurl'].$appinfo['appico'];
+			}
 		}
-		if($appinfo['version']) $about['version']=$appinfo['version'];
+		if(empty($about['version'])) $about['version']=$appinfo['version'];
 	}
 }
 if(empty($about['name_en'])){
