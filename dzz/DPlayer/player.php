@@ -7,12 +7,12 @@
 	}
 </style>
 <div id="dplayer"></div>
-<script src="/dzz/DPlayer/images/flv.min.js"></script>
-<script src="/dzz/DPlayer/images/dash.all.min.js"></script>
-<script src="/dzz/DPlayer/images/DPlayer.min.js"></script>
-<script src="/dzz/DPlayer/images/hls.min.js"></script>
-<script src="/dzz/DPlayer/images/dash.all.min.js"></script>
-<script src="/dzz/DPlayer/images/webtorrent.min.js"></script>
+<script src="images/flv.min.js"></script>
+<script src="images/dash.all.min.js"></script>
+<script src="images/DPlayer.min.js"></script>
+<script src="images/hls.min.js"></script>
+<script src="images/dash.all.min.js"></script>
+<script src="images/webtorrent.min.js"></script>
 <script>
 const dp = new DPlayer({
     container: document.getElementById('dplayer'),
