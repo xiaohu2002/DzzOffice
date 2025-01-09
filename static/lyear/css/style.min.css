@@ -3398,6 +3398,7 @@ hr.dropdown-divider {
 	display: flex;
 	height: var(--header-height);
 	align-items: center;
+	padding: 5px;
 }
 
 .sidebar-header:before,
@@ -3411,11 +3412,15 @@ hr.dropdown-divider {
 	padding: 5px;
 }
 .sidebar-header i {
+	padding:8px;
+}
+
+.brhover {
 	border-radius:50%;
 	padding:8px;
 }
 
-.sidebar-header i:hover {
+.brhover:hover {
 	background-color:rgba(0, 0, 0, 0.071);
 }
 
