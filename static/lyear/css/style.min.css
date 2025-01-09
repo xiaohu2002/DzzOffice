@@ -4093,6 +4093,8 @@ body[data-theme='dark'] .jconfirm .jconfirm-box,
 [data-theme='dark'] .card,
 [data-theme='dark'] .fwinmask,
 [data-theme='dark'] .dtheme,
+[data-theme='dark'] .edui-default .edui-editor,
+[data-theme='dark'] .edui-default .edui-editor-toolbarboxouter,
 [data-theme='dark'] .nav-tabs .nav-link.active,
 [data-theme='dark'] .nav-tabs .nav-item.show .nav-link,
 [data-theme='dark'] .bootstrap-table.fullscreen {
@@ -4154,6 +4156,8 @@ body[data-theme='dark'] .jconfirm .jconfirm-box,
 [data-theme='dark'] .offcanvas-top,
 [data-theme='dark'] .offcanvas-bottom,
 [data-theme='dark'] .popover-header,
+[data-theme='dark'] .edui-default .edui-editor,
+[data-theme='dark'] .edui-default .edui-editor-toolbarboxouter,
 [data-theme='dark'] .sidebar-footer {
     border-color: rgba(var(--bs-white-rgb), 0.125);
 }
@@ -4495,6 +4499,8 @@ body[data-theme|='translucent'] .lyear-timeline-item-action {
     backdrop-filter: blur(10px);
 }
 [data-theme|='translucent'] .fwinmask,
+[data-theme|='translucent'] .edui-default .edui-editor,
+[data-theme|='translucent'] .edui-default .edui-editor-toolbarboxouter,
 [data-theme|='translucent'] .modal-content {
     background: rgba(var(--bs-black-rgb), .125);
     backdrop-filter: blur(10px);
@@ -4623,6 +4629,8 @@ body[data-theme='translucent-pink'],
 [data-theme|='translucent'] .card>.list-group,
 [data-theme|='translucent'] .lyear-notifications-title,
 [data-theme|='translucent'] .nav-tabs,
+[data-theme|='translucent'] .edui-default .edui-editor,
+[data-theme|='translucent'] .edui-default .edui-editor-toolbarboxouter,
 [data-theme|='translucent'] .popover-header {
     border-color: rgba(var(--bs-white-rgb), 0.125);
 }

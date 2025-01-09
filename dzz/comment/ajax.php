@@ -17,9 +17,6 @@ $template = isset($_GET['template']) ? $_GET['template'] : '';
 $guests = array('getcomment', 'getThread', 'getNewThreads', 'getReply', 'getReplys', 'getUserToJson');
 if (empty($_G['uid']) && !in_array($do, $guests)) {
 	include  template('common/header_ajax');
-	/*echo "<script type=\"text/javascript\">";
-	 echo "try{top._login.logging();}catch(e){}";
-	 echo "</script>";	*/
 	echo '&nbsp;&nbsp;&nbsp;<a href="user.php?mod=login" class="btn btn-primary">'.lang('login').'</a>';
 	if( $_G['setting']['regstatus']>0){
 		echo '&nbsp;&nbsp;&nbsp;<a href="user.php?mod=register" class="btn btn-success">'.lang('register').'</a>';
@@ -52,7 +49,7 @@ if (submitcheck('replysubmit')) {
 	$setarr['allowattach'] = intval($_GET['allowattach']);
 	$setarr['allowat'] = intval($_GET['allowat']);
 	$setarr['allowsmiley'] = intval($_GET['allowsmiley']);
-	$setarr['avatar']=avatar_block($setarr['authorid'],'','img-avatar img-avatar-48');
+	$setarr['avatar']=avatar_block($setarr['authorid']);
 	if ($_G['adminid'] == 1 || $_G['uid'] == $setarr['authorid'])
 		$setarr['haveperm'] = 1;
 	showmessage('comment_success', DZZSCRIPT . '?mod=comment', array('data' => rawurlencode(json_encode($setarr))));

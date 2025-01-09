@@ -2,7 +2,7 @@
 function feed_publish(arr,tid,targetid){
 var html=''
 	html+='<li id="comment_'+arr['cid']+'" class="itemfeed" feed-id="'+arr['cid']+'" style="display:none">';
-  	html+='	<div class="d-flex lyear-message-item"> <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" target="_blank">'+arr['avatar']+'</a>';
+  	html+='	<div class="d-flex lyear-message-item"> <a href="user.php?uid='+arr['authorid']+'" class="img-avatar-48" title="'+arr['author']+'" hidefocus="true" target="_blank">'+arr['avatar']+'</a>';
   	html+='	<div class="flex-grow-1 ms-2">';
     html+=' <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" target="_blank"><strong>'+arr['author']+'</strong></a>';
     html+=' <div class="text-muted">'+arr['dateline']+' '+arr['xtllq']+' '+arr['ip']+'<span class="float-end"><a class="dcolor" hidefocus="true" class="dcolor" href="javascript:void(0);" onclick="feed_delete(\''+arr['cid']+'\',\'comment_'+arr['cid']+'\')"><i class="mdi mdi-delete"></i>&nbsp;'+__lang.delete+'</a>'+' '+'<a class="dcolor" hidefocus="true" class="dcolor" href="javascript:void(0);" onclick="getReplyForm(\''+arr['cid']+'\',\'0\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\');"><i class="mdi mdi-reply"></i>&nbsp;'+__lang.reply+'</a></span></div><p>'+arr['message']+'</p>';
@@ -61,7 +61,7 @@ function feed_reply(arr){
  var html='';
 	 html+='<li id="comment_'+arr['cid']+'" class="cmt_fed">';
      html+='   <div class="d-flex lyear-message-item">';
-     html+='   <a href="user.php?uid='+arr['authorid']+'" title="" hidefocus="true" target="_blank"> '+arr['avatar']+' </a>';
+     html+='   <a href="user.php?uid='+arr['authorid']+'" class="img-avatar-48" title="" hidefocus="true" target="_blank"> '+arr['avatar']+' </a>';
      html+='     <div class="flex-grow-1 ms-2">';
      html+='       <a href="user.php?uid='+arr['authorid']+'" title="" class="avatar_mcfed" hidefocus="true" target="_blank"><strong>'+arr['author']+'</strong></a>';
 	 if(arr['rpost']){
@@ -120,7 +120,7 @@ function feed_reply(arr){
    jQuery('#pulish_submit_'+arr['pcid']).removeAttr('disabled');
    jQuery('#reply_publish_'+arr['pcid']).slideUp(500);
    jQuery('#attachmentViewBox_'+arr['pcid']).empty();
-	jQuery('#comment_'+arr['cid']+' img[data-original]').dzzthumb();
+   jQuery('#comment_'+arr['cid']+' img[data-original]').dzzthumb();
  
 }
 function getReplyForm(tid,pid,allowattach,allowat,allowsmiley){

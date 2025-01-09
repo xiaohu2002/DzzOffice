@@ -1,5 +1,55 @@
 <!--{template lyear:header_simple_start}-->
+<style>
+  /* 裁剪样式 */
+  .image-wrapper {
+      height: 364px;
+      width: 100%;
+      box-shadow: inset 0 0 3px rgba(0, 0, 0, .075);
+      background-color: #fcfdfe;
+      overflow: hidden;
+  }
+  .image-preview {
+      float: left;
+      margin-bottom: 0.5rem;
+      margin-right: 0.5rem;
+      border: 1px solid #f1f2f3;
+      border-radius: 2px;
+      background-color: #fff;
+      overflow: hidden;
+  }
+  .image-preview img {
+      vertical-align: top;
+  }
+  .preview-lg {
+    height: 200px;
+    width: 200px;
+  }
+  .preview-md {
+    height: 120px;
+    width: 120px;
+  }
+  .preview-sm {
+    height: 48px;
+    width: 48px;
+  }
+  @media (max-width: 991px) {
+      #image-modal .image-btns {
+          margin-bottom: 15px;
+      }
+  }
+  [data-theme='dark'] .image-wrapper,
+  [data-theme|='translucent'] .image-wrapper,
+  [data-theme='dark'] .image-preview,
+  [data-theme|='translucent'] .image-preview {
+      background-color: rgba(var(--bs-white-rgb), .2);
+  }
+  [data-theme='dark'] .image-preview,
+  [data-theme|='translucent'] .image-preview {
+      border-color: rgba(var(--bs-white-rgb), .2);
+  }
+</style>
 <script type="text/javascript" src="static/js/jquery.textareaexplander.js?{VERHASH}"></script>
+<link rel="stylesheet" type="text/css" href="static/lyear/js/cropper/cropper.min.css">
 <!--日期选择器css-->
 <link rel="stylesheet" type="text/css" href="static/lyear/js/bootstrap-datepicker/bootstrap-datepicker3.min.css?{VERHASH}">
 <!--{template lyear:header_simple_end}-->
@@ -30,6 +80,14 @@
       </div>
       <!--{/if}-->
       <iframe id="frame_profile" name="frame_profile" style="display: none"></iframe>
+      <div class="d-flex mb-3">
+        <img src="avatar.php?uid=$_G['uid']&size=big&ramdom=1" alt="..." class="cropimage avatar-xl rounded-circle me-3">
+        <div class="flex-grow-1">
+          <input type="hidden" class="form-control image-src" name="picurl_two" id="picurl_two" value="avatar.php?uid=$_G['uid']&size=big&ramdom=1" />
+          <button class="btn btn-default trigger-btn" type="button">修改头像</button>
+          <p class="mt-1 mb-0">选择一张你喜欢的图片，裁剪后会自动生成200x200大小，上传图片大小不能超过2M。</p>
+        </div>
+      </div>
       <form id="accountform" name="accountform" class="row gx-3 gy-2 align-items-center" action="{MOD_URL}" method="post" enctype="multipart/form-data" target="frame_profile" onsubmit="clearErrorInfo();">
         <input type="hidden" name="profilesubmit" value="true" />
         <input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -99,11 +157,60 @@
         </dl>
          <!--{/if}-->
       </form>
+      <!--图片裁剪START-->
+      <div class="modal fade" id="image-modal">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+            <div class="modal-header">
+                <h6 class="modal-title" id="image-modal-label">上传图片</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="image-body">
+                <div class="image-upload mb-3">
+                    <button class="btn btn-primary" type="button" onclick="$('input[id=imageInput]').click();">请选择图片</button>
+                    <span class="image-name"></span>
+                    <input type="file" class="image-input d-none" id="imageInput" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mb-3">
+                    <div class="image-wrapper"></div>
+                    </div>
+                    <div class="col-lg-4">
+                    <div class="image-previews clearfix">
+                        <div class="image-preview preview-lg"></div>
+                        <div class="image-preview preview-md"></div>
+                        <div class="image-preview preview-sm"></div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 image-btns">
+                    <button class="btn btn-primary mdi mdi-rotate-left" data-method="rotate" data-option="-90" type="button" title="向左旋转-90度"></button>
+                    <button class="btn btn-primary mdi mdi-rotate-right" data-method="rotate" data-option="90" type="button" title="向右旋转90度"></button>
+                    <button type="button" class="btn btn-primary mdi mdi-magnify-plus-outline" data-method="zoom" data-option="0.1" title="放大图片"></button>
+                    <button type="button" class="btn btn-primary mdi mdi-magnify-minus-outline" data-method="zoom" data-option="-0.1" title="缩小图片"></button>
+                    <button type="button" class="btn btn-primary mdi mdi-cached" data-method="reset" title="重置图片"></button>
+                    </div>
+                    <div class="col-lg-5 image-btns toggles-btns">
+                    </div>
+                    <div class="col-lg-3 d-grid">
+                    <button class="btn btn-primary btn-block upload-btn mdi mdi-content-save" type="submit">保存修改</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+    </div>
     </div>
   </div>
 </div>
 </main>
 <script type="text/javascript">
+  var formhash = '{FORMHASH}';
 jQuery(document).on('blur','.has-error .form-control',function(){
 	if(this.value) jQuery(this).closest('.form-group').removeClass('has-error');
 });
@@ -128,7 +235,8 @@ function clearErrorInfo() {
 	jQuery('.has-error').removeClass('has-error');
 }
 </script>
+<script type="text/javascript" src="static/lyear/js/cropper/cropper.min.js"></script>
+<script type="text/javascript" src="{MOD_PATH}/scripts/cropper.js"></script>
 <!--日期选择器js-->
 <script type="text/javascript" src="static/lyear/js/bootstrap-datepicker/bootstrap-datepicker.min.js?{VERHASH}"></script>
-<script type="text/javascript" src="static/lyear/js/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js?{VERHASH}"></script>
 <!--{template lyear:footer_simple}--> 

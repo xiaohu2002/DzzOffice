@@ -29,13 +29,19 @@
     float: right;
     font-weight: 400;
 }
+.pricing-price .img-avatar {
+	width: 96px;
+	height: 96px;
+	line-height: 96px;
+	font-size: 48px;
+}
 </style>
 <div class="container-fluid">
 	<div class="card card-pricing container">
 		<div class="card-body">
 			<h3 class="text-truncate"><strong>$space['username']</strong></h3>
 			<div class="pricing-price status-info">
-				{eval echo avatar_block($uid,'','img-avatar img-avatar-96');}
+				{eval echo avatar_block($uid);}
 			</div>
 			<ul class="specification-list">
 				<!--{loop $profiles $key $value}-->

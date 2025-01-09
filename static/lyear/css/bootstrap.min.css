@@ -2263,7 +2263,7 @@ progress {
     padding-bottom: calc(.25rem + 1px);
     font-size: .875rem
 }
-
+.help-block,
 .form-text {
     margin-top: .25rem;
     font-size: .875em;
@@ -6435,10 +6435,16 @@ fieldset:disabled .btn {
     }
 }
 @media (min-width:992px) {
-
     .modal-lg,
     .modal-xl {
         max-width: 800px
+    }
+    .modal-dialog {
+        width: 800px;
+        margin: 25px auto
+    }
+    .notify {
+        width: 400px;
     }
 }
 
@@ -6449,7 +6455,10 @@ fieldset:disabled .btn {
 }
 @media (min-width:1200px) {
     .modal-dialog {
-        max-width: 1140px
+        max-width: 900px
+    }
+    .notify {
+        width: 500px;
     }
 }
 .modal-fullscreen {
@@ -12278,7 +12287,7 @@ fieldset:disabled .btn {
         display: none !important
     }
 }
-.help-inline:hover, .form-text:hover {
+.help-block:hover, .help-inline:hover, .form-text:hover {
     color: var(--bs-primary);
 }
 

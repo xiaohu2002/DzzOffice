@@ -31,7 +31,7 @@
                 <label class="col-sm-2">{lang members_verify_synopsis}</label>
                 <div class="col-sm-10">
                   <textarea name="verify[desc]" type="textarea" class="form-control" rows="3">$verifyarr[desc]</textarea>
-                  <span class="help-block">{lang verifyset_verify_synopsis_text}</span>
+                  <span class="form-text">{lang verifyset_verify_synopsis_text}</span>
                 </div>
               </div>
               <div class="row mb-3">
@@ -111,9 +111,7 @@
                     <label class="form-check-label" for="verify[field][{$value[fieldid]}]">$value[title]</label>
                   </div>
                   <!--{/loop}-->
-                </div>
-                <div class="col-sm-10">
-                  <span class="help-block danger">{lang verifyset_choosable_data_text}</span>
+                  <span class="form-text">{lang verifyset_choosable_data_text}</span>
                 </div>
               </div>
               <div class="row mb-3">
@@ -124,7 +122,7 @@
                     <option value="$value[groupid]" <!--{if in_array($value[groupid],$verifyarr[groupid])}-->selected="selected"<!--{/if}-->>$value[grouptitle]</option>
                     <!--{/loop}-->
                   </select>
-                  <span class="help-block">{lang verifyset_verify_group_text}</span>
+                  <span class="form-text">{lang verifyset_verify_group_text}</span>
                 </div>
               </div>
               <dl class="mb-3 d-grid">
