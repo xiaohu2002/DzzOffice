@@ -58,7 +58,7 @@
 		<div class="card">
 			<div class="card-body container">
       <!--{if $vid}-->
-      <div class="alert <!--{if $showbtn}-->alert-warning<!--{else}-->alert-success<!--{/if}-->" style="margin-bottom:20px;line-height:1.8">
+      <div class="alert <!--{if $showbtn}-->alert-warning<!--{else}-->alert-success<!--{/if}-->">
           <!--{if $showbtn}-->
             <p><i class="glyphicon glyphicon-question-sign" ></i> {lang profile_message1}。</p> 
             <!--{if $_G['setting']['verify'][$vid]['desc']}-->
@@ -70,12 +70,11 @@
           <!--{/if}-->
       </div>
       <!--{else}-->
-      <div class="" style="padding:20px 0;line-height:1.8">
+      <div class="mb-2">
       	<div class="progress progress-relative" style="margin:0">
-          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="$userstatus[profileprogress]" aria-valuemin="0" aria-valuemax="100" style="width: {$userstatus[profileprogress]}%">
+          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="$userstatus[profileprogress]" aria-valuemin="0" aria-valuemax="100" style="width: {$userstatus[profileprogress]}%;min-width: 100px;">
             <span class="sr-only">{lang Information_complete} $userstatus[profileprogress]% </span>
           </div>
-          <div class="progress-cover">{lang Information_complete} {$userstatus[profileprogress]}%</div>
         </div>
       </div>
       <!--{/if}-->
@@ -147,7 +146,7 @@
                   <p class="mt10">{lang current_time} :
                       <!--{date($_G[timestamp])}-->
                   </p>
-                  <p class="gray">{lang time_zone_state}</p>
+                  <p class="gray form-text">{lang time_zone_state}</p>
               </div>
           </div>
           <!--{/if}-->
