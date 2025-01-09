@@ -6440,7 +6440,7 @@ fieldset:disabled .btn {
         max-width: 800px
     }
     .modal-dialog {
-        width: 800px;
+        width: 700px;
         margin: 25px auto
     }
     .notify {
@@ -6452,8 +6452,6 @@ fieldset:disabled .btn {
     .modal-xl {
         max-width: 1140px
     }
-}
-@media (min-width:1200px) {
     .modal-dialog {
         max-width: 900px
     }
@@ -6461,6 +6459,7 @@ fieldset:disabled .btn {
         width: 500px;
     }
 }
+
 .modal-fullscreen {
     width: 100vw;
     max-width: none;
