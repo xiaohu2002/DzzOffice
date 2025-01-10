@@ -195,6 +195,18 @@ if (isset($_G['setting']['template']) && $_G['setting']['template'] === 'lyear')
 	$kongjianshiyong=formatsize(DB::result_first("SELECT SUM(filesize) FROM ".DB::table('attachment')));
 	$version = 'V'.CORE_VERSION;//版本信息
 	$RELEASE = CORE_RELEASE;
+	$currentHour = date('G');
+	if ($currentHour >= 5 && $currentHour < 12) {
+		$greeting = "早上好";
+	} elseif ($currentHour >= 12 && $currentHour < 18) {
+		$greeting = "下午好";
+	} elseif ($currentHour >= 18 || $currentHour < 5) {
+		$greeting = "晚上好";
+	}
+	$userstatus = C::t('user_status')->fetch($_G['uid']);
+	$weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+	$dateI = date('w');
+	$dateInfo = date('Y-n-j H:i') . ' 星期' . $weekdays[$dateI];
 }
 include template('main');
 function getData($time,$starttime,$endtime){

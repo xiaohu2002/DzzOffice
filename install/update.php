@@ -6,8 +6,10 @@
  * @link        http://www.dzzoffice.com
  * @author      zyx(zyx@dzz.cc)
  */
-require '../core/coreBase.php';
+define('CURSCRIPT', 'misc');
+require __DIR__ . '/../core/coreBase.php';
 @set_time_limit(0);
+error_reporting(0);
 $cachelist = array();
 $dzz = C::app();
 $dzz->cachelist = $cachelist;
@@ -156,7 +158,7 @@ if($_GET['step'] == 'start') {
 	$newcols = getcolumn($newsqls[$i]);
 
 	if(!$query = DB::query("SHOW CREATE TABLE ".DB::table($newtable), 'SILENT')) {
-		preg_match("/(CREATE TABLE .+?)\s*(ENGINE|TYPE)\s*=\s*(\w+)/is", $newsqls[$i], $maths);
+		preg_match("/(CREATE TABLE .+?)\s*(ENGINE|TYPE)\s*=\s*(\w+)/s", $newsqls[$i], $maths);
 
 		$maths[3] = strtoupper($maths[3]);
 		if($maths[3] == 'MEMORY' || $maths[3] == 'HEAP') {
@@ -167,8 +169,9 @@ if($_GET['step'] == 'start') {
 		$usql = $maths[1].$type;
 
 		$usql = str_replace("CREATE TABLE IF NOT EXISTS dzz_", 'CREATE TABLE IF NOT EXISTS '.$config['tablepre'], $usql);
+		$usql = str_replace("CREATE TABLE IF NOT EXISTS `dzz_", 'CREATE TABLE IF NOT EXISTS `' . $config['tablepre'], $usql);
 		$usql = str_replace("CREATE TABLE dzz_", 'CREATE TABLE '.$config['tablepre'], $usql);
-
+		$usql = str_replace("CREATE TABLE `dzz_", 'CREATE TABLE `' . $config['tablepre'], $usql);
 		if(!DB::query($usql, 'SILENT')) {
 			show_msg('添加表 '.DB::table($newtable).' 出错,请手工执行以下SQL语句后,再重新运行本升级程序:<br><br>'.dhtmlspecialchars($usql));
 		} else {
@@ -537,13 +540,15 @@ if($_GET['step'] == 'start') {
 	dir_clear(DZZ_ROOT.'./data/template');
 	dir_clear(DZZ_ROOT.'./data/cache');
 	savecache('setting', '');
+	$configfile = DZZ_ROOT.'data/cache/default_mod.php';  
+	$configarr = array();
 	if($_G['setting']['default_mod']) {
-		$configfile = DZZ_ROOT.'data/cache/default_mod.php';  
-		$configarr = array();
 		$configarr['default_mod']=$_G['setting']['default_mod'];
-		@file_put_contents($configfile,"<?php \t\n return ".var_export($configarr,true).";");
+	} else{
+		$configarr['default_mod']='explorer';
 	}
-	
+	@file_put_contents($configfile,"<?php \t\n return ".var_export($configarr,true).";");
+	C::t('setting')->update('bbclosed', 0);
 	if($_GET['from']) {
 		show_msg('<span id="finalmsg">缓存更新中，请稍候 ...</span><iframe src="../misc.php?mod=syscache" style="display:none;" onload="parent.window.location.href=\''.$_GET['from'].'\'"></iframe><iframe src="../misc.php?mod=setunrun" style="display:none;"></iframe>');
 	} else {

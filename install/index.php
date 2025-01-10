@@ -56,9 +56,11 @@ if(file_exists($lockfile) && $method != 'ext_info') {
 timezone_set();
 
 if(in_array($method, array('ext_info'))) {
-	$isHTTPS = is_HTTPS();
+	$isHTTPS = ($_SERVER['HTTPS'] && strtolower($_SERVER['HTTPS']) != 'off') ? true : false;
 	$PHP_SELF = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
-	$bbserver = 'http'.($isHTTPS ? 's' : '').'://'.$_SERVER['HTTP_HOST'];
+	$sitepath = substr($PHP_SELF, 0, strrpos($PHP_SELF, '/'));
+	$sitepath=preg_replace('/install$/i','',$sitepath);
+	$bbserver = 'http'.($isHTTPS ? 's' : '').'://'.preg_replace("/\:\d+/", '', $_SERVER['HTTP_HOST']).($_SERVER['SERVER_PORT'] && $_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443 ? ':'.$_SERVER['SERVER_PORT'] : '').($sitepath);
 }
 
 if($method == 'show_license') {
@@ -158,7 +160,7 @@ if($method == 'show_license') {
 					list($dbhost1,$port)=explode(':',$dbhost);
 
 				}elseif(strpos($dbhost,'.sock')!==false){//地址直接是socket地址
-					$unix_socket=$dbhost1;
+					$unix_socket=$dbhost;
 					$dbhost1='localhost';
 				}else{
 					$dbhost1=$dbhost;
@@ -208,7 +210,7 @@ if($method == 'show_license') {
 			}
 		}
 
-		if(!preg_match("/^[a-z][a-z0-9]+_$/i",$tablepre)) {
+		if(strpos($tablepre, '.') !== false || intval($tablepre[0])) {
 			show_msg('tablepre_invalid', $tablepre, 0);
 		}
 		$uid = 1 ;
@@ -244,7 +246,6 @@ if($method == 'show_license') {
 			showjsmessage(lang('table_clear_success'));
 		}
 		
-		runquery($extrasql);
 		for($i=0; $i<5;$i++){
 			showjsmessage(lang('start_importing_initialized_data'));
 		}
@@ -315,7 +316,11 @@ if($method == 'show_license') {
 
 		dir_clear(ROOT_PATH.'./data/template');
 		dir_clear(ROOT_PATH.'./data/cache');
-		
+
+		$defalutmodfile = DZZ_ROOT.'data/cache/default_mod.php';
+        $defalutmodarr = array();
+        $defalutmodarr['default_mod' ]='explorer';
+        @file_put_contents($defalutmodfile,"<?php \t\n return ".var_export($defalutmodarr,true).";");
 
 		foreach($serialize_sql_setting as $k => $v) {
 			$v = addslashes(serialize($v));
@@ -402,7 +407,7 @@ if($method == 'show_license') {
 		$ctype = 1;
 		$data = addslashes(serialize($userstats));
 		$db->query("REPLACE INTO {$tablepre}syscache (cname, ctype, dateline, data) VALUES ('userstats', '$ctype', '".time()."', '$data')");
-
+		exit("<script>window.location.href='index.php?step=5';</script>");
 		header("location: index.php?step=5");
 	}
 	show_form($form_admin_init_items, $error_msg);

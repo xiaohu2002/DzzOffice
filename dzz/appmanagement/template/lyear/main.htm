@@ -35,6 +35,14 @@
 <!--{template lyear:header_simple_end}-->
 <main class="bs-main-container">
 	<div class="container-fluid">
+    <div class="card bg-primary text-white">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <span class="fs-4 scroll-numbers">{$_G['username']}，{$greeting}</span>
+        </div>
+        <div>登录时间：<!--{eval echo dgmdate($userstatus['lastvisit'])}-->，当前时间：{$dateInfo}</div>
+      </div>
+    </div>
     <div class="row card-banner bg-white">
       <div class="col-sm-6 col-md-6 col-lg-3">
         <div class="card mb-0 shadow-none">

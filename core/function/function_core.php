@@ -123,7 +123,11 @@ function url_implode($gets)
 {
     $arr = array();
     foreach ($gets as $key => $value) {
-        if ($value) {
+        if (is_array($value)) {
+            foreach ($value as $value1) {
+                $arr[] = $key . '[]=' . urlencode($value1);
+            }
+        } elseif ($value) {
             $arr[] = $key . '=' . urlencode($value);
         }
     }
@@ -303,8 +307,10 @@ function getuserbyuid($uid, $fetch_archive = 0)
 function chk_submitroule($type)
 {
 
-    if (empty($_GET['formhash']) || $_GET['formhash'] != formhash()) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_GET['formhash']) && $_GET['formhash'] == formhash() && empty($_SERVER['HTTP_X_FLASH_VERSION']) && (empty($_SERVER['HTTP_REFERER']) ||
+            preg_replace("/https?:\/\/([^\:\/]+).*/i", "\\1", $_SERVER['HTTP_REFERER']) == preg_replace("/([^\:]+).*/", "\\1", $_SERVER['HTTP_HOST']))) {
 
+    } else {
         showTips(array('error' => '提交方式不合法', 'error_code' => 403), $type, 'common/illegal_operation');
     }
 }
@@ -630,7 +636,7 @@ function random($length, $numeric = 0)
     }
     $max = strlen($seed) - 1;
     for ($i = 0; $i < $length; $i++) {
-        $hash .= $seed[mt_rand(0, $max)];
+        $hash .= $seed[random_int(0, $max)];
     }
     return $hash;
 }
@@ -874,7 +880,7 @@ function lang($langvar = null, $vars = array(), $default = null, $curpath = '')
  * 模板函数
  * $file=>模板,$tpldir=>模板文件夹，$templateNotMust=>模板不存在时返回空字符串，屏蔽错误提示，默认不开启
  * */
-function template($file, $tpldir = '', $templateNotMust = true)
+function template($file, $tpldir = '', $templateNotMust = false)
 {
     global $_G;
     static $tplrefresh, $timestamp, $targettplname;
