@@ -364,7 +364,8 @@ if($method == 'show_license') {
 	echo '<iframe src="../misc.php?mod=syscache" style="display:none;"></iframe>';
 	echo '<h2>'.lang('install_successfully').'</h2>';
 	echo '<h3 class="red">'.lang('handwork_del').'"./install/index.php"</h3>';
-	echo '<a href="'.$bbserver.'" class="btn" >'.lang('enter_desktop').'</a>';
+	echo '<a href="'.$bbserver.'index.php?mod=appmanagement" class="btn">进入管理后台</a>';
+	echo '<a href="'.$bbserver.'" class="btn">'.lang('enter_desktop').'</a>';
 	show_footer();
 } elseif($method == 'install_check') {
 
