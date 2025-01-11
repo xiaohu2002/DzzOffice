@@ -13,6 +13,7 @@ if($_GET['path']){
 	if (!$path = dzzdecode($_GET['path'])) {
     showmessage('parameter_error');
   }
+  include_once libfile('function/appperm');
   $meta=IO::getMeta($path);
   if(!$meta) showmessage(lang('file_not_exist'));
   //判断有无查看权限

@@ -2003,7 +2003,6 @@ _header.loging_close = function(){
 				completeNum >= urls.length?(typeof callback =='function'?callback():''):"";   
 				continue;
 			}
-			//try{if(lids[i] && dc.getElementById(lids[i])) dc.getElementsByTagName("head")[0].removeChild(dc.getElementById(lids[i]));}catch(e){};
 			links[i] = dc.createElement("link"); 
 			if(lids[i]) links[i].id=lids[i];  
 			links[i].rel = "stylesheet"; 
@@ -2190,25 +2189,6 @@ function nowTime(ev,type){
 	})();
 }
 function serialize (mixed_value) {
-    // Returns a string representation of variable (which can later be unserialized)  
-    // 
-    // version: 1109.2015
-    // discuss at: http://phpjs.org/functions/serialize    // +   original by: Arpad Ray (mailto:arpad@php.net)
-    // +   improved by: Dino
-    // +   bugfixed by: Andrej Pavlovic
-    // +   bugfixed by: Garagoth
-    // +      input by: DtTvB (http://dt.in.th/2008-09-16.string-length-in-bytes.html)    // +   bugfixed by: Russell Walker (http://www.nbill.co.uk/)
-    // +   bugfixed by: Jamie Beck (http://www.terabit.ca/)
-    // +      input by: Martin (http://www.erlenwiese.de/)
-    // +   bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net/)
-    // +   improved by: Le Torbi (http://www.letorbi.de/)    // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net/)
-    // +   bugfixed by: Ben (http://benblume.co.uk/)
-    // -    depends on: utf8_encode
-    // %          note: We feel the main purpose of this function should be to ease the transport of data between php & js
-    // %          note: Aiming for PHP-compatibility, we have to translate objects to arrays    // *     example 1: serialize(['Kevin', 'van', 'Zonneveld']);
-    // *     returns 1: 'a:3:{i:0;s:5:"Kevin";i:1;s:3:"van";i:2;s:9:"Zonneveld";}'
-    // *     example 2: serialize({firstName: 'Kevin', midName: 'van', surName: 'Zonneveld'});
-    // *     returns 2: 'a:3:{s:9:"firstName";s:5:"Kevin";s:7:"midName";s:3:"van";s:7:"surName";s:9:"Zonneveld";}'
     var _utf8Size = function (str) {        var size = 0,
             i = 0,
             l = str.length,
@@ -2259,14 +2239,6 @@ function serialize (mixed_value) {
         break;
     case "array":    case "object":
         val = "a";
-/*
-            if (type == "object") {
-                var objname = mixed_value.constructor.toString().match(/(\w+)\(\)/);                if (objname == undefined) {
-                    return;
-                }
-                objname[1] = this.serialize(objname[1]);
-                val = "O" + objname[1].substring(1, objname[1].length - 1);            }
-            */
         var count = 0;
         var vals = "";
         var okey;        var key;
@@ -2293,19 +2265,6 @@ function serialize (mixed_value) {
 };
 
 function array_merge () {
-    // Merges elements from passed arrays into one array  
-    // 
-    // version: 1109.2015
-    // discuss at: http://phpjs.org/functions/array_merge    // +   original by: Brett Zamir (http://brett-zamir.me)
-    // +   bugfixed by: Nate
-    // +   input by: josh
-    // +   bugfixed by: Brett Zamir (http://brett-zamir.me)
-    // *     example 1: arr1 = {"color": "red", 0: 2, 1: 4}    // *     example 1: arr2 = {0: "a", 1: "b", "color": "green", "shape": "trapezoid", 2: 4}
-    // *     example 1: array_merge(arr1, arr2)
-    // *     returns 1: {"color": "green", 0: 2, 1: 4, 2: "a", 3: "b", "shape": "trapezoid", 4: 4}
-    // *     example 2: arr1 = []
-    // *     example 2: arr2 = {1: "data"}    // *     example 2: array_merge(arr1, arr2)
-    // *     returns 2: {0: "data"}
     var args = Array.prototype.slice.call(arguments),
         argl = args.length,
         arg,        retObj = {},
@@ -2348,25 +2307,6 @@ function array_merge () {
 };
 
 function htmlspecialchars_decode (string, quote_style) {
-  // http://kevin.vanzonneveld.net
-  // + original by: Mirek Slugen
-  // + improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-  // + bugfixed by: Mateusz "loonquawl" Zalega
-  // + input by: ReverseSyntax
-  // + input by: Slawomir Kaniecki
-  // + input by: Scott Cariss
-  // + input by: Francois
-  // + bugfixed by: Onno Marsman
-  // + revised by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-  // + bugfixed by: Brett Zamir (http://brett-zamir.me)
-  // + input by: Ratheous
-  // + input by: Mailfaker (http://www.weedem.fr/)
-  // + reimplemented by: Brett Zamir (http://brett-zamir.me)
-  // + bugfixed by: Brett Zamir (http://brett-zamir.me)
-  // * example 1: htmlspecialchars_decode("<p>this -> "</p>", 'ENT_NOQUOTES');
-  // * returns 1: '<p>this -> "</p>'
-  // * example 2: htmlspecialchars_decode(""");
-  // * returns 2: '"'
   var optTemp = 0,
     i = 0,
     noquotes = false;
