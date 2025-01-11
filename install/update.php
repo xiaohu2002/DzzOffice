@@ -26,7 +26,6 @@ $config = array(
 );
 $theurl = 'update.php';
 $_G['siteurl'] = preg_replace('/\/install\/$/i', '/', $_G['siteurl']);
-
 if($_GET['from']) {
 	if(md5($_GET['from'].$_G['config']['security']['authkey']) != $_GET['frommd5']) {
 		$refererarr = parse_url(dreferer());
@@ -48,7 +47,7 @@ if($_GET['from']) {
 		dheader('Location: '.$_G['siteurl'].basename($refererarr['path']).'?action=upgrade&operation='.$operation.'&version='.$version.'&release='.$release.'&ungetfrom='.$time.'&ungetfrommd5='.md5($time.$_G['config']['security']['authkey']));
 	}
 }
-
+if(empty($_GET['step'])) $_GET['step'] = 'start';
 $lockfile = DZZ_ROOT.'./data/update.lock';
 if(file_exists($lockfile) && !$_GET['from']) {
 	show_msg('请您先手工删除 ./data/update.lock 文件，再次运行本文件进行升级。');
@@ -92,7 +91,6 @@ function waitingdb($curstep, $sqlarray) {
 	}
 	show_msg("优化数据表", $theurl.'?step=waitingdb&nextstep='.$curstep.$sqlurl.'&sendsql='.base64_encode($sendsql), 5000, 1);
 }
-if(empty($_GET['step'])) $_GET['step'] = 'start';
 
 if($_GET['step'] == 'start') {
 	if(!C::t('setting')->fetch('bbclosed')) {
@@ -101,9 +99,17 @@ if($_GET['step'] == 'start') {
 		updatecache('setting');
 		show_msg('您的站点未关闭，正在关闭，请稍后...', $theurl.'?step=start', 5000);
 	}
-		show_msg('说明：<br>本升级程序会参照最新的SQL文件，对数据库进行同步升级。<br>
+	$phpversion=PHP_VERSION;
+	$msg = 'php版本不支持，仅支持php7+到php8以下，建议使用php7.4<br>当前版本：'.$phpversion.'<br><br><a href="'.$theurl.'?step=prepare'.($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '').'">已更换PHP版本，开始升级</a>';
+	if(strcmp($phpversion, '7+') < 0) {
+		show_msg($msg);
+	}
+	if(strcmp($phpversion, '8.0') >=0) {
+		show_msg($msg);
+	}
+	show_msg('<h2>说明：</h1>本升级程序会参照最新的SQL文件，对数据库进行同步升级。<br>
 			请确保网站根目录下 ./install/data/install.sql 文件为最新版本。<br>请在升级之前做好站点全量数据（含数据库、文件）的备份操作，并小心操作。<br><br>
-			<a href="'.$theurl.'?step=prepare'.($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '').'">准备完毕，升级开始</a>');
+			<a href="'.$theurl.'?step=prepare'.($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '').'">准备完毕，开始升级</a>');
 	
 } elseif ($_GET['step'] == 'waitingdb') {
 	$query = DB::fetch_all("SHOW FULL PROCESSLIST");
@@ -126,15 +132,6 @@ if($_GET['step'] == 'start') {
 	}
 	show_msg($msg, $theurl.$url, $time*1000, 0, $notice);
 } elseif ($_GET['step'] == 'prepare') {
-	$repeat=array();
-	/*//检查数据库表 app_market 中有无appurl重复的情况；
-	foreach(DB::fetch_all("select appid,appurl from ".DB::table('app_market')." where 1") as $value){
-		if(in_array($value['appurl'],$repeat)){
-			C::t('app_market')->update($value['appid'],array('appurl'=>$value['appurl'].'&appid='.$value['appid']));
-		}
-		$repeat[]=$value['appurl'];
-	}*/
-	
 	show_msg('准备完毕，进入下一步数据库结构升级', $theurl.'?step=sql');
 } elseif ($_GET['step'] == 'sql') {
 	$sql = implode('', file($sqlfile));
@@ -189,7 +186,7 @@ if($_GET['step'] == 'start') {
 					if(!empty($oldcols[$key])) {
 						$usql = "RENAME TABLE ".DB::table($newtable)." TO ".DB::table($newtable.'_bak');
 						if(!DB::query($usql, 'SILENT')) {
-							show_msg('升级表 '.DB::table($newtable).' 出错,请手工执行以下升级语句后,再重新运行本升级程序:<br><br><b>升级SQL语句</b>:<div style=\"position:absolute;font-size:11px;font-family:verdana,arial;background:#EBEBEB;padding:0.5em;\">'.dhtmlspecialchars($usql)."</div><br><b>Error</b>: ".DB::error()."<br><b>Errno.</b>: ".DB::errno());
+							show_msg('升级表 '.DB::table($newtable).' 出错,请手工执行以下升级语句后,再重新运行本升级程序:<br><br><b>升级SQL语句</b>:<div style=\"font-size:11px;background:#EBEBEB;padding:0.5em;\">'.dhtmlspecialchars($usql)."</div><br><b>Error</b>: ".DB::error()."<br><b>Errno.</b>: ".DB::errno());
 						} else {
 							$msg = '表改名 '.DB::table($newtable).' 完成！';
 							show_msg($msg, $theurl.'?step=sql&i='.$_GET['i']);
@@ -237,7 +234,7 @@ if($_GET['step'] == 'start') {
 		if(!empty($updates)) {
 			$usql = "ALTER TABLE ".DB::table($newtable)." ".implode(', ', $updates);
 			if(!DB::query($usql, 'SILENT')) {
-				show_msg('升级表 '.DB::table($newtable).' 出错,请手工执行以下升级语句后,再重新运行本升级程序:<br><br><b>升级SQL语句</b>:<div style=\"position:absolute;font-size:11px;font-family:verdana,arial;background:#EBEBEB;padding:0.5em;\">'.dhtmlspecialchars($usql)."</div><br><b>Error</b>: ".DB::error()."<br><b>Errno.</b>: ".DB::errno());
+				show_msg('升级表 '.DB::table($newtable).' 出错,请手工执行以下升级语句后,再重新运行本升级程序:<br><br><b>升级SQL语句</b>:<div style=\"background:#EBEBEB;padding:0.5em;\">'.dhtmlspecialchars($usql)."</div><br><b>Error</b>: ".DB::error()."<br><b>Errno.</b>: ".DB::errno());
 			} else {
 				$msg = '升级表 '.DB::table($newtable).' 完成！';
 			}
@@ -259,8 +256,6 @@ if($_GET['step'] == 'start') {
 
 } elseif ($_GET['step'] == 'data') {
 	if(!$_GET['dp']){
-		
-		
 		//新增两个配置项
 		 C::t('setting')->update('fileVersion', '1');
 		 C::t('setting')->update('fileVersionNumber', '50');
@@ -506,10 +501,10 @@ if($_GET['step'] == 'start') {
 			foreach ($cols as $coltype => $col) {
 				if (is_array($col)) {
 					foreach ($col as $index => $indexvalue) {
-						$delcolumnhtml .= "<tr><td><input type=\"checkbox\" name=\"delcols[$tablename][$coltype][$index]\" value=\"1\"></td><td>{$config['tablepre']}$tablename</td><td>索引($coltype) $index $indexvalue</td></tr>";
+						$delcolumnhtml .= "<tr><td><input type=\"checkbox\" name=\"delcols[$tablename][$coltype][$index]\" value=\"1\"></td><td>表 {$config['tablepre']}$tablename</td><td>索引($coltype) $index $indexvalue</td></tr>";
 					}
 				} else {
-					$delcolumnhtml .= "<tr><td><input type=\"checkbox\" name=\"delcols[$tablename][$col]\" value=\"1\"></td><td>{$config['tablepre']}$tablename</td><td>字段 $col</td></tr>";
+					$delcolumnhtml .= "<tr><td><input type=\"checkbox\" name=\"delcols[$tablename][$col]\" value=\"1\"></td><td>表 {$config['tablepre']}$tablename</td><td>字段 $col</td></tr>";
 				}
 			}
 		}
@@ -521,7 +516,7 @@ if($_GET['step'] == 'start') {
 	if(empty($deltables) && empty($delcolumns)) {
 		echo "<p>与标准数据库相比，没有需要删除的数据表和字段</p><a href=\"$theurl?step=cache".($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '')."\">请点击进入下一步</a></p>";
 	} else {
-		echo "<p><input type=\"submit\" name=\"delsubmit\" value=\"提交删除\"></p><p>您也可以忽略多余的表和字段<br><a href=\"$theurl?step=cache".($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '')."\">直接进入下一步</a></p>";
+		echo "<p><input type=\"submit\" name=\"delsubmit\" value=\"提交删除\"></p><p>您也可以忽略多余的表和字段</p><a href=\"$theurl?step=cache".($_GET['from'] ? '&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : '')."\">直接进入下一步</a>";
 	}
 	echo '</form>';
 
@@ -641,7 +636,6 @@ function remakesql($value) {
 }
 
 function show_msg($message, $url_forward='', $time = 1, $noexit = 0, $notice = '') {
-
 	if($url_forward) {
 		$url_forward = $_GET['from'] ? $url_forward.'&from='.rawurlencode($_GET['from']).'&frommd5='.rawurlencode($_GET['frommd5']) : $url_forward;
 		$message = "<a href=\"$url_forward\">$message (跳转中...)</a><br>$notice<script>setTimeout(\"window.location.href ='$url_forward';\", $time);</script>";
@@ -657,7 +651,6 @@ END;
 	!$noexit && exit();
 }
 
-
 function show_header() {
 	global $config;
 	$version = CORE_VERSION;
@@ -666,37 +659,52 @@ function show_header() {
 		$nowarr = array('sql' => ' class="current"');
 	}
 	print<<<END
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml">
+	<!DOCTYPE html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=$config[charset]" />
-	<title> 数据库升级程序 </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="DzzOffice" />
+	<title>DzzOffice 升级程序</title>
 	<style type="text/css">
-	* {font-size:12px; font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.5em; word-break: break-all; }
-	body { text-align:center; margin: 0; padding: 0; background: #F5FBFF; }
-	.bodydiv { margin: 40px auto 0; width:720px; text-align:left; border: solid #86B9D6; border-width: 5px 1px 1px; background: #FFF; }
-	h1 { font-size: 18px; margin: 1px 0 0; line-height: 50px; height: 50px; background: #E8F7FC; color: #5086A5; padding-left: 10px; }
-	#menu {width: 100%; margin: 10px auto; text-align: center; }
-	#menu td { height: 30px; line-height: 30px; color: #999; border-bottom: 3px solid #EEE; }
-	.current { font-weight: bold; color: #090 !important; border-bottom-color: #F90 !important; }
+	body { margin: 0; padding: 0; background: #f4f5fa;font-size: 14px; }
+	.bodydiv {margin: 40px auto 40px auto; max-width:720px; border: 1px solid #007bff; border-width: 5px 1px 1px; background: #FFF; border-radius: 12px;box-shadow: 0 5px 10px rgba(0, 0, 0, .15) !important;}
+	h1 { font-size: 18px; margin: 0; padding: 10px; color: #495057; padding-left: 10px; border-bottom: 1px solid #ededee;}
+	#menu {width: 100%; margin: 0 0 10px 0; text-align: center; }
+	#menu td { padding: 10px;color: #999; border-bottom: 3px solid #EEE; }
+	.current { font-weight: bold; color: #007bff !important; border-bottom-color: #007bff !important; }
 	input { border: 1px solid #B2C9D3; padding: 5px; background: #F5FCFF; }
-	#footer { font-size: 10px; line-height: 40px; background: #E8F7FC; text-align: center; height: 38px; overflow: hidden; color: #5086A5; margin-top: 20px; }
+	#footer {text-align: center;color: #6c757d; padding: 10px;border-top: 1px solid rgba(77, 82, 89, 0.1); }
+	a {font-size: 16px;color: #007bff;padding:5px 10px;border-radius:5px;border:1px solid #007bff;background-color:transparent;text-decoration:none;transition:color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;font-weight:400;line-height:1.5;text-align:center;}
+	a:hover {color: #fff;background-color: #007bff;}
+	table {width: 100%;}
+	input:hover,
+	button:hover {
+		color: #212529;
+		border-color: #007bff;
+		box-shadow: 0 0 0 1px rgba(13, 110, 253, .25);
+		outline: 0;
+		-webkit-transition: all .25s linear;
+		-moz-transition: all .25s linear;
+		-ms-transition: all .25s linear;
+		-o-transition: all .25s linear;
+		transition: all .25s linear;
+	}
 	</style>
 	</head>
 	<body>
 	<div class="bodydiv">
-	<h1>DzzOffice V$version 数据库升级工具</h1>
-	<div style="width:90%;margin:0 auto;">
+	<h1>DzzOffice V$version 升级程序</h1>
+	<div style="padding: 10px;">
 	<table id="menu">
 	<tr>
-	<td{$nowarr['start']}>升级开始</td>
+	<td{$nowarr['start']}>升级准备</td>
 	<td{$nowarr['sql']}>数据库结构添加与更新</td>
-	<td{$nowarr['data']}>数据更新</td>
+	<td{$nowarr['data']}>系统数据更新</td>
 	<td{$nowarr['delete']}>数据库结构删除</td>
 	<td{$nowarr['cache']}>升级完成</td>
 	</tr>
 	</table>
-	<br>
 END;
 }
 
@@ -732,7 +740,6 @@ function runquery($sql) {
 	foreach($ret as $query) {
 		$query = trim($query);
 		if($query) {
-
 			if(substr($query, 0, 12) == 'CREATE TABLE') {
 				$name = preg_replace("/CREATE TABLE ([a-z0-9_]+) .*/is", "\\1", $query);
 				DB::query(create_table($query, $dbcharset));
@@ -751,8 +758,6 @@ function save_config_file($filename, $config, $default, $deletevar) {
 	$date = gmdate("Y-m-d H:i:s", time() + 3600 * 8);
 	$content = <<<EOT
 <?php
-
-
 \$_config = array();
 
 EOT;

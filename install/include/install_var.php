@@ -120,11 +120,6 @@ $form_db_init_items = array
 		'tablepre' => array('type' => 'text', 'required' => 0, 'reg' => '/^.*+/', 'value' => array('type' => 'var', 'var' => 'tablepre')),
 		'adminemail' => array('type' => 'text', 'required' => 1, 'reg' => '/@/', 'value' => array('type' => 'var', 'var' => 'adminemail')),
 	),
-	
-);
-$form_admin_init_items = array
-(
-	
 	'admininfo' => array
 	(
 		'email' => array('type' => 'text', 'required' => 1, 'reg' => '/@/', 'value' => array('type' => 'var', 'var' => 'adminemail')),
@@ -133,6 +128,7 @@ $form_admin_init_items = array
 		'password2' => array('type' => 'password', 'required' => 1, 'reg' => '/^.*$/'),
 		
 	)
+	
 );
 
 $serialize_sql_setting = array ();

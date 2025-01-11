@@ -26,7 +26,6 @@ function getBucketList($access_id,$access_key){
 		return $re;
 	}
 function show_msg($error_no, $error_msg = 'ok', $success = 1, $quit = TRUE) {
-	
 		show_header();
 		global $step;
 		$title = lang($error_no);
@@ -43,15 +42,10 @@ function show_msg($error_no, $error_msg = 'ok', $success = 1, $quit = TRUE) {
 		}
 		$back = lang('to_back');
 		echo <<<EOT
-		<div class="content red">
-			
-				<div class="header" ><img src="images/logo.png"></div>
-			
-		
-			<h4>$title</h4>
-			<ul >$comment</ul>
-		
-			<div style="text-align:right;width:80%;padding-top:50px;"><a href="#" class="button" onclick="history.back();return false"><input type="button" value="$back"></a></div>
+		<div class="red">
+			<h3>$title</h3>
+			<ul>$comment</ul>
+			<a href="#" class="btn" onclick="history.back();return false">$back</a>
 		</div>
 EOT;
  show_footer($quit);
@@ -179,16 +173,16 @@ function function_check(&$func_items) {
 	}
 }
 
-function show_env_result(&$env_items, &$func_items, &$filesock_items) {
+function show_env_result(&$env_items, &$dirfile_items, &$func_items, &$filesock_items) {
 
 	$env_str = $file_str = $func_str = '';
 	$error_code = 0;
 	foreach($env_items as $key => $item) {
 		if($key == 'php' && strcmp($item['current'], $item['r']) < 0) {
-			show_msg('php_version_too_low', $item['current'], 0);
+			show_msg('php_version_too_low', '当前PHP版本：'.$item['current'], 0);
 		}
 		if($key == 'php' && strcmp($item['current'], $item['m']) >=0) {
-			show_msg('php_version_too_low', $item['current'], 0);
+			show_msg('php_version_too_low', '当前PHP版本：'.$item['current'], 0);
 		}
 		$status = 1;
 		if($item['r'] != 'notset') {
@@ -209,23 +203,53 @@ function show_env_result(&$env_items, &$func_items, &$filesock_items) {
 		} else {
 			$env_str .= "<tr>\n";
 			$env_str .= "<td>".lang($key)."</td>\n";
-			$env_str .= "<td class=\"padleft\">".lang($item['r'])."</td>\n";
-			$env_str .= "<td class=\"padleft\">".lang($item['b'])."</td>\n";
-			$env_str .= ($status ? "<td class=\"w pdleft1\">" : "<td class=\"nw pdleft1\">").$item['current']."</td>\n";
+			$env_str .= "<td>".lang($item['r'])."</td>\n";
+			$env_str .= "<td>".lang($item['b'])."</td>\n";
+			$env_str .= ($status ? "<td class=\"w\">" : "<td class=\"nw\">").$item['current']."</td>\n";
 			$env_str .= "</tr>\n";
 		}
+	}
+	foreach($dirfile_items as $key => $item) {
+		$tagname = $item['type'] == 'file' ? 'file' : 'dir';
+		$variable = $item['type'].'_str';
+		  if(empty($$variable)) $$variable='';
+			$$variable .= "<tr>\n";
+			$$variable .= "<td class=\"padleft\">$item[path]</td><td class=\"w\">".lang('writeable')."</td>\n";
+			if($item['status'] == 1) {
+				$$variable .= "<td class=\"w\">".lang('writeable')."</td>\n";
+			} elseif($item['status'] == -1) {
+				$error_code = ENV_CHECK_ERROR;
+				$$variable .= "<td class=\"nw\">".lang('nodir')."</td>\n";
+			} else {
+				$error_code = ENV_CHECK_ERROR;
+				$$variable .= "<td class=\"nw\">".lang('unwriteable')."</td>\n";
+			}
+			$$variable .= "</tr>\n";
+		
 	}
 		show_header();
 		if($env_str){
 			echo "<h2 class=\"title\">".lang('env_check')."</h2>\n";
-			echo "<table class=\"tb\" style=\"margin:20px 0;\">\n";
+			echo "<table class=\"tb\">\n";
 			echo "<tr>\n";
 			echo "\t<th>".lang('project')."</th>\n";
-			echo "\t<th class=\"padleft\">".lang('dzzoffice_required')."</th>\n";
-			echo "\t<th class=\"padleft\">".lang('dzzoffice_best')."</th>\n";
-			echo "\t<th class=\"padleft\">".lang('curr_server')."</th>\n";
+			echo "\t<th>".lang('dzzoffice_required')."</th>\n";
+			echo "\t<th>".lang('dzzoffice_best')."</th>\n";
+			echo "\t<th>".lang('curr_server')."</th>\n";
 			echo "</tr>\n";
 			echo $env_str;
+			echo "</table>\n";
+		}
+		if($file_str || $dir_str){
+			echo "<h2 class=\"title\">".lang('priv_check')."</h2>\n";
+			echo "<table class=\"tb\">\n";
+			echo "\t<tr>\n";
+			echo "\t<th class=\"padleft\">".lang('step1_file')."</th>\n";
+			echo "\t<th>".lang('step1_need_status')."</th>\n";
+			echo "\t<th>".lang('step1_status')."</th>\n";
+			echo "</tr>\n";
+			echo $file_str;
+			echo $dir_str;
 			echo "</table>\n";
 		}
 
@@ -234,11 +258,11 @@ function show_env_result(&$env_items, &$func_items, &$filesock_items) {
 			$func_str .= "<tr>\n";
 			$func_str .= "<td>$item()</td>\n";
 			if($status) {
-				$func_str .= "<td class=\"w pdleft1\">".lang('supportted')."</td>\n";
-				$func_str .= "<td class=\"padleft\">".lang('none')."</td>\n";
+				$func_str .= "<td class=\"w\">".lang('supportted')."</td>\n";
+				$func_str .= "<td>".lang('none')."</td>\n";
 			} else {
 				$error_code = ENV_CHECK_ERROR;
-				$func_str .= "<td class=\"nw pdleft1\">".lang('unsupportted')."</td>\n";
+				$func_str .= "<td class=\"nw\">".lang('unsupportted')."</td>\n";
 				$func_str .= "<td><font color=\"red\">".lang('advice_'.$item)."</font></td>\n";
 			}
 		}
@@ -249,12 +273,12 @@ function show_env_result(&$env_items, &$func_items, &$filesock_items) {
 			$func_strextra .= "<tr>\n";
 			$func_strextra .= "<td>$item()</td>\n";
 			if($status) {
-				$func_strextra .= "<td class=\"w pdleft1\">".lang('supportted')."</td>\n";
-				$func_strextra .= "<td class=\"padleft\">".lang('none')."</td>\n";
+				$func_strextra .= "<td class=\"w\">".lang('supportted')."</td>\n";
+				$func_strextra .= "<td>".lang('none')."</td>\n";
 				break;
 			} else {
 				$filesock_disabled++;
-				$func_strextra .= "<td class=\"nw pdleft1\">".lang('unsupportted')."</td>\n";
+				$func_strextra .= "<td class=\"nw\">".lang('unsupportted')."</td>\n";
 				$func_strextra .= "<td><font color=\"red\">".lang('advice_'.$item)."</font></td>\n";
 			}
 		}
@@ -263,11 +287,11 @@ function show_env_result(&$env_items, &$func_items, &$filesock_items) {
 		}
 		if($func_str || $func_strextra){
 			echo "<h2 class=\"title\">".lang('func_depend')."</h2>\n";
-			echo "<table class=\"tb\" style=\"margin:20px 0;width:95%;\">\n";
+			echo "<table class=\"tb\">\n";
 			echo "<tr>\n";
 			echo "\t<th>".lang('func_name')."</th>\n";
-			echo "\t<th class=\"padleft\">".lang('check_result')."</th>\n";
-			
+			echo "\t<th>".lang('check_result')."</th>\n";
+			echo "\t<th>".lang('suggestion')."</th>\n";
 			echo "</tr>\n";
 			echo $func_str.$func_strextra;
 			echo "</table>\n";
@@ -275,56 +299,16 @@ function show_env_result(&$env_items, &$func_items, &$filesock_items) {
 	show_next_step(2,$error_code);
 	show_footer();
 }
-function show_dirfile_result(&$dirfile_items) {
-
-	$file_str = '';
-	$dir_str = '';
-	$error_code = 0;
-
-	foreach($dirfile_items as $key => $item) {
-		$tagname = $item['type'] == 'file' ? 'file' : 'dir';
-		$variable = $item['type'].'_str';
-		  if(empty($$variable)) $$variable='';
-			$$variable .= "<tr>\n";
-			$$variable .= "<td>$item[path]</td><td class=\"w pdleft1\">".lang('writeable')."</td>\n";
-			if($item['status'] == 1) {
-				$$variable .= "<td class=\"w pdleft1\">".lang('writeable')."</td>\n";
-			} elseif($item['status'] == -1) {
-				$error_code = ENV_CHECK_ERROR;
-				$$variable .= "<td class=\"nw pdleft1\">".lang('nodir')."</td>\n";
-			} else {
-				$error_code = ENV_CHECK_ERROR;
-				$$variable .= "<td class=\"nw pdleft1\">".lang('unwriteable')."</td>\n";
-			}
-			$$variable .= "</tr>\n";
-		
-	}
-		show_header();
-		if($file_str || $dir_str){
-			echo "<h3 >".lang('priv_check')."</h3>\n";
-			echo "<table class=\"tb\" style=\"margin:20px 0;width:95%;\">\n";
-			echo "\t<tr>\n";
-			echo "\t<th>".lang('step1_file')."</th>\n";
-			echo "\t<th class=\"padleft\">".lang('step1_need_status')."</th>\n";
-			echo "\t<th class=\"padleft\">".lang('step1_status')."</th>\n";
-			echo "</tr>\n";
-			echo $file_str;
-			echo $dir_str;
-			echo "</table>\n";
-		}
-	show_next_step(3,$error_code);
-	show_footer();
-}
 function show_next_step($step, $error_code) {
 	global $uchidden;
 	echo "<form action=\"index.php\" method=\"post\">\n";
 	echo "<input type=\"hidden\" name=\"step\" value=\"$step\" />";
 	if($error_code == 0) {
-		$nextstep = "<a href=\"#\" class=\"button\"><input type=\"button\" onclick=\"history.back();return false;\" value=\"".lang('old_step')."\"></a><a href=\"#\" class=\"button\"><input type=\"submit\" value=\"".lang('new_step')."\"></a>\n";
+		$nextstep = "<input type=\"button\" class=\"btn\" onclick=\"history.back();return false;\" value=\"".lang('old_step')."\">&nbsp;&nbsp;<input type=\"submit\" class=\"btn\" value=\"".lang('new_step')."\">\n";
 	} else {
-		$nextstep = "<a href=\"#\" class=\"button\"><input type=\"button\" disabled=\"disabled\" value=\"".lang('not_continue')."\"></a>\n";
+		$nextstep = "<input type=\"button\" class=\"btn\" disabled=\"disabled\" value=\"".lang('not_continue')."\">\n";
 	}
-	echo '<div style="width:85%;float:left;text-align:right;padding:20px;">'.$nextstep.'</div>';
+	echo $nextstep;
 	echo "</form>\n";
 }
 function show_form(&$form_items, $error_msg) {
@@ -337,7 +321,7 @@ function show_form(&$form_items, $error_msg) {
 	show_setting('start');
 	show_setting('hidden', 'step', $step);
 	$is_first = 1;
-	echo '<div id="form_items_'.$step.'"><br />';
+	echo '<div class="container-fluid" id="form_items_'.$step.'">';
 	foreach($form_items as $key => $items) {
 		global ${'error_'.$key};
 		if($is_first == 0) {
@@ -349,7 +333,7 @@ function show_form(&$form_items, $error_msg) {
 			show_error('tips_admin_config', ${'error_'.$key});
 		}
 
-		echo '<table class="tb2">';
+		echo '<div class="tb2">';
 		foreach($items as $k => $v) {
 			$value = '';
 			if(!empty($error_msg)) {
@@ -374,7 +358,7 @@ function show_form(&$form_items, $error_msg) {
 			$is_first = 0;
 		}
 	}
-	echo '</table>';
+	echo '</div>';
 	echo '</div>';
 	echo '<table class="tb2">';
 	show_setting('', 'submitname', 'new_step', ($step == 2 ? 'submit|oldbtn' : 'submit' ));
@@ -391,21 +375,9 @@ function show_license() {
 	$release = CORE_RELEASE;
 	$install_lang = lang(INSTALL_LANG);
 	echo <<<EOT
-		<style>
-		 body{background:#2d3137}
-		</style>
-		<table width="95%" height="100%">
-		<tr><td valign="middle" align="center">
-				<h1><img src="images/logo.png"></h1>
-				<div class="spacer"></div>
-				<h4 style="font-size:20px;">$install_lang</h4>
-				<h4>$version</h4>
-				<div class="spacer"></div>
-			<div ><a href="?step=1" class="button_start"><span>$title</span></a></div>
-			<div class="spacer"></div>
-		</td></tr>
-		</table>
-	
+		<h2 style="font-weight: 600;">$install_lang</h2>
+		<h3>$version</h3>
+		<a href="?step=1" class="btn">$title</a>
 EOT;
 show_footer();
 }
@@ -472,6 +444,10 @@ function show_header() {
 <meta http-equiv="Content-Type" content="text/html; charset=$charset" />
 <title>$title</title>
 <link rel="stylesheet" href="images/style.css" type="text/css" media="all" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="DzzOffice" />
+<meta content="Leyun internet Technology(Shanghai)Co.,Ltd" name="Copyright" />
 <script type="text/javascript">
 	function $(id) {
 		return document.getElementById(id);
@@ -481,14 +457,40 @@ function show_header() {
 		document.getElementById('progress').innerHTML = message;
 	}
 </script>
-<meta content="Leyun internet Technology(Shanghai)Co.,Ltd" name="Copyright" />
+<style>
+	body { margin: 0; padding: 0; background: #f4f5fa;font-size: 14px; }
+	.container {margin: 40px auto 40px auto;max-width: 920px;border: 1px solid #007bff; border-width: 5px 1px 1px;background: #FFF; border-radius: 12px;box-shadow: 0 5px 10px rgba(0, 0, 0, .15) !important;}
+		h1 {font-size: 48px;
+    margin: 0;
+    padding: 10px;
+    color: #fff;
+    padding-left: 10px;
+    border-bottom: 1px solid #ededee;
+    background-color: #007bff;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    border-radius: 5px 5px 0 0;}
+	table {width: 100%; margin: 0 0 10px 0; text-align: center; }
+	.current { font-weight: bold; color: #007bff !important; border-bottom-color: #007bff !important; }
+	#footer {text-align: center;color: #6c757d; padding: 10px;border-top: 1px solid rgba(77, 82, 89, 0.1); }
+	a,button {font-size: 16px;color: #007bff;padding:10px;border-radius:5px;border:1px solid #007bff;background-color:transparent;text-decoration:none;transition:color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;font-weight:400;line-height:1.5;text-align:center;}
+	a:hover {color: #fff;background-color: #007bff;}
+</style>
 </head>
 <div class="container step_$step">
-
+<h1><img src="images/logo.png">DzzOffice 安装程序</h1>
+<div style="padding: 10px; text-align: center;">
 EOT;
+$step > 0 && show_step($step);
 }
+
 function show_footer($quit = true) {
+	$date = date("Y");
 	echo <<<EOT
+	</div>
+	<div id="footer">Copyright © 2012-$date DzzOffice.com All Rights Reserved.</div>
 	</div>
 </div>
 </body>
@@ -507,7 +509,7 @@ function loginit($logfile) {
 }
 function showjsmessage($message) {
 	if(VIEW_OFF) return;
-	echo '<script type="text/javascript">showmessage(\''.addslashes($message).' \');</script>'."\r\n";
+	echo '<script type="text/javascript">showmessage(\''.addslashes($message).'\');</script>'."\r\n";
 	flush();
 	ob_flush();
 }
@@ -637,25 +639,30 @@ var timer=0;
 function showmessage(message) {
 	++timer;
 	window.setTimeout(function(){
-    	document.getElementById('notice').innerHTML = message ;
+    	document.getElementById('notice').innerHTML = message;
         var width=(parseInt(document.getElementById('progress').style.width)+1);
         if(width>100) width=100;
+		if (width==100) {
+			if(message == '<?= lang('system_data_installation_successful') ?>') {
+				document.getElementById('laststep').disabled =false;
+				window.setTimeout(function() {
+					window.location='index.php?method=ext_info';
+				}, 1000);
+			}
+		}
 		document.getElementById('progress').style.width = width+'%';
     },50*timer);
 }
 function initinput() {
-	window.location='index.php?step=4';
+	window.location='index.php?method=ext_info';
 }
 </script>
-		<h3><?php echo lang('db_installing_title');?></h3>
-		<div class="pContainer" >
-        	<div id="progress" class="progress" style="width:0%"></div>
-            <span id="notice"></span>
-         </div>
-        	
-		<div style="width:80%;text-align:right">
-			<a class="button" href="#"><input type="button" name="submit" value="<?php echo lang('new_step');?>" disabled="disabled" id="laststep" onclick="initinput()"></a>
-		</div>
+<h2><?php echo lang('db_installing_title');?></h2>
+<div id="notice"></div>
+<div class="pContainer" >
+	<div id="progress" class="progress" style="width:0%"></div>
+	</div>
+<input type="button" class="btn" name="submit" value="<?php echo lang('new_step');?>" disabled="disabled" id="laststep" onclick="initinput()">
 <?php
 }
 
@@ -896,7 +903,7 @@ function show_error($type, $errors = '', $quit = false) {
 		if(!empty($errors)) {
 			foreach ((array)$errors as $k => $v) {
 				if(is_numeric($k)) {
-					$comment .= "<li><em class=\"red\">".lang($v)."</em></li>";
+					$comment .= "<li><span class=\"red\">".lang($v)."</span></li>";
 				}
 			}
 		}
@@ -921,7 +928,7 @@ function show_tips($tip, $title = '', $comment = '', $style = 1) {
 	$title = empty($title) ? lang($tip) : $title;
 	$comment = empty($comment) ? lang($tip.'_comment', FALSE) : $comment;
 	if($style) {
-		echo "<h3>$title</h3>";
+		echo "<h2 class=\"title\">$title</h2>";
 	}
 	$comment && print($comment);
 	echo "";
@@ -932,24 +939,22 @@ function show_setting($setname, $varname = '', $value = '', $type = 'text|passwo
 		echo "<form method=\"post\" action=\"index.php\">\n";
 		return;
 	} elseif($setname == 'end') {
-		echo "\n</table>\n</form>\n";
+		echo "</table></form>\n";
 		return;
 	} elseif($setname == 'hidden') {
 		echo "<input type=\"hidden\" name=\"$varname\" value=\"$value\">\n";
 		return;
 	}
 	if(strpos($type, 'submit') !== FALSE) {
-		echo '<div style="width:80%;text-align:right;padding-top:50px;">';
 		if(strpos($type, 'oldbtn') !== FALSE) {
-			echo "<a href=\"#\" class=\"button\"><input type=\"button\" name=\"oldbtn\" value=\"".lang('old_step')."\"  onclick=\"history.back();\"></a>\n";
+			echo "<input type=\"button\" class=\"btn\" name=\"oldbtn\" value=\"".lang('old_step')."\"  onclick=\"history.back();\">\n";
 		}
 		$value = empty($value) ? 'next_step' : $value;
-		echo "<a href=\"#\" class=\"button\"><input type=\"submit\" name=\"$varname\" value=\"".lang($value)."\" class=\"btn\"></a>\n";
-		echo '</div>';
+		echo "<input type=\"submit\" name=\"$varname\" value=\"".lang($value)."\" class=\"btn\">\n";
 		return true;
 	}
 
-	echo "\n".'<tr><th class="tbopt'.($error ? ' red' : '').'" align="left">&nbsp;'.(empty($setname) ? '' : lang($setname).':')."</th>\n<td>";
+	echo "\n".'<div class="row mb-2 padleft"><label class="tbopt'.($error ? ' red' : '').'" align="left">&nbsp;'.(empty($setname) ? '' : lang($setname).':')."</label>";
 	if($type == 'text' || $type == 'password') {
 		$value = dhtmlspecialchars($value);
 		echo "<input type=\"$type\" name=\"$varname\" value=\"$value\" size=\"35\" class=\"txt\">";
@@ -970,24 +975,19 @@ function show_setting($setname, $varname = '', $value = '', $type = 'text|passwo
 		echo $value;
 	}
 
-	echo "</td>\n<td>";
+	echo "<span class=\"form-text\">";
 	if($error) {
 		$comment = '<span class="red">'.(is_string($error) ? lang($error) : lang($setname.'_error')).'</span>';
 	} else {
 		$comment = lang($setname.'_comment', false);
 	}
-	echo "$comment</td>\n</tr>\n";
+	echo "$comment</span></div>\n";
 	
 	return true;
 }
 
 function show_step($step) {
-
-	global $method;
-
 	$laststep = 4;
-	$title = lang('step_'.$method.'_title');
-	$comment = lang('step_'.$method.'_desc');
 	$step_title_1 = lang('step_title_1');
 	$step_title_2 = lang('step_title_2');
 	$step_title_3 = lang('step_title_3');
@@ -1000,21 +1000,14 @@ function show_step($step) {
 	$stepclass[$laststep] .= ' last';
 
 	echo <<<EOT
-	<div class="setup step{$step}">
-		<h2>$title</h2>
-		<p>$comment</p>
-	</div>
-	<div class="stepstat">
-		<ul>
-			<li class="$stepclass[1]">$step_title_1</li>
-			<li class="$stepclass[2]">$step_title_2</li>
-			<li class="$stepclass[3]">$step_title_3</li>
-			<li class="$stepclass[4]">$step_title_4</li>
-		</ul>
-		<div class="stepstatbg stepstat1"></div>
-	</div>
-</div>
-<div class="main">
+	<table id="menu">
+	<tr>
+	<td class="$stepclass[1]">$step_title_1</td>
+	<td class="$stepclass[2]">$step_title_2</td>
+	<td class="$stepclass[3]">$step_title_3</td>
+	<td class="$stepclass[4]">$step_title_4</td>
+	</tr>
+	</table>
 EOT;
 
 }

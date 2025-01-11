@@ -35,7 +35,7 @@ require ROOT_PATH.'./install/language/zh-cn/lang.php';
 $view_off = getgpc('view_off');
 define('VIEW_OFF', $view_off ? TRUE : FALSE);
 
-$allow_method = array('show_license', 'env_check','dir_check', 'db_init', 'admin_init','ext_info', 'install_check', 'tablepre_check');
+$allow_method = array('show_license', 'env_check', 'db_init','ext_info', 'install_check', 'tablepre_check');
 $step = intval(getgpc('step', 'R')) ? intval(getgpc('step', 'R')) : 0;
 $method = getgpc('method');
 
@@ -71,20 +71,11 @@ if($method == 'show_license') {
 
 	VIEW_OFF && function_check($func_items);
 	env_check($env_items);
-	show_env_result($env_items,$func_items, $filesock_items);
-	
-} elseif($method == 'dir_check') {
-	
 	dirfile_check($dirfile_items);
-
-	show_dirfile_result($dirfile_items);
-
-
-} elseif($method == 'db_init') {
-
+	show_env_result($env_items,$dirfile_items,$func_items, $filesock_items);
 	
+} elseif($method == 'db_init') {
 	$submit = true;
-
 	$default_config = $_config = array();
 	$default_configfile = './config/config_default.php';
 
@@ -101,6 +92,13 @@ if($method == 'show_license') {
 	} else {*/
 		$_config = $default_config;
 	//}
+
+	if($submit && !VIEW_OFF && $_SERVER['REQUEST_METHOD'] == 'POST') {
+		if($password != $password2) {
+			$error_msg['admininfo']['password2'] = 1;
+			$submit = false;
+		}
+	}
 
 	$dbhost = $_config['db'][1]['dbhost'];
 	$dbname = $_config['db'][1]['dbname'];
@@ -148,7 +146,6 @@ if($method == 'show_license') {
 	}
 
 	if($submit) {
-		
 		$step = $step + 1;
 		if(empty($dbname)) {
 			show_msg('dbname_invalid', $dbname, 0);
@@ -213,6 +210,15 @@ if($method == 'show_license') {
 		if(strpos($tablepre, '.') !== false || intval($tablepre[0])) {
 			show_msg('tablepre_invalid', $tablepre, 0);
 		}
+		if($username && $email && $password) {
+			if(strlen($username) > 30 || preg_match("/^$|^c:\\con\\con$|　|[,\"\s\t\<\>&]|^Guest/is", $username)) {
+				show_msg('admin_username_invalid', $username, 0);
+			} elseif(!strstr($email, '@') || $email != stripslashes($email) || $email != dhtmlspecialchars($email)) {
+				show_msg('admin_email_invalid', $email, 0);
+			} 
+		}else {
+			show_msg('admininfo_invalid', '', 0);
+		}
 		$uid = 1 ;
 		$authkey = substr(md5($_SERVER['SERVER_ADDR'].$_SERVER['HTTP_USER_AGENT'].$dbhost.$dbuser.$dbpw.$dbname.$pconnect.substr($timestamp, 0, 6)), 8, 6).random(10);
 		$_config['db'][1]['dbhost'] = $dbhost;
@@ -261,6 +267,7 @@ if($method == 'show_license') {
 		}
 		$onlineip = $_SERVER['REMOTE_ADDR'];
 		$timestamp = time();
+
 		$backupdir = substr(md5($_SERVER['SERVER_ADDR'].$_SERVER['HTTP_USER_AGENT'].substr($timestamp, 0, 4)), 8, 6);
 		$ret = false;
 		if(is_dir(ROOT_PATH.'data/backup')) {
@@ -296,6 +303,17 @@ if($method == 'show_license') {
 			
 		}
 		$db->query("UPDATE {$tablepre}cron SET lastrun='0', nextrun='".($timestamp + 3600)."'");
+		$salt=random(6);
+		$password = md5(md5($password).$salt);
+		$db->query("REPLACE INTO {$tablepre}user (uid, username,nickname, password, adminid, groupid, email, regdate,salt,authstr) VALUES ('$uid', '$username', '','$password', '1', '1', '$email', '".time()."','$salt','');");
+        $db->query("update {$tablepre}folder set `uid`=$uid,`username`='$username' where `fid` = 1");
+		$db->query("REPLACE INTO {$tablepre}user_status (uid, regip,lastip, lastvisit, lastactivity, lastsendmail, invisible, profileprogress) VALUES ('$uid', '', '','$timestamp', '$timestamp', '0', '0', '0');");
+		$query = $db->query("SELECT COUNT(*) FROM {$tablepre}user");
+		$totalmembers = $db->result($query, 0);
+		$userstats = array('totalmembers' => $totalmembers, 'newsetuser' => $username);
+		$ctype = 1;
+		$data = addslashes(serialize($userstats));
+		$db->query("REPLACE INTO {$tablepre}syscache (cname, ctype, dateline, data) VALUES ('userstats', '$ctype', '".time()."', '$data')");
 		for($i=0; $i<5;$i++){
 			showjsmessage(lang('set_system1'));
 		}
@@ -331,86 +349,12 @@ if($method == 'show_license') {
 			exit();
 		};
 		showjsmessage(lang('system_data_installation_successful'));
-		echo '<script type="text/javascript">function setlaststep() {document.getElementById("laststep").disabled=false;}</script><script type="text/javascript">setTimeout(function(){window.location=\'index.php?step=4\'}, 30000);setlaststep();</script>'."\r\n";
-	
 		show_footer();
 	}
 	show_form($form_db_init_items, $error_msg);
 	
 } elseif($method == 'admin_init') {
-	$submit = true;
-	$adminemail = 'admin@dzzoffice.com';
-	$error_msg = array();
-	if(isset($form_admin_init_items) && is_array($form_admin_init_items)) {
-		foreach($form_admin_init_items as $key => $items) {
-			$$key = getgpc($key, 'p');
-			if(!isset($$key) || !is_array($$key)) {
-				$submit = false;
-				break;
-			}
-			foreach($items as $k => $v) {
-				$tmp = $$key;
-				$$k = $tmp[$k];
-				if(empty($$k) || !preg_match($v['reg'], $$k)) {
-					if(empty($$k) && !$v['required']) {
-						continue;
-					}
-					$submit = false;
-					VIEW_OFF or $error_msg[$key][$k] = 1;
-				}
-			}
-		}
-	} else {
-		$submit = false;
-	}
-
-	if($submit && !VIEW_OFF && $_SERVER['REQUEST_METHOD'] == 'POST') {
-		if($password != $password2) {
-			$error_msg['admininfo']['password2'] = 1;
-			$submit = false;
-		}
-	}
-
-	if($submit) {
-
-		$step = $step + 1;
-		if($username && $email && $password) {
-			if(strlen($username) > 30 || preg_match("/^$|^c:\\con\\con$|　|[,\"\s\t\<\>&]|^Guest/is", $username)) {
-				show_msg('admin_username_invalid', $username, 0);
-			} elseif(!strstr($email, '@') || $email != stripslashes($email) || $email != dhtmlspecialchars($email)) {
-				show_msg('admin_email_invalid', $email, 0);
-			} 
-		}else {
-			show_msg('admininfo_invalid', '', 0);
-		}
-		
-		$uid =  1 ;
-
-		$onlineip = $_SERVER['REMOTE_ADDR'];
-		$timestamp = time();
-		$salt=random(6);
-		$password = md5(md5($password).$salt);
-		$db = new dbstuff;
-		include ROOT_PATH.CONFIG;
-		$dbhost = $_config['db'][1]['dbhost'];
-		$dbname = $_config['db'][1]['dbname'];
-		$dbpw = $_config['db'][1]['dbpw'];
-		$dbuser = $_config['db'][1]['dbuser'];
-		$tablepre = $_config['db'][1]['tablepre'];
-		$db->connect($dbhost, $dbuser, $dbpw, $dbname, DBCHARSET);
-		$db->query("REPLACE INTO {$tablepre}user (uid, username,nickname, password, adminid, groupid, email, regdate,salt,authstr) VALUES ('$uid', '$username', '','$password', '1', '1', '$email', '".time()."','$salt','');");
-        $db->query("update {$tablepre}folder set `uid`=$uid,`username`='$username' where `fid` = 1");
-		$db->query("REPLACE INTO {$tablepre}user_status (uid, regip,lastip, lastvisit, lastactivity, lastsendmail, invisible, profileprogress) VALUES ('$uid', '', '','$timestamp', '$timestamp', '0', '0', '0');");
-		$query = $db->query("SELECT COUNT(*) FROM {$tablepre}user");
-		$totalmembers = $db->result($query, 0);
-		$userstats = array('totalmembers' => $totalmembers, 'newsetuser' => $username);
-		$ctype = 1;
-		$data = addslashes(serialize($userstats));
-		$db->query("REPLACE INTO {$tablepre}syscache (cname, ctype, dateline, data) VALUES ('userstats', '$ctype', '".time()."', '$data')");
-		exit("<script>window.location.href='index.php?step=5';</script>");
-		header("location: index.php?step=5");
-	}
-	show_form($form_admin_init_items, $error_msg);
+	
 	
 } elseif($method == 'ext_info') {
 	@touch($lockfile);
@@ -418,12 +362,10 @@ if($method == 'show_license') {
 	@unlink(ROOT_PATH.'./install/update.php');
 	show_header();
 	echo '<iframe src="../misc.php?mod=syscache" style="display:none;"></iframe>';
-	echo '<h3>'.lang('install_successfully').'</h3>';
-	echo '<h4 class="red">'.lang('handwork_del').'"./install/index.php"</h4>';
-	echo '<div style="text-align:right;width:80%;padding-top:50px;"><a href="'.$bbserver.'" class="button" ><input type="button" value="'.lang('enter_desktop').'"></a></div>';
+	echo '<h2>'.lang('install_successfully').'</h2>';
+	echo '<h3 class="red">'.lang('handwork_del').'"./install/index.php"</h3>';
+	echo '<a href="'.$bbserver.'" class="btn" >'.lang('enter_desktop').'</a>';
 	show_footer();
-	
-
 } elseif($method == 'install_check') {
 
 	if(file_exists($lockfile)) {

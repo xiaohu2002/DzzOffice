@@ -538,12 +538,12 @@
     margin-left:-2.5rem;
 }
 .weui-footer-comment .weui-footer-create-comment{
-	display: block;
+	display: inline-block;
 	-webkit-box-flex: 1;
     -webkit-flex: 1;
     flex: 1;
     text-align: center;
-    padding: 0.25rem 0px;
+    padding: 0.25rem;
     position: relative;
 }
 .weui-footer-comment .weui-footer-create-comment i{
