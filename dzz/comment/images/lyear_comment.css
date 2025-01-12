@@ -588,3 +588,15 @@ a.ui-artZoom-hide:hover span, ._tt_tasklist li .ui-artZoom-hide.title_tttl:hover
     text-decoration: none;
     background-color: #f8f9fa;
 }
+
+.attachoffer {
+	background: #fff;
+	border: 1px solid #ebebeb;
+	box-shadow: 0 1px 15px 1px rgba(77, 82, 89, .075);
+	margin: 15px 0; 
+	overflow: hidden;
+	border-color: #eff2f7;
+}
+.attachoffer:hover {
+	background: #f8f9fa;
+}

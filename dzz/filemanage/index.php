@@ -89,7 +89,6 @@ if ($do == 'delete') {
 		}
 	}
   } elseif ($do == 'getinfo') {
-	$callback = isset($_GET['callback']) ? $_GET['callback'] : '';
 	$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
 	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
 	$pfid = isset($_GET['pfid']) ? intval($_GET['pfid']) : '';
@@ -204,13 +203,25 @@ if ($do == 'delete') {
 			}
 		}
 	}
-	
 	$return = [
-		"rows" => $list,
-		"total" => $count,
+		"code"=> 0,
+		"msg"=> "",
+		"count"=> $count? $count : 0,
+		"data" => $list? $list : [],
 		"breadcrumb" => $breadcrumb,
 	];
-	exit($callback . '(' . json_encode($return) . ');');
+	$jsonReturn = json_encode($return);
+	if ($jsonReturn === false) {
+		$errorMessage = json_last_error_msg();
+		$errorResponse = [
+			"code" => 1,
+			"msg" => "JSON 编码失败，请刷新重试: " . $errorMessage,
+			"count" => 0,
+			"data" => [],
+		];
+		exit(json_encode($errorResponse));
+	}
+	exit($jsonReturn);
   } else {
 	if (isset($_G['setting']['template']) && $_G['setting']['template'] == 'lyear') {
     } else {

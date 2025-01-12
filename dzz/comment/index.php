@@ -15,7 +15,6 @@ include_once libfile('function/appperm');
 $navtitle = '评论管理';
 $do = isset($_GET['do']) ? $_GET['do'] : '';
 if ($do == 'getinfo') {
-    $callback = isset($_GET['callback']) ? $_GET['callback'] : '';
 	$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
 	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
 	$sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : '';
@@ -64,9 +63,9 @@ if ($do == 'getinfo') {
 			"authorid" => $value['author'],
 			"ip" => $value['ip'],
 			"xtllq" => $value['xtllq'],
-			"dateline" => dgmdate($value['dateline']),
+			"dateline" => dgmdate($value['dateline'], 'Y-n-j H:i:s'),
 			"cid" => $value['cid'],
-			"edittime" => $value['edittime'] ? dgmdate($value['edittime']) : null,
+			"edittime" => $value['edittime'] ? dgmdate($value['edittime'], 'Y-n-j H:i:s') : null,
 			"name" => $value['name'],
 			"edituid" => $user['username'],
 			"message" => $value['message'],
@@ -75,10 +74,23 @@ if ($do == 'getinfo') {
 		];
     }
     $return = [
-		"rows" => $list,
-		"total" => $count
+		"code"=> 0,
+		"msg"=> "",
+		"count"=> $count? $count : 0,
+		"data" => $list? $list : [],
 	];
-	exit($callback . '(' . json_encode($return) . ');');
+	$jsonReturn = json_encode($return);
+	if ($jsonReturn === false) {
+		$errorMessage = json_last_error_msg();
+		$errorResponse = [
+			"code" => 1,
+			"msg" => "JSON 编码失败，请刷新重试: " . $errorMessage,
+			"count" => 0,
+			"data" => [],
+		];
+		exit(json_encode($errorResponse));
+	}
+	exit($jsonReturn);
 } elseif ($do == 'delete') {
     $cid = isset($_GET['cid']) ? trim($_GET['cid']) : '';
     $cids = explode(',', $cid);

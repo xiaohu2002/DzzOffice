@@ -645,13 +645,11 @@ function showmessage(message) {
 		if (width==100) {
 			if(message == '<?= lang('system_data_installation_successful') ?>') {
 				document.getElementById('laststep').disabled =false;
-				window.setTimeout(function() {
-					window.location='index.php?method=ext_info';
-				}, 1000);
+				window.location='index.php?method=ext_info';
 			}
 		}
 		document.getElementById('progress').style.width = width+'%';
-    },50*timer);
+    },30*timer);
 }
 function initinput() {
 	window.location='index.php?method=ext_info';

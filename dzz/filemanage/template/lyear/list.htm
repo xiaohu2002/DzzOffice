@@ -1,6 +1,10 @@
 <!--{template lyear:header_simple_start}-->
-<link rel="stylesheet" href="static/lyear/js/bootstrap-table/bootstrap-table.min.css">
+<link rel="stylesheet" href="static/lyear/js/layui/css/layui.css">
 <style>
+	.icon {
+		width: 30px;
+		height: 30px;
+	}
 	.iconFirstWord {
 		width: 18px;
 		height: 18px;
@@ -54,47 +58,51 @@
 					  </div>
 				  </div>
                 <div id="toolbar" class="toolbar-btn-action">
-                  <button id="btn_delete" type="button" class="btn btn-danger">
+                  <button id="btn_delete" type="button" class="btn btn-danger" data-type="delete">
                     <span class="mdi mdi-delete" aria-hidden="true"></span>删除
                   </button>
                 </div>
-                <table id="table"></table>
+                <table class="layui-hide" id="table" lay-filter="table"></table>
+				  <script type="text/html" id="barDemo">
+					<!--{if $_G['adminid']}--><a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">更多</a><!--{/if}-->
+					<a class="layui-btn layui-btn--warm layui-btn-xs" lay-event="view">预览</a>
+					<a class="layui-btn layui-btn-xs" lay-event="download">下载</a>
+					<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+				  </script>
 			</div>
 		</div>
 	</div>
 </main>
-<script src="static/lyear/js/bootstrap-table/bootstrap-table.js"></script>
-<script src="static/lyear/js/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="static/lyear/js/layui/layui.js"></script>
 <script>
-
-	/**
-     * 批量 删除按钮
-     */
-	 $(document).on('click', '#btn_delete', function () {
-        var self    = $(this);
-        var selRows = $('#table').bootstrapTable("getSelections");
-        if(selRows.length == 0){
-			showmessage("请至少选择一行", 'danger',3000,1);
-            return;
-        }
+	layui.use('table', function(){
+	  var table = layui.table;
+	var $ = layui.$, active = {
+		delete: function(){
+			var checkStatus = table.checkStatus('table'),data = checkStatus.data;
+			if(!data){
+				showmessage("请至少选择一行", 'danger',3000,1);
+            	return;
+			}
+			if(data.length == 0){
+				showmessage("请至少选择一行", 'danger',3000,1);
+				return;
+			}
         var postData = "";
-        $.each(selRows,function(i) {
+        $.each(data,function(i) {
             postData +=  this.rid;
-            if (i < selRows.length - 1) {
+            if (i < data.length - 1) {
                 postData += ",";
             }
         });
-		showDialog('您确定要删除这'+selRows.length+'文件(如果是文件夹将包含其下的子文件都会被删除)吗？删除之后不可恢复！', 'confirm','', function(){	
-			var loader = $('body').lyearloading({
-				opacity: 0.2,
-				spinnerSize: 'lg'
-			});
+		layer.confirm('您确定要删除这'+data.length+'个文件(如果是文件夹将包含其下的子文件都会被删除)吗？删除之后不可恢复！', function(index){
+			var loading = layer.load(0, { shade:  [0.1, '#000'] });
 			jQuery.post('{MOD_URL}&do=delete', {'icoid': postData},function(json){
-				loader.destroy();
+				layer.close(loading);
+				layer.close(index);
 				if(json['msg']=='success'){
 					showmessage('删除成功', 'success', '3000', 1);
-					$('#table').bootstrapTable("refresh");
-					return false;
+					table.reload('table');
 				}else if(json['msg']){
 					showmessage(json['msg'], 'danger', '3000', 1);
 				} else {
@@ -102,332 +110,179 @@
 				}
 				},'json')
 				.fail(function() {
-					loader.destroy();
+					layer.close(loading);
+					layer.close(index);
 					showmessage('服务器发生错误，请稍后再试', 'danger',3000,1);
-		  });
+		  		});
         });
-        return false;
-    });
-
-	 /**
-     * 搜索按钮
-     */
-	 $(document).on('click', '#search-btn', function() {
-        $('#table').bootstrapTable('refresh');
-    })
-
-	/**
-     * 重置按钮
-     */
-	$('#refreshsearch').click(function() {
+	}
+  };
+  
+  $('#btn_delete').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+	  table.render({
+		elem: '#table',
+		url: '{MOD_URL}&do=getinfo',
+		toolbar: true,
+		text: {
+			none: '暂无相关数据'
+		},
+		page: {
+		  limit: 20, // 默认显示20行
+		  limits: [10, 20, 50, 100, 200, 500, 900] // 可选的行数
+		},
+		cellMinWidth: 80 //全局定义常规单元格的最小宽度
+		,cols: [[
+		{type:'checkbox', fixed: 'left'}
+		  ,{field:'id', title: 'ID',width:80, fixed: 'left'}
+		  <!--{if $_G['adminid']}-->,{field:'username', title: '{lang possessor}', align: 'center',templet: function(d) {
+          return d.username;
+        }}<!--{/if}-->
+		  ,{field:'name', title: '{lang filename}', align: 'center',templet: function(d) {
+          // 直接返回服务器返回的时间格式字符串
+          return d.name;
+        }}
+		  ,{field:'size', title: '{lang file_size}', align: 'center'}
+		  ,{field:'type', title: '{lang file_type}', align: 'center'}
+		  ,{field:'relpath', title: '{lang file_location}', align: 'left'}
+		  ,{field:'dateline', title: '{lang add_time}', align: 'center'}
+		  ,{field: 'right',title: '{lang operation}',width:240, align:'center', toolbar: '#barDemo', fixed: 'right'}
+		]]
+	  });
+	  //监听工具条
+	  table.on('tool(table)', function(obj){
+		var data = obj.data;
+		if(obj.event === 'detail'){
+			showDataTemplate(obj);
+		} else if(obj.event === 'view'){
+			if (obj.data.ftype == 'folder') {
+				// 刷新表格并传递搜索参数
+				table.reload('table', {
+					where: { pfid: obj.data.oid},
+					page: {
+						curr: 1
+					},
+					done: function(res, curr, count) {
+						if(res.breadcrumb) {
+							$('#breadcrumb').html(res.breadcrumb);
+						}
+					}
+				});
+			} else {
+				var url = 'share.php?a=view&s='+obj.data.dpath;
+				window.open(url);
+			}
+		} else if(obj.event === 'download'){
+			var url = DZZSCRIPT + '?mod=io&op=download&path='+obj.data.dpath;
+			window.open(url);
+		} else if(obj.event === 'del'){
+			layer.confirm('{lang filemanage_del_file}', function(index){
+				var loading = layer.load(0, { shade:  [0.1, '#000'] });
+				$.ajax({
+					type: "post",
+					url: "{MOD_URL}&do=delete",
+					data: {icoid: obj.data.rid},
+					dataType: 'json',
+					success: function (res, status) {
+						layer.close(loading);
+						layer.close(index);
+						if (res.msg == 'success') {
+							obj.del();
+							showmessage('删除成功', 'success',3000,1);
+						} else {
+							showmessage(res.msg, 'danger',3000,1);
+						}
+					},
+					error: function () {
+						layer.close(index);
+						layer.close(loading);
+						showmessage('服务器发生错误，请稍后再试', 'danger',3000,1);
+					}
+				})
+			});
+		}
+	  });
+	  <!--{if $_G['adminid']}-->
+	  table.on('rowDouble(table)', function(obj){
+		showDataTemplate(obj);
+	  });
+		function showDataTemplate(obj) {
+			var data = obj.data;
+			var template = `
+				<div>
+				${data.FileUri ? `<p><strong>直链地址:</strong> <a href="${data.FileUri}" target="_blank">${data.FileUri}</a></p>` : ''}
+				${data.copys ? `<p><strong>引用:</strong> ${data.copys}</p>` : ''}
+				${data.isdelete !== undefined ? `<p><strong>是否在回收站:</strong> ${data.isdelete}</p>` : ''}
+				${data.downs ? `<p><strong>下载次数:</strong> ${data.downs}</p>` : ''}
+				${data.views ? `<p><strong>{lang view_count}:</strong> ${data.views}</p>` : ''}
+				${data.edits ? `<p><strong>修改次数:</strong> ${data.edits}</p>` : ''}
+				</div>
+			`;
+	
+			layer.alert(JSON.stringify(data), {
+				title: '当前行文件详情：',
+				content: template,
+			});
+	
+		// 标注选中样式
+		obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+		}
+		<!--{/if}-->
+		// 搜索按钮功能
+		$(document).on('click', '#search-btn', function() {
+		// 获取搜索关键词
+		var keyword = $('#keyword').val();
+		// 刷新表格并传递搜索参数
+		table.reload('table', {
+		  where: { keyword: keyword,orgid:$('#sel_orgid_{$org[orgid]}').val() },
+		  page: {
+			curr: 1 //重新从第 1 页开始
+		  }
+		});
+	  });
+	  var pfid = '';
+		$(document).on('click', '.fid-btn', function() {
+			table.reload('table', {
+				where: {pfid:pfid}, // 清空搜索参数
+				page: {
+					curr: 1 //重新从第 1 页开始
+				}
+			});
+		});
+	   // 重置按钮功能
+	   $('#refreshsearch').click(function() {
 		// 清空表单内容
         $('#sel_orgid_{$org[orgid]}').val('');
         $('#keyword').val('');
 		// 重置按钮内容
 		$('#orgid_{$org[orgid]}_Menu').text('$org[depart]');
-        // 刷新表格
-        $('#table').bootstrapTable('refresh');
-    });
-
-	/**
-     * 文件夹按钮
-     */
-	var pfid = '';
-	$(document).on('click', '.fid-btn', function() {
-		pfid = $(this).data('fid');
-		$('#table').bootstrapTable('refresh');
-    });
-	var type = '';
-	$(document).on('click', '.type-btn', function() {
+		// 刷新表格
+		table.reload('table', {
+		  where: {}, // 清空搜索参数
+		  page: {
+			curr: 1 //重新从第 1 页开始
+		  }
+		});
+	  });
+	  // 类型按钮功能
+	  $(document).on('click', '.type-btn', function() {
 		// 移除所有 .type-btn 的 active 类
 		$('.type-btn').removeClass('active');
 		// 为当前点击的按钮添加 active 类
 		$(this).addClass('active');
 		// 获取当前的 type 值
+		operation = $(this).data('operation');
 		type = $(this).data('type');
-		$('#table').bootstrapTable('refresh');
-    })
-    
-	/**
-	 * 分页相关的配置
-	 **/
-	const pagination = {
-		// 分页方式：[client] 客户端分页，[server] 服务端分页
-		sidePagination: "server",
-		// 初始化加载第一页，默认第一页
-		pageNumber: 1,
-		// 每页的记录行数
-		pageSize: 10,
-		// 可供选择的每页的行数 - (亲测大于1000存在渲染问题)
-		pageList: [5, 10, 25, 50, 100],
-		// 在上百页的情况下体验较好 - 能够显示首尾页
-		paginationLoop: true,
-		// 展示首尾页的最小页数
-		paginationPagesBySide: 2,
-	};
-	
-	/**
-	 * 按钮相关配置
-	 **/
-	const button = {
-		// 按钮的类
-		buttonsClass: 'default',
-		// 类名前缀
-		buttonsPrefix: 'btn'
-	}
-	
-	/**
-	 * 图标相关配置
-	 **/
-	const icon = {
-		// 图标前缀
-		iconsPrefix: 'mdi',
-		// 图标大小
-		iconSize: 'mini',
-		// 图标的设置
-		icons: {
-			paginationSwitchDown: 'mdi-door-closed',
-			paginationSwitchUp: 'mdi-door-open',
-			refresh: 'mdi-refresh',
-			toggleOff: 'mdi-toggle-switch-off',
-			toggleOn: 'mdi-toggle-switch',
-			columns: 'mdi-table-column-remove',
-			detailOpen: 'mdi-plus',
-			detailClose: 'mdi-minus',
-			fullscreen: 'mdi-monitor-screenshot',
-			search: 'mdi-table-search',
-			clearSearch: 'mdi-trash-can-outline'
-		}
-	};
-	
-	/**
-	 * 表格相关的配置
-	 **/
-	const table = {
-		classes: 'table table-bordered table-hover table-striped lyear-table',
-		// 请求地址
-		url: '{MOD_URL}&do=getinfo',
-		// 唯一ID字段
-		uniqueId: 'id',
-		// 每行的唯一标识字段
-		idField: 'id',
-		// 是否启用点击选中行
-		clickToSelect: true,
-		// 是否显示详细视图和列表视图的切换按钮(clickToSelect同时设置为true时点击会报错)
-		// showToggle: true,
-		// 请求得到的数据类型
-		dataType: 'jsonp',
-		// 请求方法
-		method: 'get',
-		// 工具按钮容器
-		toolbar: '#toolbar',
-		// 是否分页
-		pagination: true,
-		// 是否显示所有的列
-		showColumns: true,
-		// 是否显示刷新按钮
-		showRefresh: true,
-		// 显示图标
-		showButtonIcons: true,
-		// 显示文本
-		showButtonText: false,
-		// 显示全屏
-		showFullscreen: true,
-		// 总数字段
-		totalField: 'total',
-		// 当字段为 undefined 显示
-		undefinedText: '-',
-		// 排序方式
-		sortOrder: "asc",
-		...icon,
-		...pagination,
-		...button,
-		detailView:true,
-		detailFormatter:"detailFormatter",
-	};
-	
-	/**
-	 * 用于演示的列信息
-	 **/
-	const columns = [{
-		field: 'example',
-		checkbox: true,
-		// 列的宽度
-		width: 5,
-		// 宽度单位
-		widthUnit: 'rem'
-	}, {
-		field: 'id',
-		title: '编号',
-		// 使用[align]，[halign]和[valign]选项来设置列和它们的标题的对齐方式。
-		// h表示横向，v标识垂直
-		align: 'center',
-		switchable: false,
-		// 列的宽度
-		width: 4,
-		// 宽度单位
-		widthUnit: 'rem'
-	},<!--{if $_G['adminid']}--> {
-		field: 'username',
-		align: 'center',
-		sortable: true,
-		title: '{lang possessor}'
-	},<!--{/if}--> {
-		field: 'name',
-		sortable: true,
-		title: '{lang filename}',
-	}, {
-		field: 'size',
-		sortable: true,
-		// 是否可视(默认 - true)
-		align: 'center',
-		title: '{lang file_size}'
-	}, {
-		field: 'type',
-		sortable: true,
-		align: 'center',
-		title: '{lang file_type}'
-	}, {
-        field: 'relpath',
-        title: '{lang file_location}'
-    }, {
-        field: 'dateline',
-		align: 'center',
-		sortable: true,
-        title: '{lang add_time}'
-    }, {
-        field: 'operate',
-        title: '{lang operation}',
-        formatter: btnGroup,  // 自定义方法
-        events: {
-			'click .view-btn': function (event, value, row, index) {
-                event.stopPropagation();
-                view(row);
-            },
-            'click .download-btn': function (event, value, row, index) {
-                event.stopPropagation();
-                download(row);
-            },
-            'click .del-btn': function (event, value, row, index) {
-                event.stopPropagation();
-                delUser(row);
-            }
-        }
-    }];
-    
-    // 自定义操作按钮
-    function btnGroup () {
-        let html =
-            '<a class="btn btn-sm btn-default me-1 view-btn" title="{lang view}" data-bs-toggle="tooltip"><i class="mdi mdi-magnify-expand"></i></a><a class="btn btn-sm btn-default me-1 download-btn" title="{lang download}" data-bs-toggle="tooltip"><i class="mdi mdi-download"></i></a>' +
-            '<a class="btn btn-sm btn-default del-btn" title="{lang delete}" data-bs-toggle="tooltip"><i class="mdi mdi-delete"></i></a>';
-        return html;
-    }
-	// 操作方法 - 预览
-    function view(row) {
-		if (row.ftype == 'folder') {
-			pfid = row.oid;
-			$('table').bootstrapTable('refresh');
-		} else {
-			var url = 'share.php?a=view&s='+row.dpath;
-			window.open(url);
-		}
-    }
-    // 操作方法 - 编辑
-    function download(row) {
-		var url = DZZSCRIPT + '?mod=io&op=download&path='+row.dpath;
-		window.open(url);
-    }
-    // 操作方法 - 删除
-	function delUser(row) {
-		showDialog('{lang filemanage_del_file}', 'confirm','', function(){	
-			var loader = $('body').lyearloading({
-				opacity: 0.2,
-				spinnerSize: 'lg'
-			});
-			$.ajax({
-            type: "post",
-            url: "{MOD_URL}&do=delete",
-            data: {icoid: row.rid},
-            dataType: 'json',
-            success: function (res, status) {
-				loader.destroy();
-                if (res.msg == 'success') {
-					showmessage('删除成功', 'success',3000,1);
-                    $("#table").bootstrapTable('refresh');
-                } else {
-					showmessage(res.msg, 'danger',3000,1);
-                }
-            },
-            error: function () {
-				loader.destroy();
-				showmessage('服务器发生错误，请稍后再试', 'danger',3000,1);
-            }
-        });
-	});
-        
-    }
-	
-	$('table').bootstrapTable({
-		...table,
-		// 自定义的查询参数
-		queryParams: function (params) {
-			return {
-				// 每页数据量
-				limit: params.limit,
-				// sql语句起始索引
-				offset: params.offset,
-				page: (params.offset / params.limit) + 1,
-				// 排序的列名
-				sort: params.sort,
-				// 排序方式 'asc' 'desc'
-				sortOrder: params.order,
-				// 搜索关键词
-                keyword: $('#keyword').val(),
-				orgid: $('#sel_orgid_{$org[orgid]}').val(),
-				pfid:pfid,
-				type:type,
-			};
-		},
-		columns,
-        onLoadSuccess: function(data){
-			if(data.breadcrumb) {
-				$('#breadcrumb').html(data.breadcrumb);
-			}
-        }
-	});
-	function detailFormatter(index, row) {
-		var html = [];
-		$.each(row, function (key, value) {
-			if (key === 'FileUri' || key === 'copys' || key === 'isdelete' || key === 'downs' || key === 'views' || key === 'edits') {
-				var label;
-				if (value) {
-					switch (key) {
-						case 'FileUri':
-							label = '直链地址';
-							value = '<a href="' + value + ';">' + value + '</a>';
-							break;
-						case 'copys':
-							label = '引用';
-							break;
-						case 'isdelete':
-							label = '是否在回收站';						
-							break;
-						case 'downs':
-							label = '下载次数';						
-							break;
-						case 'views':
-							label = '{lang view_count}';						
-							break;
-						case 'edits':
-							label = '修改次数';						
-							break;
-					}
-					html.push('<p><b>' + label + ':</b> ' + value + '</p>');
-				}
-			}
+		// 刷新表格并传递 operation 参数
+		table.reload('table', {
+		  where: { keyword: $('#keyword').val(), type: type },
+		  page: {
+			curr: 1 //重新从第 1 页开始
+		  }
 		});
-		return html.join('');
-	}
-
+	  });
+	});
 </script>
 <!--{template lyear:footer_simple}-->

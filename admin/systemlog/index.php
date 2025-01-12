@@ -3,39 +3,22 @@ if(!defined('IN_DZZ')) {
 	exit('Access Denied');
 }
 $returntype =  isset($_GET['returnType']) ?  $_GET['returnType']: 'json';//返回值方式
-$type=$_GET['type'];
-if(!in_array($type, array('list'))) {
-	$type='list';
-} 
-
+$navtitle=lang('appname');
+$do = isset($_GET['do']) ? $_GET['do'] : '';
+$operation = isset($_GET['operation']) ? $_GET['operation'] : 'cplog';
 $checkLanguage = $_G['language']; 
 if(file_exists (DZZ_ROOT.'./admin/language/'.$checkLanguage.'/'.'lang.php')){							
 	include DZZ_ROOT.'./admin/language/'.$checkLanguage.'/'.'lang.php';	
 	$_G['lang']['template']=array_merge($_G['lang']['template'],$lang); 
 }
- 
-if($type=="list"){
-	!isset($_GET['page']) && $_GET['page']=1;
-	$lpp = empty($_GET['lpp']) ? 20 : $_GET['lpp'];
+$systemlog_setting = unserialize($_G["setting"]["systemlog_setting"]); 
+if ($do == 'getinfo') {
+	$operationarr = array_keys($systemlog_setting);
+	$operation = in_array($operation, $operationarr) ? $operation : "cplog"; 
+	$limit = empty($_GET['limit']) ? 20 : $_GET['limit'];
 	$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
-	$checklpp = array();
-	$checklpp[$lpp] = 'selected="selected"';
-	$extrainput = '';
-	$systemlog_setting = unserialize($_G["setting"]["systemlog_setting"]); 
-	$operationarr = array_keys($systemlog_setting);  
-	$operation = in_array($_GET['operation'], $operationarr) ? $_GET['operation'] : "cplog"; 
-	$navtitle=$systemlog_setting[$operation]["title"].' - '.lang('appname');
-  	$page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
-	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
-  	$start = ($page - 1) * $lpp;
- 	 $gets = array(
-    'mod' => MOD_NAME,
-	'type' => $type,
-    'operation' => $operation,
-    'lpp' => $lpp,
-	'keyword' => $keyword,
-  	);
-	$theurl = BASESCRIPT . "?" . url_implode($gets);
+	$page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
+	$start = ($page - 1) * $limit;
 	$logdir = DZZ_ROOT.'./data/log/';
 	$logfiles = get_log_files($logdir, $operation);
 	if ($logfiles) {
@@ -46,7 +29,7 @@ if($type=="list"){
 		$count = ($countlogfile-1)*4000+$firstlogsnum;
 		$logs = array();
 		$jishu=4000;//每个日志文件最多行数
-		$start = ($page - 1) * $lpp;
+		$start = ($page - 1) * $limit;
 		$lastlog=$last_secondlog="";
 		
 		$newdata=array();
@@ -61,7 +44,7 @@ if($type=="list"){
 		foreach($newdata as $k=>$v){
 			if( $start<=$v["end"]){
 				$lastlog=$v;
-				if( ($start+$lpp)<$v["end"]){
+				if( ($start+$limit)<$v["end"]){
 					
 				}else{
 					if( isset($newdata[$k+1])){
@@ -93,13 +76,13 @@ if($type=="list"){
 		if( $lastlog["file"]!=$logfiles[0] ){
 			$j++;
 		}
-		$logs = array_slice($logs, $j, $lpp);
+		$logs = array_slice($logs, $j, $limit);
 		$onecountget = count($logs);
 		
 		$jj=0;
 		if( $last_secondlog ){
 			for($i=$last_secondlog["start"];$i<$last_secondlog["end"];$i++){
-				if( ($jj)>= ($lpp-$onecountget)){
+				if( ($jj)>= ($limit-$onecountget)){
 					break;
 				}
 				$jj++;
@@ -109,32 +92,58 @@ if($type=="list"){
 		if($last_secondlog){
 			$logs2 = file( $logdir.$last_secondlog["file"] );
 			$logs2 = array_reverse($logs2);
-			$end=$lpp-count($logs); 
+			$end=$limit-count($logs); 
 			$logs2 = array_slice( $logs2, 0, $jj);
 			$logs=array_merge($logs,$logs2);
 		}
-		$usergroup = array(); 
-		foreach(C::t('usergroup')->range() as $group) {
-			$usergroup[$group['groupid']] = $group['grouptitle'];
-		}
-		$list=array();
-		foreach($logs as $k => $logrow) {
-			$log = explode("\t", $logrow); 
-			if(empty($log[1])) {
-				continue;
+		if($logs) {
+			$usergroup = array(); 
+			foreach(C::t('usergroup')->range() as $group) {
+				$usergroup[$group['groupid']] = $group['grouptitle'];
 			}
-			$log[1] = dgmdate($log[1], 'y-n-j H:i:s');
-			$log[2] = $log[2];
-			$log[2] = ($log[2] != $_G['member']['username'] ? "<b>$log[2]</b>" : $log[2]);
-			$log[3] = $usergroup[$log[3]];
-			$list[$k]=$log;
+			$list=array();
+			$id = $start + 1;
+			foreach($logs as $logrow) {
+				$log = explode("\t", $logrow); 
+				if(empty($log[1])) {
+					continue;
+				}
+				$log[1] = dgmdate($log[1], 'Y-n-j H:i:s');
+				$log[3] = $usergroup[$log[3]];
+				$list[] = [
+					"id" => $id++,
+					"operator" => $log[2],
+					"usergroup" => $log[3],
+					"ip" => $log[4],
+					"time" => $log[1],
+					"loginfo" => $log[5],
+					"visit" => $log[6],
+					"from" => $log[7],
+					"info" => $log[8],
+				];
+			}
 		}
-		$multipage = multi($count, $lpp, $page, $theurl,'pull-right'); 
     }
-	include template('list');
+	$return = [
+		"code"=> 0,
+		"msg"=> "",
+		"count"=> $count? $count : 0,
+		"data" => $list? $list : [],
+	];
+	$jsonReturn = json_encode($return);
+	if ($jsonReturn === false) {
+		$errorMessage = json_last_error_msg();
+		$errorResponse = [
+			"code" => 1,
+			"msg" => "JSON 编码失败，请刷新重试: " . $errorMessage,
+			"count" => 0,
+			"data" => [],
+		];
+		exit(json_encode($errorResponse));
+	}
+	exit($jsonReturn);
 }
-
-
+include template('list');
 function getactionarray() {
 	$isfounder = true;
 	unset($topmenu['index'], $menu['index']);

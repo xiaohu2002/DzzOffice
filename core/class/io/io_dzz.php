@@ -332,16 +332,10 @@ class io_dzz extends io_api
             $file = $_G['setting']['attachdir'] . './' . $target;
             IO::output_thumb($file);
         }
-
-
         $fileurls = array();
         Hook::listen('thumbnail', $fileurls, $path);//调用挂载点程序生成缩略图绝对和相对地址；
         if (!$fileurls) {
             $fileurls = array('fileurl' => self::getFileUri($path), 'filedir' => self::getStream($path));
-        }
-        // 检查 filedir 是否为有效文件路径
-        if (!is_string($fileurls['filedir']) || !file_exists($fileurls['filedir'])) {
-            $fileurls['filedir'] = 'dzz/images/default/icodefault.png';
         }
         
         //非图片类文件的时候，直接获取文件后缀对应的图片

@@ -6,22 +6,21 @@ var html=''
   	html+='	<div class="flex-grow-1 ms-2">';
     html+=' <a href="user.php?uid='+arr['authorid']+'" title="'+arr['author']+'" hidefocus="true" target="_blank"><strong>'+arr['author']+'</strong></a>';
     html+=' <div class="text-muted">'+arr['dateline']+' '+arr['xtllq']+' '+arr['ip']+'<span class="float-end"><a class="dcolor" hidefocus="true" class="dcolor" href="javascript:void(0);" onclick="feed_delete(\''+arr['cid']+'\',\'comment_'+arr['cid']+'\')"><i class="mdi mdi-delete"></i>&nbsp;'+__lang.delete+'</a>'+' '+'<a class="dcolor" hidefocus="true" class="dcolor" href="javascript:void(0);" onclick="getReplyForm(\''+arr['cid']+'\',\'0\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\');"><i class="mdi mdi-reply"></i>&nbsp;'+__lang.reply+'</a></span></div><p>'+arr['message']+'</p>';
-	html+='<ul class="list-group list-group-horizontal-sm mb-2" style="flex-wrap:wrap;flex-direction:row">';
+	html+='<div class="row">';
 for(var i in arr['attachs']){
 	var attach=arr['attachs'][i];
-    html+='<li class="list-group-item file_fed_'+attach.type+' d-flex col-sm-6 col-md-6 col-lg-3">';
-	html+='<span><a class="img-avatar-48" hidefocus="true" href="javascript:;"><img src="'+attach['img']+'" data-original="'+attach['img']+'" alt="'+attach['title']+'" class=""></a></span>';
-	html+='<div class="ms-2 me-auto">';
-	html+='<div class="fw-bold">'+attach['title'];
+    html+='<div class="col-xs-12 col-sm-6 col-lg-4">';
+	html+='<div class="attachoffer">';
+	html+='<div class="ms-2 me-auto  p-2">';
+	html+='<div class="fw-bold"><a class="img-avatar-48" hidefocus="true" href="javascript:;"><img src="'+attach['img']+'" data-original="'+attach['img']+'" alt="'+attach['title']+'" class=""></a>'+attach['title'];
 	if(attach['filesize']){
 		html+='<span>('+attach['filesize']+')</span>';
 	}
-	html+='</div><div>';
+	html+='</div><div class="p-2">';
 	if(attach.preview>0){
 		html+='<a href="javascript:;" title="" hidefocus="true" class="btn btn-outline-info btn-sm" onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
 	}
 	if(attach.type=='dzzdoc' || attach.type=='link'){
-
 	} else {
 		html+='<a href="javascript:;" title="" hidefocus="true" class="btn btn-outline-info btn-sm" onclick="feed_downAttach(\''+attach['qid']+'\')">'+__lang.download;
 		if(attach.downloads>0){
@@ -30,10 +29,12 @@ for(var i in arr['attachs']){
 		html+='</a>';
 		html+='<a href="javascript:void(0);" title="" hidefocus="true" class="btn btn-outline-info btn-sm" onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
 	}
-	html+='<div>';
-	html+='<li>';
+	html+='</div>';
+	html+='</div>';
+	html+='</div>';
+	html+='</div>';
 }
-html+='	</ul>';
+html+='	</div>';
    html+='		<ul id="comment_reply_'+arr['cid']+'" class="list-unstyled" ></ul>';
    html+='	</div>';
    html+='	</div>';
@@ -75,17 +76,17 @@ function feed_reply(arr){
 	html+='<a class="dcolor" hidefocus="true" class="dcolor" href="javascript:void(0);" onclick="getReplyForm(\''+arr['pcid']+'\',\''+arr['cid']+'\',\''+arr['allowattach']+'\',\''+arr['allowat']+'\',\''+arr['allowsmiley']+'\');"><i class="mdi mdi-reply"></i>&nbsp;'+__lang.reply+'</a>';
 	html+='</span></div><p>'+arr['message']+'</p>';
 	if(arr['attachs']){
-		html+='<ul class="attachment list-group list-group-horizontal-sm mb-2" style="flex-wrap:wrap;flex-direction:row">';
+		html+='<div class="row">';
 	for(var i in arr['attachs']){
 		var attach=arr['attachs'][i];
-		html+='<li class="list-group-item file_fed_'+attach.type+' d-flex col-sm-6 col-md-6 col-lg-3">';
-		html+='<span><a class="img-avatar-48" hidefocus="true" href="javascript:;"><img src="'+attach['img']+'" data-original="'+attach['img']+'" alt="'+attach['title']+'" class=""></a></span>';
-		html+='<div class="ms-2 me-auto">';
-		html+='<div class="fw-bold">'+attach['title'];
+		html+='<div class="col-xs-12 col-sm-6 col-lg-4">';
+		html+='<div class="attachoffer">';
+		html+='<div class="ms-2 me-auto  p-2">';
+		html+='<div class="fw-bold"><a class="img-avatar-48" hidefocus="true" href="javascript:;"><img src="'+attach['img']+'" data-original="'+attach['img']+'" alt="'+attach['title']+'" class=""></a>'+attach['title'];
 		if(attach['filesize']){
 			html+='<span>('+attach['filesize']+')</span>';
 		}
-		html+='</div><div>';
+		html+='</div><div class="p-2">';
 		if(attach.preview>0){
 			html+='<a href="javascript:;" title="" hidefocus="true" class="btn btn-outline-info btn-sm" onclick="feed_attach_preview(\''+attach['qid']+'\')">'+__lang.preview+'</a>';
 		}
@@ -99,10 +100,12 @@ function feed_reply(arr){
 			html+='</a>';
 			html+='<a href="javascript:void(0);" title="" hidefocus="true" class="btn btn-outline-info btn-sm" onclick="feed_attach_saveto(\''+attach['qid']+'\')">'+__lang.js_saved_my_documents+'</a> ';
 		}
-		html+='<div>';
-		html+='<li>';
+		html+='</div>';
+		html+='</div>';
+		html+='</div>';
+		html+='</div>';
 	}
-	html+='	</ul>';
+	html+='	</div>';
 	}
      html+='     </div>';
      html+='   </div>';

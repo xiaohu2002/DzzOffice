@@ -1,9 +1,14 @@
 <!--{template lyear:header_simple_start}-->
 <link href="{MOD_PATH}/images/lyear_comment.css?{VERHASH}" rel="stylesheet" media="all">
 <link href="static/css/smilies.css?{VERHASH}"rel="stylesheet" media="all">
-<link rel="stylesheet" href="static/lyear/js/bootstrap-table/bootstrap-table.min.css?{VERHASH}">
+<link rel="stylesheet" href="static/lyear/js/layui/css/layui.css">
 <link href="static/dzzthumb/jquery.dzzthumb.css?{VERHASH}" rel="stylesheet" media="all">
 <script type="text/javascript" src="static/dzzthumb/jquery.dzzthumb.js?{VERHASH}"></script>
+<style type="text/css">
+	.modal-dialog {
+		width: 900px;
+	}
+</style>
 <!--{template lyear:header_simple_end}-->
 <main class="bs-main-container">
 	<div class="container-fluid">
@@ -26,47 +31,51 @@
 					  </div>
 				  </div>
                 <div id="toolbar" class="toolbar-btn-action">
-                  <button id="btn_delete" type="button" class="btn btn-danger">
+                  <button id="btn_delete" type="button" class="btn btn-danger" data-type="delete">
                     <span class="mdi mdi-delete" aria-hidden="true"></span>删除
                   </button>
                 </div>
-                <table id="table"></table>
+				<table class="layui-hide" id="table" lay-filter="table"></table>
+				<script type="text/html" id="barDemo">
+					<a class="btn btn-sm btn-default me-1" title="{lang view}当前评论" lay-event="view"><i class="mdi mdi-magnify-expand"></i></a>
+					<a class="btn btn-sm btn-default me-1 " title="{lang view}所有评论" lay-event="viewid"><i class="mdi mdi-comment-text-multiple"></i></a>
+					<a class="btn btn-sm btn-default me-1" title="{lang edit}" lay-event="edit"><i class="mdi mdi-pencil"></i></a>
+					<a class="btn btn-sm btn-default" title="{lang delete}" lay-event="del"><i class="mdi mdi-delete"></i></a>
+				</script>
 			</div>
 		</div>
 	</div>
 </main>
-<script src="static/lyear/js/bootstrap-table/bootstrap-table.js"></script>
-<script src="static/lyear/js/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="static/lyear/js/layui/layui.js"></script>
 <script>
-
-	/**
-     * 批量 删除按钮
-     */
-	 $(document).on('click', '#btn_delete', function () {
-        var self    = $(this);
-        var selRows = $('#table').bootstrapTable("getSelections");
-        if(selRows.length == 0){
-			showmessage("请至少选择一行", 'danger',3000,1);
-            return;
-        }
+	layui.use('table', function(){
+	  var table = layui.table;
+	var $ = layui.$, active = {
+		delete: function(){
+			var checkStatus = table.checkStatus('table'),data = checkStatus.data;
+			if(!data){
+				showmessage("请至少选择一行", 'danger',3000,1);
+            	return;
+			}
+			if(data.length == 0){
+				showmessage("请至少选择一行", 'danger',3000,1);
+				return;
+			}
         var postData = "";
-        $.each(selRows,function(i) {
-            postData +=  this.cid;
-            if (i < selRows.length - 1) {
+        $.each(data,function(i) {
+            postData +=  this.rid;
+            if (i < data.length - 1) {
                 postData += ",";
             }
         });
-		
-		showDialog('你确定要删除'+selRows.length+'条评论吗(如果有回复评论也将一同删除)？', 'confirm','', function(){	
-			var loader = $('body').lyearloading({
-				opacity: 0.2,
-				spinnerSize: 'lg'
-			});
+		layer.confirm('你确定要删除'+data.length+'条评论吗(如果有回复评论也将一同删除)？', function(index){
+			var loading = layer.load(0, { shade:  [0.1, '#000'] });
 			jQuery.post('{MOD_URL}&do=delete', {'cid': postData},function(json){
-				loader.destroy();
+				layer.close(loading);
+				layer.close(index);
 				if(json['msg']=='success'){
 					showmessage('删除成功', 'success', '3000', 1);
-					$('#table').bootstrapTable("refresh");
+					table.reload('table');
 					return false;
 				}else if(json['msg']){
 					showmessage(json['msg'], 'danger', '3000', 1);
@@ -75,290 +84,146 @@
 				}
 				},'json')
 				.fail(function() {
-					loader.destroy();
+					layer.close(loading);
+				layer.close(index);
 					showmessage('服务器发生错误，请稍后再试', 'danger',3000,1);
 		  });
         });
-        return false;
-    });
-
-	 /**
-     * 搜索按钮
-     */
-	 $(document).on('click', '#search-btn', function() {
-        $('#table').bootstrapTable('refresh');
-    })
-
-	/**
-     * 重置按钮
-     */
-	$('#refreshsearch').click(function() {
-		// 清空表单内容
+	}
+  };
+  
+  $('#btn_delete').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+	  table.render({
+		elem: '#table',
+		url: '{MOD_URL}&do=getinfo',
+		toolbar: true,
+		text: {
+			none: '暂无相关数据'
+		},
+		page: {
+		  limit: 20, // 默认显示20行
+		  limits: [10, 20, 50, 100, 200, 500, 900] // 可选的行数
+		},
+		cellMinWidth: 80 //全局定义常规单元格的最小宽度
+		,cols: [[
+		{type:'checkbox', fixed: 'left'}
+		  ,{field:'id', title: 'ID',width:80, fixed: 'left'}
+		  ,{field:'dateline', title: '评论时间', align: 'center'}
+		  <!--{if $_G['adminid']}-->,{field:'authorid', title: '评论者', align: 'center'}
+		  ,{field:'edituid', title: '编辑者', align: 'center'}
+		  ,{field:'edittime', title: '编辑时间', align: 'center'}<!--{/if}-->
+		  ,{field:'ip', title: 'IP', align: 'center'}
+		  ,{field:'xtllq', title: '{lang Equipment information}', align: 'left'}
+		  ,{field:'message', title: '评论内容', align: 'center'}
+		  ,{field: 'right',title: '{lang operation}',width:200, align:'center', toolbar: '#barDemo', fixed: 'right'}
+		]]
+	  });
+	  //监听工具条
+	  table.on('tool(table)', function(obj){
+		var data = obj.data;
+		if(obj.event === 'edit'){
+			showWindow('publish_edit_'+data.cid,'{MOD_URL}&op=ajax&do=edit&template=1&cid='+data.cid+'&allowattach=3&allowat=1&allowsmiley=1');
+		} else if(obj.event === 'del'){
+			layer.confirm('你确定要删除这条评论吗(如果有回复评论也将一同删除)？', function(index){
+				var loading = layer.load(0, { shade:  [0.1, '#000'] });
+				$.ajax({
+					type: "post",
+					url: "{MOD_URL}&op=ajax&do=delete",
+					data: {cid: data.cid},
+					dataType: 'json',
+					success: function (res, status) {
+						layer.close(index);
+						layer.close(loading);
+						if (res.msg == 'success') {
+							showmessage('删除成功', 'success',3000,1);
+							obj.del();
+						} else {
+							showmessage(res.msg, 'danger',3000,1);
+						}
+					},
+					error: function () {
+						layer.close(index);
+						layer.close(loading);
+						showmessage('服务器发生错误，请稍后再试', 'danger',3000,1);
+					}
+				});
+			});
+		} else if(obj.event === 'view'){
+			showWindow('publish_view_'+data.cid,'{MOD_URL}&op=ajax&do=getcommentbycid&template=1&modal=1&cid='+data.cid+'&allowattach=3&allowat=1&allowsmiley=1','get',0);
+		} else if(obj.event === 'viewid'){
+			showWindow('publish_view_'+data.fid,'{MOD_URL}&op=ajax&do=getcomment&template=1&modal=1&idtype='+data.idtype+'&id='+data.fid+'&allowattach=3&allowat=1&allowsmiley=1','get',0);
+		}
+	  });
+	  <!--{if $_G['adminid']}-->
+	  table.on('rowDouble(table)', function(obj){
+		showDataTemplate(obj);
+	  });
+		function showDataTemplate(obj) {
+			var data = obj.data;
+			var template = `
+				<div>
+				${data.authorid ? `<p><strong>评论者:</strong> ${data.authorid}</p>` : ''}
+				${data.dateline ? `<p><strong>评论时间:</strong>${data.dateline}</p>` : ''}
+				${data.edituid !== undefined ? `<p><strong>编辑者:</strong> ${data.edituid}</p>` : ''}
+				${data.edittime ? `<p><strong>编辑时间:</strong> ${data.edittime}</p>` : ''}
+				${data.xtllq ? `<p><strong>{lang Equipment information}:</strong> ${data.xtllq}</p>` : ''}
+				${data.message ? `<p><strong>评论内容:</strong> ${data.message}</p>` : ''}
+				</div>
+			`;
+	
+			layer.alert(JSON.stringify(data), {
+				title: '当前行评论详情：',
+				content: template,
+			});
+	
+		// 标注选中样式
+		obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+		}
+		<!--{/if}-->
+		// 搜索按钮功能
+		$(document).on('click', '#search-btn', function() {
+		// 获取搜索关键词
+		var keyword = $('#keyword').val();
+		// 刷新表格并传递搜索参数
+		table.reload('table', {
+		  where: { keyword: keyword},
+		  page: {
+			curr: 1 //重新从第 1 页开始
+		  }
+		});
+	  });
+	   // 重置按钮功能
+	   $('#refreshsearch').click(function() {
         $('#keyword').val('');
-        // 刷新表格
-        $('#table').bootstrapTable('refresh');
-    });
-
-	var type = '';
-	$(document).on('click', '.type-btn', function() {
+		// 刷新表格
+		table.reload('table', {
+		  where: {}, // 清空搜索参数
+		  page: {
+			curr: 1 //重新从第 1 页开始
+		  }
+		});
+	  });
+	  // 类型按钮功能
+	  $(document).on('click', '.type-btn', function() {
 		// 移除所有 .type-btn 的 active 类
 		$('.type-btn').removeClass('active');
 		// 为当前点击的按钮添加 active 类
 		$(this).addClass('active');
 		// 获取当前的 type 值
+		operation = $(this).data('operation');
 		type = $(this).data('type');
-		$('#table').bootstrapTable('refresh');
-    })
-    
-	/**
-	 * 分页相关的配置
-	 **/
-	const pagination = {
-		// 分页方式：[client] 客户端分页，[server] 服务端分页
-		sidePagination: "server",
-		// 初始化加载第一页，默认第一页
-		pageNumber: 1,
-		// 每页的记录行数
-		pageSize: 10,
-		// 可供选择的每页的行数 - (亲测大于1000存在渲染问题)
-		pageList: [5, 10, 25, 50, 100],
-		// 在上百页的情况下体验较好 - 能够显示首尾页
-		paginationLoop: true,
-		// 展示首尾页的最小页数
-		paginationPagesBySide: 2,
-	};
-	
-	/**
-	 * 按钮相关配置
-	 **/
-	const button = {
-		// 按钮的类
-		buttonsClass: 'default',
-		// 类名前缀
-		buttonsPrefix: 'btn'
-	}
-	
-	/**
-	 * 图标相关配置
-	 **/
-	const icon = {
-		// 图标前缀
-		iconsPrefix: 'mdi',
-		// 图标大小
-		iconSize: 'mini',
-		// 图标的设置
-		icons: {
-			paginationSwitchDown: 'mdi-door-closed',
-			paginationSwitchUp: 'mdi-door-open',
-			refresh: 'mdi-refresh',
-			toggleOff: 'mdi-toggle-switch-off',
-			toggleOn: 'mdi-toggle-switch',
-			columns: 'mdi-table-column-remove',
-			detailOpen: 'mdi-plus',
-			detailClose: 'mdi-minus',
-			fullscreen: 'mdi-monitor-screenshot',
-			search: 'mdi-table-search',
-			clearSearch: 'mdi-trash-can-outline'
-		}
-	};
-	
-	/**
-	 * 表格相关的配置
-	 **/
-	const table = {
-		classes: 'table table-bordered table-hover table-striped lyear-table',
-		// 请求地址
-		url: '{MOD_URL}&do=getinfo',
-		// 唯一ID字段
-		uniqueId: 'id',
-		// 每行的唯一标识字段
-		idField: 'id',
-		// 是否启用点击选中行
-		clickToSelect: true,
-		// 是否显示详细视图和列表视图的切换按钮(clickToSelect同时设置为true时点击会报错)
-		// showToggle: true,
-		// 请求得到的数据类型
-		dataType: 'jsonp',
-		// 请求方法
-		method: 'get',
-		// 工具按钮容器
-		toolbar: '#toolbar',
-		// 是否分页
-		pagination: true,
-		// 是否显示所有的列
-		showColumns: true,
-		// 是否显示刷新按钮
-		showRefresh: true,
-		// 显示图标
-		showButtonIcons: true,
-		// 显示文本
-		showButtonText: false,
-		// 显示全屏
-		showFullscreen: true,
-		// 总数字段
-		totalField: 'total',
-		// 当字段为 undefined 显示
-		undefinedText: '-',
-		// 排序方式
-		sortOrder: "asc",
-		...icon,
-		...pagination,
-		...button,
-	};
-	
-	/**
-	 * 用于演示的列信息
-	 **/
-	const columns = [{
-		field: 'example',
-		checkbox: true,
-		// 列的宽度
-		width: 5,
-		// 宽度单位
-		widthUnit: 'rem'
-	}, {
-		field: 'id',
-		title: '编号',
-		// 使用[align]，[halign]和[valign]选项来设置列和它们的标题的对齐方式。
-		// h表示横向，v标识垂直
-		align: 'center',
-		switchable: false,
-		// 列的宽度
-		width: 4,
-		// 宽度单位
-		widthUnit: 'rem'
-	},<!--{if $_G['adminid']}--> {
-		field: 'authorid',
-		align: 'center',
-		sortable: true,
-		title: '评论者'
-	},{
-		field: 'edituid',
-		align: 'center',
-		sortable: true,
-		title: '编辑者'
-	},{
-		field: 'edittime',
-		align: 'center',
-		sortable: true,
-		title: '编辑时间'
-	},<!--{/if}--> {
-		field: 'ip',
-		sortable: true,
-		title: 'IP',
-	}, {
-		field: 'xtllq',
-		sortable: true,
-		// 是否可视(默认 - true)
-		align: 'center',
-		title: '{lang Equipment information}'
-	},{
-		field: 'message',
-		sortable: true,
-		formatter: '<a class="btn btn-sm btn-default me-1 view-btn" title="{lang view}当前评论" data-bs-toggle="tooltip"><i class="mdi mdi-magnify-expand"></i></a><a class="btn btn-sm btn-default me-1 viewid-btn" title="{lang view}所有评论" data-bs-toggle="tooltip"><i class="mdi mdi-comment-text-multiple"></i></a>',
-		align: 'center',
-		title: '评论内容',
-		clickToSelect:false,
-		events: {
-			'click .view-btn': function (event, value, row, index) {
-                event.stopPropagation();
-                view(row);
-            },
-			'click .viewid-btn': function (event, value, row, index) {
-                event.stopPropagation();
-                viewid(row);
-            },
-        }
-	}, {
-		field: 'dateline',
-		sortable: true,
-		align: 'center',
-		title: '评论时间',
-	}, {
-        field: 'operate',
-        title: '{lang operation}',
-        formatter: btnGroup,  // 自定义方法
-        events: {
-			'click .edit-btn': function (event, value, row, index) {
-                event.stopPropagation();
-                edit(row);
-            },
-            'click .del-btn': function (event, value, row, index) {
-                event.stopPropagation();
-                delUser(row);
-            }
-        }
-    }];
-    
-    // 自定义操作按钮
-    function btnGroup () {
-        let html =
-            '<a class="btn btn-sm btn-default me-1 edit-btn" title="{lang edit}" data-bs-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>' +
-            '<a class="btn btn-sm btn-default del-btn" title="{lang delete}" data-bs-toggle="tooltip"><i class="mdi mdi-delete"></i></a>';
-        return html;
-    }
-	function edit(row) {
-		showWindow('publish_edit_'+row.cid,'{MOD_URL}&op=ajax&do=edit&template=1&cid='+row.cid+'&allowattach=3&allowat=1&allowsmiley=1');
-    }
-	function viewid(row) {
-		showWindow('publish_view_'+row.fid,'{MOD_URL}&op=ajax&do=getcomment&template=1&modal=1&idtype='+row.idtype+'&id='+row.fid+'&allowattach=3&allowat=1&allowsmiley=1','get',0);
-    }
-	// 操作方法 - 预览
-    function view(row) {
-		showWindow('publish_view_'+row.cid,'{MOD_URL}&op=ajax&do=getcommentbycid&template=1&modal=1&cid='+row.cid+'&allowattach=3&allowat=1&allowsmiley=1','get',0);
-    }
-    // 操作方法 - 删除
-	function delUser(row) {
-		showDialog('你确定要删除这条评论吗(如果有回复评论也将一同删除)？', 'confirm','', function(){	
-			var loader = $('body').lyearloading({
-				opacity: 0.2,
-				spinnerSize: 'lg'
-			});
-			$.ajax({
-            type: "post",
-            url: "{MOD_URL}&op=ajax&do=delete",
-            data: {cid: row.cid},
-            dataType: 'json',
-            success: function (res, status) {
-				loader.destroy();
-                if (res.msg == 'success') {
-					showmessage('删除成功', 'success',3000,1);
-                    $("#table").bootstrapTable('refresh');
-                } else {
-					showmessage(res.msg, 'danger',3000,1);
-                }
-            },
-            error: function () {
-				loader.destroy();
-				showmessage('服务器发生错误，请稍后再试', 'danger',3000,1);
-            }
-        });
+		// 刷新表格并传递 operation 参数
+		table.reload('table', {
+		  where: { keyword: $('#keyword').val(), type: type },
+		  page: {
+			curr: 1 //重新从第 1 页开始
+		  }
+		});
+	  });
 	});
-        
-    }
-	
-	$('table').bootstrapTable({
-		...table,
-		// 自定义的查询参数
-		queryParams: function (params) {
-			return {
-				// 每页数据量
-				limit: params.limit,
-				// sql语句起始索引
-				offset: params.offset,
-				page: (params.offset / params.limit) + 1,
-				// 排序的列名
-				sort: params.sort,
-				// 排序方式 'asc' 'desc'
-				sortOrder: params.order,
-				// 搜索关键词
-                keyword: $('#keyword').val(),
-				type:type,
-			};
-		},
-		columns,
-	});
-
 </script>
 <script src="dzz/comment/scripts/lyear_comment.js?{VERHASH}" type="text/javascript"></script> 
 <script type="text/javascript" src="static/js/smilies.js?{VERHASH}"></script> 
