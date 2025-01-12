@@ -101,7 +101,7 @@ if (submitcheck('replysubmit')) {
 	$perpage = 10;
 	$start = ($page - 1) * $perpage;
 	$limit = $start . "-" . $perpage;
-	$gets = array('mod' => 'comment', 'op' => 'ajax','template'=> $template, 'do' => 'getcomment', 'id' => $id, 'idtype' => $idtype, );
+	$gets = array('mod' => 'comment', 'op' => 'ajax','template'=> $template, 'do' => 'getcomment', 'id' => $id, 'idtype' => $idtype, 'modal' => $modal);
 	$theurl = BASESCRIPT . "?" . url_implode($gets);
 	$count = C::t('comment') -> fetch_all_by_idtype($id, $idtype, $limit, true);
 	$list = array();
