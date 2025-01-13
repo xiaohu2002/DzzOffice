@@ -182,6 +182,7 @@
 		elem: '#table',
 		url: '{MOD_URL}&do=getinfo',
 		toolbar: true,
+		autoSort: false,
 		text: {
 			none: '暂无相关数据'
 		},
@@ -193,19 +194,22 @@
 		,cols: [[
 		{type:'checkbox', fixed: 'left'}
 		  ,{field:'id', title: 'ID',width:80, fixed: 'left'}
-		  <!--{if $_G['adminid']}-->,{field:'username', title: '{lang possessor}', align: 'center',templet: function(d) {
+		  <!--{if $_G['adminid']}-->,{field:'username', title: '{lang possessor}', sort: true, align: 'center',templet: function(d) {
           return d.username;
         }}<!--{/if}-->
-		  ,{field:'name', title: '{lang filename}', align: 'center',templet: function(d) {
-          // 直接返回服务器返回的时间格式字符串
+		  ,{field:'name', title: '{lang filename}', align: 'center', sort: true,templet: function(d) {
           return d.name;
         }}
-		  ,{field:'size', title: '{lang file_size}', align: 'center'}
-		  ,{field:'type', title: '{lang file_type}', align: 'center'}
+		  ,{field:'size', title: '{lang file_size}', align: 'center', sort: true}
+		  ,{field:'type', title: '{lang file_type}', align: 'center', sort: true}
 		  ,{field:'relpath', title: '{lang file_location}', align: 'left'}
-		  ,{field:'dateline', title: '{lang add_time}', align: 'center'}
+		  ,{field:'dateline', title: '{lang add_time}', align: 'center', sort: true}
 		  ,{field: 'right',title: '{lang operation}',width:240, align:'center', toolbar: '#barDemo', fixed: 'right'}
-		]]
+		]],
+		initSort: {
+			field: 'dateline', // 默认排序字段
+			type: 'desc' // 默认排序方式
+		}
 	  });
 	  //监听工具条
 	  table.on('tool(table)', function(obj){
@@ -260,6 +264,16 @@
 			});
 		}
 	  });
+	  //触发排序事件 
+	table.on('sort(table)', function(obj){
+		table.reload('table', {
+			initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。
+			,where: {
+				field: obj.field //排序字段
+				,order: obj.type //排序方式
+			}
+		});
+	});
 	  table.on('rowDouble(table)', function(obj){
 		showDataTemplate(obj);
 	  });

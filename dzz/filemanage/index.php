@@ -89,18 +89,18 @@ if ($do == 'delete') {
 		}
 	}
   } elseif ($do == 'getinfo') {
-	$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+	$order = isset($_GET['order']) ? $_GET['order'] : '';
 	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
 	$pfid = isset($_GET['pfid']) ? intval($_GET['pfid']) : '';
-	$sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : '';
+	$field = isset($_GET['field']) ? $_GET['field'] : 'dateline';
 	$limit = empty($_GET['limit']) ? 20 : $_GET['limit'];
 	$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
 	$page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
 	$start = ($page - 1) * $limit;
-	$validSortFields = ['name', 'size', 'type', 'username', 'dateline'];
+	$validfields = ['name', 'size', 'type', 'username', 'dateline'];
 	$validSortOrders = ['asc', 'desc'];
-	if (in_array($sort, $validSortFields) && in_array($sortOrder, $validSortOrders)) {
-		$order = "ORDER BY $sort $sortOrder";
+	if (in_array($field, $validfields) && in_array($order, $validSortOrders)) {
+		$order = "ORDER BY $field $order";
 	} else {
 		$order = 'ORDER BY dateline DESC';
 	}
