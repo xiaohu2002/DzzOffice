@@ -6,13 +6,8 @@ html, body {
 	
 }
 .bs-main-container{
-	overflow:hidden;
 	margin-left:0;
 	border-top:0;
-}
-.list-share{
-	overflow-y:auto;
-	overflow-x:hidden;
 }
 
 .copy-success {
