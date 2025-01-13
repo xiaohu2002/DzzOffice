@@ -12,6 +12,10 @@
 		jQuery('#'+ctrlid+'_Menu').html(vals[0].path+' ');
 		jQuery('#sel_'+ctrlid).val(vals[0].orgid).trigger('change');
 	}
+	function addorgsel(){
+		jQuery('#selorg_container').append('<div class="btn-group p-2">'+(orgsel_html.replace(/orgid_tpml/ig,'orgid_tpml_'+tpml_index))+'</div>');
+		tpml_index++;
+	}
 </script>
 <!--{template lyear:header_simple_end}-->
 <main class="bs-main-container">
