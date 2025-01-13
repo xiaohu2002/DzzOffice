@@ -1,7 +1,10 @@
 
 <div class="modal-header">
   <h4 class="modal-title" id="return_$_GET[handlekey]">{lang edit}</h4>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="float-end">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="modal-fullscreen-btn"><i class="mdi"></i></button>
+  </div>
 </div>
  <div id="publish_edit_{$cid}" class="publishsharewrap">
   <form id="form_edit_{$cid}" name="form_edit_{$cid}" class="form-horizontal" action="{DZZSCRIPT}?mod=comment&op=ajax&do=edit&template=1" method="post"  onsubmit="ajaxpost('form_edit_{$cid}','return_publish_edit_{$cid}','return_publish_edit_{$cid}');return false">
@@ -126,7 +129,7 @@ function errorhandle_{$_GET[handlekey]}(url, message, values) {
 					html+='           <div class="ico_vattvb "><img alt="'+file.name+'" src="dzz/images/default/upload_failure.png" style="height:50px"></div>';
 					html+='  		  <div class="ico_vattvb_right">';
 					html+='            	<div class="ico_name">'+file.name+'</div>';
-					html+='             <div class="progress  active" style="margin:0;" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>';
+					html+='             <div class="progress  active" style="margin:0;" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-striped progress-bar-animated" style="width:0%;"></div></div>';
 					html+='          </div>';
 					
 					html+='      	</div>';

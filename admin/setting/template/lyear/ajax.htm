@@ -10,15 +10,17 @@
             <label for="pername" class="form-label">{lang folder_permission_name}</label>
             <input type="text" class="form-control" id="pername" name="pername" value="$groupperm[pername]"/>
           </div>
-          <h6>{lang choose_permission}：</h6>
-          <div class="border-example fs-6">
-            <!--{loop $perms $k $val}-->
-            <div class="form-check form-check-inline col-6 col-sm-4">
-                <input class="form-check-input" type="checkbox" name="perms[]" value="$val[1]"  id="inputval$val[1]"<!--{if $groupperm[perm] & $val[1]}--> checked="checked" <!--{/if}-->>
-                <label class="form-check-label" for="inputval$val[1]"><span class="{$val[2]} view-eidt perm_chk" data-perm="$val[1]"></span><span>$val[0]</span></label>
+          <div class="row mb-3">
+            <label class="col-sm-2">{lang choose_permission}</label>
+            <div class="col-sm-10">
+              <!--{loop $perms $k $val}-->
+                <div class="form-check form-check-inline col-6 col-sm-5">
+                    <input class="form-check-input" type="checkbox" name="perms[]" value="$val[1]"  id="inputval$val[1]"<!--{if $groupperm[perm] & $val[1]}--> checked="checked" <!--{/if}-->>
+                    <label class="form-check-label" for="inputval$val[1]"><span class="{$val[2]} view-eidt perm_chk" data-perm="$val[1]"></span><span>$val[0]</span></label>
+                </div>
+                <!--{/loop}-->
             </div>
-            <!--{/loop}-->
-        </div>
+          </div>
     </div>
     <div class="modal-footer">
         <div class="proper-bottom" style="position: relative;">

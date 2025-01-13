@@ -76,9 +76,10 @@
 							<button class="btn btn-outline-primary btn-sm needindzz"  onclick="dzzvote_uploadfrom_desktop();return false">{lang from_desktop_choose}</button>
 						</div>
 						<span class="form-text">{lang upload_img_vote}</span>
-						<ul class="list-unstyled dzzvote-post-item-container clearfix">
+						<div class="dzzvote-image-body clearfix">
+						<ul class="list-inline row lyear-uploads-pic dzzvote-post-item-container clearfix">
 						<!--{loop $vote[items][type_2] $value}-->
-							<li class="dzzvote-post-image-item list-inline-item shadow p-2 mb-3 rounded">
+							<li class="dzzvote-post-image-item col-6 col-sm-3 col-md-2 list-images-item shadow-sm p-2 mb-3 me-2 rounded">
 								<a href="javascript:;" class="dzzvote-post-delitem" data-itemid="$value['itemid']">
 									<i class="mdi mdi-delete lead"></i>
 								</a>
@@ -90,6 +91,7 @@
 							</li>
 						<!--{/loop}-->
 						</ul>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -185,7 +187,7 @@
 			pasteZone: jQuery('#dzzvote_post_image_container_{$vote[voteid]}'),
 			sequentialUploads: true,
 			add: function(e, data) {
-				data.context = jQuery('<li class="dzzvote-post-image-item list-inline-item shadow p-2 mb-3 rounded"></li>');
+				data.context = jQuery('<li class="dzzvote-post-image-item col-6 col-sm-3 col-md-2 list-images-item shadow-sm p-2 mb-3 me-2 rounded"></li>');
 				jQuery('#dzzvote_post_image_container_{$vote[voteid]} .dzzvote-post-item-container').append(data.context);
 
 				jQuery.each(data.files, function(index, file) {
@@ -197,7 +199,7 @@
 					html += '    </div>';
 					html += '    <div class="progress-container mt-2" >';
 					html += '  	 <div class="progress active" style="margin:0;" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">';
-					html += '          <div class="progress-bar progress-bar-success" style="width:0%;"></div>';
+					html += '          <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:0%;"></div>';
 					html += '         </div>';
 					html += '     </div>';
 					html += ' </div>';
@@ -265,7 +267,7 @@
 			for(var i in datas) {
 				if(datas[i].type == 'image') {
 					var img = DZZSCRIPT + '?mod=io&op=thumbnail&width=240&height=160&path=' + (datas[i].apath ? datas[i].apath : datas[i].dpath);
-					html += '<li class="dzzvote-post-image-item list-inline-item shadow p-2 mb-3 rounded">';
+					html += '<li class="dzzvote-post-image-item col-6 col-sm-3 col-md-2 list-images-item shadow-sm p-2 mb-3 me-2 rounded">';
 					html += '  <a href="javascript:;" data-itemid="0" class="dzzvote-post-delitem" ><i class="mdi mdi-delete lead"></i></a>';
 					html += '  <div class="thumbnail mb-3 text-center">';
 					html += '		<img  src="' + img + '">';
@@ -303,30 +305,32 @@
 					<!--{else}-->
 					{eval $progressvalue = '0';}
 					<!--{/if}-->
-					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{$progressvalue}" aria-valuemin="0" aria-valuemax="100" style="width: {$progressvalue}%;min-width: 20px;"> {$progressvalue}% </div>
+					<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{$progressvalue}" aria-valuemin="0" aria-valuemax="100" style="width: {$progressvalue}%;min-width: 20px;"> {$progressvalue}% </div>
 				</div>
 			</div>
 		  </div>
 		<!--{/loop}-->
 		<!--{else}-->
-		<ul class="list-unstyled dzzvote-post-item-container clearfix">
+		<div class="dzzvote-image-body clearfix">
+		<ul class="list-inline row lyear-uploads-pic dzzvote-post-item-container clearfix">
 			<!--{loop $vote['items']['type_2'] $value}-->
-			<li class="dzzvote-image-item noactive hasprogress list-inline-item shadow p-2 mb-3 rounded" id="item_$value[itemid]" data-itemid="$value[itemid]">
+			<li class="dzzvote-image-item noactive hasprogress col-6 col-sm-3 col-md-2 list-images-item shadow-sm p-2 mb-3 me-2 rounded" id="item_$value[itemid]" data-itemid="$value[itemid]">
 				<div class="thumbnail mb-3 text-center"> 
 					<a href="$value[url]" target="_blank" target="_blank"><img src="$value[img]" alt="$value['content']"></a>
-					<div class="progress mt-2">
+					<div class="progress mt-2 mb-2">
 						<!--{if $value[number]}-->
 						{eval $progressvalue = floor(($value[number]/$votetotal)*100);}
 						<!--{else}-->
 						{eval $progressvalue = '0';}
 						<!--{/if}-->
-						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{$progressvalue}" aria-valuemin="0" aria-valuemax="100" style="width: {$progressvalue}%;min-width: 20px;"> {$progressvalue}% </div>
+						<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{$progressvalue}" aria-valuemin="0" aria-valuemax="100" style="width: {$progressvalue}%;min-width: 20px;"> {$progressvalue}% </div>
 					</div>
 					<p class="mt-2">$value['content']</p>
 				</div>
 			</li>
 			<!--{/loop}-->
 		</ul>
+	</div>
 		<!--{/if}-->
 	</div>
 	<!--{if $status==1}-->
@@ -368,10 +372,10 @@
 			<!--{/loop}-->
 			<!--{else}-->
 			<div class="dzzvote-image-body clearfix">
-				<ul class="list-unstyled dzzvote-post-item-container clearfix">
+				<ul class="list-inline row lyear-uploads-pic dzzvote-post-item-container clearfix">
 				<!--{loop $vote['items']['type_2'] $value}-->
 				<!--{if $vote['isvisible']>0}-->
-				<li id="item_$value[itemid]" data-itemid="$value[itemid]" class="dzzvote-image-item list-inline-item shadow p-2 mb-3 rounded">
+				<li id="item_$value[itemid]" data-itemid="$value[itemid]" class="dzzvote-image-item col-6 col-sm-3 col-md-2 list-images-item shadow-sm p-2 mb-3 me-2 rounded">
 					<i class="mdi mdi-check-bold lead"></i>
 					<div class="thumbnail mb-3 text-center">
 						<a href="$value[url]" target="_blank"><img src="$value[img]" alt="$value['content']"></a>
@@ -379,17 +383,17 @@
 					</div>
 				</li>
 				<!--{else}-->
-				<li class="dzzvote-image-item hasprogress list-inline-item shadow p-2 mb-3 rounded" id="item_$value[itemid]" data-itemid="$value[itemid]">
+				<li class="dzzvote-image-item hasprogress col-6 col-sm-3 col-md-2 list-images-item shadow-sm p-2 mb-3 me-2 rounded" id="item_$value[itemid]" data-itemid="$value[itemid]">
 					<i class="mdi mdi-check-bold lead"></i>
 					<div class="thumbnail mb-3 text-center"> 
 						<a href="$value[url]" target="_blank" target="_blank"><img src="$value[img]" alt="$value['content']"></a>
-						<div class="progress mt-2">
+						<div class="progress mt-2 mb-2">
 							<!--{if $value[number]}-->
 							{eval $progressvalue = floor(($value[number]/$votetotal)*100);}
 							<!--{else}-->
 							{eval $progressvalue = '0';}
 							<!--{/if}-->
-							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{$progressvalue}" aria-valuemin="0" aria-valuemax="100" style="width: {$progressvalue}%;min-width: 20px;"> {$progressvalue}% </div>
+							<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{$progressvalue}" aria-valuemin="0" aria-valuemax="100" style="width: {$progressvalue}%;min-width: 20px;"> {$progressvalue}% </div>
 						</div>
 						<p class="mt-2">$value['content']</p>
 					</div>
@@ -493,30 +497,32 @@
 				<!--{else}-->
 				{eval $progressvalue = '0';}
 				<!--{/if}-->
-				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{$progressvalue}" aria-valuemin="0" aria-valuemax="100" style="width: {$progressvalue}%;min-width: 20px;"> {$progressvalue}% </div>
+				<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{$progressvalue}" aria-valuemin="0" aria-valuemax="100" style="width: {$progressvalue}%;min-width: 20px;"> {$progressvalue}% </div>
 			</div>
 		</div>
 	</div>
 	<!--{/loop}-->
 	<!--{else}-->
-	<ul class="list-unstyled dzzvote-post-item-container clearfix">
+	<div class="dzzvote-image-body clearfix">
+	<ul class="list-inline row lyear-uploads-pic dzzvote-post-item-container clearfix">
 	<!--{loop $vote['items']['type_2'] $value}-->
-	<li class="dzzvote-image-item hasprogress list-inline-item shadow p-2 mb-3 rounded" id="item_$value[itemid]" data-itemid="$value[itemid]">
+	<li class="dzzvote-image-item hasprogress col-6 col-sm-3 col-md-2 list-images-item shadow-sm p-2 mb-3 me-2 rounded" id="item_$value[itemid]" data-itemid="$value[itemid]">
 		<div class="thumbnail mb-3 text-center"> 
 			<a href="$value[url]" target="_blank" target="_blank"><img src="$value[img]" alt="$value['content']"></a>
-			<div class="progress mt-2">
+			<div class="progress mt-2 mb-2">
 				<!--{if $value[number]}-->
 				{eval $progressvalue = floor(($value[number]/$votetotal)*100);}
 				<!--{else}-->
 				{eval $progressvalue = '0';}
 				<!--{/if}-->
-				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{$progressvalue}" aria-valuemin="0" aria-valuemax="100" style="width: {$progressvalue}%;min-width: 20px;"> {$progressvalue}% </div>
+				<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{$progressvalue}" aria-valuemin="0" aria-valuemax="100" style="width: {$progressvalue}%;min-width: 20px;"> {$progressvalue}% </div>
 			</div>
 			<p class="mt-2">$value['content']</p>
 		</div>
 	</li>
 	<!--{/loop}-->
 	</ul>
+</div>
 	<!--{/if}-->
 </div>
 <div class="card-footer"><span class="success">{lang vote_thinks}</span>

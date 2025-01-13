@@ -57,16 +57,17 @@
 						</div>
 					  </div>
 				  </div>
-                <div id="toolbar" class="toolbar-btn-action">
-                  <button id="btn_delete" type="button" class="btn btn-danger" data-type="delete">
+                <div class="toolbar-btn-action demoTable">
+					<button type="button"  class="layui-btn layui-btn-normal" data-type="getCheckData">获取选中行数据</button>
+                  <button type="button" class="layui-btn layui-btn-danger" data-type="delete">
                     <span class="mdi mdi-delete" aria-hidden="true"></span>删除
                   </button>
                 </div>
                 <table class="layui-hide" id="table" lay-filter="table"></table>
 				  <script type="text/html" id="barDemo">
-					<!--{if $_G['adminid']}--><a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">更多</a><!--{/if}-->
+					<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">更多</a>
 					<a class="layui-btn layui-btn--warm layui-btn-xs" lay-event="view">预览</a>
-					<a class="layui-btn layui-btn-xs" lay-event="download">下载</a>
+					<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="download">下载</a>
 					<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 				  </script>
 			</div>
@@ -78,6 +79,61 @@
 	layui.use('table', function(){
 	  var table = layui.table;
 	var $ = layui.$, active = {
+		getCheckData: function(){ //获取选中数据
+		var checkStatus = table.checkStatus('table'), data = checkStatus.data;
+		if (data.length === 0) {
+			showmessage("请至少选择一行", 'danger', 3000, 1);
+			return;
+		}
+		// 创建模板字符串
+		var template = '<div class="accordion">';
+		data.forEach(function(item) {
+			template += `<div class="accordion-item">`;
+				template += `<h2 class="accordion-header" id="Open-heading${item.id}">`;
+					template += `<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Open-collapse${item.id}" aria-expanded="true" aria-controls="Open-collapse${item.id}">`;
+						template += `{lang filename}：${item.name}`;
+					template += `</button>`;
+				template += `</h2>`;
+				template += `<div id="Open-collapse${item.id}" class="accordion-collapse collapse show" aria-labelledby="Open-heading${item.id}">`;
+					template += `<div class="accordion-body">`;
+						template += `<p><strong>ID:</strong> ${item.id}</p>`;
+						<!--{if $_G['adminid']}-->template += `<p><strong>{lang possessor}:</strong> ${item.username}</p>`;<!--{/if}-->
+						template += `<p><strong>{lang file_size}:</strong> ${item.size}</p>`;
+						template += `<p><strong>{lang file_type}:</strong> ${item.type}</p>`;
+						template += `<p><strong>{lang file_location}:</strong> ${item.relpath}</p>`;
+						template += `<p><strong>{lang add_time}:</strong> ${item.dateline}</p>`;
+						<!--{if $_G['adminid']}-->
+						if (item.FileUri) {
+							template += `<p><strong>直链地址:</strong> <a href="${item.FileUri}" target="_blank">${item.FileUri}</a></p>`;
+						}
+						if (item.copys) {
+							template += `<p><strong>引用:</strong> ${item.copys}</p>`;
+						}
+						if (item.isdelete !== undefined) { // 假设 isdelete 是布尔值或有定义时才显示
+							template += `<p><strong>是否在回收站:</strong> ${item.isdelete}</p>`;
+						}
+						if (item.downs) {
+							template += `<p><strong>下载次数:</strong> ${item.downs}</p>`;
+						}
+						if (item.views) {
+							template += `<p><strong>{lang view_count}:</strong> ${item.views}</p>`;
+						}
+						if (item.edits) {
+							template += `<p><strong>修改次数:</strong> ${item.edits}</p>`;
+						}
+						<!--{/if}-->
+						template += `</div>`;
+						template += `</div>`;
+						template += `</div>`;
+		});
+		template += '</div>';
+
+		// 使用 layer.alert 显示模板
+		layer.alert(template, {
+			title: '选中的文件数据',
+			btn: ['确定']
+		});
+	},
 		delete: function(){
 			var checkStatus = table.checkStatus('table'),data = checkStatus.data;
 			if(!data){
@@ -118,7 +174,7 @@
 	}
   };
   
-  $('#btn_delete').on('click', function(){
+  $('.demoTable .layui-btn').on('click', function(){
     var type = $(this).data('type');
     active[type] ? active[type].call(this) : '';
   });
@@ -204,7 +260,6 @@
 			});
 		}
 	  });
-	  <!--{if $_G['adminid']}-->
 	  table.on('rowDouble(table)', function(obj){
 		showDataTemplate(obj);
 	  });
@@ -212,24 +267,30 @@
 			var data = obj.data;
 			var template = `
 				<div>
-				${data.FileUri ? `<p><strong>直链地址:</strong> <a href="${data.FileUri}" target="_blank">${data.FileUri}</a></p>` : ''}
+					<p><strong>ID:</strong> ${data.id}</p>
+					<p><strong>{lang filename}:</strong> ${data.name}</p>
+					<!--{if $_G['adminid']}--><p><strong>{lang possessor}:</strong> ${data.username}</p><!--{/if}-->
+					<p><strong>{lang file_size}:</strong> ${data.size}</p>
+					<p><strong>{lang file_type}:</strong> ${data.type}</p>
+					<p><strong>{lang file_location}:</strong> ${data.relpath}</p>
+					<p><strong>{lang add_time}:</strong> ${data.dateline}</p>
+				<!--{if $_G['adminid']}-->${data.FileUri ? `<p><strong>直链地址:</strong> <a href="${data.FileUri}" target="_blank">${data.FileUri}</a></p>` : ''}
 				${data.copys ? `<p><strong>引用:</strong> ${data.copys}</p>` : ''}
 				${data.isdelete !== undefined ? `<p><strong>是否在回收站:</strong> ${data.isdelete}</p>` : ''}
 				${data.downs ? `<p><strong>下载次数:</strong> ${data.downs}</p>` : ''}
 				${data.views ? `<p><strong>{lang view_count}:</strong> ${data.views}</p>` : ''}
-				${data.edits ? `<p><strong>修改次数:</strong> ${data.edits}</p>` : ''}
+				${data.edits ? `<p><strong>修改次数:</strong> ${data.edits}</p>` : ''}<!--{/if}-->
 				</div>
 			`;
 	
 			layer.alert(JSON.stringify(data), {
-				title: '当前行文件详情：',
+				title: `${data.name} 详情：`,
 				content: template,
 			});
 	
 		// 标注选中样式
 		obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
 		}
-		<!--{/if}-->
 		// 搜索按钮功能
 		$(document).on('click', '#search-btn', function() {
 		// 获取搜索关键词

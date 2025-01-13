@@ -29,6 +29,9 @@
 						</div>
 					  </div>
 				  </div>
+				  <div class="toolbar-btn-action demoTable">
+					<button type="button"  class="layui-btn layui-btn-normal" data-type="getCheckData">获取选中行数据</button>
+                </div>
 				  <table class="layui-hide" id="table" lay-filter="table"></table>
 				  <script type="text/html" id="barDemo">
 					<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看详情</a>
@@ -41,6 +44,49 @@
 <script>
 layui.use('table', function(){
   var table = layui.table;
+  var $ = layui.$, active = {
+		getCheckData: function(){ //获取选中数据
+		var checkStatus = table.checkStatus('table'), data = checkStatus.data;
+		if (data.length === 0) {
+			showmessage("请至少选择一行", 'danger', 3000, 1);
+			return;
+		}
+		// 创建模板字符串
+		var template = '<div class="accordion">';
+		data.forEach(function(item) {
+			template += `<div class="accordion-item">`;
+				template += `<h2 class="accordion-header" id="Open-heading${item.id}">`;
+					template += `<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Open-collapse${item.id}" aria-expanded="true" aria-controls="Open-collapse${item.id}">`;
+						template += `ID：${item.id}`;
+					template += `</button>`;
+				template += `</h2>`;
+				template += `<div id="Open-collapse${item.id}" class="accordion-collapse collapse show" aria-labelledby="Open-heading${item.id}">`;
+					template += `<div class="accordion-body">`;
+						template += `<p><strong>{lang operator}:</strong> ${item.operator}</p>`;
+						template += `<p><strong>{lang usergroup}:</strong> ${item.usergroup}</p>`;
+						template += `<p><strong>IP:</strong> ${item.ip}</p>`;
+						template += `<p><strong>{lang time}:</strong> ${item.time}</p>`;
+						template += `<p><strong>{lang info}:</strong> ${item.loginfo}</p>`;
+						template += `<p><strong>{lang visit}:</strong><a href="${item.visit}" target="_blank">${item.visit}</a></p>`;
+						template += `<p><strong>{lang from}:</strong><a href="${item.from}" target="_blank">${item.from}</a></p>`;
+						template += `<p><strong>{lang Equipment information}:</strong> ${item.info}</p>`;
+						template += `</div>`;
+						template += `</div>`;
+						template += `</div>`;
+		});
+		template += '</div>';
+
+		// 使用 layer.alert 显示模板
+		layer.alert(template, {
+			title: '选中的文件数据',
+			btn: ['确定']
+		});
+	}
+  };
+  $('.demoTable .layui-btn').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
   table.render({
     elem: '#table',
 	url: '{MOD_URL}&do=getinfo',
@@ -54,11 +100,12 @@ layui.use('table', function(){
     },
     cellMinWidth: 80 //全局定义常规单元格的最小宽度
     ,cols: [[
+	{type:'checkbox', fixed: 'left'},
       {field:'id', title: 'ID',width:80, fixed: 'left'}
       ,{field:'operator', title: '{lang operator}', align: 'center'}
       ,{field:'usergroup', title: '{lang usergroup}', align: 'center'}
       ,{field:'ip', title: 'IP', align: 'center'}
-      ,{field:'time', title: '{lang time}'}
+      ,{field:'time', title: '{lang time}', align: 'center'}
       ,{field:'loginfo', title: '{lang info}', align: 'center'}
       ,{field:'visit', title: '{lang visit}', align: 'right',hide:true}
       ,{field:'from', title: '{lang from}', align: 'right',hide:true}
@@ -86,8 +133,8 @@ layui.use('table', function(){
 			<p><strong>IP:</strong> ${data.ip}</p>
 			<p><strong>{lang time}:</strong> ${data.time}</p>
 			<p><strong>{lang info}:</strong> ${data.loginfo}</p>
-			<p><strong>{lang visit}:</strong> ${data.visit}</p>
-			<p><strong>{lang from}:</strong> ${data.from}</p>
+			<p><strong>{lang visit}:</strong> <a href="${data.visit}" target="_blank">${data.visit}</a></p>
+			<p><strong>{lang from}:</strong> <a href="${data.from}" target="_blank">${data.from}</a></p>
 			<p><strong>{lang Equipment information}:</strong> ${data.info}</p>
 			</div>
 		`;

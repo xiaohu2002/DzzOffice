@@ -1822,7 +1822,6 @@ function showWindow(k, url, mode, cache, showWindow_callback,disablebacktohide) 
 		if(disablebacktohide){
 			menuObj.setAttribute('data-bs-backdrop','static');
 			menuObj.setAttribute('data-bs-keyboard','false');
-			
 		} 
 		menuObj.style.display = 'none';
 		document.body.appendChild(menuObj);

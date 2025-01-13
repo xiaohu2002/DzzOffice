@@ -450,7 +450,6 @@
  .toast{border-color:var(--bs-border-color);box-shadow:0 0.125rem 0.75rem rgba(var(--bs-dark-rgb),.0375);border-radius:0.125rem}
  .toast-header i{line-height:1em}
  .modal-content,.modal-header,.modal-footer{border-color:var(--bs-border-color)}
- .progress{height:.75rem;border-radius:.15rem}
  .progress-bar{background-color:var(--bs-primary)}
  .progress-xs{height:.25rem}
  .progress-sm{height:.5rem}
