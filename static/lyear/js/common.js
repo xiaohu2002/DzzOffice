@@ -1873,6 +1873,7 @@ function showmessage($msg, $type, $delay, $haveclose, $position, $callback, $url
 			$icon = 'mdi mdi-alert-circle';
 			break;
 		default:
+			$type = 'info';
 			$icon = 'mdi mdi-alert';
 			break;
 	}
@@ -1894,9 +1895,6 @@ function showmessage($msg, $type, $delay, $haveclose, $position, $callback, $url
 			$align = 'left';
 			break;
 		case 'bottom-center':
-			$from = 'bottom';
-			$align = 'center';
-			break;
 		case 'center':
 			$from = 'bottom';
 			$align = 'center';
