@@ -139,7 +139,9 @@ function env_check(&$env_items) {
 	foreach($env_items as $key => $item) {
 		if($key == 'php') {
 			$env_items[$key]['current'] = PHP_VERSION;
-		} elseif($key == 'attachmentupload') {
+		} elseif($key == 'php_bit') {
+			$env_items[$key]['current'] = phpBuild64() ? 64 : 32;
+		}  elseif($key == 'attachmentupload') {
 			$env_items[$key]['current'] = @ini_get('file_uploads') ? ini_get('upload_max_filesize') : 'unknow';
 		} elseif($key == 'allow_url_fopen') {
 			$env_items[$key]['current'] = @ini_get('allow_url_fopen') ? ini_get('allow_url_fopen') : 'unknow';
@@ -166,6 +168,16 @@ function env_check(&$env_items) {
 			$env_items[$key]['status'] = 0;
 		}
 	}
+}
+
+function phpBuild64(){
+	if(PHP_INT_SIZE === 8) return true;//部分版本,64位会返回4;
+	ob_clean();
+	ob_start();
+	var_dump(12345678900);
+	$res = ob_get_clean();
+	if(strstr($res,'float')) return false;
+	return true;
 }
 function function_check(&$func_items) {
 	foreach($func_items as $item) {

@@ -106,20 +106,22 @@ if ($do == 'stats') {
 	(
 		'操作系统' => array('c' => 'PHP_OS', 'r' => '不限制', 'b' => 'Linux'),
 		'PHP 版本' => array('c' => 'PHP_VERSION', 'r' => '7+', 'b' => 'php7+'),
+		'PHP 平台版本' => array('c' => 'PHP_INT_SIZE', 'r' => '32位(32位不支持2G以上文件上传下载)', 'b' => '64位'),
 		'附件上传' => array('r' => '不限制', 'b' => '50M'),
 		'GD 库' => array('r' => '1.0', 'b' => '2.0'),
 		'磁盘空间' => array('r' => '50M', 'b' => '10G以上'),
-			'MySQL数据库持续连接' => array('r' => '不限制', 'b' => '不限制'),
-			'域名' => array('r' => '不限制', 'b' => '不限制'),
-			'服务器端口' => array('r' => '不限制', 'b' => '不限制'),
-			'运行环境' => array('r' => '不限制', 'b' => '不限制'),
-			'网站根目录' => array('r' => '不限制', 'b' => '不限制'),
-			'PHP 平台版本' => array('r' => '32位', 'b' => '64位'),
-			'执行时间限制' => array('r' => '不限制', 'b' => '不限制'),
+		'MySQL数据库持续连接' => array('r' => '不限制', 'b' => '不限制'),
+		'域名' => array('r' => '不限制', 'b' => '不限制'),
+		'服务器端口' => array('r' => '不限制', 'b' => '不限制'),
+		'运行环境' => array('r' => '不限制', 'b' => '不限制'),
+		'网站根目录' => array('r' => '不限制', 'b' => '不限制'),
+		'执行时间限制' => array('r' => '不限制', 'b' => '不限制'),
 	);
 	foreach($env_items as $key => $item) {
 		if($key == 'PHP 版本') {
 		$env_items[$key]['current'] = PHP_VERSION;
+		} elseif($key == 'PHP 平台版本') {
+			$env_items[$key]['current'] = phpBuild64() ? 64 : 32;
 		} elseif($key == '附件上传') {
 		$env_items[$key]['current'] = @ini_get('file_uploads') ? ini_get('upload_max_filesize') : 'unknow';
 		} elseif($key == 'allow_url_fopen') {
@@ -209,6 +211,15 @@ if (isset($_G['setting']['template']) && $_G['setting']['template'] === 'lyear')
 	$dateInfo = date('Y-n-j H:i') . ' 星期' . $weekdays[$dateI];
 }
 include template('main');
+function phpBuild64(){
+	if(PHP_INT_SIZE === 8) return true;//部分版本,64位会返回4;
+	ob_clean();
+	ob_start();
+	var_dump(12345678900);
+	$res = ob_get_clean();
+	if(strstr($res,'float')) return false;
+	return true;
+}
 function getData($time,$starttime,$endtime){
 	
 	$endtime=strtotime($endtime);
