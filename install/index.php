@@ -93,13 +93,6 @@ if($method == 'show_license') {
 		$_config = $default_config;
 	//}
 
-	if($submit && !VIEW_OFF && $_SERVER['REQUEST_METHOD'] == 'POST') {
-		if($password != $password2) {
-			$error_msg['admininfo']['password2'] = 1;
-			$submit = false;
-		}
-	}
-
 	$dbhost = $_config['db'][1]['dbhost'];
 	$dbname = $_config['db'][1]['dbname'];
 	$dbpw = $_config['db'][1]['dbpw'];
@@ -129,6 +122,12 @@ if($method == 'show_license') {
 		}
 	} else {
 		$submit = false;
+	}
+	if($submit && !VIEW_OFF && $_SERVER['REQUEST_METHOD'] == 'POST') {
+		if($password != $password2) {
+			$error_msg['admininfo']['password2'] = 1;
+			$submit = false;
+		}
 	}
 
 	if($submit && !VIEW_OFF && $_SERVER['REQUEST_METHOD'] == 'POST') {

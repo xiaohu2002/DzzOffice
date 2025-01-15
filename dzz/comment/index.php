@@ -15,19 +15,19 @@ include_once libfile('function/appperm');
 $navtitle = '评论管理';
 $do = isset($_GET['do']) ? $_GET['do'] : '';
 if ($do == 'getinfo') {
-	$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+	$order = isset($_GET['order']) ? $_GET['order'] : 'desc';
 	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
-	$sortOrder = isset($_GET['sortOrder']) ? $_GET['sortOrder'] : '';
+	$field = isset($_GET['field']) ? $_GET['field'] : 'dateline';
 	$limit = empty($_GET['limit']) ? 20 : $_GET['limit'];
 	$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
 	$page = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
 	$start = ($page - 1) * $limit;
-	$validSortFields = ['name', 'edittime', 'edituid', 'authorid', 'dateline','message'];
+	$validfields = ['edittime', 'edituid', 'authorid', 'dateline','ip','xtllq','message'];
 	$validSortOrders = ['asc', 'desc'];
-    if (in_array($sort, $validSortFields) && in_array($sortOrder, $validSortOrders)) {
-		$order = "ORDER BY $sort $sortOrder";
+    if (in_array($field, $validfields) && in_array($order, $validSortOrders)) {
+		$order = "order by $field $order";
 	} else {
-		$order = 'ORDER BY dateline DESC';
+		$order = 'order by dateline DESC';
 	}
     $sql = "cid!='app'";
     $param = array();
@@ -66,7 +66,6 @@ if ($do == 'getinfo') {
 			"dateline" => dgmdate($value['dateline'], 'Y-n-j H:i:s'),
 			"cid" => $value['cid'],
 			"edittime" => $value['edittime'] ? dgmdate($value['edittime'], 'Y-n-j H:i:s') : null,
-			"name" => $value['name'],
 			"edituid" => $user['username'],
 			"message" => $value['message'],
             "fid" => $value['id'],

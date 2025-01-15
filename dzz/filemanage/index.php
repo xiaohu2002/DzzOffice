@@ -89,7 +89,7 @@ if ($do == 'delete') {
 		}
 	}
   } elseif ($do == 'getinfo') {
-	$order = isset($_GET['order']) ? $_GET['order'] : '';
+	$order = isset($_GET['order']) ? $_GET['order'] : 'DESC';
 	$type = isset($_GET['type']) ? trim($_GET['type']) : '';
 	$pfid = isset($_GET['pfid']) ? intval($_GET['pfid']) : '';
 	$field = isset($_GET['field']) ? $_GET['field'] : 'dateline';

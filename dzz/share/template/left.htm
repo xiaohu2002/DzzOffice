@@ -3,7 +3,6 @@
 		<a href="{MOD_URL}">{lang all}</a>
 	</li>
 	<!--{loop $typearr $key $value}-->
-	{eval if(!$_G['adminid'] && $key == 'short') continue;}
 	<li <!--{if $type==$key}-->class="active"<!--{/if}-->>
 		<a href="{MOD_URL}&type=$key">$value</a>
 	</li>

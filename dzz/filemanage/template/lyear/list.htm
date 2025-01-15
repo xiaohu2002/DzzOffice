@@ -57,19 +57,19 @@
 						</div>
 					  </div>
 				  </div>
-                <div class="toolbar-btn-action demoTable">
-					<button type="button"  class="layui-btn layui-btn-normal" data-type="getCheckData">获取选中行数据</button>
-                  <button type="button" class="layui-btn layui-btn-danger" data-type="delete">
-                    <span class="mdi mdi-delete" aria-hidden="true"></span>删除
-                  </button>
-                </div>
                 <table class="layui-hide" id="table" lay-filter="table"></table>
-				  <script type="text/html" id="barDemo">
-					<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">更多</a>
-					<a class="layui-btn layui-btn--warm layui-btn-xs" lay-event="view">预览</a>
-					<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="download">下载</a>
-					<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-				  </script>
+				<script type="text/html" id="toolbar">
+					<div class="layui-btn-container">
+						<button type="button"  class="layui-btn layui-btn-normal" lay-event="getCheckData">获取选中行数据</button>
+						<button type="button" class="layui-btn layui-btn-danger" lay-event="delete">{lang delete}</button>
+					</div>
+				</script>
+				<script type="text/html" id="barDemo">
+				<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">更多</a>
+				<a class="layui-btn layui-btn--warm layui-btn-xs" lay-event="view">预览</a>
+				<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="download">下载</a>
+				<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+				</script>
 			</div>
 		</div>
 	</div>
@@ -78,110 +78,11 @@
 <script>
 	layui.use('table', function(){
 	  var table = layui.table;
-	var $ = layui.$, active = {
-		getCheckData: function(){ //获取选中数据
-		var checkStatus = table.checkStatus('table'), data = checkStatus.data;
-		if (data.length === 0) {
-			showmessage("请至少选择一行", 'danger', 3000, 1);
-			return;
-		}
-		// 创建模板字符串
-		var template = '<div class="accordion">';
-		data.forEach(function(item) {
-			template += `<div class="accordion-item">`;
-				template += `<h2 class="accordion-header" id="Open-heading${item.id}">`;
-					template += `<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Open-collapse${item.id}" aria-expanded="true" aria-controls="Open-collapse${item.id}">`;
-						template += `{lang filename}：${item.name}`;
-					template += `</button>`;
-				template += `</h2>`;
-				template += `<div id="Open-collapse${item.id}" class="accordion-collapse collapse show" aria-labelledby="Open-heading${item.id}">`;
-					template += `<div class="accordion-body">`;
-						template += `<p><strong>ID:</strong> ${item.id}</p>`;
-						<!--{if $_G['adminid']}-->template += `<p><strong>{lang possessor}:</strong> ${item.username}</p>`;<!--{/if}-->
-						template += `<p><strong>{lang file_size}:</strong> ${item.size}</p>`;
-						template += `<p><strong>{lang file_type}:</strong> ${item.type}</p>`;
-						template += `<p><strong>{lang file_location}:</strong> ${item.relpath}</p>`;
-						template += `<p><strong>{lang add_time}:</strong> ${item.dateline}</p>`;
-						<!--{if $_G['adminid']}-->
-						if (item.FileUri) {
-							template += `<p><strong>直链地址:</strong> <a href="${item.FileUri}" target="_blank">${item.FileUri}</a></p>`;
-						}
-						if (item.copys) {
-							template += `<p><strong>引用:</strong> ${item.copys}</p>`;
-						}
-						if (item.isdelete !== undefined) { // 假设 isdelete 是布尔值或有定义时才显示
-							template += `<p><strong>是否在回收站:</strong> ${item.isdelete}</p>`;
-						}
-						if (item.downs) {
-							template += `<p><strong>下载次数:</strong> ${item.downs}</p>`;
-						}
-						if (item.views) {
-							template += `<p><strong>{lang view_count}:</strong> ${item.views}</p>`;
-						}
-						if (item.edits) {
-							template += `<p><strong>修改次数:</strong> ${item.edits}</p>`;
-						}
-						<!--{/if}-->
-						template += `</div>`;
-						template += `</div>`;
-						template += `</div>`;
-		});
-		template += '</div>';
-
-		// 使用 layer.alert 显示模板
-		layer.alert(template, {
-			title: '选中的文件数据',
-			btn: ['确定']
-		});
-	},
-		delete: function(){
-			var checkStatus = table.checkStatus('table'),data = checkStatus.data;
-			if(!data){
-				showmessage("请至少选择一行", 'danger',3000,1);
-            	return;
-			}
-			if(data.length == 0){
-				showmessage("请至少选择一行", 'danger',3000,1);
-				return;
-			}
-        var postData = "";
-        $.each(data,function(i) {
-            postData +=  this.rid;
-            if (i < data.length - 1) {
-                postData += ",";
-            }
-        });
-		layer.confirm('您确定要删除这'+data.length+'个文件(如果是文件夹将包含其下的子文件都会被删除)吗？删除之后不可恢复！', function(index){
-			var loading = layer.load(0, { shade:  [0.1, '#000'] });
-			jQuery.post('{MOD_URL}&do=delete', {'icoid': postData},function(json){
-				layer.close(loading);
-				layer.close(index);
-				if(json['msg']=='success'){
-					showmessage('删除成功', 'success', '3000', 1);
-					table.reload('table');
-				}else if(json['msg']){
-					showmessage(json['msg'], 'danger', '3000', 1);
-				} else {
-					showmessage('{lang error}', 'danger', '3000', 1);
-				}
-				},'json')
-				.fail(function() {
-					layer.close(loading);
-					layer.close(index);
-					showmessage('服务器发生错误，请稍后再试', 'danger',3000,1);
-		  		});
-        });
-	}
-  };
-  
-  $('.demoTable .layui-btn').on('click', function(){
-    var type = $(this).data('type');
-    active[type] ? active[type].call(this) : '';
-  });
 	  table.render({
 		elem: '#table',
 		url: '{MOD_URL}&do=getinfo',
-		toolbar: true,
+		toolbar: '#toolbar',
+		title: '文件管理数据表格',
 		autoSort: false,
 		text: {
 			none: '暂无相关数据'
@@ -204,13 +105,104 @@
 		  ,{field:'type', title: '{lang file_type}', align: 'center', sort: true}
 		  ,{field:'relpath', title: '{lang file_location}', align: 'left'}
 		  ,{field:'dateline', title: '{lang add_time}', align: 'center', sort: true}
-		  ,{field: 'right',title: '{lang operation}',width:240, align:'center', toolbar: '#barDemo', fixed: 'right'}
+		  ,{title: '{lang operation}',width:240, align:'center', toolbar: '#barDemo', fixed: 'right'}
 		]],
 		initSort: {
 			field: 'dateline', // 默认排序字段
 			type: 'desc' // 默认排序方式
 		}
 	  });
+	  //头工具栏事件
+	table.on('toolbar(table)', function(obj){
+		var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
+		var data = checkStatus.data;
+		switch(obj.event){
+			case 'getCheckData':
+				if (data.length === 0) {
+					showmessage("请至少选择一行", 'danger', 3000, 1);
+					return;
+				}
+				var template = '<div class="accordion">';
+				data.forEach(function(item) {
+					template += `<div class="accordion-item">`;
+					template += `<h2 class="accordion-header" id="Open-heading${item.id}">`;
+					template += `<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Open-collapse${item.id}" aria-expanded="true" aria-controls="Open-collapse${item.id}">`;
+					template += `{lang filename}：${item.name}`;
+					template += `</button>`;
+					template += `</h2>`;
+					template += `<div id="Open-collapse${item.id}" class="accordion-collapse collapse show" aria-labelledby="Open-heading${item.id}">`;
+					template += `<div class="accordion-body">`;
+					template += `<p><strong>ID:</strong> ${item.id}</p>`;
+					<!--{if $_G['adminid']}-->template += `<p><strong>{lang possessor}:</strong> ${item.username}</p>`;<!--{/if}-->
+					template += `<p><strong>{lang file_size}:</strong> ${item.size}</p>`;
+					template += `<p><strong>{lang file_type}:</strong> ${item.type}</p>`;
+					template += `<p><strong>{lang file_location}:</strong> ${item.relpath}</p>`;
+					template += `<p><strong>{lang add_time}:</strong> ${item.dateline}</p>`;
+					<!--{if $_G['adminid']}-->
+					if (item.FileUri) {
+						template += `<p><strong>直链地址:</strong> <a href="${item.FileUri}" target="_blank">${item.FileUri}</a></p>`;
+					}
+					if (item.copys) {
+						template += `<p><strong>引用:</strong> ${item.copys}</p>`;
+					}
+					if (item.isdelete !== undefined) {
+						template += `<p><strong>是否在回收站:</strong> ${item.isdelete}</p>`;
+					}
+					if (item.downs) {
+						template += `<p><strong>下载次数:</strong> ${item.downs}</p>`;
+					}
+					if (item.views) {
+						template += `<p><strong>{lang view_count}:</strong> ${item.views}</p>`;
+					}
+					if (item.edits) {
+						template += `<p><strong>修改次数:</strong> ${item.edits}</p>`;
+					}
+					<!--{/if}-->
+					template += `</div>`;
+					template += `</div>`;
+					template += `</div>`;
+				});
+				template += '</div>';
+				layer.alert(template, {
+					title: '选中的文件数据',
+					btn: ['确定']
+				});
+				break;
+				case 'delete':
+					if (data.length === 0) {
+						showmessage("请至少选择一行", 'danger', 3000, 1);
+						return;
+					}
+					var postData = "";
+					$.each(data,function(i) {
+						postData +=  this.rid;
+						if (i < data.length - 1) {
+							postData += ",";
+						}
+					});
+					layer.confirm('您确定要删除这'+data.length+'个文件(如果是文件夹将包含其下的子文件都会被删除)吗？删除之后不可恢复！', {skin:'lyear-skin-danger'}, function(index){
+						var loading = layer.load(0, { shade:  [0.1, '#000'] });
+						jQuery.post('{MOD_URL}&do=delete', {'icoid': postData},function(json){
+							layer.close(loading);
+							layer.close(index);
+							if(json['msg']=='success'){
+								showmessage('删除成功', 'success', '3000', 1);
+								table.reload('table');
+							}else if(json['msg']){
+								showmessage(json['msg'], 'danger', '3000', 1);
+							} else {
+								showmessage('{lang error}', 'danger', '3000', 1);
+							}
+							},'json')
+							.fail(function() {
+								layer.close(loading);
+								layer.close(index);
+								showmessage('服务器发生错误，请稍后再试', 'danger',3000,1);
+							});
+					});
+				break;
+			};
+		});
 	  //监听工具条
 	  table.on('tool(table)', function(obj){
 		var data = obj.data;
@@ -238,7 +230,7 @@
 			var url = DZZSCRIPT + '?mod=io&op=download&path='+obj.data.dpath;
 			window.open(url);
 		} else if(obj.event === 'del'){
-			layer.confirm('{lang filemanage_del_file}', function(index){
+			layer.confirm('{lang filemanage_del_file}', {skin:'lyear-skin-danger'}, function(index){
 				var loading = layer.load(0, { shade:  [0.1, '#000'] });
 				$.ajax({
 					type: "post",
@@ -350,9 +342,10 @@
 		// 获取当前的 type 值
 		operation = $(this).data('operation');
 		type = $(this).data('type');
+		$('#keyword').val('');
 		// 刷新表格并传递 operation 参数
 		table.reload('table', {
-		  where: { keyword: $('#keyword').val(), type: type },
+		  where: {type: type},
 		  page: {
 			curr: 1 //重新从第 1 页开始
 		  }
