@@ -472,18 +472,7 @@ function show_header() {
 <style>
 	body { margin: 0; padding: 0; background: #f4f5fa;font-size: 14px; }
 	.container {margin: 40px auto 40px auto;max-width: 920px;border: 1px solid #007bff; border-width: 5px 1px 1px;background: #FFF; border-radius: 12px;box-shadow: 0 5px 10px rgba(0, 0, 0, .15) !important;}
-		h1 {font-size: 48px;
-    margin: 0;
-    padding: 10px;
-    color: #fff;
-    padding-left: 10px;
-    border-bottom: 1px solid #ededee;
-    background-color: #007bff;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-    border-radius: 5px 5px 0 0;}
+	h1 {font-size: 48px;margin: 0;padding: 10px;color: #fff;padding-left: 10px;border-bottom: 1px solid #ededee;background-color: #007bff;display: flex;align-items: center;align-content: center;flex-wrap: wrap;border-radius: 5px 5px 0 0;}
 	table {width: 100%; margin: 0 0 10px 0; text-align: center; }
 	.current { font-weight: bold; color: #007bff !important; border-bottom-color: #007bff !important; }
 	#footer {text-align: center;color: #6c757d; padding: 10px;border-top: 1px solid rgba(77, 82, 89, 0.1); }

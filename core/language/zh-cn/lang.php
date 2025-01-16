@@ -1514,6 +1514,7 @@ $_G[siteurl]',
 	'file_read_no_privilege'=>'抱歉！您没有该文件的预览权限',
 	'file_download_no_privilege'=>'抱歉！您没有该文件的下载权限',
 	'file_edit_no_privilege'=>'抱歉！您没有该文件的编辑权限',
+	'file_been_deleted'=>'文件已删除',
 );
 
 ?>

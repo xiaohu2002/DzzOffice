@@ -395,6 +395,9 @@ class io_dzz extends io_api
         if (!$icoarr = C::t('resources')->fetch_by_rid($rid,'',$preview,$sid)) {
             return array('error' => lang('file_not_exist'));
         }
+        if ($icoarr['isdelete']) {
+            return array('error' => lang('file_been_deleted'));
+        }
         if ($icoarr['type'] != 'document' && $icoarr['type'] != 'attach' && $icoarr['type'] != 'image') {
             return array('error' => lang('no_privilege'));
         }

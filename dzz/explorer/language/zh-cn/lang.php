@@ -424,7 +424,6 @@ $lang = array(
     'medium_icons' => '中等图标',
     'deltail_lsit' => '详细列表',
     'been_blocked' => '已屏蔽',
-    'file_been_deleted' => '文件已删除',
     'degree_exhaust' => '次数用尽',
     'logs_invite_status_4' => '已过期',
     'identification' => '标识',
